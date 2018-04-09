@@ -9,10 +9,37 @@
 * SlimFramework <http://www.slimframework.com>
 * Template <https://templated.co/introspect>
 
-# Feedback Balsi
+## Search
+The files: 
+ * src/app/search/_cse_annotations.xml
+ * src/app/search/_cse_context.xml
+
+are not referenced on the webpage.
+
+But they are needed to add 'Annotation' and 'Facet' to the custom google search.
+They could be uploaded to google on https://cse.google.com/ (with user info@ivyteam.ch).
+Menu entry > Setup > Advanced.
+
+## ToDo
+
+* Search
+* Style Start Page
+* Footer
+* Doc
+* Dev Releases (Nightly / Sprint)
+* Maven Project Build Plugin Compatible
+* Styling DevDay
+* Styling CodeCamp 
+* Community
+* Security Vulnerarbility
+* Features site
+* sitemap.xml
+* robots.txt
+
+### Feedback Balsi
 * Kontaktformular
 * Startseite buttons/Download/Install
 * Suche
 
-# Ideas
+### Ideas
 * Public Roadmap

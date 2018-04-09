@@ -17,6 +17,7 @@ use app\tutorial\TutorialGettingStartedAction;
 use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
+use app\search\SearchAction;
 
 class Website
 {
@@ -90,6 +91,7 @@ class Website
         $app->get('/support', SupportAction::class);
         $app->get('/codecamp[/{year}]', CodeCampAction::class);
         $app->get('/devday[/{year}]', DevDayAction::class);
+        $app->get('/search', SearchAction::class);
     }
 
     private function installErrorHandling()

@@ -4,7 +4,6 @@ namespace app\release;
 use app\release\model\ReleaseInfo;
 use app\release\model\Version;
 use app\util\ArrayUtil;
-use app\util\UserAgentDetector;
 
 define('CDN_HOST', 'https://download.axonivy.com');
 define('CDN_HOST_DEV_RELEASES', 'https://d3ao4l46dir7t.cloudfront.net');

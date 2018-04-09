@@ -1,0 +1,25 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Search{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1><span class="icon fa-search"></span> Search</h1></header>
+			<script>
+                (function() {
+                  var cx = '016945404294198377241:0zc49fwxvts';
+                  var gcse = document.createElement('script');
+                  gcse.type = 'text/javascript';
+                  gcse.async = true;
+                  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx=' + cx;
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(gcse, s);
+                })();
+            </script>
+            <gcse:search></gcse:search>
+		</div>
+	</section>
+
+{% endblock %}

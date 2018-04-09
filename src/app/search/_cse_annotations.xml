@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Annotations start="0" num="10" total="10">
+  <Annotation about="blog.axonivy.com/*" score="0.5" timestamp="0x000513d4017f63a8" href="ChJibG9nLmF4b25pdnkuY29tLyoQqMf9i8D6xAI">
+    <Label name="default" />
+    <Label name="blog" />
+    <AdditionalData attribute="original_url" value="blog.axonivy.com/*" />
+    <AdditionalData attribute="file" value="_cse_annotations.xml" />
+  </Annotation>
+  <Annotation about="www.ivyteam.ch/flatpress/*" score="0.5" timestamp="0x000513d4017f639d" href="Chp3d3cuaXZ5dGVhbS5jaC9mbGF0cHJlc3MvKhCdx_2LwPrEAg">
+    <Label name="default" />
+    <Label name="blog" />
+    <AdditionalData attribute="original_url" value="www.ivyteam.ch/flatpress/*" />
+    <AdditionalData attribute="file" value="_cse_annotations.xml" />
+  </Annotation>
+  <Annotation about="developer.axonivy.com/doc/latest/*" score="0.6" timestamp="0x000513d4017f6391" href="CiJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC8qEJHH_YvA-sQC">
+    <Label name="default" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/*" />
+    <AdditionalData attribute="file" value="_cse_annotations.xml" />
+  </Annotation>
+  <Annotation about="answers.axonivy.com/*" score="0.8" timestamp="0x000513d4017f6380" href="ChVhbnN3ZXJzLmF4b25pdnkuY29tLyoQgMf9i8D6xAI">
+    <Label name="default" />
+    <Label name="q_and_a" />
+    <AdditionalData attribute="original_url" value="answers.axonivy.com/*" />
+    <AdditionalData attribute="file" value="_cse_annotations.xml" />
+  </Annotation>
+  <Annotation about="developer.axonivy.com/doc/latest/EngineGuideHtml/*" score="1" timestamp="0x000513d4017f6372" href="CjJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9FbmdpbmVHdWlkZUh0bWwvKhDyxv2LwPrEAg">
+    <Label name="default" />
+    <Label name="user_guide" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/EngineGuideHtml/*" />
+    <AdditionalData attribute="file" value="_cse_annotations.xml" />
+  </Annotation>
+  <Annotation about="developer.axonivy.com/doc/latest/DesignerGuideHtml/*" score="1" timestamp="0x000513d4017f635f" href="CjRkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9EZXNpZ25lckd1aWRlSHRtbC8qEN_G_YvA-sQC">
+    <Label name="default" />
+    <Label name="user_guide" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/DesignerGuideHtml/*" />
+    <AdditionalData attribute="file" value="_cse_annotations.xml" />
+  </Annotation>
+  <Annotation about="developer.axonivy.com/doc/latest/DesignerGuideHtml/*" score="1" timestamp="0x000513c456360b86" href="CjRkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9EZXNpZ25lckd1aWRlSHRtbC8qEIaX2LHF-MQC">
+    <Label name="_cse_0zc49fwxvts" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/DesignerGuideHtml/*" />
+  </Annotation>
+  <Annotation about="developer.axonivy.com/doc/latest/EngineGuideHtml/*" score="1" timestamp="0x000513c456360b7d" href="CjJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9FbmdpbmVHdWlkZUh0bWwvKhD9ltixxfjEAg">
+    <Label name="_cse_0zc49fwxvts" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/EngineGuideHtml/*" />
+  </Annotation>
+  <Annotation about="answers.axonivy.com/questions/*" score="1" timestamp="0x000513c456360b66" href="Ch9hbnN3ZXJzLmF4b25pdnkuY29tL3F1ZXN0aW9ucy8qEOaW2LHF-MQC">
+    <Label name="_cse_0zc49fwxvts" />
+    <AdditionalData attribute="original_url" value="answers.axonivy.com/questions/*" />
+  </Annotation>
+  <Annotation about="answers.xpertivy.ch/*" score="1" timestamp="0x0004ffce6c5ee969" href="ChVhbnN3ZXJzLnhwZXJ0aXZ5LmNoLyoQ6dL74ub5vwI">
+    <Label name="_cse_bhyjujwqfhe" />
+    <AdditionalData attribute="original_url" value="answers.xpertivy.ch" />
+  </Annotation>
+</Annotations>
