@@ -1,0 +1,45 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Archive{{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <section id="main" >
+		<div class="inner">
+			<header><h2>Archive</h2></header>
+			<div class="table-wrapper">
+				<div class="select-wrapper">
+					<select name="demo-category" id="demo-category" onchange="location = this.value;">
+						{% for majorVersion in majorVersions %}
+							<a href="#"><option value="/archive/{{ majorVersion }}" {{ (majorVersion == currentMajorVersion) ? 'selected' : '' }}>{{ majorVersion }}.x</option></a>
+						{% endfor %}
+					</select>
+				</div>
+				
+				<br />
+				
+				<table class="alt">
+					<thead>
+						<tr>
+							<th>Version</th>
+							<th>Download</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for releaseInfo in releaseInfos %}
+							<tr>
+								<td>{{ releaseInfo.version.VersionNumber }}</td>
+								<td>
+									{% for variant in releaseInfo.Variants %}
+										<a href="{{ variant.DownloadUrl }}">{{ variant.DownloadUrl }}</a><br />
+									{% endfor %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+    
+{% endblock %}

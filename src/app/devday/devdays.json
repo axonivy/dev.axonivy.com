@@ -1,0 +1,64 @@
+[
+	{
+		"year": 2017,
+		"impressionsUrl": "https://www.axonivy.com/de-en/bpm-company-axon-ivy/news-events-axon-ivy/detail/list-item/d/detail/news/334-7th-developer-day-zug/",
+		"groups": [
+			{
+				"name": "New Features",
+				"subjects": [
+					{"name": "ACM Features", "url": "/blob/devday-2017/acm-features.pdf"},
+					{"name": "Rule Engine", "url": "/blob/devday-2017/rule-engine.pdf"},
+					{"name": "REST Web Services", "url": "/blob/devday-2017/rest-web-services.pdf"},
+					{"name": "Portal", "url": "/blob/devday-2017/acm-features-portal.pdf"}				
+				]
+			},
+			{
+				"name": "Pojects",
+				"subjects": [
+					{"name": "FinTech", "url": "/blob/devday-2017/fintech.pdf"},
+					{"name": "Klara", "url": "/blob/devday-2017/klara.pdf"}
+				]
+			},
+			{
+				"name": "Others",
+				"subjects": [
+					{"name": "Welcome", "url": "/blob/devday-2017/willkommen.pdf"},
+					{"name": "Outlook", "url": "/blob/devday-2017/ausblick-abschluss.pdf"},
+					{"name": "All slides as ZIP", "url": "/blob/devday-2017/devday-2017-all.zip"}
+				]
+			}
+		]
+	},
+	{
+		"year": 2015,
+		"groups": [
+			{
+				"name": "New Features",
+				"subjects": [
+					{"name": "Error Handling", "url": "/blob/devday-2015/01-error-handling.pdf"},
+					{"name": "Page Designer", "url": "/blob/devday-2015/02-page-designer.pdf"},
+					{"name": "Portal", "url": "/blob/devday-2015/03-portal.pdf"},
+					{"name": "Offline Dialog and Mobile App", "url": "/blob/devday-2015/05-offline-mobile-dialog.pdf"},
+					{"name": "Miscellaneous", "url": "/blob/devday-2015/04-miscellaneous.pdf"}
+				]
+			},
+			{
+				"name": "Innovation Corner",
+				"subjects": [
+					{"name": "IoT", "url": "/codecamp/2015/#team_webviewer"},
+					{"name": "WebViewer", "url": "/codecamp/2015/#team_webviewer"},
+					{"name": "REST", "url": "/codecamp/2015/#team_rest"},
+					{"name": "New Task List UI's", "url": "/codecamp/2015/#team_helios_a"}
+				]
+			},
+			{
+				"name": "Others",
+				"subjects": [
+					{"name": "Welcome", "url": "/blob/devday-2015/00-welcome.pdf"},
+					{"name": "Outlook", "url": "/blob/devday-2015/xx-outlook.pdf"},
+					{"name": "All slides as ZIP", "url": "/blob/devday-2015/axon-ivy-60-new-feature.zip"}
+				]
+			}
+		]
+	}
+]

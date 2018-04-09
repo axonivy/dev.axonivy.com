@@ -1,0 +1,5 @@
+/vendor
+/src/cache
+/src/logs
+developer-website.tar
+composer.phar

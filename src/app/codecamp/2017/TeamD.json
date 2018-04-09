@@ -1,0 +1,8 @@
+{
+	"id": "team_ci_cd",
+	"title": "Pipeline as Code",
+	"image": "pipeline-run.png",
+	"members": "Alexander Suter",
+	"description": "In a world in which nobody and nothing stands still, you can never rest itself, in order not to be eaten. Even more. You must be fast, innovative and reliable. <br /> In software engineering, the power of CI / CD can help to meet these requirements. This topic is about exploring <b>Jenkins Build-Pipelines</b> and how Ivy can profit.",
+	"link": "https://trello.com/b/pZ9RyXlo/codecamp-17-ci-cd"
+}

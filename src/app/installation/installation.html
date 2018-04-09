@@ -1,0 +1,41 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Installation{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1>Installation</h1></header>
+			<br /><br />
+			<ul class="alt" style="text-align:center;">
+				<li>
+					Download the latest Axon.ivy Designer to your desired location
+					<br /><br />
+					<ul class="actions">
+						<li><a href="/download" class="button special">Download</span></a></li>
+					</ul>
+					<img src="/images/installation/download-axonivy-designer.png" />
+					<br /><br />
+				</li>
+				<li>
+					<br /><br />
+					Extract the downloaded Zip file
+					<br /><br />
+					<img src="/images/installation/extract-axonivy-designer.png" />
+					<br /><br />
+				</li>
+				<li>
+					<br /><br />
+					Follow the Tutorial to learn how to start and use the Designer.
+					<br /><br />
+					<ul class="actions">
+						<li><a href="/tutorial/getting-started" class="button special">Start Tutorial</span></a></li>
+					</ul>
+				</li>
+			</ul>
+
+		</div>
+	</section>
+
+{% endblock %}

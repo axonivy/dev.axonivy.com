@@ -1,0 +1,13 @@
+{
+	"require" : {
+		"slim/slim" : "~3.9",
+		"slim/twig-view" : "~2.3",
+		"slim/logger" : "~0.1",
+		"erusev/parsedown" : "~1.7"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"app\\" : "src/app/"
+		}
+	}
+}

@@ -1,0 +1,28 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Team{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1><span class="icon fa-thumbs-up"></span> ivyTeam (Switzerland)</h1></header>
+			<p>
+				ivyTeam is the core development team of the Axon.ivy Digital Business Platform.
+				The team is highly experienced in agile software development.
+				The ivyTeam is located in Zug (Switzerland) since the formation in the year 1993.
+			</p>
+					
+			<div class="row">
+				{% for employee in employees %}
+					<div class="4u 12u$(xsmall)">
+						<header><h3>{{ employee.name }}</h3></header>	
+						<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+						<p>{{ employee.education }}<br />{{ employee.function }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

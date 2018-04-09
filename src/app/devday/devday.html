@@ -1,0 +1,30 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}DevDay {{ devday.year }}{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1>Developer Day {{ devday.year }}</h1></header>
+					
+			<div class="row">
+				{% for group in devday.groups %}
+					<div class="12u 12u$(xsmall)">
+						<header><h3>{{ group.name }}</h3></header>	
+						<ul>
+						{% for subject in group.subjects %}
+							<li><a href="{{ subject.url }}">{{ subject.name }}</a></li>
+						{% endfor %}
+						</ul>
+					</div>
+				{% endfor %}
+				
+				{% if devday.impressionsUrl is not empty %}
+					<a href="{{ devday.impressionsUrl }}">Impressions of the event can be seen here.</a>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

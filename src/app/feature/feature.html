@@ -1,0 +1,35 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Home{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="banner">
+		<!-- 
+		<div class="inner">
+			<h1>AXON.IVY DIGITIAL BUSINESS PLATFORM</h1>
+			<ul class="actions">
+				<li><a href="#" class="button alt">Download 7.1</a></li>
+			</ul>
+		</div>
+		-->
+	</section>
+
+	{% for feature in features %}
+		<section id="one">
+			<div class="inner" style="text-align:center;">
+				<header><h2>{{ feature.title }}</h2></header>
+				<p>{{ feature.description }}</p>
+				
+				{% if not feature.videoUrl is empty %}
+					<iframe src="{{ feature.videoUrl }}" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				{% endif %}
+				
+				{% if not feature.imageUrl is empty %}
+					<img style="width:100%;max-width:800px;" src="{{ feature.imageUrl }}" />
+				{% endif %}
+			</div>
+		</section>
+	{% endfor %}
+    
+{% endblock %}

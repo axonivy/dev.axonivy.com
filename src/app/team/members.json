@@ -1,0 +1,62 @@
+[
+	{
+		"name": "Alexander Suter",
+		"imgSrc": "/images/team/alex.jpg",
+		"education": "B.Sc. Computer Science",
+		"function": "Core Developer"
+	},
+	{
+		"name": "Andreas Rusch",
+		"imgSrc": "/images/team/andreas.jpg",
+		"education": "???",
+		"function": "Core Developer"
+	},
+	{
+		"name": "Barbara Brugger",
+		"imgSrc": "/images/team/barbara.jpg",
+		"education": "Certified Expert in Information Technology",
+		"function": "Customer Support"
+	},
+	{
+		"name": "Bruno Bütler",
+		"imgSrc": "/images/team/bruno.jpg",
+		"education": "Inf. Ing. HTL",
+		"function": "Product Owner & Team Leader"
+	},
+	{
+		"name": "Caty Hürlimann",
+		"imgSrc": "/images/team/caty.jpg",
+		"function": "Office Manager"
+	},
+	{
+		"name": "Christian Strebel",
+		"imgSrc": "/images/team/christian.jpg",
+		"education": "Inf. Ing. HTL",
+		"function": "Core Developer"
+	},
+	{
+		"name": "Denis Huelin",
+		"imgSrc": "/images/team/denis.jpg",
+		"education": "Apprentice in Information Technology",
+		"function": "Graduand Core Developer"
+	},
+	{
+		"name": "Peter Stöckli",
+		"imgSrc": "/images/team/peter.jpg",
+		"education": "B.Sc. Computer Science",
+		"function": "Core Developer"
+	},
+	{
+		"name": "Reguel Wermelinger",
+		"imgSrc": "/images/team/reguel.jpg",
+		"education": "B.Sc. Computer Science",
+		"function": "Core Developer"
+	},
+	{
+		"name": "Reto Weiss",
+		"imgSrc": "/images/team/reto.jpg",
+		"education": "El. Ing. HTL",
+		"function": "Product Owner & Core Developer"
+	}
+	
+]

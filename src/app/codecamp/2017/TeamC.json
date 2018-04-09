@@ -1,0 +1,8 @@
+{
+	"id": "cluster",
+	"title": "New cluster technologies",
+	"image": "cluster-technologies.png",
+	"members": "Reto Weiss",
+	"description": "Search, analyse and tryout new technologies that could be used in our new docker based cluster engine. Possible technologies are:<ul><li>RabbitMQ</li><li>MemCache</li><li>Redis</li><li>ngnix</li><li>...</li></ul><p>The target is to build a simple little application that shares state (session and global cache) over all the cluster nodes. I will try to implement the same application mutliple times with the different technologies mentioned above.</p>",
+	"link": "https://trello.com"
+}

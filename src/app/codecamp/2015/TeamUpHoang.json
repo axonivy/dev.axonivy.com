@@ -1,0 +1,29 @@
+{
+	"id": "team_up_a",
+	"title": "Icon Browser For Web Editor Components",
+	"image": "TeamUp-Hoang.png",
+	"members": "Hoang Le",
+	"description": "jQuery UI provides a number of icons that can be used by applying class names to components in Web Editor by default. It is very helpful for user can browse the icon and choose it instead of typing the code in Source Code Editor manually.",
+	"featureset": [
+		{
+			"title": "Icon Browser",
+			"description": "<ol><li>Show a browser dialog containing icons of jQuery UI when a user clicks on a component.</li><li>List out all of common jQuery UI icons.</li><li>The user can search, and select icon for the component</li></ol>"
+		}
+	],
+	"features": [
+		{
+			"id": "icon1",
+			"title": "Click  to choose an icon",
+			"text1": "",
+			"thumbnail": "ClickToChooseIcon-small.png",
+			"image": "ClickToChooseIcon.png"
+		},
+		{
+			"id": "icon2",
+			"title": "Icon Browser",
+			"text1": "",
+			"thumbnail": "IconBrowser-small.png",
+			"image": "IconBrowser.png"
+		}
+	]
+}

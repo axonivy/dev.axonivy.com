@@ -1,0 +1,36 @@
+{
+	"id": "team_helios_a",
+	"title": "Tasks Map on Mobile",
+	"image": "cc_tasksmap.png",
+	"members": "Khoa Vo, Linh Hoang, Thang Tran",
+	"description": "Imagine you have a lot of outside tasks that need to be finished in a day, and you want to do a task which its location is the nearest location to you or nearby you. So, during the code camp, we would like to develop a mobile application prototype providing that feature via a map of tasks.",
+	"featureset": [
+		{
+			"title": "Features",
+			"description": "<ul><li>List of tasks showing on a Google map</li><li>Nearby task location marker (maybe having a blink animation) basing your current location</li><li>Direction from your current location to a selected task location</li><li>Task notification on your Apple Watch</li></ul>"
+		}
+	],
+	"features": [
+		{
+			"id": "team_helios_a1",
+			"title": "Task List",
+			"text1": "Task list, sorted by distance from task location to user location-compressed.",
+			"thumbnail": "tasklist-small.png",
+			"image": "tasklist.jpg"
+		},
+		{
+			"id": "team_helios_a2",
+			"title": "Task Detail",
+			"text1": "Task detail-compressed.",
+			"thumbnail": "taskdetail-small.png",
+			"image": "taskdetail.jpg"
+		},
+		{
+			"id": "team_helios_a3",
+			"title": "Navigation",
+			"text1": "Direction from user location to task location-compressed.",
+			"thumbnail": "navigation-small.png",
+			"image": "navigation.jpg"
+		}
+	]
+}

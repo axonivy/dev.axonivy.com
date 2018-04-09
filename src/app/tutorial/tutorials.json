@@ -1,0 +1,20 @@
+[
+	{
+		"title": "Work with data from REST services",
+		"description": "In this tutorial series Axon.ivy core developer Reguel Wermelinger shows you how to work with data retrieved from a REST service.",
+		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnLUgdezy1qzS1Baut9odnr2",
+		"videoUrl": "https://www.youtube.com/watch?list=PLrFKpclzHMnLUgdezy1qzS1Baut9odnr2&v=jx6JpO7KCp0"
+	},
+	{
+		"title": "Adaptive Processes with Signals",
+		"description": "In this tutorial series Axon.ivy product owner Reto Weiss shows you how to refactor a traditional process into an adaptive process using Signals.",
+		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnJ75d7eT8HKn3B1oz0_quT9",
+		"videoUrl": "https://www.youtube.com/watch?list=PLrFKpclzHMnJ75d7eT8HKn3B1oz0_quT9&v=3k7v3kbyDec"
+	},
+	{
+		"title": "Working with SOAP Web Services",
+		"description": "In this tutorial series Axon.ivy core developer Alex Suter shows you how to work SOAP Web Services.",
+		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnIt2mDUbWwzMsCWRqkQ7igd",
+		"videoUrl": "https://www.youtube.com/watch?list=PLrFKpclzHMnIt2mDUbWwzMsCWRqkQ7igd&v=is-mIbpzaNg"
+	}
+]

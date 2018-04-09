@@ -1,0 +1,44 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Tutorial{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1><span class="icon fa-graduation-cap"></span> Tutorial</h1></header>
+			<p>
+			Learn how to work with the Axon.ivy Digital Business Platform
+			</p>
+			
+			<ul class="actions">
+				<li><a href="/tutorial/getting-started/first-project/step-1" class="button special">Start with your first project!</a></li>
+			</ul>
+		</div>
+	</section>
+	
+	<section id="main">
+		<div class="inner">
+			<div class="row">
+				{% for tutorial in tutorials %}
+					<div class="6u 12u$(xsmall)">
+						<h4>{{ tutorial.title }}</h4>
+						<iframe height="300px" width="100%"
+							src="{{ tutorial.embeddedVideoUrl }}"
+							frameborder="0"
+							allow="autoplay; encrypted-media"
+							allowfullscreen>
+						</iframe>						
+						<p>
+							{{ tutorial.description }}
+						</p>
+						<ul class="actions">
+							<li><a href="{{ tutorial.videoUrl }}" class="button special">Watching on <span class="icon fa-youtube"></span></a></li>
+						</ul>
+					</div>	
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
