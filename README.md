@@ -1,9 +1,8 @@
 # dev.axonivy.com
 
 ## Setup
-	docker-compose up
-	docker exec -i -t dev-axonivy-com-web /bin/bash
-	composer install
+	docker-compose up -d
+	docker-compose exec web composer install
 
 ## Ressources
 * Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
