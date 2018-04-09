@@ -8,6 +8,7 @@
 * Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
 * SlimFramework <http://www.slimframework.com>
 * Template <https://templated.co/introspect>
+* https://github.com/ajlkn/skel
 
 ## Search
 The files: 
@@ -22,9 +23,7 @@ Menu entry > Setup > Advanced.
 
 ## ToDo
 
-* Search
 * Style Start Page
-* Footer
 * Doc
 * Dev Releases (Nightly / Sprint)
 * Maven Project Build Plugin Compatible
