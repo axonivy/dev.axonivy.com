@@ -25,15 +25,26 @@ Menu entry > Setup > Advanced.
 
 * Style Start Page
 * Doc
-* Dev Releases (Nightly / Sprint)
 * Maven Project Build Plugin Compatible
 * Styling DevDay
 * Styling CodeCamp 
 * Community
-* Security Vulnerarbility
 * Features site
+
 * sitemap.xml
 * robots.txt
+
+* Download
+** DownloadButtons
+** Nightly
+** Sprint
+** Archive
+*** Hotfixs
+*** Release Notes
+*** Security Vulnerarbility 
+
+* Support old links
+* Maven
 
 ### Feedback Balsi
 * Kontaktformular

@@ -1,0 +1,37 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Nightly Builds{{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <section id="main" >
+		<div class="inner">
+			<header><h2>Nightly Builds</h2></header>
+			<div class="alert alert-danger" role="alert">
+				The following nightly builds are for testing purposes only. Never ever use them on productive systems!
+			</div>
+			
+			<ul>
+			{% for variant in variants %}
+				{% for variant in releaseInfo.Variants %}
+					<li><a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
+				{% endfor %}
+			{% endfor %}
+			</ul>
+			
+			<h2>Remarks</h2>
+			<ul>
+			  <li>Please note that a specific nightly build is only available for a day. It might already be deleted when you download it. New nightly releases should be available at 02:00 UTC.</li>
+			  <li>Using nightly builds with the maven project-build-plugin: <code>mvn clean install -Divy.engine.list.url=https://developer.axonivy.com/download/nightly.html</code></li>
+			  <li>You can also consume the sprint increment trough an updatesite under <code><a href="/download/nightly/p2">/download/nightly/p2</a></code></li>
+			</ul>
+			
+		</div>
+	</section>
+    
+{% endblock %}
+
+
+
+
+

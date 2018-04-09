@@ -18,6 +18,8 @@ use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
 use app\search\SearchAction;
+use app\release\SprintAction;
+use app\release\NightlyAction;
 
 class Website
 {
@@ -80,9 +82,13 @@ class Website
     {
         $app = $this->app;
         $app->get('/', FeatureAction::class);
+        
         $app->get('/download', DownloadAction::class);
-        $app->get('/archive[/{version}]', ArchiveAction::class);
-        $app->get('/addons', AddonsAction::class);
+        $app->get('/download/archive[/{version}]', ArchiveAction::class);
+        $app->get('/download/sprint-release', SprintAction::class);
+        $app->get('/download/nightly', NightlyAction::class);
+        $app->get('/download/addons', AddonsAction::class);
+        
         $app->get('/doc', DocAction::class);
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
