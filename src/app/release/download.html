@@ -18,9 +18,11 @@
 							<p>
 								The Axon.ivy Designer is a state of the art process modelling tool that enables you to turn your business processes into real and fully functional web applications. You can easily integrate your existing systems using standard connectors such as web services, SQL and many more. 
 							</p>
+							{% if designerVariant is not empty %}
 							<ul class="actions">
-								<li><a href="/archive" class="button special">Download for Windows x64</a></li>
+								<li><a href="/archive" class="button special">Download {{ designerVariant.Version.BugFixVersion }} / {{ designerVariant.Type }} {{ designerVariant.Architecture }}</a></li>
 							</ul>
+							{% endif %}
 						</div>
 					</article>
 					<article class="alt">
@@ -34,9 +36,11 @@
 							<p>
 								With the Axon.ivy Engine you can run your designed business processes on a single or clustered environment. Please order an evaluation licenses and further information at ivy@axonivy.com by providing your contact details.
 							</p>
+							{% if engineVariant is not empty %}
 							<ul class="actions">
-								<li><a href="/archive" class="button special">Download for Windows x64</a></li>
+								<li><a href="/archive" class="button special">Download {{ engineVariant.Version.BugFixVersion }} / {{ engineVariant.Type }} {{ engineVariant.Architecture }}</a></li>
 							</ul>
+							{% endif %}
 						</div>
 					</article>
 				</div>

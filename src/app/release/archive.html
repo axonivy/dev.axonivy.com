@@ -31,7 +31,7 @@
 								<td>{{ releaseInfo.version.VersionNumber }}</td>
 								<td>
 									{% for variant in releaseInfo.Variants %}
-										<a href="{{ variant.DownloadUrl }}">{{ variant.DownloadUrl }}</a><br />
+										<a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
 									{% endfor %}
 								</td>
 							</tr>

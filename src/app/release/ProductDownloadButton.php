@@ -1,6 +1,9 @@
 <?php 
 namespace app\release;
 
+use app\release\model\ReleaseInfo;
+use app\release\model\Variant;
+
 class ProductDownloadButton
 {
     private $releaseInfoLeadingEdge;
