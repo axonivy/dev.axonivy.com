@@ -9,6 +9,7 @@ use app\team\TeamAction;
 use app\release\AddonsAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
+use app\release\MavenArchiveAction;
 use app\support\SupportAction;
 use app\codecamp\CodeCampAction;
 use app\devday\DevDayAction;
@@ -21,6 +22,7 @@ use app\search\SearchAction;
 use app\release\SprintAction;
 use app\release\NightlyAction;
 
+define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
 define('CDN_HOST', 'https://download.axonivy.com');
 define('CDN_HOST_DEV_RELEASES', 'https://d3ao4l46dir7t.cloudfront.net');
 define('IVY_RELEASE_DIRECTORY', '/home/axonivya/www/developer.axonivy.com' . DIRECTORY_SEPARATOR . 'releases' . DIRECTORY_SEPARATOR . 'ivy');
@@ -89,10 +91,13 @@ class Website
         $app->get('/', FeatureAction::class);
         
         $app->get('/download', DownloadAction::class);
-        $app->get('/download/archive[/{version}]', ArchiveAction::class);
-        $app->get('/download/sprint-release', SprintAction::class);
-        $app->get('/download/nightly', NightlyAction::class);
-        $app->get('/download/addons', AddonsAction::class);
+        $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
+        $this->installRedirect('/download/archive.html', 'archive');
+        $app->get('/download/sprint-release[.html]', SprintAction::class);
+        $app->get('/download/nightly[.html]', NightlyAction::class);
+        $app->get('/download/addons', AddonsAction::class)->setName('addons');
+        $this->installRedirect('/download/addons.html', 'addons');
+        $app->get('/download/maven.html', MavenArchiveAction::class);
         
         $app->get('/doc', DocAction::class);
         $app->get('/installation', InstallationAction::class);
@@ -105,6 +110,15 @@ class Website
         $app->get('/search', SearchAction::class);
     }
 
+    private function installRedirect($oldPath, $pathFor)
+    {
+        $app = $this->app;
+        $app->get($oldPath, function ($request, Response $response, $args) use ($pathFor) {
+            $uri = $request->getUri()->withPath($this->router->pathFor($pathFor));
+            return $response->withRedirect($uri, 301);
+        });
+    }
+    
     private function installErrorHandling()
     {
         $container = $this->app->getContainer();
