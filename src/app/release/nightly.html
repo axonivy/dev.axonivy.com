@@ -11,11 +11,15 @@
 				The following nightly builds are for testing purposes only. Never ever use them on productive systems!
 			</div>
 			
-			<ul>
-			{% for variant in variants %}
-				<li><a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
-			{% endfor %}
-			</ul>
+			{% if variants is empty %}
+				<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
+			{% else %}
+				<ul>
+				{% for variant in variants %}
+					<li><a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
+				{% endfor %}
+				</ul>				
+			{% endif %}
 			
 			<h2>Remarks</h2>
 			<ul>
