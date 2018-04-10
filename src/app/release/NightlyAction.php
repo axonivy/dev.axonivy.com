@@ -34,7 +34,7 @@ class NightlyAction
 
 class NightlyArtifact {
  
-    public $downloadUrl;
     public $fileName;
+    public $downloadUrl;
     
 }
