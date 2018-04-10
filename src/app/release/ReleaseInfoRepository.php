@@ -5,11 +5,6 @@ use app\release\model\ReleaseInfo;
 use app\release\model\Version;
 use app\util\ArrayUtil;
 
-define('CDN_HOST', 'https://download.axonivy.com');
-define('CDN_HOST_DEV_RELEASES', 'https://d3ao4l46dir7t.cloudfront.net');
-define('IVY_RELEASE_DIRECTORY', '/home/axonivya/www/developer.axonivy.com' . DIRECTORY_SEPARATOR . 'releases' . DIRECTORY_SEPARATOR . 'ivy');
-define('IVY_NIGHTLY_RELEASE_DIRECTORY', $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'dev-releases' . DIRECTORY_SEPARATOR . 'ivy' . DIRECTORY_SEPARATOR . 'nightly' . DIRECTORY_SEPARATOR . 'current');
-
 class ReleaseInfoRepository
 {
     public static function getReleaseInfo(string $versionNumber): ?ReleaseInfo
