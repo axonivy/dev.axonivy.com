@@ -19,6 +19,22 @@ class NightlyAction
             $variants = [];
         }
         
-        return $this->container->get('view')->render($response, 'app/release/nightly.html', ['variants' => $variants]);
+        $nightlyArtifacts = [];
+        foreach ($variants as $variant) {
+            $artifact = new NightlyArtifact();
+            $artifact->fileName = $variant->getFileName();
+            $artifact->downloadUrl = CDN_HOST_DEV_RELEASES . '/ivy/nightly/current/' . $variant->getFileName();
+            $nightlyArtifacts[] = $artifact;
+        }
+        
+        return $this->container->get('view')->render($response, 'app/release/nightly.html', ['nightlyArtifacts' => $nightlyArtifacts]);
     }
+    
+}
+
+class NightlyArtifact {
+ 
+    public $downloadUrl;
+    public $fileName;
+    
 }

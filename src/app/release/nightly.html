@@ -15,8 +15,8 @@
 				<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
 			{% else %}
 				<ul>
-				{% for variant in variants %}
-					<li><a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
+				{% for nightlyArtifact in nightlyArtifacts %}
+					<li><a href="{{ nightlyArtifact.downloadUrl }}">{{ nightlyArtifact.fileName }}</a><br />
 				{% endfor %}
 				</ul>				
 			{% endif %}
