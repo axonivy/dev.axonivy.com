@@ -11,7 +11,7 @@
 				<div class="select-wrapper">
 					<select name="demo-category" id="demo-category" onchange="location = this.value;">
 						{% for majorVersion in majorVersions %}
-							<a href="#"><option value="/archive/{{ majorVersion }}" {{ (majorVersion == currentMajorVersion) ? 'selected' : '' }}>{{ majorVersion }}.x</option></a>
+							<a href="#"><option value="/download/archive/{{ majorVersion }}" {{ (majorVersion == currentMajorVersion) ? 'selected' : '' }}>{{ majorVersion }}.x</option></a>
 						{% endfor %}
 					</select>
 				</div>

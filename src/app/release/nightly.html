@@ -13,9 +13,7 @@
 			
 			<ul>
 			{% for variant in variants %}
-				{% for variant in releaseInfo.Variants %}
-					<li><a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
-				{% endfor %}
+				<li><a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
 			{% endfor %}
 			</ul>
 			
