@@ -17,7 +17,7 @@ class MavenArchiveAction
         $releaseInfos = ReleaseInfoRepository::getAvailableReleaseInfosByProductName(Variant::PRODUCT_NAME_ENGINE);
         $releaseInfos = array_reverse($releaseInfos);
         $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $info) {
-            return $releaseInfo->getVersion()->isEqualOrGreaterThan(MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
+            return $info->getVersion()->isEqualOrGreaterThan(MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
         });
         
         return $this->container->get('view')->render($response, 'app/release/mavenArchive.html', ['releaseInfos' => $releaseInfos]);

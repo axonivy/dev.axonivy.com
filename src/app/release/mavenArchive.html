@@ -3,7 +3,7 @@
 
 
 {% for releaseInfo in releaseInfos %}
-	<h2>Release {{ releaseInfos.Version.VersionNumber }} </h2>
+	<h2>Release {{ releaseInfo.Version.VersionNumber }} </h2>
 	<ul>
 		{% for variant in releaseInfo.Variants %}
 			{% if variant.ProductName == 'Engine' %}
