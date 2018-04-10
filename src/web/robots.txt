@@ -1,0 +1,5 @@
+Sitemap: https://developer.axonivy.com/sitemap.xml
+
+User-agent: *
+Disallow: /doc/
+Allow: /doc/latest/
