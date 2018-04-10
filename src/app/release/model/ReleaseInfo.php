@@ -196,4 +196,15 @@ class ReleaseInfo
         return $variants;
     }
     
+    
+    public function getNightlyArtifacts(): array
+    {
+        $nightlyArtifacts = [];
+        foreach ($this->getVariants() as $variant) {
+            $fileName = $variant->getFileName();
+            $downloadUrl = CDN_HOST_DEV_RELEASES . '/ivy/nightly/current/' . $variant->getFileName();
+            $nightlyArtifacts[] = new NightlyArtifact($fileName, $downloadUrl);
+        }
+        return $nightlyArtifacts;
+    }
 }
