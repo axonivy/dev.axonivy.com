@@ -2,6 +2,7 @@
 namespace app\release;
 
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\RequestInterface;
 
 class NightlyAction
 {
@@ -11,10 +12,14 @@ class NightlyAction
         $this->container = $container;
     }
 
-    public function __invoke($request, $response, $args) {
+    public function __invoke(RequestInterface $request, $response, $args) {
         $releaseInfo = ReleaseInfoRepository::getLatestNightly();
         $artifacts = $releaseInfo->getNightlyArtifacts();
-        return $this->container->get('view')->render($response, 'app/release/nightly.html', ['nightlyArtifacts' => $artifacts]);
+        return $this->container->get('view')->render($response, 'app/release/nightly.html', [
+            'nightlyArtifacts' => $artifacts,
+            'nightlyUrl' => BASE_URL . '/download/nightly',
+            'nightlyUrlP2' => BASE_URL . '/download/nightly/p2'
+        ]);
     }
     
 }

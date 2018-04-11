@@ -9,9 +9,10 @@ class Config {
     {
         define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
         
+        define('BASE_URL', 'https://developer.axonivy.com');
+        
         define('CDN_HOST', 'https://download.axonivy.com');
         define('CDN_HOST_DEV_RELEASES', 'https://d3ao4l46dir7t.cloudfront.net');
-        
  
         $rootDir = '/home/axonivya/www/developer.axonivy.com';
         if (self::isDevOrTestEnv()) {

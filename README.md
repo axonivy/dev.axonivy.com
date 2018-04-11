@@ -11,7 +11,7 @@
 * Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
 * SlimFramework <http://www.slimframework.com>
 * Template <https://templated.co/introspect>
-* https://github.com/ajlkn/skel
+* JS-Framework <https://github.com/ajlkn/skel>
 
 ## Search
 The files: 
@@ -41,8 +41,6 @@ Menu entry > Setup > Advanced.
 ** Nightly
 ** Sprint
 ** Archive
-*** Hotfixs
-*** Release Notes
 
 * Support old links
 * Maven
