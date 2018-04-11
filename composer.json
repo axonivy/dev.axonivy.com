@@ -5,9 +5,17 @@
 		"slim/logger" : "~0.1",
 		"erusev/parsedown" : "~1.7"
 	},
+	"require-dev" : {
+		"phpunit/phpunit" : "~7.1"
+	},
 	"autoload" : {
 		"psr-4" : {
 			"app\\" : "src/app/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"test\\" : "test/"
 		}
 	}
 }
