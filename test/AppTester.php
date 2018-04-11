@@ -59,6 +59,13 @@ class AppTester
         Assert::assertContains($expectedToContain, $content);
         return $this;
     }
+    
+    public function getBody() {
+        $body = $this->response->getBody();
+        $body->rewind();
+        $content = $body->getContents();
+        return $content;
+    }
 
     public function statusCode(int $expectedStatusCode): AppTester
     {
