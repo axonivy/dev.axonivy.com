@@ -16,7 +16,7 @@ pipeline {
   stages {
     stage('distribution') {
       steps {
-      	sh 'composer install --no-dev'
+      	sh 'composer install --no-dev --no-progress'
         sh 'tar -cf developer-website.tar src vendor'
         archiveArtifacts 'developer-website.tar'
       }
@@ -24,7 +24,7 @@ pipeline {
     
     stage('test') {
       steps {
-      	sh 'composer install'
+      	sh 'composer install --no-progress'
         sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
       }
       post {
