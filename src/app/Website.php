@@ -36,7 +36,10 @@ class Website
     function __construct()
     {
         $config = [
-            'settings.displayErrorDetails' => true,
+            'settings' => [
+              'displayErrorDetails' => true,
+              'debug' => true,
+            ],
             'log.enabled' => true,
             'log.path' => '../logs',
             'log.level' => 8,
