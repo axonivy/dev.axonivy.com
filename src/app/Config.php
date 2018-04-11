@@ -14,7 +14,7 @@ class Config {
         
  
         $rootDir = '/home/axonivya/www/developer.axonivy.com';
-        if (self::isDevEnv()) {
+        if (self::isDevOrTestEnv()) {
             $rootDir = '/var/www/html/test/data/webroot';
         }
         
@@ -48,8 +48,8 @@ class Config {
         define('UNSAFE_RELEASES', $UNSAVE_VERSIONS);
     }
     
-    private static function isDevEnv(): bool
+    private static function isDevOrTestEnv(): bool
     {
-        return file_exists('../../Jenkinsfile');
+        return file_exists(StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']));
     }
 }
