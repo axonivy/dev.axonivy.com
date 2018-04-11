@@ -53,15 +53,16 @@
 									{% endfor %}
 									
 									{% if releaseInfo.hasHotfix %}
-										<i>
-										<a href="{{ releaseInfo.HotfixFile.Url }}"><span class="icon fa-download"> </span></a>&nbsp;{{ releaseInfo.HotfixFile.Name }} | <a href="{{ releaseInfo.HotfixHowtoDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;How to install<br />
-										</i>
+										<a href="{{ releaseInfo.HotfixFile.Url }}"><span class="icon fa-download"> </span></a>&nbsp;{{ releaseInfo.HotfixFile.Name }}
 									{% endif %}
 									
 								</td>
 								<td>
 									{% if releaseInfo.DocumentReleaseNote is not empty and releaseInfo.DocumentReleaseNote.Exists %}
-										<a href="{{ releaseInfo.DocumentReleaseNote.Url }}"><span class="icon fa-file"> </span></a>&nbsp;{{ releaseInfo.DocumentReleaseNote.Name }}
+										<a href="{{ releaseInfo.DocumentReleaseNote.Url }}"><span class="icon fa-file"> </span></a>&nbsp;{{ releaseInfo.DocumentReleaseNote.Name }}<br />
+										{% if releaseInfo.hasHotfix %}
+											<a href="{{ releaseInfo.HotfixHowtoDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;How to install Hotfix<br />
+										{% endif %}
 									{% endif %}
 								</td>
 							</tr>
