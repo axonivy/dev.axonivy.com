@@ -16,15 +16,12 @@ class Config {
  
         $rootDir = '/home/axonivya/www/developer.axonivy.com';
         if (self::isDevOrTestEnv()) {
-            $rootDir = '/var/www/html/test/data/webroot';
+            $rootDir = __DIR__ . '/../../test/data/webroot';
         }
-        
-        echo $rootDir . "\n";
         
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'nightly', 'current']));
         define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'sprint-release']));
-        
         
         $UNSAVE_VERSIONS = [
             '6.7.1' => '7.0',
@@ -53,7 +50,6 @@ class Config {
     
     private static function isDevOrTestEnv(): bool
     {
-        echo StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']) . "\n";
         return file_exists(StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']));
     }
 }
