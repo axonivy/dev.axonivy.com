@@ -14,7 +14,12 @@ class DocAction
     }
 
     public function __invoke($request, $response, $args) {
-        $version = $args['version'];
+        $version = $args['version']; // 7.0.3, latest, 7.0.latest
+        $document = $args['document']; // DesignerGuideHtml, PublicAPI
+        
+        
+        // if (PublicAPi -> redirect uf public api)
+        
         
         $releaseInfo = ReleaseInfoRepository::getReleaseInfo($version);
         if ($releaseInfo == null) {

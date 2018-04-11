@@ -106,7 +106,10 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
         
+        $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
+        $app->get('/doc/{version}/{document}', DocAction::class);
+        
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
         $app->get('/tutorial/getting-started[/{name}/step-{stepNr}]', TutorialGettingStartedAction::class);
