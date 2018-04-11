@@ -2,7 +2,6 @@
 namespace app\release;
 
 use Psr\Container\ContainerInterface;
-use app\release\model\ReleaseInfo;
 use app\util\StringUtil;
 use Slim\Exception\NotFoundException;
 
@@ -16,7 +15,7 @@ class ArchiveAction
     
     public function __invoke($request, $response, $args) {
         $availableReleaseInfos = ReleaseInfoRepository::getAvailableReleaseInfos();
-        $availableReleaseInfos = ReleaseInfo::sortReleaseInfosByVersionLatestFirst($availableReleaseInfos);
+        $availableReleaseInfos = array_reverse($availableReleaseInfos);
         
         // determine all available major versions
         $majorVersions = [];

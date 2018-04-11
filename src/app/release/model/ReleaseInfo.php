@@ -17,14 +17,6 @@ class ReleaseInfo
         }
     }
     
-    public static function sortReleaseInfosByVersionLatestFirst(array $releaseInfos)
-    {
-        usort($releaseInfos, function (ReleaseInfo $r1, ReleaseInfo $r2) {
-            return version_compare($r2->getVersion()->getVersionNumber(), $r1->getVersion()->getVersionNumber());
-        });
-        return $releaseInfos;
-    }
-    
     public static function sortReleaseInfosByVersionOldestFirst(array $releaseInfos)
     {
         usort($releaseInfos, function (ReleaseInfo $r1, ReleaseInfo $r2) {

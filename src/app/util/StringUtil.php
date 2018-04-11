@@ -16,4 +16,9 @@ class StringUtil
     {
         return substr($string, 0, strlen($startsWith)) == $startsWith;
     }
+    
+    public static function createPath(array $elements): string
+    {
+        return implode(DIRECTORY_SEPARATOR, $elements);
+    }
 }

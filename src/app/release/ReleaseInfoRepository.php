@@ -120,9 +120,12 @@ class ReleaseInfoRepository
             //}
             
             $versionNumber = basename($directory);
+            
             if (Version::isValidVersionNumber($versionNumber)) {
-                $fileNames = glob($directory . '/downloads/*.zip');
-                $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames);
+                if ($versionNumber != '0.0.1') { // special folder
+                    $fileNames = glob($directory . '/downloads/*.zip');
+                    $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames);
+                }
             }
         }
         $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst($releaseInfos);

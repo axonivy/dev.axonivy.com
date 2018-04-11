@@ -1,0 +1,1 @@
+This folder exists only so that the Update Service can be tested with Xpert.ivy started from the IDE:

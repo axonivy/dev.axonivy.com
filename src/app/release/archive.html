@@ -35,7 +35,7 @@
 									{% endfor %}
 								</td>
 								<td>
-									{% if releaseInfo.DocumentReleaseNote is not empty %}
+									{% if releaseInfo.DocumentReleaseNote is not empty and releaseInfo.DocumentReleaseNote.Exists %}
 										<a href="{{ releaseInfo.DocumentReleaseNote.Url }}">{{ releaseInfo.DocumentReleaseNote.Name }}</a>
 									{% endif %}
 								</td>
