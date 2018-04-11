@@ -100,7 +100,7 @@ class Website
         $this->installRedirect('/download/addons.html', 'addons');
         $app->get('/download/maven.html', MavenArchiveAction::class);
         
-        $app->get('/doc', DocAction::class);
+        $app->get('/doc/{version}', DocAction::class);
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
         $app->get('/tutorial/getting-started[/{name}/step-{stepNr}]', TutorialGettingStartedAction::class);

@@ -13,6 +13,13 @@
 	
 	<section id="main" >
 		<div class="inner">
+			
+			<ul>
+				{% for doc in docs %}
+					<li>{{ doc.Name }}</li>
+				{% endfor %}
+			</ul>
+		
 			{{ newAndNoteworthyHtml|raw }}
 		</div>
 	</section>
