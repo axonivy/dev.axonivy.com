@@ -53,7 +53,7 @@
 									{% endfor %}
 									
 									{% if releaseInfo.hasHotfix %}
-										<a href="{{ releaseInfo.HotfixFile.Url }}"> {{ releaseInfo.HotfixFile.Name }}</a> (<a href="{{ releaseInfo.HotfixHowtoDocument.Url }}">How to install</a>)<br />
+										<a href="{{ releaseInfo.HotfixFile.Url }}"><span class="icon fa-download"> </span></a>&nbsp; {{ releaseInfo.HotfixFile.Name }} (<a href="{{ releaseInfo.HotfixHowtoDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;</a> How to install)<br />
 									{% endif %}
 									
 								</td>
