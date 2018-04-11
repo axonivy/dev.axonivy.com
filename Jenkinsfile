@@ -25,11 +25,11 @@ pipeline {
     stage('test') {
       steps {
       	sh 'composer install'
-        sh './vendor/bin/phpunit --log-junit phpunit-junit.xml'
+        sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
       }
       post {
         always {
-          junit 'phpunit-junit.xml' 
+          junit 'phpunit-junit.xml'
         }
       }
     }
