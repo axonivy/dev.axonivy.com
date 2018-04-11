@@ -35,13 +35,11 @@ Menu entry > Setup > Advanced.
 * robots.txt
 
 * Download
-** DownloadButtons
 ** Nightly
 ** Sprint
 ** Archive
 *** Hotfixs
 *** Release Notes
-*** Security Vulnerarbility 
 
 * Support old links
 * Maven

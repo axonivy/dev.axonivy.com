@@ -56,14 +56,14 @@ class ReleaseInfoRepository
     public static function getLatestNightly(): ?ReleaseInfo
     {
         $fileNames = glob(IVY_NIGHTLY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*.zip');
-        return new ReleaseInfo('nightly', $fileNames);
+        return new ReleaseInfo('nightly', $fileNames, '');
     }
     
     public static function getSprintRelease(): ?ReleaseInfo
     {
         $fileNames = glob(IVY_SPRINT_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*.zip');
         $sprintNumber = basename(IVY_SPRINT_RELEASE_DIRECTORY);
-        return new ReleaseInfo($sprintNumber, $fileNames);
+        return new ReleaseInfo($sprintNumber, $fileNames, '');
     }
     
     /**
@@ -123,8 +123,14 @@ class ReleaseInfoRepository
             
             if (Version::isValidVersionNumber($versionNumber)) {
                 if ($versionNumber != '0.0.1') { // special folder
+                    
+                    $safeVersion = '';
+                    if (isset(UNSAFE_RELEASES[$versionNumber])) {
+                        $safeVersion = UNSAFE_RELEASES[$versionNumber];
+                    }
+                    
                     $fileNames = glob($directory . '/downloads/*.zip');
-                    $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames);
+                    $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames, $safeVersion);
                 }
             }
         }

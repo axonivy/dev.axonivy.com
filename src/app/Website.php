@@ -10,6 +10,7 @@ use app\release\AddonsAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
+use app\release\SecurityVulnerabilityAction;
 use app\support\SupportAction;
 use app\codecamp\CodeCampAction;
 use app\devday\DevDayAction;
@@ -97,6 +98,8 @@ class Website
         $app->get('/download/addons', AddonsAction::class)->setName('addons');
         $this->installRedirect('/download/addons.html', 'addons');
         $app->get('/download/maven.html', MavenArchiveAction::class);
+        $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
+        $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
         
         $app->get('/doc/{version}', DocAction::class);
         $app->get('/installation', InstallationAction::class);
