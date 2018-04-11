@@ -51,6 +51,11 @@
 									{% for variant in releaseInfo.Variants %}
 										<a href="{{ variant.DownloadUrl }}"><span class="icon fa-download"> </span></a>&nbsp;{{ variant.FileName }}<br />
 									{% endfor %}
+									
+									{% if releaseInfo.hasHotfix %}
+										<a href="{{ releaseInfo.HotfixFile.Url }}"> {{ releaseInfo.HotfixFile.Name }}</a> (<a href="{{ releaseInfo.HotfixHowtoDocument.Url }}">How to install</a>)<br />
+									{% endif %}
+									
 								</td>
 								<td>
 									{% if releaseInfo.DocumentReleaseNote is not empty and releaseInfo.DocumentReleaseNote.Exists %}
