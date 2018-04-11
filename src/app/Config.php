@@ -21,7 +21,7 @@ class Config {
         
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'nightly', 'current']));
-        define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'sprint-release', 'Jakobshorn', '7.1.0-S8']));
+        define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'sprint-release']));
         
         
         $UNSAVE_VERSIONS = [

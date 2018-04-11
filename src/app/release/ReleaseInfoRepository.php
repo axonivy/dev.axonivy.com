@@ -59,11 +59,26 @@ class ReleaseInfoRepository
         return new ReleaseInfo('nightly', $fileNames, '');
     }
     
-    public static function getSprintRelease(): ?ReleaseInfo
+    public static function getSprintReleases(): array
     {
-        $fileNames = glob(IVY_SPRINT_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*.zip');
-        $sprintNumber = basename(IVY_SPRINT_RELEASE_DIRECTORY);
-        return new ReleaseInfo($sprintNumber, $fileNames, '');
+        $releaseInfos = [];
+        $codefolderNames = glob(IVY_SPRINT_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*');
+        foreach ($codefolderNames as $codeFolderName) { // e.g Jakobshorn
+            if (is_dir($codeFolderName)) {
+                $sprintFolderNames = glob($codeFolderName . DIRECTORY_SEPARATOR . '*');
+                foreach ($sprintFolderNames as $sprintFolderName) { // e.g. S8-7.1.0
+                    if (is_dir($sprintFolderName)) {
+                        $files = glob($sprintFolderName . DIRECTORY_SEPARATOR . '*.zip');
+                        
+                        $code = basename($codeFolderName);
+                        $sprint = basename($sprintFolderName);
+                        
+                        $releaseInfos[] = new ReleaseInfo($code . '-' . $sprint, $files, '');
+                    }
+                }
+            }            
+        }
+        return $releaseInfos;
     }
     
     /**
