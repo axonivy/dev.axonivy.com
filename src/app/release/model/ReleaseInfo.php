@@ -207,4 +207,15 @@ class ReleaseInfo
         }
         return $nightlyArtifacts;
     }
+    
+    public function getSprintArtifacts(): array
+    {
+        $nightlyArtifacts = [];
+        foreach ($this->getVariants() as $variant) {
+            $fileName = $variant->getFileName();
+            $downloadUrl = CDN_HOST_DEV_RELEASES . '/ivy/sprint/current/' . $variant->getFileName();
+            $nightlyArtifacts[] = new SprintArtifact($fileName, $downloadUrl);
+        }
+        return $nightlyArtifacts;
+    }
 }

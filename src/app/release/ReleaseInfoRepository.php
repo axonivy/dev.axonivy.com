@@ -59,6 +59,13 @@ class ReleaseInfoRepository
         return new ReleaseInfo('nightly', $fileNames);
     }
     
+    public static function getSprintRelease(): ?ReleaseInfo
+    {
+        $fileNames = glob(IVY_SPRINT_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*.zip');
+        $sprintNumber = basename(IVY_SPRINT_RELEASE_DIRECTORY);
+        return new ReleaseInfo($sprintNumber, $fileNames);
+    }
+    
     /**
      * Returns all available minor versions.
      *

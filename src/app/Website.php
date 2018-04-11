@@ -19,14 +19,15 @@ use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
 use app\search\SearchAction;
-use app\release\SprintAction;
 use app\release\NightlyAction;
+use app\release\SprintReleaseAction;
 
 define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
 define('CDN_HOST', 'https://download.axonivy.com');
 define('CDN_HOST_DEV_RELEASES', 'https://d3ao4l46dir7t.cloudfront.net');
 define('IVY_RELEASE_DIRECTORY', '/home/axonivya/www/developer.axonivy.com' . DIRECTORY_SEPARATOR . 'releases' . DIRECTORY_SEPARATOR . 'ivy');
-define('IVY_NIGHTLY_RELEASE_DIRECTORY','/home/axonivya/www/developer.axonivy.com' . DIRECTORY_SEPARATOR . 'dev-releases' . DIRECTORY_SEPARATOR . 'ivy' . DIRECTORY_SEPARATOR . 'nightly' . DIRECTORY_SEPARATOR . 'current');
+define('IVY_NIGHTLY_RELEASE_DIRECTORY', '/home/axonivya/www/developer.axonivy.com' . DIRECTORY_SEPARATOR . 'dev-releases' . DIRECTORY_SEPARATOR . 'ivy' . DIRECTORY_SEPARATOR . 'nightly' . DIRECTORY_SEPARATOR . 'current');
+define('IVY_SPRINT_RELEASE_DIRECTORY', '/home/axonivya/www/developer.axonivy.com' . DIRECTORY_SEPARATOR . 'dev-releases' . DIRECTORY_SEPARATOR . 'ivy' . DIRECTORY_SEPARATOR . 'sprint-release' . DIRECTORY_SEPARATOR . 'Jakobshorn' . DIRECTORY_SEPARATOR . '7.1.0-S8');
 
 class Website
 {
@@ -93,7 +94,7 @@ class Website
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
         $this->installRedirect('/download/archive.html', 'archive');
-        $app->get('/download/sprint-release[.html]', SprintAction::class);
+        $app->get('/download/sprint-release[.html]', SprintReleaseAction::class);
         $app->get('/download/nightly[.html]', NightlyAction::class);
         $app->get('/download/addons', AddonsAction::class)->setName('addons');
         $this->installRedirect('/download/addons.html', 'addons');

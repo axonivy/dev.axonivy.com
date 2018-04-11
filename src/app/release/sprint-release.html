@@ -1,0 +1,51 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Sprint Release{{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <section id="main" >
+		<div class="inner">
+			<header><h2>Sprint Release</h2></header>
+			<div class="alert alert-danger" role="alert">
+				The following nightly builds are for testing purposes only. Never ever use them on productive systems!
+			</div>
+			<p>We provide previews of the next release on a regular basis.</p>
+			
+				<h3>{{ sprintName }}</h3>			
+				
+				{% if sprintArtifacts is empty %}
+					<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
+				{% else %}
+					<ul>
+					{% for sprintArtifact in sprintArtifacts %}
+						<li><a href="{{ sprintArtifact.downloadUrl }}">{{ sprintArtifact.fileName }}</a><br />
+					{% endfor %}
+					</ul>				
+				{% endif %}
+			
+			<h2>Permalinks</h2>
+			<p>Same link to get always the latest sprint release. E.g. use it with <code>wget</code> (may add <code>--content-disposition</code> parameter to sore it with the real filename).</p>
+			<ul>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyDesigner-latest_Linux_x64.zip">AxonIvyDesigner_Linux_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyDesigner-latest_MacOSX_x64.zip">AxonIvyDesigner_MacOSX_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyDesigner-latest_Windows_x64.zip">AxonIvyDesigner_Windows_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_Linux_x64.zip">AxonIvyEngine_Linux_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_OSGi_All_x64.zip">AxonIvyEngine_OSGi_All_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_OSGi_Slim_All_x64.zip">AxonIvyEngine_OSGi_Slim_All_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_OSGi_Windows_x64.zip">AxonIvyEngine_OSGi_Windows_x64</a></li>
+				<li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_Windows_x64.zip">AxonIvyEngine_Windows_x64</a></li>
+			</ul>
+			
+			<h2>Remarks</h2>
+			<ul>
+			  <li>It is recommended to create a new workspace and import existing projects again.</li>
+			  <li>Using sprint release builds with the maven project-build-plugin: <code>mvn clean install -Divy.engine.list.url=https://developer.axonivy.com/download/sprint-release.html</code></li>
+			  <li>You can also consume the sprint increment trough an updatesite under <code>
+				<a href="/download/sprint-release/p2">/download/sprint-release/p2</a></code></li>
+			</ul>
+			
+		</div>
+	</section>
+    
+{% endblock %}
