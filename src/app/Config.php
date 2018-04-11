@@ -19,7 +19,7 @@ class Config {
             $rootDir = '/var/www/html/test/data/webroot';
         }
         
-        echo $rootDir;
+        echo $rootDir . "\n";
         
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'nightly', 'current']));
@@ -53,6 +53,7 @@ class Config {
     
     private static function isDevOrTestEnv(): bool
     {
+        echo StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']) . "\n";
         return file_exists(StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']));
     }
 }
