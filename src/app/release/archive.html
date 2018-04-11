@@ -23,6 +23,7 @@
 						<tr>
 							<th>Version</th>
 							<th>Download</th>
+							<th>Documents</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -31,12 +32,12 @@
 								<td>{{ releaseInfo.version.VersionNumber }}</td>
 								<td>
 									{% for variant in releaseInfo.Variants %}
-										<a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
+										<a href="{{ variant.DownloadUrl }}"><span class="icon fa-download"> </span></a>&nbsp;{{ variant.FileName }}<br />
 									{% endfor %}
 								</td>
 								<td>
 									{% if releaseInfo.DocumentReleaseNote is not empty and releaseInfo.DocumentReleaseNote.Exists %}
-										<a href="{{ releaseInfo.DocumentReleaseNote.Url }}">{{ releaseInfo.DocumentReleaseNote.Name }}</a>
+										<a href="{{ releaseInfo.DocumentReleaseNote.Url }}"><span class="icon fa-file"> </span></a>&nbsp;{{ releaseInfo.DocumentReleaseNote.Name }}
 									{% endif %}
 								</td>
 							</tr>
