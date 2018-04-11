@@ -40,6 +40,7 @@ class SprintReleaseAction
 //         <li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_OSGi_Windows_x64.zip">AxonIvyEngine_OSGi_Windows_x64</a></li>
 //         <li><a href="https://developer.axonivy.com/download/sprint-release/AxonIvyEngine-latest_Windows_x64.zip">AxonIvyEngine_Windows_x64</a></li>
         
+        // TODO Check p2 url
         
         return $this->container->get('view')->render($response, 'app/release/sprint-release.html', [
             'releaseInfos' => $releaseInfos,

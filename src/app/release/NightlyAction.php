@@ -15,6 +15,9 @@ class NightlyAction
     public function __invoke(RequestInterface $request, $response, $args) {
         $releaseInfo = ReleaseInfoRepository::getLatestNightly();
         $artifacts = $releaseInfo->getNightlyArtifacts();
+        
+        // TODO Check p2 url
+        
         return $this->container->get('view')->render($response, 'app/release/nightly.html', [
             'nightlyArtifacts' => $artifacts,
             'nightlyUrl' => BASE_URL . '/download/nightly',
