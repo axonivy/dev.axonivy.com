@@ -4,6 +4,9 @@
 	docker-compose up -d
 	docker-compose exec web composer install
 
+## Execute tests
+	docker-compose exec web ./vendor/bin/phpunit
+
 ## Ressources
 * Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
 * SlimFramework <http://www.slimframework.com>
