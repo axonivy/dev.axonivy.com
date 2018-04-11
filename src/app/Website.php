@@ -42,14 +42,19 @@ class Website
             'log.writer' => new \Slim\Logger\DateTimeFileWriter(),
         ];
         $this->app = new App($config);
-    }
-
-    public function start()
-    {
         $this->configureTemplateEngine();
         $this->installTrailingSlashMiddelware();
         $this->installRoutes();
         $this->installErrorHandling();
+    }
+    
+    public function getApp(): App
+    {
+        return $this->app;
+    }
+
+    public function start()
+    {
         $this->app->run();
     }
     
@@ -57,7 +62,7 @@ class Website
     {
         $container = $this->app->getContainer();
         $container['view'] = function ($container) {
-            $view = new \Slim\Views\Twig('../../src');
+            $view = new \Slim\Views\Twig(__DIR__ . '/..');
             $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
             $view->addExtension(new \Slim\Views\TwigExtension($container['router'], $basePath));
             $view->addExtension(new \Twig_Extension_Debug());
