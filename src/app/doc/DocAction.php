@@ -21,7 +21,7 @@ class DocAction
             throw new NotFoundException($request, $response);
         }
         
-        $docs = $releaseInfo->getDocuments();
+        $docs = $releaseInfo->getDocuments('');
         
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'docs' => $docs,

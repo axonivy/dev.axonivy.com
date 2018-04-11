@@ -33,8 +33,7 @@ class Website
         
         $config = [
             'settings' => [
-              'displayErrorDetails' => true,
-              'debug' => true,
+              'displayErrorDetails' => true
             ],
             'log.enabled' => true,
             'log.path' => '../logs',
