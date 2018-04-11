@@ -19,6 +19,8 @@ class Config {
             $rootDir = '/var/www/html/test/data/webroot';
         }
         
+        echo $rootDir;
+        
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'nightly', 'current']));
         define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'dev-releases', 'ivy', 'sprint-release']));
