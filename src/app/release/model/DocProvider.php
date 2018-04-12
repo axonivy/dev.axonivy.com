@@ -19,32 +19,54 @@ class DocProvider
         $docDir = IVY_RELEASE_DIRECTORY . '/' . $versionNumber . '';
         
         $documents = [];
-        $documents[] = new Document('Designer Guide', "/$versionNumber/documents/DesignerGuideHtml/index.html", "/doc/$versionNumber/DesignerGuideHtml");
-        $documents[] = new Document('Engine Guide', "/$versionNumber/documents/EngineGuideHtml/index.html", "/doc/$versionNumber/EngineGuideHtml");
-        $documents[] = $this->getDocumentReleaseNote();
-        $documents[] = new Document('N&N Designer', "/$versionNumber/documents/doc/newAndNoteworthy/NewAndNoteworthyDesigner.html", "/doc/$versionNumber/newAndNoteworthy/NewAndNoteworthyDesigner.html");
-        $documents[] = new Document('N&N Engine', "/$versionNumber/documents/doc/newAndNoteworthy/NewAndNoteworthyEngine.html", "/doc/$versionNumber/newAndNoteworthy/NewAndNoteworthyEngine.html");
-        $documents[] = new Document('Known Issues', "/$versionNumber/documents/KnownIssues.txt", "/doc/$versionNumber/KnownIssues.txt");
+        
+        $documents[] = self::createBook('Designer Guide', $versionNumber, 'DesignerGuideHtml', 'DesignerGuide.pdf');
+        $documents[] = self::createBook('Engine Guide', $versionNumber, 'EngineGuideHtml', 'EngineGuide.pdf');
+        $documents[] = self::createBook('Portal Kit', $versionNumber, 'PortalKitHtml', 'PortalKit.pdf');
+        $documents[] = self::createBook('Portal Connector', $versionNumber, 'PortalConnectorHtml', 'PortalConnector.pdf');
+        $documents[] = self::createBook('Public API', $versionNumber, 'PublicAPI', '');
+        
+        $documents[] = self::createReleaseNotes($this->releaseInfo->getVersion());
+  
+        $documents[] = self::createDocument('N&N Designer', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyDesigner.html');
+        $documents[] = self::createDocument('N&N Engine', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyEngine.html');
+        $documents[] = self::createDocument('Known Issues', $versionNumber, 'newAndNoteworthy/KnownIssues.txt');
+        
+        $documents[] = self::createDocument('ReadMe Designer', $versionNumber, 'ReadMe.html');
+        $documents[] = self::createDocument('ReadMe Engine', $versionNumber, 'ReadMeEngine.html');
         
         return array_filter($documents, function(Document $doc) { return $doc->exists(); });
     }
     
-    private function getDocumentReleaseNote(): Document {
-        $versionNumber = $this->releaseInfo->getVersion()->getBugfixVersion();
+    private static function createBook($bookName, $versionNumber, $dirName, $pdfFile): Document
+    {
+        $doc = new Document($bookName, "/$versionNumber/documents/$dirName/index.html", "/doc/$versionNumber/$dirName", true);
+        $doc->setPdfFile($pdfFile);
+        return $doc;
+    }
+    
+    private static function createDocument($docName, $versionNumber, $filePath): Document
+    {
+        return new Document($docName, "/$versionNumber/documents/$filePath", "/doc/$versionNumber/$filePath", false);
+    }
+    
+    private static function createReleaseNotes(Version $version): Document
+    {
+        $versionNumber = $version->getBugfixVersion();
         $fileName = 'ReleaseNotes.txt';
-        if ($this->releaseInfo->getVersion()->getMinorVersion() == '4.2') {
-            $versionNumber = $this->releaseInfo->getVersion()->getVersionNumber();
+        if ($version->getMinorVersion() == '4.2') {
+            $versionNumber = $version->getVersionNumber();
         }
-        if ($this->releaseInfo->getVersion()->getVersionNumber() == '3.9.52.8') {
+        if ($version->getVersionNumber() == '3.9.52.8') {
             $versionNumber = '3.9.8';
         }
-        if ($this->releaseInfo->getVersion()->getVersionNumber() == '3.9.52.9') {
+        if ($version->getVersionNumber() == '3.9.52.9') {
             $versionNumber = '3.9.9';
         }
-        if ($this->releaseInfo->getVersion()->getMinorVersion() == '3.9') {
+        if ($version->getMinorVersion() == '3.9') {
             $fileName = 'ReadMe.html';
         }
-        return new Document('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName");
+        return new Document('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName", false);
     }
     
     //public function getDocumentationOverviewUrl(): string

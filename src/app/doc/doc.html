@@ -14,14 +14,12 @@
     <section id="main" >
 		<div class="inner">
 			<header><h1>Documentation {{ releaseInfo.Version.VersionNumber }}</h1></header>
-					
-			<div class="row">
+				
+				<ul class="actions">
 				{% for doc in docs %}
-					<div class="4u 12u$(xsmall)">
-						<a href="{{ doc.Url }}">{{ doc.Name }}</a>
-					</div>
+					<li><a href="{{ doc.Url }}" {{doc.Book ? 'target="_blank"'}}  class="button special icon {{ doc.Book ? 'fa-book' : 'fa-file' }} " style="width:200px;">{{ doc.Name }}</a></li>
 				{% endfor %}
-			</div>
+				</ul>
 		</div>
 	</section>
     

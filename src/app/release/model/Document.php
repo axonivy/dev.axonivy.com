@@ -7,12 +7,20 @@ class Document
     private $shortName;
     private $filePath;
     private $url;
+    private $isBook;
+    private $pdfFile;
     
-    public function __construct(string $name, string $filePath, string $url)
+    public function __construct(string $name, string $filePath, string $url, bool $isBook)
     {
         $this->name = $name;
         $this->filePath = $filePath;
         $this->url = $url;
+        $this->isBook = $isBook;
+    }
+    
+    public function isBook(): bool 
+    {
+        return $this->isBook;
     }
     
     public function setShortName(string $shortName)
@@ -23,6 +31,16 @@ class Document
     public function getShortName(): ?string
     {
         return $this->shortName;
+    }
+    
+    public function setPdfFile(string $pdfFile)
+    {
+        $this->pdfFile = $pdfFile;
+    }
+    
+    public function getPdfFile(): ?string
+    {
+        return $this->pdfFile;
     }
     
     public function exists(): bool
