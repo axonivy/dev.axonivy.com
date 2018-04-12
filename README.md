@@ -31,9 +31,6 @@ Menu entry > Setup > Advanced.
 * sitemap.xml
 * robots.txt
 
-* Download
-** Archive -> Release Notes
-
 * Support old links
 
 ### After Release

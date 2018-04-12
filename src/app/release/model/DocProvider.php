@@ -68,7 +68,7 @@ class DocProvider
     private static function createBook($bookName, $versionNumber, $dirName, $pdfFile): Document
     {
         $doc = new Document($bookName, "/$versionNumber/documents/$dirName/index.html", "/doc/$versionNumber/$dirName/", true);
-        $doc->setPdfFile($pdfFile);
+        $doc->setPdfUrl("/doc/$versionNumber/$pdfFile");
         return $doc;
     }
     

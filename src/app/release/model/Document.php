@@ -8,7 +8,7 @@ class Document
     private $filePath;
     private $url;
     private $isBook;
-    private $pdfFile;
+    private $pdfUrl;
     
     public function __construct(string $name, string $filePath, string $url, bool $isBook)
     {
@@ -33,14 +33,14 @@ class Document
         return $this->shortName;
     }
     
-    public function setPdfFile(string $pdfFile)
+    public function setPdfUrl(string $pdfUrl)
     {
-        $this->pdfFile = $pdfFile;
+        $this->pdfUrl = $pdfUrl;
     }
     
     public function getPdfUrl(): ?string
     {
-        return basename($this->url) . '/' . $this->pdfFile;
+        return $this->pdfUrl;
     }
     
     public function exists(): bool
