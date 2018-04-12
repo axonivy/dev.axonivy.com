@@ -2,8 +2,8 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use app\release\ReleaseInfoRepository;
 use Slim\Exception\NotFoundException;
+use app\release\model\DocProvider;
 
 class DocAction
 {
@@ -14,23 +14,17 @@ class DocAction
     }
 
     public function __invoke($request, $response, $args) {
+        $version = $args['version'] ?? 'latest';
         
-        //   /doc/7.0.3
-        // $document = $args['document']; // DesignerGuideHtml, PublicAPI
-        
-        
-        $version = $args['version']; // 7.0.3, latest, 7.0.latest
-        
-        // if (PublicAPi -> redirect uf public api)
-        
-        
-        $releaseInfo = ReleaseInfoRepository::getReleaseInfo($version);
-        if ($releaseInfo == null) {
+        $docProvider = new DocProvider($version);
+        if (!$docProvider->exists())
+        {
             throw new NotFoundException($request, $response);
         }
         
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
-            'docProvider' => $releaseInfo->getDocProvider()
+            'version' => $version,
+            'docProvider' => $docProvider
         ]);
     }
 }

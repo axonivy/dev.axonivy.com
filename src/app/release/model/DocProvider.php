@@ -14,6 +14,11 @@ class DocProvider
         $this->versionNumber = $versionNumber;    
     }
     
+    public function exists(): bool
+    {
+        return file_exists($this->getDocDir());
+    }
+    
     public function getReleaseNotes(): Document
     {
         return self::createReleaseNotes($this->versionNumber);
@@ -29,11 +34,16 @@ class DocProvider
         return array_filter(self::getAllDocuments(), function (Document $doc) { return !$doc->isBook(); });
     }
     
+    private function getDocDir()
+    {
+        return IVY_RELEASE_DIRECTORY . '/' . $versionNumber;
+    }
+    
     private function getAllDocuments(): array
     {
         $versionNumber = $this->versionNumber;
         
-        $docDir = IVY_RELEASE_DIRECTORY . '/' . $versionNumber . '';
+        $docDir = $this->getDocDir();
         
         $documents = [];
         
@@ -47,7 +57,7 @@ class DocProvider
   
         $documents[] = self::createDocument('N&N Designer', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyDesigner.html');
         $documents[] = self::createDocument('N&N Engine', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyEngine.html');
-        $documents[] = self::createDocument('Known Issues', $versionNumber, 'newAndNoteworthy/KnownIssues.txt');
+        $documents[] = self::createDocument('Migration Notes', $versionNumber, 'MigrationNotes.html');
         
         $documents[] = self::createDocument('ReadMe Designer', $versionNumber, 'ReadMe.html');
         $documents[] = self::createDocument('ReadMe Engine', $versionNumber, 'ReadMeEngine.html');

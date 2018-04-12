@@ -38,9 +38,9 @@ class Document
         $this->pdfFile = $pdfFile;
     }
     
-    public function getPdfFile(): ?string
+    public function getPdfUrl(): ?string
     {
-        return $this->pdfFile;
+        return basename($this->url) . '/' . $this->pdfFile;
     }
     
     public function exists(): bool
