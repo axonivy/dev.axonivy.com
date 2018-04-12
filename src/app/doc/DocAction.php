@@ -14,9 +14,12 @@ class DocAction
     }
 
     public function __invoke($request, $response, $args) {
-        $version = $args['version']; // 7.0.3, latest, 7.0.latest
-        $document = $args['document']; // DesignerGuideHtml, PublicAPI
         
+        //   /doc/7.0.3
+        // $document = $args['document']; // DesignerGuideHtml, PublicAPI
+        
+        
+        $version = $args['version']; // 7.0.3, latest, 7.0.latest
         
         // if (PublicAPi -> redirect uf public api)
         
@@ -26,11 +29,10 @@ class DocAction
             throw new NotFoundException($request, $response);
         }
         
-        $docs = $releaseInfo->getDocuments('');
+        $docs = $releaseInfo->getDocPovider()->getDocuments();
         
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
-            'docs' => $docs,
-            'newAndNoteworthyHtml' => DocProvider::getNewAndNoteworthyHtml()
+            'docs' => $docs
         ]);
     }
 }

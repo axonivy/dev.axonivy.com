@@ -10,17 +10,18 @@
 			max-width:600px;
 		}
 	</style>
-	
-	<section id="main" >
+    
+    <section id="main" >
 		<div class="inner">
-			
-			<ul>
+			<header><h1>Documentation {{ releaseInfo.Version.VersionNumber }}</h1></header>
+					
+			<div class="row">
 				{% for doc in docs %}
-					<li>{{ doc.Name }}</li>
+					<div class="4u 12u$(xsmall)">
+						<a href="{{ doc.Url }}">{{ doc.Name }}</a>
+					</div>
 				{% endfor %}
-			</ul>
-		
-			{{ newAndNoteworthyHtml|raw }}
+			</div>
 		</div>
 	</section>
     

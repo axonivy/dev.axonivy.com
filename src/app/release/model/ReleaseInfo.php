@@ -47,6 +47,11 @@ class ReleaseInfo
         return $this->variants;
     }
     
+    public function getDocPovider(): DocProvider
+    {
+        return new DocProvider($this);
+    }
+    
     public function hasHotfix(): bool
     {
         $files_in_hotfix = @scandir($this->getHotFixPath());
@@ -60,6 +65,7 @@ class ReleaseInfo
         }
         return (count($files_in_hotfix) > 2);
     }
+    
     
     public function getHotfixFile(): Document
     {
@@ -93,53 +99,6 @@ class ReleaseInfo
         return IVY_RELEASE_DIRECTORY . '/' . $versionNumber . '/hotfix';
     }
     
-    public function getDocuments(?string $productName): array
-    {
-        $versionNumber = $this->version->getBugfixVersion();
-        
-        $documents = [
-            $this->getDocumentReleaseNote()
-        ];
-        if (empty($productName) || $productName == Variant::PRODUCT_NAME_DESIGNER) {
-            $documents[] = new Document('N&N Designer', "/$versionNumber/documents/doc/newAndNoteworthy/NewAndNoteworthyDesigner.html", "/doc/$versionNumber/newAndNoteworthy/NewAndNoteworthyDesigner.html");
-        }
-        if (empty($productName) || $productName == Variant::PRODUCT_NAME_ENGINE) {
-            $documents[] = new Document('N&N Engine', "/$versionNumber/documents/doc/newAndNoteworthy/NewAndNoteworthyEngine.html", "/doc/$versionNumber/newAndNoteworthy/NewAndNoteworthyEngine.html");
-        }
-        $documents[] = new Document('Known Issues', "/$versionNumber/documents/KnownIssues.txt", "/doc/$versionNumber/KnownIssues.txt");
-        
-        $docs = [];
-        foreach ($documents as $doc) {
-            if ($doc->exists()) {
-                $docs[] = $doc;
-            }
-        }
-        return $docs;
-    }
-    
-    public function getDocumentReleaseNote(): Document {
-        $versionNumber = $this->version->getBugfixVersion();
-        $fileName = 'ReleaseNotes.txt';
-        if ($this->version->getMinorVersion() == '4.2') {
-            $versionNumber = $this->version->getVersionNumber();
-        }
-        if ($this->version->getVersionNumber() == '3.9.52.8') {
-            $versionNumber = '3.9.8';
-        }
-        if ($this->version->getVersionNumber() == '3.9.52.9') {
-            $versionNumber = '3.9.9';
-        }
-        if ($this->version->getMinorVersion() == '3.9') {
-            $fileName = 'ReadMe.html';
-        }
-        return new Document('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName");
-    }
-    
-    public function getDocumentationOverviewUrl(): string
-    {
-        $versionNumber = $this->version->getBugfixVersion();
-        return "/doc/$versionNumber/";
-    }
     
     public function hasVariantWithProductName(string $productName): bool
     {
