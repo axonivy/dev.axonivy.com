@@ -5,6 +5,11 @@ class Version
 {
     private $versionNumber;
     
+    public function __construct(string $versionNumber)
+    {
+        $this->versionNumber = $versionNumber;
+    }
+    
     public static function isValidVersionNumber(string $versionNumber): bool
     {
         $number = str_replace('.' , '', $versionNumber);
@@ -21,17 +26,6 @@ class Version
         return $v[1] == 0;
     }
     
-    public function isNewestLeadingEdgeVersion(): bool
-    {
-        // TODO
-        return true;
-    }
-    
-    public function __construct(string $versionNumber)
-    {
-        $this->versionNumber = $versionNumber;
-    }
-    
     public function getVersionNumber(): string
     {
         return $this->versionNumber;
@@ -43,14 +37,14 @@ class Version
     }
     
     /**
-     * e.g. 6.1.2 or 3.9.6
+     * e.g. 6, 7
      *
      * @return string
      */
-    public function getBugfixVersion(): string
+    public function getMajorVersion(): string
     {
         $v = explode('.', $this->versionNumber);
-        $v = array_slice($v, 0, 3);
+        $v = array_slice($v, 0, 1);
         return implode('.', $v);
     }
     
@@ -67,14 +61,14 @@ class Version
     }
     
     /**
-     * e.g. 6, 7
+     * e.g. 6.1.2 or 3.9.6
      *
      * @return string
      */
-    public function getMajorVersion(): string
+    public function getBugfixVersion(): string
     {
         $v = explode('.', $this->versionNumber);
-        $v = array_slice($v, 0, 1);
+        $v = array_slice($v, 0, 3);
         return implode('.', $v);
     }
 }
