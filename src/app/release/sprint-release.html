@@ -31,9 +31,15 @@
 			<h2>Permalinks</h2>
 			<p>Same link to get always the latest sprint release. E.g. use it with <code>wget</code> (may add <code>--content-disposition</code> parameter to sore it with the real filename).</p>
 			<ul>
-				{% for permalink in permalinks %}
-					<li><a href="{{ permalink.url }}">{{ permalink.name }}</a></li>
-				{% endfor %}
+				{% if releaseInfo.SprintArtifacts is empty %}
+					<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
+					{% else %}
+						<ul>
+					{% for sprintArtifact in releaseInfo.SprintArtifacts %}
+						<li><a href="{{ sprintArtifact.Permalink }}">{{ sprintArtifact.Permalink }}</a><br />
+					{% endfor %}
+					</ul>
+				{% endif %}
 			</ul>
 			
 			<h2>Remarks</h2>

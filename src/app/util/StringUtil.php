@@ -17,6 +17,12 @@ class StringUtil
         return substr($string, 0, strlen($startsWith)) == $startsWith;
     }
     
+    public static function endsWith($string, $endsWith): bool
+    {
+        $length = strlen($endsWith);
+        return $length === 0 || (substr($string, -$length) === $endsWith);
+    }
+    
     public static function createPath(array $elements): string
     {
         return implode(DIRECTORY_SEPARATOR, $elements);

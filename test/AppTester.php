@@ -66,6 +66,12 @@ class AppTester
         $content = $body->getContents();
         return $content;
     }
+    
+    public function header($name, $value) {
+        $actual = $this->response->getHeader($name)[0];
+        Assert::assertEquals($value, $actual);
+        return $this;
+    }
 
     public function statusCode(int $expectedStatusCode): AppTester
     {

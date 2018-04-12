@@ -19,5 +19,10 @@ class SprintArtifact
     function getDownloadUrl() {
         return $this->downloadUrl;
     }
+ 
+    function getPermalink() {
+        $variant = new Variant($this->fileName);
+        return BASE_URL . '/download/sprint-release/' . $variant->getFileNameInLatestFormat();
+    }
     
 }

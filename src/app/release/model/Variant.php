@@ -18,6 +18,9 @@ class Variant
     private $type;
     private $architecture;
     
+    private $originaProductNamelPrefix;
+    private $originalTypeString;
+    
     public function __construct(string $fileName)
     {
         $this->fileName = $fileName; // AxonIvyDesigner6.4.0.52683_Windows_x86.zip
@@ -26,12 +29,15 @@ class Variant
         
         $fileNameArray = explode('_', $filename);
         $this->architecture = end($fileNameArray); // x86
+        
         $typeParts = array_slice($fileNameArray, 1, -1); // [Windows] or [Osgi All]
         $this->type = implode(' ', $typeParts); // Windows or Osgi All
+        $this->originalTypeString = implode('_', $typeParts);
         
         $productNameVersion = $fileNameArray[0]; //  AxonIvyDesigner6.4.0.52683
         $productNameVersionArray = preg_split('/(?=\d)/', $productNameVersion, 2);
-        $this->productName = str_replace('AxonIvy', '', $productNameVersionArray[0]);
+        $this->originaProductNamelPrefix = $productNameVersionArray[0];
+        $this->productName = str_replace('AxonIvy', '', $this->originaProductNamelPrefix);
         $this->productName = str_replace('XpertIvy', '', $this->productName);
         $this->productName = str_replace('Server', 'Engine', $this->productName);
         $this->versionNumber = $productNameVersionArray[1];
@@ -39,7 +45,6 @@ class Variant
     
     public function architectureIsMoreModern(Variant $mostModernVariant, string $type): bool
     {
-        //echo "<br/>TESTING:".$this->fileName. " vs ".$mostModernVariant->fileName;
         if ($this->contains($this->type, 'OSGi'))
         {
             if ($this->contains($this->type, "Slim"))
@@ -122,4 +127,13 @@ class Variant
         return basename($this->fileName);
     }
     
+    public function getFileNameInLatestFormat(): string
+    {
+        return $this->originaProductNamelPrefix . '-latest_' . $this->originalTypeString . '_' . $this->architecture . '.' . $this->getFileExtension();
+    }
+    
+    private function getFileExtension()
+    {
+        return pathinfo($this->fileName, PATHINFO_EXTENSION);
+    }
 }
