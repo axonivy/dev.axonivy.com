@@ -19,7 +19,17 @@ class DocProvider
         return self::createReleaseNotes($this->versionNumber);
     }
     
+    public function getBooks(): array
+    {
+        return array_filter(self::getAllDocuments(), function (Document $doc) { return $doc->isBook(); });
+    }
+    
     public function getDocuments(): array
+    {
+        return array_filter(self::getAllDocuments(), function (Document $doc) { return !$doc->isBook(); });
+    }
+    
+    private function getAllDocuments(): array
     {
         $versionNumber = $this->versionNumber;
         
@@ -47,7 +57,7 @@ class DocProvider
     
     private static function createBook($bookName, $versionNumber, $dirName, $pdfFile): Document
     {
-        $doc = new Document($bookName, "/$versionNumber/documents/$dirName/index.html", "/doc/$versionNumber/$dirName", true);
+        $doc = new Document($bookName, "/$versionNumber/documents/$dirName/index.html", "/doc/$versionNumber/$dirName/", true);
         $doc->setPdfFile($pdfFile);
         return $doc;
     }

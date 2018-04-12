@@ -1,12 +1,16 @@
 Options -Indexes +FollowSymLinks
 
+DirectoryIndex index.php index.html 
+
 Order allow,deny
 Allow from all
 
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^doc/([^/]+)/(.+)$ /releases/ivy/$1/documents/$2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
