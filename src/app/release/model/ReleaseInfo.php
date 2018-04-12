@@ -58,11 +58,11 @@ class ReleaseInfo
         if (!$files_in_hotfix) {
             return false;
         }
-        foreach ($files_in_hotfix as $file) {
-            if ($file == 'NotReady.txt') {
-                return false;
-            }
-        }
+        //foreach ($files_in_hotfix as $file) {
+        //    if ($file == 'NotReady.txt') {
+        //        return false;
+        //    }
+        //}
         return (count($files_in_hotfix) > 2);
     }
     
