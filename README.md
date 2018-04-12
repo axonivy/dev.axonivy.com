@@ -29,26 +29,25 @@ Menu entry > Setup > Advanced.
 * Style Start Page
 * Doc
 * Maven Project Build Plugin Compatible
-* Styling DevDay
-* Styling CodeCamp 
-* Community
-* Features site
-
 * sitemap.xml
 * robots.txt
 
 * Download
-** Nightly
-** Sprint
-** Archive
+** Archive -> Release Notes
 
 * Support old links
-* Maven
+
+### After Release
+* Fix Permalinks in Engine Guide
+* Styling DevDay
+* Styling CodeCamp
 
 ### Feedback Balsi
 * Kontaktformular
 * Startseite buttons/Download/Install
-* Suche
 
 ### Ideas
 * Public Roadmap
+* Blog on Medium
+* Features Site
+* Community Site

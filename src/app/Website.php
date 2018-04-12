@@ -22,6 +22,7 @@ use app\feature\FeatureAction;
 use app\search\SearchAction;
 use app\release\NightlyAction;
 use app\release\SprintReleaseAction;
+use app\release\StablePermalinksAction;
 
 class Website
 {
@@ -104,17 +105,13 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
+        $app->get('/download/stable/{file}', StablePermalinksAction::class);
         
         $app->get('/download/sprint-release[.html]', SprintReleaseAction::class);
         $app->get('/download/sprint-release/{file}', SprintReleaseAction::class);
         
         $app->get('/download/nightly[.html]', NightlyAction::class);
         $app->get('/download/nightly/{file}', NightlyAction::class);
-        
-        
-        //RewriteRule ^latest/(.+)$               /releases/ivy/latest/downloads/$1 [L]
-        //RewriteRule ^sprint-release/p2$       /dev-releases/ivy/sprint-release/p2 [L]
-        //RewriteRule ^sprint-release/(.+)$       /dev-releases/ivy/sprint-release/download/$1 [L]
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
