@@ -98,13 +98,23 @@ class Website
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
         $this->installRedirect('/download/archive.html', 'archive');
-        $app->get('/download/sprint-release[.html]', SprintReleaseAction::class);
-        $app->get('/download/nightly[.html]', NightlyAction::class);
         $app->get('/download/addons', AddonsAction::class)->setName('addons');
         $this->installRedirect('/download/addons.html', 'addons');
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
+
+        
+        $app->get('/download/sprint-release[.html]', SprintReleaseAction::class);
+        $app->get('/download/sprint-release/{file}', SprintReleaseAction::class);
+        
+        $app->get('/download/nightly[.html]', NightlyAction::class);
+        $app->get('/download/nightly/{file}', NightlyAction::class);
+        
+        
+        //RewriteRule ^latest/(.+)$               /releases/ivy/latest/downloads/$1 [L]
+        //RewriteRule ^sprint-release/p2$       /dev-releases/ivy/sprint-release/p2 [L]
+        //RewriteRule ^sprint-release/(.+)$       /dev-releases/ivy/sprint-release/download/$1 [L]
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);

@@ -3,6 +3,7 @@ namespace app\release;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
+use Slim\Http\Response;
 
 class NightlyAction
 {
@@ -12,11 +13,14 @@ class NightlyAction
         $this->container = $container;
     }
 
-    public function __invoke(RequestInterface $request, $response, $args) {
+    public function __invoke(RequestInterface $request, Response $response, $args) {
+        if (isset($args['file'])) {
+            $file = $args['file'];
+            return $response->withRedirect('/'.IVY_NIGHTLY_RELEASE_DIR_RELATIVE.'/' . $file);
+        }
+        
         $releaseInfo = ReleaseInfoRepository::getLatestNightly();
         $artifacts = $releaseInfo->getNightlyArtifacts();
-        
-        // TODO Check p2 url
         
         return $this->container->get('view')->render($response, 'app/release/nightly.html', [
             'nightlyArtifacts' => $artifacts,

@@ -206,7 +206,7 @@ class ReleaseInfo
         $nightlyArtifacts = [];
         foreach ($this->getVariants() as $variant) {
             $fileName = $variant->getFileName();
-            $downloadUrl = CDN_HOST_DEV_RELEASES . '/ivy/nightly/current/' . $variant->getFileName();
+            $downloadUrl = CDN_HOST_DEV_RELEASES . '/' .IVY_NIGHTLY_RELEASE_CDN_RELATIVE . '/' . $variant->getFileName();
             $nightlyArtifacts[] = new NightlyArtifact($fileName, $downloadUrl);
         }
         return $nightlyArtifacts;
@@ -217,7 +217,7 @@ class ReleaseInfo
         $nightlyArtifacts = [];
         foreach ($this->getVariants() as $variant) {
             $fileName = $variant->getFileName();
-            $downloadUrl = CDN_HOST_DEV_RELEASES . '/ivy/sprint/current/' . $variant->getFileName();
+            $downloadUrl = CDN_HOST_DEV_RELEASES . '/' . IVY_SPRINT_RELEASE_CDN_RELATIVE . '/' . $variant->getFileName();
             $nightlyArtifacts[] = new SprintArtifact($fileName, $downloadUrl);
         }
         return $nightlyArtifacts;

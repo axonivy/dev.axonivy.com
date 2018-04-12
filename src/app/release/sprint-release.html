@@ -14,9 +14,8 @@
 			
 			<p>We provide previews of the next release on a regular basis.</p>
 			
-				{% for releaseInfo in releaseInfos %}
 			
-					<h3>{{ releaseInfo.Version.VersionNumber }}</h3>			
+					<h3>Current Sprint Release</h3>			
 					
 					{% if releaseInfo.SprintArtifacts is empty %}
 						<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
@@ -28,7 +27,6 @@
 						</ul>
 					{% endif %}
 					
-				{% endfor %}
 			
 			<h2>Permalinks</h2>
 			<p>Same link to get always the latest sprint release. E.g. use it with <code>wget</code> (may add <code>--content-disposition</code> parameter to sore it with the real filename).</p>

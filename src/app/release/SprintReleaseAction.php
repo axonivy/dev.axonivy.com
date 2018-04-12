@@ -12,7 +12,14 @@ class SprintReleaseAction
     }
 
     public function __invoke($request, $response, $args) {
-        $releaseInfos = ReleaseInfoRepository::getSprintReleases();
+        
+        if (isset($args['file'])) {
+            $file = $args['file'];
+            return $response->withRedirect('/'.IVY_SPRINT_RELEASE_DIR_RELATIVE.'/' . $file);
+        }
+        
+        
+        $releaseInfo = ReleaseInfoRepository::getSprintRelease();
         
         
         $baseUrl = BASE_URL . '/download/sprint-release';
@@ -43,7 +50,7 @@ class SprintReleaseAction
         // TODO Check p2 url
         
         return $this->container->get('view')->render($response, 'app/release/sprint-release.html', [
-            'releaseInfos' => $releaseInfos,
+            'releaseInfo' => $releaseInfo,
             'sprintUrl' => $baseUrl,
             'sprintUrlP2' => $baseUrl . '/p2',
             'permalinks' => $permalinks
