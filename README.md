@@ -28,7 +28,6 @@ Menu entry > Setup > Advanced.
 
 * Style Start Page
 * Doc
-* Maven Project Build Plugin Compatible
 * sitemap.xml
 * robots.txt
 
