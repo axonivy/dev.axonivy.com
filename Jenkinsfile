@@ -60,6 +60,7 @@ pipeline {
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/web /home/axonivya/www/prototype.axonivya.myhostpoint.ch/linktoweb"
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/blob-dev-website /home/axonivya/deployment/$targetFile/src/web/blob"
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/www/developer.axonivy.com/dev-releases /home/axonivya/deployment/$targetFile/src/web/dev-releases"
+            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/www/developer.axonivy.com/releases /home/axonivya/deployment/$targetFile/src/web/releases"
             
             // housekeeping - delete tar / delete all folders but last 5 ones
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 rm -f /home/axonivya/deployment/$targetFilename"
