@@ -47,9 +47,9 @@ class ReleaseInfo
         return $this->variants;
     }
     
-    public function getDocPovider(): DocProvider
+    public function getDocProvider(): DocProvider
     {
-        return new DocProvider($this);
+        return new DocProvider($this->getVersion()->getVersionNumber());
     }
     
     public function hasHotfix(): bool

@@ -4,17 +4,24 @@ namespace app\release\model;
 
 class DocProvider
 {
+    // 7.0.0
+    // latest
+    // 7.0.latest
+    private $versionNumber;
     
-    private $releaseInfo;
-    
-    public function __construct(ReleaseInfo $releaseInfo)
+    public function __construct(string $versionNumber)
     {
-        $this->releaseInfo = $releaseInfo;    
+        $this->versionNumber = $versionNumber;    
+    }
+    
+    public function getReleaseNotes(): Document
+    {
+        return self::createReleaseNotes($this->versionNumber);
     }
     
     public function getDocuments(): array
     {
-        $versionNumber = $this->releaseInfo->getVersion()->getBugfixVersion();
+        $versionNumber = $this->versionNumber;
         
         $docDir = IVY_RELEASE_DIRECTORY . '/' . $versionNumber . '';
         
@@ -26,7 +33,7 @@ class DocProvider
         $documents[] = self::createBook('Portal Connector', $versionNumber, 'PortalConnectorHtml', 'PortalConnector.pdf');
         $documents[] = self::createBook('Public API', $versionNumber, 'PublicAPI', '');
         
-        $documents[] = self::createReleaseNotes($this->releaseInfo->getVersion());
+        $documents[] = self::createReleaseNotes($versionNumber);
   
         $documents[] = self::createDocument('N&N Designer', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyDesigner.html');
         $documents[] = self::createDocument('N&N Engine', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyEngine.html');
@@ -50,8 +57,9 @@ class DocProvider
         return new Document($docName, "/$versionNumber/documents/$filePath", "/doc/$versionNumber/$filePath", false);
     }
     
-    private static function createReleaseNotes(Version $version): Document
+    private static function createReleaseNotes(string $versionNumber): Document
     {
+        $version = new Version($versionNumber);
         $versionNumber = $version->getBugfixVersion();
         $fileName = 'ReleaseNotes.txt';
         if ($version->getMinorVersion() == '4.2') {
