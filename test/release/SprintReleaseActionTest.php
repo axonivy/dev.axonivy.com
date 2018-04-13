@@ -3,7 +3,6 @@ namespace test\release;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
-use PHPUnit\Framework\Assert;
 
 class SprintReleaseActionTest extends TestCase
 {
@@ -22,7 +21,7 @@ class SprintReleaseActionTest extends TestCase
     {
         AppTester::assertThatGet('/download/sprint-release/p2')
         ->statusCode(302)
-        ->header('Location', 'https://download.axonivy.com/sprint/p2');
+        ->header('Location', '/releases/ivy/sprint/p2');
     }
     
     public function testPermalinks()
@@ -32,21 +31,19 @@ class SprintReleaseActionTest extends TestCase
         ->header('Location', 'https://download.axonivy.com/sprint/AxonIvyEngine7.0.1.56047.S8_Slim_All_x64.zip');
     }
     
-//     public function testNotExistingPermalinks()
-//     {
-//         try {
-//             AppTester::assertThatGet('/download/sprint-release/AxonIvyEngine-latest_NotExistingArch.zip');
-//         } catch (\Slim\Exception\NotFoundException $e) {
-//            Assert::assertTrue(true);
-//            return;
-//         }
-//         Assert::fail('a not found exception should occur');
-//     }
+    public function testNotExistingPermalinks()
+    {
+        $headerlocation = '/releases/ivy/sprint/AxonIvyEngine-latest_NotExistingArch.zip';
+        
+        AppTester::assertThatGet('/download/sprint-release/AxonIvyEngine-latest_NotExistingArch.zip')
+            ->statusCode(302)
+            ->header('Location', $headerlocation);
+    }
     
     public function testAlsoAvailableUnderHtmlUrl()
     {
         $body1 = AppTester::assertThatGet('/download/sprint-release')->statusCode(200)->bodyContains('Sprint Release')->getBody();
-        $body2 = AppTester::assertThatGet('/download/sprint-release.html')->getBody();
+        $body2 = AppTester::assertThatGet('/download/sprint-release.html')->statusCode(200)->bodyContains('Sprint Release')->getBody();
         self::assertEquals($body1, $body2);
     }
 }

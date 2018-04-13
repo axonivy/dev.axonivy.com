@@ -5,11 +5,13 @@ class SprintArtifact
 {
     private $fileName;
     private $downloadUrl;
+    private $permaLink;
     
-    function __construct($fileName, $downloadUrl)
+    function __construct($fileName, $downloadUrl, $permalink)
     {
         $this->fileName = $fileName;
         $this->downloadUrl = $downloadUrl;
+        $this->permaLink = $permalink;
     }
     
     function getFileName() {
@@ -21,8 +23,7 @@ class SprintArtifact
     }
  
     function getPermalink() {
-        $variant = new Variant($this->fileName);
-        return BASE_URL . '/download/sprint-release/' . $variant->getFileNameInLatestFormat();
+        return $this->permaLink;        
     }
     
 }

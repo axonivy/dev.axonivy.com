@@ -173,12 +173,17 @@ class ReleaseInfo
     
     public function getSprintArtifacts(): array
     {
-        $nightlyArtifacts = [];
+        $artifacts = [];
         foreach ($this->getVariants() as $variant) {
             $fileName = $variant->getFileName();
             $downloadUrl = CDN_HOST . '/' . IVY_SPRINT_RELEASE_DIR_RELATIVE . '/' . $variant->getFileName();
-            $nightlyArtifacts[] = new SprintArtifact($fileName, $downloadUrl);
+            $permalink = 
+            
+            $variant = new Variant($fileName);
+            $permalink = '/download/sprint-release/' . $variant->getFileNameInLatestFormat();
+            
+            $artifacts[] = new SprintArtifact($fileName, $downloadUrl, $permalink);
         }
-        return $nightlyArtifacts;
+        return $artifacts;
     }
 }

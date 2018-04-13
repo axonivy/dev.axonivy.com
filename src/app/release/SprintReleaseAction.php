@@ -2,10 +2,10 @@
 namespace app\release;
 
 use Psr\Container\ContainerInterface;
-use app\util\StringUtil;
-use Slim\Exception\NotFoundException;
-use app\release\model\SprintArtifact;
+use Slim\Http\Request;
 use app\release\model\ReleaseInfo;
+use app\release\model\SprintArtifact;
+use app\util\StringUtil;
 
 class SprintReleaseAction
 {
@@ -15,7 +15,7 @@ class SprintReleaseAction
         $this->container = $container;
     }
 
-    public function __invoke($request, $response, $args) {
+    public function __invoke(Request $request, $response, $args) {
         $releaseInfo = ReleaseInfoRepository::getSprintRelease();
         
         if (isset($args['file'])) {
@@ -23,10 +23,10 @@ class SprintReleaseAction
             if ($res != null) {
                 return $res;
             }
-            return $response->withRedirect(CDN_HOST . '/sprint/' . $args['file']);
+            return $response->withRedirect('/releases/ivy/sprint/' . $args['file']);
         }
         
-        $baseUrl = BASE_URL . '/download/sprint-release';
+        $baseUrl = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost() . dirname($request->getUri()->getPath()) . basename($request->getUri()->getPath(), '.html');
         return $this->container->get('view')->render($response, 'app/release/sprint-release.html', [
             'releaseInfo' => $releaseInfo,
             'sprintUrl' => $baseUrl,
