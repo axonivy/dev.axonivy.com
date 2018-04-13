@@ -31,6 +31,7 @@ class SprintNightlyAction
             throw new \InvalidArgumentException($version . ' is not supported');
         }
         
+        // TODO redirect for files ... p2
         if (isset($args['file'])) {
             return $response->withRedirect('/releases/ivy/' . $urlVersion . '/' . $args['file']);
         }
