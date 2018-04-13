@@ -11,7 +11,7 @@ class NightlyActionTest extends TestCase
     {
         AppTester::assertThatGet('/download/nightly')
             ->statusCode(200)
-            ->bodyContains('Nightly Builds')
+            ->bodyContains('Nightly Build')
             ->bodyContains('https://download.axonivy.com/nightly/AxonIvyDesigner7.0.1.56047_Linux_x64.zip');
     }
     
@@ -26,12 +26,12 @@ class NightlyActionTest extends TestCase
     {
         $body1 = AppTester::assertThatGet('/download/nightly')
             ->statusCode(200)
-            ->bodyContains('Nightly Builds')
+            ->bodyContains('Nightly Build')
             ->getBody();
         
         $body2 = AppTester::assertThatGet('/download/nightly.html')
             ->statusCode(200)
-            ->bodyContains('Nightly Builds')
+            ->bodyContains('Nightly Build')
             ->getBody();
         
         $body2 = str_replace('.html', '', $body2);

@@ -20,9 +20,8 @@ use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
 use app\search\SearchAction;
-use app\release\NightlyAction;
-use app\release\SprintReleaseAction;
 use app\release\StablePermalinksAction;
+use app\release\SprintNightlyAction;
 
 class Website
 {
@@ -107,11 +106,8 @@ class Website
 
         $app->get('/download/stable/{file}', StablePermalinksAction::class);
         
-        $app->get('/download/sprint-release[.html]', SprintReleaseAction::class);
-        $app->get('/download/sprint-release/{file}', SprintReleaseAction::class);
-        
-        $app->get('/download/nightly[.html]', NightlyAction::class);
-        $app->get('/download/nightly/{file}', NightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release}[.html]', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release}/{file}', SprintNightlyAction::class);
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
