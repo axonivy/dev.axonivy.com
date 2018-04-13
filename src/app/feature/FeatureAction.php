@@ -13,7 +13,12 @@ class FeatureAction
 
     public function __invoke($request, $response, $args) {
         return $this->container->get('view')->render($response, 'app/feature/feature.html', [
-            'features' => FeatureRepository::getPromotedFeatures()
+            'features' => self::getPromotedFeatures()
         ]);
+    }
+    
+    private static function getPromotedFeatures(): array
+    {
+        return json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'promoted-features.json'));
     }
 }
