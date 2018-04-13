@@ -21,7 +21,6 @@ class Version
     
     public function isLongTermSupportVersion(): bool
     {
-        // TODO
         $v = explode('.', $this->versionNumber);
         return $v[1] == 0;
     }

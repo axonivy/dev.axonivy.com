@@ -87,7 +87,6 @@ class Variant
     
     public function getDownloadUrl(): string {
         $version = $this->getVersion();
-        $prefix = CDN_HOST;
         
         $versionNumber = $version->getBugfixVersion();
         if ($version->getMinorVersion() == '4.2') {
@@ -100,12 +99,7 @@ class Variant
             $versionNumber = '3.9.9';
         }
         
-        return "$prefix/$versionNumber/" . basename($this->fileName);
-    }
-    
-    public function getDownloadUrlViaInstallation(): string {
-        $versionNumber = $this->getVersion()->getBugfixVersion();
-        return "/installation/?startdownload=$versionNumber/" . basename($this->fileName);
+        return CDN_HOST . "/$versionNumber/" . basename($this->fileName);
     }
     
     public function getArchitecture(): string{

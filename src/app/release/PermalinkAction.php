@@ -30,7 +30,7 @@ class PermalinkAction
                 $artifacts = ReleaseInfoRepository::getSprintArtifacts();
                 break;
             case 'stable':
-                $releaseInfo = ReleaseInfoRepository::getLatestReleaseInfo();
+                $releaseInfo = ReleaseInfoRepository::getLatest();
                 if ($releaseInfo == null) {
                     throw new NotFoundException($request, $response);
                 }

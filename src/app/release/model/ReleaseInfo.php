@@ -58,16 +58,10 @@ class ReleaseInfo
         if (!$files_in_hotfix) {
             return false;
         }
-        //foreach ($files_in_hotfix as $file) {
-        //    if ($file == 'NotReady.txt') {
-        //        return false;
-        //    }
-        //}
         return (count($files_in_hotfix) > 2);
     }
     
-    
-    public function getHotfixFile(): Document
+    public function getHotfixFile(): ?Document
     {
         if ($this->hasHotfix()) {
             $fileNames = glob($this->getHotFixPath() . '/*.zip');
@@ -88,7 +82,7 @@ class ReleaseInfo
     public function getHotfixHowtoDocument(): ?Document
     {
         if ($this->hasHotfix()) {
-            return new Document('How to install', $this->getHotFixPath() . '/HowTo_Hotfix_AxonIvyEngine.txt', '/download/' . $this->getVersion()->getBugfixVersion() . '/HowTo_Hotfix_AxonIvyEngine.txt');
+            return new Document('How to install', $this->getHotFixPath() . '/HowTo_Hotfix_AxonIvyEngine.txt', '/download/' . $this->getVersion()->getBugfixVersion() . '/HowTo_Hotfix_AxonIvyEngine.txt', false);
         }
         return null;
     }
@@ -98,7 +92,6 @@ class ReleaseInfo
         $versionNumber = $this->getVersion()->getBugfixVersion();
         return IVY_RELEASE_DIRECTORY . '/' . $versionNumber . '/hotfix';
     }
-    
     
     public function hasVariantWithProductName(string $productName): bool
     {
@@ -122,12 +115,11 @@ class ReleaseInfo
         return $variant;
     }
     
-    public function getVariantWithMostModernArchitecture(string $productName, string $type): ?Variant
+    private function getVariantWithMostModernArchitecture(string $productName, string $type): ?Variant
     {
         $mostModernVariant = null;
         foreach ($this->variants as $variant) {
-            if ($variant->getProductName() == $productName)
-            {
+            if ($variant->getProductName() == $productName) {
                 if ($mostModernVariant == null || $variant->architectureIsMoreModern($mostModernVariant, $type)) {
                     $mostModernVariant = $variant;
                 }
@@ -136,30 +128,8 @@ class ReleaseInfo
         return $mostModernVariant;
     }
     
-    public function getVariantWithArchitecture(string $productName, string $type, string $architecture): ?Variant
+    public function getArtifacts(): array
     {
-        $mostModernVariant = null;
-        foreach ($this->variants as $variant) {
-            if ($variant->getProductName() == $productName && $variant->getType() == $type && $variant->getArchitecture() == $architecture)
-            {
-                return $variant;
-            }
-        }
-        return null;
-    }
-    
-    public function getVariantsWithProductName(string $productName): array
-    {
-        $variants = [];
-        foreach ($this->variants as $variant) {
-            if ($variant->getProductName() == $productName) {
-                $variants[] = $variant;
-            }
-        }
-        return $variants;
-    }
-    
-    public function getArtifacts(): array {
         return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_STABLE);
     }
     
