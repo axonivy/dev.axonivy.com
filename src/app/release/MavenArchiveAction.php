@@ -2,6 +2,7 @@
 namespace app\release;
 
 use Psr\Container\ContainerInterface;
+use app\release\model\ReleaseInfoRepository;
 use app\release\model\Variant;
 use app\release\model\ReleaseInfo;
 

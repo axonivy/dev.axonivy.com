@@ -3,6 +3,7 @@ namespace app\release;
 
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
+use app\release\model\ReleaseInfoRepository;
 use app\util\UrlHelper;
 
 class SprintNightlyAction

@@ -6,6 +6,7 @@ use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use app\release\model\PermalinkHelper;
+use app\release\model\ReleaseInfoRepository;
 
 class PermalinkAction
 {

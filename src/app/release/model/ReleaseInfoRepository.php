@@ -1,9 +1,6 @@
 <?php
-namespace app\release;
+namespace app\release\model;
 
-use app\release\model\Artifact;
-use app\release\model\ReleaseInfo;
-use app\release\model\Version;
 use app\util\ArrayUtil;
 
 class ReleaseInfoRepository
