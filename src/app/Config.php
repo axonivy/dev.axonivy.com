@@ -15,6 +15,7 @@ class Config {
         define('PERMALINK_BASE', BASE_URL . '/permalink/ivy/');
         define('PERMALINK_SPRINT', PERMALINK_BASE . 'sprint/');
         define('PERMALINK_NIGHTLY', PERMALINK_BASE . 'nightly/');
+        define('PERMALINK_STABLE', PERMALINK_BASE . 'stable/');
         
         
         

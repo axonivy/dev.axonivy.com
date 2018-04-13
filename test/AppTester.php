@@ -6,9 +6,6 @@ use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use app\Website;
-use Exception;
-use PHPUnit\Framework\Constraint\Exception as ExceptionConstraint;
-use Slim\Exception\NotFoundException;
 
 class AppTester
 {
@@ -26,16 +23,11 @@ class AppTester
 
     public static function assertThatGetThrowsNotFoundException(string $url)
     {
-        self::assertThatGetThrowsException($url, NotFoundException::class);
-    }
-
-    public static function assertThatGetThrowsException(string $url, string $expectedException)
-    {
         try {
             $response = self::get($url);
-            Assert::assertTrue(false, 'Should throw exception ' . $expectedException);
-        } catch (Exception $exception) {
-            Assert::assertThat($exception, new ExceptionConstraint($expectedException));
+            Assert::fail('Should throw exception ' . $expectedException);
+        } catch (\Slim\Exception\NotFoundException $e) {
+            Assert::assertTrue(true);
         }
     }
 

@@ -21,7 +21,6 @@ use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
 use app\search\SearchAction;
-use app\release\StablePermalinksAction;
 use app\release\SprintNightlyAction;
 
 class Website
@@ -105,8 +104,6 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
-        $app->get('/download/stable/{file}', StablePermalinksAction::class);
-        
         $app->get('/permalink/ivy/{version:nightly|sprint|stable}/{file}', PermalinkAction::class);
         
         $app->get('/download/{version:nightly|sprint-release}[.html]', SprintNightlyAction::class);

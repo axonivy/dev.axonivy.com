@@ -159,4 +159,8 @@ class ReleaseInfo
         return $variants;
     }
     
+    public function getArtifacts(): array {
+        return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_STABLE);
+    }
+    
 }
