@@ -20,12 +20,10 @@ class Config {
         
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
         
-        define('IVY_SPRINT_RELEASE_CDN_RELATIVE', 'sprint');
-        define('IVY_SPRINT_RELEASE_DIR_RELATIVE', StringUtil::createPath(['releases', IVY_SPRINT_RELEASE_CDN_RELATIVE]));
+        define('IVY_SPRINT_RELEASE_DIR_RELATIVE', 'sprint');
         define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, IVY_SPRINT_RELEASE_DIR_RELATIVE]));
         
-        define('IVY_NIGHTLY_RELEASE_CDN_RELATIVE', 'nightly');
-        define('IVY_NIGHTLY_RELEASE_DIR_RELATIVE', StringUtil::createPath(['releases', IVY_NIGHTLY_RELEASE_CDN_RELATIVE]));
+        define('IVY_NIGHTLY_RELEASE_DIR_RELATIVE', 'nightly');
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, IVY_NIGHTLY_RELEASE_DIR_RELATIVE]));
         
         $UNSAVE_VERSIONS = [
