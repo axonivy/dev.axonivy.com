@@ -3,8 +3,6 @@ namespace app\release;
 
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
-use Slim\Http\Response;
-use app\release\model\PermalinkHelper;
 use app\util\UrlHelper;
 
 class SprintNightlyAction
@@ -22,11 +20,11 @@ class SprintNightlyAction
         $name = '';
         $urlVersion = '';
         if ($version == 'nightly') {
-            $artifacts = ReleaseInfoRepository::getLatestNightly()->getNightlyArtifacts();
+            $artifacts = ReleaseInfoRepository::getNightlyArtifacts();
             $name = 'Nightly Build';
             $urlVersion = 'nightly';
         } else if ($version == 'sprint-release') {
-            $artifacts = ReleaseInfoRepository::getSprintRelease()->getSprintArtifacts();
+            $artifacts = ReleaseInfoRepository::getSprintArtifacts();
             $name = 'Sprint Release';
             $urlVersion = 'sprint';
         } else {
@@ -34,7 +32,7 @@ class SprintNightlyAction
         }
         
         if (isset($args['file'])) {
-            return self::handleArtifactRequest($request, $response, $args['file'], $artifacts, $urlVersion);
+            return $response->withRedirect('/releases/ivy/' . $urlVersion . '/' . $args['file']);
         }
         
         $baseUrl = UrlHelper::getFullPathUrl($request);
@@ -44,15 +42,6 @@ class SprintNightlyAction
             'currentUrl' => $baseUrl,
             'p2Url' => $baseUrl . '/p2'
         ]);
-    }
-    
-    private static function handleArtifactRequest($request, $response, $file, array $artifacts, string $urlVersion): ?Response
-    {
-        $artifact = PermalinkHelper::findArtifact($artifacts, $file);
-        if ($artifact == null) {
-            return $response->withRedirect('/releases/ivy/' . $urlVersion . '/' . $file);
-        }
-        return $response->withRedirect($artifact->getDownloadUrl());
     }
     
 }

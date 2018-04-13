@@ -1,7 +1,9 @@
 <?php
 namespace app\release;
 
+use app\release\model\Artifact;
 use app\release\model\ReleaseInfo;
+use app\release\model\Variant;
 use app\release\model\Version;
 use app\util\ArrayUtil;
 
@@ -53,16 +55,29 @@ class ReleaseInfoRepository
             return ArrayUtil::getLastElementOrNull($releaseInfos);
     }
     
-    public static function getLatestNightly(): ReleaseInfo
+    public static function getNightlyArtifacts(): array
     {
-        $fileNames = glob(IVY_NIGHTLY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*.zip');
-        return new ReleaseInfo('nightly', $fileNames, '');
+        return self::getArtifacts(IVY_NIGHTLY_RELEASE_DIRECTORY, CDN_HOST_NIGHTLY, PERMALINK_NIGHTLY);
     }
     
-    public static function getSprintRelease(): ReleaseInfo
+    public static function getSprintArtifacts(): array
     {
-        $files = glob(IVY_SPRINT_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*.zip');
-        return new ReleaseInfo('sprint', $files, '');
+        return self::getArtifacts(IVY_SPRINT_RELEASE_DIRECTORY, CDN_HOST_SPRINT, PERMALINK_SPRINT);
+    }
+    
+    private static function getArtifacts($artifactsDirectory, $cdnBaseUrl, $permalinkBaseUrl): array
+    {
+        $files = glob($artifactsDirectory . DIRECTORY_SEPARATOR . '*.zip');
+        $releaseInfo = new ReleaseInfo('', $files, '');
+        $artifacts = [];
+        foreach ($releaseInfo->getVariants() as $variant) {
+            $fileName = $variant->getFileName();
+            $downloadUrl = $cdnBaseUrl . $variant->getFileName();
+            $permalink = $permalinkBaseUrl . (new Variant($fileName))->getFileNameInLatestFormat();
+            
+            $artifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
+        }
+        return $artifacts;
     }
     
     /**

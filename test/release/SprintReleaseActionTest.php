@@ -24,13 +24,6 @@ class SprintReleaseActionTest extends TestCase
         ->header('Location', '/releases/ivy/sprint/p2');
     }
     
-    public function testPermalinks()
-    {
-        AppTester::assertThatGet('/download/sprint-release/AxonIvyEngine-latest_Slim_All_x64.zip')
-        ->statusCode(302)
-        ->header('Location', 'https://download.axonivy.com/sprint/AxonIvyEngine7.0.1.56047.S8_Slim_All_x64.zip');
-    }
-    
     public function testNotExistingPermalinks()
     {
         $headerlocation = '/releases/ivy/sprint/AxonIvyEngine-latest_NotExistingArch.zip';

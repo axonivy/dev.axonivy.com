@@ -159,30 +159,4 @@ class ReleaseInfo
         return $variants;
     }
     
-    
-    public function getNightlyArtifacts(): array
-    {
-        $nightlyArtifacts = [];
-        foreach ($this->getVariants() as $variant) {
-            $fileName = $variant->getFileName();
-            $downloadUrl = CDN_HOST_NIGHTLY . '/' . $variant->getFileName();
-            $permalink = '/download/nightly/' . (new Variant($fileName))->getFileNameInLatestFormat();
-            
-            $nightlyArtifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
-        }
-        return $nightlyArtifacts;
-    }
-    
-    public function getSprintArtifacts(): array
-    {
-        $artifacts = [];
-        foreach ($this->getVariants() as $variant) {
-            $fileName = $variant->getFileName();
-            $downloadUrl = CDN_HOST_SPRINT . '/' . $variant->getFileName();
-            $permalink = '/download/sprint-release/' . (new Variant($fileName))->getFileNameInLatestFormat();
-            
-            $artifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
-        }
-        return $artifacts;
-    }
 }

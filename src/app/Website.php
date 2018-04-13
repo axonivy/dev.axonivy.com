@@ -10,6 +10,7 @@ use app\release\AddonsAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
+use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
 use app\support\SupportAction;
 use app\codecamp\CodeCampAction;
@@ -105,6 +106,8 @@ class Website
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
         $app->get('/download/stable/{file}', StablePermalinksAction::class);
+        
+        $app->get('/permalink/ivy/{version:nightly|sprint|stable}/{file}', PermalinkAction::class);
         
         $app->get('/download/{version:nightly|sprint-release}[.html]', SprintNightlyAction::class);
         $app->get('/download/{version:nightly|sprint-release}/{file}', SprintNightlyAction::class);

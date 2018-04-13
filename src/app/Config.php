@@ -8,16 +8,19 @@ class Config {
     public static function initConfig()
     {
         define('CDN_HOST', 'https://download.axonivy.com');
-        define('CDN_HOST_SPRINT', CDN_HOST . '/sprint');
-        define('CDN_HOST_NIGHTLY', CDN_HOST . '/nightly');
+        define('CDN_HOST_SPRINT', CDN_HOST . '/sprint/');
+        define('CDN_HOST_NIGHTLY', CDN_HOST . '/nightly/');
+        
+        define('BASE_URL', self::getRequestedBaseUri());
+        define('PERMALINK_BASE', BASE_URL . '/permalink/ivy/');
+        define('PERMALINK_SPRINT', PERMALINK_BASE . 'sprint/');
+        define('PERMALINK_NIGHTLY', PERMALINK_BASE . 'nightly/');
         
         
         
         
         
         
-        
-        define('BASE_URL', 'https://developer.axonivy.com');
         
         
         
@@ -59,6 +62,11 @@ class Config {
             '6.0.0' => '6.0.11',
         ];
         define('UNSAFE_RELEASES', $UNSAVE_VERSIONS);
+    }
+    
+    private static function getRequestedBaseUri(): string
+    {
+        return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     }
     
     private static function isDevOrTestEnv(): bool
