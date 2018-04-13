@@ -24,17 +24,17 @@ class DownloadAction
     }
     
     private function findVariant($productName): ?Variant {
-        $leadingEdge = ReleaseInfoRepository::getLatestLeadingEdge($productName);
-        $longTermSupport = ReleaseInfoRepository::getLatestLongTermSupport($productName);
+        $releaseInfo = ReleaseInfoRepository::getLatestLeadingEdge($productName);
         
-        if ($leadingEdge == null) {
-            $leadingEdge = $longTermSupport;
+        if ($releaseInfo != null) {
+            return $releaseInfo->getMostMatchingVariantForCurrentRequest($productName);
+        }
+         
+        $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport($productName);
+        if ($releaseInfo != null) {
+            return $releaseInfo->getMostMatchingVariantForCurrentRequest($productName);
         }
         
-        if ($leadingEdge == null) {
-            return null;
-        }
-        
-        return $leadingEdge->getMostMatchingVariantForCurrentRequest($productName);
+        return null;
     }
 }
