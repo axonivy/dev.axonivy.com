@@ -70,7 +70,14 @@ class AppTester
         Assert::assertEquals($expectedStatusCode, $this->response->getStatusCode());
         return $this;
     }
-
+    
+    public function redirect(string $url): AppTester
+    {
+        self::statusCode(302);
+        self::header('Location', $url);
+        return $this;
+    }
+    
     public function contentType(string $expectedContentType): AppTester
     {
         Assert::assertEquals($expectedContentType, $this->response->getHeader('Content-Type')[0]);

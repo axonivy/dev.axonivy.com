@@ -16,7 +16,7 @@ use app\support\SupportAction;
 use app\codecamp\CodeCampAction;
 use app\devday\DevDayAction;
 use app\tutorial\TutorialAction;
-use app\tutorial\TutorialGettingStartedAction;
+use app\tutorial\gettingstarted\TutorialGettingStartedAction;
 use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
