@@ -1,0 +1,48 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}{{ name }}{{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <section id="main" >
+		<div class="inner">
+			<header><h2>{{ name }}</h2></header>
+			
+			<blockquote>
+				The following {{ name|lower }} are for testing purposes only. Never ever use them on productive systems!
+			</blockquote>
+			
+			{% if artifacts is empty %}
+				<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
+			{% else %}
+				<ul>
+				{% for artifact in artifacts %}
+					<li><a href="{{ artifact.downloadUrl }}">{{ artifact.fileName }}</a><br />
+				{% endfor %}
+				</ul>				
+			{% endif %}
+			
+			{% if artifacts is not empty %}
+			<h2>Permalinks</h2>
+			<p>Same link to get always the latest {{ name|lower }}. E.g. use it with <code>wget</code> (may add <code>--content-disposition</code> parameter to sore it with the real filename).</p>
+			<ul>
+				{% for artifact in artifacts %}
+					<li><a href="{{ artifact.Permalink }}">{{ artifact.Permalink }}</a><br />
+				{% endfor %}
+			</ul>
+			{% endif %}
+			
+			<h2>Remarks</h2>
+			<ul>
+			  <li>
+			  	Using {{ name|lower }} with the maven project-build-plugin: <br/> <code>mvn clean install -Divy.engine.list.url={{ currentUrl }}</code>
+			  </li>
+			  <li>
+			  	You can also consume the {{ name|lower }} trough an updatesite under:<br /> <code><a href="{{ currentUrl }}">{{ p2Url }}</a></code>
+			  </li>
+			</ul>
+			
+		</div>
+	</section>
+    
+{% endblock %}

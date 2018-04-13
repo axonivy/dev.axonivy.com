@@ -2,8 +2,10 @@
 namespace app\release;
 
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\RequestInterface;
+use Slim\Http\Request;
 use Slim\Http\Response;
+use app\release\model\PermalinkHelper;
+use app\util\UrlHelper;
 
 class NightlyAction
 {
@@ -13,20 +15,29 @@ class NightlyAction
         $this->container = $container;
     }
 
-    public function __invoke(RequestInterface $request, Response $response, $args) {
+    public function __invoke(Request $request, $response, $args) {
+        $artifacts = ReleaseInfoRepository::getLatestNightly()->getNightlyArtifacts();
+        
         if (isset($args['file'])) {
-            $file = $args['file'];
-            return $response->withRedirect('/'.IVY_NIGHTLY_RELEASE_DIR_RELATIVE.'/' . $file);
+            return self::handleArtifactRequest($request, $response, $args['file'], $artifacts);
         }
         
-        $releaseInfo = ReleaseInfoRepository::getLatestNightly();
-        $artifacts = $releaseInfo->getNightlyArtifacts();
-        
-        return $this->container->get('view')->render($response, 'app/release/nightly.html', [
-            'nightlyArtifacts' => $artifacts,
-            'nightlyUrl' => BASE_URL . '/download/nightly',
-            'nightlyUrlP2' => BASE_URL . '/download/nightly/p2'
+        $baseUrl = UrlHelper::getFullPathUrl($request);
+        return $this->container->get('view')->render($response, 'app/release/sprint-nightly.html', [
+            'artifacts' => $artifacts,
+            'name' => 'Nightly Builds',
+            'currentUrl' => $baseUrl,
+            'p2Url' => $baseUrl . '/p2'
         ]);
+    }
+    
+    private static function handleArtifactRequest($request, $response, $file, array $artifacts): ?Response
+    {
+        $artifact = PermalinkHelper::findArtifact($artifacts, $file);
+        if ($artifact == null) {
+            return $response->withRedirect('/releases/ivy/nightly/' . $file);
+        }
+        return $response->withRedirect($artifact->getDownloadUrl());
     }
     
 }

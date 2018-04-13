@@ -7,11 +7,21 @@ class Config {
     
     public static function initConfig()
     {
-        define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
+        define('CDN_HOST', 'https://download.axonivy.com');
+        define('CDN_HOST_SPRINT', CDN_HOST . '/sprint');
+        define('CDN_HOST_NIGHTLY', CDN_HOST . '/nightly');
+        
+        
+        
+        
+        
+        
         
         define('BASE_URL', 'https://developer.axonivy.com');
         
-        define('CDN_HOST', 'https://download.axonivy.com');
+        
+        
+        define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
  
         $rootDir = '/home/axonivya/www/developer.axonivy.com';
         if (self::isDevOrTestEnv()) {

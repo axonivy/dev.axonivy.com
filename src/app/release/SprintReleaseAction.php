@@ -3,9 +3,9 @@ namespace app\release;
 
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
-use app\release\model\ReleaseInfo;
-use app\release\model\SprintArtifact;
-use app\util\StringUtil;
+use Slim\Http\Response;
+use app\release\model\PermalinkHelper;
+use app\util\UrlHelper;
 
 class SprintReleaseAction
 {
@@ -16,64 +16,28 @@ class SprintReleaseAction
     }
 
     public function __invoke(Request $request, $response, $args) {
-        $releaseInfo = ReleaseInfoRepository::getSprintRelease();
+        $artifacts = ReleaseInfoRepository::getSprintRelease()->getSprintArtifacts();
         
         if (isset($args['file'])) {
-            $res = $this->handleArtifactRequest($request, $response, $args['file'], $releaseInfo);
-            if ($res != null) {
-                return $res;
-            }
-            return $response->withRedirect('/releases/ivy/sprint/' . $args['file']);
+            return self::handleArtifactRequest($request, $response, $args['file'], $artifacts);
         }
         
-        $baseUrl = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost() . dirname($request->getUri()->getPath()) . '/' . basename($request->getUri()->getPath(), '.html');
-        return $this->container->get('view')->render($response, 'app/release/sprint-release.html', [
-            'releaseInfo' => $releaseInfo,
-            'sprintUrl' => $baseUrl,
-            'sprintUrlP2' => $baseUrl . '/p2'
+        $baseUrl = UrlHelper::getFullPathUrl($request);
+        return $this->container->get('view')->render($response, 'app/release/sprint-nightly.html', [
+            'artifacts' => $artifacts,
+            'name' => 'Sprint Release',
+            'currentUrl' => $baseUrl,
+            'p2Url' => $baseUrl . '/p2'
         ]);
     }
     
-    private function handleArtifactRequest($request, $response, $file, ReleaseInfo $releaseInfo)
+    private static function handleArtifactRequest($request, $response, $file, array $artifacts): ?Response
     {
-        $artifacts = $releaseInfo->getSprintArtifacts();
-
-        $artifact = null;
-        
-        // check permalink request
-        if (preg_match('/AxonIvy(.+)-latest(.+)/', $file)) {
-            $artifact = $this->getSprintArtifactForPermalink($artifacts, $file);
-        } else {
-            foreach ($artifacts as $art) {
-                if ($art->getFileName() == $file) {
-                    $artifact = $art;
-                }
-            }
-        }
-
+        $artifact = PermalinkHelper::findArtifact($artifacts, $file);
         if ($artifact == null) {
-            return null;
+            return $response->withRedirect('/releases/ivy/sprint/' . $file);
         }
-        
         return $response->withRedirect($artifact->getDownloadUrl());
     }
     
-    private function getSprintArtifactForPermalink($artifacts, $file): ?SprintArtifact
-    {
-        $startsAndEndsWith = explode('-latest', $file);
-        $startsWith = $startsAndEndsWith[0];
-        $endsWith = $startsAndEndsWith[1];
-        
-        foreach ($artifacts as $artifact) {
-            if (StringUtil::startsWith($artifact->getFileName(), $startsWith)) {
-                if (StringUtil::endsWith($artifact->getFileName(), $endsWith)) {
-                    return $artifact;
-                }
-            }
-        }
-        
-        return null;
-    }
 }
-
-

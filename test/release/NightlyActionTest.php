@@ -19,13 +19,23 @@ class NightlyActionTest extends TestCase
     {
         AppTester::assertThatGet('/download/nightly/p2')
         ->statusCode(302)
-        ->header('Location', '/nightly/p2');
+        ->header('Location', '/releases/ivy/nightly/p2');
     }
     
     public function testAlsoAvailableUnderHtmlUrl()
     {
-        $body1 = AppTester::assertThatGet('/download/nightly')->statusCode(200)->bodyContains('Nightly Builds')->getBody();
-        $body2 = AppTester::assertThatGet('/download/nightly.html')->getBody();
+        $body1 = AppTester::assertThatGet('/download/nightly')
+            ->statusCode(200)
+            ->bodyContains('Nightly Builds')
+            ->getBody();
+        
+        $body2 = AppTester::assertThatGet('/download/nightly.html')
+            ->statusCode(200)
+            ->bodyContains('Nightly Builds')
+            ->getBody();
+        
+        $body2 = str_replace('.html', '', $body2);
+            
         self::assertEquals($body1, $body2);
     }
 }
