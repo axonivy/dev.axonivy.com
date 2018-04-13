@@ -5,8 +5,9 @@ use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use app\release\model\PermalinkHelper;
+use app\release\model\Artifact;
 use app\release\model\ReleaseInfoRepository;
+use app\util\StringUtil;
 
 class PermalinkAction
 {
@@ -39,7 +40,7 @@ class PermalinkAction
                 throw new NotFoundException($request, $response);
         }
         
-        $artifact = PermalinkHelper::findArtifact($artifacts, $file);
+        $artifact = self::findArtifactForPermalink($artifacts, $file);
         
         if ($artifact == null) {
             throw new NotFoundException($request, $response);
@@ -48,4 +49,20 @@ class PermalinkAction
         return $response->withRedirect($artifact->getDownloadUrl());
     }
     
+    private static function findArtifactForPermalink($artifacts, $permalinkFile): ?Artifact
+    {
+        $startsAndEndsWith = explode('-latest', $permalinkFile);
+        $startsWith = $startsAndEndsWith[0];
+        $endsWith = $startsAndEndsWith[1];
+        
+        foreach ($artifacts as $artifact) {
+            if (StringUtil::startsWith($artifact->getFileName(), $startsWith)) {
+                if (StringUtil::endsWith($artifact->getFileName(), $endsWith)) {
+                    return $artifact;
+                }
+            }
+        }
+        
+        return null;
+    }
 }
