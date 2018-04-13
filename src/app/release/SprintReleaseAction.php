@@ -26,7 +26,7 @@ class SprintReleaseAction
             return $response->withRedirect('/releases/ivy/sprint/' . $args['file']);
         }
         
-        $baseUrl = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost() . dirname($request->getUri()->getPath()) . basename($request->getUri()->getPath(), '.html');
+        $baseUrl = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost() . dirname($request->getUri()->getPath()) . '/' . basename($request->getUri()->getPath(), '.html');
         return $this->container->get('view')->render($response, 'app/release/sprint-release.html', [
             'releaseInfo' => $releaseInfo,
             'sprintUrl' => $baseUrl,
