@@ -74,7 +74,7 @@ class ReleaseInfo
             if (!empty($fileNames)) {
                 $fileNamePath = $fileNames[0];
                 $fileName = basename($fileNamePath);
-                $doc = new Document($fileName, $fileNamePath, '/download/' . $this->getVersion()->getBugfixVersion() . '/' . $fileName);
+                $doc = new Document($fileName, $fileNamePath, '/download/' . $this->getVersion()->getBugfixVersion() . '/' . $fileName, false);
                 
                 $fileNameParts = explode('_', $fileName);
                 $fileNameParts = array_slice($fileNameParts, 1);
