@@ -168,7 +168,7 @@ class ReleaseInfo
             $downloadUrl = CDN_HOST_NIGHTLY . '/' . $variant->getFileName();
             $permalink = '/download/nightly/' . (new Variant($fileName))->getFileNameInLatestFormat();
             
-            $nightlyArtifacts[] = new NightlyArtifact($fileName, $downloadUrl, $permalink);
+            $nightlyArtifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
         }
         return $nightlyArtifacts;
     }
@@ -181,7 +181,7 @@ class ReleaseInfo
             $downloadUrl = CDN_HOST_SPRINT . '/' . $variant->getFileName();
             $permalink = '/download/sprint-release/' . (new Variant($fileName))->getFileNameInLatestFormat();
             
-            $artifacts[] = new SprintArtifact($fileName, $downloadUrl, $permalink);
+            $artifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
         }
         return $artifacts;
     }
