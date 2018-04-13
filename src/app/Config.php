@@ -12,23 +12,21 @@ class Config {
         define('BASE_URL', 'https://developer.axonivy.com');
         
         define('CDN_HOST', 'https://download.axonivy.com');
-        define('CDN_HOST_DEV_RELEASES', 'https://d3ao4l46dir7t.cloudfront.net');
  
         $rootDir = '/home/axonivya/www/developer.axonivy.com';
         if (self::isDevOrTestEnv()) {
             $rootDir = __DIR__ . '/../../test/data/webroot';
         }
         
-        // TODO Calcualte this name or make it folder structure simpler, there is only one sprint release!
-        define('IVY_SPRINT_RELEASE_CDN_RELATIVE', StringUtil::createPath(['ivy', 'sprint-release', 'Jakobshorn', '7.1.0-S8']));
-        define('IVY_SPRINT_RELEASE_DIR_RELATIVE', StringUtil::createPath(['dev-releases', IVY_SPRINT_RELEASE_CDN_RELATIVE]));
-        define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, IVY_SPRINT_RELEASE_DIR_RELATIVE]));
-        
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
         
-        define('IVY_NIGHTLY_RELEASE_CDN_RELATIVE', StringUtil::createPath(['ivy', 'nightly', 'current']));
-        define('IVY_NIGHTLY_RELEASE_DIR_RELATIVE', StringUtil::createPath(['dev-releases', IVY_NIGHTLY_RELEASE_CDN_RELATIVE]));
-        define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, IVY_NIGHTLY_RELEASE_DIR_RELATIVE]));
+        define('IVY_SPRINT_RELEASE_CDN_RELATIVE', 'sprint');
+        define('IVY_SPRINT_RELEASE_DIR_RELATIVE', StringUtil::createPath(['releases', IVY_SPRINT_RELEASE_CDN_RELATIVE]));
+        define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, IVY_SPRINT_RELEASE_DIR_RELATIVE]));
+        
+        define('IVY_NIGHTLY_RELEASE_CDN_RELATIVE', 'nightly');
+        define('IVY_NIGHTLY_RELEASE_DIR_RELATIVE', StringUtil::createPath(['releases', IVY_NIGHTLY_RELEASE_CDN_RELATIVE]));
+        define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, IVY_NIGHTLY_RELEASE_DIR_RELATIVE]));
         
         $UNSAVE_VERSIONS = [
             '6.7.1' => '7.0',
