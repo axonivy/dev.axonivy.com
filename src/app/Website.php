@@ -147,11 +147,5 @@ class Website
             };
         };
     }
-    
-    private static function createSimpleRenderFunction(string $template): callable {
-        return function ($request, $response, $args) use ($template) {
-            return $this->view->render($response, $template);
-        };
-    }
 }
 
