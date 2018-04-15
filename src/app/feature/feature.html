@@ -5,14 +5,12 @@
 {% block content %}
 
 	<section id="banner">
-		<!-- 
 		<div class="inner">
 			<h1>AXON.IVY DIGITIAL BUSINESS PLATFORM</h1>
 			<ul class="actions">
-				<li><a href="#" class="button alt">Download 7.1</a></li>
+				<li><a href="/download" class="button alt">Download {{ latestMinorVersion }}</a></li>
 			</ul>
 		</div>
-		-->
 	</section>
 
 	{% for feature in features %}
@@ -22,14 +20,21 @@
 				<p>{{ feature.description }}</p>
 				
 				{% if not feature.videoUrl is empty %}
-					<iframe src="{{ feature.videoUrl }}" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<iframe class="image fit" src="{{ feature.videoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 				{% endif %}
 				
 				{% if not feature.imageUrl is empty %}
-					<img style="width:100%;max-width:800px;" src="{{ feature.imageUrl }}" />
+					<img style="width:100%;max-height:200px;" src="{{ feature.imageUrl }}" />
 				{% endif %}
 			</div>
 		</section>
 	{% endfor %}
+
+<section id="one">
+	<div style="background-image: url('/images/visionar-gartner.jpg');min-height:200px;background-size: cover;
+		background-repeat: no-repeat;">
+				
+			</div>    
+</section>
     
 {% endblock %}

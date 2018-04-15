@@ -20,7 +20,7 @@
 							</p>
 							{% if designerVariant is not empty %}
 							<ul class="actions">
-								<li><a href="{{ designerVariant.DownloadUrl }}" class="button special">Download {{ designerVariant.Version.BugFixVersion }} / {{ designerVariant.Type }} {{ designerVariant.Architecture }}</a></li>
+								<li><a href="{{ designerVariant.DownloadUrl }}" class="button special">Download {{ designerVariant.Version.BugFixVersion }} | {{ designerVariant.Type }} {{ designerVariant.Architecture }}</a></li>
 							</ul>
 							<a href="/download/archive">other versions/platforms</a>
 							{% endif %}
@@ -39,7 +39,7 @@
 							</p>
 							{% if engineVariant is not empty %}
 							<ul class="actions">
-								<li><a href="{{ engineVariant.DownloadUrl }}" class="button special">Download {{ engineVariant.Version.BugFixVersion }} / {{ engineVariant.Type }} {{ engineVariant.Architecture }}</a></li>
+								<li><a href="{{ engineVariant.DownloadUrl }}" class="button special">Download {{ engineVariant.Version.BugFixVersion }} | {{ engineVariant.Type }} {{ engineVariant.Architecture }}</a></li>
 							</ul>
 							<a href="/download/archive">other versions/platforms</a>
 							{% endif %}

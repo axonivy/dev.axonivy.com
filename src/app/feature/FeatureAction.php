@@ -2,6 +2,7 @@
 namespace app\feature;
 
 use Psr\Container\ContainerInterface;
+use app\release\model\ReleaseInfoRepository;
 
 class FeatureAction
 {
@@ -12,8 +13,11 @@ class FeatureAction
     }
 
     public function __invoke($request, $response, $args) {
+        $releaseInfo = ReleaseInfoRepository::getLatest();
+        
         return $this->container->get('view')->render($response, 'app/feature/feature.html', [
-            'features' => self::getPromotedFeatures()
+            'features' => self::getPromotedFeatures(),
+            'latestMinorVersion' => $releaseInfo == null ? '' : $releaseInfo->getVersion()->getMinorVersion()
         ]);
     }
     

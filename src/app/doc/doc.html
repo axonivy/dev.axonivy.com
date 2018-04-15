@@ -19,7 +19,7 @@
 				<ul class="actions">
 				{% for doc in docProvider.Documents %}
 					<li>
-						<a href="{{ doc.Url }}" {{doc.Book ? 'target="_blank"'}}  class="button special icon {{ doc.Book ? 'fa-book' : 'fa-file' }} " style="width:200px;">{{ doc.Name }}</a>
+						<a href="{{ doc.Url }}"  class="button special icon fa-book " style="width:200px;">{{ doc.Name }}</a>
 					</li>
 				{% endfor %}
 				</ul>
