@@ -20,21 +20,19 @@ class SprintNightlyAction
         $artifacts = [];
         $name = '';
         $urlVersion = '';
+        $p2Url = '';
         if ($version == 'nightly') {
             $artifacts = ReleaseInfoRepository::getNightlyArtifacts();
             $name = 'Nightly Build';
             $urlVersion = 'nightly';
+            $p2Url = 'https://file.axonivy.rocks/p2/nightly/';
         } else if ($version == 'sprint-release') {
             $artifacts = ReleaseInfoRepository::getSprintArtifacts();
             $name = 'Sprint Release';
             $urlVersion = 'sprint';
+            $p2Url = 'https://file.axonivy.rocks/p2/sprint/';
         } else {
             throw new \InvalidArgumentException($version . ' is not supported');
-        }
-        
-        // TODO redirect for files ... p2
-        if (isset($args['file'])) {
-            return $response->withRedirect('/releases/ivy/' . $urlVersion . '/' . $args['file']);
         }
         
         $baseUrl = UrlHelper::getFullPathUrl($request);
@@ -42,7 +40,7 @@ class SprintNightlyAction
             'artifacts' => $artifacts,
             'name' => $name,
             'currentUrl' => $baseUrl,
-            'p2Url' => $baseUrl . '/p2'
+            'p2Url' => $p2Url
         ]);
     }
     
