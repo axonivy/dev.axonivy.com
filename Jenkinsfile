@@ -40,9 +40,9 @@ pipeline {
         expression {
           currentBuild.result == null || currentBuild.result == 'SUCCESS' 
         }
-        expression {
+        /*expression {
           input 'Do you want to deploy to production?'
-        }
+        }*/
         /*expression {
           params.deployToProduction         
         }*/
@@ -60,9 +60,9 @@ pipeline {
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 rm -f /home/axonivya/deployment/$targetFilename"
             
             // create symlinks
-            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/web /home/axonivya/www/prototype.axonivya.myhostpoint.ch/linktoweb"
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/blob-dev-website /home/axonivya/deployment/$targetFile/src/web/blob"
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/www/developer.axonivy.com/releases /home/axonivya/deployment/$targetFile/src/web/releases"
+            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/web /home/axonivya/www/prototype.axonivya.myhostpoint.ch/linktoweb"
           }
         }
       }
