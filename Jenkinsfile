@@ -10,9 +10,9 @@ pipeline {
   options {
     buildDiscarder(logRotator(artifactNumToKeepStr: '10'))
   }
-  parameters {
+  /*parameters {
     booleanParam(defaultValue: false, description: 'Deploy to production?', name: 'deployToProduction')
-  }
+  }*/
   stages {
     stage('distribution') {
       steps {
@@ -41,8 +41,11 @@ pipeline {
           currentBuild.result == null || currentBuild.result == 'SUCCESS' 
         }
         expression {
-          params.deployToProduction         
+          input 'Do you want to deploy to production?'
         }
+        /*expression {
+          params.deployToProduction         
+        }*/
       }
       steps {
         sshagent(['3015bfe2-5718-4bd4-9da0-6a5f0169cbfc']) {
