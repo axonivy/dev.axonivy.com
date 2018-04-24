@@ -14,25 +14,11 @@
     <section id="main" >
 		<div class="inner">
 			<header><h1>Documentation {{ version }}</h1></header>
-				
-				<h3>Release Documents</h3>
-				<ul class="actions">
-				{% for doc in docProvider.Documents %}
-					<li>
-						<a href="{{ doc.Url }}"  class="button special icon fa-book " style="width:200px;">{{ doc.Name }}</a>
-					</li>
-				{% endfor %}
-				</ul>
-				
-				<h3>Books</h3>
-				<ul class="actions">
 				{% for doc in docProvider.Books %}
-					<li>
-						<a href="{{ doc.Url }}" target="_blank"  class="button special icon fa-book" style="width:200px;">{{ doc.Name }}</a>
-						<a href="{{ doc.PdfUrl }}" class="button special" >PDF</a>
-					</li>
+					<a href="{{ doc.Url }}" >{{ doc.Name }}</a>
+					<a href="{{ doc.PdfUrl }}" target="_blank" >PDF</a>
+					| 
 				{% endfor %}
-				</ul>
 		</div>
 	</section>
 	
@@ -42,6 +28,5 @@
 		}
 	</script>
 	<iframe width="100%" scrolling="no" frameBorder="0" src="{{ documentUrl }}" onload='javascript:resizeIframe(this);'></iframe>
-    
     
 {% endblock %}
