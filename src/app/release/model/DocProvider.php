@@ -39,6 +39,14 @@ class DocProvider
         return IVY_RELEASE_DIRECTORY . '/' . $versionNumber;
     }
     
+    // DesignerGuideHtml / EngineGuideHtml etc.
+    public function findDocument(string $document): ?Document
+    {
+        $docs = $this->getAllDocuments();
+        $docs = array_filter($docs, function (Document $doc) { return basename($doc->getPublicUrl()); });
+        return empty($docs) ? null : $docs[0];
+    }
+    
     private function getAllDocuments(): array
     {
         $versionNumber = $this->versionNumber;
@@ -70,12 +78,15 @@ class DocProvider
     {
         $doc = new Document($bookName, "/$versionNumber/documents/$dirName/index.html", "/doc/$versionNumber/$dirName/", true);
         $doc->setPdfUrl("/doc/$versionNumber/$pdfFile");
+        $doc->setPublicUrl('/releases/ivy/'.$versionNumber.'/documents/' . $dirName);
         return $doc;
     }
     
     private static function createDocument($docName, $versionNumber, $filePath): Document
     {
-        return new Document($docName, "/$versionNumber/documents/$filePath", "/doc/$versionNumber/$filePath", false);
+        $doc = new Document($docName, "/$versionNumber/documents/$filePath", "/doc/$versionNumber/$filePath", false);
+        $doc->setPublicUrl('/releases/ivy/'.$versionNumber.'/documents/' . $filePath);
+        return $doc;
     }
     
     private static function createReleaseNotes(string $versionNumber): Document

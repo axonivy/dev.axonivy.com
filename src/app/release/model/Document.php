@@ -23,6 +23,18 @@ class Document
         return $this->isBook;
     }
     
+    private $publicUrl;
+    
+    public function setPublicUrl($publicUrl)
+    {
+        $this->publicUrl = $publicUrl; 
+    }
+    
+    public function getPublicUrl()
+    {
+        return $this->publicUrl;
+    }
+    
     public function setShortName(string $shortName)
     {
         $this->shortName = $shortName;
