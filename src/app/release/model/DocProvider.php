@@ -55,6 +55,7 @@ class DocProvider
         
         $documents[] = self::createReleaseNotes($versionNumber);
   
+        $documents[] = self::createDocument('N&N', $versionNumber, 'newAndNoteworthy/NewAndNoteworthy.html');
         $documents[] = self::createDocument('N&N Designer', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyDesigner.html');
         $documents[] = self::createDocument('N&N Engine', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyEngine.html');
         $documents[] = self::createDocument('Migration Notes', $versionNumber, 'MigrationNotes.html');
