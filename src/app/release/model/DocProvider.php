@@ -79,9 +79,10 @@ class DocProvider
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
-            self::createReleaseDocument('N&N', 'newAndNoteworthy/NewAndNoteworthy.html'),
-            self::createReleaseDocument('N&N Designer', 'newAndNoteworthy/NewAndNoteworthyDesigner.html'),
-            self::createReleaseDocument('N&N Engine', 'newAndNoteworthy/NewAndNoteworthyEngine.html'),
+            self::createReleaseNotes(),
+            self::createReleaseDocument('N&N', 'doc/newAndNoteworthy/NewAndNoteworthy.html'),
+            self::createReleaseDocument('N&N Designer', 'doc/newAndNoteworthy/NewAndNoteworthyDesigner.html'),
+            self::createReleaseDocument('N&N Engine', 'doc/newAndNoteworthy/NewAndNoteworthyEngine.html'),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
             self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
             self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html')
