@@ -14,9 +14,14 @@
     <section id="main" >
 		<div class="inner">
 			<header><h1>Documentation {{ version }}</h1></header>
+				{% for doc in docProvider.releaseDocuments %}
+					<a href="{{ doc.Url }}">{{ doc.Name }}</a>
+					| 
+				{% endfor %}
+				<br />
 				{% for doc in docProvider.Books %}
-					<a href="{{ doc.Url }}" >{{ doc.Name }}</a>
-					<a href="{{ doc.PdfUrl }}" target="_blank" >PDF</a>
+					<a href="{{ doc.Url }}">{{ doc.Name }}</a>
+					<a href="{{ doc.PdfUrl }}" target="_blank">PDF</a>
 					| 
 				{% endfor %}
 		</div>

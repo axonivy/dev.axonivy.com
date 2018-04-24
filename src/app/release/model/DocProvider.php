@@ -35,24 +35,37 @@ class DocProvider
      * <li> DesignerGuideHtml
      * <li> EngineGuideHtml
      * @param string $name
-     * @return Document|NULL
+     * @return AbstractDocument|NULL
      */
     public function findDocumentByPathName(string $pathName): ?AbstractDocument
     {
-        $docs = $this->findAllDocuments();
-        $docs = array_filter($docs, function (AbstractDocument $doc) use ($pathName) {
+        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pathName) {
             return $doc->getPath() == $pathName;
         });
-        return array_shift(array_values($docs));
     }
     
     public function findDocumentByPdfName(string $pdfFileName): ?AbstractDocument
     {
-        $docs = $this->findAllDocuments();
-        $docs = array_filter($docs, function (AbstractDocument $doc) use ($pdfFileName) {
+        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pdfFileName) {
             return $doc->getPdfFileName() == $pdfFileName;
         });
+    }
+    
+    private function findDocumentByFilter(callable $function): ?AbstractDocument
+    {
+        $docs = $this->findAllDocuments();
+        $docs = array_filter($docs, $function);
         return array_shift(array_values($docs));
+    }
+    
+    public function getBooks(): array
+    {
+        return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof Book; });
+    }
+    
+    public function getReleaseDocuments(): array
+    {
+        return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof ReleaseDocument; });
     }
     
     private function findAllDocuments(): array
@@ -61,24 +74,72 @@ class DocProvider
             self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'),
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'),
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
-            self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf')
+            self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
+            
+            self::createReleaseDocument('N&N', 'newAndNoteworthy/NewAndNoteworthy.html'),
+            self::createReleaseDocument('N&N Designer', 'newAndNoteworthy/NewAndNoteworthyDesigner.html'),
+            self::createReleaseDocument('N&N Engine', 'newAndNoteworthy/NewAndNoteworthyEngine.html'),
+            self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
+            self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
+            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html')
         ];
         return array_filter($documents, function(AbstractDocument $doc) { return $doc->exists(); });
     }
     
     private function createBook($name, $path, $pdfFile): Book
     {
-        $rootPath = StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'documents']);
-        $baseUrl = '/doc/' . $this->versionNumber;
-        $baseRessourceUrl = '/releases/ivy/' . $this->versionNumber . '/documents';
+        $rootPath = $this->createRootPath();
+        $baseUrl = $this->createBaseUrl();
+        $baseRessourceUrl = $this->createBaseRessourceUrl();
         return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, $pdfFile);
     }
     
-    public function getBooks(): array
+    private function createReleaseDocument($name, $path): ReleaseDocument
     {
-        return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof Book; });
+        $rootPath = $this->createRootPath();
+        $baseUrl = $this->createBaseUrl();
+        $baseRessourceUrl = $this->createBaseRessourceUrl();
+        return new ReleaseDocument($name, $rootPath, $baseUrl, $baseRessourceUrl, $path);
     }
     
+    private function createReleaseNotes(): ReleaseDocument
+    {
+        $version = new Version($this->versionNumber);
+        $versionNumber = $version->getBugfixVersion();
+        $fileName = 'ReleaseNotes.txt';
+        if ($version->getMinorVersion() == '4.2') {
+            $versionNumber = $version->getVersionNumber();
+        }
+        if ($version->getVersionNumber() == '3.9.52.8') {
+            $versionNumber = '3.9.8';
+        }
+        if ($version->getVersionNumber() == '3.9.52.9') {
+            $versionNumber = '3.9.9';
+        }
+        if ($version->getMinorVersion() == '3.9') {
+            $fileName = 'ReadMe.html';
+        }
+        // TODO FIX
+        //return new ReleaseDocument('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName", false);
+        return $this->createReleaseDocument('Release Notes', 'ReleaseNotes.txt');
+    }
+    
+    private function createRootPath(): string
+    {
+        return StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'documents']);
+    }
+    
+    private function createBaseUrl(): string
+    {
+        return '/doc/' . $this->versionNumber;
+    }
+    
+    private function createBaseRessourceUrl(): string
+    {
+        return '/releases/ivy/' . $this->versionNumber . '/documents';
+    }
+    
+
     
     
     
@@ -86,60 +147,16 @@ class DocProvider
     
     
     
-    
-    public function getReleaseNotes(): Document
+    public function getReleaseNotes(): ReleaseDocument
     {
         return self::createReleaseNotes($this->versionNumber);
     }
     
-    
-    
-    public function getDocuments(): array
-    {
-        return array_filter(self::getAllDocuments(), function (Document $doc) { return !$doc->isBook(); });
-    }
-    
-    
-    
-    
-    
     //$documents[] = self::createExternalBook('Public API', $versionNumber, 'PublicAPI');
-    //$documents[] = self::createReleaseNotes($versionNumber);
-    //$documents[] = self::createDocument('N&N', $versionNumber, 'newAndNoteworthy/NewAndNoteworthy.html');
-    //$documents[] = self::createDocument('N&N Designer', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyDesigner.html');
-    //$documents[] = self::createDocument('N&N Engine', $versionNumber, 'newAndNoteworthy/NewAndNoteworthyEngine.html');
-    //$documents[] = self::createDocument('Migration Notes', $versionNumber, 'MigrationNotes.html');
-    //$documents[] = self::createDocument('ReadMe Designer', $versionNumber, 'ReadMe.html');
-    //$documents[] = self::createDocument('ReadMe Engine', $versionNumber, 'ReadMeEngine.html');
     
     
     
-//     private static function createDocument($docName, $versionNumber, $filePath): Document
-//     {
-//         $doc = new Document($docName, "/$versionNumber/documents/$filePath", "/doc/$versionNumber/$filePath", false);
-//         $doc->setPublicUrl('/releases/ivy/'.$versionNumber.'/documents/' . $filePath);
-//         return $doc;
-//     }
     
-//     private static function createReleaseNotes(string $versionNumber): Document
-//     {
-//         $version = new Version($versionNumber);
-//         $versionNumber = $version->getBugfixVersion();
-//         $fileName = 'ReleaseNotes.txt';
-//         if ($version->getMinorVersion() == '4.2') {
-//             $versionNumber = $version->getVersionNumber();
-//         }
-//         if ($version->getVersionNumber() == '3.9.52.8') {
-//             $versionNumber = '3.9.8';
-//         }
-//         if ($version->getVersionNumber() == '3.9.52.9') {
-//             $versionNumber = '3.9.9';
-//         }
-//         if ($version->getMinorVersion() == '3.9') {
-//             $fileName = 'ReadMe.html';
-//         }
-//         return new Document('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName", false);
-//     }
     
     
 }
