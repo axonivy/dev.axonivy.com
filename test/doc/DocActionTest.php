@@ -12,8 +12,8 @@ class DocActionTest extends TestCase
         AppTester::assertThatGet('/doc/7.0.1')
             ->statusCode(200)
             ->bodyContains('Designer Guide')
-            ->bodyContains('Engine Guide')
-            ->bodyContains('Release Notes');   
+            ->bodyContains('Engine Guide');
+            //->bodyContains('Release Notes');   
     }
     
 }
