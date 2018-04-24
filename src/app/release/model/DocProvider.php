@@ -47,7 +47,10 @@ class DocProvider
     public function findDocumentByPdfName(string $pdfFileName): ?AbstractDocument
     {
         return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pdfFileName) {
-            return $doc->getPdfFileName() == $pdfFileName;
+            if ($doc instanceof Book) {
+                return $doc->getPdfFileName() == $pdfFileName;
+            }
+            return false;
         });
     }
     
