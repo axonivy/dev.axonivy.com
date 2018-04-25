@@ -201,28 +201,9 @@ class DocProvider
         return $minorVersion . $latest;
     }
        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public function getReleaseNotes(): ReleaseDocument
     {
         return self::createReleaseNotes($this->versionNumber);
     }
-    
-    
-    
-    
-    
-    
     
 }
