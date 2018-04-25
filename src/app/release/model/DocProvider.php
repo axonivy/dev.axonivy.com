@@ -97,8 +97,8 @@ class DocProvider
             
             self::createExternalBook('Public API', 'PublicAPI'),
             
-            self::createReleaseNotes(),
-            self::createReleaseDocument('N&N', 'NewAndNoteworthy.html'),
+            self::getReleaseNotes(),
+            self::getNewAndNoteworthy(),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
             self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
             self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html')
@@ -128,28 +128,6 @@ class DocProvider
         $baseUrl = $this->createBaseUrl();
         $baseRessourceUrl = $this->createBaseRessourceUrl();
         return new ReleaseDocument($name, $rootPath, $baseUrl, $baseRessourceUrl, $path);
-    }
-    
-    private function createReleaseNotes(): ReleaseDocument
-    {
-        $version = new Version($this->versionNumber);
-        $versionNumber = $version->getBugfixVersion();
-        $fileName = 'ReleaseNotes.txt';
-        if ($version->getMinorVersion() == '4.2') {
-            $versionNumber = $version->getVersionNumber();
-        }
-        if ($version->getVersionNumber() == '3.9.52.8') {
-            $versionNumber = '3.9.8';
-        }
-        if ($version->getVersionNumber() == '3.9.52.9') {
-            $versionNumber = '3.9.9';
-        }
-        if ($version->getMinorVersion() == '3.9') {
-            $fileName = 'ReadMe.html';
-        }
-        // TODO FIX
-        //return new ReleaseDocument('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName", false);
-        return $this->createReleaseDocument('Release Notes', 'ReleaseNotes.txt');
     }
     
     private function createRootPath(): string
@@ -200,10 +178,31 @@ class DocProvider
         }
         return $minorVersion . $latest;
     }
-       
+
     public function getReleaseNotes(): ReleaseDocument
     {
-        return self::createReleaseNotes($this->versionNumber);
+        $version = new Version($this->versionNumber);
+        $versionNumber = $version->getBugfixVersion();
+        $fileName = 'ReleaseNotes.txt';
+        if ($version->getMinorVersion() == '4.2') {
+            $versionNumber = $version->getVersionNumber();
+        }
+        if ($version->getVersionNumber() == '3.9.52.8') {
+            $versionNumber = '3.9.8';
+        }
+        if ($version->getVersionNumber() == '3.9.52.9') {
+            $versionNumber = '3.9.9';
+        }
+        if ($version->getMinorVersion() == '3.9') {
+            $fileName = 'ReadMe.html';
+        }
+        // TODO FIX
+        //return new ReleaseDocument('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName", false);
+        return $this->createReleaseDocument('Release Notes', 'ReleaseNotes.txt');
     }
     
+    public function getNewAndNoteworthy(): ReleaseDocument
+    {
+        return self::createReleaseDocument('N&N', 'NewAndNoteworthy.html');
+    }
 }

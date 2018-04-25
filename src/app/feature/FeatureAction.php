@@ -17,7 +17,8 @@ class FeatureAction
         
         return $this->container->get('view')->render($response, 'app/feature/feature.html', [
             'features' => self::getPromotedFeatures(),
-            'latestMinorVersion' => $releaseInfo == null ? '' : $releaseInfo->getVersion()->getMinorVersion()
+            'latestMinorVersion' => $releaseInfo == null ? '' : $releaseInfo->getVersion()->getMinorVersion(),
+            'newAndNoteworthyLink' => $releaseInfo == null ? '' : $releaseInfo->getDocProvider()->getNewAndNoteworthy()->getUrl()
         ]);
     }
     
