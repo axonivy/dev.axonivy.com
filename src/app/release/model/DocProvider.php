@@ -55,6 +55,16 @@ class DocProvider
         });
     }
     
+    public function findExternalBookByPathName(string $pathName): ?ExternalBook
+    {
+        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pathName) {
+            if ($doc instanceof ExternalBook) {
+                return $doc->getPath() == $pathName;
+            }
+            return false;
+        });
+    }
+    
     private function findDocumentByFilter(callable $function): ?AbstractDocument
     {
         $docs = $this->findAllDocuments();
@@ -65,6 +75,11 @@ class DocProvider
     public function getBooks(): array
     {
         return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof Book; });
+    }
+    
+    public function getExternalBooks(): array
+    {
+        return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof ExternalBook; });
     }
     
     public function getReleaseDocuments(): array
@@ -80,10 +95,10 @@ class DocProvider
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
+            self::createExternalBook('Public API', 'PublicAPI'),
+            
             self::createReleaseNotes(),
-            self::createReleaseDocument('N&N', 'doc/newAndNoteworthy/NewAndNoteworthy.html'),
-            self::createReleaseDocument('N&N Designer', 'doc/newAndNoteworthy/NewAndNoteworthyDesigner.html'),
-            self::createReleaseDocument('N&N Engine', 'doc/newAndNoteworthy/NewAndNoteworthyEngine.html'),
+            self::createReleaseDocument('N&N', 'NewAndNoteworthy.html'),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
             self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
             self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html')
@@ -97,6 +112,14 @@ class DocProvider
         $baseUrl = $this->createBaseUrl();
         $baseRessourceUrl = $this->createBaseRessourceUrl();
         return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, $pdfFile);
+    }
+    
+    private function createExternalBook($name, $path): ExternalBook
+    {
+        $rootPath = $this->createRootPath();
+        $baseUrl = $this->createBaseUrl();
+        $baseRessourceUrl = $this->createBaseRessourceUrl();
+        return new ExternalBook($name, $rootPath, $baseUrl, $baseRessourceUrl, $path);
     }
     
     private function createReleaseDocument($name, $path): ReleaseDocument
@@ -196,7 +219,6 @@ class DocProvider
         return self::createReleaseNotes($this->versionNumber);
     }
     
-    //$documents[] = self::createExternalBook('Public API', $versionNumber, 'PublicAPI');
     
     
     

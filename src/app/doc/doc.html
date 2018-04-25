@@ -24,6 +24,10 @@
 					<a href="{{ doc.PdfUrl }}" target="_blank">PDF</a>
 					| 
 				{% endfor %}
+				{% for doc in docProvider.ExternalBooks %}
+					<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
+					| 
+				{% endfor %}
 		</div>
 	</section>
 	

@@ -38,6 +38,13 @@ class DocAction
             return $response->withRedirect($pdf->getRessourcePdfUrl()); 
         }
         
+        // Redirect External Books
+        $externalBook = $docProvider->findExternalBookByPathName($document);
+        if ($externalBook != null)
+        {
+            return $response->withRedirect($externalBook->getRessourceUrl());
+        }
+        
         // Find the requested document and show it in iframe
         $doc = $docProvider->findDocumentByPathName($document);
         
