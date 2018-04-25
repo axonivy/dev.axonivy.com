@@ -40,11 +40,26 @@
 					header.remove();
 				}
 			}
+			
+			navbars = iframe.contentWindow.document.getElementsByClassName('navbar');
+			for (i = 0; i < navbars.length; i++) {
+				navbars[i].remove();
+			} 
 		}
-		
-		
 	</script>
+	
+	{% if not iframeFullWidth %}
+	<section id="main" >
+		<div class="inner">
+	{% endif %}
+	
 	<iframe width="100%" scrolling="no" frameBorder="0" src="{{ documentUrl }}" onload='javascript:resizeIframe(this);'></iframe>
+	
+	{% if not iframeFullWidth %}
+		</div>
+	</section>
+	{% endif %}
+	
 	
     
 {% endblock %}

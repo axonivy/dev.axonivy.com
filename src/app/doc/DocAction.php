@@ -5,6 +5,7 @@ use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
 use app\release\model\DocProvider;
 use Slim\Http\Response;
+use app\util\StringUtil;
 
 class DocAction
 {
@@ -43,7 +44,8 @@ class DocAction
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
             'docProvider' => $docProvider,
-            'documentUrl' => $doc == null ? '' : $doc->getRessourceUrl()
+            'documentUrl' => $doc == null ? '' : $doc->getRessourceUrl(),
+            'iframeFullWidth' => !StringUtil::endsWith($document, '.txt')
         ]);
     }
 }
