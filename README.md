@@ -29,6 +29,7 @@ Menu entry > Setup > Advanced.
 * Doc
 * sitemap.xml
 * robots.txt
+* PageSpeed
 
 * Support old links
 

@@ -163,7 +163,7 @@ class DocProvider
                 continue;
             }
             
-            $versionNumbers[] = substr($versionNumber, 0, strlen($latest));
+            $versionNumbers[] = substr($versionNumber, 0, -strlen($latest));
         }
         
         usort($versionNumbers, function ($versionNumber1, $versionNumber2) {
