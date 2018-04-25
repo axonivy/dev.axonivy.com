@@ -32,6 +32,7 @@ Menu entry > Setup > Advanced.
 * robots.txt
 
 * Doc: Improve integration
+* Doc: Check old releases
 
 * Refactor: Hotfix Stuff
 

@@ -205,4 +205,9 @@ class DocProvider
     {
         return self::createReleaseDocument('N&N', 'NewAndNoteworthy.html');
     }
+    
+    public function getOverviewUrl(): string
+    {
+        return self::createBaseUrl();
+    }
 }
