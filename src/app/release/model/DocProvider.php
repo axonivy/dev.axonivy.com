@@ -3,6 +3,7 @@
 namespace app\release\model;
 
 use app\util\StringUtil;
+use app\util\ArrayUtil;
 
 class DocProvider
 {
@@ -143,7 +144,46 @@ class DocProvider
         return '/releases/ivy/' . $this->versionNumber . '/documents';
     }
     
-
+    /**
+     * returns e.g. 7.1.latest
+     * @return string
+     */
+    public static function findLatestMinor(): string
+    {
+        $versionNumbers = [];
+        
+        $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*'), 'is_dir');
+        foreach ($directories as $directory) {
+            $versionNumber = basename($directory);
+            
+            $latest = '.latest';
+            
+            // drop e.g. nightly or sprint
+            if (!StringUtil::endsWith($versionNumber, $latest)) {
+                continue;
+            }
+            
+            $versionNumbers[] = substr($versionNumber, 0, strlen($latest));
+        }
+        
+        usort($versionNumbers, function ($versionNumber1, $versionNumber2) {
+            return version_compare($versionNumber1, $versionNumber2);
+        });
+        
+        $minorVersion = ArrayUtil::getLastElementOrNull($versionNumbers);
+        
+        if (empty($minorVersion)) {
+            return '';
+        }
+        return $minorVersion . $latest;
+    }
+       
+    
+    
+    
+    
+    
+    
     
     
     

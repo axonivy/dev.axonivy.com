@@ -21,6 +21,10 @@ class DocAction
         $version = $args['version'] ?? 'latest';
         $document = $args['document'] ?? 'DesignerGuideHtml';
         
+        if ($version == 'latest') {
+            $version = DocProvider::findLatestMinor();
+        }
+        
         $docProvider = new DocProvider($version);
         if (!$docProvider->exists()) {
             throw new NotFoundException($request, $response);
