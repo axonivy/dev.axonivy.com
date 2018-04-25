@@ -58,7 +58,9 @@
 									
 								</td>
 								<td>
-									<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fa-file"> </span></a>&nbsp;Documentation<br />
+									{% if releaseInfo.DocProvider.hasDocuments %}
+										<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fa-file"> </span></a>&nbsp;Documentation<br />
+									{% endif %}
 									{% if releaseInfo.hasHotfix %}
 										<a href="{{ releaseInfo.HotfixHowtoDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;How to install Hotfix<br />
 									{% endif %}

@@ -26,6 +26,11 @@ class DocProvider
         return file_exists($this->getDocDir());
     }
     
+    public function hasDocuments(): bool
+    {
+        return !empty(self::findAllDocuments());
+    }
+    
     private function getDocDir()
     {
         return IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . $this->versionNumber;
