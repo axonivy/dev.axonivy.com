@@ -92,6 +92,7 @@ class DocProvider
         $documents = [
             self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'),
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'),
+            self::createBook('Server Guide', 'ServerGuideHtml', 'ServerGuide.pdf'),
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
@@ -101,7 +102,8 @@ class DocProvider
             self::getNewAndNoteworthy(),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
             self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
-            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html')
+            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html'),
+            self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html')
         ];
         return array_filter($documents, function(AbstractDocument $doc) { return $doc->exists(); });
     }
