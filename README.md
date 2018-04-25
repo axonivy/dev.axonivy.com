@@ -30,6 +30,7 @@ Menu entry > Setup > Advanced.
 * sitemap.xml
 * robots.txt
 * PageSpeed
+* Javascript bug
 
 * Support old links
 
