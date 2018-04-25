@@ -26,7 +26,6 @@ Menu entry > Setup > Advanced.
 
 ## ToDo
 
-* Style Start Page
 * Doc
 * sitemap.xml
 * robots.txt
@@ -37,6 +36,7 @@ Menu entry > Setup > Advanced.
 * Fix Permalinks in Engine Guide
 * Styling DevDay
 * Styling CodeCamp
+* Check build upload unecessary .htacces / index.php
 
 ### Feedback Balsi
 * Kontaktformular
