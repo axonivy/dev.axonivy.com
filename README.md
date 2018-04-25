@@ -28,8 +28,6 @@ Menu entry > Setup > Advanced.
 
 * Reto/Balsi: Install Button
 
-* Sticky Footer
-
 * sitemap.xml
 * robots.txt
 
