@@ -35,6 +35,8 @@ Menu entry > Setup > Advanced.
 
 * Refactor: Hotfix Stuff
 
+* Stable Permalinks Site
+
 * Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
 * Reguel: doc-menu bleibt nicht stehen (rechts)
 
