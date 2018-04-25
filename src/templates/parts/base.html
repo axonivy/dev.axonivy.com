@@ -14,19 +14,32 @@
     	</script>
         <link rel="stylesheet" href="/assets/css/main.css" />
         <link rel="icon" href="/images/ivy_favicon_48.png">
+        
+        <!-- sticky footer styles -->
+        <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.sticky-footer-wrapper {
+			min-height: 100%;
+			/* Equal to height of footer */
+			/* But also accounting for potential margin-bottom of last child */
+			margin-bottom: -230px;
+		}
+		#footer, .sticky-footer-push {
+			height: 230px;
+		}
+		</style>
     </head>
     <body>
     
 		<header id="header">
 			<div class="inner">
-				 
 				<a href="/" class="logo">
 					<img class="logo" style="width:180px;margin-top:20px;" src="/images/axonivy-logo-dev.png" />
 					<span id="navtext" style="margin-left:190px;">for developers</span>
 				</a>
-				<!-- 
-				<span class="logo">for developers</span>
-				 -->
 				<nav id="nav">
 					<a href="/download">Download</a>
 					<a href="/doc">Doc</a>
@@ -40,15 +53,14 @@
 		
 		<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 	
-        <div>
+        <div class="sticky-footer-wrapper">
             {% block global %}{% endblock %}
+            
+            <div class="sticky-footer-push"></div>
         </div>
-        
 
-		<section id="footer">
+	<section id="footer">
 			<div class="inner">
-				<div class="row">
-					<div class="6u 12u$(xsmall)">
 						<ul class="icons">
 							<li><a href="https://twitter.com/AxonivyPlatform" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="https://www.facebook.com/axonivy/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -57,14 +69,9 @@
 							<li><a href="https://www.youtube.com/channel/UCkoNcDoeDAVM7FB-txy3jnQ" class="icon fa-youtube"><span class="label">YouTube</span></a></li>
 							<li><a href="https://github.com/axonivy" class="icon fa-github"><span class="label">GitHub</span></a></li>
 						</ul>
-					</div>
-					<div class="6u 12u$(xsmall)" style="height:80px;text-align:right;position:relative;top:20px;">
 						<a href="/support"><span class="icon fa-life-ring"></span> Support</a>
 						 | 
 						&copy; {{ "now"|date("Y") }} <a href="https://www.axonivy.com/">AXON IVY AG</a>
-					</div>
-				</div>
-				
 			</div>
 		</section>
 
