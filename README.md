@@ -26,23 +26,26 @@ Menu entry > Setup > Advanced.
 
 ## ToDo
 
-* Doc
+* Reto/Balsi: Install Button
+
+* Sticky Footer
+
 * sitemap.xml
 * robots.txt
-* PageSpeed
-* Javascript bug
 
-* Support old links
+* Doc: Improve integration
+
+* Refactor: Hotfix Stuff
+
+* Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
+* Reguel: doc-menu bleibt nicht stehen (rechts)
 
 ### After Release
 * Fix Permalinks in Engine Guide
 * Styling DevDay
 * Styling CodeCamp
 * Check build upload unecessary .htacces / index.php
-
-### Feedback Balsi
-* Kontaktformular
-* Startseite buttons/Download/Install
+* PageSpeed
 
 ### Ideas
 * Public Roadmap
