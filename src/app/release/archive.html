@@ -51,11 +51,6 @@
 									{% for variant in releaseInfo.Variants %}
 										<a href="{{ variant.DownloadUrl }}"><span class="icon fa-download"> </span></a>&nbsp;{{ variant.FileName }}<br />
 									{% endfor %}
-									
-									{% if releaseInfo.hasHotfix %}
-										<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fa-download"> </span></a>&nbsp;Hotfix
-									{% endif %}
-									
 								</td>
 								<td>
 									{% if releaseInfo.DocProvider.hasDocuments %}
@@ -63,6 +58,7 @@
 									{% endif %}
 									{% if releaseInfo.hasHotfix %}
 										<a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;How to install Hotfix<br />
+										<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fa-download"> </span></a>&nbsp;Hotfix<br />
 									{% endif %}
 								</td>
 							</tr>

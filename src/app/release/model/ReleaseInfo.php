@@ -64,10 +64,9 @@ class ReleaseInfo
         if (empty($fileNames)) {
             return '';
         }
-        $fileNamePath = $fileNames[0];
-        $fileName = basename($fileNamePath);
+        $fileName = basename($fileNames[0]);
         
-        return '/releases/ivy/' . $this->version->getVersionNumber() . '/hotfix/' . $filename;;
+        return '/releases/ivy/' . $this->version->getVersionNumber() . '/hotfix/' . $fileName;
     }
     
     private function getHotFixPath(): string
