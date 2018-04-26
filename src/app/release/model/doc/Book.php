@@ -1,5 +1,5 @@
 <?php
-namespace app\release\model;
+namespace app\release\model\doc;
 
 class Book extends AbstractDocument
 {

@@ -1,7 +1,7 @@
 <?php
-namespace app\release\model;
+namespace app\release\model\doc;
 
-class ExternalBook extends AbstractDocument
+class ReleaseDocument extends AbstractDocument
 {
 
     public function __construct(string $name, string $rootPath, string $baseUrl, string $baseRessourceUrl, string $path)
