@@ -26,6 +26,8 @@ Menu entry > Setup > Advanced.
 
 ## ToDo
 
+* Differ between LE and LTS (pes) -> user must download LTS like ubuntu
+
 * Reto/Balsi: Install Button
 
 * sitemap.xml
@@ -41,7 +43,6 @@ Menu entry > Setup > Advanced.
 * Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
 * Reguel: doc-menu bleibt nicht stehen (rechts)
 
-* Differ between LE and LTS
 
 ### After Release
 * Fix Permalinks in Engine Guide
