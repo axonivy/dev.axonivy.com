@@ -4,6 +4,7 @@ namespace app\release\model;
 
 use app\util\StringUtil;
 use app\util\ArrayUtil;
+use app\release\model\doc\SimpleDocument;
 
 class DocProvider
 {
@@ -217,4 +218,13 @@ class DocProvider
     {
         return self::createBaseUrl();
     }
+    
+    public function getHotfixHowToDocument(): SimpleDocument
+    {
+        $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
+        $path = StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'hotfix', $filename]);
+        $url = '/releases/ivy/' . $this->versionNumber . '/hotfix/' . $filename;
+        return new SimpleDocument('How to install Hotfix', $path, $url);
+    }
+    
 }

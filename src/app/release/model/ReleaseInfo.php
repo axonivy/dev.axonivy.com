@@ -54,37 +54,19 @@ class ReleaseInfo
     
     public function hasHotfix(): bool
     {
-        $files_in_hotfix = @scandir($this->getHotFixPath());
-        if (!$files_in_hotfix) {
-            return false;
-        }
-        return (count($files_in_hotfix) > 2);
+        return file_exists($this->getHotFixPath());
     }
     
-    public function getHotfixFile(): ?Document
+    public function getHotfixFileUrl(): string
     {
-        if ($this->hasHotfix()) {
-            $fileNames = glob($this->getHotFixPath() . '/*.zip');
-            if (!empty($fileNames)) {
-                $fileNamePath = $fileNames[0];
-                $fileName = basename($fileNamePath);
-                $doc = new Document($fileName, $fileNamePath, '/download/' . $this->getVersion()->getBugfixVersion() . '/' . $fileName, false);
-                
-                $fileNameParts = explode('_', $fileName);
-                $fileNameParts = array_slice($fileNameParts, 1);
-                $doc->setShortName(implode('_', $fileNameParts));
-                return $doc;
-            }
+        $fileNames = glob($this->getHotFixPath() . '/*.zip');
+        if (empty($fileNames)) {
+            return '';
         }
-        return null;
-    }
-    
-    public function getHotfixHowtoDocument(): ?Document
-    {
-        if ($this->hasHotfix()) {
-            return new Document('How to install', $this->getHotFixPath() . '/HowTo_Hotfix_AxonIvyEngine.txt', '/download/' . $this->getVersion()->getBugfixVersion() . '/HowTo_Hotfix_AxonIvyEngine.txt', false);
-        }
-        return null;
+        $fileNamePath = $fileNames[0];
+        $fileName = basename($fileNamePath);
+        
+        return '/releases/ivy/' . $this->version->getVersionNumber() . '/hotfix/' . $filename;;
     }
     
     private function getHotFixPath(): string
