@@ -221,9 +221,19 @@ class DocProvider
     public function getHotfixHowToDocument(): SimpleDocument
     {
         $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
-        $path = StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'hotfix', $filename]);
+        
+        $path = self::createHotFixFilePath($filename);
+        if (!file_exists($path)) {
+            $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
+        }
+        
+        $path = self::createHotFixFilePath($filename);
         $url = '/releases/ivy/' . $this->versionNumber . '/hotfix/' . $filename;
         return new SimpleDocument('How to install Hotfix', $path, $url);
     }
     
+    private function createHotFixFilePath(string $filename): string
+    {
+        return StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'hotfix', $filename]);
+    }
 }
