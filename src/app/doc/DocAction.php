@@ -3,7 +3,7 @@ namespace app\doc;
 
 use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
-use app\release\model\DocProvider;
+use app\release\model\doc\DocProvider;
 use Slim\Http\Response;
 use app\util\StringUtil;
 

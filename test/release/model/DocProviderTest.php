@@ -3,7 +3,7 @@ namespace test\release\model;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use app\release\model\DocProvider;
+use app\release\model\doc\DocProvider;
 
 class DocProviderTest extends TestCase
 {

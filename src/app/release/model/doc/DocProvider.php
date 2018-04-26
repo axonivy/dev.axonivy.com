@@ -1,14 +1,9 @@
 <?php 
-
-namespace app\release\model;
+namespace app\release\model\doc;
 
 use app\util\StringUtil;
 use app\util\ArrayUtil;
-use app\release\model\doc\AbstractDocument;
-use app\release\model\doc\Book;
-use app\release\model\doc\ExternalBook;
-use app\release\model\doc\ReleaseDocument;
-use app\release\model\doc\SimpleDocument;
+use app\release\model\Version;
 
 class DocProvider
 {

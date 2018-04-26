@@ -1,6 +1,7 @@
 <?php
 namespace app\release\model;
 
+use app\release\model\doc\DocProvider;
 use app\util\UserAgentDetector;
 
 class ReleaseInfo
