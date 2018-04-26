@@ -14,12 +14,12 @@ class SimpleDocument
         $this->url = $url;
     }
     
-    private function getName(): string
+    public function getName(): string
     {
         return $this->name;
     }
     
-    private function getUrl(): string
+    public function getUrl(): string
     {
         return $this->url;
     }

@@ -57,7 +57,7 @@
 										<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fa-file"> </span></a>&nbsp;Documentation<br />
 									{% endif %}
 									{% if releaseInfo.hasHotfix %}
-										<a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;How to install Hotfix<br />
+										<a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
 										<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fa-download"> </span></a>&nbsp;Hotfix<br />
 									{% endif %}
 								</td>
