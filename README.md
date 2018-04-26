@@ -41,6 +41,8 @@ Menu entry > Setup > Advanced.
 * Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
 * Reguel: doc-menu bleibt nicht stehen (rechts)
 
+* Differ between LE and LTS
+
 ### After Release
 * Fix Permalinks in Engine Guide
 * Styling DevDay
