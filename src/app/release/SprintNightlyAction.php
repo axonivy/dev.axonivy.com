@@ -21,6 +21,7 @@ class SprintNightlyAction
         $name = '';
         $urlVersion = '';
         $p2Url = '';
+        $testingPurpose = true;
         if ($version == 'nightly') {
             $artifacts = ReleaseInfoRepository::getNightlyArtifacts();
             $name = 'Nightly Build';
@@ -31,6 +32,11 @@ class SprintNightlyAction
             $name = 'Sprint Release';
             $urlVersion = 'sprint';
             $p2Url = 'https://file.axonivy.rocks/p2/sprint/';
+        } else if ($version == 'stable') {
+            $artifacts = ReleaseInfoRepository::getLatest()->getArtifacts();
+            $name = 'Stable Release';
+            $urlVersion = 'stable';
+            $testingPurpose = false;
         } else {
             throw new \InvalidArgumentException($version . ' is not supported');
         }
@@ -40,7 +46,8 @@ class SprintNightlyAction
             'artifacts' => $artifacts,
             'name' => $name,
             'currentUrl' => $baseUrl,
-            'p2Url' => $p2Url
+            'p2Url' => $p2Url,
+            'testingPurpose' => $testingPurpose
         ]);
     }
     

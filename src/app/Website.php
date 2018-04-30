@@ -106,8 +106,8 @@ class Website
 
         $app->get('/permalink/ivy/{version:nightly|sprint|stable}/{file}', PermalinkAction::class);
         
-        $app->get('/download/{version:nightly|sprint-release}[.html]', SprintNightlyAction::class);
-        $app->get('/download/{version:nightly|sprint-release}/{file}', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|stable}[.html]', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|stable}/{file}', SprintNightlyAction::class);
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);

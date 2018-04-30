@@ -8,9 +8,11 @@
 		<div class="inner">
 			<header><h2>{{ name }}</h2></header>
 			
+			{% if testingPurpose %}
 			<blockquote>
 				The following {{ name|lower }} are for testing purposes only. Never ever use them on productive systems!
 			</blockquote>
+			{% endif %}
 			
 			{% if artifacts is empty %}
 				<span style="color:red;">Artifacts are not yet available. Please check back in approx. 15 minutes.</span><br /><br />
@@ -37,9 +39,11 @@
 			  <li>
 			  	Using {{ name|lower }} with the maven project-build-plugin: <br/> <code>mvn clean install -Divy.engine.list.url={{ currentUrl }}</code>
 			  </li>
+			  {% if p2Url is not empty %}
 			  <li>
 			  	You can also consume the {{ name|lower }} trough an updatesite under:<br /> <code><a href="{{ p2Url }}">{{ p2Url }}</a></code>
 			  </li>
+			  {% endif %}
 			</ul>
 			
 		</div>

@@ -24,8 +24,6 @@ Menu entry > Setup > Advanced.
 
 * Doc: Improve integration
 
-* Stable Permalinks Site
-
 * Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
 * Reguel: doc-menu bleibt nicht stehen (rechts)
 
