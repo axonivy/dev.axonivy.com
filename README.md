@@ -23,6 +23,7 @@ Menu entry > Setup > Advanced.
 ## ToDo
 
 * Doc: Improve integration
+* Alte Doc Links like: https://developer.axonivy.com/doc/latest/DesignerGuideHtml/ivy.introduction.html#ivy.introduction.usefulCommands
 
 * Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
 * Reguel: doc-menu bleibt nicht stehen (rechts)
