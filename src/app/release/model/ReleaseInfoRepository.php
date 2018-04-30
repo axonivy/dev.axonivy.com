@@ -11,15 +11,9 @@ class ReleaseInfoRepository
         return ArrayUtil::getLastElementOrNull($releaseInfos);
     }
     
-    public static function getLatestLeadingEdge(string $productName): ?ReleaseInfo
+    public static function getLatestLongTermSupport(): ?ReleaseInfo
     {
-        $releaseInfos = self::getAvailableReleaseInfosByProductName($productName);
-        return ArrayUtil::getLastElementOrNull($releaseInfos);
-    }
-    
-    public static function getLatestLongTermSupport(string $productName): ?ReleaseInfo
-    {
-        $releaseInfos = self::getAvailableReleaseInfosByProductName($productName);
+        $releaseInfos = self::getAvailableReleaseInfos();
         $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) {
             return $releaseInfo->getVersion()->isLongTermSupportVersion();
         });

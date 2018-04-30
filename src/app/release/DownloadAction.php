@@ -14,27 +14,38 @@ class DownloadAction
     }
     
     public function __invoke($request, $response, $args) {
-        $designerVariant = $this->findVariant(Variant::PRODUCT_NAME_DESIGNER);
-        $engineVariant = $this->findVariant(Variant::PRODUCT_NAME_ENGINE);
+        $designerVariantLE = $this->findVariantLE(Variant::PRODUCT_NAME_DESIGNER);
+        $designerVariantLTS = $this->findVariantLTS(Variant::PRODUCT_NAME_DESIGNER);
+        
+        $engineVariantLE = $this->findVariantLE(Variant::PRODUCT_NAME_ENGINE);
+        $engineVariantLTS = $this->findVariantLTS(Variant::PRODUCT_NAME_ENGINE);
+        
+        $leadingEdgeReleaseInfo = ReleaseInfoRepository::getLatest();
         
         return $this->container->get('view')->render($response, 'app/release/download.html', [
-            'designerVariant' => $designerVariant,
-            'engineVariant' => $engineVariant
+            'designerVariantLE' => $designerVariantLE,
+            'designerVariantLTS' => $designerVariantLTS,
+            
+            'engineVariantLE' => $engineVariantLE,
+            'engineVariantLTS' => $engineVariantLTS,
+            
+            'leVersion' => $leadingEdgeReleaseInfo == null ? '' : $leadingEdgeReleaseInfo->getVersion()->getMinorVersion()
         ]);
     }
     
-    private function findVariant($productName): ?Variant {
-        $releaseInfo = ReleaseInfoRepository::getLatestLeadingEdge($productName);
-        
+    private function findVariantLE($productName): ?Variant {
+        $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
             return $releaseInfo->getMostMatchingVariantForCurrentRequest($productName);
         }
-         
-        $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport($productName);
+        return null;
+    }
+    
+    private function findVariantLTS($productName): ?Variant {
+        $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();
         if ($releaseInfo != null) {
             return $releaseInfo->getMostMatchingVariantForCurrentRequest($productName);
         }
-        
         return null;
     }
 }

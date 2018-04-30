@@ -13,12 +13,13 @@ class FeatureAction
     }
 
     public function __invoke($request, $response, $args) {
-        $releaseInfo = ReleaseInfoRepository::getLatest();
-        
+        $releaseInfoLE = ReleaseInfoRepository::getLatest();
+        $releaseInfoLTS = ReleaseInfoRepository::getLatestLongTermSupport();
         return $this->container->get('view')->render($response, 'app/feature/feature.html', [
             'features' => self::getPromotedFeatures(),
-            'latestMinorVersion' => $releaseInfo == null ? '' : $releaseInfo->getVersion()->getMinorVersion(),
-            'newAndNoteworthyLink' => $releaseInfo == null ? '' : $releaseInfo->getDocProvider()->getNewAndNoteworthy()->getUrl()
+            'leVersion' => $releaseInfoLE == null ? '' : $releaseInfoLE->getVersion()->getMinorVersion(),
+            'ltsVersion' => $releaseInfoLTS == null ? '' : $releaseInfoLTS->getVersion()->getMinorVersion(),
+            'newAndNoteworthyLink' => $releaseInfoLE == null ? '' : $releaseInfoLE->getDocProvider()->getNewAndNoteworthy()->getUrl()
         ]);
     }
     

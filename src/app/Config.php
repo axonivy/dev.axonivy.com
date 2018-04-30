@@ -49,6 +49,8 @@ class Config {
             '6.0.1' => '6.0.11',
             '6.0.0' => '6.0.11',
         ]);
+        
+        define('LTS_VERSIONS', ['7.0', '6.0']);
     }
     
     private static function getRequestedBaseUri(): string

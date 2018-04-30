@@ -18,12 +18,25 @@
 							<p>
 								The Axon.ivy Designer is a state of the art process modelling tool that enables you to turn your business processes into real and fully functional web applications. You can easily integrate your existing systems using standard connectors such as web services, SQL and many more. 
 							</p>
-							{% if designerVariant is not empty %}
+							
+							{% if designerVariantLTS is not empty %}
 							<ul class="actions">
-								<li><a href="{{ designerVariant.DownloadUrl }}" class="button special">Download {{ designerVariant.Version.BugFixVersion }} | {{ designerVariant.Type }} {{ designerVariant.Architecture }}</a></li>
+								<li><a href="{{ designerVariantLTS.DownloadUrl }}" class="button special">Download LTS {{ designerVariantLTS.Version.BugFixVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }}</a></li>
 							</ul>
-							<a href="/download/archive">other versions/platforms</a>
 							{% endif %}
+							
+							<p>
+								Our <a href="#product-editions">leading edge</a> release got always the newest features: 
+							</p>
+							
+							{% if designerVariantLE is not empty %}
+							<ul class="actions">
+								<li><a href="{{ designerVariantLE.DownloadUrl }}" class="button special">Download LE {{ designerVariantLE.Version.BugFixVersion }} {{ designerVariantLE.Type }} {{ designerVariantLE.Architecture }}</a></li>
+							</ul>
+							{% endif %}
+							<p>
+								Are you looking for other versions and platforms? Browse our <a href="/download/archive">archive</a>!
+							</p>
 						</div>
 					</article>
 					<article class="alt">
@@ -37,12 +50,26 @@
 							<p>
 								With the Axon.ivy Engine you can run your designed business processes on a single or clustered environment. Please order an evaluation licenses and further information at ivy@axonivy.com by providing your contact details.
 							</p>
-							{% if engineVariant is not empty %}
+							
+							{% if engineVariantLTS is not empty %}
 							<ul class="actions">
-								<li><a href="{{ engineVariant.DownloadUrl }}" class="button special">Download {{ engineVariant.Version.BugFixVersion }} | {{ engineVariant.Type }} {{ engineVariant.Architecture }}</a></li>
+								<li><a href="{{ engineVariantLTS.DownloadUrl }}" class="button special">Download LTS {{ engineVariantLTS.Version.BugFixVersion }} {{ engineVariantLTS.Type }} {{ engineVariantLTS.Architecture }}</a></li>
 							</ul>
-							<a href="/download/archive">other versions/platforms</a>
 							{% endif %}
+
+							<p>
+								Our <a href="#product-editions">leading edge</a> release got always the newest features: 
+							</p>
+							
+							{% if engineVariantLE is not empty %}
+							<ul class="actions">
+								<li><a href="{{ engineVariantLE.DownloadUrl }}" class="button special">Download LE {{ engineVariantLE.Version.BugFixVersion }} {{ engineVariantLE.Type }} {{ engineVariantLE.Architecture }}</a></li>
+							</ul>
+							{% endif %}
+							
+							<p>
+								Are you looking for other versions and platforms? Browse our <a href="/download/archive">archive</a>!
+							</p>
 						</div>
 					</article>
 				</div>
@@ -95,7 +122,7 @@
 	
 			<section id="two">
 				
-				<div class="inner">
+				<div class="inner" id="product-editions">
 					<article>
 						<div class="content">
 							<header>

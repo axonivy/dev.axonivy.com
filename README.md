@@ -30,15 +30,11 @@ Menu entry > Setup > Advanced.
 * robots.txt
 
 * Doc: Improve integration
-* Doc: Check old releases
-
-* Refactor: Hotfix Stuff
 
 * Stable Permalinks Site
 
 * Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
 * Reguel: doc-menu bleibt nicht stehen (rechts)
-
 
 ### After Release
 * Fix Permalinks in Engine Guide
@@ -46,6 +42,9 @@ Menu entry > Setup > Advanced.
 * Styling CodeCamp
 * Check build upload unecessary .htacces / index.php
 * PageSpeed
+* Move all releaseNotes.txt from root to documents folder
+* Remove 0.0.1
+* REmove ReleaseInfo.txt
 
 ### Ideas
 * Public Roadmap

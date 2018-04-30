@@ -21,8 +21,8 @@ class Version
     
     public function isLongTermSupportVersion(): bool
     {
-        $v = explode('.', $this->versionNumber);
-        return $v[1] == 0;
+        $minorVersion = $this->getMinorVersion();
+        return in_array($minorVersion, LTS_VERSIONS);
     }
     
     public function getVersionNumber(): string
