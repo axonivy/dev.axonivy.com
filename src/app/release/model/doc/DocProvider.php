@@ -97,14 +97,14 @@ class DocProvider
         $documents = [
             self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'),
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'),
-            self::createBook('Server Guide', 'ServerGuideHtml', 'ServerGuide.pdf'),
+            self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'),
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
             self::createExternalBook('Public API', 'PublicAPI'),
             
-            self::getReleaseNotes(),
             self::getNewAndNoteworthy(),
+            self::getReleaseNotes(),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
             self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
             self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html'),
