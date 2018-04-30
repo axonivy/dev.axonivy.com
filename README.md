@@ -32,8 +32,6 @@ Menu entry > Setup > Advanced.
 
 ### After Release
 * Fix Permalinks in Engine Guide
-* Styling DevDay
-* Styling CodeCamp
 * Check build upload unecessary .htacces / index.php
 * PageSpeed
 * Move all releaseNotes.txt from root to documents folder
