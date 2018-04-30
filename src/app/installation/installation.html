@@ -13,7 +13,7 @@
 					Download the latest Axon.ivy Designer to your desired location
 					<br /><br />
 					<ul class="actions">
-						<li><a href="/download" class="button special">Download</span></a></li>
+						<li><a href="{{variant.DownloadUrl}}" class="button special">Download Axon.ivy Designer {{variant.Version.MinorVersion}}</span></a></li>
 					</ul>
 					<img src="/images/installation/download-axonivy-designer.png" />
 					<br /><br />
@@ -37,5 +37,13 @@
 
 		</div>
 	</section>
+	
+	{% if downloadUrl is not empty %}
+	  	<script>
+	    	$(document).ready(function(){
+	      		window.location.href = '{{ downloadUrl }}';
+	    	});
+	  	</script>
+  	{% endif %}
 
 {% endblock %}

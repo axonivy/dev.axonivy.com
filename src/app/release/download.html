@@ -21,7 +21,7 @@
 							
 							{% if designerVariantLTS is not empty %}
 							<ul class="actions">
-								<li><a href="{{ designerVariantLTS.DownloadUrl }}" class="button special">Download LTS {{ designerVariantLTS.Version.BugFixVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }}</a></li>
+								<li><a href="{{ designerVariantLTS.InstallationUrl }}" class="button special">Download LTS {{ designerVariantLTS.Version.BugFixVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }}</a></li>
 							</ul>
 							{% endif %}
 							
@@ -31,7 +31,7 @@
 							
 							{% if designerVariantLE is not empty %}
 							<ul class="actions">
-								<li><a href="{{ designerVariantLE.DownloadUrl }}" class="button special">Download LE {{ designerVariantLE.Version.BugFixVersion }} {{ designerVariantLE.Type }} {{ designerVariantLE.Architecture }}</a></li>
+								<li><a href="{{ designerVariantLE.InstallationUrl }}" class="button special">Download LE {{ designerVariantLE.Version.BugFixVersion }} {{ designerVariantLE.Type }} {{ designerVariantLE.Architecture }}</a></li>
 							</ul>
 							{% endif %}
 							<p>

@@ -102,6 +102,11 @@ class Variant
         return CDN_HOST . "/$versionNumber/" . basename($this->fileName);
     }
     
+    public function getInstallationUrl(): string
+    {
+        return '/installation?downloadUrl=' . $this->getDownloadUrl();    
+    }
+    
     public function getArchitecture(): string{
         return $this->architecture;
     }
