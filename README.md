@@ -21,15 +21,14 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ## ToDo
-* support /doc/latest/xxx
 * ReleaseNotes.html
 
 ### After Release
 * Fix Permalinks in Engine Guide
-* Move all ReleaseNotes.txt from root to documents folder -> check build
 * Update developerAPI url on update.axonivy.com
+* Move all ReleaseNotes.txt from root to documents folder -> check build
+* Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction
 * PageSpeed
-* Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository,DocAction
 
 ### Ideas
 * Public Roadmap

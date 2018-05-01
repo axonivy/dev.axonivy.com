@@ -24,6 +24,7 @@ use app\feature\FeatureAction;
 use app\search\SearchAction;
 use app\sitemap\SitemapAction;
 use app\release\SprintNightlyAction;
+use app\release\model\doc\DocProvider;
 
 class Website
 {
@@ -48,6 +49,8 @@ class Website
         $this->installTrailingSlashMiddelware();
         $this->installRoutes();
         $this->installErrorHandling();
+        
+        $this->updateDocLatestSymlink();
     }
     
     public function getApp(): App
@@ -90,6 +93,19 @@ class Website
             }
             return $next($request, $response);
         });
+    }
+    
+    /**
+     * in each request we very that the symlink /doc/latest points to the latest doc folder
+     * - this should be done when uploading a release, but there we have only ftp
+     * - can't be done properly with .htaccess serving  
+     */
+    private function updateDocLatestSymlink()
+    {
+        $latestMinor = DocProvider::findLatestMinor();
+        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
+        $symlink = $_SERVER['DOCUMENT_ROOT'] . '/doc/latest';
+        shell_exec('ln -fns ' . $latestDoc . ' ' . $symlink);
     }
 
     private function installRoutes()
