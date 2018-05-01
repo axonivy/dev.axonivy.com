@@ -23,7 +23,6 @@ Menu entry > Setup > Advanced.
 ## ToDo
 * support /doc/latest/xxx
 * ReleaseNotes.html
-* Gartner-Image on InternetExplorer & Iphone
 
 ### After Release
 * Fix Permalinks in Engine Guide
