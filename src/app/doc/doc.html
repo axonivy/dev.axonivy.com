@@ -14,6 +14,31 @@
     <section id="main" >
 		<div class="inner">
 			<header><h1>Documentation {{ version }}</h1></header>
+			
+			<div class="row">
+				<div class="6u 12u$(xsmall)">
+					<ul class="actions vertical">
+						{% for doc in docProvider.releaseDocuments %}
+							<li><a href="{{ doc.Url }}" style="width:200px;" target="_blank" class="button special">{{ doc.Name }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				
+				<div class="6u 12u$(xsmall)">		
+					<ul class="actions vertical">
+						{% for doc in docProvider.Books %}
+							<li>
+								<a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a>
+								<a href="{{ doc.PdfUrl }}" target="_blank" class="button special icon fa-file">PDF</a>
+							</li>
+						{% endfor %}
+						{% for doc in docProvider.ExternalBooks %}
+							<li><a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			
 				{% for doc in docProvider.releaseDocuments %}
 					<a href="{{ doc.Url }}">{{ doc.Name }}</a>
 					| 
