@@ -71,8 +71,13 @@ class ReleaseInfo
     
     private function getHotFixPath(): string
     {
+        return $this->getPath() . '/hotfix';
+    }
+    
+    public function getPath(): string
+    {
         $versionNumber = $this->getVersion()->getBugfixVersion();
-        return IVY_RELEASE_DIRECTORY . '/' . $versionNumber . '/hotfix';
+        return IVY_RELEASE_DIRECTORY . '/' . $versionNumber;
     }
     
     public function hasVariantWithProductName(string $productName): bool

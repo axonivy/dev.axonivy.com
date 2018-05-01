@@ -22,6 +22,7 @@ use app\doc\DocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
 use app\search\SearchAction;
+use app\sitemap\SitemapAction;
 use app\release\SprintNightlyAction;
 
 class Website
@@ -124,6 +125,8 @@ class Website
         $app->get('/search', SearchAction::class);
 
         $app->get('/api/currentRelease', ApiCurrentRelease::class);
+        
+        $app->get('/sitemap.xml', SitemapAction::class);
     }
 
     private function installRedirect($oldPath, $pathFor)

@@ -191,26 +191,14 @@ class DocProvider
         return StringUtil::createPath([self::createRootPath(), 'doc', 'newAndNoteworthy', 'NewAndNoteworthy.md']);
     }
 
-    public function getReleaseNotes(): ReleaseDocument
+    private function getReleaseNotes(): ReleaseDocument
     {
         $version = new Version($this->versionNumber);
-        $versionNumber = $version->getBugfixVersion();
         $fileName = 'ReleaseNotes.txt';
-        if ($version->getMinorVersion() == '4.2') {
-            $versionNumber = $version->getVersionNumber();
-        }
-        if ($version->getVersionNumber() == '3.9.52.8') {
-            $versionNumber = '3.9.8';
-        }
-        if ($version->getVersionNumber() == '3.9.52.9') {
-            $versionNumber = '3.9.9';
-        }
         if ($version->getMinorVersion() == '3.9') {
             $fileName = 'ReadMe.html';
         }
-        // TODO FIX
-        //return new ReleaseDocument('Release Notes', "/$versionNumber/documents/$fileName", "/doc/$versionNumber/$fileName", false);
-        return $this->createReleaseDocument('Release Notes', 'ReleaseNotes.txt');
+        return $this->createReleaseDocument('Release Notes', $fileName);
     }
     
     public function getNewAndNoteworthy(): ReleaseDocument

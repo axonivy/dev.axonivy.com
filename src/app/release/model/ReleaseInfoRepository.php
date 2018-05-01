@@ -45,10 +45,6 @@ class ReleaseInfoRepository
             if (!Version::isValidVersionNumber($versionNumber)) {
                 continue;
             }
-            // drop special folder
-            if ($versionNumber == '0.0.1') {
-                continue;
-            }
             
             $safeVersion = '';
             if (isset(UNSAFE_RELEASES[$versionNumber])) {

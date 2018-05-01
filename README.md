@@ -21,21 +21,16 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ## ToDo
-
-* Doc: Improve integration
-** Anker Links funtionieren nicht
-** Alte Doc Links like: https://developer.axonivy.com/doc/latest/DesignerGuideHtml/ivy.introduction.html#ivy.introduction.usefulCommands (Man kann keine Links versenden)
-** Navigation schöner und markieren, welches selektiert ist
-** Reguel: switch zwischen Engine / Designer guide sehe ich nicht. Oder geht nur via PDF?
-** Reguel: doc-menu bleibt nicht stehen (rechts)
-
-* sitemap.xml
-* robots.txt
+* support /doc/latest/xxx
+* ReleaseNotes.html
+* Gartner-Image on InternetExplorer & Iphone
 
 ### After Release
 * Fix Permalinks in Engine Guide
 * Move all ReleaseNotes.txt from root to documents folder -> check build
+* Update developerAPI url on update.axonivy.com
 * PageSpeed
+* Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository,DocAction
 
 ### Ideas
 * Public Roadmap
