@@ -13,6 +13,7 @@ use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
 use app\support\SupportAction;
+use app\api\ApiCurrentRelease;
 use app\codecamp\CodeCampAction;
 use app\devday\DevDayAction;
 use app\tutorial\TutorialAction;
@@ -121,6 +122,8 @@ class Website
         $app->get('/codecamp[/{year}]', CodeCampAction::class);
         $app->get('/devday[/{year}]', DevDayAction::class);
         $app->get('/search', SearchAction::class);
+
+        $app->get('/api/currentRelease', ApiCurrentRelease::class);
     }
 
     private function installRedirect($oldPath, $pathFor)
