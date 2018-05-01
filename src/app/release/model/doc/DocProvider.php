@@ -99,7 +99,7 @@ class DocProvider
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'),
             self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'),
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
-            self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
+            self::createBook('Portal Con.', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
             self::createExternalBook('Public API', 'PublicAPI'),
             
@@ -118,7 +118,7 @@ class DocProvider
         $rootPath = $this->createRootPath();
         $baseUrl = $this->createBaseUrl();
         $baseRessourceUrl = $this->createBaseRessourceUrl();
-        return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, $pdfFile);
+        return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/', $pdfFile);
     }
     
     private function createExternalBook($name, $path): ExternalBook
@@ -126,7 +126,7 @@ class DocProvider
         $rootPath = $this->createRootPath();
         $baseUrl = $this->createBaseUrl();
         $baseRessourceUrl = $this->createBaseRessourceUrl();
-        return new ExternalBook($name, $rootPath, $baseUrl, $baseRessourceUrl, $path);
+        return new ExternalBook($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/');
     }
     
     private function createReleaseDocument($name, $path): ReleaseDocument
@@ -184,6 +184,11 @@ class DocProvider
             return '';
         }
         return $minorVersion . $latest;
+    }
+    
+    public function getNewAndNoteworthyMarkdown(): string
+    {
+        return StringUtil::createPath([self::createRootPath(), 'doc', 'newAndNoteworthy', 'NewAndNoteworthy.md']);
     }
 
     public function getReleaseNotes(): ReleaseDocument

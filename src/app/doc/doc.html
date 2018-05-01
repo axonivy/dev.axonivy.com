@@ -11,34 +11,29 @@
 		}
 	</style>
     
-    <section id="main" >
+    <section id="main" style="padding-bottom:0px;" >
 		<div class="inner">
 			<header><h1>Documentation {{ version }}</h1></header>
 			
-			<div class="row">
-				<div class="6u 12u$(xsmall)">
-					<ul class="actions vertical">
+					<ul class="actions">
 						{% for doc in docProvider.releaseDocuments %}
 							<li><a href="{{ doc.Url }}" style="width:200px;" target="_blank" class="button special">{{ doc.Name }}</a></li>
 						{% endfor %}
 					</ul>
-				</div>
 				
-				<div class="6u 12u$(xsmall)">		
-					<ul class="actions vertical">
+					<ul class="actions">
 						{% for doc in docProvider.Books %}
 							<li>
-								<a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a>
-								<a href="{{ doc.PdfUrl }}" target="_blank" class="button special icon fa-file">PDF</a>
+								<a href="{{ doc.Url }}" target="_blank" style="width:144px;padding-left:5px;padding-right:5px;" class="button special">{{ doc.Name }}</a>
+								<a href="{{ doc.PdfUrl }}" target="_blank" style="width:10px;" class="button special icon fa-file"></a>
 							</li>
 						{% endfor %}
 						{% for doc in docProvider.ExternalBooks %}
 							<li><a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a></li>
 						{% endfor %}
 					</ul>
-				</div>
-			</div>
 			
+				<!-- 
 				{% for doc in docProvider.releaseDocuments %}
 					<a href="{{ doc.Url }}">{{ doc.Name }}</a>
 					| 
@@ -52,13 +47,25 @@
 				{% for doc in docProvider.ExternalBooks %}
 					<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
 				{% endfor %}
+				 -->
 		</div>
 	</section>
+	
+	
+	<!-- 
+	<section id="main" style="padding-top:0px;">
+		<div class="inner">
+			{{ newAndNoteworthyHtml|raw }}
+		</div>
+	</section>
+	 -->
+	
 	
 	<script type="text/javascript">
 		function resizeIframe(obj) {
 			obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 			removeHeader(obj);
+			openLinksInNewTab(obj);
 		}
 		function removeHeader(iframe) {
 			headerdiv = iframe.contentWindow.document.getElementById('headerdiv');
@@ -73,6 +80,11 @@
 			for (i = 0; i < navbars.length; i++) {
 				navbars[i].remove();
 			} 
+		}
+		function openLinksInNewTab(iframe) {
+			var base = document.createElement('base');
+			base.target = '_parent';
+			iframe.contentWindow.document.getElementsByTagName('head')[0].appendChild(base);
 		}
 	</script>
 	

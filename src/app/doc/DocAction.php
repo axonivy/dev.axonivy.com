@@ -20,7 +20,7 @@ class DocAction
     public function __invoke($request, Response $response, $args)
     {
         $version = $args['version'] ?? 'latest';
-        $document = $args['document'] ?? 'DesignerGuideHtml';
+        $document = $args['document'] ?? 'NewAndNoteworthy.html';
         
         if ($version == 'latest') {
             $version = DocProvider::findLatestMinor();
@@ -31,28 +31,18 @@ class DocAction
             throw new NotFoundException($request, $response);
         }
         
-        // Redirect PDF File requests
-        $pdf = $docProvider->findDocumentByPdfName($document);
-        if ($pdf != null)
-        {
-            return $response->withRedirect($pdf->getRessourcePdfUrl()); 
-        }
-        
-        // Redirect External Books
-        $externalBook = $docProvider->findExternalBookByPathName($document);
-        if ($externalBook != null)
-        {
-            return $response->withRedirect($externalBook->getRessourceUrl());
-        }
-        
         // Find the requested document and show it in iframe
         $doc = $docProvider->findDocumentByPathName($document);
+        
+        //$parsedown = new \Parsedown();
+        //$html = $parsedown->text(file_get_contents($docProvider->getNewAndNoteworthyMarkdown()));
         
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
             'docProvider' => $docProvider,
             'documentUrl' => $doc == null ? '' : $doc->getRessourceUrl(),
-            'iframeFullWidth' => !StringUtil::endsWith($document, '.txt')
+            'iframeFullWidth' => !StringUtil::endsWith($document, '.txt'),
+            //'newAndNoteworthyHtml' => $html
         ]);
     }
 }

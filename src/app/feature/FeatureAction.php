@@ -19,7 +19,7 @@ class FeatureAction
             'features' => self::getPromotedFeatures(),
             'leVersion' => $releaseInfoLE == null ? '' : $releaseInfoLE->getVersion()->getMinorVersion(),
             'ltsVersion' => $releaseInfoLTS == null ? '' : $releaseInfoLTS->getVersion()->getMinorVersion(),
-            'newAndNoteworthyLink' => $releaseInfoLE == null ? '' : $releaseInfoLE->getDocProvider()->getNewAndNoteworthy()->getUrl()
+            'newAndNoteworthyLink' => $releaseInfoLE == null ? '' : $releaseInfoLE->getDocProvider()->getOverviewUrl()
         ]);
     }
     
