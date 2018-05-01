@@ -34,11 +34,8 @@ Menu entry > Setup > Advanced.
 
 ### After Release
 * Fix Permalinks in Engine Guide
-* Check build upload unecessary .htacces / index.php
+* Move all ReleaseNotes.txt from root to documents folder -> check build
 * PageSpeed
-* Move all releaseNotes.txt from root to documents folder
-* Remove 0.0.1
-* REmove ReleaseInfo.txt
 
 ### Ideas
 * Public Roadmap
