@@ -106,8 +106,7 @@ class Website
         $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
-        //echo $cmd;
-        //shell_exec($cmd);
+        shell_exec($cmd);
     }
     
     private function installRoutes()
