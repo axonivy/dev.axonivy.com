@@ -31,6 +31,9 @@ Menu entry > Setup > Advanced.
 * Archive (Dropdown-Eintrag pro LE/LTS etc, Le/lts IM DROPDOWN ERWÄHNEN)
 * Archive (Dropdown -> UNSUPPORTED)
 * Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
+* Entfernen for developers
+* Add addresse
+* Dokumentation (release documents in iframe)
 
 ### After Release
 * Fix Permalinks in Engine Guide
