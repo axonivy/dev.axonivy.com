@@ -198,7 +198,9 @@ class DocProvider
         if ($version->getMinorVersion() == '3.9') {
             $fileName = 'ReadMe.html';
         }
-        return $this->createReleaseDocument('Release Notes', $fileName);
+        $doc =  $this->createReleaseDocument('Release Notes', $fileName);
+        $doc->setUrlPath('ReleaseNotes.html');
+        return $doc;
     }
     
     public function getNewAndNoteworthy(): ReleaseDocument

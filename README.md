@@ -21,7 +21,7 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ## ToDo
-* ReleaseNotes.html
+* How to keep latest folder up to date?
 
 ### After Release
 * Fix Permalinks in Engine Guide
