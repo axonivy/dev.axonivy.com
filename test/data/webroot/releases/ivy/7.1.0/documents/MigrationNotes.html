@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Migration Notes</title>
+  <link rel="shortcut icon" href="doc/shared/images/ivy_favicon_48.png" />
+  <link href="doc/shared/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="doc/shared/css/docs.min.css" rel="stylesheet" type="text/css">
+  <link href="doc/shared/css/ivy-common-6.css" rel="stylesheet" type="text/css">
+  <link href="doc/shared/css/ivy-designer-doc.css" rel="stylesheet" type="text/css">
+  <script src="doc/shared/js/jquery.min.js"></script>
+  <script src="doc/shared/js/bootstrap.min.js"></script>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<div id="mainContent">
+
+    <!-- start-top-navigation -->
+		<div class="navbar navbar-top" role="navigation">
+		  <div class="container" id="headerdiv">
+			<div class="navbar-header">
+			  <a class="ivy-logo" href="http://developer.axonivy.com">
+                <img src="doc/shared/images/axon_ivy_logo.png" alt="Axon.ivy" />
+              </a>
+			</div>
+			
+			<div class="navbar">
+			  <ul class="nav nav-pills" id="navbar-ivy-links">
+				<li><a href="http://developer.axonivy.com/download/" target="blank"><span class="glyphicon glyphicon-download" aria-hidden="true"></span><br>Download</a></li>
+				<li><a href="http://developer.axonivy.com/doc/" target="blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span><br>Documentation</a></li>
+				<li><a href="http://answers.axonivy.com" target="blank"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><br>Q &amp; A</a></li>				
+			  </ul>
+			</div>
+		  </div><!-- /.container -->
+		</div>
+    <div class="navbar ivy-subnav">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="row">
+            <ul class="nav nav-pills">
+              <li><a href="doc/newAndNoteworthy/NewAndNoteworthy.html">N&amp;N</a></li>
+              <li><a href="ReleaseNotes.txt">Release Notes</a></li>
+              <li class="active"><a href="MigrationNotes.html">Migration Notes</a></li>
+              <li><a href="ReadMe.html">Read Me</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end-top-navigation -->
+
+<div class="container">
+
+
+<div class="content">
+
+
+			<h1 class="page-header">Migration Notes Overview</h1>
+			
+
+<p>This document informs you in detail about <span
+style="font-weight: bold;">incompatibilities that were introduced between
+different Axon.ivy versions</span> and tells you what needs to be done to get
+your existing projects working with the newest Axon.ivy version.</p>
+
+	<div class="bs-callout bs-callout-info">
+		<h4>Please note:</h4>
+		<ol>
+          <li>Changing from an older Axon.ivy version to a newer one requires
+            you to perform the necessary migration steps one after another from
+            the oldest to the newest one.</li>
+          <li>If deployed <em>Axon.ivy</em> projects are not compatible with a
+            new Engine version then you will have to convert them first on the
+            Axon.ivy Designer and then redeploy them to the upgraded Engine
+            installation afterwards.</li>
+        </ol>
+	</div>
+	
+	<div class="bs-callout bs-callout-info">
+		<h4>Xpert.ivy becomes Axon.ivy</h4>
+		<p>With version 5.1 the product was renamed from <i>Xpert.ivy</i> to <i>Axon.ivy</i>. Moreover, the Xpert.ivy <i>Server</i> was renamed to Axon.ivy <i>Engine</i>.</p>
+		<p>If previous versions of the product are referenced in this document then still the old names <i>Xpert.ivy</i> and <i>Server</i> are used.</p>
+	</div>	
+</div>
+
+<h3>Migrating Axon.ivy Projects</h3>
+
+<div class="content">
+<p>When we speak about migrating the <span
+style="font-style: italic;">Designer</span>, we mean in fact <span
+style="font-style: italic;">Axon.ivy Projects</span> in your workspace (or
+inside an <em>SVN</em> repository). It might be that the default structure of a
+project has changed, that the storage format of some artifacts has been altered
+or that new configuration files have been introduced with a new Axon.ivy
+version. <br>
+<br>
+Usually, all of those incompatibilities can be resolved automatically by
+invoking the <a href="doc/migrationNotes/ProjectConversion.html">project
+conversion</a> in the <span style="font-style: italic;">Designer</span>.
+Sometimes, however, it is necessary that you perform some changes manually.
+This document and it's sub documents will guide you through this process. </p>
+</div>
+	<div class="bs-callout bs-callout-warning">
+		<h4>Deprecated Public API</h4>
+		<p>When migrating your projects check whether you are using deprecated Public API. Replace the usage of the deprecated Public API with the new Public API provided instead.<br>
+		<b>Deprecated Public API may be removed in future versions!</b>
+	</div>	
+<h3>Migrating an Engine Installation</h3>
+
+<div class="content">
+<p>To learn how to upgrade/migrate an Engine please read the <span style="font-style: italic;">Installation</span> chapter of the <span style="font-style: italic;">Engine Guide</span>.</p> 
+<p>If you upgrade to a new update release within the same Long Term Support (LTS) or Leading Edge (LE) version (e.g. 7.0.3 to 7.0.4) 
+then normally you do not have to do any migration steps at all. Simply follow the procedure given in the <span style="font-style: italic;">Installation</span> chapter.</p> 
+
+<p>Migrating an <span style="font-style: italic;">Engine</span> usually implies
+a conversion of the system database. This can be resolved automatically by
+invoking the <a href="doc/migrationNotes/SystemDbConversion.html">system
+database conversion</a> in the <span style="font-style: italic;">Engine
+Configuration Tool</span>.</p>
+
+<h4>Project Conversion</h4>
+<p>If deployed Axon.ivy projects are no longer compatible with a new Engine
+version then it is currently not possible to convert them on the Engine. Therefore you
+need to load all projects deployed to active process model
+versions into the Designer, convert and migrate them individually and re-deploy them
+to the same process model version.</p>
+
+<h4>Update Apache Tomcat Connector</h4>
+<p>
+	If the Axon.ivy Engine is integrated with a reverse proxy (e.g. IIS or Apache), 
+	it is best practice to check if the most recent Apache Tomcat Connector is installed.
+	For further information look at <a href="doc/migrationNotes/UpdateApacheTomcatConnector.html">Update Apache Tomcat Connector</a>.
+</p>
+
+<h3>Migrating a Leading Edge Version</h3>
+<p>
+  If you migrate a Leading Edge (LE) version then also read the migration notes for the older Long Term Support (LTS) version to the newer LTS version. 
+  For example, you have a Leading Edge version 6.3 then also read the migration notes for migrating between LTS version 6.0 and LTS version 7.0.
+</p>
+<p>Migration steps that are necessary for all versions (LTS and all LE versions) are marked with:</p>
+<div class="leadingEdgeNotice">Migration needed for all versions</div>
+<p>&gt; Execute this migration step.</p>
+<p>Migration steps that are not necessary for certain Leading Edge versions are marked with:</p>
+<div class="leadingEdgeNotice">Migration <b>not</b> needed for <span class="feature-badge">6.3</span>..<span class="feature-badge">7.0</span></div>
+<p>&gt; Execute this migration step if you have 6.0, 6.1 or 6.2. Do not execute if you have 6.3, 6.4, 6.5, 6.6 or 6.7.</p>
+<p>Migration steps that are only necessary for certain Leading Edge versions are marked with:</p>
+<div class="leadingEdgeNotice">Migration <b>only</b> needed for <span class="feature-badge">6.3</span>..<span class="feature-badge">7.0</span></div>
+<p>&gt; Execute this migration step if you have 6.3, 6.4, 6.5, 6.6 or 6.7. Do not execute if you have 6.0, 6.1 or 6.2.
+
+</div>
+
+<h2 class="page-header">Migration</h2>
+
+<h3>Migrate 7.0 (Jakobshorn) ... 7.1 (Weisshorn)</h3>
+
+<div class="content">
+<p>Read the migration notes of </p>
+<ul>
+  <li><a href="doc/migrationNotes/MigrationNotes.html">Designer/Engine 7.1</a></li>
+</ul>
+</div>
+
+<h3>Migrate 6.0 (Säntis) ... 7.0 (Jakobshorn)</h3>
+
+<div class="content">
+<p>Read the migration notes of </p>
+<ul>
+  <li><a href="doc/migrationNotes/MigrationNotesDesigner7.0.html">Designer 7.0</a></li>
+  <li><a href="doc/migrationNotes/MigrationNotesEngine7.0.html">Engine 7.0</a></li>
+</ul>
+<p>If you are migrating from a 6.x Jakobshorn Leading Edge version this migration notes is also for you.</p> 
+</div>
+
+<h3>Migrate 5.1 (Lauberhorn) ... 6.0 (Säntis)</h3>
+
+<div class="content">
+<p>Read the migration notes of </p>
+<ul>
+  <li><a href="doc/migrationNotes/MigrationNotesDesigner6.0.html">Designer 6.0</a></li>
+  <li><a href="doc/migrationNotes/MigrationNotesEngine6.0.html">Engine 6.0</a></li>
+</ul>
+</div>
+
+<h3>Migrate 5.0 (Rothorn) ... 5.1 (Lauberhorn)</h3>
+
+<div class="content">
+<p>Read the migration notes of </p>
+<ul>
+  <li><a href="doc/migrationNotes/MigrationNotesDesigner5.1.html">Designer 5.1</a></li>
+  <li><a href="doc/migrationNotes/MigrationNotesEngine5.1.html">Engine 5.1</a></li>
+</ul>
+</div>
+
+<h3>Migrate 4.3 (Pilatus) ... 5.0 (Rothorn)</h3>
+
+<div class="content">
+<p>Read the migration notes of </p>
+<ul>
+  <li><a href="doc/migrationNotes/MigrationNotesDesigner5.0.html">Designer
+  5.0</a></li>
+  <li><a href="doc/migrationNotes/MigrationNotesEngine5.0.html">Server 5.0</a></li>
+</ul>
+</div>
+
+<h3>Migrate 4.2 (Rigi) ... 4.3 (Pilatus)</h3>
+
+<div class="content">
+<p>Read the migration notes of </p>
+<ul>
+  <li><a href="doc/migrationNotes/MigrationNotesDesigner4.3.html">Designer
+    4.3</a></li>
+  <li><a href="doc/migrationNotes/MigrationNotesEngine4.3.html">Server
+  4.3</a></li>
+</ul>
+</div>
+<br/><br/><br/>
+</div>
+</div>
+</body>
+</html>

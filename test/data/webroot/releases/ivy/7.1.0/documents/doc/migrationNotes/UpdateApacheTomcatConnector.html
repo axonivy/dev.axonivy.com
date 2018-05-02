@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Update Apache Tomcat Connector</title>
+  <link rel="shortcut icon" href="../shared/images/ivy_favicon_48.png" />
+	<link href="../shared/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="../shared/css/docs.min.css" rel="stylesheet" type="text/css">
+  <link href="../shared/css/ivy-common-6.css" rel="stylesheet" type="text/css">
+	<link href="../shared/css/ivy-designer-doc.css" rel="stylesheet" type="text/css">
+  <script src="../shared/js/jquery.min.js"></script>
+  <script src="../shared/js/bootstrap.min.js"></script>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<div id="mainContent">
+
+    <!-- start-top-navigation -->
+		<div class="navbar navbar-top" role="navigation">
+		  <div class="container" id="headerdiv">
+			<div class="navbar-header">
+			  <a class="ivy-logo" href="http://developer.axonivy.com">
+                <img src="../shared/images/axon_ivy_logo.png" alt="Axon.ivy" />
+              </a>
+			</div>
+			
+			<div class="navbar">
+			  <ul class="nav nav-pills" id="navbar-ivy-links">
+				<li><a href="http://developer.axonivy.com/download/" target="blank"><span class="glyphicon glyphicon-download" aria-hidden="true"></span><br>Download</a></li>
+				<li><a href="http://developer.axonivy.com/doc/" target="blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span><br>Documentation</a></li>
+				<li><a href="http://answers.axonivy.com" target="blank"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><br>Q &amp; A</a></li>
+				<li><a href="http://www.ivyteam.ch/flatpress/?paged=1" target="blank"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span><br>Blog</a></li>
+			  </ul>
+			</div>
+
+		  </div><!-- /.container -->
+		</div>
+    <div class="navbar ivy-subnav">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="row">
+            <ul class="nav nav-pills">
+              <li><a href="../newAndNoteworthy/NewAndNoteworthyDesigner.html">N&amp;N Designer</a></li>
+              <li><a href="../newAndNoteworthy/NewAndNoteworthyEngine.html">N&amp;N Engine</a></li>
+              <li><a href="../../ReleaseNotes.txt">Realease Notes</a></li>
+              <li class="active"><a href="../../MigrationNotes.html">Migration Notes</a></li>
+              <li><a href="../../ReadMe.html">Read Me</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- end-top-navigation -->
+	
+	<div class="container">
+		<h1 class="page-header">Update Apache Tomcat Connector</h1>
+		
+		The <a href="http://tomcat.apache.org/connectors-doc/">Apache Tomcat Connector</a> is used to 
+		integrate an IIS or Apache web server as reverse proxy for the Axon.ivy Engine. This sections describes how to update an Apache Tomcat Connector 
+		which is already installed after the <a href="../../EngineGuideHtml/integration.html">Integration</a> chapter.
+		
+		<div class="bs-callout bs-callout-info">
+			<h4>Integration Directory</h4>
+			<p>The term <code>integration directory</code>
+			 is described in the <a href="../../EngineGuideHtml/integration.html#integration-directory">Integration</a> chapter.</p>
+		</div>
+		
+		<h3>Apache</h3>
+		<h4>Windows</h4>
+		<ol>
+			<li>
+				Open the <code>integration directory</code>.
+			</li>
+			
+			<li>
+				Verify if the most recent version of the Apache Tomcat Connector is there. The file is called 
+				<em class="filename">mod_jk.*.so</em>.
+				For Windows we deliver stable versions of the Apache Tomcat Connector in the <em class="filename">[[Axon.ivy Engine install dir]]/misc/apache/win/(x86|x64)</em> directories.
+				Alternatively check the <a href="http://tomcat.apache.org/download-connectors.cgi">
+				official website</a> or <a href="https://www.apachelounge.com/download/">Apache Lounge</a> and download the most recent version.
+			</li>
+			
+			<li>
+				Verify all paths in <code>integration directory</code>/<em class="filename">mod_jk.conf</em>.
+			</li>
+			
+			<li>
+				Open the <em class="filename">httpd.conf</em> file of the Apache installation. 
+				Verify that the path to <em class="filename">mod_jk.conf</em> is correct.
+			</li>
+		</ol>
+		
+		<h4>Linux</h4>
+		<ol>
+			<li>Use the system package manager (e.g. <code>apt</code>) to update the Apache Tomcat Connector (libapache2-mod-jk).</li>
+		</ol>
+		
+		<h3>IIS</h3>
+		<h4>Windows Server 2008 / 2012</h4>
+		<ol>
+			<li>
+				Open the <code>integration directory</code>.
+			</li>
+			
+			<li>
+				Verify if the most recent version of the ISAPI redirector is there.
+				We deliver stable versions of the ISAPI redirector in the <em class="filename">[[Axon.ivy Engine install dir]]/misc/iis/(x86|x64)</em> directories.
+				Alternatively check the <a href="http://tomcat.apache.org/download-connectors.cgi">
+				official website</a> and download the most recent version.
+			</li>
+			
+		
+			<li>
+				Open the Server Manager  (Start > Control Panel > Administrative Tools > Server Manager).
+				Navigate to the node Server Manager > Roles > Web Server (IIS) and select it.
+			</li>
+			
+			<li>
+				Select the Web Site in the Connections pane, select the virtual directory <code>ivy</code> and 
+				open the extended settings dialog. Verify that the physical paths points to the actual
+				<code>integration directory</code>. 
+			</li>
+			
+			<li>
+				Select the Web Site in the Connections pane and open the ISAPI Filters entry in the Feature View.
+				Verify the path to the <em class="filename">isap_redirect.*.dll</em> of the ISAPI Filter. It must point to the actual <code>integration directory</code>.
+			</li>
+			
+			<li>
+				Check the ISAPI and CGI Restrictions of the IIS Server.
+				There must already be an <code>allow</code> entry for the <em class="filename">isap_redirect.*.dll</em>.
+				This path must also point to the actual <code>integration directory</code>.
+			</li>
+		</ol>
+		
+    </div>
+</div>
+
+</body>
+</html>

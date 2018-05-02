@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+	  <meta content="width=device-width, initial-scale=1" name="viewport">
+	  <title> Migration Notes for 7.x</title>
+	  <link rel="shortcut icon" href="../shared/images/ivy_favicon_48.png" />
+	  <link href="../shared/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	  <link href="../shared/css/docs.min.css" rel="stylesheet" type="text/css">
+	  <link href="../shared/css/ivy-common-6.css" rel="stylesheet" type="text/css">
+	  <link href="../shared/css/ivy-designer-doc.css" rel="stylesheet" type="text/css">
+	  <link href="../shared/css/highlight-modified.min.css" rel="stylesheet" type="text/css">
+	  <script src="../shared/js/jquery.min.js"></script>
+	  <script src="../shared/js/bootstrap.min.js"></script>
+	  <script src="../shared/js/highlight.min.js"></script>
+	  <script>hljs.initHighlightingOnLoad();</script>
+	  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	  <!--[if lt IE 9]>
+	    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	  <![endif]-->
+	</head>
+	
+  <body>
+
+    <div id="mainContent">
+
+      <!-- start-top-navigation -->
+      <div class="navbar navbar-top" role="navigation">
+        <div class="container" id="headerdiv">
+          <div class="navbar-header">
+            <a class="ivy-logo" href="https://developer.axonivy.com">
+              <img src="../shared/images/axon_ivy_logo.png" alt="Axon.ivy" />
+            </a>
+          </div>
+
+          <div class="navbar">
+            <ul class="nav nav-pills" id="navbar-ivy-links">
+              <li><a href="https://developer.axonivy.com/download/" target="blank"><span class="glyphicon glyphicon-download" aria-hidden="true"></span><br>Download</a></li>
+              <li><a href="https://developer.axonivy.com/doc/" target="blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span><br>Documentation</a></li>
+              <li><a href="https://answers.axonivy.com" target="blank"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><br>Q &amp; A</a></li>              
+            </ul>
+          </div>
+
+        </div><!-- /.container -->
+      </div>
+      <div class="navbar ivy-subnav">
+        <div class="navbar-inner">
+          <div class="container">
+            <div class="row">
+              <ul class="nav nav-pills">
+                <li><a href="../newAndNoteworthy/NewAndNoteworthy.html">N&amp;N</a></li>
+                <li><a href="../../ReleaseNotes.txt">Release Notes</a></li>
+                <li><a href="../../MigrationNotes.html">Migration Notes</a></li>
+                <li><a href="../../ReadMe.html">Read Me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end-top-navigation -->
+
+    <div class="container"> <h1>Migration Notes for 7.x</h1>
+<hr />
+<h2>Migrating from 7.0 to 7.1</h2>
+<h3>Removed Libraries from Project Classpath</h3>
+<p>Some libraries have been removed from the project class path and are no longer available to the Ivy project. If you still need them, you can add them manually to the Ivy project. There is one big advantage: You can now use it in the version you need. It concerns the following libraries:</p>
+<ul>
+<li>Lucene: <code>lucene-core-4.5.1.jar</code>, <code>lucene-analyzers-common-4.5.1.jar</code>, <code>lucene-queryparser-4.5.1.jar</code></li>
+<li>JGroups: <code>jgroups-3.3.4.Final.jar</code></li>
+<li>Freemarker: <code>freemarker-2.3.23.jar</code></li>
+<li>Spring Security Crypto: <code>spring-security-crypto-4.2.3.RELEASE.jar</code></li>
+<li>DB Libraries: <code>ecs-1.4.2.jar</code>, <code>hsqldb-1.8.0.10.jar</code>, <code>jt400-7.3.0.3.jar</code>, <code>jtds-1.3.1.jar</code>, <code>mysql-connector-java-5.1.42.jar</code>, <code>ojdbc8-12.2.0.1.jar</code>, <code>postgresql-42.1.3.jar</code>, <code>mssql-jdbc-6.2.1.jre8.jar</code></li>
+</ul>
+<h3>Library upgrades</h3>
+<ul>
+<li>Upgraded Tomcat to version 8.5.29</li>
+<li>Upgraded Apache CXF (used by Web Service Processes and CXF Web Service Clients) to version 3.2.2</li>
+<li>Upgraded all Java libraries to its latest maintenance release (Guava, Apache Commons, Jackson, JDBC Drivers, ...)</li>
+</ul>
+<h3>REST services: CSRF-protection now enabled by default</h3>
+<p>CSRF-protection is now enabled by default on all REST services provided by ivy (including services provided by the mobile workflow API and services provided by custom ivy projects).</p>
+<p>To call a modifying REST service via <code>PUT</code>, <code>POST</code> or <code>DELETE</code> the caller needs to provide a HTTP Header called <code>X-Requested-By</code> with any value e.g. ivy. This is the Jersey provided protection of REST services against cross-site request forgery (CSRF). If the CSRF header is not provided on a modifying REST request the request will fail with an HTTP Status <code>400</code> (Bad Request). Custom REST services via <code>GET</code>, <code>HEAD</code> or <code>OPTIONS</code> should therefore be implemented in a way that they don't modify data.</p>
+<p>The CSRF protection for REST services can be server-wide disabled by setting the system property <code>WebServer.REST.CSRF.Protection</code> to false. However, that is not recommended.</p>
+<h3>The engine operates with packed projects</h3>
+<p>The engine is now able to execute projects in packed zip or iar files. If you deploy a new project to the engine, the new Process Model Versions will now contain a packed file instead of an expanded project directory by default.</p>
+<p>Already deployed projects keep their expanded directory format.</p>
+<h5>Read-only projects</h5>
+<p>The packed projects are read-only projects. So if you try to change the contents of such a project at runtime it will fail with a <code>java.nio.file.ReadOnlyFileSystemException</code>.</p>
+<h5>Get write access</h5>
+<p>If write access is necessary, for instance because the <code>ivy.cms</code> write API is used, the related project must be made writable. This can be done by deploying the project as an expanded project:</p>
+<ul>
+<li>with the maven <code>project-build-plugin</code>, the configuration parameter <a href="http://axonivy.github.io/project-build-plugin/snapshot/7.1/deploy-to-engine-mojo.html#deployTargetFileFormat">deployTargetFileFormat</a> must be set to <code>EXPANDED</code>.</li>
+<li>with the <code>deploy</code> directory, it can be enforced by providing an <code>options.yaml</code> file with the following content</li>
+</ul>
+<pre><code>target
+  fileFormat : EXPANDED</code></pre>
+<ul>
+<li>with the Admin UI, the deployment wizard will always expand directories.</li>
+</ul>
+<h3>IvyAddOns split into multiple projects</h3>
+<p>If your project depends on IvyAddOns we recommend that you migrate to the latest IvyAddOns. However, the IvyAddOns Project that was delivered with earlier versions of the Axon.ivy Designer has been split into multiple projects:</p>
+<ul>
+<li>IvyAddOnsCommons  (ch.ivyteam.ivy.addons:commons) - Provides WaitForAsyncProcess, ResourceHelper, EnvironmentHelper, WaitTillLastTaskOfCase, ProcessParameter, QRCode, Sudo, ...</li>
+<li>DocFactory (ch.ivyteam.ivy.addons:doc-factory) - Provides Aspose DocFactory to create Word, PDF, Excel, Powerpoint documents</li>
+<li>FileManagerApi (ch.ivyteam.ivy.addons:file-manager-api) Provides an extended file manager API</li>
+<li>IvyAddOns (ch.ivyteam.ivy.addons:ch.ivyteam.ivy.addons) Empty facade project that depends on IvyAddOnsCommons, DocFactory and FileManagerApi. For backwards compatibility of old projects that depend on IvyAddOns.</li>
+<li>IvyAddOnsRichDialog (ch.ivyteam.ivy.addons:rich-dialog)- Provides all the functionality for Rich Dialogs like: File Manager, Dynamic Dialogs, Event Log, ...</li>
+</ul>
+<p>With the latest Axon.ivy Designer we only deliver the DocFactory project. If your project only needs DocFactory features simple remove the IvyAddOns dependency and add a dependency to the new DocFactory project.</p>
+<p>If you depend on other features then contact our support to get the appropriate new projects. Now, you can remove the dependency to IvyAddOns and replace them with dependencies to the appropriate new projects.</p>
+<p>If you do not want to change the dependencies, then download the new IvyAddOns project. This project is an empty facade project that only defines dependencies to the other new IvyAddOns projects (IvyAddOnsCommons, DocFactory and FileManagerApi).</p>
+<p>If you need Rich Dialog features of IvyAddOns then download the new IvyAddOnsRichDialog project. This project contains all the Rich Dialog features and a dependency to the new IvyAddOns project.</p>
+<p>The following IvyAddOns API's have been removed or moved because of the split:</p>
+<ul>
+<li>The following Html Dialog specific File Manager classes were removed:
+<ul>
+<li><code>ch.ivyteam.ivy.addons.filemanager.html.configuration.HtmlConfigurationController</code></li>
+<li><code>ch.ivyteam.ivy.addons.filemanager.html.enums.Environment</code></li>
+<li><code>ch.ivyteam.ivy.addons.filemanager.html.thumbnailer.HtmlFileManagerThumbnailer</code></li>
+</ul>
+</li>
+<li>The following specific thumbnailer jars and their dependencies have been removed:
+<ul>
+<li>lib/thumbnailer/thumbnailer_plugin_images-*.jar</li>
+<li>lib/thumbnailer/thumbnailer_plugin_mime.*.jar</li>
+<li>lib/thumbnailer/thumbnailer_plugin_msoffice.*.jar</li>
+<li>lib/thumbnailer/thumbnailer_plugin_pdf.*.jar</li>
+<li>lib/thumbnailer/*.jar (dependencies)</li>
+</ul>
+</li>
+<li>The already deprecated Rich Dialog specific constructors from class <code>ch.ivyteam.ivy.addons.docfactory.AsposeDocFactory</code> have been removed.</li>
+<li>The method <code>saveStringAsJavaFile</code> has been removed from class <code>ch.ivyteam.ivy.addons.filemanager.FileHandler</code>.</li>
+<li>The following methods from class <code>ch.ivyteam.ivy.addons.filemanager.FileHandler</code> has been moved to class <code>ch.ivyteam.ivy.addons.filemanager.RichDialogFileHandler</code> If your projects use any of those methods or classes then you will get errors in the Designer and you need to fix them:
+<ul>
+<li><code>upload</code></li>
+<li><code>download</code></li>
+<li><code>getTreePath</code></li>
+<li><code>getSystemPropertyNames</code></li>
+<li><code>getUserParametersNames</code></li>
+<li><code>formatPathWithClientSeparator</code></li>
+<li><code>getClientFileSeparator</code></li>
+</ul>
+</li>
+</ul>
+<h3>Macros in Authentication Section of Web Service Call Inscription</h3>
+<p>The fields in the authentication section on the web service inscription mask are automatically converted to properties. You were able to use macros in these fields, which will be converted to valid ivy script. There is one special case which won't be supported anymore: Macro expansion within macro expansion. For example: The macro <code>&lt;%= ivy.co(&quot;/pathInCms&quot;) %&gt;</code> reads the content from the specified cms path. If there is also macro in the specified cms path, this macro will not be expanded anymore.</p>
+<h3>Import a Xpert.ivy 3.9 is no longer possible</h3>
+<p>The support to import a Xpert.ivy 3.9 project into Axon.ivy Designer has been removed. If you need to convert a Xpert.ivy 3.9 project use Axon.ivy Designer 7.0 or earlier.</p>
+<h3>Renew / Change the session ID after login</h3>
+<p>To prevent from the <strong>Session Fixation</strong>  attack Axon.ivy renews / changes the session ID after login. If you have any trouble with it (e.g. in combination with RIA applications) you can disable this by changing the system property <code>WebServer.RenewSessionIdOnLogin</code> to <code>false</code>. If you migrate from 7.0.4 the feature is per default disabled and also stays disabled after migration. We highly recommend to enable this feature by changing the system property <code>WebServer.RenewSessionIdOnLogin</code> to <code>true</code>.</p>
+</div>
+</div>
+</body>
+</html>

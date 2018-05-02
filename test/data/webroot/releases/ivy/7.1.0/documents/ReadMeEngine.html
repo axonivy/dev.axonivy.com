@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Read Me Axon.ivy Engine 7.1</title>
+  <link rel="shortcut icon" href="doc/shared/images/ivy_favicon_48.png" />
+  <link href="doc/shared/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="doc/shared/css/docs.min.css" rel="stylesheet" type="text/css">
+  <link href="doc/shared/css/ivy-common-6.css" rel="stylesheet" type="text/css">
+  <link href="doc/shared/css/ivy-designer-doc.css" rel="stylesheet" type="text/css">
+  <script src="doc/shared/js/jquery.min.js"></script>
+  <script src="doc/shared/js/bootstrap.min.js"></script>
+  <style type="text/css">
+          div#thirdPartyContent td,div#thirdPartyContent tr{
+                  font-size:9pt;
+          }
+          tr { border-bottom: solid 1px #F0F0F0;}
+          td,th {padding: 0.1em 1em 0.1em 0.1em; text-align: left; vertical-align:top;}
+          table {border-collapse: collapse;}
+  </style>
+  <!--[if IE]>
+  <style type="text/css">
+    div#thirdPartyContent{
+      width:985px;
+    }
+    div#thirdPartyContent table{
+      table-layout: fixed;
+    }
+  </style>
+  <![endif]-->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+<div id="mainContent">
+    <!-- start-top-navigation -->
+		<div class="navbar navbar-top" role="navigation">
+		  <div class="container" id="headerdiv">
+			<div class="navbar-header">
+			  <a class="ivy-logo" href="https://developer.axonivy.com">
+                <img src="doc/shared/images/axon_ivy_logo.png" alt="Axon.ivy" />
+              </a>
+			</div>
+			
+			<div class="navbar">
+			  <ul class="nav nav-pills" id="navbar-ivy-links">
+				<li><a href="https://developer.axonivy.com/download/" target="blank"><span class="glyphicon glyphicon-download" aria-hidden="true"></span><br>Download</a></li>
+				<li><a href="https://developer.axonivy.com/doc/" target="blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span><br>Documentation</a></li>
+				<li><a href="https://answers.axonivy.com" target="blank"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><br>Q &amp; A</a></li>
+			  </ul>
+			</div>
+		  </div><!-- /.container -->
+		</div>
+    <div class="navbar ivy-subnav">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="row">
+            <ul class="nav nav-pills">
+              <li><a href="doc/newAndNoteworthy/NewAndNoteworthy.html">N&amp;N</a></li>
+              <li><a href="ReleaseNotes.txt">Release Notes</a></li>
+              <li><a href="MigrationNotes.html">Migration Notes</a></li>
+              <li class="active"><a href="ReadMe.html">Read Me</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end-top-navigation -->
+<div class="container">
+	<h1>Read Me for Axon.ivy Engine 7.1 (Weisshorn)</h1>
+	
+<h2>Table of Content</h2>
+<ol>
+  <li><a href="#requirements">System requirements</a></li>
+  <li><a href="#upgrading">Upgrading from an older version</a></li>
+  <li><a href="#3rd">3rd Party Products</a></li>
+  <li><a href="#patents">Patents</a></li>
+  <li><a href="#support">Support</a></li>
+  <li><a href="#security">Security</a></li>
+  <li><a href="#productInfo">Product Information</a></li>
+  <li><a href="#acknowledgments">Acknowledgments</a></li>
+</ol>
+
+
+<h2 id="requirements">System requirements</h2>
+
+<p>We <span style="font-style: italic;">recommend</span> the following system
+requirements </p>
+
+<h3>For Axon.ivy Engine 7.1</h3>
+<table class="table table-hover">
+  <thead>
+	<tr>
+      <th></th>
+      <th>Minimum</th>
+      <th>Recommended</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Java</td>
+      <td>1.8</td>
+      <td>&gt;= 1.8.0_144<br />
+      &lt; Java 9</td>
+      <td>Included in some installations</td>
+    </tr>
+    <tr>
+      <td>Memory (RAM)</td>
+      <td>3 GB</td>
+      <td>8 GB </td>
+      <td>Depends highly on deployed applications and number of concurrent
+      users</td>
+    </tr>
+    <tr>
+      <td>Harddisk</td>
+      <td>1 GB</td>
+      <td>20 GB SSD</td>
+      <td>Product installation and data of your projects</td>
+    </tr>
+    <tr>
+      <td>Processor</td>
+      <td>Quad core with 2 GHz </td>
+      <td> </td>
+      <td>Depends highly on deployed applications and number of concurrent
+      users</td>
+    </tr>
+    <tr>
+      <td>Operating Systems</td>
+      <td>
+        Windows Server 2008 R2 64 Bit (x64)<br>
+      	Windows Server 2012<br>
+      	Windows Server 2016<br>
+        Linux 64 Bit (x64)
+      </td>
+      <td><br>
+        <br>
+        <br>
+        <br>
+      </td>
+      <td>Tested Linux distributions:<br>
+        Ubuntu<br>        
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<h3>System Database</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Database System</th>
+      <th>Supported</th>
+	  <th>Tested</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MySQL (only InnoDB Engine)</td>
+      <td>5.5 - 5.7</td>
+      <td>5.5, 5.7</td>
+    </tr>
+    <tr>
+      <td>MariaDB (only InnoDB Engine)</td>
+      <td>10.0 - 10.2</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <td>Microsoft SQL Server</td>
+      <td>2008 R2, 2012, 2014, 2016</td>
+	  <td>2008 R2, 2016</td>
+    </tr>
+    <tr>
+      <td>Oracle Database</td>
+      <td>11g, 12c</td>
+      <td>11g, 12c</td>
+    </tr>
+    <tr>
+      <td>PostgreSQL</td>
+      <td>9.2 - 9.5</td>
+      <td>9.5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>For HtmlDialog clients</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Minimum</th>
+      <th>Recommended</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Web Browser</td>
+      <td>Internet&nbsp;Explorer&nbsp;11<br>
+      	Edge <sup>*)</sup><br>
+        Firefox <sup>*)</sup><br>
+        Chrome <sup>*)</sup><br>
+        Safari <sup>*)</sup><br>
+        Opera <sup>*)</sup></td>
+      <td>Latest available versions of Internet&nbsp;Explorer, Edge, Firefox, Chrome, Safari, Opera</td>
+      <td>For security reasons we recommend to use the latest available web
+        browser versions. 
+
+        <p>Most other web browser that support the latest JavaScript, Html 5
+        and CSS 3 specifications will work too.</p>
+
+        <p><sup>*)</sup> Current stable version and the previous current stable
+        version are supported. For example if the current version is 24.x, we
+        support 24.x and 23.x.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>For RichDialog clients</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Minimum</th>
+      <th>Recommended</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Java</td>
+      <td>1.8<br /><b>Java >= 9 not supported yet!</b></td>
+      <td>Latest available 1.8 Update Release</td>
+      <td><p>For security reasons we recommend to use the latest available 1.8
+        Update Release.</p>
+        <p>Only Java Runtime Environments provided by Oracle are supported.</p>
+        <p><b>We do not support Java >= 9 yet. If you try starting a Rich Dialog with Java >= 9 you will get an error message!</b></p>
+      </td>
+    </tr>
+    <tr>
+      <td>Memory (RAM)</td>
+      <td>512 MB</td>
+      <td>1 GB</td>
+      <td>Depends highly on the RichDialog application.</td>
+    </tr>
+    <tr>
+      <td>Harddisk </td>
+      <td>500 MB</td>
+      <td> </td>
+      <td>Java installation and cache for the RichDialog application files</td>
+    </tr>
+    <tr>
+      <td>Web Browser</td>
+      <td>Internet&nbsp;Explorer&nbsp;9<br>
+        Edge<br>
+        Firefox<br>
+        Chrome<br>
+        Safari<br>
+        Opera
+      </td>
+      <td>Latest available versions of Internet&nbsp;Explorer, Edge, Firefox, Chrome, Safari, Opera</td>
+      <td>For security reasons we recommend to use the latest available web
+        browser versions. 
+
+        <p>To launch RichDialog applications most other web browsers will work
+        too.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Operating Systems</td>
+      <td>Windows, Linux, Mac OS X</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="upgrading">Upgrading from an older version</h2>
+
+<div class="bs-callout bs-callout-info">
+	<h4>Xpert.ivy Server becomes Axon.ivy Engine</h4>
+	<p>With version 5.1 the product was renamed from <i>Xpert.ivy Server</i> to <i>Axon.ivy Engine</i>.</p>
+	<p>Therefore, don't be confused if the product name of all the versions mentioned below (3.x / 4.x / 5.x) is <i>Xpert.ivy Server</i> and not <i>Axon.ivy Engine</i>.</p>
+</div>
+
+<h3>Upgrading from 3.x</h3>
+
+<p>Xpert.ivy Server 3.x cannot be upgraded to 6.0. However, 3.9 projects can be
+converted into 7.1 projects using the Axon.ivy Designer 7.1. Read the
+chapter <em>Help &gt; Designer Guide &gt; Projects &gt; Importing a
+Project</em> of the Designer to learn more about this new feature.</p>
+
+<h3>Upgrading from 4.x/5.x/6.x</h3>
+
+<p>Read the <a href="MigrationNotes.html">Migration Notes</a> to learn about
+the necessary steps to migrate from an older 4.x, 5.x or 6.x to the latest version
+7.1.</p>
+
+<h2 id="3rd">3rd Party Products</h2>
+<div id="thirdPartyContent">
+<h3>RichDialog Client Libraries</h3>
+
+<p>The following libraries included in Axon.ivy Engine are third party libraries and are
+provided by external companies or organisations. The libraries will be deployed
+to client machines that use RichDialogs. The libraries are located in the
+directories <span style="font-style: italic;">clientlib/signed</span>.</p>
+<!-- The following library table was generated by the ch.ivyteam.ivy.generator.Server3rdPartyJarReadmeGenerator //-->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Jar</th>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Provider</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>commons-lang-2.5-7.1.0.201802100118.jar</td>
+      <td>Commons Lang</td>
+      <td>2.5</td>
+      <td>The Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>de-javasoft-synthetica-netbeans-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>120111</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>DJNativeSwing-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>DJNativeSwing-SWT-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>icepdf-core-7.1.0.201802100118.jar</td>
+      <td>ICEpdf</td>
+      <td>P01 5.0.6_24 (${buildtime})</td>
+      <td>ICEsoft Technologies, Inc.</td>
+    </tr>
+    <tr>
+      <td>icepdf-viewer-7.1.0.201802100118.jar</td>
+      <td>ICEpdf</td>
+      <td>P01 5.0.6_24 (${buildtime})</td>
+      <td>ICEsoft Technologies, Inc.</td>
+    </tr>
+    <tr>
+      <td>ivyUlcExtension-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ivyUlcPatch-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>jakarta-oro-7.1.0.201802100118.jar</td>
+      <td>org.apache.oro</td>
+      <td>2.0.8 2003-12-28 11:00:13</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>jcommon-client-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>jfreechart-client-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>jgoodies-looks-7.1.0.201802100118.jar</td>
+      <td>JGoodies Looks</td>
+      <td>2.3.0 2009-09-15 08:41:57</td>
+      <td>JGoodies Karsten Lentzsch</td>
+    </tr>
+    <tr>
+      <td>jgoodies-plastic-7.1.0.201802100118.jar</td>
+      <td>com.jgoodies.plaf</td>
+      <td>1.1.3 2003-11-14 02:16:11</td>
+      <td>JGoodies Karsten Lentzsch</td>
+    </tr>
+    <tr>
+      <td>jydocking-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>jytable-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>jywidgets-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>linux_64_native\jna-4.0.0-7.1.0.201802100118.jar</td>
+      <td>com.sun.jna</td>
+      <td>4.0.0 (b2)</td>
+      <td>JNA Development Team</td>
+    </tr>
+    <tr>
+      <td>linux_64_native\swt-linux-64-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>linux_native\jna-4.0.0-7.1.0.201802100118.jar</td>
+      <td>com.sun.jna</td>
+      <td>4.0.0 (b2)</td>
+      <td>JNA Development Team</td>
+    </tr>
+    <tr>
+      <td>linux_native\swt-linux-32-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>look_and_feel-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>lookuptextfield-extension-client-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>mac_64_native\swt-mac-64-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>mac_native\swt-mac-32-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>MultipleGradientPaint-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>SteelSeries-3.9.23-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>swing-layout-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>swing-worker-1.1-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>swingx-1.6.5-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>synthetica-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaAddons-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaAddonsWithThemes-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaAluOxide-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaAluOxideAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBatik-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlackEye-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlackEyeAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlackMoon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlackMoonAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlackStar-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlackStarAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueIce-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueIceAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueLight-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueLightAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueMoon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueMoonAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueSteel-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaBlueSteelAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaClassy-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaClassyAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaGreenDream-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaGreenDreamAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaMauveMetallic-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaMauveMetallicAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaOrangeMetallic-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaOrangeMetallicAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaSilverMoon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaSilverMoonAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaSimple2D-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaSimple2DAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaSkyMetallic-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaSkyMetallicAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaStandardAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaWhiteVision-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>syntheticaWhiteVisionAddon-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>trident-6.3-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ulc-applet-client-7.1.0.201802100118.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ulc-base-client-7.1.0.201802100118.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ulc-base-trusted-7.1.0.201802100118.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ulc-jnlp-client-7.1.0.201802100118.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ulc-servlet-client-7.1.0.201802100118.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ulcswingx-extension-client-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>vBamWidgets-client-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>windows_64_native\jna-4.0.0-7.1.0.201802100118.jar</td>
+      <td>com.sun.jna</td>
+      <td>4.0.0 (b2)</td>
+      <td>JNA Development Team</td>
+    </tr>
+    <tr>
+      <td>windows_64_native\jna_WindowUtils-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>windows_64_native\swt-windows-64-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>windows_native\jna-4.0.0-7.1.0.201802100118.jar</td>
+      <td>com.sun.jna</td>
+      <td>4.0.0 (b2)</td>
+      <td>JNA Development Team</td>
+    </tr>
+    <tr>
+      <td>windows_native\jna_WindowUtils-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>windows_native\swt-windows-32-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>xpertLineStandardLookAndFeel-7.1.0.201802100118.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>HtmlDialog Libraries</h3>
+<p>The following libraries included in Axon.ivy Engine are third party libraries and are provided by external companies or organisations. 
+The libraries will be deployed to the ivy web application. The libraries are located in the directories <span style="font-style: italic;">webapps/ivy/WEB-INF/lib</span>.</p>
+<!-- The following library table was generated by the ch.ivyteam.ivy.generator.Server3rdPartyJarReadmeGenerator //-->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Jar</th>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Provider</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>all-themes-1.0.8.jar</td>
+      <td>all-themes</td>
+      <td>1.0.8</td>
+      <td>org.primefaces.extensions</td>
+    </tr>
+    <tr>
+      <td>cglib-2.2.2.jar</td>
+      <td>cglib</td>
+      <td>2.2.2</td>
+      <td>cglib</td>
+    </tr>
+    <tr>
+      <td>gson-2.2.4.jar</td>
+      <td>gson</td>
+      <td>2.2.4</td>
+      <td>Google</td>
+    </tr>
+    <tr>
+      <td>ivy-primefaces.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>jstl-1.2.jar</td>
+      <td>Sun Java System Application Server</td>
+      <td>1.2</td>
+      <td>Sun Microsystems, Inc.</td>
+    </tr>
+    <tr>
+      <td>modena-ivy-theme.jar</td>
+      <td>PrimeFaces Ivy Default Theme</td>
+      <td>n.a.</td>
+      <td>AXON IVY AG</td>
+    </tr>
+    <tr>
+      <td>modena-theme-2.0.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>primefaces-6.1.1-SNAPSHOT.jar</td>
+      <td>primefaces</td>
+      <td>6.1.1-SNAPSHOT</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>primefaces-extensions-6.1.0.jar</td>
+      <td>PrimeFaces Extensions</td>
+      <td>6.1.0</td>
+      <td>org.primefaces.extensions</td>
+    </tr>
+    <tr>
+      <td>primefaces-ivy-theme.jar</td>
+      <td>PrimeFaces Ivy Default Theme</td>
+      <td>n.a.</td>
+      <td>AXON IVY AG</td>
+    </tr>
+    <tr>
+      <td>resources-ckeditor-6.1.0.jar</td>
+      <td>resources-ckeditor</td>
+      <td>6.1.0</td>
+      <td>org.primefaces.extensions</td>
+    </tr>
+    <tr>
+      <td>resources-codemirror-6.1.0.jar</td>
+      <td>resources-codemirror</td>
+      <td>6.1.0</td>
+      <td>org.primefaces.extensions</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Engine Libraries</h3>
+
+<p>The following libraries included in Axon.ivy Engine are third party libraries and are
+provided by external companies or organisations. The libraries are located in
+the directory <span style="font-style: italic;">plugins</span>.</p>
+<!-- The following library table was generated by the ch.ivyteam.ivy.generator.Eclipse3rdPartyJarReadmeGenerator //-->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Plugin</th>
+      <th>Jar</th>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Provider</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ch.ivyteam.icons</td>
+      <td>lib/ivyteam-icons-ab.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.icons</td>
+      <td>lib/ivyteam-icons-bd.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.icons</td>
+      <td>lib/ivyteam-icons-im.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.icons</td>
+      <td>lib/ivyteam-icons-ns.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.icons</td>
+      <td>lib/ivyteam-icons-op.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.icons</td>
+      <td>lib/ivyteam-icons-sd.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.richdialog.exec</td>
+      <td>lib/vDisplay.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/antlr-runtime-3.5.jar</td>
+      <td>ANTLR 3 Runtime</td>
+      <td>3.5</td>
+      <td>ANTLR</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/drools-decisiontables-7.1.0.Final.jar</td>
+      <td>Drools :: Decision Tables</td>
+      <td>7.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/drools-templates-7.1.0.Final.jar</td>
+      <td>Drools :: Templates</td>
+      <td>7.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/janino-2.5.16.jar</td>
+      <td>janino</td>
+      <td>2.5.16</td>
+      <td>org.codehaus.janino</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/commons-codec-1.10.jar</td>
+      <td>Apache Commons Codec</td>
+      <td>1.10</td>
+      <td>The Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/kie-api-7.1.0.Final.jar</td>
+      <td>KIE :: Public API</td>
+      <td>7.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/kie-internal-7.1.0.Final.jar</td>
+      <td>KIE :: Internal</td>
+      <td>7.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/mvel2-2.3.0.Final.jar</td>
+      <td>mvel2</td>
+      <td>2.3.0.Final</td>
+      <td>org.mvel</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/poi-ooxml-3.15.jar</td>
+      <td>Apache POI</td>
+      <td>3.15</td>
+      <td>The Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/protobuf-java-2.6.0.jar</td>
+      <td>protobuf-java</td>
+      <td>2.6.0</td>
+      <td>Google</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/xmlpull-1.1.3.1.jar</td>
+      <td>xmlpull</td>
+      <td>1.1.3.1</td>
+      <td>xmlpull</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/xpp3_min-1.1.4c.jar</td>
+      <td>xpp3_min</td>
+      <td>1.1.4c</td>
+      <td>xpp3</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/xstream-1.4.9.jar</td>
+      <td>XStream Core</td>
+      <td>1.4.9</td>
+      <td>XStream</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/drools-core-7.1.0.Final.jar</td>
+      <td>Drools :: Core</td>
+      <td>7.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/poi-ooxml-schemas-3.15.jar</td>
+      <td>Apache POI</td>
+      <td>3.15</td>
+      <td>The Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/drools-compiler-7.1.0.Final.jar</td>
+      <td>Drools :: Compiler</td>
+      <td>7.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/poi-3.15.jar</td>
+      <td>Apache POI</td>
+      <td>3.15</td>
+      <td>The Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/slf4j-api-1.7.7.jar</td>
+      <td>slf4j-api</td>
+      <td>1.7.7</td>
+      <td>org.slf4j</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/uberfire-maven-support-1.1.0.Final.jar</td>
+      <td>Maven-support</td>
+      <td>1.1.0.Final</td>
+      <td>JBoss by Red Hat</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.rule.engine.libs</td>
+      <td>libs/xmlbeans-2.6.0.jar</td>
+      <td>org.apache.xmlbeans</td>
+      <td>2.6.0-r1364789</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webserver</td>
+      <td>lib/cos.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.configuration</td>
+      <td>lib/axis1_mini_common.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis1</td>
+      <td>lib/axis1.4_patched/axis.jar</td>
+      <td>Apache Axis</td>
+      <td>1.4 1156 May 23 2006</td>
+      <td>Apache Web Services</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis1</td>
+      <td>lib/axis1.4_patched/commons-discovery.jar</td>
+      <td>commons-discovery</td>
+      <td>0.2</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis1</td>
+      <td>lib/axis1.4_patched/jaxrpc.jar</td>
+      <td>JAX-RPC</td>
+      <td>1.1</td>
+      <td>JCP</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis1</td>
+      <td>lib/axis1.4_patched/saaj.jar</td>
+      <td>SAAJ</td>
+      <td>1.2</td>
+      <td>JCP</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis1</td>
+      <td>lib/axis1.4_patched/wsdl4j.jar</td>
+      <td>WSDL4J</td>
+      <td>1.5.1</td>
+      <td>IBM</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/annogen-0.1.0.jar</td>
+      <td>annogen</td>
+      <td>0.1.0</td>
+      <td>annogen</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axiom-api-1.2.5.jar</td>
+      <td>axiom-api</td>
+      <td>1.2.5</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axiom-dom-1.2.5.jar</td>
+      <td>axiom-dom</td>
+      <td>1.2.5</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axiom-impl-1.2.5.jar</td>
+      <td>axiom-impl</td>
+      <td>1.2.5</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-adb-1.3.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-adb-codegen-1.3.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-codegen-1.3.jar</td>
+      <td>axis2-codegen</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-fastinfoset-1.3.jar</td>
+      <td>axis2-fastinfoset</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-java2wsdl-1.3.jar</td>
+      <td>axis2-java2wsdl</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-jaxbri-1.3.jar</td>
+      <td>axis2-jaxbri</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-jaxws-1.3.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-jibx-1.3.jar</td>
+      <td>axis2-jibx</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-json-1.3.jar</td>
+      <td>axis2-json</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-jws-api-1.3.jar</td>
+      <td>axis2-jws-api</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-kernel-1.3.jar</td>
+      <td>axis2-kernel</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-metadata-1.3.jar</td>
+      <td>axis2-metadata</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-mtompolicy-1.3.jar</td>
+      <td>axis2-mtompolicy</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-spring-1.3.jar</td>
+      <td>axis2-spring</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/axis2-xmlbeans-1.3.jar</td>
+      <td>axis2-xmlbeans</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/backport-util-concurrent-2.2.jar</td>
+      <td>backport-util-concurrent</td>
+      <td>2.2</td>
+      <td>backport-util-concurrent</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/commons-httpclient-3.0.1.jar</td>
+      <td>org.apache.commons.httpclient</td>
+      <td>3.0.1</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/designer/axis2-saaj-1.3.jar</td>
+      <td>axis2-saaj</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/designer/axis2-saaj-api-1.3.jar</td>
+      <td>axis2-saaj-api</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/designer/jalopy-1.5rc3.jar</td>
+      <td>*</td>
+      <td>1.5rc3</td>
+      <td>Jalopy</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/geronimo-jms_1.1_spec-1.1.jar</td>
+      <td>geronimo-jms_1.1_spec</td>
+      <td>1.1</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/jcifs-1.3.17.jar</td>
+      <td>jcifs</td>
+      <td>1.3.17</td>
+      <td>jcifs</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/jibx-bind-1.1.5.jar</td>
+      <td>jibx-bind</td>
+      <td>1.1.5</td>
+      <td>org.jibx</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/jibx-run-1.1.5.jar</td>
+      <td>jibx-run</td>
+      <td>1.1.5</td>
+      <td>org.jibx</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/mex-impl-1.3.jar</td>
+      <td>mex-impl</td>
+      <td>1.3</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/neethi-2.0.4.jar</td>
+      <td>neethi</td>
+      <td>2.0.4</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/woden-1.0-incubating-M7b.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/xbean-2.2.0.jar</td>
+      <td>org.apache.xmlbeans</td>
+      <td>2.2.0-r413705</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ivy.webservice.exec.axis2</td>
+      <td>lib/axis2-1.3_patched/XmlSchema-1.4.7.jar</td>
+      <td>XmlSchema</td>
+      <td>1.4.7</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.parserGenerator</td>
+      <td>lib/java-cup-v11a-runtime.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib/jfcunit.jar</td>
+      <td>jfcunit</td>
+      <td>2.08</td>
+      <td>net.sf.jfcunit</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/synthetica.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaBlackEye.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaBlackMoon.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaBlackStar.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaBlueIce.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaBlueMoon.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaBlueSteel.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaClassy.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaGreenDream.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaMauveMetallic.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaOrangeMetallic.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaSilverMoon.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaSimple2D.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaSkyMetallic.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_lf/synthetica/themes/syntheticaWhiteVision.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/base/lib/jcommon-client.jar</td>
+      <td>jcommon</td>
+      <td>1.0.15</td>
+      <td>jfree</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/base/lib/jfreechart-client.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/base/lib/ulc-base-client.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/base/lib/ulc-base-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/base/lib/ulc-base-trusted.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/container/ejb/lib/ulc-ejb-client.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/container/ejb/lib/ulc-ejb-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/container/local/lib/ulc-local-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/container/servlet/lib/ulc-servlet-client.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/container/servlet/lib/ulc-servlet-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/environment/applet/lib/ulc-applet-client.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/environment/applet/lib/ulc-applet-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/environment/jnlp/lib/ulc-jnlp-client.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc/environment/standalone/lib/ulc-standalone-client.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/closeabletabbedpane-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/lookuptextfield-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/tabledecorator-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/ulc-applet-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/ulc-base-server.jar</td>
+      <td>ULC</td>
+      <td>r18630,build.6504</td>
+      <td>Canoo Engineering AG</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/ulcswingx-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_deploy/vBamWidgets-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/closeabletabbedpane-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/commons-lang-2.5.jar</td>
+      <td>Commons Lang</td>
+      <td>2.5</td>
+      <td>The Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/jakarta-oro.jar</td>
+      <td>org.apache.oro</td>
+      <td>2.0.8 2003-12-28 11:00:13</td>
+      <td>Apache Software Foundation</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/lookuptextfield-extension-client.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/lookuptextfield-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/tabledecorator-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/trident-6.3.jar</td>
+      <td>trident</td>
+      <td>6.3</td>
+      <td>com.github.insubstantial</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/ulcswingx-extension-client.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/ulcswingx-extension-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/vBamWidgets-client.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>ch.ivyteam.ulc.base</td>
+      <td>lib_ulc_ext/vBamWidgets-server.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>org.aspectj.runtime</td>
+      <td>aspectjrt.jar</td>
+      <td>org.aspectj.tools</td>
+      <td>DEVELOPMENT</td>
+      <td>aspectj.org</td>
+    </tr>
+    <tr>
+      <td>org.eclipse.core.resources</td>
+      <td>ant_tasks/resources-ant.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>org.eclipse.equinox.p2.jarprocessor</td>
+      <td>lib/jarprocessor-ant.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>org.eclipse.equinox.p2.metadata.repository</td>
+      <td>ant_tasks/metadataRepository-ant.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>org.eclipse.equinox.p2.publisher.eclipse</td>
+      <td>ant_tasks/pdepublishing-ant.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+    <tr>
+      <td>org.eclipse.jdt.core</td>
+      <td>jdtCompilerAdapter.jar</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+      <td>n.a.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3>Products</h3>
+
+<p>The following products are included in Axon.ivy Engine. They are provided by a third party company: </p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Directory</th>
+      <th>Product</th>
+      <th>Version</th>
+      <th>Producer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">jre</td>
+      <td style="vertical-align: top;">Java Runtime Environment </td>
+      <td style="vertical-align: top;">1.8.0_144</td>
+      <td style="vertical-align: top;"><a href="http://www.oracle.com/">Oracle</a><br>
+        <a href="http://java.com/">Java</a></td>
+    </tr>
+     <tr>
+      <td style="vertical-align: top;">elasticsearch</td>
+      <td style="vertical-align: top;">Elasticsearch</td>
+      <td style="vertical-align: top;">5.5.0</td>
+      <td style="vertical-align: top;"><a href="https://www.elastic.co">Elastic</a></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">misc/iis &amp; misc/apache</td>
+      <td style="vertical-align: top;">Apache Tomcat Connector</td>
+      <td style="vertical-align: top;">1.2.42</td>
+      <td style="vertical-align: top;"><a href="http://tomcat.apache.org/connectors-doc/">Apache</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="patents">Patents</h2>
+
+<p>Axon.ivy Engine is protected by the following patent:</p>
+<ul>
+  <li>United States Patent No. US 6,778,863 B1</li>
+  <li>European Patent No. EP 1 061 422 A1</li>
+</ul>
+
+<h2 id="support">Support</h2>
+<p>Many questions and problems are already answered or solved in our <a href="http://answers.axonivy.com">Q &amp; A (Questions &amp; Answers)</a>.<br/>
+<p>To get support please see our <a href="http://developer.axonivy.com/support/">support center</a>.</p>
+
+<h2 id="security">Security</h2>
+
+<p>We take security seriously. We continuously improve and harden our product. 
+If you find a vulnerability then please report it immediately to our <a href="http://developer.axonivy.com/support/">support</a>.</p> 
+<p>Please do not report or discuss it in public until we provide an official fix.</p>
+
+<h2 id="productInfo">Product Information</h2>
+
+<p>To get the latest information, versions, updates and patches please visit our developer homepage <a
+href="http://developer.axonivy.com">developer.axonivy.com</a>.</p>
+
+<p>For more information about Axon.ivy Engine visit <a
+href="http://www.axonivy.com">www.axonivy.com</a>.</p>
+
+<h2 id="acknowledgments">Acknowledgments</h2>
+
+<p>We thank all persons which have helped us improving Axon.ivy Engine by
+contributing hints, requests for enhancement or discovered bugs and reported
+them to us.</p>
+
+<p>We hope you enjoy the product.</p>
+
+<p>AXON IVY AG, 16.04.2018, Zug, Switzerland</p>
+<hr>
+
+<table style="width:985px">
+  <tbody>
+    <tr>
+      <td style="text-align: left; vertical-align: middle"><a href="http://www.axonivy.com"><img
+        border="0" alt="AXON IVY AG Logo"
+        width="212px" src="doc/shared/images/axon_ivy_logo.png"></a></td>
+      <td style="font-weight: bold; text-align: right; vertical-align: middle">© 2018 AXON IVY AG</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

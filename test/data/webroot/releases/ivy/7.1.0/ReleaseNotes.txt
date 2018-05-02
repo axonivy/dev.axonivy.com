@@ -1,0 +1,21 @@
+================================================================================
+Axon.ivy 7.1.0  (Weisshorn) Release Notes
+================================================================================
+
+! - Critical: We strongly recommend to install this release because it fixes this security issue!
+* - Recommended: We recommend to install this release because it fixes this stability issue!
++ - Suggested: We suggest to install this release if you are suffering from this issue.      
+
+Changes in 7.1.0.58200, 16.04.2018
+--------------------------------------------------------------------------------
+
+This is a Leading Edge version.
+
++ XIVY-2118      Epic        Renew Web Service Call Libraries
++ XIVY-349       Story       Renew/Change the session ID after login
++ XIVY-620       Story       Deploy full application ZIP
++ XIVY-624       Story       Deploy options in deploy-iar goal to control re-deployment
++ XIVY-1115      Story       Store and access ivy projects as single IAR file on the engine
++ XIVY-1168      Story       REST Client should consider SSL Client settings of Designer and Server when using https
++ XIVY-1183      Story       Calling REST Service from browser that already owns an authenticated ivy session
++ XIVY-1636      Story       WARN log: Could not remove unused process data cache for task
