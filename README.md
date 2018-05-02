@@ -20,6 +20,18 @@ But they are needed to add _Annotation_ and _Facet_  to the custom google search
 They could be uploaded to google on <https://cse.google.com/> with user info@ivyteam.ch.
 Menu entry > Setup > Advanced.
 
+### TODO
+* Search (Zu grosses Text Feld)
+* Search (in einzelnen Books)
+* Twitter Feed einbinden (News)
+* Testen mit blauen Links
+* Tutorial für erstes Tutorial ein Bild
+* Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
+* FTP Account einschränken
+* Archive (Dropdown-Eintrag pro LE/LTS etc, Le/lts IM DROPDOWN ERWÄHNEN)
+* Archive (Dropdown -> UNSUPPORTED)
+* Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
+
 ### After Release
 * Fix Permalinks in Engine Guide
 * Update developerAPI url on update.axonivy.com
