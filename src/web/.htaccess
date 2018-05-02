@@ -9,7 +9,7 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^doc/latest/(.+)$ /releases/ivy/7.1.latest/documents/$2 [L]
+RewriteRule ^doc/latest/(.+)$ /releases/ivy/7.1.latest/documents/$1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
