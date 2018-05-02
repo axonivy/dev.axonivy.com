@@ -37,10 +37,6 @@ abstract class AbstractDocument
     
     public function getRessourceUrl(): string
     {
-        if (!empty($this->urlPath))
-        {
-            return $this->baseRessourceUrl . '/' . $this->urlPath;
-        }
         return $this->baseRessourceUrl . '/' . $this->path;
     }
     
