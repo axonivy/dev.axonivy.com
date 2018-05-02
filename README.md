@@ -23,17 +23,30 @@ Menu entry > Setup > Advanced.
 ### TODO
 * Search (Zu grosses Text Feld)
 * Search (in einzelnen Books)
+
 * Twitter Feed einbinden (News)
-* Testen mit blauen Links
+
 * Tutorial für erstes Tutorial ein Bild
+
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
+
 * FTP Account einschränken
+
 * Archive (Dropdown-Eintrag pro LE/LTS etc, Le/lts IM DROPDOWN ERWÄHNEN)
 * Archive (Dropdown -> UNSUPPORTED)
+* Archive (Documentation in archive spalte nicht korrekt bei 5)
+
 * Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
-* Entfernen for developers
-* Add addresse
+
 * Dokumentation (release documents in iframe)
+* Dokumentation (Portal Con. versteht man nciht)
+
+* Add addresse
+* Entfernen for developers
+
+* Testen mit blauen Links
+* Hover Pink
+* Grün oben im Header nicht exakt gleich
 
 ### After Release
 * Fix Permalinks in Engine Guide
