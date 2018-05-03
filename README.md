@@ -20,9 +20,6 @@ But they are needed to add _Annotation_ and _Facet_  to the custom google search
 They could be uploaded to google on <https://cse.google.com/> with user info@ivyteam.ch.
 Menu entry > Setup > Advanced.
 
-### TODO
-* Twitter Feed einbinden (News)
-
 ### After Release
 * Fix Permalinks in Engine Guide
 * Update developerAPI url on update.axonivy.com
