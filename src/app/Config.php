@@ -23,7 +23,7 @@ class Config {
         if (self::isDevOrTestEnv()) {
             $rootDir = __DIR__ . '/../../test/data/webroot';
         }
-        define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'releases', 'ivy']));
+        define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'ivy']));
         define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'sprint']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'nightly']));
         
