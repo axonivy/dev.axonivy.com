@@ -30,6 +30,7 @@ use Twig_Extension_Debug;
 use Slim\Views\Twig;
 use app\release\model\ReleaseInfoRepository;
 use app\release\model\ReleaseInfo;
+use app\news\NewsAction;
 
 class Website
 {
@@ -163,6 +164,8 @@ class Website
         $app->get('/api/currentRelease', ApiCurrentRelease::class);
         
         $app->get('/sitemap.xml', SitemapAction::class);
+        
+        $app->get('/news', NewsAction::class);
     }
 
     private function installRedirect($oldPath, $pathFor)
