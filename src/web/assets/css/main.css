@@ -3621,6 +3621,11 @@ font-size: 18px;
 			}
 
 		}
+		
+    #two .inner article .icon {
+    	color: #b3b3b3;
+   		 font-size: 3em;
+	}
 
 	#two {
 		padding: 6em 0 4em 0;
@@ -3979,3 +3984,6 @@ font-size: 18px;
 			}
 
 		}
+		
+		
+		

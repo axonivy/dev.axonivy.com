@@ -37,13 +37,11 @@ Menu entry > Setup > Advanced.
 * Dokumentation (release documents in iframe)
 * Dokumentation (Portal Con. versteht man nciht)
 
-* Download: see other version
-
 * Entfernen for developers
+* Grün oben im Header nicht exakt gleich
 
 * Testen mit blauen Links
 * Hover Pink
-* Grün oben im Header nicht exakt gleich
 
 ### After Release
 * Fix Permalinks in Engine Guide
