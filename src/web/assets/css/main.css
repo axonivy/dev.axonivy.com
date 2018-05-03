@@ -2008,7 +2008,7 @@ font-size: 18px;
 			input[type="button"].special:hover,
 			button.special:hover,
 			.button.special:hover {
-				background-color: #e85d61;
+				background-color: rgba(175, 202, 5, 0.7);
 			}
 
 			input[type="submit"].special:active,

@@ -30,8 +30,6 @@ Menu entry > Setup > Advanced.
 
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
 
-* FTP Account einschränken
-
 * Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
 
 * Dokumentation (release documents in iframe)
@@ -41,7 +39,6 @@ Menu entry > Setup > Advanced.
 * Grün oben im Header nicht exakt gleich
 
 * Testen mit blauen Links
-* Hover Pink
 
 ### After Release
 * Fix Permalinks in Engine Guide
@@ -49,6 +46,7 @@ Menu entry > Setup > Advanced.
 * Move all ReleaseNotes.txt from root to documents folder -> check build
 * Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction
 * PageSpeed
+* FTP Account einschränken
 
 ### Ideas
 * Public Roadmap
