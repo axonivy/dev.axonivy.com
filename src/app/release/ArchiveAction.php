@@ -21,10 +21,10 @@ class ArchiveAction
         // determine the current version to show on the ui
         $version = $args['version'] ?? '';
         if (empty($version)) {
-            if (count(IVY_VERSIONS) > 0) {
-                $version = IVY_VERSIONS[0];
-            } else {
+            if (empty(IVY_VERSIONS)) {
                 throw new NotFoundException($request, $response);
+            } else {
+                $version = $this->getLatesVersion();
             }
         } else {
             if (!array_key_exists($version, IVY_VERSIONS)) {
@@ -48,6 +48,14 @@ class ArchiveAction
             $links[] = new VersionLink($version, $description);
         }
         return $links;
+    }
+    
+    private function getLatesVersion(): string
+    {
+        foreach (IVY_VERSIONS as $version => $desc) {
+            return $version;
+        }
+        return '';
     }
     
     private function findReleaseInfos(string $version): array
