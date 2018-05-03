@@ -13,46 +13,82 @@ class ArchiveAction
     public function __construct(ContainerInterface $container) {
         $this->container = $container;
     }
-    
-    public function __invoke($request, $response, $args) {
-        $availableReleaseInfos = ReleaseInfoRepository::getAvailableReleaseInfos();
-        $availableReleaseInfos = array_reverse($availableReleaseInfos);
+
+    public function __invoke($request, $response, $args)
+    {
+        $links = $this->createLinks();
         
-        // determine all available major versions
-        $majorVersions = [];
-        foreach ($availableReleaseInfos as $releaseInfo) {
-            if (!in_array($releaseInfo->getVersion()->getMajorVersion(), $majorVersions)) {
-                $majorVersions[] = $releaseInfo->getVersion()->getMajorVersion();
-            }
-        }
-        
-        // determine current major version to show on the ui
-        $version = '';
-        if (isset($args['version'])) {
-            $version = $args['version'];
-            if (!in_array($version, $majorVersions)) {
-                throw new NotFoundException($request, $response);
-            }
-        } else {
-            if (count($majorVersions) > 0) {
-                $version = $majorVersions[0];
+        // determine the current version to show on the ui
+        $version = $args['version'] ?? '';
+        if (empty($version)) {
+            if (count(IVY_VERSIONS) > 0) {
+                $version = IVY_VERSIONS[0];
             } else {
                 throw new NotFoundException($request, $response);
             }
-        }
-        
-        // determine all release infos for the current major version
-        $releaseInfos = [];
-        foreach ($availableReleaseInfos as $releaseInfo) {
-            if (StringUtil::startsWith($releaseInfo->getVersion()->getVersionNumber(), $version)) {
-                $releaseInfos[] = $releaseInfo;
+        } else {
+            if (!array_key_exists($version, IVY_VERSIONS)) {
+                throw new NotFoundException($request, $response);
             }
         }
         
+        $releaseInfos = $this->findReleaseInfos($version);
+
         return $this->container->get('view')->render($response, 'app/release/archive.html', [
             'releaseInfos' => $releaseInfos,
-            'majorVersions' => $majorVersions,
+            'versionLinks' => $links,
             'currentMajorVersion' => $version
         ]);
+    }
+    
+    private function createLinks(): array
+    {
+        $links = [];
+        foreach (IVY_VERSIONS as $version => $description) {
+            $links[] = new VersionLink($version, $description);
+        }
+        return $links;
+    }
+    
+    private function findReleaseInfos(string $version): array
+    {
+        $availableReleaseInfos = array_reverse(ReleaseInfoRepository::getAvailableReleaseInfos());
+        $releaseInfos = [];
+        foreach ($availableReleaseInfos as $releaseInfo) {
+            $versionNumber = $releaseInfo->getVersion()->getVersionNumber();
+            
+            if (StringUtil::startsWith($versionNumber, $version)) {
+                $releaseInfos[] = $releaseInfo;
+            }
+            
+            if (StringUtil::endsWith($version, 'x')) {
+                $versionWithoutX = substr($version, 0, -1);
+                if ($releaseInfo->getVersion()->getMinorNumber() != '0') {
+                    if (StringUtil::startsWith($versionNumber, $versionWithoutX)) {
+                        $releaseInfos[] = $releaseInfo;
+                    }
+                }
+            }
+        }
+        
+        return $releaseInfos;
+    }
+}
+
+class VersionLink
+{
+    public $id;
+    private $productEdition;
+    public function __construct(string $id, string $productEdition)
+    {
+        $this->id = $id;
+        $this->productEdition = $productEdition;
+    }
+    public function getUrl(): string
+    {
+        return '/download/archive/' . $this->id;
+    }
+    public function getDisplayText(): string {
+        return $this->id . ' ('.$this->productEdition.')';
     }
 }

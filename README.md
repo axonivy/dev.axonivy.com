@@ -32,10 +32,6 @@ Menu entry > Setup > Advanced.
 
 * FTP Account einschränken
 
-* Archive (Dropdown-Eintrag pro LE/LTS etc, Le/lts IM DROPDOWN ERWÄHNEN)
-* Archive (Dropdown -> UNSUPPORTED)
-* Archive (Documentation in archive spalte nicht korrekt bei 5)
-
 * Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
 
 * Dokumentation (release documents in iframe)

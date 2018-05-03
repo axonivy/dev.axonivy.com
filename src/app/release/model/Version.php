@@ -70,4 +70,16 @@ class Version
         $v = array_slice($v, 0, 3);
         return implode('.', $v);
     }
+    
+    /**
+     * Returns only the minor number of the full version string.
+     * 
+     * @return string
+     */
+    public function getMinorNumber(): string
+    {
+        $v = explode('.', $this->versionNumber);
+        $v = array_slice($v, 1, 1);
+        return implode('.', $v);
+    }
 }

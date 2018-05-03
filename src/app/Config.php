@@ -50,7 +50,26 @@ class Config {
             '6.0.0' => '6.0.11',
         ]);
         
-        define('LTS_VERSIONS', ['7.0', '6.0']);
+        define('IVY_VERSIONS', [
+            '7.x' => 'Leading Edge',
+            '7.0' => 'LTS',
+            '6.x' => 'UNSUPPORTED',
+            '6.0' => 'LTS',
+            '5.1' => 'UNSUPPORTED',
+            '5.0' => 'UNSUPPORTED',
+            '4.3' => 'UNSUPPORTED',
+            '4.2' => 'UNSUPPORTED',
+            '3.9' => 'UNSUPPORTED'
+        ]);
+        
+        $lts = [];
+        foreach (IVY_VERSIONS as $version => $description) {
+            if ($description == 'LTS') {
+                $lts[] = $version;
+            }
+        }
+        
+        define('LTS_VERSIONS', $lts);
     }
     
     private static function getRequestedBaseUri(): string
