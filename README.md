@@ -21,7 +21,6 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ### TODO
-* Search (Zu grosses Text Feld)
 * Search (in einzelnen Books)
 
 * Twitter Feed einbinden (News)
