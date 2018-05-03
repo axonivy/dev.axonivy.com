@@ -2016,7 +2016,7 @@ font-size: 18px;
 			input[type="button"].special:active,
 			button.special:active,
 			.button.special:active {
-				background-color: #e23135;
+				background-color: rgba(175, 202, 5, 0.9);
 			}
 
 /* Form */

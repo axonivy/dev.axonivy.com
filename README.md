@@ -28,13 +28,10 @@ Menu entry > Setup > Advanced.
 
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
 
-* Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
-
 * Dokumentation (release documents in iframe)
 * Dokumentation (Portal Con. versteht man nciht)
 
 * Entfernen for developers
-* Grün oben im Header nicht exakt gleich
 
 * Testen mit blauen Links
 

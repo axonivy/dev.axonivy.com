@@ -25,6 +25,11 @@ use app\search\SearchAction;
 use app\sitemap\SitemapAction;
 use app\release\SprintNightlyAction;
 use app\release\model\doc\DocProvider;
+use Slim\Views\TwigExtension;
+use Twig_Extension_Debug;
+use Slim\Views\Twig;
+use app\release\model\ReleaseInfoRepository;
+use app\release\model\ReleaseInfo;
 
 class Website
 {
@@ -67,12 +72,26 @@ class Website
     {
         $container = $this->app->getContainer();
         $container['view'] = function ($container) {
-            $view = new \Slim\Views\Twig(__DIR__ . '/..');
+            $view = new Twig(__DIR__ . '/..');
             $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-            $view->addExtension(new \Slim\Views\TwigExtension($container['router'], $basePath));
-            $view->addExtension(new \Twig_Extension_Debug());
+            $view->addExtension(new TwigExtension($container['router'], $basePath));
+            $view->addExtension(new Twig_Extension_Debug());
             return $view;
         };
+
+        // global variables
+        $view = $container['view'];
+        
+        $version = $this->getBugFixVersion(ReleaseInfoRepository::getLatest());
+        $view->getEnvironment()->addGlobal('CURRENT_LEADING_EDGE_VERSION', $version);
+        
+        $version = $this->getBugFixVersion(ReleaseInfoRepository::getLatestLongTermSupport());
+        $view->getEnvironment()->addGlobal('CURRENT_LONG_TERM_SUPPORT_VERSION', $version);
+    }
+    
+    private function getBugFixVersion(?ReleaseInfo $info): string
+    {
+        return $info == null ? '' : $info->getVersion()->getBugfixVersion();
     }
     
     /**
