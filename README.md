@@ -37,7 +37,8 @@ Menu entry > Setup > Advanced.
 * Dokumentation (release documents in iframe)
 * Dokumentation (Portal Con. versteht man nciht)
 
-* Add addresse
+* Download: see other version
+
 * Entfernen for developers
 
 * Testen mit blauen Links
