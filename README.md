@@ -21,8 +21,6 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ### TODO
-* Search (in einzelnen Books)
-
 * Twitter Feed einbinden (News)
 
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
@@ -47,3 +45,4 @@ Menu entry > Setup > Advanced.
 * Blog on Medium
 * Features Site
 * Community Site
+* Implement search in single books
