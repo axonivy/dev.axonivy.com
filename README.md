@@ -23,12 +23,6 @@ Menu entry > Setup > Advanced.
 ### TODO
 * Twitter Feed einbinden (News)
 
-* Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
-
-* Entfernen for developers
-
-* Testen mit blauen Links
-
 ### After Release
 * Fix Permalinks in Engine Guide
 * Update developerAPI url on update.axonivy.com
@@ -37,6 +31,9 @@ Menu entry > Setup > Advanced.
 * Remove parsedown
 * PageSpeed
 * FTP Account einschränken
+* Entfernen for developers
+* Testen mit blauen Links
+* Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
 
 ### Ideas
 * Public Roadmap
