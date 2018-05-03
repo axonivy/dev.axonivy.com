@@ -43,14 +43,26 @@ class DocProvider
      * @param string $name
      * @return AbstractDocument|NULL
      */
-    public function findDocumentByPathName(string $pathName): ?AbstractDocument
+    // TODO Delete
+    private function findDocumentByPathName(string $pathName): ?AbstractDocument
     {
         return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pathName) {
             return $doc->getPath() == $pathName;
         });
     }
     
-    public function findDocumentByPdfName(string $pdfFileName): ?AbstractDocument
+    public function findDocumentByNiceUrlPath(string $niceUrlPath): ?AbstractDocument
+    {
+        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($niceUrlPath) {
+            if ($doc instanceof ReleaseDocument) {
+                return $doc->getNiceUrlPath() == $niceUrlPath;
+            }
+            return false;
+        });
+    }
+    
+    // TODO Delete
+    private function findDocumentByPdfName(string $pdfFileName): ?AbstractDocument
     {
         return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pdfFileName) {
             if ($doc instanceof Book) {
@@ -60,7 +72,8 @@ class DocProvider
         });
     }
     
-    public function findExternalBookByPathName(string $pathName): ?ExternalBook
+    // TODO Delete
+    private function findExternalBookByPathName(string $pathName): ?ExternalBook
     {
         return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pathName) {
             if ($doc instanceof ExternalBook) {
@@ -105,10 +118,10 @@ class DocProvider
             
             self::getNewAndNoteworthy(),
             self::getReleaseNotes(),
-            self::createReleaseDocument('Migration Notes', 'MigrationNotes.html'),
-            self::createReleaseDocument('ReadMe Designer', 'ReadMe.html'),
-            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html'),
-            self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html')
+            self::createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes'),
+            self::createReleaseDocument('ReadMe Designer', 'ReadMe.html', 'read-me'),
+            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'),
+            self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')
         ];
         return array_filter($documents, function(AbstractDocument $doc) { return $doc->exists(); });
     }
@@ -129,12 +142,12 @@ class DocProvider
         return new ExternalBook($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/');
     }
     
-    private function createReleaseDocument($name, $path): ReleaseDocument
+    private function createReleaseDocument($name, $path, $niceUrlPath): ReleaseDocument
     {
         $rootPath = $this->createRootPath();
         $baseUrl = $this->createBaseUrl();
         $baseRessourceUrl = $this->createBaseRessourceUrl();
-        return new ReleaseDocument($name, $rootPath, $baseUrl, $baseRessourceUrl, $path);
+        return new ReleaseDocument($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, $niceUrlPath);
     }
     
     private function createRootPath(): string
@@ -198,14 +211,12 @@ class DocProvider
         if ($version->getMinorVersion() == '3.9') {
             $fileName = 'ReadMe.html';
         }
-        $doc =  $this->createReleaseDocument('Release Notes', $fileName);
-        $doc->setUrlPath('ReleaseNotes.html');
-        return $doc;
+        return $this->createReleaseDocument('Release Notes', $fileName, 'release-notes');
     }
     
     public function getNewAndNoteworthy(): ReleaseDocument
     {
-        return self::createReleaseDocument('N&N', 'NewAndNoteworthy.html');
+        return self::createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
     }
     
     public function getOverviewUrl(): string

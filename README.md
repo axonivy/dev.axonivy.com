@@ -25,9 +25,6 @@ Menu entry > Setup > Advanced.
 
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
 
-* Dokumentation (release documents in iframe)
-* Dokumentation (Portal Con. versteht man nciht)
-
 * Entfernen for developers
 
 * Testen mit blauen Links
@@ -36,7 +33,8 @@ Menu entry > Setup > Advanced.
 * Fix Permalinks in Engine Guide
 * Update developerAPI url on update.axonivy.com
 * Move all ReleaseNotes.txt from root to documents folder -> check build
-* Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction
+* Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction$ (TODO)
+* Remove parsedown
 * PageSpeed
 * FTP Account einschränken
 

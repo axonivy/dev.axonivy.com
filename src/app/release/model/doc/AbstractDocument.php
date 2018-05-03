@@ -10,7 +10,6 @@ abstract class AbstractDocument
     private $baseRessourceUrl;
     
     private $path;
-    private $urlPath;
     
     public function __construct(string $name, string $rootPath, string $baseUrl, string $baseRessourceUrl, string $path)
     {
@@ -28,10 +27,6 @@ abstract class AbstractDocument
     
     public function getUrl(): string
     {
-        if (!empty($this->urlPath))
-        {
-            return $this->baseUrl . '/' . $this->urlPath;
-        }
         return $this->baseUrl . '/' . $this->path;
     }
     
@@ -59,8 +54,4 @@ abstract class AbstractDocument
         return $this->baseRessourceUrl;
     }
     
-    public function setUrlPath(string $urlPath)
-    {
-        $this->urlPath = $urlPath;
-    }
 }

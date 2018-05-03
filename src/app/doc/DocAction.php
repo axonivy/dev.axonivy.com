@@ -20,29 +20,27 @@ class DocAction
     public function __invoke($request, Response $response, $args)
     {
         $version = $args['version'] ?? 'latest';
-        $document = $args['document'] ?? 'NewAndNoteworthy.html';
-        
-        if ($document == 'ReleaseNotes.html') {
-            $document = 'ReleaseNotes.txt';
-        }
-        
         $docProvider = new DocProvider($version);
         if (!$docProvider->exists()) {
             throw new NotFoundException($request, $response);
         }
         
-        // Find the requested document and show it in iframe
-        $doc = $docProvider->findDocumentByPathName($document);
+        $document = $args['document'] ?? $docProvider->getNewAndNoteworthy()->getNiceUrlPath();
+        if ($document == 'ReleaseNotes.html') {
+            return $response->withRedirect('release-notes', 301);
+        }
         
-        //$parsedown = new \Parsedown();
-        //$html = $parsedown->text(file_get_contents($docProvider->getNewAndNoteworthyMarkdown()));
+        $doc = $docProvider->findDocumentByNiceUrlPath($document);
+        if ($doc == null) {
+            throw new NotFoundException($request, $response);
+        }
         
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
             'docProvider' => $docProvider,
-            'documentUrl' => $doc == null ? '' : $doc->getRessourceUrl(),
-            'iframeFullWidth' => !StringUtil::endsWith($document, '.txt'),
-            //'newAndNoteworthyHtml' => $html
+            'documentUrl' => $doc->getRessourceUrl(),
+            'iframeFullWidth' => !StringUtil::endsWith($doc->getRessourceUrl(), '.txt'),
+            'currentNiceUrlPath' => $document,
         ]);
     }
 }

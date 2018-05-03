@@ -14,10 +14,9 @@
     <section id="main" style="padding-bottom:0px;" >
 		<div class="inner">
 			<header><h1>Documentation {{ version }}</h1></header>
-			
 					<ul class="actions">
 						{% for doc in docProvider.releaseDocuments %}
-							<li><a href="{{ doc.Url }}" style="width:200px;" target="_blank" class="button special">{{ doc.Name }}</a></li>
+							<li><a href="{{ doc.Url }}" style="width:200px;" class="button {{ doc.NiceUrlPath != currentNiceUrlPath ? 'special' }}">{{ doc.Name }}</a></li>
 						{% endfor %}
 					</ul>
 				
@@ -32,34 +31,8 @@
 							<li><a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a></li>
 						{% endfor %}
 					</ul>
-			
-				<!-- 
-				{% for doc in docProvider.releaseDocuments %}
-					<a href="{{ doc.Url }}">{{ doc.Name }}</a>
-					| 
-				{% endfor %}
-				<br />
-				{% for doc in docProvider.Books %}
-					<a href="{{ doc.Url }}">{{ doc.Name }}</a>
-					<a href="{{ doc.PdfUrl }}" target="_blank" class="icon fa-file"><span class="label">PDF</span></a>
-					| 
-				{% endfor %}
-				{% for doc in docProvider.ExternalBooks %}
-					<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
-				{% endfor %}
-				 -->
 		</div>
 	</section>
-	
-	
-	<!-- 
-	<section id="main" style="padding-top:0px;">
-		<div class="inner">
-			{{ newAndNoteworthyHtml|raw }}
-		</div>
-	</section>
-	 -->
-	
 	
 	<script type="text/javascript">
 		function resizeIframe(obj) {
