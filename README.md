@@ -24,12 +24,16 @@ Menu entry > Setup > Advanced.
 * Fix Permalinks in Engine Guide
 * Update developerAPI url on update.axonivy.com
 * Move all ReleaseNotes.txt from root to documents folder -> check build
+
 * Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction$ (TODO)
 * Remove parsedown
+
 * PageSpeed
 * FTP Account einschränken
+
 * Entfernen for developers
 * Testen mit blauen Links
+
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
 
 ### Ideas

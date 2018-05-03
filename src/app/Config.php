@@ -19,11 +19,11 @@ class Config {
         
         define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
         
-        $rootDir = '/home/axonivya/data/ivy-releases';
+        $rootDir = '/home/axonivya/data/ivy-releases/ivy';
         if (self::isDevOrTestEnv()) {
-            $rootDir = __DIR__ . '/../../test/data/webroot';
+            $rootDir = __DIR__ . '/../../test/data/webroot/releases/ivy';
         }
-        define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir, 'ivy']));
+        define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
         define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'sprint']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'nightly']));
         
