@@ -26,8 +26,6 @@ Menu entry > Setup > Advanced.
 
 * Twitter Feed einbinden (News)
 
-* Tutorial für erstes Tutorial ein Bild
-
 * Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
 
 * Startseite (Download Buttons Mergen, Unten eventuell eine Kleine Info, Im Header einen Download Knopf mit Version)
