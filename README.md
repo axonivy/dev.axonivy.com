@@ -23,8 +23,6 @@ Menu entry > Setup > Advanced.
 ### After Release
 * Add Links for switching in documentation (oither versions)
 
-* Fix Permalinks in Engine Guide
-
 * Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction$ (TODO)
 * Remove parsedown
 
