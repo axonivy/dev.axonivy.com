@@ -21,9 +21,9 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ### After Release
+* Add Links for switching in documentation (oither versions)
+
 * Fix Permalinks in Engine Guide
-* Update developerAPI url on update.axonivy.com
-* Move all ReleaseNotes.txt from root to documents folder -> check build
 
 * Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction$ (TODO)
 * Remove parsedown

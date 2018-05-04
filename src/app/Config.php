@@ -51,10 +51,10 @@ class Config {
         ]);
         
         define('IVY_VERSIONS', [
-            '7.x' => 'Leading Edge',
-            '7.0' => 'LTS',
+            '7.x' => 'Leading Edge - LE',
+            '7.0' => 'Long Term Support - LTS',
+            '6.0' => 'Long Term Support - LTS',
             '6.x' => 'UNSUPPORTED',
-            '6.0' => 'LTS',
             '5.1' => 'UNSUPPORTED',
             '5.0' => 'UNSUPPORTED',
             '4.3' => 'UNSUPPORTED',
@@ -64,7 +64,7 @@ class Config {
         
         $lts = [];
         foreach (IVY_VERSIONS as $version => $description) {
-            if ($description == 'LTS') {
+            if ($description == 'Long Term Support - LTS') {
                 $lts[] = $version;
             }
         }
