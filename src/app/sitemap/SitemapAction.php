@@ -49,7 +49,7 @@ class SitemapAction
     {
         $sites[] = self::createSite('/doc/latest/'.$path.'/', 1);
         foreach (self::getHtmlFiles($releaseInfo->getPath() . '/documents/'.$path.'/') as $html) {
-            $sites[] = self::createSite('/doc/latest/'.$path.'/' . $html, 0.8);
+            $sites[] = self::createSite('/doc/latest/'.$path . $html, 0.8);
         }
         return $sites;
     }
