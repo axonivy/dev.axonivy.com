@@ -19,7 +19,7 @@ class Config {
         
         define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
         
-        $rootDir = '/home/axonivya/data/ivy-releases/ivy';
+        $rootDir = '/home/axonivya/data/ivy-releases';
         if (self::isDevOrTestEnv()) {
             $rootDir = __DIR__ . '/../../test/data/webroot/releases/ivy';
         }
