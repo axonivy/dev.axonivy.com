@@ -11,8 +11,8 @@ class Config {
         define('CDN_HOST_SPRINT', CDN_HOST . '/sprint/');
         define('CDN_HOST_NIGHTLY', CDN_HOST . '/nightly/');
         
-        $BASE_URL = self::getRequestedBaseUri();
-        $PERMALINK_BASE_URL = $BASE_URL . '/permalink/ivy/';
+        define('BASE_URL', self::getRequestedBaseUri());
+        $PERMALINK_BASE_URL = BASE_URL . '/permalink/ivy/';
         define('PERMALINK_SPRINT', $PERMALINK_BASE_URL . 'sprint/');
         define('PERMALINK_NIGHTLY', $PERMALINK_BASE_URL . 'nightly/');
         define('PERMALINK_STABLE', $PERMALINK_BASE_URL . 'stable/');

@@ -76,10 +76,10 @@ class SitemapAction
         return $files;
     }
     
-    private static function createSite($url, $prio): Site
+    private static function createSite($relativeUrl, $prio): Site
     {
         $site = new Site();
-        $site->url = $url;
+        $site->url =  BASE_URL . $relativeUrl;
         $site->changeFreq = 'daily';
         $site->prio = $prio;
         return $site;
