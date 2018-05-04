@@ -183,13 +183,13 @@ class Website
         
         $container['notFoundHandler'] = function ($c) {
             return function ($request, $response) use ($c) {
-                return $c['view']->render($response, 'templates/error/404.html');
+                return $c['view']->render($response, 'templates/error/404.html')->withStatus(404);
             };
         };
         
         $container['errorHandler'] = function ($c) {
             return function ($request, $response, $exception) use ($c) {
-                return $c['view']->render($response, 'templates/error/500.html', ['message' => $exception->getMessage()]);
+                return $c['view']->render($response, 'templates/error/500.html', ['message' => $exception->getMessage()])->withStatus(500);
             };
         };
     }
