@@ -61,7 +61,10 @@ pipeline {
             
             // create symlinks
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/blob-dev-website /home/axonivya/deployment/$targetFile/src/web/blob"
-            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/ivy-releases /home/axonivya/deployment/$targetFile/src/web/releases"
+
+            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 mkdir /home/axonivya/deployment/$targetFile/src/web/releases"
+            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/ivy-releases /home/axonivya/deployment/$targetFile/src/web/releases/ivy"
+
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/web /home/axonivya/www/prototype.axonivya.myhostpoint.ch/linktoweb"
           }
         }
