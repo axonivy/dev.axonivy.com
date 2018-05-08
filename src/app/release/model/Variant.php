@@ -107,18 +107,9 @@ class Variant
         return '/installation?downloadUrl=' . $this->getDownloadUrl();    
     }
     
-    public function getArchitecture(): string{
-        return $this->architecture;
-    }
-    
     public function getProductName(): string
     {
         return $this->productName;
-    }
-    
-    public function getType(): string
-    {
-        return $this->type;
     }
     
     public function getFileName(): string

@@ -36,48 +36,11 @@ class DocProvider
         return IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . $this->versionNumber;
     }
     
-    /**
-     * For example:
-     * <li> DesignerGuideHtml
-     * <li> EngineGuideHtml
-     * @param string $name
-     * @return AbstractDocument|NULL
-     */
-    // TODO Delete
-    private function findDocumentByPathName(string $pathName): ?AbstractDocument
-    {
-        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pathName) {
-            return $doc->getPath() == $pathName;
-        });
-    }
-    
     public function findDocumentByNiceUrlPath(string $niceUrlPath): ?AbstractDocument
     {
         return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($niceUrlPath) {
             if ($doc instanceof ReleaseDocument) {
                 return $doc->getNiceUrlPath() == $niceUrlPath;
-            }
-            return false;
-        });
-    }
-    
-    // TODO Delete
-    private function findDocumentByPdfName(string $pdfFileName): ?AbstractDocument
-    {
-        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pdfFileName) {
-            if ($doc instanceof Book) {
-                return $doc->getPdfFileName() == $pdfFileName;
-            }
-            return false;
-        });
-    }
-    
-    // TODO Delete
-    private function findExternalBookByPathName(string $pathName): ?ExternalBook
-    {
-        return $this->findDocumentByFilter(function (AbstractDocument $doc) use ($pathName) {
-            if ($doc instanceof ExternalBook) {
-                return $doc->getPath() == $pathName;
             }
             return false;
         });
@@ -199,11 +162,6 @@ class DocProvider
         return $minorVersion . $latest;
     }
     
-    public function getNewAndNoteworthyMarkdown(): string
-    {
-        return StringUtil::createPath([self::createRootPath(), 'doc', 'newAndNoteworthy', 'NewAndNoteworthy.md']);
-    }
-
     private function getReleaseNotes(): ReleaseDocument
     {
         $version = new Version($this->versionNumber);

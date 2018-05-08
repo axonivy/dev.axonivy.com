@@ -20,23 +20,12 @@ But they are needed to add _Annotation_ and _Facet_  to the custom google search
 They could be uploaded to google on <https://cse.google.com/> with user info@ivyteam.ch.
 Menu entry > Setup > Advanced.
 
-### After Release
-* Add Links for switching in documentation (oither versions)
-
-* Remove oboslete code in DocProvider, ReleaseInfo, ReleaseInfoRepository, DocAction$ (TODO)
-* Remove parsedown
-
-* PageSpeed
-* FTP Account einschränken
-
-* Entfernen for developers
-* Testen mit blauen Links
-
-* Add-Ons Seite - Monitor entfernen, Portal entfernen, Worklfow UIs entfernen
-
 ### Ideas
 * Public Roadmap
 * Blog on Medium
 * Features Site
 * Community Site
 * Implement search in single books
+* Documentation: Add Links to switch fast between different versions
+* Design: Try to change links to blue
+* AddOns-Page: Remove Monitor / Remove Portal / Remove Workflow UI's
