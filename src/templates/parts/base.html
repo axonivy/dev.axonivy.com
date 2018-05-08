@@ -34,13 +34,15 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     </head>
     <body>
-    
+    	
 		<header id="header">
 			<div class="inner">
 				<a href="/" class="logo">
-					<img class="logo" style="width:180px;margin-top:20px;" src="/images/misc/axonivy-logo-dev.png" />
-					<span id="navtext" style="display:none;margin-left:190px;">for developers</span>
+					<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" /> 
+					<span id="navtext" style="font-family:Anton;font-size:48px;">DEV</span>
+					<img src="/images/misc/axonivy-logo-dev.png" style="width:180px;position:relative;top:7px;">
 				</a>
+			
 				<nav id="nav">
 					<a class="button special" href="/download">Download {{ CURRENT_LONG_TERM_SUPPORT_VERSION }} / {{ CURRENT_LEADING_EDGE_VERSION }}</a>
 					<a href="/news">News</a>
