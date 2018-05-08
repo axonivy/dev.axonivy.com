@@ -7,6 +7,9 @@
 ## Execute tests
 	docker-compose exec web ./vendor/bin/phpunit
 
+## Big Files
+Please do not commit big files in this repo. If you need to reference binary large objects upload them to blob.axonivy.works.
+
 ## Ressources
 * Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
 * SlimFramework <http://www.slimframework.com>
