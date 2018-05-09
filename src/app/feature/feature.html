@@ -28,12 +28,14 @@
 			<ul class="actions">
 				<li><a href="/download" class="button alt">Download LTS {{ CURRENT_LONG_TERM_SUPPORT_VERSION }} / LE {{ CURRENT_LEADING_EDGE_VERSION }}</a></li>
 				<li><a href="{{ newAndNoteworthyLink }}" class="button alt">New and Noteworthy</a></li>
+				<li><a href="#video" class="button alt">Videos</a></li>
 			</ul>
 		</div>
 	</section>
     
+   	<span id="video"></span>
 	{% for feature in features %}
-		<section id="one">
+		<section id="one" style="padding: 3em 0 2em 0;">
 			<div class="inner-small" style="text-align:center;">
 				<header><h2>{{ feature.title }}</h2></header>
 				<p>{{ feature.description }}</p>
