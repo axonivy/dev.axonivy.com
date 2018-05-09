@@ -1786,32 +1786,32 @@ font-size: 18px;
 	}
 
 	input, select, textarea {
-		color: #afca05;
+		color: #C7D426;
 	}
 
 	a {
-		color: #afca05;
+		color: #C7D426;
 	}
 
 	strong, b {
-		/*color: #afca05;*/
+		/*color: #C7D426;*/
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #afca05;
+		color: #C7D426;
 	}
 
 	blockquote {
-		border-left-color: #afca05;
+		border-left-color: #C7D426;
 	}
 
 	code {
 		background: none;
-		border-color: #afca05;
+		border-color: #C7D426;
 	}
 
 	hr {
-		border-bottom-color: #afca05;
+		border-bottom-color: #C7D426;
 	}
 
 /* Box */
@@ -1836,7 +1836,7 @@ font-size: 18px;
 		}
 
 	.box {
-		border-color: #afca05;
+		border-color: #C7D426;
 	}
 
 /* Button */
@@ -1966,8 +1966,8 @@ font-size: 18px;
 		button.alt,
 		.button.alt {
 			background-color: transparent;
-			box-shadow: inset 0 0 0 2px #afca05;
-			color: #afca05 !important;
+			box-shadow: inset 0 0 0 2px #C7D426;
+			color: #C7D426 !important;
 		}
 
 			input[type="submit"].alt:hover,
@@ -1999,7 +1999,7 @@ font-size: 18px;
 		input[type="button"].special,
 		button.special,
 		.button.special {
-			background-color: #afca05;
+			background-color: #C7D426;
 			color: #ffffff !important;
 		}
 
@@ -2241,7 +2241,7 @@ font-size: 18px;
 	}
 
 	label {
-		color: #afca05;
+		color: #C7D426;
 	}
 
 	input[type="text"],
@@ -2250,7 +2250,7 @@ font-size: 18px;
 	select,
 	textarea {
 		background: none;
-		border-color: #afca05;
+		border-color: #C7D426;
 	}
 
 		input[type="text"]:focus,
@@ -2258,12 +2258,12 @@ font-size: 18px;
 		input[type="email"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #afca05;
-			box-shadow: 0 0 0 1px #afca05;
+			border-color: #C7D426;
+			box-shadow: 0 0 0 1px #C7D426;
 		}
 
 	.select-wrapper:before {
-		color: #afca05;
+		color: #C7D426;
 	}
 
 	input[type="checkbox"] + label,
@@ -2274,20 +2274,20 @@ font-size: 18px;
 		input[type="checkbox"] + label:before,
 		input[type="radio"] + label:before {
 			background: none;
-			border-color: #afca05;
+			border-color: #C7D426;
 		}
 
 	input[type="checkbox"]:checked + label:before,
 	input[type="radio"]:checked + label:before {
-		background-color: #afca05;
-		border-color: #afca05;
+		background-color: #C7D426;
+		border-color: #C7D426;
 		color: #ffffff;
 	}
 
 	input[type="checkbox"]:focus + label:before,
 	input[type="radio"]:focus + label:before {
-		border-color: #afca05;
-		box-shadow: 0 0 0 1px #afca05;
+		border-color: #C7D426;
+		box-shadow: 0 0 0 1px #C7D426;
 	}
 
 	::-webkit-input-placeholder {
@@ -2523,7 +2523,7 @@ font-size: 18px;
 		}
 
 	ul.alt li {
-		border-top-color: #afca05;
+		border-top-color: #C7D426;
 	}
 
 /* Section/Article */
@@ -2648,7 +2648,7 @@ font-size: 18px;
 			}
 
 	table tbody tr {
-		border-color: #afca05;
+		border-color: #C7D426;
 	}
 
 		table tbody tr:nth-child(2n + 1) {
@@ -2660,15 +2660,15 @@ font-size: 18px;
 	}
 
 	table thead {
-		border-bottom-color: #afca05;
+		border-bottom-color: #C7D426;
 	}
 
 	table tfoot {
-		border-top-color: #afca05;
+		border-top-color: #C7D426;
 	}
 
 	table.alt tbody tr td {
-		border-color: #afca05;
+		border-color: #C7D426;
 	}
 
 /* Wrapper */
@@ -2683,7 +2683,7 @@ font-size: 18px;
 		}
 
 		.wrapper.style1 {
-			background-color: #afca05;
+			background-color: #C7D426;
 			color: #f2a3a5;
 		}
 
@@ -2785,7 +2785,7 @@ font-size: 18px;
 				.wrapper.style1 button.special,
 				.wrapper.style1 .button.special {
 					background-color: #ffffff;
-					color: #afca05 !important;
+					color: #C7D426 !important;
 				}
 
 			.wrapper.style1 label {
@@ -2829,7 +2829,7 @@ font-size: 18px;
 			.wrapper.style1 input[type="radio"]:checked + label:before {
 				background-color: #ffffff;
 				border-color: #ffffff;
-				color: #afca05;
+				color: #C7D426;
 			}
 
 			.wrapper.style1 input[type="checkbox"]:focus + label:before,
@@ -2900,7 +2900,7 @@ font-size: 18px;
 			}
 
 			.wrapper.style2 a {
-				color: #afca05;
+				color: #C7D426;
 			}
 
 			.wrapper.style2 strong, .wrapper.style2 b {
@@ -2972,7 +2972,7 @@ font-size: 18px;
 				.wrapper.style2 input[type="button"].special,
 				.wrapper.style2 button.special,
 				.wrapper.style2 .button.special {
-					background-color: #afca05;
+					background-color: #C7D426;
 					color: #ffffff !important;
 				}
 
@@ -3010,8 +3010,8 @@ font-size: 18px;
 				.wrapper.style2 input[type="email"]:focus,
 				.wrapper.style2 select:focus,
 				.wrapper.style2 textarea:focus {
-					border-color: #afca05;
-					box-shadow: 0 0 0 1px #afca05;
+					border-color: #C7D426;
+					box-shadow: 0 0 0 1px #C7D426;
 				}
 
 			.wrapper.style2 .select-wrapper:before {
@@ -3031,15 +3031,15 @@ font-size: 18px;
 
 			.wrapper.style2 input[type="checkbox"]:checked + label:before,
 			.wrapper.style2 input[type="radio"]:checked + label:before {
-				background-color: #afca05;
-				border-color: #afca05;
+				background-color: #C7D426;
+				border-color: #C7D426;
 				color: #ffffff;
 			}
 
 			.wrapper.style2 input[type="checkbox"]:focus + label:before,
 			.wrapper.style2 input[type="radio"]:focus + label:before {
-				border-color: #afca05;
-				box-shadow: 0 0 0 1px #afca05;
+				border-color: #C7D426;
+				box-shadow: 0 0 0 1px #C7D426;
 			}
 
 			.wrapper.style2 ::-webkit-input-placeholder {
@@ -3157,7 +3157,7 @@ font-size: 18px;
 			padding: 0;
 			position: absolute;
 			top: 0;
-			color: #afca05;
+			color: #C7D426;
 			font-size: 1.75em;
 			text-transform: none;
 			font-weight: normal;
@@ -3384,7 +3384,7 @@ font-size: 18px;
 /* Banner */
 
 	#banner {
-		background-color: #afca05;
+		background-color: #C7D426;
 		color: #f2a3a5;
 		padding: 13em 0 11em 0;
 		background-color: #0c0c0c;
@@ -3491,7 +3491,7 @@ font-size: 18px;
 			#banner button.special,
 			#banner .button.special {
 				background-color: #ffffff;
-				color: #afca05 !important;
+				color: #C7D426 !important;
 			}
 
 		#banner:after {
@@ -3771,10 +3771,10 @@ font-size: 18px;
 /* Footer */
 
 	#footer {
-		background-color: #afca05;
+		background-color: #C7D426;
 		color: #fff;
 		padding: 4em 0 2em 0;
-		background: #afca05;
+		background: #C7D426;
 	}
 
 		#footer input, #footer select, #footer textarea {
@@ -3871,7 +3871,7 @@ font-size: 18px;
 			#footer button.special,
 			#footer .button.special {
 				background-color: #ffffff;
-				color: #afca05 !important;
+				color: #C7D426 !important;
 			}
 
 		#footer label {
@@ -3915,7 +3915,7 @@ font-size: 18px;
 		#footer input[type="radio"]:checked + label:before {
 			background-color: #ffffff;
 			border-color: #ffffff;
-			color: #afca05;
+			color: #C7D426;
 		}
 
 		#footer input[type="checkbox"]:focus + label:before,
