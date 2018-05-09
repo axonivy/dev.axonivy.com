@@ -7,12 +7,10 @@ Allow from all
 
 RewriteEngine On
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^download/([0-9][^/]+)/(.+)$ /releases/ivy/$1/downloads/$2 [L]
+RewriteRule ^download/nightly/(.+)$ /releases/ivy/nightly/$1 [L]
+RewriteRule ^download/sprint/(.+)$ /releases/ivy/sprint/$1 [L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^doc/([^/]+)/(.+)$ /releases/ivy/$1/documents/$2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
