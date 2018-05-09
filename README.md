@@ -32,3 +32,4 @@ Menu entry > Setup > Advanced.
 * Documentation: Add Links to switch fast between different versions
 * Design: Try to change links to blue
 * AddOns-Page: Remove Monitor / Remove Portal / Remove Workflow UI's
+* Mark Top-Level Navigation as Active (Color to green) if you are on a specific site
