@@ -12,16 +12,19 @@
 	{
 		"title": "Integrate with other systems",
 		"description": "The Axon.ivy Digital Business Platform integrates well with countless different 3rd party systems (e.g. REST, Web Services, Databases, SAP, Email, Reporting).",
-		"imageUrl": "/images/features/twitter-rest-sample.png"
+		"imageUrl": "/images/features/twitter-rest-sample.png",
+		"imageMaxWidth": "611px"
 	},
 	{
 		"title": "Solve complex problems",
 		"description": "With our Java integration you always have the ability to break out of our predefined tooling and use advanced features of Tomcat, JPA, JSF, JAX-RS or whatever you require.",
-		"imageUrl": "/images/features/java-rest.png"
+		"imageUrl": "/images/features/java-rest.png",
+		"imageMaxWidth": "890px"
 	},
 	{
 		"title": "Monitor your engines",
 		"description": "We provide you effective monitoring and logging interfaces to give you confidence that the application is healthy and accessible.",
-		"imageUrl": "/images/features/monitoring_visualvm.gif"
+		"imageUrl": "/images/features/monitoring_visualvm.gif",
+		"imageMaxWidth": "1080px"
 	}
 ]

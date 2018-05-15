@@ -47,7 +47,9 @@
 				{% endif %}
 				
 				{% if not feature.imageUrl is empty %}
-					<span class="image fit"><img src="{{ feature.imageUrl }}" /></span>
+					<span class="image fit">
+						<center><img src="{{ feature.imageUrl }}" style="max-width:{{ feature.imageMaxWidth }};" /></center>
+					</span>
 				{% endif %}
 			</div>
 		</section>
