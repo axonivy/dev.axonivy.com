@@ -24,7 +24,7 @@ They could be uploaded to google on <https://cse.google.com/> with user info@ivy
 Menu entry > Setup > Advanced.
 
 ### Ideas
-* Public Roadmap
+* Public Roadmap <http://www.wptimeline.io/jqueryversion/demo/18.html>
 * Blog on Medium
 * Features Site
 * Community Site
