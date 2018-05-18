@@ -78,6 +78,13 @@ class AppTester
         return $this;
     }
     
+    public function permanentRedirect(string $url): AppTester
+    {
+        self::statusCode(301);
+        self::header('Location', $url);
+        return $this;
+    }
+    
     public function contentType(string $expectedContentType): AppTester
     {
         Assert::assertEquals($expectedContentType, $this->response->getHeader('Content-Type')[0]);

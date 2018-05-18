@@ -15,6 +15,7 @@ use app\release\SecurityVulnerabilityAction;
 use app\support\SupportAction;
 use app\api\ApiCurrentRelease;
 use app\codecamp\CodeCampAction;
+use app\community\CommunityAction;
 use app\devday\DevDayAction;
 use app\tutorial\TutorialAction;
 use app\tutorial\gettingstarted\TutorialGettingStartedAction;
@@ -166,6 +167,9 @@ class Website
         $app->get('/sitemap.xml', SitemapAction::class);
         
         $app->get('/news', NewsAction::class);
+        
+        $app->get('/community', CommunityAction::class)->setName('community');
+        $this->installRedirect('/download/community.html', 'community');
     }
 
     private function installRedirect($oldPath, $pathFor)

@@ -27,7 +27,6 @@ Menu entry > Setup > Advanced.
 * Public Roadmap <http://www.wptimeline.io/jqueryversion/demo/18.html>
 * Blog on Medium
 * Features Site
-* Community Site
 * Implement search in single books
 * Documentation: Add Links to switch fast between different versions
 * Documentation: Add Link to Release Document from /download
