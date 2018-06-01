@@ -124,7 +124,8 @@ class Website
     private function updateDocLatestSymlink()
     {
         $latestMinor = DocProvider::findLatestMinor();
-        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
+        // $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
+        $latestDoc = IVY_RELEASE_DIRECTORY . '/7.1.latest';
         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
         shell_exec($cmd);
