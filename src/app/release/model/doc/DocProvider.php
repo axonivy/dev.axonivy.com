@@ -132,15 +132,14 @@ class DocProvider
      * returns e.g. 7.1.latest
      * @return string
      */
-    public static function findLatestMinor(): string
+    public static function findSecondLatestMinor(): string
     {
         $versionNumbers = [];
+        $latest = '.latest';
         
         $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*'), 'is_dir');
         foreach ($directories as $directory) {
             $versionNumber = basename($directory);
-            
-            $latest = '.latest';
             
             // drop e.g. nightly or sprint
             if (!StringUtil::endsWith($versionNumber, $latest)) {
@@ -154,7 +153,7 @@ class DocProvider
             return version_compare($versionNumber1, $versionNumber2);
         });
         
-        $minorVersion = ArrayUtil::getLastElementOrNull($versionNumbers);
+        $minorVersion = ArrayUtil::getSecondLastElementOrNull($versionNumbers);
         
         if (empty($minorVersion)) {
             return '';
