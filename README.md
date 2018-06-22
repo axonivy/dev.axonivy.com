@@ -7,6 +7,10 @@
 ## Execute tests
 	docker-compose exec web ./vendor/bin/phpunit
 
+## latest doc link
+The latest doc link </doc/latest> has a very special handling.
+This will updated on each request to the page in Website::updateDocLatestSymlink
+
 ## Big Files
 Please do not commit big files in this repo. If you need to reference binary large objects upload them to blob.axonivy.works.
 

@@ -123,7 +123,10 @@ class Website
      */
     private function updateDocLatestSymlink()
     {
-        $latestMinor = DocProvider::findSecondLatestMinor();
+        $latestMinor = DocProvider::findLatestMinor();
+        if (empty($latestMinor)) {
+            return;
+        }
         $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;

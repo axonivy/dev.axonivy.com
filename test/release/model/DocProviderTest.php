@@ -8,9 +8,9 @@ use app\release\model\doc\DocProvider;
 class DocProviderTest extends TestCase
 {
 
-    public function testFindSecondLatestMinor()
+    public function testFindLatestMinor()
     {
-        $latestMinor = DocProvider::findSecondLatestMinor();
+        $latestMinor = DocProvider::findLatestMinor();
         Assert::assertEquals('7.0.latest', $latestMinor);
     }
 }
