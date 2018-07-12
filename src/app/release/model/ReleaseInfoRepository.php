@@ -50,7 +50,7 @@ class ReleaseInfoRepository
             if (isset(UNSAFE_RELEASES[$versionNumber])) {
                 $safeVersion = UNSAFE_RELEASES[$versionNumber];
             }
-            $fileNames = glob($directory . '/downloads/*.zip');
+            $fileNames = glob($directory . '/downloads/*.{zip,deb}');
             $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames, $safeVersion);
         }
         $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst($releaseInfos);
