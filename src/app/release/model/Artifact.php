@@ -28,7 +28,7 @@ class Artifact
     
     public static function createArtifacts(string $artifactsDirectory, string $cdnBaseUrl, string $permalinkBaseUrl): array
     {
-        $files = glob($artifactsDirectory . DIRECTORY_SEPARATOR . '*.zip');
+        $files = glob($artifactsDirectory . DIRECTORY_SEPARATOR . '*.{zip,deb}', GLOB_BRACE);
         $releaseInfo = new ReleaseInfo('', $files, '');
         return self::createArtifactsFromReleaseInfo($releaseInfo, $cdnBaseUrl, $permalinkBaseUrl);
     }
