@@ -1,29 +1,29 @@
 [
 	{
 		"title": "Visualize your business processes",
-		"description": "The Axon.ivy Digital Business Platform allows you to document business processes fast and intuitive. A shared view on users, roles, departments and technical systems that are involved in a business process improves your work.",
+		"description": "The Axon.ivy Digital Business Platform allows you to document business processes quickly and intuitively. A shared view on all the users, roles, departments and technical systems that are involved in a business process simplifies the task.",
 		"videoUrl": "https://player.vimeo.com/video/236916642"
 	},
 	{
 		"title": "Automate your business processes",
-		"description": "Documented processes are good. But what you really want is to drive your highly valuable processes automatically. An initial application that leads users through the process can be generated without the need to hire a software engineer.",
+		"description": "Documenting your processes is good. But what you really want is to automate your high-value processes. Build applications that lead users through processes without the need to hire a software engineer.",
 		"videoUrl": "https://player.vimeo.com/video/236916913"
 	},
 	{
 		"title": "Integrate with other systems",
-		"description": "The Axon.ivy Digital Business Platform integrates well with countless different 3rd party systems (e.g. REST, Web Services, Databases, SAP, Email, Reporting).",
+		"description": "The Axon.ivy Digital Business Platform integrates well with countless 3rd party systems (e.g. REST, Web Services, Databases, SAP, Email, Reporting).",
 		"imageUrl": "/images/features/twitter-rest-sample.png",
 		"imageMaxWidth": "611px"
 	},
 	{
 		"title": "Solve complex problems",
-		"description": "With our Java integration you always have the ability to break out of our predefined tooling and use advanced features of Tomcat, JPA, JSF, JAX-RS or whatever you require.",
+		"description": "With our Java integration you have the ability to break out of our predefined tooling and use the advanced features of Tomcat, JPA, JSF, JAX-RS and more.",
 		"imageUrl": "/images/features/java-rest.png",
 		"imageMaxWidth": "890px"
 	},
 	{
 		"title": "Monitor your engines",
-		"description": "We provide you effective monitoring and logging interfaces to give you confidence that the application is healthy and accessible.",
+		"description": "We provide insightful and effective monitoring and logging interfaces that give you confidence that the application is healthy and accessible.",
 		"imageUrl": "/images/features/monitoring_visualvm.gif",
 		"imageMaxWidth": "1080px"
 	}
