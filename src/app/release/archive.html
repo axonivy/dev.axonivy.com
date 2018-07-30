@@ -49,16 +49,16 @@
 									{% endif %}
 								
 									{% for variant in releaseInfo.Variants %}
-										<a href="{{ variant.DownloadUrl }}"><span class="icon fa-download"> </span></a>&nbsp;{{ variant.FileName }}<br />
+										<a href="{{ variant.DownloadUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;{{ variant.FileName }}<br />
 									{% endfor %}
 								</td>
 								<td style="min-width:200px;">
 									{% if releaseInfo.DocProvider.hasDocuments %}
-										<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fa-file"> </span></a>&nbsp;Documentation<br />
+										<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fas fa-file"> </span></a>&nbsp;Documentation<br />
 									{% endif %}
 									{% if releaseInfo.hasHotfix %}
-										<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fa-download"> </span></a>&nbsp;Hotfix<br />
-										<a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fa-file"> </span></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
+										<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;Hotfix<br />
+										<a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fas fa-file"> </span></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
 									{% endif %}
 								</td>
 							</tr>
