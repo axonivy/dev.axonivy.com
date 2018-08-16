@@ -28,19 +28,19 @@ class SprintNightlyAction
             $name = 'Nightly Build';
             $urlVersion = 'nightly';
             $p2Url = 'https://file.axonivy.rocks/p2/nightly/';
-            $dockerImage = 'axonivydev/axonivy-engine:nightly';
+            $dockerImage = 'axonivy/axonivy-engine:nightly';
         } else if ($version == 'sprint-release') {
             $artifacts = ReleaseInfoRepository::getSprintArtifacts();
             $name = 'Sprint Release';
             $urlVersion = 'sprint';
             $p2Url = 'https://file.axonivy.rocks/p2/sprint/';
-            $dockerImage = 'axonivydev/axonivy-engine:sprint';
+            $dockerImage = 'axonivy/axonivy-engine:sprint';
         } else if ($version == 'stable') {
             $artifacts = ReleaseInfoRepository::getLatest()->getArtifacts();
             $name = 'Stable Release';
             $urlVersion = 'stable';
             $testingPurpose = false;
-            $dockerImage = 'axonivydev/axonivy-engine';
+            $dockerImage = 'axonivy/axonivy-engine';
         } else {
             throw new \InvalidArgumentException($version . ' is not supported');
         }
