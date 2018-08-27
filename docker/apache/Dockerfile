@@ -3,12 +3,12 @@ FROM php:7.2.4-apache
 RUN a2enmod rewrite
 
 # used for composer
-RUN apt-get update && \
+RUN apt-get install -y zip unzip && \
     apt-get install -y git
 	
 # used for composer
-RUN apt-get update && \
-    apt-get install -y zip unzip
+#RUN apt-get update && \
+#    apt-get install -y zip unzip
 
 # composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
