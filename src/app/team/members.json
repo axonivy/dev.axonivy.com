@@ -12,12 +12,6 @@
 		"function": "Core Developer"
 	},
 	{
-		"name": "Barbara Brugger",
-		"imgSrc": "/images/team/barbara.jpg",
-		"education": "Certified Expert in Information Technology",
-		"function": "Customer Support"
-	},
-	{
 		"name": "Bruno Bütler",
 		"imgSrc": "/images/team/bruno.jpg",
 		"education": "Inf. Ing. HTL",
@@ -39,6 +33,16 @@
 		"imgSrc": "/images/team/denis.jpg",
 		"education": "Apprentice in Information Technology",
 		"function": "Graduand Core Developer"
+	},
+	{
+		"name": "Lukas Lieb",
+		"education": "B.Sc. Computer Science",
+		"function": "Core Developer"
+	},
+	{
+		"name": "Oliver Heer",
+		"education": "B.Sc. Computer Science",
+		"function": "Core Developer"
 	},
 	{
 		"name": "Reguel Wermelinger",
