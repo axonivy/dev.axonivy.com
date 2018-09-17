@@ -16,8 +16,15 @@
 			<div class="row">
 				{% for employee in employees %}
 					<div class="4u 12u$(xsmall)">
-						<header><h3>{{ employee.name }}</h3></header>	
-						<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+						<header><h3>{{ employee.name }}</h3></header>
+						
+						{% if employee.imgSrc %}
+							<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+						{% else %}
+							<div style="width:101px;height:170px;border:1px solid #C7D426;text-align:center;">
+							</div>
+						{% endif %}
+							
 						<p>{{ employee.education }}<br />{{ employee.function }}</p>
 					</div>
 				{% endfor %}
