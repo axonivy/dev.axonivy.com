@@ -127,7 +127,7 @@ class Website
         if ($releaseInfo == null) {
             return;
         }
-        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $releaseInfo->getPathOrLatestPath();
+        $latestDoc = $releaseInfo->getPathOrLatestPath();
         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
         shell_exec($cmd);
