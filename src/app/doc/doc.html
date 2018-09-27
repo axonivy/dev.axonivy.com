@@ -13,8 +13,22 @@
     
     <section id="main" style="padding-bottom:0px;" >
 		<div class="inner">
-			<header><h1>Documentation {{ version }}</h1></header>
-					<ul class="actions">
+			<header>
+				<h1>Documentation {{ version }}</h1>
+			</header>
+			
+					<span style="font-size:12px;">
+						Switch to: 
+						<select name="version" id="version" style="width:110px;display:inline;" onchange="location = this.value;">
+							{% for docLink in docLinks %}
+								<a href="#">
+									<option value="{{ docLink.url }}" {{ (currentDocUrl starts with docLink.url) ? 'selected' : '' }}>{{ docLink.displayText }}</option>
+								</a>
+							{% endfor %}
+						</select>
+					</span>
+			
+					<ul class="actions" style="margin-top:10px;">
 						{% for doc in docProvider.releaseDocuments %}
 							<li><a href="{{ doc.Url }}" style="width:200px;" class="button {{ doc.NiceUrlPath != currentNiceUrlPath ? 'special' }}">{{ doc.Name }}</a></li>
 						{% endfor %}
@@ -31,7 +45,11 @@
 							<li><a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a></li>
 						{% endfor %}
 					</ul>
+					
+					
+					
 		</div>
+		
 	</section>
 	
 	<script type="text/javascript">

@@ -3,6 +3,7 @@ namespace app\doc;
 
 use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
+use app\release\model\ReleaseInfoRepository;
 use app\release\model\doc\DocProvider;
 use Slim\Http\Response;
 use app\util\StringUtil;
@@ -34,6 +35,8 @@ class DocAction
         if ($doc == null) {
             throw new NotFoundException($request, $response);
         }
+
+        $docLinks = $this->getDocLinks();
         
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
@@ -41,6 +44,36 @@ class DocAction
             'documentUrl' => $doc->getRessourceUrl(),
             'iframeFullWidth' => !StringUtil::endsWith($doc->getRessourceUrl(), '.txt'),
             'currentNiceUrlPath' => $document,
+            
+            'docLinks' => $docLinks,
+            'currentDocUrl' => $_SERVER['REQUEST_URI']
         ]);
+    }
+    
+    private function getDocLinks(): array {
+        $docUrls = ['latest' => '/doc/latest'];
+        
+        $releaseInfo = ReleaseInfoRepository::getLatest();
+        if ($releaseInfo != null) {
+            $docUrls[$releaseInfo->getVersion()->getMinorVersion()] = $releaseInfo->getVersion()->getMinorVersion() . '.latest';
+        }
+        foreach (LTS_VERSIONS as $ltsVersion) {
+            $docUrls[$ltsVersion] = '/doc/' . $ltsVersion . '.latest';
+        }
+        
+        $docLinks = [];
+        foreach ($docUrls as $text => $url) {
+            $docLinks[] = $this->createDocLink(
+                $url,
+                $text);
+        }
+        return $docLinks;
+    }
+    
+    private function createDocLink($url, $text) {
+        return [
+            'url' => $url,
+            'displayText' => $text
+        ];
     }
 }
