@@ -51,7 +51,7 @@ class DocAction
     }
     
     private function getDocLinks(): array {
-        $docUrls = ['latest' => '/doc/latest'];
+        $docUrls = [];
         
         $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
