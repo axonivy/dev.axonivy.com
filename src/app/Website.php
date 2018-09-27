@@ -127,27 +127,10 @@ class Website
         if ($releaseInfo == null) {
             return;
         }
-        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $releaseInfo->getVersion()->getVersionNumber();
+        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $releaseInfo->getPathOrLatestPath();
         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
         shell_exec($cmd);
-        
-        
-        // /doc/latest -> /doc/7.1.latest        (last released version)
-        
-        
-//         $latestMinor = DocProvider::findLatestMinor();
-//         if (empty($latestMinor)) {
-//             return;
-//         }
-//         $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
-//         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
-//         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
-//         shell_exec($cmd);
-        
-        // /doc/dev -> 
-        
-        
     }
     
     private function installRoutes()

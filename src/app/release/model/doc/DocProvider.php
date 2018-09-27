@@ -128,43 +128,6 @@ class DocProvider
         return '/releases/ivy/' . $this->versionNumber . '/documents';
     }
     
-    /**
-     * returns e.g. 7.1.latest
-     * @return string
-     */
-    public static function findLatestMinor(): string
-    {
-        $versionNumbers = [];
-        $latest = '.latest';
-        
-        $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*'), 'is_dir');
-        foreach ($directories as $directory) {
-            
-            $versionNumber = basename($directory);
-            
-            if (!StringUtil::endsWith($versionNumber, $latest)) {
-                continue;
-            }
-
-            if (!file_exists($directory . DIRECTORY_SEPARATOR . 'latest.ready')) {
-                continue;
-            }
-            
-            $versionNumbers[] = substr($versionNumber, 0, -strlen($latest));
-        }
-        
-        usort($versionNumbers, function ($versionNumber1, $versionNumber2) {
-            return version_compare($versionNumber1, $versionNumber2);
-        });
-        
-        $minorVersion = ArrayUtil::getLastElementOrNull($versionNumbers);
-        
-        if (empty($minorVersion)) {
-            return '';
-        }
-        return $minorVersion . $latest;
-    }
-    
     private function getReleaseNotes(): ReleaseDocument
     {
         $version = new Version($this->versionNumber);
