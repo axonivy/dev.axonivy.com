@@ -117,20 +117,37 @@ class Website
     }
     
     /**
-     * in each request we very that the symlink /doc/latest points to the latest doc folder
+     * in each request we very that the symlink /doc/latest points to the latest release doc folder
      * - this should be done when uploading a release, but there we have only ftp
      * - can't be done properly with .htaccess serving
      */
     private function updateDocLatestSymlink()
     {
-        $latestMinor = DocProvider::findLatestMinor();
-        if (empty($latestMinor)) {
+        $releaseInfo = ReleaseInfoRepository::getLatest();
+        if ($releaseInfo == null) {
             return;
         }
-        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
+        $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $releaseInfo->getVersion()->getVersionNumber();
         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
         shell_exec($cmd);
+        
+        
+        // /doc/latest -> /doc/7.1.latest        (last released version)
+        
+        
+//         $latestMinor = DocProvider::findLatestMinor();
+//         if (empty($latestMinor)) {
+//             return;
+//         }
+//         $latestDoc = IVY_RELEASE_DIRECTORY . '/' . $latestMinor;
+//         $symlink = IVY_RELEASE_DIRECTORY . '/latest';
+//         $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
+//         shell_exec($cmd);
+        
+        // /doc/dev -> 
+        
+        
     }
     
     private function installRoutes()
