@@ -55,7 +55,7 @@ class DocAction
         
         $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
-            $docUrls[$releaseInfo->getVersion()->getMinorVersion()] = '/doc/' . $releaseInfo->getVersion()->getMinorVersion() . '.latest';
+            $docUrls[$releaseInfo->getVersion()->getMinorVersion()] = '/doc/' . $releaseInfo->getVersion()->getBugfixVersion();
         }
         foreach (LTS_VERSIONS as $ltsVersion) {
             $docUrls[$ltsVersion] = '/doc/' . $ltsVersion . '.latest';

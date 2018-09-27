@@ -2,7 +2,6 @@
 namespace app\release\model\doc;
 
 use app\util\StringUtil;
-use app\util\ArrayUtil;
 use app\release\model\Version;
 
 class DocProvider
