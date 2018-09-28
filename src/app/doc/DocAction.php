@@ -50,15 +50,18 @@ class DocAction
     }
     
     private function getDocLinks(): array {
+        $DOCPREFIX = '/doc';
+        
         $docUrls = [];
         
         $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
-            $docUrls[$releaseInfo->getVersion()->getMinorVersion()] = '/doc/' . $releaseInfo->getVersion()->getBugfixVersion();
+            $docUrls[$releaseInfo->getVersion()->getMinorVersion()] = $DOCPREFIX;
         }
         foreach (LTS_VERSIONS as $ltsVersion) {
-            $docUrls[$ltsVersion] = '/doc/' . $ltsVersion . '.latest';
+            $docUrls[$ltsVersion] = $DOCPREFIX . '/' . $ltsVersion . '.latest';
         }
+        $docUrls['dev'] = $DOCPREFIX . '/dev';
         
         $docLinks = [];
         foreach ($docUrls as $text => $url) {

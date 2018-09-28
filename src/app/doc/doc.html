@@ -15,11 +15,8 @@
 		<div class="inner">
 		
 			<div style="text-align:right;position:relative;top:-20px; height: 0;">
-				Switch to: 
 				{% for docLink in docLinks %}
-					<a href="{{ docLink.url }}">
-						{{ docLink.displayText }} 
-					</a>
+					<a href="{{ docLink.url }}">{{ docLink.displayText }}</a>
 					{% if not loop.last %}|{% endif %}
 				{% endfor %}
 			</div>
