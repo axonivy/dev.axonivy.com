@@ -45,8 +45,7 @@ class DocAction
             'iframeFullWidth' => !StringUtil::endsWith($doc->getRessourceUrl(), '.txt'),
             'currentNiceUrlPath' => $document,
             
-            'docLinks' => $docLinks,
-            'currentDocUrl' => $_SERVER['REQUEST_URI']
+            'docLinks' => $docLinks
         ]);
     }
     
