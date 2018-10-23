@@ -39,7 +39,7 @@ class Artifact
         foreach ($releaseInfo->getVariants() as $variant) {
             $fileName = $variant->getFileName();
             $downloadUrl = $cdnBaseUrl . $variant->getFileName();
-            $permalink = $permalinkBaseUrl . (new Variant($fileName))->getFileNameInLatestFormat();
+            $permalink = $permalinkBaseUrl .  Variant::create($fileName)->getFileNameInLatestFormat();
             
             $artifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
         }

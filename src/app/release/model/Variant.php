@@ -1,6 +1,8 @@
 <?php
 namespace app\release\model;
 
+use app\util\StringUtil;
+
 class Variant
 {
     public const PRODUCT_NAME_ENGINE = 'Engine';
@@ -9,32 +11,43 @@ class Variant
     public const TYPE_WINDOWS = 'Windows';
     public const TYPE_LINUX = 'Linux';
     
-    private const ARCHITECTURE_X64 = 'x64';
-    private const ARCHITECTURE_X86 = 'x86';
+    public const ARCHITECTURE_X64 = 'x64';
+    public const ARCHITECTURE_X86 = 'x86';
     
-    private $fileName;
-    private $productName;
-    private $versionNumber;
-    private $type;
-    private $architecture;
+    protected $fileName;
+    protected $productName;
+    protected $versionNumber;
+    protected $type;
+    protected $architecture;
     
-    private $originaProductNamelPrefix;
-    private $originalTypeString;
+    protected $originaProductNamelPrefix;
+    protected $originalTypeString;
     
-    public function __construct(string $fileName)
+    public static function create(string $fileName): Variant
+    {
+        if (StringUtil::endsWith($fileName, 'deb'))
+        {
+            return new VariantDeb($fileName);
+        }
+        else
+        {
+            return new Variant($fileName);
+        }
+    }
+
+    private function __construct(string $fileName)
     {
         $this->fileName = $fileName; // AxonIvyDesigner6.4.0.52683_Windows_x86.zip
-        
+
         $filename = pathinfo($fileName, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86
-        
         $fileNameArray = explode('_', $filename);
         $this->architecture = end($fileNameArray); // x86
-        
+
         $typeParts = array_slice($fileNameArray, 1, -1); // [Windows] or [Osgi All]
         $this->type = implode(' ', $typeParts); // Windows or Osgi All
         $this->originalTypeString = implode('_', $typeParts);
-        
-        $productNameVersion = $fileNameArray[0]; //  AxonIvyDesigner6.4.0.52683
+
+        $productNameVersion = $fileNameArray[0]; //AxonIvyDesigner6.4.0.52683
         $productNameVersionArray = preg_split('/(?=\d)/', $productNameVersion, 2);
         $this->originaProductNamelPrefix = $productNameVersionArray[0];
         $this->productName = str_replace('AxonIvy', '', $this->originaProductNamelPrefix);
@@ -125,5 +138,30 @@ class Variant
     private function getFileExtension()
     {
         return pathinfo($this->fileName, PATHINFO_EXTENSION);
+    }
+}
+
+class VariantDeb extends Variant
+{
+    
+    public function __construct(string $fileName)
+    {
+        $this->fileName = $fileName; // AxonIvyDesigner6.4.0.52683_Windows_x86.zip or axonivy-engine-7x_7.2.0.60027.deb
+        
+        $filename = pathinfo($fileName, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86 or axonivy-engine-7x_7.2.0.60027
+        
+        $fileNameArray = explode('_', $filename);
+        $this->architecture = Variant::ARCHITECTURE_X64;
+        $this->type = "Debian";
+        $this->originalTypeString = "Debian";
+        
+        $this->originaProductNamelPrefix = 'axonivy-engine';
+        $this->productName = 'axonivy-engine';
+        $this->versionNumber = end($fileNameArray);
+    }
+    
+    public function getFileNameInLatestFormat(): string
+    {
+        return $this->originaProductNamelPrefix . '-latest.deb';
     }
 }

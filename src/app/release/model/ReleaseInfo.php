@@ -15,7 +15,7 @@ class ReleaseInfo
         $this->version = new Version($versionNumber);
         $this->variants = [];
         foreach ($variantNames as $variantName) {
-            $this->variants[] = new Variant($variantName);
+            $this->variants[] = Variant::create($variantName);
         }
         $this->safeVersion = $safeVersion;
     }
