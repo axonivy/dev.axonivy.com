@@ -19,11 +19,11 @@
 							</p>
 							
 							{% if designerVariantLTS is not empty %}
-							<a href="{{ designerVariantLTS.InstallationUrl }}" class="button special">Designer {{ designerVariantLTS.Version.DisplayVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }} (LTS)</a>
+							<a href="{{ designerVariantLTS.InstallationUrl }}" title="{{ designerVariantLTS.FileName }}" class="button special">Designer {{ designerVariantLTS.Version.DisplayVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }} (LTS)</a>
 							{% endif %}
 
 							{% if designerVariantLE is not empty %}
-							<a href="{{ designerVariantLE.InstallationUrl }}" class="button">Designer {{ designerVariantLE.Version.DisplayVersion }} (LE)</a>
+							<a href="{{ designerVariantLE.InstallationUrl }}" title="{{ designerVariantLE.FileName }}" class="button">Designer {{ designerVariantLE.Version.DisplayVersion }} (LE)</a>
 							{% endif %}
 							<p>
 								<a href="/download/archive">other version and platforms</a>
@@ -42,7 +42,7 @@
 							</p>
 							
 							{% if engineVariantLTS is not empty %}
-							<a href="{{ engineVariantLTS.DownloadUrl }}" title="{{ engineVariantLE.FileName }}" class="button special">Engine.{{ engineVariantLE.FileExtension }} {{ engineVariantLTS.Version.DisplayVersion }} (LTS)
+							<a href="{{ engineVariantLTS.DownloadUrl }}" title="{{ engineVariantLTS.FileName }}" class="button special">Engine.{{ engineVariantLE.FileExtension }} {{ engineVariantLTS.Version.DisplayVersion }} (LTS)
 							</a>
 							{% endif %}
 							
