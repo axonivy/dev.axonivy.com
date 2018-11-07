@@ -136,7 +136,7 @@ class Variant
         return $this->originaProductNamelPrefix . '-latest_' . $this->originalTypeString . '_' . $this->architecture . '.' . $this->getFileExtension();
     }
     
-    private function getFileExtension()
+    public function getFileExtension()
     {
         return pathinfo($this->fileName, PATHINFO_EXTENSION);
     }

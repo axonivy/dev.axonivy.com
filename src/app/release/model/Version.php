@@ -82,4 +82,31 @@ class Version
         $v = array_slice($v, 1, 1);
         return implode('.', $v);
     }
+
+    /**
+     * Returns only the Bugfix number of the full version string.
+     *
+     * @return string
+     */
+    public function getBugfixNumber(): string
+    {
+        $v = explode('.', $this->versionNumber);
+        $v = array_slice($v, 2, 1);
+        return implode('.', $v);
+    }
+    
+    /**
+     * Returns the display version. e.g. for 7.0.0 -> 7.0, for 7.0.1 -> 7.0.1
+     * 
+     * @return string
+     */
+    public function getDisplayVersion(): string
+    {
+        $bugFixNumber = $this->getBugfixNumber();
+        if ($bugFixNumber == '0')
+        {
+            return $this->getMinorVersion();
+        }
+        return $this->getBugfixVersion();
+    }
 }

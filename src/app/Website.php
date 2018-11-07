@@ -84,16 +84,16 @@ class Website
         // global variables
         $view = $container['view'];
         
-        $version = $this->getBugFixVersion(ReleaseInfoRepository::getLatest());
+        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
         $view->getEnvironment()->addGlobal('CURRENT_LEADING_EDGE_VERSION', $version);
         
-        $version = $this->getBugFixVersion(ReleaseInfoRepository::getLatestLongTermSupport());
+        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
         $view->getEnvironment()->addGlobal('CURRENT_LONG_TERM_SUPPORT_VERSION', $version);
     }
     
-    private function getBugFixVersion(?ReleaseInfo $info): string
+    private function getDisplayVersion(?ReleaseInfo $info): string
     {
-        return $info == null ? '' : $info->getVersion()->getBugfixVersion();
+        return $info == null ? '' : $info->getVersion()->getDisplayVersion();
     }
     
     /**
