@@ -10,6 +10,7 @@ class Variant
     
     public const TYPE_WINDOWS = 'Windows';
     public const TYPE_LINUX = 'Linux';
+    public const TYPE_DEBIAN = 'Deb';
     
     public const ARCHITECTURE_X64 = 'x64';
     public const ARCHITECTURE_X86 = 'x86';
@@ -152,8 +153,8 @@ class VariantDeb extends Variant
         
         $fileNameArray = explode('_', $filename);
         $this->architecture = Variant::ARCHITECTURE_X64;
-        $this->type = "Debian";
-        $this->originalTypeString = "Debian";
+        $this->type = Variant::TYPE_DEBIAN;
+        $this->originalTypeString = Variant::TYPE_DEBIAN;
         
         $this->originaProductNamelPrefix = 'axonivy-engine';
         $this->productName = 'axonivy-engine';
