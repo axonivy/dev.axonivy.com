@@ -105,6 +105,10 @@ class ReleaseInfo
         $variant = null;
         if (UserAgentDetector::isOsLinux()) {
             $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_DEBIAN);
+            if ($variant == null)
+            {
+                $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_LINUX);
+            }
         }
         if (! UserAgentDetector::isOsLinux() || $variant == null) {
             $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_WINDOWS);
