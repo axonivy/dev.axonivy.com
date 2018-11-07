@@ -156,13 +156,13 @@ class VariantDeb extends Variant
         $this->type = Variant::TYPE_DEBIAN;
         $this->originalTypeString = Variant::TYPE_DEBIAN;
         
-        $this->originaProductNamelPrefix = 'axonivy-engine';
-        $this->productName = 'axonivy-engine';
+        $this->originaProductNamelPrefix = Variant::PRODUCT_NAME_ENGINE;
+        $this->productName = Variant::PRODUCT_NAME_ENGINE;
         $this->versionNumber = end($fileNameArray);
     }
     
     public function getFileNameInLatestFormat(): string
     {
-        return $this->originaProductNamelPrefix . '-latest.deb';
+        return 'axonivy-engine-latest.deb';
     }
 }
