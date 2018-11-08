@@ -12,10 +12,10 @@ class Config {
         define('CDN_HOST_NIGHTLY', CDN_HOST . '/nightly/');
         
         define('BASE_URL', self::getRequestedBaseUri());
-        $PERMALINK_BASE_URL = BASE_URL . '/permalink/ivy/';
+        $PERMALINK_BASE_URL = BASE_URL . '/permalink/';
         define('PERMALINK_SPRINT', $PERMALINK_BASE_URL . 'sprint/');
         define('PERMALINK_NIGHTLY', $PERMALINK_BASE_URL . 'nightly/');
-        define('PERMALINK_STABLE', $PERMALINK_BASE_URL . 'stable/');
+        define('PERMALINK_LATEST', $PERMALINK_BASE_URL . 'latest/');
         
         define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
         

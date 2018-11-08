@@ -131,7 +131,7 @@ class ReleaseInfo
     
     public function getArtifacts(): array
     {
-        return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_STABLE);
+        return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_LATEST);
     }
     
 }

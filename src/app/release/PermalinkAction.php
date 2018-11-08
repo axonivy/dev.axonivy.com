@@ -18,7 +18,7 @@ class PermalinkAction
     }
 
     public function __invoke(Request $request, Response $response, array $args) {
-        $version = $args['version'];    // nightly, sprint, stable
+        $version = $args['version'];    // nightly, sprint, latest
         $file = $args['file'];          // AxonIvyEngine7.0.1.56047.S8_Slim_All_x64.zip
         
         $artifacts = [];
@@ -29,7 +29,7 @@ class PermalinkAction
             case 'sprint':
                 $artifacts = ReleaseInfoRepository::getSprintArtifacts();
                 break;
-            case 'stable':
+            case 'latest':
                 $releaseInfo = ReleaseInfoRepository::getLatest();
                 if ($releaseInfo == null) {
                     throw new NotFoundException($request, $response);
@@ -50,17 +50,11 @@ class PermalinkAction
     }
     
     private static function findArtifactForPermalink($artifacts, $permalinkFile): ?Artifact
-    {
-        $startsAndEndsWith = explode('-latest', $permalinkFile);
-        $startsWith = $startsAndEndsWith[0];
-        $endsWith = $startsAndEndsWith[1];
-        
+    {   
         foreach ($artifacts as $artifact) {
-            if (StringUtil::startsWith($artifact->getFileName(), $startsWith)) {
-                if (StringUtil::endsWith($artifact->getFileName(), $endsWith)) {
-                    return $artifact;
-                }
-            }
+            if (StringUtil::endsWith($artifact->getPermalink(), $permalinkFile)) {
+                return $artifact;
+             }
         }
         
         return null;

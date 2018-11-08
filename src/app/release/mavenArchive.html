@@ -3,11 +3,11 @@
 
 
 {% for releaseInfo in releaseInfos %}
-	<h2>Release {{ releaseInfo.Version.VersionNumber }} </h2>
+	<h2>Release {{ releaseInfo.version.versionNumber }} </h2>
 	<ul>
 		{% for variant in releaseInfo.Variants %}
-			{% if variant.ProductName == 'Engine' %}
-				<li><a href="{{ variant.DownloadUrl }}">{{ variant.Filename }}</a></li>
+			{% if variant.mavenPluginCompatible == 'engine' %}
+				<li><a href="{{ variant.downloadUrl }}">{{ variant.filename }}</a></li>
 			{% endif %}
 		{% endfor %}
 	</ul>

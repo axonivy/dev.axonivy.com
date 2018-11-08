@@ -147,10 +147,10 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
-        $app->get('/permalink/ivy/{version:nightly|sprint|stable}/{file}', PermalinkAction::class);
+        $app->get('/permalink/{version:nightly|sprint|latest}/{file}', PermalinkAction::class);
         
-        $app->get('/download/{version:nightly|sprint-release|stable}[.html]', SprintNightlyAction::class);
-        $app->get('/download/{version:nightly|sprint-release|stable}/{file}', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|latest}[.html]', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|latest}/{file}', SprintNightlyAction::class);
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
