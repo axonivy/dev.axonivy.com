@@ -17,8 +17,7 @@ class MavenArtifact
     {
         $artifacts = array_merge(
             self::getWorkflowUis(), 
-            self::getProjectDemos(), 
-            self::getDemoApps()
+            self::getProjectDemos()
         );
         $artifacts[] = self::getProjectDemosApp();
         return $artifacts;
@@ -47,13 +46,6 @@ class MavenArtifact
         return [
             new MavenArtifact('jsf-workflow-ui', $groupdId, 'JsfWorkflowUi', 'iar'),
             new MavenArtifact('html-workflow-ui', $groupdId, 'HtmlWfUi', 'iar'),
-        ];
-    }
-        
-    private static function getDemoApps(): ?array
-    {
-        return [
-            new MavenArtifact('demo-app', 'ch.ivyteam.ivy.project.demo.ci.deploy.application', 'application', 'zip'),
         ];
     }
     
