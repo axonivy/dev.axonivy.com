@@ -7,7 +7,20 @@ class LibPermalink
 {
     private function getMavenInfos($name): ?array {
         $artifacts = [
-            'demo-app' => ['ch.ivyteam.ivy.project.demo.ci.deploy.application', 'application']
+            // demos
+            'quick-start-tutorial' => ['ch.ivyteam.ivy.project.demo', 'QuickStartTutorial'],
+            'workflow-demos' => ['ch.ivyteam.ivy.project.demo', 'WorkflowDemos'],
+            'error-handling-demos' => ['ch.ivyteam.ivy.project.demo', 'ErrorHandlingDemos'],
+            'connectivity-demos' => ['ch.ivyteam.ivy.project.demo', 'ConnectivityDemos'],
+            'rule-engine-demos' => ['ch.ivyteam.ivy.project.demo', 'RuleEngineDemos'],
+            //'demos-app' => ['ch.ivyteam.ivy.project', 'IvyDemoApp'],
+            
+            // workflow ui
+            'jsf-workflow-ui' => ['ch.ivyteam.ivy.project.wf', 'JsfWorkflowUi'],
+            'html-workflow-ui' => ['ch.ivyteam.ivy.project.wf', 'HtmlWfUi'],
+
+            // full application zip demos
+            'demo-app' => ['ch.ivyteam.ivy.project.demo.ci.deploy.application', 'application'],
         ];
         return $artifacts[$name] ?? null;
     }
