@@ -3,8 +3,6 @@ namespace app\permalink;
 
 class MavenArtifact
 {
-    //'demos-app' => ['ch.ivyteam.ivy.project', 'IvyDemoApp'],
-    
     public static function getMavenArtifact($name): ?MavenArtifact {
         $artifacts = self::getAll();
         foreach ($artifacts as $artifact) {
@@ -15,12 +13,18 @@ class MavenArtifact
         return null;        
     }
     
-    private static function getAll(): ?array
+    private static function getAll(): array
     {
-        return array_merge(self::getWorkflowUis(), self::getProjectDemos(), self::getDemoApps());
+        $artifacts = array_merge(
+            self::getWorkflowUis(), 
+            self::getProjectDemos(), 
+            self::getDemoApps()
+        );
+        $artifacts[] = self::getProjectDemosApp();
+        return $artifacts;
     }
-    
-    public static function getProjectDemos(): ?array
+        
+    public static function getProjectDemos(): array
     {
         $groupdId = 'ch.ivyteam.ivy.project.demo';
         return [
@@ -31,7 +35,12 @@ class MavenArtifact
             new MavenArtifact('rule-engine-demos', $groupdId, 'RuleEngineDemos', 'iar')
         ];
     }
-
+        
+    public static function getProjectDemosApp(): MavenArtifact
+    {
+        return new MavenArtifact('demos', 'ch.ivyteam.ivy.project', 'IvyDemoApp', 'zip');
+    }
+    
     public static function getWorkflowUis(): ?array
     {
         $groupdId = 'ch.ivyteam.ivy.project.wf';
@@ -40,7 +49,7 @@ class MavenArtifact
             new MavenArtifact('html-workflow-ui', $groupdId, 'HtmlWfUi', 'iar'),
         ];
     }
-    
+        
     private static function getDemoApps(): ?array
     {
         return [

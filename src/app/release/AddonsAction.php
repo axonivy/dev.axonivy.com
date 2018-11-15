@@ -15,7 +15,8 @@ class AddonsAction
     public function __invoke($request, $response, $args) {
         return $this->container->get('view')->render($response, 'app/release/addons.html', [
             'projectDemos' => MavenArtifact::getProjectDemos(),
-            'workflowUis' => MavenArtifact::getWorkflowUis()
+            'projectDemosApp' => MavenArtifact::getProjectDemosApp(),
+            'workflowUis' => MavenArtifact::getWorkflowUis(),
         ]);
     }
 }
