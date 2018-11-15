@@ -32,6 +32,7 @@ use Slim\Views\Twig;
 use app\release\model\ReleaseInfoRepository;
 use app\release\model\ReleaseInfo;
 use app\news\NewsAction;
+use app\permalink\LibPermalink;
 
 class Website
 {
@@ -148,6 +149,7 @@ class Website
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
         $app->get('/permalink/{version:nightly|sprint|latest}/{file}', PermalinkAction::class);
+        $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
         
         $app->get('/download/{version:nightly|sprint-release|latest}[.html]', SprintNightlyAction::class);
         $app->get('/download/{version:nightly|sprint-release|latest}/{file}', SprintNightlyAction::class);

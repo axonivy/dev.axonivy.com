@@ -70,6 +70,8 @@ class Config {
         }
         
         define('LTS_VERSIONS', $lts);
+        
+        define('MAVEN_ARTIFACTORY_URL', 'https://repo.axonivy.com/artifactory/libs-snapshot');
     }
     
     private static function getRequestedBaseUri(): string
