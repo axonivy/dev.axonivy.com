@@ -15,4 +15,27 @@ class MavenArtifactTest extends TestCase
         $artifact = MavenArtifact::getMavenArtifact('does not exist');
         $this->assertNull($artifact);
     }
+
+    public function testGetProjectDemosApp() {
+        $artifact = MavenArtifact::getProjectDemosApp();
+        $this->assertEquals('Demos', $artifact->getDisplayName());
+    }
+
+    public function testGetWorkflowUis() {
+        $artifacts = MavenArtifact::getWorkflowUis();
+        $this->assertEquals('Jsf Workflow Ui', $artifacts[0]->getDisplayName());
+    }
+
+    public function testGetProjectDemos() {
+        $artifacts = MavenArtifact::getProjectDemos();
+        $this->assertEquals('Quick Start Tutorial', $artifacts[0]->getDisplayName());
+    }
+
+    public function testMavenArtifact() {
+        $artifact = MavenArtifact::getMavenArtifact('connectivity-demos');
+        $this->assertEquals('Connectivity Demos', $artifact->getDisplayName());
+        $this->assertEquals('ch.ivyteam.ivy.project.demo', $artifact->getGroupId());
+        $this->assertEquals('ConnectivityDemos', $artifact->getArtifactId());
+        $this->assertEquals('/permalink/lib/dev/connectivity-demos.iar', $artifact->getPermalinkDev());
+    }
 }
