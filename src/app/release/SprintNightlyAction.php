@@ -25,19 +25,19 @@ class SprintNightlyAction
         $dockerImage = '';
         if ($version == 'nightly') {
             $artifacts = ReleaseInfoRepository::getNightlyArtifacts();
-            $name = 'Download Nightly Build';
+            $name = 'Nightly Build';
             $urlVersion = 'nightly';
             $p2Url = 'https://file.axonivy.rocks/p2/nightly/';
             $dockerImage = 'axonivy/axonivy-engine:nightly';
         } else if ($version == 'sprint-release') {
             $artifacts = ReleaseInfoRepository::getSprintArtifacts();
-            $name = 'Download Sprint Release';
+            $name = 'Sprint Release';
             $urlVersion = 'sprint';
             $p2Url = 'https://file.axonivy.rocks/p2/sprint/';
             $dockerImage = 'axonivy/axonivy-engine:sprint';
         } else if ($version == 'latest') {
             $artifacts = ReleaseInfoRepository::getLatest()->getArtifacts();
-            $name = 'Download Latest Release';
+            $name = 'Latest Release';
             $urlVersion = 'latest';
             $testingPurpose = false;
             $dockerImage = 'axonivy/axonivy-engine';
