@@ -42,7 +42,8 @@
 			{% endif %}
 					
 			<h3>Docker</h3>
-			<pre><code>docker run -p 8080:8080 {{ dockerImage }}</code></pre>
+			<pre><code>docker pull {{ dockerImage }}
+docker run -p 8080:8080 {{ dockerImage }}</code></pre>
 			
 			<h3>Maven Project Build Plugin</h3>
 			<pre><code>mvn clean install -Divy.engine.list.url={{ currentUrl }}</code></pre>
