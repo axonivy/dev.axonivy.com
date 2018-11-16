@@ -32,6 +32,7 @@ class MavenArtifact
             new MavenArtifact('error-handling-demos', $groupdId, 'ErrorHandlingDemos', 'iar'),
             new MavenArtifact('connectivity-demos', $groupdId, 'ConnectivityDemos', 'iar'),
             new MavenArtifact('rule-engine-demos', $groupdId, 'RuleEngineDemos', 'iar')
+            new MavenArtifact('html-dialog-demos', $groupdId, 'HtmlDialogDemos', 'iar')
         ];
     }
         
