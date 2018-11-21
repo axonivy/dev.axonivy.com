@@ -45,16 +45,16 @@
 										<span style="color:red;">
 										 We have identified a security issue in this version which has been fixed with {{ releaseInfo.SafeVersion }}.
 										 We highly recommend updating to the latest version or <a href="/download/securityvulnerability">patch this version!</a>
-										 </span> <br />
+										 </span> <br /><br />
 									{% endif %}
 								
 									{% for variant in releaseInfo.Variants %}
-										<a href="{{ variant.DownloadUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;{{ variant.FileName }}<br />
+										<a href="{{ variant.DownloadUrl }}"><span class="icon fas fa-download"></a> </span>&nbsp;<a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
 									{% endfor %}
 								</td>
 								<td style="min-width:200px;">
 									{% if releaseInfo.DocProvider.hasDocuments %}
-										<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fas fa-file"> </span></a>&nbsp;Documentation<br />
+										<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fas fa-file"> </span></a>&nbsp;<a href="{{ releaseInfo.DocProvider.OverviewUrl }}">Documentation</a><br />
 									{% endif %}
 									{% if releaseInfo.hasHotfix %}
 										<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;Hotfix<br />

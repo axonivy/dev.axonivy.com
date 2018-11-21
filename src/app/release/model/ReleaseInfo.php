@@ -15,7 +15,7 @@ class ReleaseInfo
         $this->version = new Version($versionNumber);
         $this->variants = [];
         foreach ($variantNames as $variantName) {
-            $this->variants[] = new Variant($variantName);
+            $this->variants[] = Variant::create($variantName);
         }
         $this->safeVersion = $safeVersion;
     }
@@ -104,7 +104,11 @@ class ReleaseInfo
     {
         $variant = null;
         if (UserAgentDetector::isOsLinux()) {
-            $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_LINUX);
+            $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_DEBIAN);
+            if ($variant == null)
+            {
+                $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_LINUX);
+            }
         }
         if (! UserAgentDetector::isOsLinux() || $variant == null) {
             $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_WINDOWS);
@@ -127,7 +131,7 @@ class ReleaseInfo
     
     public function getArtifacts(): array
     {
-        return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_STABLE);
+        return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_LATEST);
     }
     
 }

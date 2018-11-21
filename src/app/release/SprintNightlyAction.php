@@ -35,10 +35,10 @@ class SprintNightlyAction
             $urlVersion = 'sprint';
             $p2Url = 'https://file.axonivy.rocks/p2/sprint/';
             $dockerImage = 'axonivy/axonivy-engine:sprint';
-        } else if ($version == 'stable') {
+        } else if ($version == 'latest') {
             $artifacts = ReleaseInfoRepository::getLatest()->getArtifacts();
-            $name = 'Stable Release';
-            $urlVersion = 'stable';
+            $name = 'Latest Release';
+            $urlVersion = 'latest';
             $testingPurpose = false;
             $dockerImage = 'axonivy/axonivy-engine';
         } else {

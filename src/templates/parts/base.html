@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %} | DEV AXON IVY{% endblock %}</title>
+        <title>{% block title %} | DEV AXON Ivy{% endblock %}</title>
         <script>
 	      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -14,7 +14,7 @@
     	</script>
         <link rel="stylesheet" href="/assets/css/main.css" />
         <link rel="icon" href="/images/ivy_favicon_48.png">
-        
+
         <!-- sticky footer styles -->
         <style>
 		html, body {
@@ -30,19 +30,25 @@
 		#footer, .sticky-footer-push {
 			height: 230px;
 		}
+		a {
+			color: #2b7bb9;
+		}
+		.button {
+			text-transform: none;
+		}
 		</style>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     </head>
     <body>
-    	
+
 		<header id="header">
 			<div class="inner">
 				<a href="/" class="logo">
-					<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" /> 
+					<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
 					<span id="navtext" style="font-family:Anton;font-size:48px;">DEV</span>
 					<img src="/images/misc/axonivy-logo-dev.png" style="width:180px;position:relative;top:7px;">
 				</a>
-			
+
 				<nav id="nav">
 					<a class="button special" href="/download">Download {{ CURRENT_LONG_TERM_SUPPORT_VERSION }} / {{ CURRENT_LEADING_EDGE_VERSION }}</a>
 					<a href="/news">News</a>
@@ -54,12 +60,12 @@
 				</nav>
 			</div>
 		</header>
-		
+
 		<a href="#menu" class="navPanelToggle"><span class="fa fas fa-bars"></span></a>
-	
+
         <div class="sticky-footer-wrapper">
             {% block global %}{% endblock %}
-            
+
             <div class="sticky-footer-push"></div>
         </div>
 
@@ -77,12 +83,12 @@
 						<a href="/community">Community</a>
 						 |
 						<a href="/support">Support</a>
-						 | 
+						 |
 						&copy; {{ "now"|date("Y") }} <a href="https://www.axonivy.com/">AXON Ivy AG</a>
 			</div>
 		</section>
 
-		
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
 		<script src="/assets/js/util.js"></script>
 		<script src="/assets/js/main.js"></script>

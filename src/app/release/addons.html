@@ -10,16 +10,48 @@
 				font-size: 3em;
 			}
 			</style>
+			
+			<section id="two">
+				<div class="inner">
+					<article>
+						<div class="content">
+							<header>
+								<h3><span class="icon icon-customized fas fa-flask"></span> Demos</h3>
+							</header>
+							<p>These projects impressively demonstrate the power of the Axon.ivy Digital Business Platform.</p>
+							<ul>
+							  {% for projectDemo in projectDemos %}
+							  	<li><a href="{{ projectDemo.permalinkDev }}">{{ projectDemo.displayName }}</a></li>
+							  {% endfor %}
+							</ul>
+							Or simply drop the <a href="{{ projectDemosApp.permalinkDev }}">demo app</a> in <i>[engine-dir]/deploy</i>.</p>
+						</div>
+					</article>
+					<article class="alt">
+						<div class="content">
+							<header>
+								<h3><span class="icon icon-customized fas fa-tasks"></span> Workflow Uis</h3>
+							</header>
+							<p>Workflow UIs provides as a fully functional end user application that allows to manage and facilitate your daily work.</p>
+							<ul>
+							  {% for workflowUi in workflowUis %}
+							  	<li><a href="{{ workflowUi.permalinkDev }}">{{ workflowUi.displayName }}</a></li>
+							  {% endfor %}
+							</ul>
+						</div>
+					</article>
+				</div>
+			</section>
 
+
+			<!--
 			<section id="one">
 				<div class="inner">
 					<article>
 						<div class="content">
 							<header>
-								<h1>AddOns</h1>
+								<h3><span class="icon icon-customized fas fa-puzzle-piece"></span>IvyAddOns</h3>
 							</header>
-							<span class="icon icon-customized fas fa-puzzle-piece"></span>
-							<h3>Axon.ivy IvyAddOns</h3>
 							<p>
 								The IvyAddOns project is provided as a convenience utility project for Axon.ivy developers.
 								It contains various reusable components, such as:
@@ -32,32 +64,21 @@
 							  <li><strong>And many more</strong> Java Helper Classes, Libraries, Wait for an asynchronous process</li>
 							</ul>
 							<ul class="actions">
-								<li><a href="https://blob.axonivy.works/addons/IvyAddOns-4.3.17.zip" class="button special">Download 4.3</a></li>
-								<li><a href="https://blob.axonivy.works/addons/IvyAddOns-5.0.9.zip" class="button special">Download 5.0</a></li>
+								<li><a href="" class="button special">Download 4.3</a></li>
+								<li><a href="" class="button special">Download 5.0</a></li>
 							</ul>
-							<small style="font-size:12px;">Newer versions are directly included in the Axon.ivy Designer &amp; Engine</small style="font-size:12px;">
 						</div>
 					</article>
 				</div>
 			</section>
+			
+			-->
+			
+			
 
+			<!-- 
 			<section id="two">
 				<div class="inner">
-					<article>
-						<div class="content">
-							<span class="icon icon-customized fas fa-columns"></span>
-							<header>
-								<h3>Axon.ivy Portal</h3>
-							</header>
-							<p>
-								The Axon.ivy Portal is intended as a starting point on your ivy process server. It helps to develop and publish your project(s) 
-								together with extended workflow and administration functionality. Versions from 6.0 are directly included in the Axon.ivy Engine. 
-							</p>
-							<ul class="actions">
-								<li><a href="https://blob.axonivy.works/portal/axonivy-portal_sprint123-r132713.zip" class="button special">Download 5.0</a></li>
-							</ul>
-						</div>
-					</article>
 					<article class="alt">
 						<div class="content">
 							<span class="icon icon-customized fas fa-user"></span>
@@ -75,71 +96,16 @@
 					</article>
 				</div>
 			</section>
-
-			<section id="three">
-				<div class="inner">
-					<article>
-						<div class="content">
-							<span class="icon icon-customized fas fa-tasks"></span>
-							<header>
-								<h3>JSF Workflow UI</h3>
-							</header>
-							<p>The JSF Workflow UI project is provided as a fully functional end user application that allows to manage and facilitate your daily work. The main features are:</p>
-							<ul>
-							  <li>Tasklist handling</li>
-							  <li>User management like daily mail, language and notifications</li>
-							  <li>Substitute management</li>
-							  <li>and many more</li>
-							</ul>
-							<ul class="actions">
-								<li><a href="https://blob.axonivy.works/addons/JsfWfUi-5.0.9.zip" class="button special icon fas fa-download" style="font-size:15px;">5.0</a></li>
-							</ul>
-							<small style="font-size:12px;">Newer versions are directly included in the Axon.ivy Designer &amp; Engine</small style="font-size:12px;">
-						</div>
-					</article>
-					
-					<article>
-						<div class="content">
-							<span class="icon icon-customized fas fa-tasks"></span>
-							<header>
-								<h3>ULC Workflow UI</h3>
-							</header>
-							<p>The ULC Workflow UI project is provided as a fully functional end user application that allows to manage and facilitate your daily work. The main features are:</p>
-							<ul>
-							  <li>Tasklist handling</li>
-							  <li>User management like daily mail, language and notifications</li>
-							  <li>Substitute management</li>
-							  <li>and many more</li>
-							</ul>
-							<ul class="actions">
-								<li><a href="https://blob.axonivy.works/addons/WorkflowUI-4.3.17.zip" class="button special icon fas fa-download" style="font-size:15px;">4.3</a></li>
-								<li><a href="https://blob.axonivy.works/addons/WorkflowUI-5.0.9.zip" class="button special icon fas fa-download" style="font-size:15px;">5.0</a></li>
-							</ul>
-							<small style="font-size:12px;">Newer versions are directly included in the Axon.ivy Designer &amp; Engine</small style="font-size:12px;">
-						</div>
-					</article>
-					<article>
-					<div class="content">
-							<span class="icon icon-customized fas fa-tasks"></span>
-							<header>
-								<h3>HTML Workflow UI</h3>
-							</header>
-							<p>The HTML Workflow UI project is provided as a fully functional end user application that allows to manage and facilitate your daily work. The main features are:</p>
-							<ul>
-							  <li>Tasklist handling</li>
-							  <li>User management like daily mail, language and notifications</li>
-							  <li>Substitute management</li>
-							  <li>and many more</li>
-							</ul>
-							<ul class="actions">
-								<li><a href="https://blob.axonivy.works/addons/HtmlWfUi-4.3.17.zip" class="button special icon fas fa-download" style="font-size:15px;">4.3</a></li>
-								<li><a href="https://blob.axonivy.works/addons/HtmlWfUi-5.0.9.zip" class="button special icon fas fa-download" style="font-size:15px;">5.0</a></li>
-							</ul>
-							<small style="font-size:12px;">Newer versions are directly included in the Axon.ivy Designer &amp; Engine</small style="font-size:12px;">
-						</div>
-					</article>
-				</div>
-			</section>
-
-    
+ -->
+<!-- 
+https://blob.axonivy.works/addons/IvyAddOns-4.3.17.zip
+https://blob.axonivy.works/addons/IvyAddOns-5.0.9.zip
+https://blob.axonivy.works/portal/axonivy-portal_sprint123-r132713.zip
+https://blob.axonivy.works/addons/JsfWfUi-5.0.9.zip
+https://blob.axonivy.works/addons/WorkflowUI-4.3.17.zip
+https://blob.axonivy.works/addons/WorkflowUI-5.0.9.zip
+https://blob.axonivy.works/addons/HtmlWfUi-4.3.17.zip
+https://blob.axonivy.works/addons/HtmlWfUi-5.0.9.zip
+ -->
+ 
 {% endblock %}

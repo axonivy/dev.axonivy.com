@@ -9,28 +9,21 @@
 				<div class="inner">
 					<article>
 						<div class="content">
-							<span class="icon fas fa-wrench"></span>
+							
 							<header>
-								<h3>Axon.ivy Designer</h3>
+								<h3><span class="icon fas fa-wrench"></span>
+									Axon.ivy Designer</h3>
 							</header>
 							<p style="min-height:200px;">
 								The Axon.ivy Designer is a state of the art process modelling tool that enables you to turn your business processes into real and fully functional web applications. You can easily integrate your existing systems using standard connectors such as web services, SQL and many more. 
 							</p>
 							
 							{% if designerVariantLTS is not empty %}
-							<ul class="actions">
-								<li><a href="{{ designerVariantLTS.InstallationUrl }}" class="button special">Download LTS {{ designerVariantLTS.Version.BugFixVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }}</a></li>
-							</ul>
+							<a href="{{ designerVariantLTS.InstallationUrl }}" title="{{ designerVariantLTS.FileName }}" class="button special">Designer {{ designerVariantLTS.Version.DisplayVersion }} {{ designerVariantLTS.Type }} {{ designerVariantLTS.Architecture }} (LTS)</a>
 							{% endif %}
-							
-							<p>
-								Our <a href="#product-editions">leading edge</a> release got always the newest features: 
-							</p>
-							
+
 							{% if designerVariantLE is not empty %}
-							<ul class="actions">
-								<li><a href="{{ designerVariantLE.InstallationUrl }}" class="button special">Download LE {{ designerVariantLE.Version.BugFixVersion }} {{ designerVariantLE.Type }} {{ designerVariantLE.Architecture }}</a></li>
-							</ul>
+							<a href="{{ designerVariantLE.InstallationUrl }}" title="{{ designerVariantLE.FileName }}" class="button">Designer {{ designerVariantLE.Version.DisplayVersion }} (LE)</a>
 							{% endif %}
 							<p>
 								<a href="/download/archive">other version and platforms</a>
@@ -39,35 +32,34 @@
 					</article>
 					<article class="alt">
 						<div class="content">
-							<span class="icon fas fa-rocket"></span>
 							<header>
-								<h3>Axon.ivy Engine</h3>
+								<h3><span class="icon fas fa-rocket"></span>Axon.ivy Engine</h3>
 							</header>
 							<p style="min-height:200px;">
-								With the Axon.ivy Engine you can run your designed business processes on a single or clustered environment. Please order an evaluation licenses and further information at ivy@axonivy.com by providing your contact details.
+								With the Axon.ivy Engine you can run your business processes on a single or clustered environment. Please order an evaluation licenses and further information at ivy@axonivy.com by providing your contact details.
+								
+							Choose between <a href="#product-editions">Long Term Support (LTS)</a> or <a href="#product-editions">Leading Edge (LE)</a> 
 							</p>
 							
 							{% if engineVariantLTS is not empty %}
-							<ul class="actions">
-								<li><a href="{{ engineVariantLTS.DownloadUrl }}" class="button special">Download LTS {{ engineVariantLTS.Version.BugFixVersion }} {{ engineVariantLTS.Type }} {{ engineVariantLTS.Architecture }}</a></li>
-							</ul>
+							<a href="{{ engineVariantLTS.DownloadUrl }}" title="{{ engineVariantLTS.FileName }}" class="button special">Engine.{{ engineVariantLTS.FileExtension }} {{ engineVariantLTS.Version.DisplayVersion }} (LTS)
+							</a>
 							{% endif %}
-
-							<p>
-								Our <a href="#product-editions">leading edge</a> release got always the newest features: 
-							</p>
 							
 							{% if engineVariantLE is not empty %}
-							<ul class="actions">
-								<li><a href="{{ engineVariantLE.DownloadUrl }}" class="button special">Download LE {{ engineVariantLE.Version.BugFixVersion }} {{ engineVariantLE.Type }} {{ engineVariantLE.Architecture }}</a></li>
-							</ul>
+							<a href="{{ engineVariantLE.DownloadUrl }}" title="{{ engineVariantLE.FileName }}" class="button">Engine.{{ engineVariantLE.FileExtension }} {{ engineVariantLE.Version.DisplayVersion }} (LE)</a>
 							{% endif %}
 							
 							<p>
 								<a href="/download/archive">other version and platforms</a>
 							</p>
 							
-							<code>docker run -p 8080:8080 axonivy/axonivy-engine</code>
+							<h4><a href="/doc/latest/EngineGuideHtml/gettingstarted.html#gettingstarted-docker">Docker</a></h4>
+							<pre><code>docker pull axonivy/axonivy-engine
+docker run -p 8080:8080 axonivy/axonivy-engine</code></pre>
+							<h4><a href="/doc/latest/EngineGuideHtml/gettingstarted.html#gettingstarted-debian">Debian / Ubuntu Linux</a></h4>
+							<pre><code>wget https://developer.axonivy.com/permalink/latest/axonivy-engine.deb
+sudo apt install ./axonivy-engine.deb</code></pre>
 						</div>
 					</article>
 				</div>
@@ -94,10 +86,10 @@
 							<header>
 								<h3>Dev Releases</h3>
 							</header>
-							<p>Can't wait for new features? Check our Sprint Release and Nightly Builds!</p>
+							<p>Future is Bright! Check our Sprint Release and Nightly Builds!</p>
 							<ul class="actions">
 								<li style="margin-bottom:8px;"><a href="/download/sprint-release" class="button special" style="width:200px;">Sprint Release</a></li>
-								<li><a href="/download/nightly" class="button special" style="width:200px;">Nightly Builds</a></li>
+								<li><a href="/download/nightly" class="button" style="width:200px;">Nightly Builds</a></li>
 							</ul>
 						</div>
 					</article>
@@ -105,11 +97,11 @@
 					<div class="content">
 							<span class="icon fas fa-puzzle-piece"></span>
 							<header>
-								<h3>AddOns</h3>
+								<h3>Demos & Workflow UI</h3>
 							</header>
-							<p>Do you need more functionality? Install our AddOns!</p>
+							<p>We provide a rich set of demos and workflow uis</p>
 							<ul class="actions">
-								<li><a href="/download/addons" class="button special">AddOns</a></li>
+								<li><a href="/download/addons" class="button special">Demos & Workflow UIs</a></li>
 							</ul>
 						</div>
 					</article>

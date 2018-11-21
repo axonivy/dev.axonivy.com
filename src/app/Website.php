@@ -32,6 +32,7 @@ use Slim\Views\Twig;
 use app\release\model\ReleaseInfoRepository;
 use app\release\model\ReleaseInfo;
 use app\news\NewsAction;
+use app\permalink\LibPermalink;
 
 class Website
 {
@@ -84,16 +85,16 @@ class Website
         // global variables
         $view = $container['view'];
         
-        $version = $this->getBugFixVersion(ReleaseInfoRepository::getLatest());
+        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
         $view->getEnvironment()->addGlobal('CURRENT_LEADING_EDGE_VERSION', $version);
         
-        $version = $this->getBugFixVersion(ReleaseInfoRepository::getLatestLongTermSupport());
+        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
         $view->getEnvironment()->addGlobal('CURRENT_LONG_TERM_SUPPORT_VERSION', $version);
     }
     
-    private function getBugFixVersion(?ReleaseInfo $info): string
+    private function getDisplayVersion(?ReleaseInfo $info): string
     {
-        return $info == null ? '' : $info->getVersion()->getBugfixVersion();
+        return $info == null ? '' : $info->getVersion()->getDisplayVersion();
     }
     
     /**
@@ -147,10 +148,11 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
-        $app->get('/permalink/ivy/{version:nightly|sprint|stable}/{file}', PermalinkAction::class);
+        $app->get('/permalink/{version:nightly|sprint|latest}/{file}', PermalinkAction::class);
+        $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
         
-        $app->get('/download/{version:nightly|sprint-release|stable}[.html]', SprintNightlyAction::class);
-        $app->get('/download/{version:nightly|sprint-release|stable}/{file}', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|latest}[.html]', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|latest}/{file}', SprintNightlyAction::class);
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);

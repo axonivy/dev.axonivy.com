@@ -2,6 +2,7 @@
 namespace app\release;
 
 use Psr\Container\ContainerInterface;
+use app\permalink\MavenArtifact;
 
 class AddonsAction
 {
@@ -12,6 +13,10 @@ class AddonsAction
     }
 
     public function __invoke($request, $response, $args) {
-        return $this->container->get('view')->render($response, 'app/release/addons.html');
+        return $this->container->get('view')->render($response, 'app/release/addons.html', [
+            'projectDemos' => MavenArtifact::getProjectDemos(),
+            'projectDemosApp' => MavenArtifact::getProjectDemosApp(),
+            'workflowUis' => MavenArtifact::getWorkflowUis(),
+        ]);
     }
 }
