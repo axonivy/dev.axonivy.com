@@ -27,24 +27,25 @@ class MavenArtifact
     {
         $groupdId = 'ch.ivyteam.ivy.project.demo';
         return [
-            new MavenArtifact('quick-start-tutorial', $groupdId, 'QuickStartTutorial', 'iar'),
-            new MavenArtifact('workflow-demos', $groupdId, 'WorkflowDemos', 'iar'),
-            new MavenArtifact('error-handling-demos', $groupdId, 'ErrorHandlingDemos', 'iar'),
-            new MavenArtifact('connectivity-demos', $groupdId, 'ConnectivityDemos', 'iar'),
-            new MavenArtifact('rule-engine-demos', $groupdId, 'RuleEngineDemos', 'iar'),
-            new MavenArtifact('html-dialog-demos', $groupdId, 'HtmlDialogDemos', 'iar')
+            new MavenArtifact('quick-start-tutorial', $groupdId, 'quick-start-tutorial', 'iar'),
+            new MavenArtifact('workflow-demos', $groupdId, 'workflow-demos', 'iar'),
+            new MavenArtifact('error-handling-demos', $groupdId, 'error-handling-demos', 'iar'),
+            new MavenArtifact('connectivity-demos', $groupdId, 'connectivity-demos', 'iar'),
+            new MavenArtifact('rule-engine-demos', $groupdId, 'rule-engine-demos', 'iar'),
+            new MavenArtifact('html-dialog-demos', $groupdId, 'html-dialog-demos', 'iar')
         ];
     }
         
     public static function getProjectDemosApp(): MavenArtifact
     {
-        return new MavenArtifact('demos', 'ch.ivyteam.ivy.project', 'IvyDemoApp', 'zip');
+        return new MavenArtifact('demos', 'ch.ivyteam.ivy.project.demo', 'ivy-demos-app', 'zip');
     }
     
     public static function getWorkflowUis(): ?array
     {
         $groupdId = 'ch.ivyteam.ivy.project.wf';
         return [
+            new MavenArtifact('portal', 'ch.ivyteam.ivy.project.portal', 'portal-app', 'zip'),
             new MavenArtifact('jsf-workflow-ui', $groupdId, 'JsfWorkflowUi', 'iar'),
             new MavenArtifact('html-workflow-ui', $groupdId, 'HtmlWfUi', 'iar'),
         ];
