@@ -69,6 +69,12 @@
 			for (i = 0; i < navbars.length; i++) {
 				navbars[i].remove();
 			} 
+			
+			// since 7.x
+			navbar = iframe.contentWindow.document.getElementsByTagName('nav');
+			if (navbar != null) {
+				navbar.remove();
+			}
 		}
 		function openLinksInNewTab(iframe) {
 			var base = document.createElement('base');
