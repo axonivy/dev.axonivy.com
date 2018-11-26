@@ -23,7 +23,7 @@ class MavenArtifactTest extends TestCase
 
     public function testGetWorkflowUis() {
         $artifacts = MavenArtifact::getWorkflowUis();
-        $this->assertEquals('Jsf Workflow Ui', $artifacts[0]->getDisplayName());
+        $this->assertEquals('Jsf Workflow Ui', $artifacts[1]->getDisplayName());
     }
 
     public function testGetProjectDemos() {
@@ -35,7 +35,7 @@ class MavenArtifactTest extends TestCase
         $artifact = MavenArtifact::getMavenArtifact('connectivity-demos');
         $this->assertEquals('Connectivity Demos', $artifact->getDisplayName());
         $this->assertEquals('ch.ivyteam.ivy.project.demo', $artifact->getGroupId());
-        $this->assertEquals('ConnectivityDemos', $artifact->getArtifactId());
+        $this->assertEquals('connectivity-demos', $artifact->getArtifactId());
         $this->assertEquals('/permalink/lib/dev/connectivity-demos.iar', $artifact->getPermalinkDev());
     }
 }
