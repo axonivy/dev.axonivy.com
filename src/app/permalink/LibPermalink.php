@@ -26,25 +26,43 @@ class LibPermalink
         return $response->withRedirect($url);
     }
     
-    
     private function createLink($groupId, $artifactId, $type): string
     {
         $groupId = $this->convertToUrl($groupId);
         $baseUrl = MAVEN_ARTIFACTORY_URL . "/$groupId/$artifactId";
         
         $content = file_get_contents("$baseUrl/maven-metadata.xml");
-        $latestVersion = $this->parseLatestVersionFromXml($content);
         
-        $content = file_get_contents("$baseUrl/$latestVersion/maven-metadata.xml");
-        $build = $this->parseVersionIdentifierFromXml($content);
+        $releaseVersion = $this->parseReleaseVersionFromXml($content);
         
-        $url = "$baseUrl/$latestVersion/$artifactId-$build.$type";
+        $url = "";
+        if (empty($releaseVersion))
+        {
+            // snapshot version
+            $latestVersion = $this->parseLatestVersionFromXml($content);
+            $content = file_get_contents("$baseUrl/$latestVersion/maven-metadata.xml");
+            $build = $this->parseVersionIdentifierFromXml($content);
+            $url = "$baseUrl/$latestVersion/$artifactId-$build.$type";
+        }
+        else
+        {
+            // release version
+            $url = "$baseUrl/$releaseVersion/$artifactId-$releaseVersion.$type";
+        }
+        
         return $url;
     }
     
     private function convertToUrl(string $part): string
     {
         return str_replace('.', '/', $part);
+    }
+    
+    public function parseReleaseVersionFromXml(string $xml): ?string
+    {
+        $element = new \SimpleXMLElement($xml);
+        $result = $element->xpath('/metadata/versioning/release');
+        return $result[0][0];
     }
     
     public function parseLatestVersionFromXml(string $xml): string
