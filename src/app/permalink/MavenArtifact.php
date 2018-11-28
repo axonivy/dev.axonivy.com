@@ -47,7 +47,7 @@ class MavenArtifact
         return [
             new MavenArtifact('portal', 'ch.ivyteam.ivy.project.portal', 'portal-app', 'zip'),
             new MavenArtifact('jsf-workflow-ui', $groupdId, 'JsfWorkflowUi', 'iar'),
-            new MavenArtifact('html-workflow-ui', $groupdId, 'HtmlWfUi', 'iar'),
+            // new MavenArtifact('html-workflow-ui', $groupdId, 'HtmlWfUi', 'iar'),
         ];
     }
     
