@@ -1,4 +1,4 @@
-{% extends "templates/parts/base_content.html" %}
+{% extends "templates/parts/base_content_no_footer.html" %}
 
 {% block title %}Doc {{ version }}{{ parent() }}{% endblock %}
 
@@ -174,7 +174,7 @@
 	<script>
 	function t() {
 		
-		height = window.innerHeight - 630;
+		height = window.innerHeight - 400;
 		
 		
 		document.getElementById("iframecontainer").style.height = height +"px"

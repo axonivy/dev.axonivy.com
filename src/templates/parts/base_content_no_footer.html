@@ -1,0 +1,7 @@
+{% extends "templates/parts/base_no_footer.html" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block global %}
+    {% block content %}{% endblock %}
+{% endblock %}
