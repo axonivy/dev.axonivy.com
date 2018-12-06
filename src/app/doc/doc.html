@@ -172,14 +172,14 @@
 	</section>
 	
 	<script>
-	function t() {
-		
+	window.onresize = function(event) {
+		resizeHeighOfIframe();
+	};
+	function resizeHeighOfIframe() {
 		height = window.innerHeight - 400;
-		
-		
 		document.getElementById("iframecontainer").style.height = height +"px"
 	}
-	t();
+	resizeHeighOfIframe();
 	</script>
 	
 	
