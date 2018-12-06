@@ -35,6 +35,11 @@ class Version
         return version_compare($this->versionNumber, $versionNumber, '>=');
     }
     
+    public function isLowerThan(string $versionNumber): bool
+    {
+        return version_compare($this->versionNumber, $versionNumber, '<');
+    }
+    
     /**
      * e.g. 6, 7
      *
