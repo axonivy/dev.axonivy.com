@@ -79,14 +79,8 @@
 						{% for doc in docProvider.releaseDocuments %}
 							<a href="{{ doc.Url }}" style="padding-left:5px;padding-right:5px;">{{ doc.Name }}</a> 
 						{% endfor %}
-						<br />
-						{% for doc in docProvider.getImportantBooks %}
-								<a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
-						{% endfor %}
-				
-					
-					
-					<div class="dropdown" style="float:right;">
+						
+						<div class="dropdown" style="float:right;">
 					  <button class="dropbtn">Further Docs</button>
 					  <div class="dropdown-content">
 					  	<span style="font-size:12px;padding-left:15px;">Docs</span>
@@ -102,6 +96,12 @@
 						{% endfor %}
 					  </div>
 					</div>
+						
+						<br />
+						{% for doc in docProvider.getImportantBooks %}
+								<a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+						{% endfor %}					
+					
 			</div>
 			
 			<br />
