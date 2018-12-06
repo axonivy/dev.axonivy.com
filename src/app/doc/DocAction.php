@@ -43,9 +43,7 @@ class DocAction
             'version' => $version,
             'docProvider' => $docProvider,
             'documentUrl' => $doc->getRessourceUrl(),
-            'iframeFullWidth' => !StringUtil::endsWith($doc->getRessourceUrl(), '.txt') && (new Version($version))->isLowerThan('7.3.0') && $version != 'dev',
             'currentNiceUrlPath' => $document,
-            
             'docLinks' => $docLinks
         ]);
     }

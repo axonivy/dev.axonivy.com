@@ -130,8 +130,8 @@
 			} 
 			
 			// since 7.x
-			bodies = iframe.contentWindow.document.getElementsByTagName('body');
-			bodies[0].style="margin-left:0px;"
+			containers = iframe.contentWindow.document.getElementsByClassName('container');
+			containers[0].style.marginLeft = "0px"
 			
 			navbars = iframe.contentWindow.document.getElementsByTagName('nav');
 			if (navbars != null && navbars[0]) {
@@ -145,21 +145,42 @@
 		}
 	</script>
 	
-	<style>
 	
+	<style>
+		.iframe-container {
+		  overflow: hidden;
+		  position: relative;
+		}
+		
+		.iframe-container iframe {
+		   border: 0;
+		   height: 100%;
+		   left: 0;
+		   position: absolute;
+		   top: 0;
+		   width: 100%;
+		}
 	</style>
 	
-	{% if not iframeFullWidth %}
-	<section id="main" >
+	
+	<section id="main" style="padding-top:2em;">
 		<div class="inner">
-	{% endif %}
-	
-	<iframe width="100%" scrolling="yes" style="position: absolute; height: 100%; border: none" src="{{ documentUrl }}" onload='javascript:resizeIframe(this);'></iframe>
-	
-	{% if not iframeFullWidth %}
+		  <div id="iframecontainer" class="iframe-container">
+		    <iframe src="{{ documentUrl }}" frameborder="0" onload='javascript:resizeIframe(this);'></iframe>
+		  </div>
 		</div>
 	</section>
-	{% endif %}
+	
+	<script>
+	function t() {
+		
+		height = window.innerHeight - 630;
+		
+		
+		document.getElementById("iframecontainer").style.height = height +"px"
+	}
+	t();
+	</script>
 	
 	
     
