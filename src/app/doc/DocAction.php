@@ -7,6 +7,7 @@ use app\release\model\ReleaseInfoRepository;
 use app\release\model\doc\DocProvider;
 use Slim\Http\Response;
 use app\util\StringUtil;
+use app\release\model\Version;
 
 class DocAction
 {
@@ -42,7 +43,7 @@ class DocAction
             'version' => $version,
             'docProvider' => $docProvider,
             'documentUrl' => $doc->getRessourceUrl(),
-            'iframeFullWidth' => !StringUtil::endsWith($doc->getRessourceUrl(), '.txt'),
+            'iframeFullWidth' => !StringUtil::endsWith($doc->getRessourceUrl(), '.txt') && (new Version($version))->isLowerThan('7.3.0') && $version != 'dev',
             'currentNiceUrlPath' => $document,
             
             'docLinks' => $docLinks
