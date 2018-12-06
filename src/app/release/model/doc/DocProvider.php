@@ -81,7 +81,7 @@ class DocProvider
             self::getNewAndNoteworthy(),
             self::getReleaseNotes(),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes'),
-            self::createReleaseDocument('ReadMe Designer', 'ReadMe.html', 'readme-designer'),
+            self::createReleaseDocument('ReadMe', 'ReadMe.html', 'readme'),
             self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'),
             self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')
         ];
