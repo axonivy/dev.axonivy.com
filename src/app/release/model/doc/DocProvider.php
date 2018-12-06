@@ -57,6 +57,17 @@ class DocProvider
         return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof Book; });
     }
     
+    public function getImportantBooks(): array
+    {
+        return array_filter(self::getBooks(), function (Book $book) { return !StringUtil::startsWith(strtolower($book->getName()), "portal"); });
+    }
+    
+    public function getNotImportantBooks(): array
+    {
+        return array_filter(self::getBooks(), function (Book $book) { return StringUtil::startsWith(strtolower($book->getName()), "portal"); });
+    }
+    
+    
     public function getExternalBooks(): array
     {
         return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof ExternalBook; });
@@ -74,7 +85,7 @@ class DocProvider
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'),
             self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'),
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
-            self::createBook('Portal Con.', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
+            self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
             self::createExternalBook('Public API', 'PublicAPI'),
             

@@ -11,6 +11,54 @@
 		}
 	</style>
     
+    
+    
+    <style>
+.dropbtn {
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+</style>
+    
+    
+    
+    
+    
+    
     <section id="main" style="padding-bottom:0px;" >
 		<div class="inner">
 		
@@ -26,24 +74,31 @@
 				<h1>Documentation {{ version }}</h1>
 			</header>
 			
-					<ul class="actions" style="margin-top:10px;">
 						{% for doc in docProvider.releaseDocuments %}
-							<li><a href="{{ doc.Url }}" style="width:200px;" class="button {{ doc.NiceUrlPath != currentNiceUrlPath ? 'special' }}">{{ doc.Name }}</a></li>
+							<a href="{{ doc.Url }}" style="padding-left:5px;padding-right:5px;">{{ doc.Name }}</a> 
 						{% endfor %}
-					</ul>
+						{% for doc in docProvider.getImportantBooks %}
+								<a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }}</a>
+						{% endfor %}
 				
-					<ul class="actions">
-						{% for doc in docProvider.Books %}
-							<li>
-								<a href="{{ doc.Url }}" target="_blank" style="width:144px;padding-left:5px;padding-right:5px;" class="button special">{{ doc.Name }}</a>
-								<a href="{{ doc.PdfUrl }}" target="_blank" style="width:10px;" class="button special icon fas fa-file-pdf"></a>
-							</li>
-						{% endfor %}
-						{% for doc in docProvider.ExternalBooks %}
-							<li><a href="{{ doc.Url }}" target="_blank" style="width:200px;" class="button special">{{ doc.Name }}</a></li>
-						{% endfor %}
-					</ul>
 					
+					
+					<div class="dropdown" style="float:right;">
+					  <button class="dropbtn">Further Docs</button>
+					  <div class="dropdown-content">
+					  	<span style="font-size:12px;padding-left:15px;">Docs</span>
+					  	{% for doc in docProvider.getNotImportantBooks %}
+							<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
+						{% endfor %}
+					  	{% for doc in docProvider.ExternalBooks %}
+							<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
+						{% endfor %}
+						<span style="font-size:12px;padding-left:15px;">PDF's</span>
+					  	{% for doc in docProvider.Books %}
+								<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
+						{% endfor %}
+					  </div>
+					</div>
 					
 					
 		</div>
@@ -71,9 +126,9 @@
 			} 
 			
 			// since 7.x
-			navbar = iframe.contentWindow.document.getElementsByTagName('nav');
-			if (navbar != null) {
-				navbar.remove();
+			navbars = iframe.contentWindow.document.getElementsByTagName('nav');
+			if (navbars != null) {
+				navbars[0].remove();
 			}
 		}
 		function openLinksInNewTab(iframe) {
