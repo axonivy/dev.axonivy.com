@@ -24,8 +24,8 @@ class Config {
             $rootDir = __DIR__ . '/../../test/data/webroot/releases/ivy';
         }
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
-        define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'sprint']));
-        define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'nightly']));
+        define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'sprint', 'downloads']));
+        define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'nightly', 'downloads']));
         
         define('UNSAFE_RELEASES', [
             '6.7.1' => '7.0',
