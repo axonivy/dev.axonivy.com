@@ -57,8 +57,6 @@ class Website
         $this->installTrailingSlashMiddelware();
         $this->installRoutes();
         $this->installErrorHandling();
-        
-        $this->updateDocLatestSymlink();
     }
     
     public function getApp(): App
@@ -115,23 +113,6 @@ class Website
             }
             return $next($request, $response);
         });
-    }
-    
-    /**
-     * in each request we very that the symlink /doc/latest points to the latest release doc folder
-     * - this should be done when uploading a release, but there we have only ftp
-     * - can't be done properly with .htaccess serving
-     */
-    private function updateDocLatestSymlink()
-    {
-        $releaseInfo = ReleaseInfoRepository::getLatest();
-        if ($releaseInfo == null) {
-            return;
-        }
-        $latestDoc = $releaseInfo->getPathOrLatestPath();
-        $symlink = IVY_RELEASE_DIRECTORY . '/latest';
-        $cmd = 'ln -fns ' . $latestDoc . ' ' . $symlink;
-        shell_exec($cmd);
     }
     
     private function installRoutes()
