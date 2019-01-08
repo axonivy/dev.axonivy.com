@@ -66,5 +66,10 @@ class ReleaseInfoRepository
     {
         return Artifact::createArtifacts(IVY_SPRINT_RELEASE_DIRECTORY, CDN_HOST_SPRINT, PERMALINK_SPRINT);
     }
+    
+    public static function getDevArtifacts(): array
+    {
+        return Artifact::createArtifacts(IVY_DEV_RELEASE_DIRECTORY, CDN_HOST_DEV, PERMALINK_DEV);
+    }
 }
 

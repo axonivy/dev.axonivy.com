@@ -10,12 +10,14 @@ class Config {
         define('CDN_HOST', 'https://download.axonivy.com');
         define('CDN_HOST_SPRINT', CDN_HOST . '/sprint/');
         define('CDN_HOST_NIGHTLY', CDN_HOST . '/nightly/');
+        define('CDN_HOST_DEV', CDN_HOST . '/dev/');
         
         define('BASE_URL', self::getRequestedBaseUri());
         $PERMALINK_BASE_URL = BASE_URL . '/permalink/';
         define('PERMALINK_SPRINT', $PERMALINK_BASE_URL . 'sprint/');
         define('PERMALINK_NIGHTLY', $PERMALINK_BASE_URL . 'nightly/');
         define('PERMALINK_LATEST', $PERMALINK_BASE_URL . 'latest/');
+        define('PERMALINK_DEV', $PERMALINK_BASE_URL . 'dev/');
         
         define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
         
@@ -26,6 +28,7 @@ class Config {
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
         define('IVY_SPRINT_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'sprint', 'downloads']));
         define('IVY_NIGHTLY_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'nightly', 'downloads']));
+        define('IVY_DEV_RELEASE_DIRECTORY', StringUtil::createPath([IVY_RELEASE_DIRECTORY, 'dev', 'downloads']));
         
         define('UNSAFE_RELEASES', [
             '6.7.1' => '7.0',

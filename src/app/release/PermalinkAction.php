@@ -29,6 +29,9 @@ class PermalinkAction
             case 'sprint':
                 $artifacts = ReleaseInfoRepository::getSprintArtifacts();
                 break;
+            case 'dev':
+                $artifacts = ReleaseInfoRepository::getDevArtifacts();
+                break;
             case 'latest':
                 $releaseInfo = ReleaseInfoRepository::getLatest();
                 if ($releaseInfo == null) {
