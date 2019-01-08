@@ -34,9 +34,9 @@ class ReleaseInfoRepository
         $releaseInfos = [];
         $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*'), 'is_dir');
         foreach ($directories as $directory) {
-            // drop not ready, because it is still uploading
-            $releaseNotReadyFile = $directory . DIRECTORY_SEPARATOR . 'NotReady.txt';
-            if (file_exists($releaseNotReadyFile)) {
+            // check release.ready files, it is uploaded
+            $releaseNotReadyFile = $directory . DIRECTORY_SEPARATOR . 'release.ready';
+            if (!file_exists($releaseNotReadyFile)) {
                 continue;
             }
             
