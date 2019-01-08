@@ -25,7 +25,6 @@ use app\feature\FeatureAction;
 use app\search\SearchAction;
 use app\sitemap\SitemapAction;
 use app\release\SprintNightlyAction;
-use app\release\model\doc\DocProvider;
 use Slim\Views\TwigExtension;
 use Twig_Extension_Debug;
 use Slim\Views\Twig;
@@ -129,11 +128,11 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
-        $app->get('/permalink/{version:nightly|sprint|latest}/{file}', PermalinkAction::class);
+        $app->get('/permalink/{version:nightly|sprint|latest|dev}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
         
-        $app->get('/download/{version:nightly|sprint-release|latest}[.html]', SprintNightlyAction::class);
-        $app->get('/download/{version:nightly|sprint-release|latest}/{file}', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|latest|dev}[.html]', SprintNightlyAction::class);
+        $app->get('/download/{version:nightly|sprint-release|latest|dev}/{file}', SprintNightlyAction::class);
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
