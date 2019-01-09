@@ -34,7 +34,7 @@ class PermalinkActionTest extends TestCase
     {
         AppTester::assertThatGet('/permalink/latest/axonivy-engine-slim.zip')
         ->statusCode(302)
-        ->header('Location', 'https://download.axonivy.com/7.2.0/AxonIvyEngine7.2.0.56047_Slim_All_x64.zip');
+        ->header('Location', 'https://download.axonivy.com/latest/AxonIvyEngine7.2.0.56047_Slim_All_x64.zip');
     }
     
     public function testPermalink_latest_notexisting()

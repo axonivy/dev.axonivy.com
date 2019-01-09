@@ -17,31 +17,31 @@ class SprintNightlyAction
     public function __invoke(Request $request, $response, $args) {
         $version = $args['version'];
         
-        $artifacts = [];
+        if ($version == 'sprint-release') {
+            $version = 'sprint';
+        }
+        
+        $artifacts = ReleaseInfoRepository::getArtifacts($version);
         $name = '';
         $p2Url = '';
         $testingPurpose = true;
-        $dockerImage = '';
+        $dockerImage = 'axonivy/axonivy-engine';
+        
         if ($version == 'nightly') {
-            $artifacts = ReleaseInfoRepository::getNightlyArtifacts();
             $name = 'Nightly Build';
             $p2Url = 'https://file.axonivy.rocks/p2/nightly/';
-            $dockerImage = 'axonivy/axonivy-engine:nightly';
+            $dockerImage .= ':' . $version;
         } else if ($version == 'dev') {
-            $artifacts = ReleaseInfoRepository::getDevArtifacts();
             $name = 'Dev Build';
             $p2Url = '';
-            $dockerImage = 'axonivy/axonivy-engine:dev';
-        } else if ($version == 'sprint-release') {
-            $artifacts = ReleaseInfoRepository::getSprintArtifacts();
+            $dockerImage .= ':' . $version;
+        } else if ($version == 'sprint') {
             $name = 'Sprint Release';
             $p2Url = 'https://file.axonivy.rocks/p2/sprint/';
-            $dockerImage = 'axonivy/axonivy-engine:sprint';
+            $dockerImage .= ':' . $version;
         } else if ($version == 'latest') {
-            $artifacts = ReleaseInfoRepository::getLatest()->getArtifacts();
             $name = 'Latest Release';
             $testingPurpose = false;
-            $dockerImage = 'axonivy/axonivy-engine';
         } else {
             throw new \InvalidArgumentException($version . ' is not supported');
         }

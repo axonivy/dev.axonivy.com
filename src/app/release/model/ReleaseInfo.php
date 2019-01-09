@@ -128,10 +128,4 @@ class ReleaseInfo
         }
         return $mostModernVariant;
     }
-    
-    public function getArtifacts(): array
-    {
-        return Artifact::createArtifactsFromReleaseInfo($this, CDN_HOST . '/' . $this->version->getVersionNumber() . '/', PERMALINK_LATEST);
-    }
-    
 }

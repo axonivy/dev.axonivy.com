@@ -2,6 +2,7 @@
 namespace app\release\model;
 
 use app\util\ArrayUtil;
+use app\util\StringUtil;
 
 class ReleaseInfoRepository
 {
@@ -49,27 +50,44 @@ class ReleaseInfoRepository
             $safeVersion = '';
             if (isset(UNSAFE_RELEASES[$versionNumber])) {
                 $safeVersion = UNSAFE_RELEASES[$versionNumber];
-            }
-            $fileNames = glob($directory . '/downloads/*.{zip,deb}', GLOB_BRACE);
-            $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames, $safeVersion);
+            }            
+            $releaseInfos[] = self::createReleaseInfo($directory, $versionNumber, $safeVersion);
         }
         $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst($releaseInfos);
         return $releaseInfos;
     }
     
-    public static function getNightlyArtifacts(): array
+    /**
+     * e.g: latest, sprint, nightly
+     */
+    public static function getArtifacts(string $version): array
     {
-        return Artifact::createArtifacts(IVY_NIGHTLY_RELEASE_DIRECTORY, CDN_HOST_NIGHTLY, PERMALINK_NIGHTLY);
+        $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $version;
+        $cdnBaseUrl = CDN_HOST . '/' . $version . '/';
+        $permalinkBaseUrl = PERMALINK_BASE_URL . $version . '/';
+        
+        $releaseInfo = self::createReleaseInfo($artifactsDirectory, '', '');
+        
+        return self::createArtifactsFromReleaseInfo($releaseInfo, $cdnBaseUrl, $permalinkBaseUrl);
     }
     
-    public static function getSprintArtifacts(): array
+    private static function createArtifactsFromReleaseInfo(ReleaseInfo $releaseInfo, string $cdnBaseUrl, string $permalinkBaseUrl): array
     {
-        return Artifact::createArtifacts(IVY_SPRINT_RELEASE_DIRECTORY, CDN_HOST_SPRINT, PERMALINK_SPRINT);
+        $artifacts = [];
+        foreach ($releaseInfo->getVariants() as $variant) {
+            $fileName = $variant->getFileName();
+            $downloadUrl = $cdnBaseUrl . $variant->getFileName();
+            $permalink = $permalinkBaseUrl .  Variant::create($fileName)->getFileNameInLatestFormat();
+            
+            $artifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
+        }
+        return $artifacts;
     }
     
-    public static function getDevArtifacts(): array
+    private static function createReleaseInfo($directory, $versionNumber, $safeVersion): ReleaseInfo
     {
-        return Artifact::createArtifacts(IVY_DEV_RELEASE_DIRECTORY, CDN_HOST_DEV, PERMALINK_DEV);
+        $fileNames = glob($directory . '/downloads/*.{zip,deb}', GLOB_BRACE);
+        return new ReleaseInfo($versionNumber, $fileNames, $safeVersion);
     }
 }
 
