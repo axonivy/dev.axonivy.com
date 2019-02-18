@@ -8,7 +8,7 @@ pipeline {
     cron '@midnight'
   }
   options {
-    buildDiscarder(logRotator(artifactNumToKeepStr: '10'))
+    buildDiscarder(logRotator(numToKeepStr: '120', artifactNumToKeepStr: '10'))
   }
   /*parameters {
     booleanParam(defaultValue: false, description: 'Deploy to production?', name: 'deployToProduction')
