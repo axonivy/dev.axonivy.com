@@ -110,7 +110,10 @@ class ReleaseInfo
                 $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_LINUX);
             }
         }
-        if (! UserAgentDetector::isOsLinux() || $variant == null) {
+        if (UserAgentDetector::isOsMac()) {
+            $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_MAC);
+        }
+        if ($variant == null) {
             $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_WINDOWS);
         }
         return $variant;

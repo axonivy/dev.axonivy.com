@@ -14,4 +14,15 @@ class UserAgentDetector
         $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
         return StringUtil::contains($userAgent, 'linux');   
     }
+
+    /**
+     * Determines if the OS of the current request is a Mac based OS.
+     * 
+     * @return bool
+     */
+    public static function isOsMac(): bool
+    {
+        $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+        return StringUtil::contains($userAgent, 'macintosh');
+    }
 }

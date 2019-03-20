@@ -11,6 +11,7 @@ class Variant
     public const TYPE_WINDOWS = 'Windows';
     public const TYPE_LINUX = 'Linux';
     public const TYPE_DEBIAN = 'Debian';
+    public const TYPE_MAC = 'MacOSX-BETA';
     
     public const ARCHITECTURE_X64 = 'x64';
     public const ARCHITECTURE_X86 = 'x86';
@@ -104,16 +105,13 @@ class Variant
         {
             return false;
         }
-        else
+        else if ($this->contains($this->type, $type))
         {
-            if ($this->contains($this->type, $type))
-            {
-                if ($this->architecture == self::ARCHITECTURE_X64) {
-                    return true;
-                }
+            if ($this->architecture == self::ARCHITECTURE_X64) {
+                return true;
             }
-            return false;
         }
+        return false;
     }
     
     private function contains(string $candidate, string $search): bool {
