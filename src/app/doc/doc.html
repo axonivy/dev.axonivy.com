@@ -16,7 +16,7 @@
     <style>
 .dropbtn {
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   cursor: pointer;
 }
@@ -60,10 +60,10 @@
     
     
     
-    <section id="main" style="padding-bottom:0px;" >
+    <section id="docuHeader" style="padding-bottom: 10px; padding-top: 20px;" >
 		<div class="inner">
 		
-			<div style="text-align:right;position:relative;top:-40px; height: 0;">
+			<div style="text-align: right; position: relative; height: 0;">
 				{% for docLink in docLinks %}
 					<a href="{{ docLink.url }}">{{ docLink.displayText }}</a>
 					{% if not loop.last %}|{% endif %}
@@ -103,8 +103,6 @@
 						{% endfor %}					
 					
 			</div>
-			
-			<br />
 					
 		</div>
 		
@@ -164,7 +162,7 @@
 	</style>
 	
 	
-	<section id="main" style="padding-top:2em;">
+	<section id="main" style="padding-top: 0; padding-bottom: 0;">
 		<div class="inner">
 		  <div id="iframecontainer" class="iframe-container">
 		    <iframe src="{{ documentUrl }}" frameborder="0" onload='javascript:resizeIframe(this);'></iframe>
@@ -177,7 +175,7 @@
 		resizeHeighOfIframe();
 	};
 	function resizeHeighOfIframe() {
-		height = window.innerHeight - 400;
+		height = window.innerHeight - document.getElementById('header').clientHeight - document.getElementById('docuHeader').clientHeight;
 		document.getElementById("iframecontainer").style.height = height +"px"
 	}
 	resizeHeighOfIframe();
