@@ -29,8 +29,7 @@ class SitemapAction
             self::createSite('/doc/latest/NewAndNoteworthy.html', 0.6),
             self::createSite('/doc/latest/ReleaseNotes.html', 0.6),
             self::createSite('/doc/latest/MigrationNotes.html', 0.4),
-            self::createSite('/doc/latest/ReadMe.html', 0.4),
-            self::createSite('/doc/latest/ReadMeEngine.html', 0.4),
+            self::createSite('/doc/latest/ReadMe.html', 0.4)
         ];
         
         $releaseInfo = ReleaseInfoRepository::getLatest();
@@ -38,7 +37,6 @@ class SitemapAction
             $sites = self::addSites($sites, $releaseInfo, 'DesignerGuideHtml');
             $sites = self::addSites($sites, $releaseInfo, 'EngineGuideHtml');
             $sites = self::addSites($sites, $releaseInfo, 'PortalKitHtml');
-            $sites = self::addSites($sites, $releaseInfo, 'PortalConnectorHtml');
             $sites = self::addSites($sites, $releaseInfo, 'PublicAPI');
         }
         
