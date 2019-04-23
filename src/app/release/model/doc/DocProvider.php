@@ -82,8 +82,9 @@ class DocProvider
     {
         $documents = [
             self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'),
-            self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'),
-            self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'),
+            self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'), // ancient engine guide
+            self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
+            self::createExternalBook('Engine Guide', 'engine-guide'), // new engine guide since 7.4
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
             
