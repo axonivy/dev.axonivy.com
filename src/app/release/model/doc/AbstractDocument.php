@@ -49,9 +49,9 @@ abstract class AbstractDocument
     {
         return $this->baseUrl;
     }
-    protected function getBaseRessourceUrl(): string
+
+    protected function getRootPath(): string
     {
-        return $this->baseRessourceUrl;
+        return $this->rootPath;
     }
-    
 }

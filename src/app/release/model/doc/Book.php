@@ -16,13 +16,12 @@ class Book extends AbstractDocument
         return parent::getBaseUrl() . '/' . $this->pdfFile;
     }
     
-    public function getRessourcePdfUrl()
+    public function pdfExists(): bool
     {
-        return parent::getBaseRessourceUrl() . '/' . $this->pdfFile;
-    }
-    
-    public function getPdfFileName()
-    {
-        return $this->pdfFile;
+        if (empty($this->pdfFile))
+        {
+            return false;
+        }
+        return file_exists(parent::getRootPath() . '/' . $this->pdfFile);
     }
 }

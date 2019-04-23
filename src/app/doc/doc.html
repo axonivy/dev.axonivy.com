@@ -91,9 +91,11 @@
 							<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
 						{% endfor %}
 						<span style="font-size:12px;padding-left:15px;">PDF's</span>
-					  	{% for doc in docProvider.Books %}
-								<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
-						{% endfor %}
+							{% for doc in docProvider.Books %}
+								{% if doc.pdfExists %}
+									<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
+								{% endif %}
+						  {% endfor %}
 					  </div>
 					</div>
 						
