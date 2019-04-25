@@ -4,20 +4,20 @@ pipeline {
       dir 'docker/apache'    
     }
   }
+  
   triggers {
     cron '@midnight'
   }
+  
   options {
     buildDiscarder(logRotator(numToKeepStr: '120', artifactNumToKeepStr: '10'))
   }
-  /*parameters {
-    booleanParam(defaultValue: false, description: 'Deploy to production?', name: 'deployToProduction')
-  }*/
+  
   stages {
     stage('distribution') {
       steps {
       	sh 'composer install --no-dev --no-progress'
-        sh 'tar -cf ivy-website-developer.tar --exclude=src/web/releasess src vendor'
+        sh 'tar -cf ivy-website-developer.tar --exclude=src/web/releases src vendor'
         archiveArtifacts 'ivy-website-developer.tar'
       }
     }
@@ -26,12 +26,8 @@ pipeline {
       steps {
       	sh 'composer install --no-progress'
         sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-      }
-      post {
-        always {
-          junit 'phpunit-junit.xml'
-        }
-      }
+        junit 'phpunit-junit.xml'
+      } 
     }
     
     stage('deploy') {
@@ -40,12 +36,6 @@ pipeline {
         expression {
           currentBuild.result == null || currentBuild.result == 'SUCCESS' 
         }
-        /*expression {
-          input 'Do you want to deploy to production?'
-        }*/
-        /*expression {
-          params.deployToProduction         
-        }*/
       }
       steps {
         sshagent(['zugprojenkins-ssh']) {
