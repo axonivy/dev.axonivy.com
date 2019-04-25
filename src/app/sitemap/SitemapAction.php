@@ -35,7 +35,8 @@ class SitemapAction
         $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
             $sites = self::addSites($sites, $releaseInfo, 'DesignerGuideHtml');
-            $sites = self::addSites($sites, $releaseInfo, 'EngineGuideHtml');
+            $sites = self::addSites($sites, $releaseInfo, 'EngineGuideHtml'); // legacy (prior 7.4)
+            $sites = self::addSites($sites, $releaseInfo, 'engine-guide'); // legacy (since 7.4)
             $sites = self::addSites($sites, $releaseInfo, 'PortalKitHtml');
             $sites = self::addSites($sites, $releaseInfo, 'PublicAPI');
         }
@@ -45,7 +46,6 @@ class SitemapAction
     
     private static function addSites($sites, ReleaseInfo $releaseInfo, $path): array
     {
-        $sites[] = self::createSite('/doc/latest/'.$path.'/', 1);
         foreach (self::getHtmlFiles($releaseInfo->getPath() . '/documents/'.$path.'/') as $html) {
             if (!StringUtil::startsWith($html, '/')) {
                 $html = '/' . $html;
