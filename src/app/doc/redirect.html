@@ -1,0 +1,90 @@
+{% extends "templates/parts/base_content_no_footer.html" %}
+
+{% block title %}Doc {{ version }}{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1>Redirect</h1></header>
+					
+			<div class="row">
+				<div id="redirectText" class="12u 12u$(xsmall)">
+					You will be redirected in 3 seconds to our brand new documentation.
+					Otherwise click on the following link.
+				</div>
+				<div class="12u 12u$(xsmall)">
+					<a href="#" id="redirectPage"></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<script type="text/javascript">
+		var redirects = {
+		  'EngineGuideHtml' : '',
+		  'index.html' : '',
+	      'introduction.html' : 'introduction/',
+		  'introduction.html#ivy-introduction-whatis' : 'introduction/index.html#what-is-axon-ivy',
+		  'gettingstarted.html' : 'getting-started/',
+		  'installation.html' : 'installation/',
+		  'configuration.html' : 'configuration/',
+		  'security.html' : 'security/',
+		  'integration.html' : 'integration/',
+		  'administration.html' : 'administration/',
+		  'monitoring.html' : 'monitoring/',
+		  'tools.html' : 'tool-reference/',
+		  'troubleshooting.html' : 'troubleshooting/'
+		}
+		
+		var page = getPageWithAnchor();
+		if (!redirect(page)) {
+			page = getPage();
+			if (!redirect(page)) {
+				page = 'index.html'
+				redirect(page);
+			}
+		}
+		
+		function redirect(from) {
+			if (redirects.hasOwnProperty(from)) {
+				var to = redirects[from];
+				console.log("redirect " + from + " to " + to);
+				targetPage = "../engine-guide/" + to
+
+				var link = document.getElementById("redirectPage");
+				link.href = targetPage;
+				link.innerHTML = targetPage;
+				
+				setTimeout(function() {
+					window.location.href = targetPage;
+				}, 3000);
+				return true;
+			} else {
+				console.log("no redirection found for page " + page);
+				return false;
+			}
+		}
+
+		function getPageWithAnchor() {
+			var page = getPage();
+			var anchor = getAnchor();
+			if (anchor) {
+				return page + "#" + anchor;
+			}
+			return page;
+		}
+
+		function getPage() {
+			var path = window.location.pathname;
+			return path.split("/").pop();
+		}
+		
+		function getAnchor() {
+		    var currentUrl = document.URL,
+			urlParts   = currentUrl.split('#');				
+		    return (urlParts.length > 1) ? urlParts[1] : null;
+		}		
+	</script>
+    
+{% endblock %}

@@ -20,6 +20,7 @@ use app\devday\DevDayAction;
 use app\tutorial\TutorialAction;
 use app\tutorial\gettingstarted\TutorialGettingStartedAction;
 use app\doc\DocAction;
+use app\doc\LegacyDocAction;
 use app\installation\InstallationAction;
 use app\feature\FeatureAction;
 use app\search\SearchAction;
@@ -136,6 +137,7 @@ class Website
         
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
+        $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyDocAction::class);
         $app->get('/doc/{version}/{document}', DocAction::class);
         
         $app->get('/installation', InstallationAction::class);
