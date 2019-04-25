@@ -17,7 +17,7 @@ pipeline {
     stage('distribution') {
       steps {
       	sh 'composer install --no-dev --no-progress'
-        sh 'tar -cf ivy-website-developer.tar src vendor'
+        sh 'tar -cf ivy-website-developer.tar --exclude=src/web/releasess src vendor'
         archiveArtifacts 'ivy-website-developer.tar'
       }
     }

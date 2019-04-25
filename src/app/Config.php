@@ -16,7 +16,7 @@ class Config {
         
         $rootDir = '/home/axonivya/data/ivy-releases';
         if (self::isDevOrTestEnv()) {
-            $rootDir = __DIR__ . '/../../test/data/webroot/releases/ivy';
+            $rootDir = __DIR__ . '/../../src/web/releases/ivy';
         }
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
         
