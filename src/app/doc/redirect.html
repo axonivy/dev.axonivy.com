@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <meta http-equiv="refresh" content="6; URL={{ redirectUrl }}"> <!-- fallback if no javascript is enabled -->
+    <meta http-equiv="refresh" content="3; URL={{ redirectUrl }}"> <!-- fallback if no javascript is enabled -->
 
 	<section id="main" >
 		<div class="inner">
@@ -182,7 +182,7 @@
 				
 				setTimeout(function() {
 					window.location.href = targetPage;
-				}, 3000);
+				}, 500);
 				return true;
 			} else {
 				console.log("no redirection found for page " + page);
