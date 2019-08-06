@@ -17,7 +17,8 @@ class MavenArtifact
     {
         $artifacts = array_merge(
             self::getWorkflowUis(), 
-            self::getProjectDemos()
+            self::getProjectDemos(),
+            self::getValveDemos()
         );
         $artifacts[] = self::getProjectDemosApp();
         return $artifacts;
@@ -33,6 +34,14 @@ class MavenArtifact
             new MavenArtifact('connectivity-demos', $groupdId, 'connectivity-demos', 'iar'),
             new MavenArtifact('rule-engine-demos', $groupdId, 'rule-engine-demos', 'iar'),
             new MavenArtifact('html-dialog-demos', $groupdId, 'html-dialog-demos', 'iar')
+        ];
+    }
+    
+    public static function getValveDemos(): array
+    {
+        $groupdId = 'com.acme';
+        return [
+            new MavenArtifact('processing-valve', $groupdId, 'com.acme.ProcessingValve', 'jar')
         ];
     }
         
