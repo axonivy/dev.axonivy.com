@@ -103,6 +103,14 @@
 						{% for doc in docProvider.getImportantBooks %}
 								<a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
 						{% endfor %}					
+
+						{% for doc in docProvider.getZips %}
+							{% if doc.zipExists %}
+								<a href="{{ doc.zipUrl }}" target="_blank" title="{{ doc.Name }}" style="padding-left:5px;padding-right:5px;">
+									<i style="font-size:14px;" class="fas fa-download"></i>
+								</a>
+							{% endif %}
+						{% endfor %}					
 					
 			</div>
 					
