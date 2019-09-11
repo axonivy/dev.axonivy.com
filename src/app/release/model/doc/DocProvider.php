@@ -52,6 +52,11 @@ class DocProvider
         return array_shift(array_values($docs));
     }
     
+    public function getZips(): array
+    {
+        return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof ZipDoc; });
+    }
+
     public function getBooks(): array
     {
         return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof Book; });
@@ -81,25 +86,38 @@ class DocProvider
     private function findAllDocuments(): array
     {
         $documents = [
-            self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'),
+            self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'), // legacy engine guide prior to 8.0
+            self::createBook('Designer Guide', 'designer-guide', ''), // new guide since 8.0
+
             self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'), // ancient engine guide
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
             self::createBook('Engine Guide', 'engine-guide', ''), // new engine guide since 7.4
+            
             self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
-            self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'),
+            self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'), // legacy
             
             self::createExternalBook('Public API', 'PublicAPI'),
+
+            self::createZip('Product Documentation', 'axonivy-doc-*.zip'),
             
             self::getNewAndNoteworthy(),
             self::getReleaseNotes(),
             self::createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes'),
             self::createReleaseDocument('ReadMe', 'ReadMe.html', 'readme'),
-            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'),
-            self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')
+            self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'), // legacy
+            self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')  // legacy
         ];
         return array_filter($documents, function(AbstractDocument $doc) { return $doc->exists(); });
     }
-    
+
+    private function createZip($name, $fileNamePattern): ZipDoc
+    {
+        $rootPath = $this->createRootPath();
+        $baseUrl = $this->createBaseUrl();
+        $baseRessourceUrl = $this->createBaseRessourceUrl();
+        return new ZipDoc($name, $rootPath, $baseUrl, $baseRessourceUrl, $fileNamePattern);
+    }
+
     private function createBook($name, $path, $pdfFile): Book
     {
         $rootPath = $this->createRootPath();
