@@ -6,7 +6,7 @@ use test\AppTester;
 
 class ApiCurrentReleaseTest extends TestCase
 {
-    private static $RESPONSE = '{"latestReleaseVersion":"7.4.0","latestServiceReleaseVersion":"7.0.1"}';
+    private static $RESPONSE = '{"latestReleaseVersion":"7.5.0","latestServiceReleaseVersion":"7.0.1"}';
     
     public function testCurrentRelease()
     {
