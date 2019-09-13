@@ -4,7 +4,7 @@ namespace app\doc;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Response;
 
-class LegacyDocAction
+class LegacyEngineGuideDocAction
 {
     protected $container;
 
@@ -23,7 +23,7 @@ class LegacyDocAction
         }
         
         $redirectUrl = $this->getRedirectUrl($doc);        
-        return $this->container->get('view')->render($response, 'app/doc/redirect.html', ['redirectUrl' => $redirectUrl]);
+        return $this->container->get('view')->render($response, 'app/doc/redirect-engine-guide.html', ['redirectUrl' => $redirectUrl]);
     }
 
     private function getRedirectUrl($doc)

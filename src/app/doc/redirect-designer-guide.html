@@ -1,0 +1,196 @@
+{% extends "templates/parts/base_content_no_footer.html" %}
+
+{% block title %}Doc {{ version }}{{ parent() }}{% endblock %}
+
+{% block content %}
+
+    <meta http-equiv="refresh" content="3; URL={{ redirectUrl }}"> <!-- fallback if no javascript is enabled -->
+
+	<section id="main" >
+		<div class="inner">
+			<header><h1>Redirect</h1></header>
+			<div class="row">
+				<div id="redirectText" class="12u 12u$(xsmall)">
+					You will be redirected in 3 seconds to our brand new documentation.
+					Otherwise click on the following link.
+				</div>
+				<div class="12u 12u$(xsmall)">
+					<a href="{{ redirectUrl }}" id="redirectPage">{{ redirectUrl }}</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<script type="text/javascript">
+		var redirects = {
+		  'DesignerGuideHtml' : '',
+		  'index.html' : '',
+		  
+	      'ivy.introduction.html' : 'introduction/',
+		  'ivy.introduction.html#ivy-introduction-whatis' : '../axonivy/index.html',
+		  
+		  'ivy.introduction.html#ivy-introduction-workbench' : 'introduction/workbench.html',
+		  'ivy.introduction.html#ivy-introduction-editorsandviews' : 'introduction/workbench.html#axon-ivy-editors-and-views',
+		  
+		  'ivy.introduction.html#ivy-introduction-perspectives' : 'introduction/perspectives.html',
+		  'ivy.introduction.html#ivy-introduction-available_ivy_perspectives' : 'introduction/perspectives.html',
+		  'ivy.introduction.html#ivy-introduction-available_other_perspectives' : 'introduction/perspectives.html',
+		  
+		  'ivy.introduction.html#ivy-introduction-menus' : 'introduction/menus.html',
+		  
+		  'ivy.introduction.html#ivy-introduction-toolbar' : 'introduction/toolbar.html',
+		  
+		  'ivy.introduction.html#ivy-introduction-usefulCommands' : 'introduction/shortcuts.html',
+		  
+		  'ivy.introduction.html#ivy-introduction-preferences' : 'introduction/preferences.html',
+		  'ivy.introduction.html#ivy-introduction-preferences-deprecation' : 'introduction/preferences.html#deprecation-settings',
+		  'ivy.introduction.html#ivy-introduction-preferences-email' : 'introduction/preferences.html#email-settings',
+		  'ivy.introduction.html#ivy-introduction-preferences-ivyscript' : 'introduction/preferences.html#ivyscript-settings',
+		  'ivy.introduction.html#ivy-introduction-preferences-processeditor' : 'introduction/preferences.html#process-editor-settings',
+		  'ivy.introduction.html#ivy-introduction-preferences-processengine' : 'introduction/preferences.html#process-engine-settings',
+		  'ivy.introduction.html#ivy-introduction-preferences-sslclient' : 'introduction/preferences.html#ssl-client-settings',
+		  
+		  'ivy.introduction.html#ivy-introduction-commonuicomponents' : 'introduction/common-ui-components.html',
+		  'ivy.introduction.html#ivy-ui-common-ivyscript-editor' : 'introduction/common-ui-components.html#ivyscript-editor',
+		  'ivy.introduction.html#commonUIComponents-MacroTextEditor' : 'introduction/common-ui-components.html#macro-text-editor',
+		  'ivy.introduction.html#commonUIComponents-SmartButtons' : 'introduction/common-ui-components.html#smart-buttons',
+		  'ivy.introduction.html#ivy-wizards-refactoring' : 'introduction/common-ui-components.html#refactoring-wizards',
+		  
+		  'ivy.processmodeling.html' : 'process-modeling/',
+		  'ivy.processmodeling.html#ivy-project' : 'process-modeling/projects.html',
+		  'ivy.processmodeling.html#ivy-project-archives' : 'process-modeling/projects.html#ivy-archives',
+		  'ivy.processmodeling.html#ivy-views-project' : 'process-modeling/projects.html#ivy-project-view',
+		  'ivy.processmodeling.html#ivy-wizards-newproject' : 'process-modeling/projects.html#new-project-wizard',
+		  'ivy.processmodeling.html#ivy-actions-importproject' : 'process-modeling/projects.html#importing-a-project',
+		  'ivy.processmodeling.html#ivy-actions-exportproject' : 'process-modeling/projects.html#exporting-a-project',
+		  'ivy.processmodeling.html#ivy-project-convert' : 'process-modeling/projects.html#converting-projects',
+		  'ivy.processmodeling.html#ivy-project-preferences' : 'process-modeling/projects.html#project-preferences',
+		  'ivy.processmodeling.html#ivy-project-deploymentdescriptor' : 'process-modeling/projects.html#project-deployment-descriptor',
+		  'ivy.processmodeling.html#ivy-validators' : 'process-modeling/projects.html#validating-axon-ivy-projects-and-resources',
+		  
+		  'ivy.processmodeling.html#ivy-processmodels' : 'process-modeling/process-modeling.html',
+		  'ivy.processmodeling.html#ivy-processmodels-processkinds' : 'process-modeling/process-modeling.html#process-kinds',
+		  'ivy.processmodeling.html#ivy-wizards-newprocess' : 'process-modeling/process-modeling.html#new-process-wizard',
+		  'ivy.processmodeling.html#ivy-wizards-newprocessgroup' : 'process-modeling/process-modeling.html#new-process-group-wizard',
+		  'ivy.processmodeling.html#ivy-processmodels-import-modeller' : 'process-modeling/process-modeling.html#import-axon-ivy-modeler-processes',
+		  'ivy.processmodeling.html#ivy-processmodels-process-inscription' : 'process-modeling/process-modeling.html#process-properties',
+		  'ivy.processmodeling.html#ivy-editors-process' : 'process-modeling/process-modeling.html#process-editor',
+		  'ivy.processmodeling.html#ivy-processmodels-swimmlanes' : 'process-modeling/process-modeling.html#swimlanes',
+		  'ivy.processmodeling.html#ivy-wizards-reporting' : 'process-modeling/process-modeling.html#process-model-reporting-wizard',
+		  'ivy.processmodeling.html#ivy-views-processoutline' : 'process-modeling/process-modeling.html#process-outline-view',
+		  'ivy.processmodeling.html#ivy-views-processtemplates' : 'process-modeling/process-modeling.html#process-template-view',
+		  'ivy.processmodeling.html#ivy-views-problems' : 'process-modeling/process-modeling.html#problems-view',
+		  'ivy.processmodeling.html#ivy-views-reference' : 'process-modeling/process-modeling.html#reference-view',
+		  
+		  'ivy.processmodeling.html#ivy-simulation_and_debugging' : 'process-modeling/simulation-debugging.html',
+		  'ivy.processmodeling.html#ivy-processmodels-simulation' : 'process-modeling/simulation-debugging.html#simulation',
+		  'ivy.processmodeling.html#ivy-processmodels-debugging' : 'process-modeling/simulation-debugging.html#debugger',
+
+		  'ivy.processmodeling.html#ivy-casemap' : 'process-modeling/casemap.html',
+		  'ivy.processmodeling.html#ivy-wizards-newcasemap' : 'process-modeling/casemap.html#case-map-wizard',
+		  'ivy.processmodeling.html#ivy-editors-casemap' : 'process-modeling/casemap.html#case-map-editor',
+		  'ivy.processmodeling.html#ivy-casemap-statistics' : 'process-modeling/casemap.html#case-map-statistics-preview',
+		  'ivy.processmodeling.html#ivy-casemap-workflow-execution' : 'process-modeling/casemap.html#workflow-execution-of-case-map-processes',
+		  
+		  'ivy.processmodeling.html#ivy-processmodels-elements-tabs' : 'process-modeling/process-elements/common-tabs.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-startrequest' : 'process-modeling/process-elements/start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-event' : 'process-modeling/process-elements/program-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-boundary-error' : 'process-modeling/process-elements/error-boundary-event.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-error-start' : 'process-modeling/process-elements/error-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-boundary-signal' : 'process-modeling/process-elements/signal-boundary-event.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-signal-start' : 'process-modeling/process-elements/signal-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-alternative' : 'process-modeling/process-elements/alternative.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-split' : 'process-modeling/process-elements/split.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-join' : 'process-modeling/process-elements/join.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-task' : 'process-modeling/process-elements/task-switch-gateway.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-tasksimple' : 'process-modeling/process-elements/task-switch-event.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-intermediate' : 'process-modeling/process-elements/wait-program-intermediate-event.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-callandwait' : 'process-modeling/process-elements/call-and-wait.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-endpage' : 'process-modeling/process-elements/process-end-page.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-error-end' : 'process-modeling/process-elements/error-end.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-end' : 'process-modeling/process-elements/process-end.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-usertask' : 'process-modeling/process-elements/user-task.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-page' : 'process-modeling/process-elements/web-page.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-userdialog' : 'process-modeling/process-elements/user-dialog.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-scriptactivity' : 'process-modeling/process-elements/script-step.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-database' : 'process-modeling/process-elements/db-step.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-webservice' : 'process-modeling/process-elements/web-service-call-activity.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-rest-client' : 'process-modeling/process-elements/rest-client-activity.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-email' : 'process-modeling/process-elements/email-step.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-embeddedsub' : 'process-modeling/process-elements/embedded-subprocess.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-independentsub' : 'process-modeling/process-elements/call-sub.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-trigger' : 'process-modeling/process-elements/trigger-step.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-pi' : 'process-modeling/process-elements/program-interface-activity.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-note' : 'process-modeling/process-elements/note.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-wsprocessstart' : 'process-modeling/process-elements/web-service-process-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-subprocessstart' : 'process-modeling/process-elements/sub-process-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-userdialog-init' : 'process-modeling/process-elements/user-dialog-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-userdialog-method' : 'process-modeling/process-elements/user-dialog-method-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-userdialog-event' : 'process-modeling/process-elements/user-dialog-event-start.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-userdialog-end' : 'process-modeling/process-elements/user-dialog-process-end.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-userdialog-exit' : 'process-modeling/process-elements/user-dialog-exit-end.html',
+		  'ivy.processmodeling.html#ivy-processmodels-elements-bpmntasks' : 'process-modeling/process-elements/bpmn-activity-elements.html'
+		  
+		  // TODO
+		  // data modeling
+		  // ivyscript
+		  // cms
+		  // user interface
+		  // integration
+		  // configuration
+		  // concepts
+		  // toubleshooting
+		  // reference		  
+		}
+		
+		var page = getPageWithAnchor();
+		if (!redirect(page)) {
+			page = getPage();
+			if (!redirect(page)) {
+				page = 'index.html'
+				redirect(page);
+			}
+		}
+		
+		function redirect(from) {
+			if (redirects.hasOwnProperty(from)) {
+				var to = redirects[from];
+				console.log("redirect " + from + " to " + to);
+				targetPage = "../designer-guide/" + to
+
+				var link = document.getElementById("redirectPage");
+				link.href = targetPage;
+				link.innerHTML = targetPage;
+				
+				setTimeout(function() {
+					window.location.href = targetPage;
+				}, 500);
+				return true;
+			} else {
+				console.log("no redirection found for page " + page);
+				return false;
+			}
+		}
+
+		function getPageWithAnchor() {
+			var page = getPage();
+			var anchor = getAnchor();
+			if (anchor) {
+				return page + "#" + anchor;
+			}
+			return page;
+		}
+
+		function getPage() {
+			var path = window.location.pathname;
+			return path.split("/").pop();
+		}
+		
+		function getAnchor() {
+		    var currentUrl = document.URL,
+			urlParts   = currentUrl.split('#');				
+		    return (urlParts.length > 1) ? urlParts[1] : null;
+		}		
+	</script>
+    
+{% endblock %}
