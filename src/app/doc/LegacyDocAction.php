@@ -15,7 +15,20 @@ class LegacyDocAction
 
     public function __invoke($request, Response $response, $args)
     {
-        $htmlDocument = $args['htmlDocument'] ?? 'index.html';
+        $doc = $args['htmlDocument'];
+        
+        if (empty($doc))
+        {
+            return $response->withRedirect('engine-guide/', 301);
+        }
+        
+        $redirectUrl = $this->getRedirectUrl($doc);        
+        return $this->container->get('view')->render($response, 'app/doc/redirect.html', ['redirectUrl' => $redirectUrl]);
+    }
+
+    private function getRedirectUrl($doc)
+    {
+        $htmlDocument = $doc ?? 'index.html';
         $redirects = [
             'index.html' => '/',
             'introduction.html' => 'introduction/',
@@ -30,8 +43,6 @@ class LegacyDocAction
             'troubleshooting.html' => 'troubleshooting/'
         ];
         $newPage = $redirects[$htmlDocument] ?? '';
-        $redirectUrl = '../engine-guide/' . $newPage;
-        
-        return $this->container->get('view')->render($response, 'app/doc/redirect.html', ['redirectUrl' => $redirectUrl]);
+        return '../engine-guide/' . $newPage;
     }
 }
