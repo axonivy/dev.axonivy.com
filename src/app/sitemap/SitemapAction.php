@@ -35,8 +35,7 @@ class SitemapAction
         $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
             $sites = self::addSites($sites, $releaseInfo, 'DesignerGuideHtml');
-            $sites = self::addSites($sites, $releaseInfo, 'EngineGuideHtml'); // legacy (prior 7.4)
-            $sites = self::addSites($sites, $releaseInfo, 'engine-guide'); // legacy (since 7.4)
+            $sites = self::addSites($sites, $releaseInfo, 'engine-guide');
             $sites = self::addSites($sites, $releaseInfo, 'PortalKitHtml');
             $sites = self::addSites($sites, $releaseInfo, 'PublicAPI');
         }

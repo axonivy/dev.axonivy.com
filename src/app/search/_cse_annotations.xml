@@ -17,10 +17,10 @@
     <AdditionalData attribute="original_url" value="answers.axonivy.com/*" />
     <AdditionalData attribute="file" value="_cse_annotations.xml" />
   </Annotation>
-  <Annotation about="developer.axonivy.com/doc/latest/EngineGuideHtml/*" score="1" timestamp="0x000513d4017f6372" href="CjJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9FbmdpbmVHdWlkZUh0bWwvKhDyxv2LwPrEAg">
+  <Annotation about="developer.axonivy.com/doc/latest/engine-guide/*" score="1" timestamp="0x000513d4017f6372" href="CjJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9FbmdpbmVHdWlkZUh0bWwvKhDyxv2LwPrEAg">
     <Label name="default" />
     <Label name="user_guide" />
-    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/EngineGuideHtml/*" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/engine-guide/*" />
     <AdditionalData attribute="file" value="_cse_annotations.xml" />
   </Annotation>
   <Annotation about="developer.axonivy.com/doc/latest/DesignerGuideHtml/*" score="1" timestamp="0x000513d4017f635f" href="CjRkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9EZXNpZ25lckd1aWRlSHRtbC8qEN_G_YvA-sQC">
@@ -33,9 +33,9 @@
     <Label name="_cse_0zc49fwxvts" />
     <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/DesignerGuideHtml/*" />
   </Annotation>
-  <Annotation about="developer.axonivy.com/doc/latest/EngineGuideHtml/*" score="1" timestamp="0x000513c456360b7d" href="CjJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9FbmdpbmVHdWlkZUh0bWwvKhD9ltixxfjEAg">
+  <Annotation about="developer.axonivy.com/doc/latest/engine-guide/*" score="1" timestamp="0x000513c456360b7d" href="CjJkZXZlbG9wZXIuYXhvbml2eS5jb20vZG9jL2xhdGVzdC9FbmdpbmVHdWlkZUh0bWwvKhD9ltixxfjEAg">
     <Label name="_cse_0zc49fwxvts" />
-    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/EngineGuideHtml/*" />
+    <AdditionalData attribute="original_url" value="developer.axonivy.com/doc/latest/engine-guide/*" />
   </Annotation>
   <Annotation about="answers.axonivy.com/questions/*" score="1" timestamp="0x000513c456360b66" href="Ch9hbnN3ZXJzLmF4b25pdnkuY29tL3F1ZXN0aW9ucy8qEOaW2LHF-MQC">
     <Label name="_cse_0zc49fwxvts" />
