@@ -16,5 +16,11 @@
 		"description": "In this tutorial series Axon.ivy core developer Alex Suter shows you how to work with SOAP Web Services.",
 		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnIt2mDUbWwzMsCWRqkQ7igd",
 		"videoUrl": "https://www.youtube.com/watch?list=PLrFKpclzHMnIt2mDUbWwzMsCWRqkQ7igd&v=is-mIbpzaNg"
+	},
+	{
+		"title": "CI/CD",
+		"description": "Axon.ivy core developers Reguel and Alex shows how to build a CI/CD pipeline with Axon.ivy.",
+		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnJR0Nc3Zmtem9FFHW0g6Jsz",
+		"videoUrl": "https://www.youtube.com/playlist?list=PLrFKpclzHMnJR0Nc3Zmtem9FFHW0g6Jsz"
 	}
 ]
