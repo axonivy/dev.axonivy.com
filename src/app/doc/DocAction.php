@@ -62,9 +62,7 @@ class DocAction
         
         $docLinks = [];
         foreach ($docUrls as $text => $url) {
-            $docLinks[] = $this->createDocLink(
-                $url,
-                $text);
+            $docLinks[] = $this->createDocLink($url, $text);
         }
         return $docLinks;
     }

@@ -84,11 +84,18 @@ class Website
         // global variables
         $view = $container['view'];
         
-        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
-        $view->getEnvironment()->addGlobal('CURRENT_LEADING_EDGE_VERSION', $version);
+        $versionLTS = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
+        $versionLE = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
         
-        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
-        $view->getEnvironment()->addGlobal('CURRENT_LONG_TERM_SUPPORT_VERSION', $version);
+        $text = "$versionLTS";
+        $textLong = "LTS $versionLTS";
+        if ($versionLTS != $versionLE)
+        {
+            $text .= " / $versionLE";
+            $textLong .= " / LE $versionLE";
+        }
+        $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD', $text);
+        $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD_LONG', $textLong);
     }
     
     private function getDisplayVersion(?ReleaseInfo $info): string

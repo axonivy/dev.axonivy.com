@@ -11,6 +11,7 @@ pipeline {
   
   options {
     buildDiscarder(logRotator(numToKeepStr: '120', artifactNumToKeepStr: '10'))
+    skipStagesAfterUnstable()
   }
   
   stages {
@@ -33,9 +34,6 @@ pipeline {
     stage('deploy') {
       when {
         branch 'master'
-        expression {
-          currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-        }
       }
       steps {
         sshagent(['zugprojenkins-ssh']) {

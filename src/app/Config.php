@@ -44,9 +44,11 @@ class Config {
         ]);
         
         define('IVY_VERSIONS', [
-            '7.x' => 'Leading Edge - LE',
+            // '8.x' => 'Leading Edge - LE',
+            '8.0' => 'Long Term Support - LTS',
+            '7.x' => 'UNSUPPORTED',
             '7.0' => 'Long Term Support - LTS',
-            '6.0' => 'Long Term Support - LTS',
+            '6.0' => 'UNSUPPORTED',
             '6.x' => 'UNSUPPORTED',
             '5.1' => 'UNSUPPORTED',
             '5.0' => 'UNSUPPORTED',

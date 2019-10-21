@@ -1,6 +1,5 @@
 @import url("https://use.fontawesome.com/releases/v5.2.0/css/all.css");
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700|Pacifico"); /* TODO Remove that */
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700|Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700|Roboto");
 
 /*
 	Introspect by TEMPLATED
@@ -1590,18 +1589,10 @@
 	}
 
 	body, input, select, textarea {
-		font-family: "Roboto", /*"Helvetica Neue", Helvetica, Arial,*/ sans-serif;
-		/*font-size: 15pt;
-		font-weight: 300;
-		line-height: 2;
-		*/
-		font-weight: 300;
-
-letter-spacing: 0.1px;
-
-line-height: 1.75;
-
-font-size: 18px;
+		font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+		font-weight: 400;
+		line-height: 1.75;
+		font-size: 18px;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -1672,7 +1663,6 @@ font-size: 18px;
 		font-weight: 700;
 		line-height: 1.5;
 		margin: 0 0 1em 0;
-		text-transform: uppercase;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -1858,7 +1848,7 @@ font-size: 18px;
 		border: 0;
 		cursor: pointer;
 		display: inline-block;
-		font-size: .8em;
+		/*font-size: .8em;*/
 		font-weight: 700;
 		height: 3.5em;
 		line-height: 3.65em;
@@ -1940,7 +1930,7 @@ font-size: 18px;
 	input[type="button"],
 	button,
 	.button {
-		background-color: #5a5a5a;
+		background-color: #575656;
 		color: #ffffff !important;
 	}
 
@@ -2723,7 +2713,7 @@ font-size: 18px;
 			.wrapper.style1 input[type="button"],
 			.wrapper.style1 button,
 			.wrapper.style1 .button {
-				background-color: #5a5a5a;
+				background-color: #575656;
 				color: #ffffff !important;
 			}
 
@@ -2889,7 +2879,7 @@ font-size: 18px;
 			}
 
 		.wrapper.style2 {
-			background-color: #5a5a5a;
+			background-color: #575656;
 			color: #d5d5d5;
 		}
 
@@ -2928,7 +2918,7 @@ font-size: 18px;
 			.wrapper.style2 button,
 			.wrapper.style2 .button {
 				background-color: #ffffff;
-				color: #5a5a5a !important;
+				color: #575656 !important;
 			}
 
 				.wrapper.style2 input[type="submit"].alt,
@@ -3116,7 +3106,7 @@ font-size: 18px;
 	}
 
 	#header {
-		background: #1c1c1c;
+		background: #007095;
 		color: #d5d5d5;
 		cursor: default;
 		height: 5em;
@@ -3146,7 +3136,6 @@ font-size: 18px;
 			}
 
 		#header .logo {
-			font-family: 'Pacifico', cursive;
 			display: inline-block;
 			height: inherit;
 			left: 0;
@@ -3177,7 +3166,6 @@ font-size: 18px;
 			text-decoration: none;
 			text-transform: uppercase;
 			font-weight: 700;
-			font-size: .85em;
 		}
 
 			#header a:hover {
@@ -3386,7 +3374,7 @@ font-size: 18px;
 		color: #f2a3a5;
 		padding: 13em 0 11em 0;
 		background-color: #0c0c0c;
-		background-image: url("/images/misc/mountains.jpg");
+		background-image: url("/images/misc/weisshorn-big.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 15% left;
@@ -3429,7 +3417,7 @@ font-size: 18px;
 		#banner input[type="button"],
 		#banner button,
 		#banner .button {
-			background-color: #5a5a5a;
+			background-color: #575656;
 			color: #ffffff !important;
 		}
 
@@ -3493,10 +3481,10 @@ font-size: 18px;
 			}
 
 		#banner:after {
-			-moz-transition: opacity 4s ease;
-			-webkit-transition: opacity 4s ease;
-			-ms-transition: opacity 4s ease;
-			transition: opacity 4s ease;
+			-moz-transition: opacity 2s ease;
+			-webkit-transition: opacity 2s ease;
+			-ms-transition: opacity 2s ease;
+			transition: opacity 2s ease;
 			content: '';
 			position: absolute;
 			width: 100%;
@@ -3504,8 +3492,8 @@ font-size: 18px;
 			display: block;
 			top: 0;
 			left: 0;
-			background-color: #0c0c0c;
-			opacity: 0.25;
+			background-color: #007095;
+			opacity: 0.2;
 		}
 
 		#banner .inner {
@@ -3772,7 +3760,7 @@ font-size: 18px;
 		background-color: #C7D426;
 		color: #fff;
 		padding: 4em 0 2em 0;
-		background: #C7D426;
+		background: #007095;
 	}
 
 		#footer input, #footer select, #footer textarea {
@@ -3809,7 +3797,7 @@ font-size: 18px;
 		#footer input[type="button"],
 		#footer button,
 		#footer .button {
-			background-color: #5a5a5a;
+			background-color: #575656;
 			color: #ffffff !important;
 		}
 
