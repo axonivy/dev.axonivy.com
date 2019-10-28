@@ -2,7 +2,6 @@
 namespace app\release\model;
 
 use app\util\ArrayUtil;
-use app\util\StringUtil;
 
 class ReleaseInfoRepository
 {
