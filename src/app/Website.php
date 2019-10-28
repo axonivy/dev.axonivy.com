@@ -34,6 +34,7 @@ use app\news\NewsAction;
 use app\permalink\LibPermalink;
 use app\doc\LegacyEngineGuideDocAction;
 use app\doc\LegacyDesignerGuideDocAction;
+use app\doc\LegacyPublicAPIAction;
 
 class Website
 {
@@ -147,6 +148,7 @@ class Website
         $app->get('/doc/{version}', DocAction::class);
         $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
         $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
+        $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document}', DocAction::class);
         
         $app->get('/installation', InstallationAction::class);

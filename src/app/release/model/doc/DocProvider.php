@@ -97,6 +97,7 @@ class DocProvider
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'), // legacy
             
             self::createExternalBook('Public API', 'PublicAPI'),
+            self::createExternalBook('Public API', 'public-api'),
 
             self::createZip('Product Documentation', 'axonivy-doc-*.zip'),
             
