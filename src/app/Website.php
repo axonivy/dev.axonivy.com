@@ -6,12 +6,13 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 use app\team\TeamAction;
-use app\release\AddonsAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
+use app\store\ProductAction;
+use app\store\StoreAction;
 use app\support\SupportAction;
 use app\api\ApiCurrentRelease;
 use app\codecamp\CodeCampAction;
@@ -132,8 +133,6 @@ class Website
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
         $this->installRedirect('/download/archive.html', 'archive');
-        $app->get('/download/addons', AddonsAction::class)->setName('addons');
-        $this->installRedirect('/download/addons.html', 'addons');
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
@@ -150,6 +149,11 @@ class Website
         $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
         $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document}', DocAction::class);
+        
+        $app->get('/store', StoreAction::class)->setName('store');
+        $app->get('/store/{key}[/{version}]', ProductAction::class);
+        $this->installRedirect('/download/addons.html', 'store');
+        $this->installRedirect('/download/addons', 'store');
         
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
