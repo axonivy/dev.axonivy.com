@@ -2,3 +2,4 @@
 /src/cache
 /src/logs
 composer.phar
+.phpunit.result.cache
