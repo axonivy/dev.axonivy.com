@@ -33,7 +33,7 @@ class MavenArtifact
         $groupdId = 'ch.ivyteam.ivy.project.demo';
         return [
             new MavenArtifact('quick-start-tutorial', 'Quick Start Tutorial', $groupdId, 'quick-start-tutorial', 'iar', false, false),
-            new MavenArtifact('workflow-demos', 'Worklfow Demos', $groupdId, 'workflow-demos', 'iar', false, false),
+            new MavenArtifact('workflow-demos', 'Workflow Demos', $groupdId, 'workflow-demos', 'iar', false, false),
             new MavenArtifact('error-handling-demos', 'Error Handling Demos', $groupdId, 'error-handling-demos', 'iar', false, false),
             new MavenArtifact('connectivity-demos', 'Connectivity Demos', $groupdId, 'connectivity-demos', 'iar', false, false),
             new MavenArtifact('rule-engine-demos', 'Rule Engine Demos', $groupdId, 'rule-engine-demos', 'iar', false, false),
@@ -164,12 +164,12 @@ class MavenArtifact
             if (empty($xml)) {
                 return "";
             }
-            $concretVersion = $this->parseVersionIdentifierFromXml($xml);
+            $concretVersion = self::parseVersionIdentifierFromXml($xml);
         }
         return $baseUrl . '/' . $version . '/' . $this->artifactId . '-' . $concretVersion . '.' . $this->type;
     }
 
-    private function parseVersionIdentifierFromXml(string $xml): string
+    public static function parseVersionIdentifierFromXml(string $xml): string
     {
         $element = new \SimpleXMLElement($xml);
         $result = $element->xpath('/metadata/versioning/snapshotVersions/snapshotVersion');
@@ -199,17 +199,21 @@ class MavenArtifact
                 return $this->versionCache;
             }
 
-            $element = new \SimpleXMLElement($xml);
-            $result = $element->xpath('/metadata/versioning/versions');
-            $versions = get_object_vars($result[0]->version);
-
-            $v = array_values($versions);
+            $v = self::parseVersions($xml);
+            
             usort($v, 'version_compare');
             $v = array_reverse($v);
 
             $this->versionCache = $v;
         }
         return $this->versionCache;
+    }
+    
+    public static function parseVersions($xml) {
+        $element = new \SimpleXMLElement($xml);
+        $result = $element->xpath('/metadata/versioning/versions');
+        $versions = get_object_vars($result[0]->version);
+        return array_values($versions);
     }
 
     private function get_contents($url)
