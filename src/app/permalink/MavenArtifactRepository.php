@@ -67,7 +67,6 @@ class MavenArtifactRepository
             ->name('Quick Start Tutorial')
             ->groupId('ch.ivyteam.ivy.project.demo')
             ->artifactId('quick-start-tutorial')
-            ->type('iar')
             ->build();
     }
 
@@ -77,7 +76,6 @@ class MavenArtifactRepository
             ->name('Workflow Demos')
             ->groupId('ch.ivyteam.ivy.project.demo')
             ->artifactId('workflow-demos')
-            ->type('iar')
             ->build();
     }
 
@@ -87,7 +85,6 @@ class MavenArtifactRepository
             ->name('Error Handling Demos')
             ->groupId('ch.ivyteam.ivy.project.demo')
             ->artifactId('error-handling-demos')
-            ->type('iar')
             ->build();
     }
 
@@ -97,7 +94,6 @@ class MavenArtifactRepository
             ->name('Connectivity Demos')
             ->groupId('ch.ivyteam.ivy.project.demo')
             ->artifactId('connectivity-demos')
-            ->type('iar')
             ->build();
     }
 
@@ -107,7 +103,6 @@ class MavenArtifactRepository
             ->name('Rule Engine Demos')
             ->groupId('ch.ivyteam.ivy.project.demo')
             ->artifactId('rule-engine-demos')
-            ->type('iar')
             ->build();
     }
 
@@ -117,7 +112,6 @@ class MavenArtifactRepository
             ->name('Html Dialog Demos')
             ->groupId('ch.ivyteam.ivy.project.demo')
             ->artifactId('html-dialog-demos')
-            ->type('iar')
             ->build();
     }
 
@@ -147,7 +141,6 @@ class MavenArtifactRepository
             ->name('Portal Template')
             ->groupId('ch.ivyteam.ivy.project.portal')
             ->artifactId('portalTemplate')
-            ->type('iar')
             ->makesSenseAsMavenDependency()
             ->build();
     }
@@ -158,7 +151,6 @@ class MavenArtifactRepository
             ->name('Portal Style')
             ->groupId('ch.ivyteam.ivy.project.portal')
             ->artifactId('portalStyle')
-            ->type('iar')
             ->build();
     }
 
@@ -168,7 +160,6 @@ class MavenArtifactRepository
             ->name('Portal Kit')
             ->groupId('ch.ivyteam.ivy.project.portal')
             ->artifactId('portalKit')
-            ->type('iar')
             ->build();
     }
 
@@ -178,7 +169,6 @@ class MavenArtifactRepository
             ->name('Axon.ivy Express')
             ->groupId('ch.ivyteam.ivy.project.portal')
             ->artifactId('axonIvyExpress')
-            ->type('iar')
             ->build();
     }
 
@@ -188,7 +178,6 @@ class MavenArtifactRepository
             ->name('Portal Examples')
             ->groupId('ch.ivyteam.ivy.project.portal')
             ->artifactId('portalExamples')
-            ->type('iar')
             ->build();
     }
 
@@ -230,7 +219,6 @@ class MavenArtifactRepository
             ->name('JSF Workflow UI')
             ->groupId('ch.ivyteam.ivy.project.wf')
             ->artifactId('JsfWorkflowUi')
-            ->type('iar')
             ->build();
     }
 
@@ -240,7 +228,6 @@ class MavenArtifactRepository
             ->name('Doc Factory')
             ->groupId('ch.ivyteam.ivy.addons')
             ->artifactId('doc-factory')
-            ->type('iar')
             ->makesSenseAsMavenDependency()
             ->build();
     }
@@ -251,7 +238,6 @@ class MavenArtifactRepository
             ->name('Doc Factory Demo')
             ->groupId('ch.ivyteam.ivy.addons')
             ->artifactId('doc-factory-demo')
-            ->type('iar')
             ->build();
     }
 

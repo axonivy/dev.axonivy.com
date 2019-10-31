@@ -9,7 +9,7 @@ class MavenArtifactBuilder
     private $name;
     private $groupId;
     private $artifactId;
-    private $type;
+    private $type = 'iar';
     private $makesSenseAsMavenDependency = false;
     private $isDocumentation = false;
     
