@@ -37,7 +37,7 @@ class MavenArtifact
         return new MavenArtifactBuilder($key);
     }
 
-    private function getKey(): string
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -57,7 +57,7 @@ class MavenArtifact
         return $this->type;
     }
 
-    public function getDisplayName(): string
+    public function getName(): string
     {
         return $this->name;
     }

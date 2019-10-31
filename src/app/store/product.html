@@ -24,7 +24,7 @@
 					
 					
 						{% for artifact in docArtifacts %}
-							&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"></span> {{ artifact.displayName }}</a>
+							&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"></span> {{ artifact.name }}</a>
 					    {% endfor %}
 					 
 				</div>
@@ -50,7 +50,7 @@
 								{% for artifact in mavenArtifacts %}
 								<li>
 									<a style="font-size:16px;" href="{{ artifact.getUrl(selectedVersion) }}">
-									{{ artifact.displayName }} {{ selectedVersion }}
+									{{ artifact.name }} {{ selectedVersion }}
 									</a>
 									</li>
 							    {% endfor %}
@@ -87,7 +87,7 @@
 								</p>
 								{% for artifact in mavenArtifactsAsDependency %}
 
-									<pre><code>&lt;!-- {{ artifact.displayName }} --&gt;
+									<pre><code>&lt;!-- {{ artifact.name }} --&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;{{ artifact.groupId }}&lt;/groupId&gt;
   &lt;artifactId&gt;{{ artifact.artifactId }}&lt;/artifactId&gt;
