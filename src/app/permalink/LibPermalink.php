@@ -16,7 +16,7 @@ class LibPermalink
         $type = pathinfo($name, PATHINFO_EXTENSION); // e.g. zip 
         $filename = pathinfo($name, PATHINFO_FILENAME); // e.g. demo-app
         
-        $mavenArtifact = MavenArtifact::getMavenArtifact($filename, $type);
+        $mavenArtifact = MavenArtifactRepository::getMavenArtifact($filename, $type);
         if ($mavenArtifact == null) {
             throw new NotFoundException($request, $response);
         }

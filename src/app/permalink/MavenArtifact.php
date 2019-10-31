@@ -3,80 +3,72 @@ namespace app\permalink;
 
 use app\util\StringUtil;
 
+class MavenArtifactBuilder
+{
+    private $key;
+    private $name;
+    private $groupId;
+    private $artifactId;
+    private $type;
+    private $makesSenseAsMavenDependency = false;
+    private $isDocumentation = false;
+    
+    public function __construct($key)
+    {
+        $this->key = $key;
+    }
+    
+    public function name(string $name): MavenArtifactBuilder
+    {
+        $this->name = $name;
+        return $this;
+    }
+    
+    public function groupId(string $groupId): MavenArtifactBuilder
+    {
+        $this->groupId = $groupId;
+        return $this;
+    }
+    
+    public function artifactId(string $artifactId): MavenArtifactBuilder
+    {
+        $this->artifactId = $artifactId;
+        return $this;
+    }
+    
+    public function type(string $type): MavenArtifactBuilder
+    {
+        $this->type = $type;
+        return $this;
+    }
+    
+    public function makesSenseAsMavenDependency(): MavenArtifactBuilder
+    {
+        $this->makesSenseAsMavenDependency = true;
+        return $this;
+    }
+    
+    public function doc(): MavenArtifactBuilder
+    {
+        $this->isDocumentation = true;
+        return $this;
+    }
+    
+    public function build(): MavenArtifact
+    {
+        return new MavenArtifact(
+            $this->key,
+            $this->name,
+            $this->groupId,
+            $this->artifactId,
+            $this->type,
+            $this->makesSenseAsMavenDependency,
+            $this->isDocumentation);
+    }
+}
+
 class MavenArtifact
 {
-
-    public static function getMavenArtifact($key, $type): ?MavenArtifact
-    {
-        $artifacts = self::getAll();
-        foreach ($artifacts as $artifact) {
-            if ($artifact->getKey() == $key && $artifact->getType() == $type) {
-                return $artifact;
-            }
-        }
-        return null;
-    }
-
-    private static function getAll(): array
-    {
-        return array_merge(
-            self::getProjectDemos(),
-            self::getValveDemos(),
-            self::getJsfWorkflowUi(),
-            self::getPortal(),
-            self::getDocFactory()
-        );
-    }
-
-    public static function getProjectDemos(): array
-    {
-        $groupdId = 'ch.ivyteam.ivy.project.demo';
-        return [
-            new MavenArtifact('quick-start-tutorial', 'Quick Start Tutorial', $groupdId, 'quick-start-tutorial', 'iar', false, false),
-            new MavenArtifact('workflow-demos', 'Workflow Demos', $groupdId, 'workflow-demos', 'iar', false, false),
-            new MavenArtifact('error-handling-demos', 'Error Handling Demos', $groupdId, 'error-handling-demos', 'iar', false, false),
-            new MavenArtifact('connectivity-demos', 'Connectivity Demos', $groupdId, 'connectivity-demos', 'iar', false, false),
-            new MavenArtifact('rule-engine-demos', 'Rule Engine Demos', $groupdId, 'rule-engine-demos', 'iar', false, false),
-            new MavenArtifact('html-dialog-demos', 'Html Dialog Demos', $groupdId, 'html-dialog-demos', 'iar', false, false),
-            new MavenArtifact('demos', 'Demo App', 'ch.ivyteam.ivy.project.demo', 'ivy-demos-app', 'zip', false, false)
-        ];
-    }
-
-    public static function getValveDemos(): array
-    {
-        return [
-            new MavenArtifact('processing-valve', 'Processing Valve Demo', 'com.acme', 'com.acme.ProcessingValve', 'jar', false, false)
-        ];
-    }
-
-    private static function getJsfWorkflowUi(): array
-    {
-        return [
-            new MavenArtifact('jsf-workflow-ui', 'JSF Workflow UI', 'ch.ivyteam.ivy.project.wf', 'JsfWorkflowUi', 'iar', false, false)
-        ];
-    }
-
-    public static function getPortal(): array
-    {
-        return [
-            new MavenArtifact('portal', 'Portal App', 'ch.ivyteam.ivy.project.portal', 'portal-app', 'zip', false, false),
-            new MavenArtifact('portal-template', 'Portal Template', 'ch.ivyteam.ivy.project.portal', 'portalTemplate', 'iar', true, false),
-            new MavenArtifact('portal-style', 'Portal Style', 'ch.ivyteam.ivy.project.portal', 'portalStyle', 'iar', false, false),
-            new MavenArtifact('portal-kit', 'Portal Kit', 'ch.ivyteam.ivy.project.portal', 'portalKit', 'iar', false, false),
-            new MavenArtifact('axonivy-express', 'Axon.ivy Express', 'ch.ivyteam.ivy.project.portal', 'axonIvyExpress', 'iar', false, false),
-            new MavenArtifact('portal-examples', 'Portal Examples', 'ch.ivyteam.ivy.project.portal', 'portalExamples', 'iar', false, false)
-        ];
-    }
-
-    public static function getDocFactory(): array
-    {
-        return [
-            new MavenArtifact('doc-factory', 'Doc Factory', 'ch.ivyteam.ivy.addons', 'doc-factory', 'iar', true, false),
-            new MavenArtifact('doc-factory-demo', 'Doc Factory Demo', 'ch.ivyteam.ivy.addons', 'doc-factory-demo', 'iar', false, false),
-            new MavenArtifact('doc-factory-doc', 'Doc Factory Documentation', 'ch.ivyteam.ivy.addons', 'doc-factory-doc', 'zip', false, true)
-        ];
-    }
-
     private $key;
 
     private $name;
@@ -102,6 +94,11 @@ class MavenArtifact
         $this->type = $type;
         $this->makesSenseAsMavenDependency = $makesSenseAsMavenDependency;
         $this->isDocumentation = $isDocumentation;
+    }
+    
+    public static function create(string $key): MavenArtifactBuilder
+    {
+        return new MavenArtifactBuilder($key);
     }
 
     private function getKey(): string

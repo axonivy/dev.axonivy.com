@@ -1,7 +1,7 @@
 <?php
 namespace app\store;
 
-use app\permalink\MavenArtifact;
+use app\permalink\MavenArtifactRepository;
 
 class Store
 {
@@ -41,9 +41,9 @@ class Store
 </p>
 ';
 
-        $portal = new Product('portal', 'Portal', MavenArtifact::getPortal(), $descriptionPortal);
-        $docFactory = new Product('doc-factory', 'Doc Factory', MavenArtifact::getDocFactory(), $descDocFactory);
-        $demos = new Product('demos', 'Demos', MavenArtifact::getProjectDemos(), $descriptionDemo);
+        $portal = new Product('portal', 'Portal', MavenArtifactRepository::getPortal(), $descriptionPortal);
+        $docFactory = new Product('doc-factory', 'Doc Factory', MavenArtifactRepository::getDocFactory(), $descDocFactory);
+        $demos = new Product('demos', 'Demos', MavenArtifactRepository::getProjectDemos(), $descriptionDemo);
 
         return [$portal, $docFactory, $demos];
     }
