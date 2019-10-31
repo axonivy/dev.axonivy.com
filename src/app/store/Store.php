@@ -34,6 +34,7 @@ class Store
     <li>Rule Engine</li>
     <li>Connectivity (REST/SOAP)</li>
     <li>Html Dialog</li>
+    <li>Error Handling</li>
 </ul>
 
 <p>  

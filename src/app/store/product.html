@@ -22,27 +22,40 @@
 				<div class="6u 12u$(xsmall)">
 					{{ product.description|raw }}
 					
-					{% for artifact in docArtifacts %}
-						<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"> Read the documentation</span></a>
-				    {% endfor %}
+					
+						{% for artifact in docArtifacts %}
+							&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"></span> {{ artifact.displayName }}</a>
+					    {% endfor %}
 					 
 				</div>
 				<div class="6u 12u$(xsmall)" >
 					<img src="{{ product.imgSrc }}" class="image fit" style="max-width: 680px;" />
 				</div>
+				
 	    	</div>
 		</div>
 	</section>
 	
 	
-			
-	
-
-	
-	<section id="two">
+	<section id="two" style="padding-top: 60px;">
 				<div class="inner">
 					<article>
 						<div class="content">
+						
+						    <header>
+								<h3>Download</h3>
+							</header>
+							<div>
+							    <ul>
+								{% for artifact in mavenArtifacts %}
+								<li>
+									<a style="font-size:16px;" href="{{ artifact.getUrl(selectedVersion) }}">
+									{{ artifact.displayName }} {{ selectedVersion }}
+									</a>
+									</li>
+							    {% endfor %}
+							    </ul>
+							</div>
 						
 							{% if product.importWizard %}
 	  						    <header>
@@ -56,17 +69,7 @@
 									<img src="/images/store/import-wizard.png" class="image fit" />
 								</div>
 							{% endif %}
-						
-							<header>
-								<h3>Download</h3>
-							</header>
-							<div>
-								<ul>
-								{% for artifact in mavenArtifacts %}
-									<li>{{ artifact.displayName }} {{ selectedVersion }} &ensp;<a href="{{ artifact.getUrl(selectedVersion) }}"> <span style="font-size:16px;" class="icon fas fa-download"></span></a></li>
-							    {% endfor %}
-							    </ul>
-							</div>
+							
 						</div>
 					</article>
 					<article class="alt">
