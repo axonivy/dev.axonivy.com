@@ -62,6 +62,17 @@ class DocProvider
         return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof Book; });
     }
     
+    public function getExistingBooks(): array
+    {
+      $existingBooks = [];
+      foreach ($this->getBooks() as $book) {
+          if ($book->pdfExists()) {
+            $existingBooks[] = $book;
+          }
+      }
+      return $existingBooks;
+    }
+    
     public function getImportantBooks(): array
     {
         return array_filter(self::getBooks(), function (Book $book) { return !StringUtil::startsWith(strtolower($book->getName()), "portal"); });
@@ -71,7 +82,6 @@ class DocProvider
     {
         return array_filter(self::getBooks(), function (Book $book) { return StringUtil::startsWith(strtolower($book->getName()), "portal"); });
     }
-    
     
     public function getExternalBooks(): array
     {
