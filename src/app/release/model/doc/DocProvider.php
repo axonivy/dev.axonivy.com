@@ -103,11 +103,11 @@ class DocProvider
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
             self::createBook('Engine Guide', 'engine-guide', ''), // new engine guide since 7.4
             
-            self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),
+            self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),  // legacy
             self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'), // legacy
             
-            self::createExternalBook('Public API', 'PublicAPI'),
-            self::createExternalBook('Public API', 'public-api'),
+            self::createExternalBook('Public API', 'PublicAPI'),  // legacy public api url
+            self::createExternalBook('Public API', 'public-api'),  // new url since 8.0
 
             self::createZip('Product Documentation', 'axonivy-doc-*.zip'),
             
