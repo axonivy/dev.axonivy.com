@@ -1,9 +1,9 @@
 <?php
-namespace app\store;
+namespace app\market;
 
 use Psr\Container\ContainerInterface;
 
-class StoreAction
+class MarketAction
 {
     protected $container;
 
@@ -12,6 +12,6 @@ class StoreAction
     }
 
     public function __invoke($request, $response, $args) {
-        return $this->container->get('view')->render($response, 'app/store/store.html', ['products' => Store::getAll()]);
+        return $this->container->get('view')->render($response, 'app/market/market.html', ['products' => Market::getAll()]);
     }
 }

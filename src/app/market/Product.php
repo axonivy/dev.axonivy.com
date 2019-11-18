@@ -1,5 +1,5 @@
 <?php
-namespace app\store;
+namespace app\market;
 
 class Product
 {
@@ -40,7 +40,7 @@ class Product
 
     public function getImgSrc()
     {
-        return '/images/store/' . $this->key . '.png';
+        return '/images/market/' . $this->key . '.png';
     }
 
     public function getMavenArtifacts(): array
@@ -50,7 +50,7 @@ class Product
 
     public function getUrl(): string
     {
-        return '/store/' . $this->key;
+        return '/market/' . $this->key;
     }
 
     public function getImportWizard(): bool

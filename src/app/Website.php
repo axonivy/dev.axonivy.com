@@ -11,8 +11,8 @@ use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
-use app\store\ProductAction;
-use app\store\StoreAction;
+use app\market\ProductAction;
+use app\market\MarketAction;
 use app\support\SupportAction;
 use app\api\ApiCurrentRelease;
 use app\codecamp\CodeCampAction;
@@ -150,10 +150,10 @@ class Website
         $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document}', DocAction::class);
         
-        $app->get('/store', StoreAction::class)->setName('store');
-        $app->get('/store/{key}[/{version}]', ProductAction::class);
-        $this->installRedirect('/download/addons.html', 'store');
-        $this->installRedirect('/download/addons', 'store');
+        $app->get('/market', MarketAction::class)->setName('market');
+        $app->get('/market/{key}[/{version}]', ProductAction::class);
+        $this->installRedirect('/download/addons.html', 'market');
+        $this->installRedirect('/download/addons', 'market');
         
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);

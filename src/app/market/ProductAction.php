@@ -1,5 +1,5 @@
 <?php
-namespace app\store;
+namespace app\market;
 
 use Psr\Container\ContainerInterface;
 use Slim\Exception\NotFoundException;
@@ -14,7 +14,7 @@ class ProductAction
 
     public function __invoke($request, $response, $args) {
         $key = $args['key'] ?? '';
-        $product = Store::getProductByKey($key);
+        $product = Market::getProductByKey($key);
         if ($product == null) {
             throw new NotFoundException($request, $response);
         }
@@ -42,7 +42,7 @@ class ProductAction
             }
         }
         
-        return $this->container->get('view')->render($response, 'app/store/product.html', [
+        return $this->container->get('view')->render($response, 'app/market/product.html', [
             'product' => $product,
             'mavenArtifacts' => $mavenArtifacts,
             'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,

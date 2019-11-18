@@ -1,9 +1,9 @@
 <?php
-namespace app\store;
+namespace app\market;
 
 use app\permalink\MavenArtifactRepository;
 
-class Store
+class Market
 {
     public static function getAll(): array
     {

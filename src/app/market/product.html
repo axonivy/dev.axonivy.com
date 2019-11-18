@@ -1,6 +1,6 @@
 {% extends "templates/parts/base_content.html" %}
 
-{% block title %}{{ product.name }} | Store {{ parent() }}{% endblock %}
+{% block title %}{{ product.name }} | Axon.ivy Market {{ parent() }}{% endblock %}
 
 {% block content %}
 
@@ -8,7 +8,7 @@
 	<section id="main" >
 		<div class="inner">
 			<header>
-				<h1 style="float:left;"><span class="icon fas fa-store "></span> Store - {{ product.name }}</h1>
+				<h1 style="float:left;"><span class="icon fas fa-store "></span> Axon.ivy Market - {{ product.name }}</h1>
 				<select name="version" id="version" onchange="location = this.value;" style="width:auto;float:right;">
 					{% for version in product.versions %}
 						<a href="#">
@@ -66,7 +66,7 @@
 										You can use the import wizard in Axon.ivy Designer
 										<br ><i style="font-size:12px;">File > Import > Axon.ivy > Ivy Projects</i>					
 									</p>
-									<img src="/images/store/import-wizard.png" class="image fit" />
+									<img src="/images/market/import-wizard.png" class="image fit" />
 								</div>
 							{% endif %}
 							
