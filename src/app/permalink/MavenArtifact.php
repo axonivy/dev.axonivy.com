@@ -74,7 +74,13 @@ class MavenArtifact
 
     public function getDocUrl($version)
     {
-        return $this->getUrl($version) . '!/index.html';
+        // this folder exists on server as ~/data/cache-doc and is symlinked to webroot in Jenkinsfile
+        // cache will be build with ~/script/clone-doc.sh
+        return '/documentation/' . $this->getDocSubFolder($version);
+    }
+    
+    public function getDocSubFolder($version) {
+        return $this->artifactId . '/' . $version;
     }
     
     public function getDevUrl()

@@ -25,6 +25,18 @@ class MavenArtifactRepository
         );
     }
     
+    public static function getDocs()
+    {
+        $all = self::getAll();
+        $docs = [];
+        foreach ($all as $a) {
+            if ($a->isDocumentation()) {
+                $docs[] = $a;
+            }
+        }
+        return $docs;
+    }
+
     public static function getPortal(): array
     {
         return [
