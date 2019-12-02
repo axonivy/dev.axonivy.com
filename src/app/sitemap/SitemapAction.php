@@ -22,6 +22,7 @@ class SitemapAction
             self::createSite('/download', 1),
             self::createSite('/doc', 1),
             self::createSite('/tutorial', 1),
+            self::createSite('/market', 1),
             
             self::createSite('/support', 0.8),
             self::createSite('/team', 0.8),
