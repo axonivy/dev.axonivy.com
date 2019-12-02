@@ -2,6 +2,7 @@
 namespace app\release\model;
 
 use app\util\ArrayUtil;
+use app\util\StringUtil;
 
 class ReleaseInfoRepository
 {
@@ -58,9 +59,21 @@ class ReleaseInfoRepository
     
     /**
      * e.g: latest, sprint, nightly
+     * special treatment for version like 8.0, will return latest 8.0.x 
      */
     public static function getArtifacts(string $version): array
     {
+        if (StringUtil::endsWith($version, '.0')) {
+            $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst(self::getAvailableReleaseInfos());
+            foreach ($releaseInfos as $info) {
+                $v = $info->getVersion()->getVersionNumber();
+                if (StringUtil::startsWith($v, $version))
+                {
+                    $version = $info->getVersion->getVersionNumber();
+                }
+            }
+        }
+        
         $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $version;
         $cdnBaseUrl = CDN_HOST . '/' . $version . '/';
         $permalinkBaseUrl = PERMALINK_BASE_URL . $version . '/';
