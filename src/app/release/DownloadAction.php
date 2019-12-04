@@ -14,11 +14,17 @@ class DownloadAction
     }
     
     public function __invoke($request, $response, $args) {
-        $designerVariantLE = $this->findVariantLE(Variant::PRODUCT_NAME_DESIGNER);
         $designerVariantLTS = $this->findVariantLTS(Variant::PRODUCT_NAME_DESIGNER);
+        $designerVariantLE = $this->findVariantLE(Variant::PRODUCT_NAME_DESIGNER);
+        if ($designerVariantLTS->getVersion() == $designerVariantLE->getVersion()) {
+            $designerVariantLE = null;
+        }
         
-        $engineVariantLE = $this->findVariantLE(Variant::PRODUCT_NAME_ENGINE);
         $engineVariantLTS = $this->findVariantLTS(Variant::PRODUCT_NAME_ENGINE);
+        $engineVariantLE = $this->findVariantLE(Variant::PRODUCT_NAME_ENGINE);
+        if ($engineVariantLTS->getVersion() == $engineVariantLE->getVersion()) {
+            $engineVariantLE = null;
+        }
         
         $leadingEdgeReleaseInfo = ReleaseInfoRepository::getLatest();
         

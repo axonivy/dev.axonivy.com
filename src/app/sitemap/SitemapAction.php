@@ -22,22 +22,23 @@ class SitemapAction
             self::createSite('/download', 1),
             self::createSite('/doc', 1),
             self::createSite('/tutorial', 1),
+            self::createSite('/market', 1),
             
             self::createSite('/support', 0.8),
             self::createSite('/team', 0.8),
             
-            self::createSite('/doc/latest/NewAndNoteworthy.html', 0.6),
-            self::createSite('/doc/latest/ReleaseNotes.html', 0.6),
-            self::createSite('/doc/latest/MigrationNotes.html', 0.4),
-            self::createSite('/doc/latest/ReadMe.html', 0.4)
+            self::createSite('/doc/latest/new-and-noteworthy', 0.6),
+            self::createSite('/doc/latest/release-notes', 0.6),
+            self::createSite('/doc/latest/migration-notes', 0.4),
+            self::createSite('/doc/latest/readme', 0.4)
         ];
         
         $releaseInfo = ReleaseInfoRepository::getLatest();
         if ($releaseInfo != null) {
-            $sites = self::addSites($sites, $releaseInfo, 'DesignerGuideHtml');
+            $sites = self::addSites($sites, $releaseInfo, 'designer-guide');
             $sites = self::addSites($sites, $releaseInfo, 'engine-guide');
             $sites = self::addSites($sites, $releaseInfo, 'PortalKitHtml');
-            $sites = self::addSites($sites, $releaseInfo, 'PublicAPI');
+            $sites = self::addSites($sites, $releaseInfo, 'public-api');
         }
         
         return $this->container->get('view')->render($response, 'app/sitemap/sitemap.xml', ['sites' => $sites])->withHeader('Content-Type', 'text/xml');

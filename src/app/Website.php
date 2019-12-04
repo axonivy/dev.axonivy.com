@@ -6,12 +6,13 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 use app\team\TeamAction;
-use app\release\AddonsAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
+use app\market\ProductAction;
+use app\market\MarketAction;
 use app\support\SupportAction;
 use app\api\ApiCurrentRelease;
 use app\codecamp\CodeCampAction;
@@ -34,6 +35,7 @@ use app\news\NewsAction;
 use app\permalink\LibPermalink;
 use app\doc\LegacyEngineGuideDocAction;
 use app\doc\LegacyDesignerGuideDocAction;
+use app\doc\LegacyPublicAPIAction;
 
 class Website
 {
@@ -84,11 +86,18 @@ class Website
         // global variables
         $view = $container['view'];
         
-        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
-        $view->getEnvironment()->addGlobal('CURRENT_LEADING_EDGE_VERSION', $version);
+        $versionLTS = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
+        $versionLE = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
         
-        $version = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
-        $view->getEnvironment()->addGlobal('CURRENT_LONG_TERM_SUPPORT_VERSION', $version);
+        $text = "$versionLTS";
+        $textLong = "LTS $versionLTS";
+        if ($versionLTS != $versionLE)
+        {
+            $text .= " / $versionLE";
+            $textLong .= " / LE $versionLE";
+        }
+        $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD', $text);
+        $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD_LONG', $textLong);
     }
     
     private function getDisplayVersion(?ReleaseInfo $info): string
@@ -124,8 +133,6 @@ class Website
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
         $this->installRedirect('/download/archive.html', 'archive');
-        $app->get('/download/addons', AddonsAction::class)->setName('addons');
-        $this->installRedirect('/download/addons.html', 'addons');
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
@@ -140,7 +147,13 @@ class Website
         $app->get('/doc/{version}', DocAction::class);
         $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
         $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
+        $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document}', DocAction::class);
+        
+        $app->get('/market', MarketAction::class)->setName('market');
+        $app->get('/market/{key}[/{version}]', ProductAction::class);
+        $this->installRedirect('/download/addons.html', 'market');
+        $this->installRedirect('/download/addons', 'market');
         
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);

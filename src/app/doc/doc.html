@@ -50,7 +50,7 @@
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  background-color: #007095;
 }
 
 </style>
@@ -80,31 +80,40 @@
 							<a href="{{ doc.Url }}" style="padding-left:5px;padding-right:5px;">{{ doc.Name }}</a> 
 						{% endfor %}
 						
+						{% if docProvider.notImportantBooks is not empty or docProvider.existingBook is not empty %}
 						<div class="dropdown" style="float:right;">
-					  <button class="dropbtn">Further Docs</button>
-					  <div class="dropdown-content">
-					  	<span style="font-size:12px;padding-left:15px;">Docs</span>
-					  	{% for doc in docProvider.getNotImportantBooks %}
-							<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
-						{% endfor %}
-					  	{% for doc in docProvider.ExternalBooks %}
-							<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
-						{% endfor %}
-						<span style="font-size:12px;padding-left:15px;">PDF's</span>
-							{% for doc in docProvider.Books %}
-								{% if doc.pdfExists %}
-									<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
-								{% endif %}
-						  {% endfor %}
-					  </div>
-					</div>
+					  		<button class="dropbtn">Further Docs</button>
+							<div class="dropdown-content">
+							
+							  {% if docProvider.notImportantBooks is not empty %}
+								  <span style="font-size:12px;padding-left:15px;">Docs</span>
+								  {% for doc in docProvider.notImportantBooks %}
+									<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
+								  {% endfor %}
+							  {% endif %}
+							  
+							  {% if docProvider.existingBooks is not empty %}
+								  <span style="font-size:12px;padding-left:15px;">PDF's</span>
+									 {% for doc in docProvider.existingBooks %}
+	 									<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
+									  {% endfor %}
+								  </div>
+							  {% endif %}
+						</div>
+						{% endif %}
 						
 						<br />
-						{% for doc in docProvider.getImportantBooks %}
-								<a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
-						{% endfor %}					
+						
+						{% for doc in docProvider.importantBooks %}
+						  <a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+						{% endfor %}
+						{% for doc in docProvider.externalBooks %}
+						  <a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+						{% endfor %}
 
-						{% for doc in docProvider.getZips %}
+
+
+						{% for doc in docProvider.zips %}
 							{% if doc.zipExists %}
 								<a href="{{ doc.zipUrl }}" target="_blank" title="{{ doc.Name }}" style="padding-left:5px;padding-right:5px;">
 									<i style="font-size:14px;" class="fas fa-download"></i>

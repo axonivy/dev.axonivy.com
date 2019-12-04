@@ -21,7 +21,7 @@ class PermalinkAction
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $version = $args['version']; // nightly, sprint, latestt
+        $version = $args['version']; // nightly, sprint, latest, 8.0
         $file = $args['file']; // axonivy-engine-slim.zip
 
         $artifacts = ReleaseInfoRepository::getArtifacts($version);

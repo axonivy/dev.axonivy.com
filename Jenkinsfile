@@ -11,6 +11,7 @@ pipeline {
   
   options {
     buildDiscarder(logRotator(numToKeepStr: '120', artifactNumToKeepStr: '10'))
+    skipStagesAfterUnstable()
   }
   
   stages {
@@ -33,9 +34,6 @@ pipeline {
     stage('deploy') {
       when {
         branch 'master'
-        expression {
-          currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-        }
       }
       steps {
         sshagent(['zugprojenkins-ssh']) {
@@ -52,6 +50,7 @@ pipeline {
             // create symlinks
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 mkdir /home/axonivya/deployment/$targetFile/src/web/releases"
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/ivy-releases /home/axonivya/deployment/$targetFile/src/web/releases/ivy"
+            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/doc-cache /home/axonivya/deployment/$targetFile/src/web/documentation"
 
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
           }

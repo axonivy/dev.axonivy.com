@@ -20,6 +20,8 @@ class Config {
         }
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
         
+        define('DOC_DIRECTORY_THIRDPARTY', '/home/axonivya/data/doc-cache');
+        
         define('UNSAFE_RELEASES', [
             '6.7.1' => '7.0',
             '6.7.0' => '7.0',
@@ -44,9 +46,11 @@ class Config {
         ]);
         
         define('IVY_VERSIONS', [
-            '7.x' => 'Leading Edge - LE',
+            // '8.x' => 'Leading Edge - LE',
+            '8.0' => 'Long Term Support - LTS',
+            '7.x' => 'UNSUPPORTED',
             '7.0' => 'Long Term Support - LTS',
-            '6.0' => 'Long Term Support - LTS',
+            '6.0' => 'UNSUPPORTED',
             '6.x' => 'UNSUPPORTED',
             '5.1' => 'UNSUPPORTED',
             '5.0' => 'UNSUPPORTED',
