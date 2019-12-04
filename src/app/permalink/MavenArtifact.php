@@ -82,7 +82,12 @@ class MavenArtifact
     public function getDocSubFolder($version) {
         return $this->artifactId . '/' . $version;
     }
-    
+
+    public function docExists($version)
+    {
+        return file_exists(DOC_DIRECTORY_THIRDPARTY . '/' . $this->getDocSubFolder($version));
+    }
+
     public function getDevUrl()
     {
         $versions = $this->getVersions();

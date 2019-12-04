@@ -24,7 +24,9 @@
 					
 					
 						{% for artifact in docArtifacts %}
-							&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"></span> {{ artifact.name }}</a>
+						    {% if artifact.docExists(selectedVersion) %}
+								&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"></span> {{ artifact.name }}</a>
+							{% endif %}
 					    {% endfor %}
 					 
 				</div>
