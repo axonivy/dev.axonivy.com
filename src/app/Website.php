@@ -137,7 +137,7 @@ class Website
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
         $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
 
-        $app->get('/permalink/{version:nightly|sprint|latest|dev}/{file}', PermalinkAction::class);
+        $app->get('/permalink/{version}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
         
         $app->get('/download/{version:nightly|sprint-release|latest|dev}[.html]', SprintNightlyAction::class);
