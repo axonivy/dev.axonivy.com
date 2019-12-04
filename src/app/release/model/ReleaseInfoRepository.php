@@ -69,7 +69,7 @@ class ReleaseInfoRepository
                 $v = $info->getVersion()->getVersionNumber();
                 if (StringUtil::startsWith($v, $version))
                 {
-                    $version = $info->getVersion->getVersionNumber();
+                    $version = $info->getVersion()->getVersionNumber();
                 }
             }
         }
