@@ -70,7 +70,6 @@
 				{% endfor %}
 			</div>
 		
-			
 			<header>
 				<h1>Documentation {{ version }}</h1>
 			</header>
@@ -79,6 +78,8 @@
 						{% for doc in docProvider.releaseDocuments %}
 							<a href="{{ doc.Url }}" style="padding-left:5px;padding-right:5px;">{{ doc.Name }}</a> 
 						{% endfor %}
+						
+							
 						
 						{% if docProvider.notImportantBooks is not empty or docProvider.existingBook is not empty %}
 						<div class="dropdown" style="float:right;">
@@ -98,7 +99,8 @@
 	 									<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
 									  {% endfor %}
 								  </div>
-							  {% endif %}
+							  {% endif %}							  
+							  
 						</div>
 						{% endif %}
 						
@@ -110,6 +112,11 @@
 						{% for doc in docProvider.externalBooks %}
 						  <a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
 						{% endfor %}
+						
+						{% if version == "8.0.0" or version == '8.0.latest' or version == 'latest' %}
+							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="/documentation/portal-developer-guide/8.0.183.2/">Portal Dev Guide <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="/documentation/portal-user-guide/8.0.183.2/">Portal User Guide <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a> 
+						{% endif %}
 
 
 
