@@ -163,6 +163,16 @@ class Variant
     {
         return pathinfo($this->fileName, PATHINFO_EXTENSION);
     }
+    
+    public function getFileExtensionIfNecessary(): string
+    {
+        $ext = $this->getFileExtension();
+        if (StringUtil::contains($ext, 'deb'))
+        {
+            return '.deb';
+        }
+        return '';
+    }
 
     public function isMavenPluginCompatible(): bool
     {
