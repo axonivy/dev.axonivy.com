@@ -34,14 +34,14 @@ class ProductAction
                 $mavenArtifactsAsDependency[] = $artifact;
             }
         }
-        
+
         $docArtifacts = [];
         foreach ($mavenArtifacts as $artifact) {
             if ($artifact->isDocumentation()) {
                 $docArtifacts[] = $artifact;
             }
         }
-        
+
         return $this->container->get('view')->render($response, 'app/market/product.html', [
             'product' => $product,
             'mavenArtifacts' => $mavenArtifacts,
