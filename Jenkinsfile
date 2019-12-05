@@ -53,6 +53,7 @@ pipeline {
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/data/doc-cache /home/axonivya/deployment/$targetFile/src/web/documentation"
 
             sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
+            sh "ssh -o StrictHostKeyChecking=no axonivya@217.26.51.247 ln -fns /home/axonivya/deployment/$targetFile/src/app/DocCacher.php /home/axonivya/script/DocCacher.php"
           }
         }
       }

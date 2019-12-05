@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ . '/../../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 use app\permalink\MavenArtifactRepository;
 use app\Config;
