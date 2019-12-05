@@ -1,6 +1,8 @@
 <?php
 namespace app\market;
 
+use \app\util\StringUtil;
+
 class Product
 {
 
@@ -13,14 +15,17 @@ class Product
     private $mavenArtifacts;
 
     private $importWizard;
+    
+    private $showSnapshotVersion;
 
-    public function __construct(string $key, string $name, array $mavenArtifacts, string $description)
+    public function __construct(string $key, string $name, array $mavenArtifacts, string $description, bool $showSnasphotVersion)
     {
         $this->key = $key;
         $this->name = $name;
         $this->mavenArtifacts = $mavenArtifacts;
         $this->description = $description;
         $this->importWizard = true;
+        $this->showSnapshotVersion = $showSnasphotVersion;
     }
 
     public function getKey()
@@ -80,6 +85,24 @@ class Product
         $versions = array_unique($versions);
         usort($versions, 'version_compare');
         $versions = array_reverse($versions);
+        return $versions;
+    }
+    
+    public function getVersionsToDisplay(): array
+    {
+        if ($this->showSnapshotVersion)
+        {
+            return $this->getVersions();
+        }
+        
+        $versions = [];
+        foreach ($this->getVersions() as $v)
+        {
+            if (!StringUtil::contains($v, '-SNAPSHOT'))
+            {
+                $versions[] = $v;
+            }
+        }
         return $versions;
     }
 

@@ -10,7 +10,7 @@
 			<header>
 				<h1 style="float:left;"><span class="icon fas fa-store "></span> Axon.ivy Market - {{ product.name }}</h1>
 				<select name="version" id="version" onchange="location = this.value;" style="width:auto;float:right;">
-					{% for version in product.versions %}
+					{% for version in product.versionsToDisplay %}
 						<a href="#">
 							<option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version }}</option>
 						</a>

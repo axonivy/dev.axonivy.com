@@ -42,9 +42,9 @@ class Market
 </p>
 ';
 
-        $portal = new Product('portal', 'Portal', MavenArtifactRepository::getPortal(), $descriptionPortal);
-        $docFactory = new Product('doc-factory', 'Doc Factory', MavenArtifactRepository::getDocFactory(), $descDocFactory);
-        $demos = new Product('demos', 'Demos', MavenArtifactRepository::getProjectDemos(), $descriptionDemo);
+        $portal = new Product('portal', 'Portal', MavenArtifactRepository::getPortal(), $descriptionPortal, false);
+        $docFactory = new Product('doc-factory', 'Doc Factory', MavenArtifactRepository::getDocFactory(), $descDocFactory, false);
+        $demos = new Product('demos', 'Demos', MavenArtifactRepository::getProjectDemos(), $descriptionDemo, true);
 
         return [$portal, $docFactory, $demos];
     }
