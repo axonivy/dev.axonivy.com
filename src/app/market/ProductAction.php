@@ -21,7 +21,7 @@ class ProductAction
         
         $version = $args['version'] ?? '';
         if (empty($version)) {
-            $version = $product->getLatestVersion();
+            $version = $product->getLatestVersionToDisplay();
         } else if (!$product->hasVersion($version)) {
            throw new NotFoundException($request, $response);
         }

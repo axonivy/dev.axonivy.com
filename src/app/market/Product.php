@@ -100,6 +100,15 @@ class Product
         return $versions[0];
     }
 
+    public function getLatestVersionToDisplay(): ?string
+    {
+        $versions = $this->getVersionsToDisplay();
+        if (empty($versions)) {
+            return null;
+        }
+        return $versions[0];
+    }
+    
     public function hasVersion(string $v): bool
     {
         $versions = $this->getVersions();
