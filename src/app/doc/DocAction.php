@@ -40,7 +40,7 @@ class DocAction
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
             'docProvider' => $docProvider,
-            'documentUrl' => $doc->getRessourceUrl(),
+            'documentUrl' => $doc->getRessourceUrl() . '?v=' . time(),
             'currentNiceUrlPath' => $document,
             'docLinks' => $docLinks
         ]);
