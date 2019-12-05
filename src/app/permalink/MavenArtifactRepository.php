@@ -249,7 +249,7 @@ class MavenArtifactRepository
         return MavenArtifact::create('doc-factory-demo')
             ->name('Doc Factory Demo')
             ->groupId('ch.ivyteam.ivy.addons')
-            ->artifactId('doc-factory-demo')
+            ->artifactId('doc-factory-demos')
             ->build();
     }
 

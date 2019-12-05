@@ -21,6 +21,7 @@ class Config {
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
         
         define('DOC_DIRECTORY_THIRDPARTY', '/home/axonivya/data/doc-cache');
+        define('CLONE_DOC_SCRIPT', '/home/axonivya/script/clone-doc.sh');
         
         define('UNSAFE_RELEASES', [
             '6.7.1' => '7.0',
