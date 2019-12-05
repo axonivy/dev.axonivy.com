@@ -36,6 +36,7 @@ use app\permalink\LibPermalink;
 use app\doc\LegacyEngineGuideDocAction;
 use app\doc\LegacyDesignerGuideDocAction;
 use app\doc\LegacyPublicAPIAction;
+use app\doc\RedirectLatestDocVersion;
 
 class Website
 {
@@ -144,6 +145,7 @@ class Website
         $app->get('/download/{version:nightly|sprint-release|latest|dev}/{file}', SprintNightlyAction::class);
         
         $app->get('/doc', DocAction::class);
+        $app->get('/doc/{version}.latest[/{path:.*}]', RedirectLatestDocVersion::class);
         $app->get('/doc/{version}', DocAction::class);
         $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
         $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
