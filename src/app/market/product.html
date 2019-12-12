@@ -52,7 +52,7 @@
 								{% for artifact in mavenArtifacts %}
 								<li>
 									<a style="font-size:16px;" href="{{ artifact.getUrl(selectedVersion) }}">
-									{{ artifact.name }} {{ selectedVersion }}
+									{{ artifact.name }} {{ selectedVersion }} ({{ artifact.type }})
 									</a>
 									</li>
 							    {% endfor %}
