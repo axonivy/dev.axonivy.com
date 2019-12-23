@@ -46,6 +46,7 @@ class MavenArtifactRepository
             self::getPortalKit(),
             self::getAxonIvyExpress(),
             self::getPortalExamples(),
+            self::getPortalGuide(),
             self::getPortalUserGuide(),
             self::getPortalDeveloperGuide()
         ];
@@ -192,7 +193,21 @@ class MavenArtifactRepository
             ->artifactId('portalExamples')
             ->build();
     }
-
+    
+    private static function getPortalGuide(): MavenArtifact
+    {
+        return MavenArtifact::create('portal-guide')
+        ->name('Portal Guide')
+        ->groupId('ch.ivyteam.ivy.project.portal')
+        ->artifactId('portal-guide')
+        ->type('zip')
+        ->doc()
+        ->build();
+    }
+    
+    /**
+     * since 8.0.1 -> portalGuide
+     */
     private static function getPortalUserGuide(): MavenArtifact
     {
         return MavenArtifact::create('portal-user-guide')
@@ -203,7 +218,10 @@ class MavenArtifactRepository
             ->doc()
             ->build();
     }
-
+    
+    /**
+     * since 8.0.1 -> portalGuide
+     */
     private static function getPortalDeveloperGuide(): MavenArtifact
     {
         return MavenArtifact::create('portal-developer-guide')
