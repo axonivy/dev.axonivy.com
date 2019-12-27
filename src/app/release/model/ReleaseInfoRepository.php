@@ -63,20 +63,21 @@ class ReleaseInfoRepository
      */
     public static function getArtifacts(string $version): array
     {
+        $versionModified = $version;
         if (StringUtil::endsWith($version, '.0')) {
             $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst(self::getAvailableReleaseInfos());
             foreach ($releaseInfos as $info) {
                 $v = $info->getVersion()->getVersionNumber();
                 if (StringUtil::startsWith($v, $version))
                 {
-                    $version = $info->getVersion()->getVersionNumber();
+                    $versionModified = $info->getVersion()->getVersionNumber();
                 }
             }
         }
         
-        $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $version;
-        $cdnBaseUrl = CDN_HOST . '/' . $version . '/';
-        $permalinkBaseUrl = PERMALINK_BASE_URL . $version . '/';
+        $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $versionModified;
+        $cdnBaseUrl = CDN_HOST . '/' . $versionModified . '/';
+        $permalinkBaseUrl = PERMALINK_BASE_URL . $versionModified . '/';
         
         $releaseInfo = self::createReleaseInfo($artifactsDirectory, '', '');
         

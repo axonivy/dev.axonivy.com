@@ -6,6 +6,13 @@ use test\AppTester;
 
 class PermalinkActionTest extends TestCase
 {
+    public function testPermalink_80()
+    {
+        AppTester::assertThatGet('/permalink/8.0/axonivy-engine.deb')
+        ->statusCode(302)
+        ->header('Location', 'https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb');
+    }
+    
     public function testPermalink_sprint()
     {
         AppTester::assertThatGet('/permalink/sprint/axonivy-engine-slim.zip')
