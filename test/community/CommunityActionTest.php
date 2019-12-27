@@ -11,7 +11,7 @@ class CommunityActionTest extends TestCase
     {
         AppTester::assertThatGet('/community')
             ->statusCode(200)
-            ->bodyContains('The Axon.ivy repositories are open source projects. Fork them on GitHub.');
+            ->bodyContains('See how it works on GitHub.');
     }
     
     
