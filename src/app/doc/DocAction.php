@@ -85,10 +85,10 @@ class DocAction
     }
     
     private static function getDocLinksLE(): array
-    {        
+    {
         $docLinks = [];
         $releaseInfo = ReleaseInfoRepository::getLatest();
-        if ($releaseInfo != null) {
+        if ($releaseInfo != null && !$releaseInfo->getVersion()->isLongTermSupportVersion()) {
             $docLinks[] = self::createDocLink('/doc/latest', $releaseInfo->getVersion()->getMinorVersion());
         }
         return $docLinks;
