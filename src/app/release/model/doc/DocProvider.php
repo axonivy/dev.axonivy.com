@@ -111,10 +111,10 @@ class DocProvider
 
             self::createZip('Product Documentation', 'axonivy-doc-*.zip'),
             
-            self::getNewAndNoteworthy(),
-            self::getReleaseNotes(),
-            self::createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes'),
-            self::createReleaseDocument('ReadMe', 'ReadMe.html', 'readme'),
+            self::getNewAndNoteworthy(), // since 9.1 not available
+            self::getReleaseNotes(), // since 9.1 part of product documentation
+            self::createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes'), // since 9.1 part of product documentation
+            self::createReleaseDocument('ReadMe', 'ReadMe.html', 'readme'), // since 9.1 not available
             self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'), // legacy
             self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')  // legacy
         ];

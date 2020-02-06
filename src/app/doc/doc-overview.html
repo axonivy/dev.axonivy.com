@@ -1,0 +1,64 @@
+{% extends "templates/parts/base_content_no_footer.html" %}
+
+{% block title %}Doc {{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<section id="main" >
+		<div class="inner">
+			<div class="row">
+				<div class="6u 12u$(xsmall)">
+					<header><h1><span class="icon fas fa-book"></span> Documentation</h1></header>
+					<p>Learn how to work with the Axon.ivy Digital Business Platform</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="three">
+		<div class="inner">
+			<article>
+				<div class="content">
+					<span class="icon fas fa-balance-scale"></span>
+					<header>
+						<h3>Long Term Support (LTS)</h3>
+					</header>
+					<p>Browse through the documentation of our stable LTS releases.</p>
+					<ul class="actions">
+						{% for docLink in docLinksLTS %}
+							<li><a href="{{ docLink.url }}" class="button special">Documentation {{ docLink.displayText }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</article>
+			<article>
+				<div class="content">
+					<span class="icon fas fa-rocket"></span>
+					<header>
+						<h3>Leading Edge (LE)</h3>
+					</header>
+					<p>Read about our new features in our LE releases.</p>
+					<ul class="actions">
+						{% for docLink in docLinksLE %}
+							<li><a href="{{ docLink.url }}" class="button special">Documentation {{ docLink.displayText }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</article>
+			<article>
+				<div class="content">
+					<span class="icon fas fa-star"></span>
+					<header>
+						<h3>Dev Releases</h3>
+					</header>
+					<p>Check out our Sprint Release, Nightly and Dev documentation!</p>
+					<ul class="actions">
+						{% for docLink in docLinksDEV %}
+							<li><a href="{{ docLink.url }}" class="button special">Documentation {{ docLink.displayText }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</article>
+		</div>
+  </section>
+{% endblock %}
