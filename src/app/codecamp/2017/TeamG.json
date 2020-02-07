@@ -1,8 +1,0 @@
-{
-	"id": "bleadingedge",
-	"title": "Bleeding Edge again",
-	"image": "the-technology-bleeding-edge.jpg",
-	"members": "Christian Strebel",
-	"description": "Develop Ivy and with Ivy is complex and feels not like cutting edge as it was some years ago. There is one answer in the market to make it simple and great again:<br> <div style=\"font-size:24px; text-align: center;\">Microservices in Containers</div><br>As always there are downsides. It is more complex to operate, monitor or measure performance. But the new Ivy will simply provide all new cool tools to do these tasks easily and better with the microservices architecture.<br>One aspect is also to find out if it is possible to change Ivy to this direction or if it is better to start from scratch and reuse the good parts...<br><strong>The future is easy to see how it works!</strong>",
-	"link": "https://trello.com/b/z0Rkt0GF/codecamp17-bleeding-edge-again"
-}

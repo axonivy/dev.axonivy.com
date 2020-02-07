@@ -1,8 +1,0 @@
-{
-	"id": "jsuni",
-	"title": "Modern front-end development",
-	"image": "angular.jpg",
-	"members": "Barbara Brugger",
-	"description": "Front-end JavaScript frameworks spring up like mushrooms these days. One of the most popular ones is Angular. I'd like to have a look beyond the (Java) horizon and explore the possibilities of Angular in general and in cooperation with ivy. Additionally  I want to learn more about helpful tools to improve web development proficiency like Npm, Karma, jsLint or Yeoman.",
-	"link": "https://trello.com/b/aLteSv0c/codecamp-2017-modern-front-end-development"
-}

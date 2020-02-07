@@ -15,9 +15,7 @@ use app\market\ProductAction;
 use app\market\MarketAction;
 use app\support\SupportAction;
 use app\api\ApiCurrentRelease;
-use app\codecamp\CodeCampAction;
 use app\community\CommunityAction;
-use app\devday\DevDayAction;
 use app\tutorial\TutorialAction;
 use app\tutorial\gettingstarted\TutorialGettingStartedAction;
 use app\doc\DocAction;
@@ -161,16 +159,14 @@ class Website
         $app->get('/tutorial', TutorialAction::class);
         $app->get('/tutorial/getting-started[/{name}/step-{stepNr}]', TutorialGettingStartedAction::class);
         $app->get('/team', TeamAction::class);
-        $app->get('/support', SupportAction::class);
-        $app->get('/codecamp[/{year}]', CodeCampAction::class);
-        $app->get('/devday[/{year}]', DevDayAction::class);
+        $app->get('/support', SupportAction::class);        
         $app->get('/search', SearchAction::class);
 
         $app->get('/api/currentRelease', ApiCurrentRelease::class);
         
         $app->get('/sitemap.xml', SitemapAction::class);
         
-        $app->get('/news', NewsAction::class);
+        $app->get('/news[/{version}]', NewsAction::class);
         
         $app->get('/community', CommunityAction::class)->setName('community');
         $this->installRedirect('/download/community.html', 'community');

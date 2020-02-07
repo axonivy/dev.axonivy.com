@@ -1,8 +1,0 @@
-{
-	"id": "selfservice2",
-	"title": "Selfservice Workflow 2.0",
-	"image": "selfservice-wf-20.png",
-	"members": "Bruno B&uuml;tler",
-	"description": "Let the citizen developers do the work! One of the current hype in BPMS are Zero-Code-, Express-, Ad-hoc-, Instant- processes.<br/>With the SelfService Workflow and the Axon.ivy Express features in the Portal, Axon.ivy already addresses very nicely these requirements.<br/>However, there are many more ideas in my mind to bring more modelling power to the people at the front. Define and launch processes at your fingertips.",
-	"link": "https://trello.com/b/TqynrYtH/selfservice-workflow-20"
-}
