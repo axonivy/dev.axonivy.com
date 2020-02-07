@@ -19,10 +19,10 @@ class DocAction
 
     public function __invoke($request, Response $response, $args)
     {
-        $version = $args['version'];        
+        $version = $args['version'];
 
         if (empty($version)) {
-            return $this->renderDocOverview($response);            
+            return $this->renderDocOverview($response);
         }
 
         $docProvider = new DocProvider($version);
@@ -30,9 +30,10 @@ class DocAction
             throw new NotFoundException($request, $response);
         }
         
-         // since version 9, also for dev, nightly, latest and sprint releases
+        // since version 9, also for dev, nightly and sprint releases
+        // TODO: Add 'latest' to this check once latest points to release 9.1.0!
         if (version_compare($version, 9) >= 0 ||
-                $version === 'dev' || $version === 'nightly' || $version === 'latest' || $version === 'sprint') {
+                $version === 'dev' || $version === 'nightly' || $version === 'sprint') {
             $document = $args['document'];
             if (empty($document)) {
                 return $response->withRedirect("/doc/$version/index.html", 301);
