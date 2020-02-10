@@ -17,6 +17,9 @@ with redirects.
 * /doc/${version}/migration-notes
 * /doc/${version}/release-notes
 
+* /portal [Portal Landing Page]
+* /portal/${version} [Portal Landing Page for specific version (dev, sprint, nightly, latest also supported)] 
+* /portal/${version}/doc [Portal Doc for specific version (dev, sprint, nightly, latest also supported)]
 
 ## Big Files
 Please do not commit big files in this repo. If you need to reference binary large objects upload them to blob.axonivy.works.

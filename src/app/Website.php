@@ -6,6 +6,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 use app\team\TeamAction;
+use app\portal\PortalAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
@@ -128,7 +129,7 @@ class Website
     {
         $app = $this->app;
         $app->get('/', FeatureAction::class);
-        
+
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
         $this->installRedirect('/download/archive.html', 'archive');
@@ -154,6 +155,8 @@ class Website
         $app->get('/market/{key}[/{version}]', ProductAction::class);
         $this->installRedirect('/download/addons.html', 'market');
         $this->installRedirect('/download/addons', 'market');
+
+        $app->get('/portal[/{version}[/{topic}]]', PortalAction::class);
         
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
