@@ -4000,3 +4000,9 @@
 			background-color:white;
 			color: #007095 !important;
 		  }
+		  .inverse a {
+			  color: white;
+		  }
+		  .inverse select {
+			border-color: white;
+		  }
