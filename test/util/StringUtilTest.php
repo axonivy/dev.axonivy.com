@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Assert;
 use app\util\StringUtil;
 
-class TeamActionTest extends TestCase
+class StringUtilTest extends TestCase
 {
     
     public function testStartsWith()

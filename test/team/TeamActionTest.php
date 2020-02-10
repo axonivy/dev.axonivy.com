@@ -11,7 +11,7 @@ class TeamActionTest extends TestCase
     {
         AppTester::assertThatGet('/team')
             ->statusCode(200)
-            ->bodyContains('ivyTeam is the core development team of the Axon.ivy Digital Business Platform.');
+            ->bodyContains('<b>ivyTeam</b> is the core development team of the <b>Axon.ivy Digital Business Platform</b>');
     }
 
     public function testRender_brunoExists()
