@@ -59,6 +59,10 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
                 continue;
             }
 
+            if (StringUtil::contains($v, '-m')) { // hide sprint releases (maven milestone releases)
+                continue;
+            }
+
             $splittedVersion = explode('.', $v);
             if (count($splittedVersion) == 4) // old one with sprint release number in third 7.1.162.3
             {
