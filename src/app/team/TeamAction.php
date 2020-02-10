@@ -17,9 +17,11 @@ class TeamAction
         ]);
     }
     
-    private static function getMembers(): array
-    {
-        return json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'members.json'));
+    private static function getMembers(): array {
+        $jsonFile = __DIR__ . DIRECTORY_SEPARATOR . 'members.json';
+        $members = json_decode(file_get_contents($jsonFile));
+        shuffle($members);
+        return $members;
     }
 }
 

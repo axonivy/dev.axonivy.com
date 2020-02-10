@@ -7,6 +7,17 @@
 ## Execute tests
 	docker-compose exec web ./vendor/bin/phpunit
 
+## Permalinks
+
+The following links won't change and are fully support
+with redirects.
+
+* /doc/${version}
+* /doc/${version}/new-and-noteworthy
+* /doc/${version}/migration-notes
+* /doc/${version}/release-notes
+
+
 ## Big Files
 Please do not commit big files in this repo. If you need to reference binary large objects upload them to blob.axonivy.works.
 

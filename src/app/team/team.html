@@ -4,40 +4,50 @@
 
 {% block content %}
 
-	<section id="main" >
-		<div class="inner">
-			<header><h1><span class="icon fas fa-thumbs-up"></span> ivyTeam (Switzerland)</h1></header>
+	<section id="main" class="inverse">
+		<div class="inner-small">
+			<header>
+				<h1><span class="icon fas fa-thumbs-up"></span> ivyTeam (Switzerland)</h1>
+			</header>
 			<p>
-				ivyTeam is the core development team of the Axon.ivy Digital Business Platform.
-				The team is highly experienced in agile software development.
-				The ivyTeam is located in Zug (Switzerland) since the formation in the year 1993.
+				<b>ivyTeam</b> is the core development team of the <b>Axon.ivy Digital Business Platform</b>.
+				The team is highly experienced in <b>agile software development</b>. Since the formation
+				in the year <b>1993</b> the team is located in <b>Zug</b> in the heart of Switzerland.
 			</p>
-					
+	
+			{% for employee in employees %}
+			{% if loop.index % 3 == 1 %}
 			<div class="row">
-				{% for employee in employees %}
-					<div class="4u 12u$(xsmall)">
-						<header><h3>{{ employee.name }}</h3></header>
-						
-						{% if employee.imgSrc %}
-							<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
-						{% else %}
-							<div style="width:101px;height:170px;border:1px solid #C7D426;text-align:center;">
-							</div>
-						{% endif %}
-							
-						<p>{{ employee.education }}<br />{{ employee.function }}</p>
-					</div>
-				{% endfor %}
+			{% endif %}	
+				<div class="4u 12u$(xsmall)">
+					<header>
+						<h4>{{ employee.name }}</h4>
+					</header>
+					{% if employee.imgSrc %}
+					<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+					{% else %}
+					<div style="width:101px;height:170px;border:1px solid #C7D426;text-align:center;"></div>
+					{% endif %}
+					<p>{{ employee.function }}<br />{{ employee.education }}</p>
+				</div>
+			{% if loop.index % 3 == 0 %}
 			</div>
-			<hr />
-			
-			<h4>Address</h4>
-				<p>
-					AXON Ivy AG<br />
-					Baarerstrasse 12<br />
-					CH-6300 Zug
-				</p>
+			{% endif %}
+			{% endfor %}
 		</div>
 	</section>
+<section id="one">
+	<div class="inner">
+		<div class="row">
+			<iframe
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2718.478560878836!2d8.295136951797458!3d48.0504619790493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5b40af4685e176d7!2sAxon%20Active%20Inc.!5e0!3m2!1sde!2sch!4v1572873938939!5m2!1sde!2sch"
+				style="width:100%;"
+				allowfullscreen=""
+				height="450"
+				frameborder="0">
+			</iframe>
+		</div>
+	</div>
+</section>
 
 {% endblock %}

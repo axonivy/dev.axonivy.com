@@ -13,15 +13,13 @@ class FeatureAction
     }
 
     public function __invoke($request, $response, $args) {
-        $info = ReleaseInfoRepository::getLatest();
         return $this->container->get('view')->render($response, 'app/feature/feature.html', [
-            'features' => self::getPromotedFeatures(),
-            'newAndNoteworthyLink' => $info == null ? '' : $info->getDocProvider()->getNewAndNoteworthy()->getUrl()
+            'features' => self::getPromotedFeatures()
         ]);
     }
     
-    private static function getPromotedFeatures(): array
-    {
-        return json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'promoted-features.json'));
+    private static function getPromotedFeatures(): array {
+        $jsonFile = __DIR__ . DIRECTORY_SEPARATOR . 'promoted-features.json';
+        return json_decode(file_get_contents($jsonFile));
     }
 }

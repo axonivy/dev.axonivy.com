@@ -1,0 +1,1034 @@
+<style>
+    h1 {
+        color:#007095;
+    }
+    
+    h2 {
+        color:black;
+        margin-bottom: 15px;	
+    }
+    
+    .image.fit {
+        margin-bottom: 15px;	
+    }
+    ul {
+        margin-bottom: 15px;
+    }
+    p {
+        margin-bottom: 15px;
+    }
+    .short-links {
+        margin-top: 15px;
+    }
+
+
+.galery{
+	max-width: 200px;
+	padding-right: 5px;
+	float:left;
+}
+
+
+
+.collapsible {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.collapsible-content {
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-bottom:10px;
+}
+</style>
+
+
+
+<link href="/assets/css/lightbox.min.css" rel="stylesheet" />
+<script src="/assets/js/lightbox.min.js"></script>
+
+<section id="one" style="background-color:#007095">
+	<div class="inner-small" style="color: white;">
+		<img src="/images/news/8.0/ivy256.png" style="width:100px;position:relative;right:120px;top:120px;" />
+		<h1 style="color:white;">Axon.ivy 8.0 LTS</h1>
+		<p style="margin-bottom:0px;font-size:28px;font-weight:bold;color:#007095;color:white;">
+			Smart, smarter, Axon.ivy Digital Business Platform<br />
+		</p>
+		<p>December 4th, 2019</p>
+	</div>
+</section>
+
+
+<section id="one">
+	<div class="inner-small">
+
+		<h2>Engine Cockpit</h2>
+		<p>
+			Our new Engine Cockpit has now become a mighty successor of the AdminUI with a rich feature set.
+			It's completely based on web technologies and simply open in your favorite browser or even on mobile
+			devices.
+		</p>
+		<ul>
+			<li><b>Configuration</b>: System and app configurations can be reviewed and modified effectively.</li>
+			<li><b>Administration</b>: Manage your security systems in the cockpit. Add Users, change roles, edit
+				properties, all can be done with the new security tools.</li>
+		</ul>
+
+		<button type="button" class="button collapsible">More features</button>
+		<div class="collapsible-content">
+			<ul>
+				<li><strong>External Services</strong>: Database, SOAP or REST web services used by the engine can be
+					viewed, configured and even tested right within the Cockpit. Additionally, you can see your running
+					elastic search server and run queries against it.</li>
+				<li><strong>License</strong>: The Engine license can be updated in the Cockpit. Once your license is
+					near its end of life, administrators can initiate the renewal process right out of the Cockpit.</li>
+				<li><strong>Monitoring</strong>: A new expressive view allows to examine recent logs and offers an
+					export functionality to download them as ZIP files. As a result, file access to the Engine is no
+					longer necessary and data collection becomes very easy.</li>
+				<li><strong>Applications</strong>: Simply manage your running Applications on the Cockpit. Start, stop,
+					release and other actions are possible. Even the deployment of *.iar or *.zip files can be done
+					directly over the web.</li>
+				<li><strong>System</strong>: Managing your administrators or system database has never been never
+					easier! You need to migrate your system database? Do it right from the Cockpit.</li>
+				<li><strong>More</strong>: The Cockpit can do much, much more. Please give it a try!</li>
+			</ul>
+		</div>
+
+		<a href="/images/news/8.0/80_cockpit_dashboard.png" data-lightbox="cockpit">
+			<img class="image fit" src="/images/news/8.0/80_cockpit_dashboard.png" />
+		</a>
+
+		<a href="/images/news/8.0/80_cockpit_apps.png" data-lightbox="cockpit">
+			<img class="image fit galery " src="/images/news/8.0/80_cockpit_apps.png" />
+		</a>
+		<a href="/images/news/8.0/80_cockpit_db.png" data-lightbox="cockpit">
+			<img class="image fit galery " src="/images/news/8.0/80_cockpit_db.png" />
+		</a>
+		<a href="/images/news/8.0/80_cockpit_monitor.png" data-lightbox="cockpit">
+			<img class="image fit galery " src="/images/news/8.0/80_cockpit_monitor.png" />
+		</a>
+		<a href="/images/news/8.0/80_cockpit_log.png" data-lightbox="cockpit">
+			<img class="image fit galery" src="/images/news/8.0/80_cockpit_log.png" />
+		</a>
+		<div style="clear:both;"></div>
+
+		<div class="short-links">
+			<a href="/doc/8.0.latest/engine-guide/tool-reference/engine-cockpit/index.html"
+				class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fas fa-book"></i> Engine Guide
+			</a>
+		</div>
+	</div>
+</section>
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>Setup Wizard</h2>
+		<p>With the new theme and the introduction of the <strong>Engine Cockpit</strong>, the <strong>Engine Config
+				UI</strong> doesn't really fit in our product toolset any longer. Because of that, we decided to
+			reengeneer this initial setup as a new <strong>Setup Wizard</strong>.</p>
+		<ul>
+			<li><strong>Write Yaml</strong>: As our new configuration lives in <em>yaml</em> files, the new wizard saves
+				your settings correctly.</li>
+			<li><strong>Better integration</strong>: The Setup Wizard is part of the <strong>Engine Cockpit</strong>, so
+				all parts of the wizard are integrated in the cockpit as well.</li>
+			<li><strong>Improved Interface</strong>: The user interface matches the theme of the 8.0 release.</li>
+			<li><strong>Better guidance</strong>: We are now giving you better feedback to smoothly configure your
+				engine.</li>
+		</ul>
+
+		<a href="/images/news/8.0/80_setup_lic.png" data-lightbox="setupwizard">
+			<img class="image fit" src="/images/news/8.0/80_setup_lic.png" />
+		</a>
+
+		<a href="/images/news/8.0/80_setup_admins.png" data-lightbox="setupwizard">
+			<img class="image fit galery " src="/images/news/8.0/80_setup_admins.png" />
+		</a>
+		<a href="/images/news/8.0/80_setup_webserver.png" data-lightbox="setupwizard">
+			<img class="image fit galery " src="/images/news/8.0/80_setup_webserver.png" />
+		</a>
+		<a href="/images/news/8.0/80_setup_systemdb.png" data-lightbox="setupwizard">
+			<img class="image fit galery " src="/images/news/8.0/80_setup_systemdb.png" />
+		</a>
+		<div style="clear:both;"></div>
+
+
+		<div class="short-links">
+			<a href="/doc/8.0.latest/engine-guide/tool-reference/setup-wizard.html" class="btn btn-outline-dark btn-sm"
+				role="button" target="_blank">
+				<i class="fas fa-book"></i> Engine Guide
+			</a>
+		</div>
+	</div>
+</section>
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Portal</h2>
+		<p>We re-styled the Portal application completely and implemented a lot of new features.</p>
+		<ul>
+			<li><strong>Group Chat</strong>: Establish chats with other workflow users instantly, even case related</li>
+			<li><strong>Announcements</strong>: Promote planned maintenance and other global announcements conveniently,
+				in multiple languages</li>
+			<li><strong>Express data providers</strong>: Add your custom data source to provide data for Axon.ivy
+				Express form widgets</li>
+		</ul>
+
+		<a href="/images/news/8.0/80_portal-chat.png" data-lightbox="portal">
+			<img class="image fit" src="/images/news/8.0/80_portal-chat.png" />
+		</a>
+
+		<a href="/images/news/8.0/80_portal_announcement.png" data-lightbox="portal">
+			<img class="image fit galery " src="/images/news/8.0/80_portal_announcement.png" />
+		</a>
+		<a href="/images/news/8.0/80_portal_data_provider.png" data-lightbox="portal">
+			<img class="image fit galery " src="/images/news/8.0/80_portal_data_provider.png" />
+		</a>
+		<div style="clear:both;"></div>
+
+
+		<div class="short-links">
+			<a href="/documentation/portal-guide/8.0.2/portal-developer-guide/introduction/index.html#new-and-noteworthy"
+				class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fas fa-book"></i> Portal Guide
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>Run in Container</h2>
+
+		<img class="image fit" src="/images/news/8.0/72_ivy_on_docker.jpg" />
+
+		<p>
+			Running the Axon.ivy Engine in an isolated container has become a lot easier.
+			This means that the barriers between Docker, Kubernetes, OpenShift and all other container orchestration
+			platforms
+			have been broken down!
+			<ul>
+				<li> <b>FULLY ISOLATED</b>: Software running in a container is completely isolated from the outside
+					world.</li>
+				<li> <b>REPRODUCIBLE SYSTEMS</b>: Your system setup becomes fully reproducible in one go since the whole
+					system
+					configuration is defined in a so-called image.</li>
+				<li> <b>PORTABLE</b>: Build once, run everywhere! Once a docker image is generated it can be run on
+					every system
+					that supports Docker.</li>
+				<li> <b>DOCUMENTED INFRASTRUCTURE</b>: The entire Axon.ivy Engine system setup is part of an image and
+					thus
+					fully documented.</li>
+			</ul>
+		</p>
+
+		<div class="short-links">
+			<a href="/doc/8.0.latest/engine-guide/getting-started/docker.html" class="btn btn-outline-dark btn-sm"
+				role="button" target="_blank">
+				<i class="fas fa-book"></i> Getting started with Docker
+			</a>
+			&nbsp;&nbsp;
+			<a href="https://hub.docker.com/r/axonivy/axonivy-engine/" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fab fa-docker"></i> Axon.ivy Engine Docker Image
+			</a>
+			&nbsp;&nbsp;
+			<a href="https://github.com/ivy-samples/docker-samples" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fas fa-flask"></i> Docker Examples
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Debian Engine Installer</h2>
+
+		<img class="image" src="/images/news/8.0/72_deb-package-installer.png" />
+
+		<p>
+			The Axon.ivy Engine is now available as a Debian package. Now Engine operators can benefit from the rich
+			tooling on the preferred platform of most cloud providers.
+			<ul>
+				<li><strong>SIMPLE</strong>: Install &amp; run the Engine with one click.</li>
+				<li><strong>BEST PRACTICE</strong>: Run the Axon.ivy Engine as systemd service and restricts the access
+					to Engine and workflow application files.</li>
+				<li><strong>UPDATEABLE</strong>: Install the latest hotfix version without risky manual steps.</li>
+				<li><strong>SECURE</strong>: Keep your manual changes in configuration files during updates.</li>
+				<li><strong>FRIENDLY</strong>: Organize files compliant with the Linux file structure and re-use the JVM
+					provided by the system.</li>
+			</ul>
+		</p>
+
+		<div class="short-links">
+			<a href="/doc/8.0.latest/engine-guide/getting-started/debian.html" class="btn btn-outline-dark btn-sm"
+				role="button" target="_blank">
+				<i class="fas fa-plane-departure"></i> Debian : Getting Started
+			</a>
+			&nbsp;&nbsp;
+			<a href="/permalink/latest/axonivy-engine.deb" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fas fa-download"></i> Download Debian package
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>Highly Configurable</h2>
+
+		<p>
+			Successfully deploying your application in your customers environment is now easier than ever.
+			The days of manual installations and the related chatty documentation are over!
+		</p>
+
+		<pre><code># sample ivy.yaml with some often used entries defined
+SystemDb:
+  Url: jdbc:mariadb://myDbHost:3306/AxonIvySystemDatabase
+  UserName: root
+  Password: 1234
+Administrators:
+  admin:
+    Password: "${hash:1234}"
+    Email: info@localhost
+  devop:
+    Password: "${hash:4321}"
+    Email: dev@axonivy.com
+EMail:
+  Server:
+  Host: smtp.gmail.com
+  Port: 25
+Frontend:
+  HostName: workflow.acme.com
+  Port: 80
+</code></pre>
+
+		<ul>
+			<li><strong>FILES</strong>: The complete configuration of an Axon.ivy Engine is now stored in simple human
+				readable <code>YAML</code> files. Now it is very easy to document the whole truth about the current
+				engine environment within an <code>ivy.yaml</code> file.</li>
+			<li><strong>ZERO DOCUMENTATION</strong>: In the past you had to document the installation of an Axon.ivy
+				Engine because certain settings (e.g. Security System) could only be configured via the Admin UI. Now
+				you can use the <code>ivy.yaml</code> file as your system documentation.</li>
+			<li><strong>OVERRIDABLE</strong>: Configurations are always overridable with environment variables. This is
+				especially useful in container environments.</li>
+			<li><strong>TRACKABLE</strong>: Configuration changes get logged, showing what has been changed and where.
+				Besides auditing configuration changes, this can also help tracking down problems after changes.</li>
+		</ul>
+
+		<div class="short-links">
+			<a href="/doc/8.0.latest/engine-guide/configuration/" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fas fa-book"></i> Engine Guide Configuration
+			</a>
+			&nbsp;&nbsp;
+			<a href="/doc/8.0.latest/engine-guide/configuration/file-reference.html" class="btn btn-outline-dark btn-sm"
+				role="button" target="_blank">
+				<i class="fas fa-book"></i> Configuration File Reference
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Instant Deployment</h2>
+
+		<p>We believe that highly automated deployments are important. Customers should be able to use the latest
+			features instantly. While developers and operations need a high confidence about the proper execution of
+			their runtime artifacts.</p>
+
+		<p>That's why we extended our deployment interface:</p>
+
+		<ul>
+			<li><strong>Atomar</strong>: The complete feature set of an application can be deployed at once. Just drop a
+				zip file that contains multiple projects that belong to the same application into our engine
+				<code>deploy</code> directory and it will be rolled-out.</li>
+			<li><strong>Controllable</strong>: The new deployment option file gives you the chance to fine tune the
+				deployment process. It allows to enforce configuration updates and to steer the target Process Model
+				Version to use. Now there are no technical reasons to migrate workflow data into a new Process Model
+				Version.</li>
+			<li><strong>Self-documented</strong>: Deployment options can be stored in <a
+					href="https://developer.axonivy.com/doc/8.0.2/engine-guide/administration/deployment.html#advanced-deployment"
+					target="_blank">YAML files</a> or in Maven plugin configurations. The deployment process is
+				therefore documented, visible and reproducible in any environment. A separate documentation in a guide
+				becomes obsolete.</li>
+			<li><strong>Automated</strong>: The deployment to the engine is steered by simple file operations. So almost
+				any scripting environment can be used to automate deployments. The roll-out of a new application version
+				should never take more effort than one click.</li>
+			<li><strong>Via HTTP</strong>: Deployment to remote engines has never been easier! Just upload your new
+				application with one HTTP file transfer and you're done, perfect for your CI/CD environment!</li>
+		</ul>
+
+		<div class="short-links">
+			<a href="/doc/8.0.2/engine-guide/administration/deployment.html" class="btn btn-outline-dark btn-sm"
+				role="button" target="_blank">
+				<i class="fas fa-book"></i> Engine Guide
+			</a>
+			&nbsp;&nbsp;
+			<a href="https://axonivy.github.io/project-build-plugin" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fas fa-book"></i> Maven Plugin
+			</a>
+			&nbsp;&nbsp;
+			<a href="https://github.com/axonivy/project-build-examples" class="btn btn-outline-dark btn-sm"
+				role="button" target="_blank">
+				<i class="fas fa-flask"></i> GitHub Examples
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>Modern Platform</h2>
+
+		<p>
+			We updated the platform of the Designer in order to bring even more fun and productivity into your daily
+			work. Stay ahead!
+		</p>
+
+		<p>That's why we extended our deployment interface:</p>
+
+		<ul>
+			<li><strong>DARK</strong>: Modern themes of the Eclipse platform can be used. You may give the new dark
+				theme a try during your next nightly coding session.</li>
+			<li><strong>HDPI</strong>: High resolution displays are now supported. Feel free to use a brand new device
+				to work with Axon.ivy.</li>
+			<li><strong>SCRIPTING</strong>: Scripting editors now support linking and quick navigation to referenced
+				classes and methods. Use the <code>F3</code>-Button or <code>Ctrl + click</code> to jump instantly to a
+				resource.</li>
+			<li><strong>MARKETPLACE</strong>: The now included Eclipse Marketplace allows you to access the universe of
+				Eclipse tools. This will make you even more efficient.</li>
+		</ul>
+
+		<a href="/images/news/8.0/80_eclipse_2019-09.png" data-lightbox="modern">
+			<img class="image fit" src="/images/news/8.0/80_eclipse_2019-09.png" />
+		</a>
+
+		<a href="/images/news/8.0/80_script_step.png" data-lightbox="modern">
+			<img class="image fit galery " src="/images/news/8.0/80_script_step.png" />
+		</a>
+		<a href="/images/news/8.0/72_dark_theme_workbench.png" data-lightbox="modern">
+			<img class="image fit galery " src="/images/news/8.0/72_dark_theme_workbench.png" />
+		</a>
+		<div style="clear:both;"></div>
+
+		<div class="short-links">
+
+			<a href="https://www.eclipse.org/downloads/" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fas fa-dice-d20"></i> Eclipse 2019-09
+			</a>
+			&nbsp;&nbsp;
+			<a href="https://marketplace.eclipse.org/" class="btn btn-outline-dark btn-sm" role="button"
+				target="_blank">
+				<i class="fas fa-shopping-cart"></i> Marketplace
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Native MAC & GTK3 Development</h2>
+
+		<p>
+			Run the Axon.ivy Designer with the operating system you know and love most.
+			<ul>
+				<li><strong>MAC Designer</strong>: We released the first native Axon.ivy Designer for Mac OS X. Now you
+					can digitalize your business on a Mac without starting a virtualized OS.</li>
+				<li><strong>Linux GTK3</strong>: The latest designer has been optimized to work with the most popular
+					desktop environments on Linux. As a result, we were able to update the embedded browser, delivering
+					way more accurate results when modern CSS &amp; JavaScript is used.</li>
+				<li><strong>Process Editor</strong>: Many new native UI components are now available for all platforms:
+					Context Menu, Inscription Masks</li>
+				<li><strong>Html Dialog Editor</strong>: It dropped its strict coupling to the JavaFX-based WYSIWYG
+					editor and therefore runs on all platforms.</li>
+			</ul>
+		</p>
+
+		<img class="image fit" src="/images/news/8.0/73_highSierra_restActivity.png" />
+	</div>
+</section>
+
+
+
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>Customizable Designer</h2>
+
+		<p>
+			We made the latest Axon.ivy Designer much more flexible, so that it serves best for your development needs.
+			<ul>
+				<li><strong>Lighter</strong>:
+					<ul>
+						<li>The Xpert.ivy 3.9 import feature has been retired.</li>
+						<li>The project reporting feature is no longer included. But you can install it via the
+							pre-configured update site.</li>
+					</ul>
+				</li>
+				<li><strong>Up to date</strong>:
+					<ul>
+						<li>Many developers switched to GIT as their primary source control management system. Now we
+							ship the <em>EGit</em> team provider together with a new version of <em>Subclipse</em> for
+							SVN users.</li>
+						<li>Independent features of the designer such as GIT or SVN can now be updated. Now you are not
+							bound to the Axon.ivy Designer release cycle to get the latest third-party improvements
+							anymore.</li>
+					</ul>
+				</li>
+				<li><strong>Totally yours</strong>:
+					<ul>
+						<li>You do not require some core parts of the Designer at all? We isolated features of the
+							Designer so that you can uninstall them.</li>
+						<li>Why don't you craft your custom Axon.ivy Designer with the essentials for you and your team?
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</p>
+
+		<img class="image fit" src="/images/news/8.0/71_designer_isolatedFeatures.png" />
+	</div>
+</section>
+
+
+
+
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Custom Fields</h2>
+
+		<p>
+			Customizing a task and case list based on process data is easier than ever before.
+			Put data in the custom field store of the task or case and it becomes automatically searchable.
+			In addition, it can also be helpful for workflow process reporting.
+			<ul>
+				<li><strong>MEANINGFUL NAME</strong>: Name the custom field as you like.</li>
+				<li><strong>SEARCHABLE</strong>: You won't miss any search capabilities. Simply use
+					<code>TaskQuery</code> and <code>CaseQuery</code> API to filter, aggregate and order by custom
+					fields.</li>
+				<li><strong>STRONG TYPING</strong>: All custom fields are strongly typed. You can choose between
+					<code>STRING</code>, <code>TEXT</code>, <code>NUMBER</code> and <code>TIMESTAMP</code>.</li>
+			</ul>
+		</p>
+
+		<pre><code>TaskQuery.create().where()
+        .customField().stringField("branchOffice").isEqual("Zug")
+      .and()
+        .customField().numberField("creditLimit").isGreaterThan(10_000);</code></pre>
+
+		<p><strong>Legacy Support</strong>: Forget the additional properties, the limited old custom fields, the strange
+			business fields and the legacy categorization. You don't need them anymore. But we are fully backward
+			compatible. All legacy API calls will be mapped to custom fields. All inscribed inscriptions in your project
+			will automatically be converted.</p>
+
+
+		<div class="short-links">
+			<a href="/doc/8.0.latest/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html"
+				class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fab fa-java"></i> Public API Custom Field
+			</a>
+			&nbsp;&nbsp;
+			<a href="/doc/8.0.latest/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--"
+				class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fab fa-java"></i> Public API Query
+			</a>
+		</div>
+
+
+
+
+	</div>
+</section>
+
+
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>New Web Service Client Tooling</h2>
+
+		<p>
+			The tooling to call remote Web Services has been completely re-worked and is more powerful than ever.
+			<ul>
+				<li><strong>Simple</strong>: Clean and intuitive configuration mask on the Web Service Call activity
+				</li>
+				<li><strong>Secure</strong>: Integrated authentication features for HTTP-BASIC, HTTP-DIGEST, NTLM and
+					WS-Security.</li>
+				<li><strong>Compliant</strong>: A huge set of Web Service specifications (WS-*) are supported and ready
+					to use</li>
+				<li><strong>Reliable</strong>: Logs and monitoring capabilities let you easily identify fragile Web
+					Service communications</li>
+				<li><strong>Open</strong>: Additional client features can easily be contributed by process developers
+				</li>
+			</ul>
+		</p>
+
+		<img class="image" src="/images/news/8.0/71_wsClient_requestTab.png" />
+
+		<div class="short-links">
+			<a href="/doc/8.0.2/designer-guide/3rd-party-integration/index.html#web-services"
+				class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fas fa-book"></i> Designer Guide
+			</a>
+			&nbsp;&nbsp;
+			<a href="/tutorial" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fas fa-video"></i> Tutorial Video
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Java 11 LTS</h2>
+
+		<p>
+			Axon.ivy now runs with Java 11. Which is the most recent LTS runtime for Java.
+			<ul>
+				<li><strong>Featured</strong>: Use the latest language features such as <code>var</code> and make use of
+					modern libraries built upon Java 11.</li>
+				<li><strong>Secure</strong>: Rely upon the latest maintenance releases to run your solution.</li>
+				<li><strong>Light</strong>: The Java runtime environment is quick as fox since optional features are
+					released as such and the remaining core was put on a strict diet.</li>
+			</ul>
+		</p>
+
+		<img class="image fit" src="/images/news/8.0/80_adopt_logo_white.svg" />
+
+		<div class="short-links">
+
+			<a href="https://developer.axonivy.com/doc/8.0.2/migration-notes#74java11migration"
+				class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+				<i class="fas fa-book"></i> Java 11 Migration Notes
+			</a>
+
+		</div>
+	</div>
+</section>
+
+
+
+
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<h2>Improvements</h2>
+
+		<ul>
+			<li>Improve Logging in User Synchronization <a href="https://jira.axonivy.com/jira/browse/XIVY-3011" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>On demand synchronisation of AD users <a href="https://jira.axonivy.com/jira/browse/XIVY-3106" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Streamline process element inscription tabs to SWT <a href="https://jira.axonivy.com/jira/browse/XIVY-3457" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Validate macro fields <a href="https://jira.axonivy.com/jira/browse/XIVY-1458" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Validate Database Activity output tab at design time <a href="https://jira.axonivy.com/jira/browse/XIVY-2591" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Change order of output arrows/paths in Alternative Gateway <a href="https://jira.axonivy.com/jira/browse/XIVY-2940" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Log Error Message in Elasticsearch Bulk Request <a href="https://jira.axonivy.com/jira/browse/XIVY-3112" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>First case and task of a case map  must not appear in task list after session timeout <a href="https://jira.axonivy.com/jira/browse/XIVY-2909" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Provide an API to start a CaseMap  <a href="https://jira.axonivy.com/jira/browse/XIVY-2899" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support HTTP POST request to start CaseMaps and Sidesteps with arguments <a href="https://jira.axonivy.com/jira/browse/XIVY-2900" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support ivyProjects in application directory located in project specific Docker Image <a href="https://jira.axonivy.com/jira/browse/XIVY-3082" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Configure Business Calendar in YAML config files <a href="https://jira.axonivy.com/jira/browse/XIVY-3116" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Auto create application and deploy application zip during engine startup <a href="https://jira.axonivy.com/jira/browse/XIVY-2631" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support plain JSF pages without html dialog/process <a href="https://jira.axonivy.com/jira/browse/XIVY-3049" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>HTTP deployments to a remote engine using Maven or curl <a href="https://jira.axonivy.com/jira/browse/XIVY-623" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Consume engine to build from maven repo <a href="https://jira.axonivy.com/jira/browse/XIVY-3255" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Create a new application at deploy time <a href="https://jira.axonivy.com/jira/browse/XIVY-621" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support Overrides for Html Dialogs defined in a parent project <a href="https://jira.axonivy.com/jira/browse/XIVY-3052" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Simple import/download of Portal/Sample projects  <a href="https://jira.axonivy.com/jira/browse/XIVY-929" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Provide demo portal application only in demo mode <a href="https://jira.axonivy.com/jira/browse/XIVY-2861" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Permanent substitute/deputy users <a href="https://jira.axonivy.com/jira/browse/XIVY-2960" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Change security system of application <a href="https://jira.axonivy.com/jira/browse/XIVY-26" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">security</span></li>
+			<li>Add isLike(...) for number (ID) in TaskQuery- and CaseQuery-API <a href="https://jira.axonivy.com/jira/browse/XIVY-2536" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Add new descriptive property "owner" to the case <a href="https://jira.axonivy.com/jira/browse/XIVY-2528" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>After I reserved a task and then resume it and get interrupted the task should still be reserved for me <a href="https://jira.axonivy.com/jira/browse/XIVY-2886" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Make Documents/Files Location configurable <a href="https://jira.axonivy.com/jira/browse/XIVY-2870" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Call WS methods that can only be generated in wrapper style <a href="https://jira.axonivy.com/jira/browse/XIVY-2856" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Simplify REST file upload API and error its failure tracking <a href="https://jira.axonivy.com/jira/browse/XIVY-3097" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Calling REST Service from browser that already owns an authenticated ivy session <a href="https://jira.axonivy.com/jira/browse/XIVY-1183" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support async REST services <a href="https://jira.axonivy.com/jira/browse/XIVY-3000" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>REST Client should consider SSL Client settings of Designer and Server when using https <a href="https://jira.axonivy.com/jira/browse/XIVY-1168" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Use SameSite Cookies to prevent potential CSRF <a href="https://jira.axonivy.com/jira/browse/XIVY-1025" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">security</span></li>
+			<li>Renew/Change the session ID after login <a href="https://jira.axonivy.com/jira/browse/XIVY-349" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Update Elasticsearch to 7.3 <a href="https://jira.axonivy.com/jira/browse/XIVY-2927" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Official Support for Postgres 11 <a href="https://jira.axonivy.com/jira/browse/XIVY-3023" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Upgrade jQuery to v3.3.1 <a href="https://jira.axonivy.com/jira/browse/XIVY-3242" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Upgrade Tomcat to 9.0.24 <a href="https://jira.axonivy.com/jira/browse/XIVY-3301" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support SQL Server 2017 and drop support for SQL Server 2008 <a href="https://jira.axonivy.com/jira/browse/XIVY-3038" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support Oracle 19c and 18c and drop support for Oracle11g <a href="https://jira.axonivy.com/jira/browse/XIVY-3183" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support PostgreSQL 12 <a href="https://jira.axonivy.com/jira/browse/XIVY-3373" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Upgrade Designer to Eclipse 2019-09 (4.13) <a href="https://jira.axonivy.com/jira/browse/XIVY-3387" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Use Ivy Serenity Theme as new default theme <a href="https://jira.axonivy.com/jira/browse/XIVY-3392" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Upgrade primefaces to 7.0.10 <a href="https://jira.axonivy.com/jira/browse/XIVY-3437" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Platform independent jvm.options file to configure an Engine <a href="https://jira.axonivy.com/jira/browse/XIVY-2950" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>PostConstruct script for highly customized Task creation logic <a href="https://jira.axonivy.com/jira/browse/XIVY-2935" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Improve drag &amp; drop support under Linux <a href="https://jira.axonivy.com/jira/browse/XIVY-2499" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Improve performance of prefixed LIKE queries on PostgreSQL system databases <a href="https://jira.axonivy.com/jira/browse/XIVY-2611" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">performance</span></li>
+			<li>Allow project specific JAX-RS extensions such as an exception handler <a href="https://jira.axonivy.com/jira/browse/XIVY-2633" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Add Marketplace to Designer <a href="https://jira.axonivy.com/jira/browse/XIVY-2700" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>APT package for fast engine distribution under Ubuntu/Debian <a href="https://jira.axonivy.com/jira/browse/XIVY-2811" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support High DPI (HDPI) displays in Designer <a href="https://jira.axonivy.com/jira/browse/XIVY-2821" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Document how to log rest client messages on the engine <a href="https://jira.axonivy.com/jira/browse/XIVY-2966" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Store and access ivy projects as single IAR file on the engine <a href="https://jira.axonivy.com/jira/browse/XIVY-1115" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">performance</span></li>
+			<li>Support GIT in Designer <a href="https://jira.axonivy.com/jira/browse/XIVY-2137" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Officially support Maria DB <a href="https://jira.axonivy.com/jira/browse/XIVY-2269" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Make project reporting an independent installable P2 unit <a href="https://jira.axonivy.com/jira/browse/XIVY-2404" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Improve graphical performance on process editor for Linux <a href="https://jira.axonivy.com/jira/browse/XIVY-2449" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Limit substitutes/deputies to current and future tasks of substituted user <a href="https://jira.axonivy.com/jira/browse/XIVY-3060" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Validate .project file <a href="https://jira.axonivy.com/jira/browse/XIVY-3065" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Make read and connection timeout for Elasticsearch connection configurable <a href="https://jira.axonivy.com/jira/browse/XIVY-2838" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Keep Line Break style of existing MOD files <a href="https://jira.axonivy.com/jira/browse/XIVY-2855" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Support MySQL 8.0 as SystemDB <a href="https://jira.axonivy.com/jira/browse/XIVY-2625" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Respect editor preferences for Html Dialog views <a href="https://jira.axonivy.com/jira/browse/XIVY-2446" target="_blank"><span class="fas fa-link"></span></a></li>
+			<li>Automate Designer pre-requisites installation under Linux <a href="https://jira.axonivy.com/jira/browse/XIVY-2376" target="_blank"><span class="fas fa-link"></span></a></li>
+			</ul>
+	</div>
+</section>
+
+
+
+
+
+
+
+<section id="one">
+	<div class="inner-small">
+		<h2>Bug Fixes</h2>
+
+		<div class="bugs-section collapse show" id="bugSection8" style="">
+			<ul>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-85">XIVY-85</a> Enable Edit button on WS endpoint</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-118">XIVY-118</a> Process editor context menu selected text is white on Windows 10</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-852">XIVY-852</a> Default XHTML dialog editor is broken on macOS</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1011">XIVY-1011</a> Handle null entries when sorting by expiry date via orderby().nullFirst() or orderBy().nullLast()</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1034">XIVY-1034</a> Problem when saving the deployment editor after removing the SNAPSHOT from the version</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1298">XIVY-1298</a> Custom error page is not documented</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1329">XIVY-1329</a> No new PMV will be created by default when redeploying same library but with new version</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1672">XIVY-1672</a> MSSQL: Inserting to CustomVarCharFields fails when inserting more than 900 bytes</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1673">XIVY-1673</a> Attachments sent by mail step contains folder path</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1706">XIVY-1706</a> JavaScript Builder fails with NPE on WebPage projects</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1853">XIVY-1853</a> REST API for single tasks does not return resumed/created tasks</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-1948">XIVY-1948</a> UI process executes normal even if current task is not in state CREATED/RESUMED</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2000">XIVY-2000</a> HtmlDialog from global error handler (handling error from another HtmlDialog) is not shown for Ajax request</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2112">XIVY-2112</a> Text overlapping in designer welcome page</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2168">XIVY-2168</a> Can't install new Licences over a UI if it has expired</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2170">XIVY-2170</a> Hovered text in context menu of process editor is white</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2171">XIVY-2171</a> A task may start on the wrong TaskSwitchGateway output arc</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2173">XIVY-2173</a> Sample Call&amp;Wait implementation does not work with multiple PMVs</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2206">XIVY-2206</a> File Browse in Control Center fails</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2209">XIVY-2209</a> Process Selection in CaseMap-Editor does not work</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2210">XIVY-2210</a> Ivy 6.0/7.0 can't join tasks of cases which has been started with Ivy 5.1</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2214">XIVY-2214</a> Can not build 7.0.0 projects while a non OSGi engine is in cache</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2216">XIVY-2216</a> NullpointerException occurs while logging null values in Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2224">XIVY-2224</a> Session of user is still alive after user deletion</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2238">XIVY-2238</a> Cleanup JSF ViewScope when closing DialogRuntime</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2245">XIVY-2245</a> Unexpected 'End of File' scripting error when mapping REST response</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2259">XIVY-2259</a> Empty task activator script fails at runtime</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2261">XIVY-2261</a> ISession.logoutSessionUser() clears the HTTP Session attributes of the current request</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2264">XIVY-2264</a> Engine start fails after running it as root user</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2268">XIVY-2268</a> Wrong parameters in Javadoc for web service process constructor</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2272">XIVY-2272</a> RComboBox and RTable fail with an NPE on initialization</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2300">XIVY-2300</a> Enforce usage of Java 1.8 webstart by default</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2333">XIVY-2333</a> Enterprise server discloses hostname</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2359">XIVY-2359</a> RIA Workflow UI button "Resume All" does not work any more</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2362">XIVY-2362</a> Project build maven plugin fails when executing mutliple builds in parallel</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2378">XIVY-2378</a> systemctl stop AxonIvyEngine does not stop engine smoothly. Instead the process is killed.</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2399">XIVY-2399</a> Fix already known WS client (CXF) bugs</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2423">XIVY-2423</a> JSF Workflow UI: trigger escalation and modification of expiry timestamp don't work</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2429">XIVY-2429</a> Rarely occuring IndexOutOfBoundsException on process data de-serialisation</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2432">XIVY-2432</a> CC/BCC-Recipients in mail are not set in Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2458">XIVY-2458</a> No new PMV will be created by default when redeploying same library but with new version II</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2461">XIVY-2461</a> WSDL namespace mapping dialog does not expose all namespaces</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2475">XIVY-2475</a> HTTP authentication (Basic/Digest/NTLM) while reading WSDL file in WebService editor broken.</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2488">XIVY-2488</a> Can not store an object in the business data store with more than 1000 different fields</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2492">XIVY-2492</a> Broken pipe when trying to load web assets like fonts or css files</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2493">XIVY-2493</a> Cluster Communication broken because of ClassLoading Problems with OSGi</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2495">XIVY-2495</a> Displaying of the roles in the AdminUI is extremely slow with a lot of PMVs and Roles</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2497">XIVY-2497</a> Serving wrong mime type for jpeg images in cms causes problems with IE</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2503">XIVY-2503</a> ViewExpiredException if an error happens after an HtmlDialog in the business process</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2504">XIVY-2504</a> Ivy.html().startref(...) is not available within rest service</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2506">XIVY-2506</a> JSFWorkflowUI does not show Absences/Substitution in navigation</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2525">XIVY-2525</a> JSF NumberConverter does not work properly with p:inputNumber and german locale</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2535">XIVY-2535</a> Parameter requestedPage for default login process is wrong</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2538">XIVY-2538</a> EmptyStackException occurs if a task is reseted and a user want to submit the form</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2590">XIVY-2590</a> Mapping to unqualified ch.ivyteam.ivy.scripting.objects.List<e> fails in rest client</e></li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2591">XIVY-2591</a> Validate Database Activity output tab at design time</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2593">XIVY-2593</a> JSF view file validation and content assist does not know properties and methods declared in super interfaces</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2610">XIVY-2610</a> Gracefully shutdown the engine</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2619">XIVY-2619</a> Process search in Designer fails without showing any results</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2627">XIVY-2627</a> Open redirect vulnerability in Engine Wf UI <span class="badge badge-pill badge-success">security</span></li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2628">XIVY-2628</a> Wrong "error" page if one clicks on a link of a inactive PMV</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2632">XIVY-2632</a> NPE when joining Task</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2638">XIVY-2638</a> HttpOnly flag is not specified on cookie set by Java Webstart request <span class="badge badge-pill badge-success">security</span></li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2657">XIVY-2657</a> Error information missing on ViewExpiredException</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2666">XIVY-2666</a> BPMN element names with umlauts are broken under linux</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2717">XIVY-2717</a> Support Maria-DB driver under Linux</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2747">XIVY-2747</a> Process Editor freezes under Linux</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2803">XIVY-2803</a> Rarely NullPointerException on engine/designer start</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2810">XIVY-2810</a> Fix Oxygen Designer packaging/start on macOS</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2836">XIVY-2836</a> HD View validation shows false positive warnings for standard components</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2840">XIVY-2840</a> Rarely NullPointerException on webserver start</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2860">XIVY-2860</a> Support Windows Server 2016 in IIS integration batch files</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2867">XIVY-2867</a> Session expired error message when trying to start an already finsished task with a link in a notification mail</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2868">XIVY-2868</a> An image from CMS are not correctly included/referenced in a mail if it is not located in the CMS root folder</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2873">XIVY-2873</a> Designer may not start because of a race condition in RuleEngineActivator</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2874">XIVY-2874</a> Database Connection is not closed when quering database in the SQL Query Dialog of the Database Editor of the Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2880">XIVY-2880</a> Overloaded Methods may not correctly be displayed in completion proposal and javadoc help</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2882">XIVY-2882</a> Memory Leak in ProcessElementFactory</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2883">XIVY-2883</a> Business Data (Elasticsearch) does not work if I start same Designer twice</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2888">XIVY-2888</a> Webservice call model invalid when migrating from Axis2 to CXF</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2889">XIVY-2889</a> Data Class editor is not correctly initialized when data class is opened from Search view</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2890">XIVY-2890</a> Cannot restart engine if old license is no longer valid even if I install a new valid license</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2891">XIVY-2891</a> ManagedBeans do not work in *.iar file created with the Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2893">XIVY-2893</a> TaskQuery.fromJson may fail with JsonMappingException: Numeric value (XXXX) out of range of int</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2894">XIVY-2894</a> Pack/Unpack a project creates unneeded empty files</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2895">XIVY-2895</a> Error message of BPM Error is not displayed in error page</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2898">XIVY-2898</a> Memory leak in RuleVersionService (Rule Engine)</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2912">XIVY-2912</a> Element alignment broken after copy-paste</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2913">XIVY-2913</a> Use UTF-8 to encode mail addresses (to, from, cc, bcc, replyTo)</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2915">XIVY-2915</a> JSF managed beans, validators or converters of a projects may not be found after redeploy or restart</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2916">XIVY-2916</a> Elasticsearch cannot be started under Linux if installation path contains a space</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2917">XIVY-2917</a> Can't start Engine to renew licence with Engine-Config or -Cockpit if old licence is expired</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2920">XIVY-2920</a> Password is visible in clear text in AdminUI if it is configured in a yaml file even if it is encrypted in the file</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2922">XIVY-2922</a> OSGi Bundle patches not in charge if whitespaces in path</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2931">XIVY-2931</a> Restart of Task throws EmptyStackException or IvyScriptCastException</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2954">XIVY-2954</a> Can not migrate engine because of missing *iar.zip if no system database migration is needed</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2957">XIVY-2957</a> Engine started with systemd awaits timeout if exited by a failure</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2964">XIVY-2964</a> Html Dialog Editor WYSIWYG selection broken with JRE 191</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2970">XIVY-2970</a> Opening an Embedded-Sub InscriptionEditor throws NPE</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2972">XIVY-2972</a> Deadlock can occur when importing all ivy sample projects</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2973">XIVY-2973</a> ConcurrentModificationException after importing ivy projects</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2974">XIVY-2974</a> Bundled ElasticSearch has frequently no data after reboot</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2984">XIVY-2984</a> Database Output tab not validated in RDM</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2992">XIVY-2992</a> Project build problem after moving to new workspace</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2993">XIVY-2993</a> NPE in CMS after closing or deleting a project</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-2994">XIVY-2994</a> Build problems after importing .iar created with Designer 7.2</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3004">XIVY-3004</a> Deadlock while deploying multiple iars to a new application</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3012">XIVY-3012</a> ConcurrentModificationException in request history</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3020">XIVY-3020</a> IsNull-Query for additional property returns wrong result</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3024">XIVY-3024</a> Copy &amp; paste in process editor does not respect view port</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3042">XIVY-3042</a> Designer bug dialog fails to render linebreaks in error message</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3048">XIVY-3048</a> Goto Data Class action broken when viewing embedded Subprocess</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3056">XIVY-3056</a> Memory Leak with Oracle as System Database</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3057">XIVY-3057</a> isEqual/isEqualIgnoreCase Queries do not work on customTextFields and additonalProperties with MS-SQL DB</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3058">XIVY-3058</a> CMS Search Index creation fails with NPE</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3059">XIVY-3059</a> Multithreading issues in AXIS Web Service Client Call</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3062">XIVY-3062</a> Referenced TaskExpiry error not updated during copy&amp;paste</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3073">XIVY-3073</a> ConcurrentModificationException when using async p:remotecommands</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3107">XIVY-3107</a> PersistentObjectDeletedException in SessionCounter when deleting User</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3108">XIVY-3108</a> ViewExpiredExceptions is logged on Level INFO with full stacktrace</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3117">XIVY-3117</a> CXF WebService Generation fails if included xsd needs redirecting</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3118">XIVY-3118</a> Task notification mail sending is slow</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3127">XIVY-3127</a> NoSuchElementException in EndlessLoopDetectionJob</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3128">XIVY-3128</a> StackOverflowException in JavaBeanUtil while logging Axis1 or Axis2 WebService error</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3134">XIVY-3134</a> Task notification mail job may trigger unneeded portal home requests causing high cpu usage</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3137">XIVY-3137</a> High CPU load (100%) if you debug the Designer inside the Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3139">XIVY-3139</a> Find invovled cases since MySQL 8.0.12 extremly slow</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3141">XIVY-3141</a> Timeout while synchronizing 50'000 users with Novell eDirectory</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3153">XIVY-3153</a> NPE in CMS when opening TaskSwitchEvent Inscription Mask within packed project</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3167">XIVY-3167</a> HtmlMailConverter endless port occupation</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3169">XIVY-3169</a> Engine Cockpit error if no app is deployed on applications view</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3170">XIVY-3170</a> CustomTimestampField cache issue if it's called the first time</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3173">XIVY-3173</a> Ivy project rename error in data classes</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3178">XIVY-3178</a> TimeoutException during building of ivy project</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3179">XIVY-3179</a> Engine Cockpit array error if a app file deployment happens and this app is opened in detail view</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3188">XIVY-3188</a> Method customField() is not documented and not marked as PublicAPI in TaskQuery and CaseQuery</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3191">XIVY-3191</a> Active Directory User synchronisation not imports all users if the import user group has more than 1500 entries</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3193">XIVY-3193</a> CXF generated WSDL in Client jar does not map included XSDs</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3197">XIVY-3197</a> Editor 'Jump to Dialog' broken for Dialogs with input Parameters</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3204">XIVY-3204</a> Html dialog editor cache problems</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3206">XIVY-3206</a> Maven Classpath container not auto-added</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3207">XIVY-3207</a> Linux TreeTable NPE in AWT Inscriptions</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3210">XIVY-3210</a> BigDecimals type is occasionally serialized as long which leads to corrupt indexes</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3211">XIVY-3211</a> Engine Config UI tempts users to write overquoted YAML files</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3212">XIVY-3212</a> Setting Advanced Webserver configs overwrites already set Port vals</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3213">XIVY-3213</a> Post Task Construct code block provide inaccessible 'out' variable on RequestStart</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3214">XIVY-3214</a> Yaml Writer can not write subnode to property if it already have a value</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3215">XIVY-3215</a> TaskMail generator fails if AJP is enabled</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3220">XIVY-3220</a> Clarify the wildcard pattern usages in signal codes</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3222">XIVY-3222</a> Resolving JSF variable is not thread save</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3223">XIVY-3223</a> Process context menu commands connect/wrap/openDoc partially broken</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3226">XIVY-3226</a> False positive signature validation errors on SubProcess StartEvent</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3233">XIVY-3233</a> Turn off flaky webeditor RCPTT tests</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3234">XIVY-3234</a> Taskmail links point to localhost instead of frontend server</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3235">XIVY-3235</a> Load extensions in dropins in first start</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3237">XIVY-3237</a> Reindex of business data fails with OutOfMemory</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3240">XIVY-3240</a> Cms template with placeholder not working if there are escape chars</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3245">XIVY-3245</a> Designer Project Reporting (Birt) does not work</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3246">XIVY-3246</a> Analyze and fix known issues with Primefaces 7 migration</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3247">XIVY-3247</a> Wrong Business Calendar will be used when multiple tasks configured</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3249">XIVY-3249</a> Nullpointer exception thrown when authenticate a non existing user with empty password</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3250">XIVY-3250</a> Designer crashes with misspelled html tags in webeditor</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3252">XIVY-3252</a> Designer configuration editor context menu unavailable</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3258">XIVY-3258</a> Deadlock in Designer while importing Portal and Project Graph view is open</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3262">XIVY-3262</a> Static JSF pages don't work on Windows if the page is in a subfolder</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3263">XIVY-3263</a> In the console.log the following entries appears without timestamp 'start windows service control:4'</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3265">XIVY-3265</a> Business Data is limited to maximum 64k characters if using MySql system database</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3277">XIVY-3277</a> Patch Primefaces 6.1 to fix Bug #873 (selectManyMenu only selects one)</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3279">XIVY-3279</a> Patch Primefaces 6.1 to fix Bug #3755 (photocam: was blocked by chrome)</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3283">XIVY-3283</a> Fix SWING Inscription crash on Linux</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3288">XIVY-3288</a> IvyAddOns writes debug information to the console output 'docx' and exception traces</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3289">XIVY-3289</a> After reindex of business data some records may be missing in the index with Sql Server 2016 and higher and microsoft jdbc driver</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3291">XIVY-3291</a> Keyword infinity is not supported in systemd versions older than version 229 (e.g. RHEL 7)</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3293">XIVY-3293</a> IvyScriptParserException is thrown by bpm engine if macro contains "</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3296">XIVY-3296</a> Case Map Example area hides Add Sidestep Menu in case map editor</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3297">XIVY-3297</a> Deadlock and therefore UI freeze during Designer start when synchronizing breakpoints</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3298">XIVY-3298</a> System database conversion from &lt; 7.3 to &gt;= 7.3 may fail with unique constrain violation error because of duplicated task or case additional properties</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3305">XIVY-3305</a> NPE in IvyJsfIntegrationHelper during Logging</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3309">XIVY-3309</a> CMS Editor for Text Content Objects broken</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3310">XIVY-3310</a> Copying process elements switched to SWT throws NPE</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3315">XIVY-3315</a> Suppress server information on error screen</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3319">XIVY-3319</a> Daily mail wrongfully logs 302 moved temporarily</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3325">XIVY-3325</a> Control center reacts badly</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3336">XIVY-3336</a> SSL Designer client settings not working for self-signed certs</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3339">XIVY-3339</a> Deadlock when importing PortalTemplate with M2 wizard</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3340">XIVY-3340</a> Engine Config UI can't start with a license with no expiry date</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3341">XIVY-3341</a> Elasticsearch start fails when migrating to 8.0</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3342">XIVY-3342</a> SystemDb password is always encrypted on SystemDb creation</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3343">XIVY-3343</a> Can not convert system database while startup of engine with official axonivy docker image</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3345">XIVY-3345</a> Open inscription masks fast as a fox</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3348">XIVY-3348</a> ESC key closes my inscription mask without warning that there are unsaved changes</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3352">XIVY-3352</a> Case and task category tree generates wrong tree hierarchy</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3353">XIVY-3353</a> ConfigUI crashes with never expiring license</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3354">XIVY-3354</a> Licence with special characters e.g. umlauts are not valid</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3361">XIVY-3361</a> BPMN processes are corrupt after import</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3376">XIVY-3376</a> Password label hides password value if password is entered by brower auto fill</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3383">XIVY-3383</a> Strange error message if project-build-plugin is run with old java version.</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3384">XIVY-3384</a> Improve info log of goal default-installEngine with chosen engine directory</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3386">XIVY-3386</a> MyFaces Resource Caching is enabled in Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3391">XIVY-3391</a> Creating a DataClass field via QuickFix will always write FQN to the file</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3395">XIVY-3395</a> Reimplement multilanguage Task Annotation mails in the standard</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3396">XIVY-3396</a> CaseQuery CaseScope is ignored when creating the TaskQuery first</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3403">XIVY-3403</a> Security System detail view in Cockpit shows password in DOM</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3404">XIVY-3404</a> Allow to add IAR resource which already exist in project basedir</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3405">XIVY-3405</a> Execution of method was not successful in Html Dialog</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3407">XIVY-3407</a> Opening a CaseMap in Designer logs DI errors</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3411">XIVY-3411</a> Fix possible XSS vulnerability on end.jsp page</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3416">XIVY-3416</a> Casemap Editor is unusable on Linux</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3421">XIVY-3421</a> Html Dialog Editor does not consider a theme that is configured in a layout</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3422">XIVY-3422</a> Axis1 classes cannot be compiled after project is migrated to latest project version (Java 11)</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3424">XIVY-3424</a> JSF Error Handler broken in Designer</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3433">XIVY-3433</a> NullPointerException if sending signal without being in a task/case</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3439">XIVY-3439</a> Drools DRL editor support for java 11</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3440">XIVY-3440</a> errorPage.getLocale() throws NPE in ErrorPage</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3444">XIVY-3444</a> ViewExpiredException when user from other app in same browser logs out</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3446">XIVY-3446</a> After initialization of alternative arrow colors are lost</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3447">XIVY-3447</a> Subclipse client JavaHL breaks preference page</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3454">XIVY-3454</a> Creating Dialog Event/Method via quickfix is not aligned in logic</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3458">XIVY-3458</a> Messages in Flash do not work on end-page</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3459">XIVY-3459</a> Enable End Page edit command and menu entry</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/XIVY-3463">XIVY-3463</a> BigDecimals without precision in Lists</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-2737">IVYPORTAL-2737</a> Correct Session timeout</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-2844">IVYPORTAL-2844</a> Enhance - Add favourite Processes</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4286">IVYPORTAL-4286</a> Clean up Express CSS</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4289">IVYPORTAL-4289</a> Clean up Portal style</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4365">IVYPORTAL-4365</a> Fix layout on ~1240 pixels</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4386">IVYPORTAL-4386</a> Add to dashboard button does not work in PortalStatistics</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4433">IVYPORTAL-4433</a> Fix performance bug in user/role selection</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4489">IVYPORTAL-4489</a> Lazy load embedded dialogs on demand</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4498">IVYPORTAL-4498</a> Link to open sidebar is missing</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4539">IVYPORTAL-4539</a> Extended PortalKit supported language cause error III</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4812">IVYPORTAL-4812</a> Search in case list doesn't work for creator</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4813">IVYPORTAL-4813</a> Task list filtering in Multiapp Szenario - Responsible filter for each app</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4867">IVYPORTAL-4867</a> Consistent behaviour in Portal - Leaving task warning</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4882">IVYPORTAL-4882</a> Fix NPE in portal if COERCE_TO_ZERO option is enabled</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4942">IVYPORTAL-4942</a> Design chooser bug - New Colours were not applied after saving</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-4969">IVYPORTAL-4969</a> Session expired message, even if session not expired II</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5015">IVYPORTAL-5015</a> List out Portal multi-applications issues</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5027">IVYPORTAL-5027</a> Bug in Task list navigation - Portal Home and full task list</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5031">IVYPORTAL-5031</a> Costumization with Less doesn't change buttons in Exit-Dialog II</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5118">IVYPORTAL-5118</a> Implement "Sticky Task List" for "Skip Task List"</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5276">IVYPORTAL-5276</a> Enhance Task list - Start button and more option buttons</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5384">IVYPORTAL-5384</a> No Error Dialog if general Exception happens</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5760">IVYPORTAL-5760</a> Email settings not working for users not having all apps</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-5838">IVYPORTAL-5838</a> Exception when click left menu and select leave task</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6069">IVYPORTAL-6069</a> Consistent behaviour for searching application users in portal admin</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6300">IVYPORTAL-6300</a> Open redirect vulnerability in Portal Wf UI</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6303">IVYPORTAL-6303</a> selectonemenu and selectcheckboxmenu menu caret icon and filter style</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6340">IVYPORTAL-6340</a> UI Problem in User Menu</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6341">IVYPORTAL-6341</a> Extend TaskQueryOrderBy for task without tasks</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6346">IVYPORTAL-6346</a> Language settings in small screens</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6367">IVYPORTAL-6367</a> Identify and handle localStorage Access Denied</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6376">IVYPORTAL-6376</a> User "admin" gets automatically permissions</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6446">IVYPORTAL-6446</a> Portal slows down every AJAX request with unnecessary background requests</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6536">IVYPORTAL-6536</a> Handle performance &amp; fix for standard Portal II</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6539">IVYPORTAL-6539</a> Statistics - Task Categories of case missing</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6540">IVYPORTAL-6540</a> Hide technical Stuff - Optimization</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6648">IVYPORTAL-6648</a> Primefaces Elements in DIV tags problem - Alignment</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6851">IVYPORTAL-6851</a> Too much whitespace in Task Header</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-6894">IVYPORTAL-6894</a> Fix bugs and improve code for story Remove PortalConnector</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-7464">IVYPORTAL-7464</a> Fix width of search bar not responsive</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-7537">IVYPORTAL-7537</a> Express: Order of fields changes from definition to execution II</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-7647">IVYPORTAL-7647</a> Improve portal exception handle</li>
+			<li><a href="https://jira.axonivy.com/jira/browse/IVYPORTAL-7799">IVYPORTAL-7799</a> Processchain numbers are black in circle shape; set buttons text to white in LESS</li>
+			</ul>
+			</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+		
+		for (i = 0; i < coll.length; i++) {
+		  coll[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var content = this.nextElementSibling;
+			if (content.style.display === "block") {
+			  content.style.display = "none";
+			} else {
+			  content.style.display = "block";
+			}
+		  });
+		}
+		</script>
+		

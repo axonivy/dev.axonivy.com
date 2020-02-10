@@ -1,0 +1,208 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ch.ivyteam.ivy</groupId>
+    <artifactId>maven-config-tycho</artifactId>
+    <version>9.1.0-SNAPSHOT</version>
+    <relativePath>../../maven/config/tycho</relativePath>
+  </parent>
+  <artifactId>ch.ivyteam.ivy.doc.release.feature</artifactId>
+  <packaging>eclipse-feature</packaging>
+
+  <properties>
+    <output.root.dir>${project.build.directory}/root</output.root.dir>
+    <new.and.noteworthy.dir>${output.root.dir}/doc/newAndNoteworthy</new.and.noteworthy.dir>
+    <migi.notes.dir>${output.root.dir}/doc/migrationNotes</migi.notes.dir>
+    <markdown.template.dir>${project.basedir}/root/doc/_templates</markdown.template.dir>
+    <portal.guide.url>${doc.url}umentation/portal-guide/${ivy.portal.version}</portal.guide.url>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-all-files</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/root</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>root</directory>
+                  <excludes>
+                    <exclude>doc/_templates/*</exclude>
+                  </excludes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>ch.ivyteam.maven</groupId>
+        <artifactId>changelog-generator-plugin</artifactId>
+        <version>1.3.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>replace-changelog-tokens</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>generate-changelog</goal>
+            </goals>
+            <configuration>
+              <jiraServerId>axonivy.jira</jiraServerId>
+              <filterBy>project in (XIVY,IVYPORTAL) AND fixVersion = ${ivy-version}</filterBy>
+              <orderBy>project,"Epic Link" ASC,fixVersion DESC,key</orderBy>
+              <whitelistJiraLabels>security,performance</whitelistJiraLabels>
+              <fileset>
+                <directory>${output.root.dir}</directory>
+              </fileset>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>ch.ivyteam.maven</groupId>
+        <artifactId>merge-files-plugin</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <id>bundle-markdowns-nn</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>merge-files</goal>
+            </goals>
+            <configuration>
+              <inputFiles>
+                <directory>${new.and.noteworthy.dir}</directory>
+                <include>NewAndNoteworthy*.*.md</include>
+              </inputFiles>
+              <outputFile>${new.and.noteworthy.dir}/NewAndNoteworthy.md</outputFile>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>bundle-markdowns-migi</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>merge-files</goal>
+            </goals>
+            <configuration>
+              <inputFiles>
+                <directory>${migi.notes.dir}</directory>
+                <include>MigrationNotes*.*.md</include>
+              </inputFiles>
+              <outputFile>${migi.notes.dir}/MigrationNotes.md</outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>replace-other-tokens</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <tstamp>
+                  <format property="build.date" pattern="dd.MM.yyyy" locale="en" />
+                </tstamp>
+                <replace dir="${output.root.dir}">
+                  <replacefilter token="@date@" value="${build.date}" />
+
+                  <replacefilter token="@appname@" value="Axon.ivy Digital Business Platform" />
+
+                  <replacefilter token="@displayversion@" value="${build.version.display}" />
+                  <replacefilter token="@version@" value="${ivy-release-version}" />
+                  <replacefilter token="@versionFull@" value="${ivy-version}" />
+                  <replacefilter token="@revision@" value="${build-datetime}" />
+
+                  <replacefilter token="@jre@" value="${jre.version}" />
+                  <replacefilter token="@elasticsearchversion@" value="${elasticsearch.version}" />
+                  <replacefilter token="@tomcat.connector.version@" value="${tomcat.connector.version}" />
+
+                  <replacefilter token="@doc.url@" value="${doc.url.current}" />
+                  <replacefilter token="@engine.guide.url@" value="${engine.guide.url}" />
+                  <replacefilter token="@designer.guide.url@" value="${designer.guide.url}" />
+                  <replacefilter token="@portal.guide.url@" value="${portal.guide.url}" />
+                </replace>
+              </target>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>merge-markdown-footer-nn</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <loadfile property="footer" srcFile="${new.and.noteworthy.dir}/NewAndNoteworthyFooter.md" />
+                <echo file="${new.and.noteworthy.dir}/NewAndNoteworthy.md" append="true" message="${footer}" />
+              </target>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>merge-markdown-footer-migi</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <loadfile property="header" srcFile="${migi.notes.dir}/MigrationNotesHeader.md" />
+                <loadfile property="content" srcFile="${migi.notes.dir}/MigrationNotes.md" />
+                <loadfile property="footer" srcFile="${migi.notes.dir}/MigrationNotesFooter.md" />
+                <echo file="${migi.notes.dir}/MigrationNotes.md" message="${header}" />
+                <echo file="${migi.notes.dir}/MigrationNotes.md" append="true" message="${content}" />
+                <echo file="${migi.notes.dir}/MigrationNotes.md" append="true" message="${footer}" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.ruleoftech</groupId>
+        <artifactId>markdown-page-generator-plugin</artifactId>
+        <version>2.1.0</version>
+        <executions>
+          <execution>
+            <id>process-markdown-files</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputDirectory>${output.root.dir}</inputDirectory>
+              <outputDirectory>${output.root.dir}</outputDirectory>
+              <headerHtmlFile>${markdown.template.dir}/header.html</headerHtmlFile>
+              <footerHtmlFile>${markdown.template.dir}/footer.html</footerHtmlFile>
+              <recursiveInput>true</recursiveInput>
+              <attributes>
+                <attribute>TableBlock|class=table table-hover table-bordered</attribute>
+                <attribute>Image|class=img-fluid</attribute>
+              </attributes>
+              <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS</pegdownExtensions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>

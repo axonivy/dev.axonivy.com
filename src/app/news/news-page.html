@@ -1,0 +1,9 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}News{{ parent() }}{% endblock %}
+
+{% block content %}
+
+{% include 'app/news/' ~ version ~ '/page.html' %}
+
+{% endblock %}

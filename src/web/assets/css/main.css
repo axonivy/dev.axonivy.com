@@ -1780,7 +1780,7 @@
 	}
 
 	a {
-		color: #C7D426;
+		color: #007095;
 	}
 
 	strong, b {
@@ -1788,7 +1788,7 @@
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #C7D426;
+		color: #007095;
 	}
 
 	blockquote {
@@ -1989,7 +1989,7 @@
 		input[type="button"].special,
 		button.special,
 		.button.special {
-			background-color: #C7D426;
+			background-color: #007095;
 			color: #ffffff !important;
 		}
 
@@ -2960,7 +2960,7 @@
 				.wrapper.style2 input[type="button"].special,
 				.wrapper.style2 button.special,
 				.wrapper.style2 .button.special {
-					background-color: #C7D426;
+					background-color: ##007095;
 					color: #ffffff !important;
 				}
 
@@ -3971,5 +3971,32 @@
 
 		}
 		
-		
-		
+
+
+
+		.inverse {
+			background-color:#007095;
+			color: white;
+		  }
+		  .inverse h1 {
+			  color: white;
+		  }
+		  .inverse h2 {
+			color: white;
+		}
+		  .inverse h3 {
+			color: white;
+		}
+		.inverse h4 {
+			color: white;
+		}
+		.inverse h5 {
+			color: white;
+		}
+		  .inverse .icon {
+			  color: #C7D426;
+		  }
+		  .inverse .button.special {
+			background-color:white;
+			color: #007095 !important;
+		  }

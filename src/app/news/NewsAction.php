@@ -2,6 +2,7 @@
 namespace app\news;
 
 use Psr\Container\ContainerInterface;
+use Slim\Exception\NotFoundException;
 
 class NewsAction
 {
@@ -12,6 +13,19 @@ class NewsAction
     }
 
     public function __invoke($request, $response, $args) {
-        return $this->container->get('view')->render($response, 'app/news/news.html');
+        $version = $args['version'] ?? "";
+
+        if (empty($version)) {
+            return $this->container->get('view')->render($response, 'app/news/news.html');
+        }
+
+        $dirs = glob(__DIR__  . '/*' , GLOB_ONLYDIR);
+        foreach ($dirs as $dir) {            
+            if (basename($dir) == $version) {
+                return $this->container->get('view')->render($response, 'app/news/news-page.html', ['version' => $version]);        
+            }
+        }
+
+        throw new NotFoundException($request, $response);        
     }
 }
