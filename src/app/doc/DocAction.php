@@ -119,7 +119,6 @@ class DocAction
         $docLinks = [];
         $docLinks['sprint'] = self::createDocLink('/doc/sprint', 'Sprint');
         $docLinks['nightly'] = self::createDocLink('/doc/nightly', 'Nightly');
-        $docLinks['dev'] = self::createDocLink('/doc/dev', 'Dev');
         return $docLinks;
     }
 
