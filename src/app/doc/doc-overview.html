@@ -4,16 +4,17 @@
 
 {% block content %}
 
-	<section id="main" >
-		<div class="inner">
-			<div class="row">
-				<div class="12u$(xsmall)">
-					<header><h1><span class="icon fas fa-book"></span> Documentation</h1></header>
-					<p>Find all information about the Axon.ivy Digital Business Platform in our documents</p>
-				</div>
-			</div>
-		</div>
-	</section>
+<section id="one" class="inverse">
+	<div class="inner">
+		<header>
+			<h1><span class="icon fas fa-book"></span> Documentation</h1>
+		</header>
+		<p>
+			Find all information about the Axon.ivy Digital Business Platform in our documents.
+		</p>
+	</div>
+</section>
+
 
 	{% if docLinksLE is not empty %}
 	<section id="three">
@@ -24,14 +25,14 @@
 			<article>
 				<div class="content">
 					<span class="icon fas fa-balance-scale"></span>
-					<header>
-						<h3>Long Term Support (LTS)</h3>
-					</header>
+					<header><h3>Long Term Support (LTS)</h3></header>
 					<ul class="actions">
-						{% for docLink in docLinksLTS %}
-							<li><a href="{{ docLink.url }}" class="button special" style="width:300px;">Documentation {{ docLink.displayText }}</a></li>
-						{% endfor %}
-					</ul>
+					{% for docLink in docLinksLTS %}
+					<li>	<a href="{{ docLink.url }}" style="width: 120px;padding-left:15px;padding-right:15px;"class="button special">
+						<span style="color:white;font-size:18px;" class="icon fas fa-book"></span>
+							{{ docLink.displayText }}</a></li>
+					{% endfor %}					
+				</ul>
 				</div>
 			</article>
 			{% if docLinksLE is not empty %}
@@ -43,7 +44,8 @@
 					</header>
 					<ul class="actions">
 						{% for docLink in docLinksLE %}
-							<li><a href="{{ docLink.url }}" class="button special" style="width:300px;">Documentation {{ docLink.displayText }}</a></li>
+							<li><a href="{{ docLink.url }}" style="width: 120px;padding-left:15px;padding-right:15px;" class="button special">
+								<span style="color:white;font-size:18px;" class="icon fas fa-book"></span>{{ docLink.displayText }}</a></li>
 						{% endfor %}
 					</ul>
 				</div>
@@ -57,7 +59,9 @@
 					</header>
 					<ul class="actions">
 						{% for docLink in docLinksDEV %}
-							<li><a href="{{ docLink.url }}" class="button special" style="width:300px;">Documentation {{ docLink.displayText }}</a></li>
+							<li><a href="{{ docLink.url }}" style="width: 120px;padding-left:15px;padding-right:15px;" class="button special">
+								<span style="color:white;font-size:18px;" class="icon fas fa-book"></span>
+								{{ docLink.displayText }}</a></li>
 						{% endfor %}
 					</ul>
 				</div>

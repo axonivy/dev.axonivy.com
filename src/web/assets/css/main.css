@@ -2119,7 +2119,7 @@
 		}
 
 		.select-wrapper:before {
-			content: '\f078';
+			
 			display: block;
 			height: 2.75em;
 			line-height: 2.75em;
@@ -2240,7 +2240,8 @@
 	select,
 	textarea {
 		background: none;
-		border-color: #C7D426;
+		border-color:#007095;
+
 	}
 
 		input[type="text"]:focus,
@@ -2248,8 +2249,8 @@
 		input[type="email"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #C7D426;
-			box-shadow: 0 0 0 1px #C7D426;
+			border-color:#007095;
+			box-shadow: 0 0 0 1px #007095;
 		}
 
 	.select-wrapper:before {
@@ -4006,3 +4007,5 @@
 		  .inverse select {
 			border-color: white;
 		  }
+
+		  

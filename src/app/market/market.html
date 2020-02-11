@@ -4,8 +4,8 @@
 
 {% block content %}
 
-   <section id="main" >
-		<div class="inner">
+   <section id="main" class="inverse">
+		<div class="inner-small">
 			<header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
 
 			<p>
@@ -13,7 +13,11 @@
 				From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
 				Take a look around.
 			</p>
+		</div>
+	</section>
 
+	<section id="main">
+		<div class="inner-small">
 			<div class="row">
 				{% for product in products %}
 					<div class="6u 12u$(xsmall)">
