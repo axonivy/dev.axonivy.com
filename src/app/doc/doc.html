@@ -113,13 +113,10 @@
 						  <a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
 						{% endfor %}
 						
-						{% if version == "8.0.0" or version == '8.0.latest' or version == 'latest' %}
-							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="/documentation/portal-developer-guide/8.0.183.2/">Portal Dev Guide <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
-							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="/documentation/portal-user-guide/8.0.183.2/">Portal User Guide <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a> 
+						{% if portalLink is not empty %}
+							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="{{ portalLink }}">Portal Guide<i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
 						{% endif %}
-
-
-
+						
 						{% for doc in docProvider.zips %}
 							{% if doc.zipExists %}
 								<a href="{{ doc.zipUrl }}" target="_blank" title="{{ doc.Name }}" style="padding-left:5px;padding-right:5px;">

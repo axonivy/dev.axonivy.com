@@ -62,12 +62,22 @@ class DocAction
         }
         
         $docLinks = $this->getDocLinks();
+
+        $portalLink = "";
+        if (version_compare($version, 8) >= 0) {
+           if ($version == '8.0.0') {
+            $portalLink =  '/documentation/portal-developer-guide/8.0.183.2/';
+           } else {
+            $portalLink = "/documentation/portal-guide/$version/";  
+           }
+        }
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
             'docProvider' => $docProvider,
             'documentUrl' => $doc->getRessourceUrl() . '?v=' . time(),
             'currentNiceUrlPath' => $document,
-            'docLinks' => $docLinks
+            'docLinks' => $docLinks,
+            'portalLink' => $portalLink,
         ]);
     }
 
