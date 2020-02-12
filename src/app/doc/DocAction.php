@@ -90,9 +90,7 @@ class DocAction
     }
 
     private function getDocLinks(): array {
-        $docLinks = array_merge(self::getDocLinksLE(), self::getDocLinksLTS());
-        $docLinks['dev'] = self::createDocLink('/doc/dev', 'dev');
-        return $docLinks;
+        return array_merge(self::getDocLinksLE(), self::getDocLinksLTS());
     }
     
     private static function getDocLinksLE(): array
