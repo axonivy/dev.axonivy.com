@@ -45,10 +45,12 @@ class MavenArtifactRepository
             self::getPortalStyle(),
             self::getPortalKit(),
             self::getAxonIvyExpress(),
+
+            self::getPortalUserExamples(),
+            self::getPortalDeveloperExamples(),
             self::getPortalExamples(),
-            self::getPortalGuide(),
-            self::getPortalUserGuide(),
-            self::getPortalDeveloperGuide()
+
+            self::getPortalGuide()
         ];
     }
     
@@ -185,6 +187,27 @@ class MavenArtifactRepository
             ->build();
     }
 
+    // since 9.1
+    private static function getPortalDeveloperExamples(): MavenArtifact
+    {
+        return MavenArtifact::create('portal-developer-examples')
+            ->name('Portal Developer Examples')
+            ->groupId('com.axonivy.portal')
+            ->artifactId('portal-developer-examples')
+            ->build();
+    }
+
+    // since 9.1
+    private static function getPortalUserExamples(): MavenArtifact
+    {
+        return MavenArtifact::create('portal-user-examples')
+            ->name('Portal User Examples')
+            ->groupId('com.axonivy.portal')
+            ->artifactId('portal-user-examples')
+            ->build();
+    }
+
+    // legacy: prior to 9.1
     private static function getPortalExamples(): MavenArtifact
     {
         return MavenArtifact::create('portal-examples')
@@ -203,34 +226,6 @@ class MavenArtifactRepository
         ->type('zip')
         ->doc()
         ->build();
-    }
-    
-    /**
-     * since 8.0.1 -> portalGuide
-     */
-    private static function getPortalUserGuide(): MavenArtifact
-    {
-        return MavenArtifact::create('portal-user-guide')
-            ->name('Portal User Guide')
-            ->groupId('ch.ivyteam.ivy.project.portal')
-            ->artifactId('portal-user-guide')
-            ->type('zip')
-            ->doc()
-            ->build();
-    }
-    
-    /**
-     * since 8.0.1 -> portalGuide
-     */
-    private static function getPortalDeveloperGuide(): MavenArtifact
-    {
-        return MavenArtifact::create('portal-developer-guide')
-            ->name('Portal Developer Guide')
-            ->groupId('ch.ivyteam.ivy.project.portal')
-            ->artifactId('portal-developer-guide')
-            ->type('zip')
-            ->doc()
-            ->build();
     }
 
     private static function getProcessingValve(): MavenArtifact

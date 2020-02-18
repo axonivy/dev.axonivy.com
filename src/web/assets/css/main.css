@@ -4006,6 +4006,11 @@
 		  }
 		  .inverse select {
 			border-color: white;
+			color: white;
+		  }
+		  .inverse option {
+			border-color: white;
+			color: #007095;
 		  }
 
 		  
