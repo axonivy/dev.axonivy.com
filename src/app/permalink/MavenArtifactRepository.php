@@ -14,6 +14,8 @@ class MavenArtifactRepository
         return null;
     }
     
+
+
     private static function getAll(): array
     {
         return array_merge(
@@ -21,10 +23,11 @@ class MavenArtifactRepository
             [self::getProcessingValve()],
             [self::getJsfWorkflowUi()],
             self::getPortal(),
-            self::getDocFactory()
+            self::getDocFactory(),
+            [self::getVisualVMPlugin()]
         );
-    }
-    
+    }    
+
     public static function getDocs()
     {
         $all = self::getAll();
@@ -74,6 +77,16 @@ class MavenArtifactRepository
             self::getHtmlDialogDemos(),
             self::getDemosApp()
         ];
+    }
+
+    public static function getVisualVMPlugin(): MavenArtifact
+    {
+        return MavenArtifact::create('visualvm-plugin')
+            ->name('Visual VM Plugin')
+            ->groupId('ch.ivyteam.visualvm')
+            ->artifactId('visualvm-plugin')
+            ->type('nbm')
+            ->build();
     }
 
     private static function getQuickStartTutorial(): MavenArtifact
