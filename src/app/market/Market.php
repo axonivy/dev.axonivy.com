@@ -49,14 +49,16 @@ class Market
         $visualVmInstallInstructions = '
         <p>
             <ul>
-                <li>Make sure that you have an installation of VisualVM. If you use a standalone
-                    version of VisualVM, please make sure that you use at least version 1.3.7.</li>
-                <li>Run VisualVM (in JDK go to the <code>bin</code> folder and start <code>jvisualvm</code>)</li>
+                <li>
+                    Download and install <a href="https://visualvm.github.io/releases.html">VisualVM</a>
+                    (>1.3.7 and <2.0)
+                </li>
+                <li>Run VisualVM</li>
                 <li>Go to the <i>Tools/Plugins</i> menu</li>
-                <li>Change to <i>Downloaded</i> tab and click on the <i>Add Plugins...</i> button</li>
-                <li>In the file chooser that appears, navigate the direcotry with the downloaded <code>visualvm-plugin.nbm</code> and choose it.</li>
-                <li>Follow the instructions in the installation wizard.</li>
-                <li>Choose the option to restart VisualVM at the end of the installation wizard.</li>       
+                <li>Switch to <i>Downloaded</i> tab and click on the <i>Add Plugins...</i> button</li>
+                <li>Select the downloaded <code>visualvm-plugin.nbm</code> in the file chooser</li>
+                <li>Follow the instructions in the installation wizard</li>
+                <li>Choose the option to restart VisualVM</li> 
 ';
         $portal = self::getPortal();
         $visualVm = new Product('visualvm-plugin', 'VisualVM Plugin', [MavenArtifactRepository::getVisualVMPlugin()], $descriptionVisualVmPlugin, VersionDisplayFilterFactory::createHideSnapshots(), false, $visualVmInstallInstructions);
