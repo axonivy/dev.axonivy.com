@@ -71,6 +71,15 @@
 									<img src="/images/market/import-wizard.png" class="image fit" />
 								</div>
 							{% endif %}
+
+							{% if product.installInstructions %}
+	  						    <header>
+									<h3>Installation</h3>
+								</header>
+								<div>
+									{{ product.installInstructions | raw }}		
+								</div>
+							{% endif %}
 							
 						</div>
 					</article>

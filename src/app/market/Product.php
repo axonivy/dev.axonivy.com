@@ -16,14 +16,15 @@ class Product
     
     private $versionDisplayFilter;
     
-    public function __construct(string $key, string $name, array $mavenArtifacts, string $description, VersionDisplayFilter $versionDisplayFilter)
+    public function __construct(string $key, string $name, array $mavenArtifacts, string $description, VersionDisplayFilter $versionDisplayFilter, bool $importWizard = true, string $installInstructions = '')
     {
         $this->key = $key;
         $this->name = $name;
         $this->mavenArtifacts = $mavenArtifacts;
         $this->description = $description;
-        $this->importWizard = true;
+        $this->importWizard = $importWizard;
         $this->versionDisplayFilter = $versionDisplayFilter;
+        $this->installInstructions = $installInstructions;
     }
 
     public function getKey()

@@ -28,12 +28,42 @@ class Market
     You can also download the demo application which contains all demo projects and drop it in the <i>[engineDir]/deploy</i> folder of an Axon.ivy Engine.
 </p>
 ';
+        $descriptionVisualVmPlugin = '
+        <p>
+        The Axon.ivy VisualVM plugin enables real-time monitoring of an Axon.ivy Engine for:
 
+        <ul>
+          <li>HTTP requests</li>
+          <li>System database connections and transactions</li>
+          <li>REST Calls</li>
+          <li>SOAP Web Service Requests</li>
+          <li>Slow Queries to to External Databases</li>
+          <li>License Information and Violations</li>
+        </ul>
+
+        and many more ...
+
+        </p>
+        ';
+
+        $visualVmInstallInstructions = '
+        <p>
+            <ul>
+                <li>Make sure that you have an installation of VisualVM. If you use a standalone
+                    version of VisualVM, please make sure that you use at least version 1.3.7.</li>
+                <li>Run VisualVM (in JDK go to the <code>bin</code> folder and start <code>jvisualvm</code>)</li>
+                <li>Go to the <i>Tools/Plugins</i> menu</li>
+                <li>Change to <i>Downloaded</i> tab and click on the <i>Add Plugins...</i> button</li>
+                <li>In the file chooser that appears, navigate the direcotry with the downloaded <code>visualvm-plugin.nbm</code> and choose it.</li>
+                <li>Follow the instructions in the installation wizard.</li>
+                <li>Choose the option to restart VisualVM at the end of the installation wizard.</li>       
+';
         $portal = self::getPortal();
+        $visualVm = new Product('visualvm-plugin', 'VisualVM Plugin', [MavenArtifactRepository::getVisualVMPlugin()], $descriptionVisualVmPlugin, VersionDisplayFilterFactory::createHideSnapshots(), false, $visualVmInstallInstructions);
         $docFactory = new Product('doc-factory', 'Doc Factory', MavenArtifactRepository::getDocFactory(), $descDocFactory, VersionDisplayFilterFactory::createHideSnapshots());
         $demos = new Product('demos', 'Demos', MavenArtifactRepository::getProjectDemos(), $descriptionDemo, VersionDisplayFilterFactory::createShowAll());
 
-        return [$portal, $docFactory, $demos];
+        return [$portal, $visualVm, $docFactory, $demos];
     }
 
     public static function getPortal(): Product {
