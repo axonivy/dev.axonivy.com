@@ -51,12 +51,18 @@ class DocAction
         }
 
         // legacy, before 9
-        $document = $args['document'] ?? $docProvider->getNewAndNoteworthy()->getNiceUrlPath();
-        if ($document == 'ReleaseNotes.html') {
-            return $response->withRedirect('release-notes', 301);
+        $doc = null;
+        if (isset($args['document'])) {
+            $document = $args['document'];
+            if ($document == 'ReleaseNotes.html') {
+                return $response->withRedirect('release-notes', 301);
+            }
+            $doc = $docProvider->findDocumentByNiceUrlPath($document);
+        }
+        else {
+            $doc = $docProvider->getOverviewDocument();            
         }
 
-        $doc = $docProvider->findDocumentByNiceUrlPath($document);
         if ($doc == null) {
             throw new NotFoundException($request, $response);
         }

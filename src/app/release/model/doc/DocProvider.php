@@ -94,7 +94,7 @@ class DocProvider
             self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'), // legacy engine guide prior to 8.0
             self::createBook('Designer Guide', 'designer-guide', ''), // new guide since 8.0
 
-            self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'), // ancient engine guide
+            self::getServerGuide(),
             self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
             self::createBook('Engine Guide', 'engine-guide', ''), // new engine guide since 7.4
             
@@ -162,7 +162,27 @@ class DocProvider
         }
         return $this->createReleaseDocument('Release Notes', $fileName, 'release-notes');
     }
-    
+
+    public function getOverviewDocument(): ?AbstractDocument
+    {
+        $docs = [
+            self::getNewAndNoteworthy(),
+            self::getServerGuide(),
+            self::getReleaseNotes()
+        ];
+        foreach ($docs as $doc) {
+            if ($doc->exists()) {
+                return $doc;
+            }
+        }
+        return null;
+    }
+
+    public function getServerGuide(): Book
+    {
+        return self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'); // ancient engine guide
+    }
+
     public function getNewAndNoteworthy(): ReleaseDocument
     {
         return self::createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
