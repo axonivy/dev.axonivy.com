@@ -10,8 +10,4 @@ class ArrayUtil
         }
         return end($array);
     }
-    
-    public static function getFirstElementOrNull(array $array) {
-        return $array[0] ?? null;
-    }
 }
