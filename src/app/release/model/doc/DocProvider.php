@@ -51,11 +51,6 @@ class DocProvider
         $docs = array_filter($docs, $function);
         return array_shift(array_values($docs));
     }
-    
-    public function getZips(): array
-    {
-        return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) { return $doc instanceof ZipDoc; });
-    }
 
     public function getBooks(): array
     {
@@ -108,8 +103,6 @@ class DocProvider
             
             self::createExternalBook('Public API', 'PublicAPI'),  // legacy public api url
             self::createExternalBook('Public API', 'public-api'),  // new url since 8.0
-
-            self::createZip('Product Documentation', 'axonivy-doc-*.zip'),
             
             self::getNewAndNoteworthy(), // since 9.1 not available
             self::getReleaseNotes(), // since 9.1 part of product documentation
@@ -119,14 +112,6 @@ class DocProvider
             self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')  // legacy
         ];
         return array_filter($documents, function(AbstractDocument $doc) { return $doc->exists(); });
-    }
-
-    private function createZip($name, $fileNamePattern): ZipDoc
-    {
-        $rootPath = $this->createRootPath();
-        $baseUrl = $this->createBaseUrl();
-        $baseRessourceUrl = $this->createBaseRessourceUrl();
-        return new ZipDoc($name, $rootPath, $baseUrl, $baseRessourceUrl, $fileNamePattern);
     }
 
     private function createBook($name, $path, $pdfFile): Book
