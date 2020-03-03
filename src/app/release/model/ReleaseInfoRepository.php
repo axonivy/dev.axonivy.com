@@ -36,8 +36,8 @@ class ReleaseInfoRepository
         $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*'), 'is_dir');
         foreach ($directories as $directory) {
             // check release.ready files, it is uploaded
-            $releaseNotReadyFile = $directory . DIRECTORY_SEPARATOR . 'release.ready';
-            if (!file_exists($releaseNotReadyFile)) {
+            $releaseReadyFile = $directory . DIRECTORY_SEPARATOR . 'release.ready';
+            if (!file_exists($releaseReadyFile)) {
                 continue;
             }
             
