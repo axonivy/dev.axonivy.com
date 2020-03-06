@@ -36,6 +36,6 @@ class RedirectLatestDocVersion
             throw new NotFoundException($request, $response);
         }
         
-        return $response->withRedirect('/doc/' . $releaseInfo->getVersion()->getVersionNumber() . $path, 301);
+        return $response->withRedirect('/doc/' . $releaseInfo->getVersion()->getVersionNumber() . $path, 302);
     }
 }
