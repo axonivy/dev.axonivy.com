@@ -22,7 +22,7 @@ class PermalinkActionTest extends TestCase
     
     public function testPermalink_sprint_notexisting()
     {
-        AppTester::assertThatGetThrowsNotFoundException('/permalink/sprint/axonivy-engine-NotExistingType.zip');
+        AppTester::assertThatGet('/permalink/sprint/axonivy-engine-NotExistingType.zip')->notFound();
     }
     
     public function testPermalink_nightly()
@@ -34,7 +34,7 @@ class PermalinkActionTest extends TestCase
     
     public function testPermalink_nightly_notexisting()
     {
-        AppTester::assertThatGetThrowsNotFoundException('/permalink/nightly/axonivy-engineNotExisting-Slim_All.zip');
+        AppTester::assertThatGet('/permalink/nightly/axonivy-engineNotExisting-Slim_All.zip')->notFound();
     }
     
     public function testPermalink_latest()
@@ -46,7 +46,7 @@ class PermalinkActionTest extends TestCase
     
     public function testPermalink_latest_notexisting()
     {
-        AppTester::assertThatGetThrowsNotFoundException('/permalink/latest/AxonIvyEngine-NotExistingType-x64.zip');
+        AppTester::assertThatGet('/permalink/latest/AxonIvyEngine-NotExistingType-x64.zip')->notFound();
     }
     
 }

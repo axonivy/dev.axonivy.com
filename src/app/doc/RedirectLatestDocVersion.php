@@ -2,10 +2,11 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use Slim\Exception\NotFoundException;
 use app\release\model\ReleaseInfoRepository;
-use Slim\Http\Response;
 use app\util\StringUtil;
+use Slim\Psr7\Response;
+use DI\NotFoundException;
+use app\util\Redirect;
 
 class RedirectLatestDocVersion
 {
@@ -21,21 +22,21 @@ class RedirectLatestDocVersion
     {
         $version = $args['version'];
         $path = $args['path'];
-        if (!empty($path)) {
+        if (! empty($path)) {
             $path = '/' . $path;
         }
-        
+
         $releaseInfo = null;
         foreach (ReleaseInfoRepository::getAvailableReleaseInfos() as $info) {
             if (StringUtil::startsWith($info->getVersion()->getVersionNumber(), $version)) {
                 $releaseInfo = $info;
             }
         }
-        
+
         if ($releaseInfo == null) {
             throw new NotFoundException($request, $response);
         }
-        
-        return $response->withRedirect('/doc/' . $releaseInfo->getVersion()->getVersionNumber() . $path, 302);
+
+        return Redirect::to($response, '/doc/' . $releaseInfo->getVersion()->getVersionNumber() . $path);
     }
 }

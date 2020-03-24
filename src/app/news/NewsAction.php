@@ -2,7 +2,7 @@
 namespace app\news;
 
 use Psr\Container\ContainerInterface;
-use Slim\Exception\NotFoundException;
+use Slim\Exception\HttpNotFoundException;
 
 class NewsAction
 {
@@ -26,6 +26,6 @@ class NewsAction
             }
         }
 
-        throw new NotFoundException($request, $response);        
+        throw new HttpNotFoundException($request);        
     }
 }

@@ -4,7 +4,7 @@ namespace app\release;
 use Psr\Container\ContainerInterface;
 use app\release\model\ReleaseInfoRepository;
 use app\util\StringUtil;
-use Slim\Exception\NotFoundException;
+use Slim\Exception\HttpNotFoundException;
 
 class ArchiveAction
 {
@@ -22,13 +22,13 @@ class ArchiveAction
         $version = $args['version'] ?? '';
         if (empty($version)) {
             if (empty(IVY_VERSIONS)) {
-                throw new NotFoundException($request, $response);
+                throw new HttpNotFoundException($request);
             } else {
                 $version = $this->getLatesVersion();
             }
         } else {
             if (!array_key_exists($version, IVY_VERSIONS)) {
-                throw new NotFoundException($request, $response);
+                throw new HttpNotFoundException($request);
             }
         }
         

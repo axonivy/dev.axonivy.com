@@ -2,7 +2,8 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use Slim\Http\Response;
+use Slim\Psr7\Response;
+use app\util\Redirect;
 
 class LegacyDesignerGuideDocAction
 {
@@ -19,7 +20,7 @@ class LegacyDesignerGuideDocAction
         
         if (empty($doc))
         {
-            return $response->withRedirect('designer-guide/', 301);
+            return Redirect::to($response, 'designer-guide/');
         }
         
         $redirectUrl = $this->getRedirectUrl($doc);        

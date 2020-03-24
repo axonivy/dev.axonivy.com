@@ -17,7 +17,7 @@ class TutorialGettingStartedActionTest extends TestCase
     
     public function testNotFound_ifNonExistingTutorial()
     {
-        AppTester::assertThatGetThrowsNotFoundException('/tutorial/getting-started/nonexisting/step-1');
+        AppTester::assertThatGet('/tutorial/getting-started/nonexisting/step-1')->notFound();
     }
     
     public function testRedirect_ifTutorialNameIsMissing()
@@ -25,7 +25,4 @@ class TutorialGettingStartedActionTest extends TestCase
         AppTester::assertThatGet('/tutorial/getting-started')
             ->redirect('/tutorial/getting-started/first-project/step-1');
     }
-    
-    
-
 }

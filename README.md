@@ -8,7 +8,11 @@
 	docker-compose exec web ./vendor/bin/phpunit
 
 # Update a php library
-    docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
+	docker-compose exec web composer require --update-with-dependencies slim/slim
+	docker-compose exec web composer require --update-with-dependencies slim/twig-view
+	docker-compose exec web composer require --update-with-dependencies slim/logger
+
+	docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
 
 ## Permalinks
 

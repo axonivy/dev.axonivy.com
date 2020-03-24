@@ -2,10 +2,11 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use Slim\Exception\NotFoundException;
 use app\release\model\ReleaseInfoRepository;
 use app\release\model\doc\DocProvider;
-use Slim\Http\Response;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Psr7\Response;
+use app\util\Redirect;
 
 class DocAction
 {
@@ -26,28 +27,27 @@ class DocAction
         }
 
         $docProvider = new DocProvider($version);
-        if (!$docProvider->exists()) {
-            throw new NotFoundException($request, $response);
+        if (! $docProvider->exists()) {
+            throw new HttpNotFoundException($request);
         }
-        
+
         // since version 9, also for dev, nightly and sprint releases
         // TODO: Add 'latest' to this check once latest points to release 9.1.0!
-        if (version_compare($version, 9) >= 0 ||
-                $version === 'dev' || $version === 'nightly' || $version === 'sprint') {
+        if (version_compare($version, 9) >= 0 || $version === 'dev' || $version === 'nightly' || $version === 'sprint') {
             $document = $args['document'];
             if (empty($document)) {
-                return $response->withRedirect("/doc/$version/index.html", 301);
+                return Redirect::to($response, "/doc/$version/index.html");
             }
             if ($document == 'migration-notes') {
-                return $response->withRedirect('axonivy/migration/index.html', 301);
+                return Redirect::to($response, 'axonivy/migration/index.html');
             }
             if ($document == 'release-notes') {
-                return $response->withRedirect('axonivy/release-notes/index.html', 301);
+                return Redirect::to($response, 'axonivy/release-notes/index.html');
             }
             if ($document == 'new-and-noteworthy') {
-                return $response->withRedirect('/news', 301);
+                return Redirect::to($response, '/news');
             }
-            throw new NotFoundException($request, $response); 
+            throw new HttpNotFoundException($request);
         }
 
         // legacy, before 9
@@ -55,27 +55,26 @@ class DocAction
         if (isset($args['document'])) {
             $document = $args['document'];
             if ($document == 'ReleaseNotes.html') {
-                return $response->withRedirect('release-notes', 301);
+                return Redirect::to($response, 'release-notes');
             }
             $doc = $docProvider->findDocumentByNiceUrlPath($document);
-        }
-        else {
-            $doc = $docProvider->getOverviewDocument();            
+        } else {
+            $doc = $docProvider->getOverviewDocument();
         }
 
         if ($doc == null) {
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
-        
+
         $docLinks = $this->getDocLinks();
 
         $portalLink = "";
         if (version_compare($version, 8) >= 0) {
-           if ($version == '8.0.0') {
-            $portalLink =  '/documentation/portal-guide/8.0.1/';
-           } else {
-            $portalLink = "/documentation/portal-guide/$version/";  
-           }
+            if ($version == '8.0.0') {
+                $portalLink = '/documentation/portal-guide/8.0.1/';
+            } else {
+                $portalLink = "/documentation/portal-guide/$version/";
+            }
         }
         return $this->container->get('view')->render($response, 'app/doc/doc.html', [
             'version' => $version,
@@ -83,27 +82,29 @@ class DocAction
             'documentUrl' => $doc->getRessourceUrl() . '?v=' . time(),
             'currentNiceUrlPath' => $document,
             'docLinks' => $docLinks,
-            'portalLink' => $portalLink,
+            'portalLink' => $portalLink
         ]);
     }
 
-    private function renderDocOverview(Response $response) {
+    private function renderDocOverview($response)
+    {
         return $this->container->get('view')->render($response, 'app/doc/doc-overview.html', [
-               'docLinksLTS' => self::getDocLinksLTS(),
-               'docLinksLE' => self::getDocLinksLE(),
-               'docLinksDEV' => self::getDocLinksDev()
+            'docLinksLTS' => self::getDocLinksLTS(),
+            'docLinksLE' => self::getDocLinksLE(),
+            'docLinksDEV' => self::getDocLinksDev()
         ]);
     }
 
-    private function getDocLinks(): array {
+    private function getDocLinks(): array
+    {
         return array_merge(self::getDocLinksLE(), self::getDocLinksLTS());
     }
-    
+
     private static function getDocLinksLE(): array
     {
         $docLinks = [];
         $releaseInfo = ReleaseInfoRepository::getLatest();
-        if ($releaseInfo != null && !$releaseInfo->getVersion()->isLongTermSupportVersion()) {
+        if ($releaseInfo != null && ! $releaseInfo->getVersion()->isLongTermSupportVersion()) {
             $docLinks[] = self::createDocLink('/doc/latest', $releaseInfo->getVersion()->getMinorVersion());
         }
         return $docLinks;
@@ -113,7 +114,7 @@ class DocAction
     {
         $docLinks = [];
         foreach (LTS_VERSIONS as $ltsVersion) {
-            $docLinks[] = self::createDocLink("/doc/$ltsVersion.latest", $ltsVersion) ;
+            $docLinks[] = self::createDocLink("/doc/$ltsVersion.latest", $ltsVersion);
         }
         return $docLinks;
     }
@@ -126,7 +127,8 @@ class DocAction
         return $docLinks;
     }
 
-    private static function createDocLink($url, $text) {
+    private static function createDocLink($url, $text)
+    {
         return [
             'url' => $url,
             'displayText' => $text
