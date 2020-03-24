@@ -134,11 +134,11 @@ class Website
         $app->get('/search', SearchAction::class);
 
         $app->get('/api/currentRelease', ApiCurrentRelease::class);
-        
+
         $app->get('/sitemap.xml', SitemapAction::class);
-        
+
         $app->get('/news[/{version}]', NewsAction::class);
-        
+
         $app->get('/community', CommunityAction::class);
         $app->redirect('/download/community.html', '/community', 301);
     }
@@ -153,12 +153,16 @@ class Website
                 ->render($response, 'templates/error/404.html')
                 ->withStatus(404);
         });
-        $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
-            $response = new Response();
-            $data = ['message' => $exception->getMessage()];
-            return $container->get('view')
+        
+        if (!Config::isDevOrTestEnv())
+        {
+            $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
+                $response = new Response();
+                $data = ['message' => $exception->getMessage()];
+                return $container->get('view')
                 ->render($response, 'templates/error/500.html', $data)
                 ->withStatus(500);
-        });
+            });
+        }
     }
 }

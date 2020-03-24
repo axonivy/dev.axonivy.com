@@ -77,7 +77,7 @@ class Config {
         return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     }
     
-    private static function isDevOrTestEnv(): bool
+    public static function isDevOrTestEnv(): bool
     {
         return file_exists(StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']));
     }
