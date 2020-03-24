@@ -2,11 +2,11 @@
 namespace app\sitemap;
 
 use Psr\Container\ContainerInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
 use app\release\model\ReleaseInfo;
 use app\release\model\ReleaseInfoRepository;
 use app\util\StringUtil;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 class SitemapAction
 {

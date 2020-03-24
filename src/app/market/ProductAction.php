@@ -2,7 +2,7 @@
 namespace app\market;
 
 use Psr\Container\ContainerInterface;
-use Slim\Exception\NotFoundException;
+use Slim\Exception\HttpNotFoundException;
 
 class ProductAction
 {
@@ -16,14 +16,14 @@ class ProductAction
         $key = $args['key'] ?? '';
         $product = Market::getProductByKey($key);
         if ($product == null) {
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
         
         $version = $args['version'] ?? '';
         if (empty($version)) {
             $version = $product->getLatestVersionToDisplay();
         } else if (!$product->hasVersion($version)) {
-           throw new NotFoundException($request, $response);
+           throw new HttpNotFoundException($request);
         }
         
         $mavenArtifacts = $product->getMavenArtifactsForVersion($version);

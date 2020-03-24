@@ -1,14 +1,15 @@
 <?php
 namespace app\permalink;
 
-use Slim\Exception\NotFoundException;
+use Slim\Exception\HttpNotFoundException;
+use app\util\Redirect;
 
 class LibPermalink
 {
     public function __invoke($request, $response, $args) {
         $version = $args['version'];
         if ($version != 'dev') {
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
         
         $name = $args['name'] ?? ''; // e.g demo-app.zip
@@ -18,10 +19,10 @@ class LibPermalink
         
         $mavenArtifact = MavenArtifactRepository::getMavenArtifact($filename, $type);
         if ($mavenArtifact == null) {
-            throw new NotFoundException($request, $response);
+            throw new HttpNotFoundException($request);
         }
 
         $url = $mavenArtifact->getDevUrl();
-        return $response->withRedirect($url);
+        return Redirect::to($response, $url);
     }
 }

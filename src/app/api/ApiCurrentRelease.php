@@ -3,26 +3,30 @@ namespace app\api;
 
 use app\release\model\ReleaseInfo;
 use app\release\model\ReleaseInfoRepository;
-use Slim\Http\Request;
 use app\release\model\Version;
 use app\util\StringUtil;
 use app\util\ArrayUtil;
+use Slim\Psr7\Request;
+use Psr\Container\ContainerInterface;
 
 class ApiCurrentRelease
 {
     protected $container;
     
-    public function __construct($container) {
+    public function __construct(ContainerInterface $container) {
         $this->container = $container;
     }
-    
+
     public function __invoke(Request $request, $response, $args) {
         $releaseVersion = $request->getQueryParams()['releaseVersion'] ?? '';
         $data = [
             'latestReleaseVersion' => $this->getLatestReleaseVersion(),
             'latestServiceReleaseVersion' => $this->getLatestServiceReleaseVersion($releaseVersion)
         ];
-        return $response->withJson($data);
+        
+        $response->getBody()->write((string) json_encode($data));
+        $response = $response->withHeader('Content-Type', 'application/json');
+        return $response;
     }
     
     private function getLatestReleaseVersion(): string

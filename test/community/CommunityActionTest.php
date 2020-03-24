@@ -14,9 +14,8 @@ class CommunityActionTest extends TestCase
             ->bodyContains('See how it works on GitHub.');
     }
     
-    
     public function testRedirect()
     {
-        AppTester::assertThatGet('/download/community.html')->permanentRedirect('http://localhost/community');
+        AppTester::assertThatGet('/download/community.html')->permanentRedirect('/community');
     }
 }

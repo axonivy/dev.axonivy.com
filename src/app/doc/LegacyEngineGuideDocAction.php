@@ -2,7 +2,8 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use Slim\Http\Response;
+use Slim\Psr7\Response;
+use app\util\Redirect;
 
 class LegacyEngineGuideDocAction
 {
@@ -19,7 +20,7 @@ class LegacyEngineGuideDocAction
         
         if (empty($doc))
         {
-            return $response->withRedirect('engine-guide/', 301);
+            return Redirect::to($response, 'engine-guide/');
         }
         
         $redirectUrl = $this->getRedirectUrl($doc);        

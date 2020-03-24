@@ -2,7 +2,8 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use Slim\Http\Response;
+use Slim\Psr7\Response;
+use app\util\Redirect;
 
 class LegacyPublicAPIAction
 {
@@ -17,6 +18,6 @@ class LegacyPublicAPIAction
     {
         $requestUri = $_SERVER['REQUEST_URI'];
         $newUri = str_replace('PublicAPI', 'public-api', $requestUri);
-        return $response->withRedirect($newUri, 301);
+        return Redirect::to($response, $newUri);
     }
 }

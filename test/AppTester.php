@@ -2,9 +2,9 @@
 namespace test;
 
 use PHPUnit\Framework\Assert;
-use Slim\Http\Environment;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Psr7\Response;
+use Slim\Psr7\Factory\RequestFactory;
 use app\Website;
 
 class AppTester
@@ -21,26 +21,11 @@ class AppTester
         return new AppTester(self::get($url));
     }
 
-    public static function assertThatGetThrowsNotFoundException(string $url)
-    {
-        try {
-            $response = self::get($url);
-            Assert::fail('Should throw exception ' . $expectedException);
-        } catch (\Slim\Exception\NotFoundException $e) {
-            Assert::assertTrue(true);
-        }
-    }
-
     private static function get(string $url): Response
     {
         $app = (new Website())->getApp();
-        $environment = Environment::mock([
-            'REQUEST_METHOD' => 'GET',
-            'REQUEST_URI' => $url
-        ]);
-        $request = Request::createFromEnvironment($environment);
-        $response = $app($request, new \Slim\Http\Response());
-        return $response;
+        $request = (new RequestFactory())->createRequest('GET', $url);
+        return $app->handle($request);
     }
 
     public function bodyContains(string $expectedToContain)
@@ -68,6 +53,12 @@ class AppTester
     public function statusCode(int $expectedStatusCode): AppTester
     {
         Assert::assertEquals($expectedStatusCode, $this->response->getStatusCode());
+        return $this;
+    }
+    
+    public function notFound(): AppTester
+    {
+        self::statusCode(404);
         return $this;
     }
     

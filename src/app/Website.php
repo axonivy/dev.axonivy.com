@@ -1,41 +1,43 @@
 <?php
 namespace app;
 
+use Middlewares\TrailingSlash;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
-use Slim\Http\Request;
-use Slim\Http\Response;
-
-use app\team\TeamAction;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Factory\AppFactory;
+use Slim\Psr7\Response;
+use Slim\Views\Twig;
+use app\api\ApiCurrentRelease;
+use app\community\CommunityAction;
+use app\doc\DocAction;
+use app\doc\LegacyDesignerGuideDocAction;
+use app\doc\LegacyEngineGuideDocAction;
+use app\doc\LegacyPublicAPIAction;
+use app\doc\RedirectLatestDocVersion;
+use app\feature\FeatureAction;
+use app\installation\InstallationAction;
+use app\market\MarketAction;
+use app\market\ProductAction;
+use app\news\NewsAction;
+use app\permalink\LibPermalink;
 use app\portal\PortalAction;
 use app\release\ArchiveAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
-use app\market\ProductAction;
-use app\market\MarketAction;
-use app\support\SupportAction;
-use app\api\ApiCurrentRelease;
-use app\community\CommunityAction;
-use app\tutorial\TutorialAction;
-use app\tutorial\gettingstarted\TutorialGettingStartedAction;
-use app\doc\DocAction;
-use app\installation\InstallationAction;
-use app\feature\FeatureAction;
+use app\release\SprintNightlyAction;
+use app\release\model\ReleaseInfo;
+use app\release\model\ReleaseInfoRepository;
 use app\search\SearchAction;
 use app\sitemap\SitemapAction;
-use app\release\SprintNightlyAction;
-use Slim\Views\TwigExtension;
-use Twig_Extension_Debug;
-use Slim\Views\Twig;
-use app\release\model\ReleaseInfoRepository;
-use app\release\model\ReleaseInfo;
-use app\news\NewsAction;
-use app\permalink\LibPermalink;
-use app\doc\LegacyEngineGuideDocAction;
-use app\doc\LegacyDesignerGuideDocAction;
-use app\doc\LegacyPublicAPIAction;
-use app\doc\RedirectLatestDocVersion;
+use app\support\SupportAction;
+use app\team\TeamAction;
+use app\tutorial\TutorialAction;
+use app\tutorial\gettingstarted\TutorialGettingStartedAction;
+use Throwable;
 
 class Website
 {
@@ -45,23 +47,17 @@ class Website
     {
         // load dev-config otherwise prod config
         Config::initConfig();
-        
-        $config = [
-            'settings' => [
-              'displayErrorDetails' => true
-            ],
-            'log.enabled' => true,
-            'log.path' => '../logs',
-            'log.level' => 8,
-            'log.writer' => new \Slim\Logger\DateTimeFileWriter(),
-        ];
-        $this->app = new App($config);
+
+        $container = new \DI\Container();
+        AppFactory::setContainer($container);
+        $this->app = AppFactory::create();
+
         $this->configureTemplateEngine();
-        $this->installTrailingSlashMiddelware();
+        $this->app->add((new TrailingSlash(false))->redirect());
         $this->installRoutes();
         $this->installErrorHandling();
     }
-    
+
     public function getApp(): App
     {
         return $this->app;
@@ -75,20 +71,14 @@ class Website
     private function configureTemplateEngine()
     {
         $container = $this->app->getContainer();
-        $container['view'] = function ($container) {
-            $view = new Twig(__DIR__ . '/..');
-            $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-            $view->addExtension(new TwigExtension($container['router'], $basePath));
-            $view->addExtension(new Twig_Extension_Debug());
-            return $view;
-        };
+        $container->set('view', function (ContainerInterface $container) {
+            return Twig::create(__DIR__ . '/..');
+        });
 
-        // global variables
-        $view = $container['view'];
-        
+        $view = $container->get('view');
         $versionLTS = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
         $versionLE = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
-        
+
         $text = "$versionLTS";
         $textLong = "LTS $versionLTS";
         if ($versionLTS != $versionLE)
@@ -105,37 +95,17 @@ class Website
         return $info == null ? '' : $info->getVersion()->getDisplayVersion();
     }
     
-    /**
-     * permanently redirect paths with a trailing slash to their non-trailing counterpart
-     */
-    private function installTrailingSlashMiddelware()
-    {
-        $this->app->add(function (Request $request, Response $response, callable $next) {
-            $uri = $request->getUri();
-            $path = $uri->getPath();
-            if ($path != '/' && substr($path, -1) == '/') {
-                $uri = $uri->withPath(substr($path, 0, -1));
-                if ($request->getMethod() == 'GET') {
-                    return $response->withRedirect((string)$uri, 301);
-                } else {
-                    return $next($request->withUri($uri), $response);
-                }
-            }
-            return $next($request, $response);
-        });
-    }
-    
     private function installRoutes()
     {
         $app = $this->app;
         $app->get('/', FeatureAction::class);
 
         $app->get('/download', DownloadAction::class);
-        $app->get('/download/archive[/{version}]', ArchiveAction::class)->setName('archive');
-        $this->installRedirect('/download/archive.html', 'archive');
+        $app->get('/download/archive[/{version}]', ArchiveAction::class);
+        $app->redirect('/download/archive.html', '/download/archive', 301);
         $app->get('/download/maven.html', MavenArchiveAction::class);
-        $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class)->setName('securityvulnerability');
-        $this->installRedirect('/download/securityvulnerability.html', 'securityvulnerability');
+        $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class);
+        $app->redirect('/download/securityvulnerability.html', '/download/securityvulnerability', 301);
 
         $app->get('/permalink/{version}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
@@ -151,10 +121,9 @@ class Website
         $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document}', DocAction::class);
         
-        $app->get('/market', MarketAction::class)->setName('market');
+        $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);
-        $this->installRedirect('/download/addons.html', 'market');
-        $this->installRedirect('/download/addons', 'market');
+        $app->redirect('/download/addons[.html]', '/market', 301);
 
         $app->get('/portal[/{version}[/{topic}]]', PortalAction::class);
         
@@ -162,7 +131,7 @@ class Website
         $app->get('/tutorial', TutorialAction::class);
         $app->get('/tutorial/getting-started[/{name}/step-{stepNr}]', TutorialGettingStartedAction::class);
         $app->get('/team', TeamAction::class);
-        $app->get('/support', SupportAction::class);        
+        $app->get('/support', SupportAction::class);
         $app->get('/search', SearchAction::class);
 
         $app->get('/api/currentRelease', ApiCurrentRelease::class);
@@ -171,34 +140,26 @@ class Website
         
         $app->get('/news[/{version}]', NewsAction::class);
         
-        $app->get('/community', CommunityAction::class)->setName('community');
-        $this->installRedirect('/download/community.html', 'community');
+        $app->get('/community', CommunityAction::class);
+        $app->redirect('/download/community.html', '/community', 301);
     }
 
-    private function installRedirect($oldPath, $pathFor)
-    {
-        $app = $this->app;
-        $app->get($oldPath, function ($request, Response $response, $args) use ($pathFor) {
-            $uri = $request->getUri()->withPath($this->router->pathFor($pathFor));
-            return $response->withRedirect($uri, 301);
-        });
-    }
-    
     private function installErrorHandling()
     {
         $container = $this->app->getContainer();
-        
-        $container['notFoundHandler'] = function ($c) {
-            return function ($request, $response) use ($c) {
-                return $c['view']->render($response, 'templates/error/404.html')->withStatus(404);
-            };
-        };
-        
-        $container['errorHandler'] = function ($c) {
-            return function ($request, $response, $exception) use ($c) {
-                return $c['view']->render($response, 'templates/error/500.html', ['message' => $exception->getMessage()])->withStatus(500);
-            };
-        };
+        $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
+        $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
+            $response = new Response();
+            return $container->get('view')
+                ->render($response, 'templates/error/404.html')
+                ->withStatus(404);
+        });
+        $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
+            $response = new Response();
+            $data = ['message' => $exception->getMessage()];
+            return $container->get('view')
+                ->render($response, 'templates/error/500.html', $data)
+                ->withStatus(500);
+        });
     }
 }
-

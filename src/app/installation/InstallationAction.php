@@ -2,9 +2,9 @@
 namespace app\installation;
 
 use Psr\Container\ContainerInterface;
-use Slim\Http\Request;
 use app\release\model\ReleaseInfoRepository;
 use app\release\model\Variant;
+use Slim\Psr7\Request;
 
 class InstallationAction
 {

@@ -2,43 +2,44 @@
 namespace app\portal;
 
 use Psr\Container\ContainerInterface;
-use Slim\Http\Request;
-use app\release\model\ReleaseInfoRepository;
-use app\release\model\Variant;
-use Slim\Exception\NotFoundException;
 use app\market\Market;
-
-use app\permalink\MavenArtifactRepository;
+use Slim\Psr7\Request;
+use Slim\Exception\HttpNotFoundException;
+use app\util\Redirect;
 
 class PortalAction
 {
+
     protected $container;
 
-    public function __construct(ContainerInterface $container) {
+    public function __construct(ContainerInterface $container)
+    {
         $this->container = $container;
     }
 
-    public function __invoke(Request $request, $response, $args) {        
+    public function __invoke(Request $request, $response, $args)
+    {
         $version = $args['version'] ?? '';
 
-        if (empty($version)) {            
-            return $response->withRedirect('/market/portal');
+        if (empty($version)) {
+            return Redirect::to($response, '/market/portal');
         }
 
         $version = self::evaluatePortalVersion($version);
 
         $topic = $args['topic'] ?? '';
         if (empty($topic)) {
-            return $response->withRedirect('/market/portal/' . $version);
+            return Redirect::to($response, '/market/portal/' . $version);
         }
 
         if ($topic == 'doc') {
-            return $response->withRedirect('/documentation/portal-guide/' . $version);
+            return Redirect::to($response, '/documentation/portal-guide/' . $version);
         }
-        throw new NotFoundException($request, $response);        
+        throw new HttpNotFoundException($request);
     }
 
-    private static function evaluatePortalVersion(String $version): String {        
+    private static function evaluatePortalVersion(String $version): String
+    {
         if ($version == 'dev' || $version == 'nightly' || $version == 'sprint') {
             return Market::getPortal()->getLatestVersion();
         }
