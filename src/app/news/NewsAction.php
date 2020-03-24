@@ -6,23 +6,28 @@ use Slim\Exception\HttpNotFoundException;
 
 class NewsAction
 {
-    protected $container;
 
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    protected $view;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->view = $container->get('view');
     }
 
-    public function __invoke($request, $response, $args) {
+    public function __invoke($request, $response, $args)
+    {
         $version = $args['version'] ?? "";
 
         if (empty($version)) {
-            return $this->container->get('view')->render($response, 'app/news/news.html');
+            return $this->view->render($response, 'app/news/news.html');
         }
 
-        $dirs = glob(__DIR__  . '/*' , GLOB_ONLYDIR);
-        foreach ($dirs as $dir) {            
+        $dirs = glob(__DIR__ . '/*', GLOB_ONLYDIR);
+        foreach ($dirs as $dir) {
             if (basename($dir) == $version) {
-                return $this->container->get('view')->render($response, 'app/news/news-page.html', ['version' => $version]);        
+                return $this->view->render($response, 'app/news/news-page.html', [
+                    'version' => $version
+                ]);        
             }
         }
 

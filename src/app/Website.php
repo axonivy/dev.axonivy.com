@@ -49,9 +49,7 @@ class Website
         Config::initConfig();
 
         $container = new \DI\Container();
-        AppFactory::setContainer($container);
-        $this->app = AppFactory::create();
-
+        $this->app = AppFactory::createFromContainer($container);
         $this->configureTemplateEngine();
         $this->app->add((new TrailingSlash(false))->redirect());
         $this->installRoutes();
@@ -71,6 +69,7 @@ class Website
     private function configureTemplateEngine()
     {
         $container = $this->app->getContainer();
+        
         $container->set('view', function (ContainerInterface $container) {
             return Twig::create(__DIR__ . '/..');
         });
