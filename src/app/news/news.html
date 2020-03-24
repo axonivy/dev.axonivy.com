@@ -43,52 +43,27 @@
 	</div>
 </section>
 
-<section id="one">
-	<div class="inner">
-		<h3 >Axon.ivy 8.0 <span class="lts-marker">LTS</span> <span style="font-weight:80;">| Smart, smarter, Axon.ivy Digital Business Platform</span></h3>
-		<p class="date-section">December 4th, 2019</p>
-		
-		<div class="row">
-			<div class="4u 12u$(xsmall)">
-				<img class="image fit" src="/images/news/8.0/80_cockpit_monitor.png" />
-			</div>
-			<div class="4u 12u$(xsmall)">
-				<h5>Engine Cockpit</h5>
-				<p>Our new Engine Cockpit has now become a mighty successor of the AdminUI with a rich feature set.
-					It's completely based on web technologies and simply open in your favorite browser or even on mobile devices.</p>
 
-				<h5>Highly Configurable</h5>
-					<p>Successfully deploying your application in your customers environment is now easier than ever.
-					The days of manual installations and the related chatty documentation are over!</p>
-					<h5>Portal</h5>
-				<p>We re-styled the Portal application completely and implemented a lot of new features.</p>
-			</div>
-			<div class="4u$ 12u$(xsmall)">
-				
-				<h5>More glance and glory</h5>
-				<ul>
-					<li>Setup Wizard</li>
-					<li>Debian Engine Installer</li>
-					<li>Run in Container</li>
-					<li>Instant Deployment</li>
-					<li>New Web Service Client Tooling</li>
-					<li>Custom Fields</li>
-					<li>Modern Platform</li>
-					<li>Native MAC & GTK3 Development</li>
-					<li>Customizable Designer</li>
-				</ul>
-				<div class="fixes">
-					<span class="fas fa-rocket"></span> 64 Improvements
-				</div>
-				<div class="fixes">
-					<span class="fas fa-bug"></span> 266 Bug Fixes
-				</div>
-				
-			</div>
-		</div>			
-		<a href="/news/8.0" class="button special">Read more</a>
-	</div>
-</section>
-
+{% for new in news %}
+	{% set inverseClass = '' %}
+	{% if loop.index is divisible by(2) %}
+        {% set inverseClass = 'inverse' %}
+    {% endif %}
+	<section id="one" class="{{ inverseClass }}">
+		<div class="inner">
+			{% set ltsMarker = 'display:none;' %}
+			{% if new.meta.lts %}
+			  {% set ltsMarker = '' %}
+			{% endif %}
+			
+			<h3 >{{ new.meta.title }} <span class="lts-marker" style="{{ ltsMarker }}">LTS</span> <span style="font-weight:80;">| {{ new.meta.slogan }}</span></h3>
+			<p class="date-section">{{ new.meta.date }}</p>
+			
+			{{ new.snippet |raw }}
+			
+			<a href="{{ new.link }}" class="button special">Read more</a>
+		</div>
+	</section>
+{% endfor %}
 
 {% endblock %}
