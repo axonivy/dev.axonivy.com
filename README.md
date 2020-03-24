@@ -7,6 +7,9 @@
 ## Execute tests
 	docker-compose exec web ./vendor/bin/phpunit
 
+# Update a php library
+    docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
+
 ## Permalinks
 
 The following links won't change and are fully support
