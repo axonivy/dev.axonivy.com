@@ -11,14 +11,20 @@ class NewsActionTest extends TestCase
     {
         AppTester::assertThatGet('/news')
             ->ok()
-            ->bodyContains('What\'s new');
+            ->bodyContains('What\'s new')
+            ->bodyContains('Smart, smart, Axon.ivy Digital Business Platform')
+            ->bodyContains('Successfully deploying your application in your customers')
+            ->bodyContains('December 4th, 2019');
     }
 
     public function testNewsDetailPage()
     {
         AppTester::assertThatGet('/news/8.0')
         ->ok()
-        ->bodyContains('Our new Engine Cockpit has now become a mighty successor of the AdminUI with a rich feature set.');
+        ->bodyContains('Our new Engine Cockpit has now become a mighty successor of the AdminUI with a rich feature set.')
+        ->bodyContains('Smart, smart, Axon.ivy Digital Business Platform')
+        ->bodyContains('Axon.ivy now runs with Java 11. Which is the most recent LTS runtime for Java.')
+        ->bodyContains('December 4th, 2019');        
     }
 
     public function testNonExistingNews()
