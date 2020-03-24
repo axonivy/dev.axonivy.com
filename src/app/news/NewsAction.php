@@ -3,7 +3,6 @@ namespace app\news;
 
 use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
-use phpDocumentor\Reflection\Types\String_;
 
 class NewsAction
 {
