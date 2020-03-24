@@ -2,7 +2,6 @@
 namespace test;
 
 use PHPUnit\Framework\Assert;
-use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Response;
 use Slim\Psr7\Factory\RequestFactory;
 use app\Website;
@@ -53,6 +52,12 @@ class AppTester
     public function statusCode(int $expectedStatusCode): AppTester
     {
         Assert::assertEquals($expectedStatusCode, $this->response->getStatusCode());
+        return $this;
+    }
+    
+    public function ok(): AppTester
+    {
+        self::statusCode(200);
         return $this;
     }
     
