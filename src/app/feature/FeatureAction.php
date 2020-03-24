@@ -2,7 +2,6 @@
 namespace app\feature;
 
 use Psr\Container\ContainerInterface;
-use app\release\model\ReleaseInfoRepository;
 
 class FeatureAction
 {
