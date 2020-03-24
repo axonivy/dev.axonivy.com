@@ -44,10 +44,3 @@ But they are needed to add _Annotation_ and _Facet_  to the custom google search
 They could be uploaded to google on <https://cse.google.com/> with user info@ivyteam.ch.
 Menu entry > Setup > Advanced.
 
-### Ideas
-* Public Roadmap <http://www.wptimeline.io/jqueryversion/demo/18.html>
-* Blog on Medium
-* Features Site
-* Documentation: Add Links to switch fast between different versions
-* Documentation: Add Link to Release Document from /download
-* Mark Top-Level Navigation as Active (Color to green) if you are on a specific site
