@@ -9,11 +9,11 @@ The tooling to call remote Web Services has been completely re-worked and is mor
 
 ![WebService](images/71_wsClient_requestTab.png "Web Service Request")
 
-<div class="btn-group btn-group-sm mb-4" role="group" aria-label="...">
-	<a href="/doc/8.0.2/designer-guide/3rd-party-integration/index.html#web-services" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+<div class="short-links">
+	<a href="/doc/8.0.2/designer-guide/3rd-party-integration/index.html#web-services" target="_blank">
 	  <i class="fas fa-book"></i> Designer Guide
 	</a>
-	<a href="https://developer.axonivy.com/tutorial" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+	<a href="https://developer.axonivy.com/tutorial" target="_blank">
 	  <i class="fas fa-video"></i> Tutorial Video
 	</a>
 </div>

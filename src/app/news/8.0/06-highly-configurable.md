@@ -27,11 +27,11 @@ Successfully deploying your application in your customers environment is now eas
  * __OVERRIDABLE__: Configurations are always overridable with environment variables. This is especially useful in container environments.
  * __TRACKABLE__: Configuration changes get logged, showing what has been changed and where. Besides auditing configuration changes, this can also help tracking down problems after changes.
 
-<div class="btn-group btn-group-sm mb-4" role="group" aria-label="...">
-	<a href="/doc/8.0.latest/engine-guide/configuration/" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+<div class="short-links">
+	<a href="/doc/8.0.latest/engine-guide/configuration/" target="_blank">
 	  <i class="fas fa-book"></i> Engine Guide Configuration
 	</a>
-	<a href="/doc/8.0.latest/engine-guide/configuration/file-reference.html" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+	<a href="/doc/8.0.latest/engine-guide/configuration/file-reference.html" target="_blank">
 	  <i class="fas fa-book"></i> Configuration File Reference
 	</a>
 </div>

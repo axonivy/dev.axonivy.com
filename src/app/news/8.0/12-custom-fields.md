@@ -18,11 +18,11 @@ __Legacy Support__: Forget the additional properties, the limited old custom fie
 You don't need them anymore. But we are fully backward compatible. All legacy API calls will be mapped to custom fields.
 All inscribed inscriptions in your project will automatically be converted.
 
-<div class="btn-group btn-group-sm mb-4" role="group" aria-label="...">
-	<a href="/doc/8.0.latest/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+<div class="short-links">
+	<a href="/doc/8.0.latest/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html" target="_blank">
 	  <i class="fab fa-java"></i> Public API Custom Field
 	</a>
-	<a href="/doc/8.0.latest/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+	<a href="/doc/8.0.latest/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--" target="_blank">
 	  <i class="fab fa-java"></i> Public API Query
 	</a>
 </div>

@@ -8,11 +8,11 @@ The Axon.ivy Engine is now available as a Debian package. Now Engine operators c
  * __SECURE__: Keep your manual changes in configuration files during updates.
  * __FRIENDLY__: Organize files compliant with the Linux file structure and re-use the JVM provided by the system.
 
-<div class="btn-group btn-group-sm mb-4" role="group" aria-label="...">
-	<a href="/doc/8.0.latest/engine-guide/getting-started/debian.html" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+<div class="short-links">
+	<a href="/doc/8.0.latest/engine-guide/getting-started/debian.html" target="_blank">
 	  <i class="fas fa-plane-departure"></i> Debian : Getting Started
 	</a>
-	<a href="/permalink/latest/axonivy-engine.deb" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+	<a href="/permalink/latest/axonivy-engine.deb" target="_blank">
 	  <i class="fas fa-download"></i> Download Debian package
 	</a>
 </div>

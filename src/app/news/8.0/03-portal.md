@@ -6,8 +6,8 @@ We re-styled the Portal  application completely and implemented a lot of new fea
  * __Announcements__: Promote planned maintenance and other global announcements conveniently, in multiple languages
  * __Express data providers__: Add your custom data source to provide data for Axon.ivy Express form widgets
 
-<div class="btn-group btn-group-sm mb-4" role="group" aria-label="...">
-	<a href=/documentation/portal-guide/8.0.2/portal-developer-guide/introduction/index.html#new-and-noteworthy" class="btn btn-outline-dark btn-sm" role="button" target="_blank">
+<div class="short-links">
+	<a href=/documentation/portal-guide/8.0.2/portal-developer-guide/introduction/index.html#new-and-noteworthy" target="_blank">
 	  <i class="fas fa-book"></i> Portal New & Noteworthy
 	</a>
 </div>
