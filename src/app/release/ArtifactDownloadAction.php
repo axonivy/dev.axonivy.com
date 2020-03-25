@@ -5,8 +5,9 @@ use Psr\Container\ContainerInterface;
 use app\release\model\ReleaseInfoRepository;
 use app\util\UrlHelper;
 use Slim\Psr7\Request;
+use Slim\Exception\HttpNotFoundException;
 
-class SprintNightlyAction
+class ArtifactDownloadAction
 {
     protected $container;
 
@@ -16,10 +17,6 @@ class SprintNightlyAction
 
     public function __invoke(Request $request, $response, $args) {
         $version = $args['version'];
-        
-        if ($version == 'sprint-release') {
-            $version = 'sprint';
-        }
         
         $artifacts = ReleaseInfoRepository::getArtifacts($version);
         $name = '';
@@ -43,11 +40,11 @@ class SprintNightlyAction
             $name = 'Latest Release';
             $testingPurpose = false;
         } else {
-            throw new \InvalidArgumentException($version . ' is not supported');
+            throw new HttpNotFoundException($request);
         }
-        
+
         $baseUrl = UrlHelper::getFullPathUrl($request);
-        return $this->container->get('view')->render($response, 'app/release/sprint-nightly.html', [
+        return $this->container->get('view')->render($response, 'app/release/artifact-download.html', [
             'artifacts' => $artifacts,
             'name' => $name,
             'currentUrl' => $baseUrl,

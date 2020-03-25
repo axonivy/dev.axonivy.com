@@ -10,6 +10,7 @@ use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\api\ApiCurrentRelease;
+use app\api\StatusApi;
 use app\community\CommunityAction;
 use app\doc\DocAction;
 use app\doc\LegacyDesignerGuideDocAction;
@@ -24,11 +25,11 @@ use app\news\NewsAction;
 use app\permalink\LibPermalink;
 use app\portal\PortalAction;
 use app\release\ArchiveAction;
+use app\release\ArtifactDownloadAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
 use app\release\SecurityVulnerabilityAction;
-use app\release\SprintNightlyAction;
 use app\release\model\ReleaseInfo;
 use app\release\model\ReleaseInfoRepository;
 use app\search\SearchAction;
@@ -38,7 +39,6 @@ use app\team\TeamAction;
 use app\tutorial\TutorialAction;
 use app\tutorial\gettingstarted\TutorialGettingStartedAction;
 use Throwable;
-use app\api\StatusApi;
 
 class Website
 {
@@ -98,21 +98,24 @@ class Website
     private function installRoutes()
     {
         $app = $this->app;
+        
+        $app->redirect('/download/addons[.html]', '/market', 301);
+        $app->redirect('/download/community.html', '/community', 301);
+        $app->redirect('/download/archive.html', '/download/archive', 301);
+        $app->redirect('/download/securityvulnerability.html', '/download/securityvulnerability', 301);
+        $app->redirect('/download/sprint-release[.html]', '/download/sprint', 301);
+
         $app->get('/', FeatureAction::class);
 
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class);
-        $app->redirect('/download/archive.html', '/download/archive', 301);
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class);
-        $app->redirect('/download/securityvulnerability.html', '/download/securityvulnerability', 301);
+        $app->get('/download/{version}[.html]', ArtifactDownloadAction::class);
 
         $app->get('/permalink/{version}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
-        
-        $app->get('/download/{version:nightly|sprint-release|latest|dev}[.html]', SprintNightlyAction::class);
-        $app->get('/download/{version:nightly|sprint-release|latest|dev}/{file}', SprintNightlyAction::class);
-        
+
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}.latest[/{path:.*}]', RedirectLatestDocVersion::class);
         $app->get('/doc/{version}', DocAction::class);
@@ -123,7 +126,6 @@ class Website
         
         $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);
-        $app->redirect('/download/addons[.html]', '/market', 301);
 
         $app->get('/portal[/{version}[/{topic}]]', PortalAction::class);
         
@@ -141,8 +143,7 @@ class Website
 
         $app->get('/news[/{version}]', NewsAction::class);
 
-        $app->get('/community', CommunityAction::class);
-        $app->redirect('/download/community.html', '/community', 301);
+        $app->get('/community', CommunityAction::class);        
     }
 
     private function installErrorHandling()
