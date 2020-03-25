@@ -75,7 +75,7 @@
 							
 							<h4><a href="/doc/{{ engineVariantLTS.version.minorVersion }}/engine-guide/getting-started/docker.html">Docker</a></h4>
 							<pre><code>docker pull axonivy/axonivy-engine:{{ engineVariantLTS.version.minorVersion}}
-docker run -p 8080:8080 axonivy/axonivy-engine</code></pre>
+docker run -p 8080:8080 axonivy/axonivy-engine:{{ engineVariantLTS.version.minorVersion}}</code></pre>
 							<h4><a href="/doc/{{ engineVariantLTS.version.minorVersion }}/engine-guide/getting-started/debian.html">Debian / Ubuntu Linux</a></h4>
 							<pre><code>wget https://developer.axonivy.com/permalink/{{ engineVariantLTS.version.minorVersion }}/axonivy-engine.deb
 sudo apt install ./axonivy-engine.deb</code></pre>
