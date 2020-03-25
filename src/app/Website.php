@@ -25,7 +25,7 @@ use app\news\NewsAction;
 use app\permalink\LibPermalink;
 use app\portal\PortalAction;
 use app\release\ArchiveAction;
-use app\release\ArtifactDownloadAction;
+use app\release\DevReleasesDownloadAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
@@ -111,7 +111,7 @@ class Website
         $app->get('/download/archive[/{version}]', ArchiveAction::class);
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class);
-        $app->get('/download/{version}[.html]', ArtifactDownloadAction::class);
+        $app->get('/download/{version}[.html]', DevReleasesDownloadAction::class);
 
         $app->get('/permalink/{version}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
