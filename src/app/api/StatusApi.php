@@ -20,8 +20,9 @@ class StatusApi
                 'phpVersion' => phpversion()
             ],
             'data' => [
-                'latestReleaseVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatest()),
-                'latestLtsReleaseVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatestLongTermSupport()),
+                'latestVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatest()),
+                'latestLtsVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatestLongTermSupport()),
+                'leadingEdgeVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLeadingEdge()),
                 'versions' => $this->getVersions()
             ]            
         ];
@@ -29,7 +30,7 @@ class StatusApi
     
     private function getVersionNumber(?ReleaseInfo $releaseInfo)
     {
-        return $releaseInfo == null ? '' : $releaseInfo->getVersion()->getVersionNumber();
+        return $releaseInfo == null ? 'not available' : $releaseInfo->getVersion()->getVersionNumber();
     }
     
     private function getVersions(): array

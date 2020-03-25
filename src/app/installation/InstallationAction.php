@@ -16,7 +16,7 @@ class InstallationAction
 
     public function __invoke(Request $request, $response, $args) {
         $downloadUrl = $request->getQueryParams()['downloadUrl'] ?? '';
-        $releaseInfo = ReleaseInfoRepository::getLatest();
+        $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();
         $variant = $releaseInfo == null ? null : $releaseInfo->getMostMatchingVariantForCurrentRequest(Variant::PRODUCT_NAME_DESIGNER);
         return $this->container->get('view')->render($response, 'app/installation/installation.html', [
             'downloadUrl' => $downloadUrl,
