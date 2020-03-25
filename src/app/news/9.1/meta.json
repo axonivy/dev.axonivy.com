@@ -3,6 +3,5 @@
 	"title": "Axon.ivy 9.1",
     "slogan": "200k Users and Testing",
     "date": "???",
-    "lts": false,
-    "released": false
+    "lts": false
 }
