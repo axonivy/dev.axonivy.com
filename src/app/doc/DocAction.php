@@ -10,12 +10,11 @@ use app\util\Redirect;
 
 class DocAction
 {
-
-    protected $container;
+    private $view;
 
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
+        $this->view = $container->get('view');
     }
 
     public function __invoke($request, Response $response, $args)
@@ -35,19 +34,7 @@ class DocAction
         // TODO: Add 'latest' to this check once latest points to release 9.1.0!
         if (version_compare($version, 9) >= 0 || $version === 'dev' || $version === 'nightly' || $version === 'sprint') {
             $document = $args['document'];
-            if (empty($document)) {
-                return Redirect::to($response, "/doc/$version/index.html");
-            }
-            if ($document == 'migration-notes') {
-                return Redirect::to($response, 'axonivy/migration/index.html');
-            }
-            if ($document == 'release-notes') {
-                return Redirect::to($response, 'axonivy/release-notes/index.html');
-            }
-            if ($document == 'new-and-noteworthy') {
-                return Redirect::to($response, '/news');
-            }
-            throw new HttpNotFoundException($request);
+            return $this->redirectOldLinksToNewReadTheDocs($request, $response, $version, $document);
         }
 
         // legacy, before 9
@@ -76,7 +63,7 @@ class DocAction
                 $portalLink = "/documentation/portal-guide/$version/";
             }
         }
-        return $this->container->get('view')->render($response, 'app/doc/doc.html', [
+        return $this->view->render($response, 'app/doc/doc.html', [
             'version' => $version,
             'docProvider' => $docProvider,
             'documentUrl' => $doc->getRessourceUrl() . '?v=' . time(),
@@ -86,9 +73,26 @@ class DocAction
         ]);
     }
 
+    private function redirectOldLinksToNewReadTheDocs($request, $response, $version, $document)
+    {
+        if (empty($document)) {
+            return Redirect::to($response, "/doc/$version/index.html");
+        }
+        if ($document == 'migration-notes') {
+            return Redirect::to($response, 'axonivy/migration/index.html');
+        }
+        if ($document == 'release-notes') {
+            return Redirect::to($response, 'axonivy/release-notes/index.html');
+        }
+        if ($document == 'new-and-noteworthy') {
+            return Redirect::to($response, '/news');
+        }
+        throw new HttpNotFoundException($request);
+    }
+    
     private function renderDocOverview($response)
     {
-        return $this->container->get('view')->render($response, 'app/doc/doc-overview.html', [
+        return $this->view->render($response, 'app/doc/doc-overview.html', [
             'docLinksLTS' => self::getDocLinksLTS(),
             'docLinksLE' => self::getDocLinksLE(),
             'docLinksDEV' => self::getDocLinksDev()
@@ -104,7 +108,7 @@ class DocAction
     {
         $docLinks = [];
         $releaseInfo = ReleaseInfoRepository::getLatest();
-        if ($releaseInfo != null && ! $releaseInfo->getVersion()->isLongTermSupportVersion()) {
+        if ($releaseInfo != null && !$releaseInfo->getVersion()->isLongTermSupportVersion()) {
             $docLinks[] = self::createDocLink('/doc/latest', $releaseInfo->getVersion()->getMinorVersion());
         }
         return $docLinks;
@@ -121,10 +125,10 @@ class DocAction
 
     private static function getDocLinksDev(): array
     {
-        $docLinks = [];
-        $docLinks['sprint'] = self::createDocLink('/doc/sprint', 'Sprint');
-        $docLinks['nightly'] = self::createDocLink('/doc/nightly', 'Nightly');
-        return $docLinks;
+        return [
+            self::createDocLink('/doc/sprint', 'Sprint'),
+            self::createDocLink('/doc/nightly', 'Nightly')
+        ];
     }
 
     private static function createDocLink($url, $text)
