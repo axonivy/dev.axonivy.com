@@ -47,7 +47,7 @@ class Config {
         ]);
         
         define('IVY_VERSIONS', [
-            // '8.x' => 'Leading Edge - LE',
+             //'9' => 'Leading Edge - LE', // do not use 9.x -> 
             '8.0' => 'Long Term Support - LTS',
             '7.x' => 'UNSUPPORTED',
             '7.0' => 'Long Term Support - LTS',
@@ -67,7 +67,15 @@ class Config {
             }
         }
         
+        $le = null;
+        foreach (IVY_VERSIONS as $version => $description) {
+            if ($description == 'Leading Edge - LE') {
+                $le = $version;
+            }
+        }
+        
         define('LTS_VERSIONS', $lts);
+        define('LE_VERSION', $le);
         
         define('MAVEN_ARTIFACTORY_URL', 'https://repo.axonivy.rocks/');
     }

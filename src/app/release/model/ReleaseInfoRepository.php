@@ -6,6 +6,21 @@ use app\util\StringUtil;
 
 class ReleaseInfoRepository
 {
+    public static function getLeadingEdge(): ?ReleaseInfo
+    {
+        $leVersion = LE_VERSION;
+        if (empty($leVersion)) {
+            return null;
+        }
+        
+        $releaseInfos = self::getAvailableReleaseInfos();
+        $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) {
+            $v = $releaseInfo->getVersion()->getVersionNumber();
+            return StringUtil::startsWith($v, LE_VERSION);
+        });
+        return ArrayUtil::getLastElementOrNull($releaseInfos);
+    }
+    
     public static function getLatest(): ?ReleaseInfo
     {
         $releaseInfos = self::getAvailableReleaseInfos();
