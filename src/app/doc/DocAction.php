@@ -118,7 +118,7 @@ class DocAction
     {
         $docLinks = [];
         foreach (LTS_VERSIONS as $ltsVersion) {
-            $docLinks[] = self::createDocLink("/doc/$ltsVersion.latest", $ltsVersion);
+            $docLinks[] = self::createDocLink("/doc/$ltsVersion", $ltsVersion);
         }
         return $docLinks;
     }

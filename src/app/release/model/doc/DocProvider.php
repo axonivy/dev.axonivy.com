@@ -9,7 +9,6 @@ class DocProvider
     /**
      * For example:
      * <li> latest
-     * <li> 7.0.latest
      * <li> 7.0.0
      * @var $versionNumber
      */
