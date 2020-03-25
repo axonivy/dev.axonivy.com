@@ -111,7 +111,7 @@ class Website
         $app->get('/download/archive[/{version}]', ArchiveAction::class);
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class);
-        $app->get('/download/{version}[.html]', DevReleasesDownloadAction::class);
+        $app->get('/download/{version}', DevReleasesDownloadAction::class);
 
         $app->get('/permalink/{version}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
