@@ -6,6 +6,7 @@ use app\market\Market;
 use Slim\Psr7\Request;
 use Slim\Exception\HttpNotFoundException;
 use app\util\Redirect;
+use app\util\StringUtil;
 
 class PortalAction
 {
@@ -43,9 +44,25 @@ class PortalAction
         if ($version == 'dev' || $version == 'nightly' || $version == 'sprint') {
             return Market::getPortal()->getLatestVersion();
         }
+
         if ($version == 'latest') {
             return Market::getPortal()->getLatestVersionToDisplay();
         }
+
+        if (self::isMinorVersion($version)) {
+            $portalVersions = Market::getPortal()->getVersionsToDisplay();
+            foreach ($portalVersions as $v) {
+                if (StringUtil::startsWith($v, $version)) {
+                    return $v;
+                }
+            }
+        }
         return $version;
+    }
+    
+    private static function isMinorVersion($version)
+    {
+       $count = substr_count($version, '.');
+       return $count == 1;
     }
 }

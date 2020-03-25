@@ -57,11 +57,7 @@ class DocAction
 
         $portalLink = "";
         if (version_compare($version, 8) >= 0) {
-            if ($version == '8.0.0') {
-                $portalLink = '/documentation/portal-guide/8.0.1/';
-            } else {
-                $portalLink = "/documentation/portal-guide/$version/";
-            }
+            $portalLink = '/portal/8.0/doc';
         }
         return $this->view->render($response, 'app/doc/doc.html', [
             'version' => $version,
