@@ -11,7 +11,8 @@ class StatusApiTest extends TestCase
         AppTester::assertThatGet('/status')
             ->statusCode(200)
             ->bodyContains('phpVersion')
-            ->bodyContains('latestReleaseVersion')
-            ->bodyContains('latestLtsReleaseVersion');
+            ->bodyContains('latestVersion')
+            ->bodyContains('leadingEdgeVersion')
+            ->bodyContains('latestLtsVersion');
     }
 }
