@@ -79,8 +79,8 @@ class NewsRepository
         }
 
         $meta = json_decode(file_get_contents(__DIR__ . "/$version/meta.json"));
-        $snippet = file_get_contents(__DIR__ . "/$version/snippet.html");
-        return new News($version, $meta, $snippet, $isReleased, $sections);
+        $abstract = file_get_contents(__DIR__ . "/$version/abstract.html");
+        return new News($version, $meta, $abstract, $isReleased, $sections);
     }
 
     private static function loadImages(String $version, String $markdownFile): array
@@ -103,14 +103,14 @@ class News
 {
     private $version;
     private $meta;
-    private $snippet;
+    private $abstract;
     private $isReleased;
     private $newsDetailSections;
     
-    public function __construct(String $version, $meta, String $snippet, bool $isReleased, array $newsDetailSections)
+    public function __construct(String $version, $meta, String $abstract, bool $isReleased, array $newsDetailSections)
     {
         $this->version = $version; 
-        $this->snippet = $snippet;
+        $this->abstract = $abstract;
         $this->meta = $meta;
         $this->isReleased = $isReleased;
         $this->newsDetailSections = $newsDetailSections;
@@ -121,9 +121,9 @@ class News
         return $this->meta;
     }
 
-    public function getSnippet()
+    public function getAbstract()
     {
-        return $this->snippet;
+        return $this->abstract;
     }
     
     public function getNewsDetailSections(): array
