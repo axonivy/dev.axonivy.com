@@ -77,12 +77,13 @@ class Website
 
         $view = $container->get('view');
         $versionLTS = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
-        $versionLE = $this->getDisplayVersion(ReleaseInfoRepository::getLatest());
+        $leRelease = ReleaseInfoRepository::getLeadingEdge();
 
         $text = "$versionLTS";
         $textLong = "LTS $versionLTS";
-        if ($versionLTS != $versionLE)
+        if ($leRelease != null)
         {
+            $versionLE = $this->getDisplayVersion($leRelease);
             $text .= " / $versionLE";
             $textLong .= " / LE $versionLE";
         }
