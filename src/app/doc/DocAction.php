@@ -106,12 +106,15 @@ class DocAction
 
     private static function getDocLinksLE(): array
     {
-        $docLinks = [];
-        $releaseInfo = ReleaseInfoRepository::getLatest();
-        if ($releaseInfo != null && !$releaseInfo->getVersion()->isLongTermSupportVersion()) {
-            $docLinks[] = self::createDocLink('/doc/latest', $releaseInfo->getVersion()->getMinorVersion());
+        $releaseInfo = ReleaseInfoRepository::getLeadingEdge();
+        if ($releaseInfo == null) {
+            return [];
         }
-        return $docLinks;
+
+        $minorVersion = $releaseInfo->getVersion()->getMinorVersion();
+        return [
+            self::createDocLink("/doc/$minorVersion", $releaseInfo->getVersion()->getMinorVersion())
+        ];
     }
 
     private static function getDocLinksLTS(): array

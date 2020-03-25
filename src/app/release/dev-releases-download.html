@@ -6,20 +6,10 @@
 
     <section id="main" >
 		<div class="inner">
-				<div style="text-align:right;position:relative;top:-40px; height: 0;">
-					<a href="latest">latest</a> |
-					<a href="sprint-release">sprint</a> |
-					<a href="nightly">nightly</a> |
-					<a href="dev">dev</a>
-					
-				</div>
-			
 			<header>
 				<h2>
 					Download {{ name }}			
-						{% if testingPurpose %}
-							<br /><span style="font-size:14px;color:red;text-transform:none;">These artifacts are for testing purposes only. Never use them on a productive system!</span>
-						{% endif %}
+					<br /><span style="font-size:14px;color:red;text-transform:none;">These artifacts are for testing purposes only. Never use them on a productive system!</span>
 				</h2>
 			</header>
 			
