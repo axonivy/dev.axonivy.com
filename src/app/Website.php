@@ -38,6 +38,7 @@ use app\team\TeamAction;
 use app\tutorial\TutorialAction;
 use app\tutorial\gettingstarted\TutorialGettingStartedAction;
 use Throwable;
+use app\api\StatusApi;
 
 class Website
 {
@@ -134,6 +135,7 @@ class Website
         $app->get('/search', SearchAction::class);
 
         $app->get('/api/currentRelease', ApiCurrentRelease::class);
+        $app->get('/status', StatusApi::class);
 
         $app->get('/sitemap.xml', SitemapAction::class);
 

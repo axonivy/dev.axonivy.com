@@ -80,16 +80,6 @@ class ReleaseInfo
         return IVY_RELEASE_DIRECTORY . '/' . $versionNumber;
     }
     
-    public function getPathOrLatestPath()
-    {
-        $folder = IVY_RELEASE_DIRECTORY . '/' . $this->getVersion()->getMinorVersion() . '.latest';
-        if (file_exists($folder))
-        {
-            return $folder;
-        }
-        return $this->getPath();
-    }
-    
     public function hasVariantWithProductName(string $productName): bool
     {
         foreach ($this->variants as $variant) {

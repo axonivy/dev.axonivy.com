@@ -2,12 +2,15 @@
 namespace app\doc;
 
 use Psr\Container\ContainerInterface;
-use app\release\model\ReleaseInfoRepository;
-use app\util\StringUtil;
 use Slim\Psr7\Response;
-use DI\NotFoundException;
 use app\util\Redirect;
 
+/**
+ * Redirects
+ *  /doc/8.0.latest to /doc/8.0
+ *
+ * This is only for legacy links. Do not publish such links.
+ */
 class RedirectLatestDocVersion
 {
 
@@ -25,18 +28,7 @@ class RedirectLatestDocVersion
         if (! empty($path)) {
             $path = '/' . $path;
         }
-
-        $releaseInfo = null;
-        foreach (ReleaseInfoRepository::getAvailableReleaseInfos() as $info) {
-            if (StringUtil::startsWith($info->getVersion()->getVersionNumber(), $version)) {
-                $releaseInfo = $info;
-            }
-        }
-
-        if ($releaseInfo == null) {
-            throw new NotFoundException($request, $response);
-        }
-
-        return Redirect::to($response, '/doc/' . $releaseInfo->getVersion()->getVersionNumber() . $path);
+        $version = substr($version, 0, 3);
+        return Redirect::to($response, "/doc/$version" . $path);
     }
 }

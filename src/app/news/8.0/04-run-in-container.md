@@ -10,7 +10,7 @@ This means that the barriers between Docker, Kubernetes, OpenShift and all other
  * __DOCUMENTED INFRASTRUCTURE__: The entire Axon.ivy Engine system setup is part of an image and thus fully documented.
 
 <div class="short-links">
-	<a href="/doc/8.0.latest/engine-guide/getting-started/docker.html" target="_blank">
+	<a href="${docBaseUrl}/engine-guide/getting-started/docker.html" target="_blank">
 	  <i class="fas fa-book"></i> Getting started
 	</a>
 	<a href="https://hub.docker.com/r/axonivy/axonivy-engine/" target="_blank">

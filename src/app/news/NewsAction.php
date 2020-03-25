@@ -3,6 +3,7 @@ namespace app\news;
 
 use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
+use app\release\model\ReleaseInfoRepository;
 
 class NewsAction
 {
@@ -19,7 +20,7 @@ class NewsAction
         $version = $args['version'] ?? "";
 
         if (empty($version)) {
-            $news = NewsRepository::all();
+            $news = NewsRepository::allReleased();
             return $this->view->render($response, 'app/news/news.html', ['news' => $news]);
         }
 
@@ -37,13 +38,13 @@ class NewsAction
 
 class NewsRepository
 {
-    public static function all(): array
+    public static function allReleased(): array
     {
         $news = [];
         $dirs = glob(__DIR__ . '/*', GLOB_ONLYDIR);
         foreach ($dirs as $dir) {
             $new = self::find(basename($dir));
-            if ($new->getMeta()->released) {
+            if ($new->isReleased()) {
                 $news[] = $new;
             }
         }
@@ -64,9 +65,13 @@ class NewsRepository
     {
         $directory = __DIR__ . "/$version";
         
+        $isReleased = ReleaseInfoRepository::isReleased($version);
+        
         $sections = [];
         foreach (glob("$directory/*.md") as $markdownFile) {
             $markdown = file_get_contents($markdownFile);
+            $docBaseUrl = $isReleased ? "/doc/$version" : '/doc/dev';
+            $markdown = str_replace('${docBaseUrl}', $docBaseUrl, $markdown);
             $html = \ParsedownExtra::instance()->text($markdown);
             
             $images = self::loadImages($version, $markdownFile);
@@ -75,7 +80,7 @@ class NewsRepository
 
         $meta = json_decode(file_get_contents(__DIR__ . "/$version/meta.json"));
         $snippet = file_get_contents(__DIR__ . "/$version/snippet.html");
-        return new News($version, $meta, $snippet, $sections);
+        return new News($version, $meta, $snippet, $isReleased, $sections);
     }
 
     private static function loadImages(String $version, String $markdownFile): array
@@ -99,13 +104,15 @@ class News
     private $version;
     private $meta;
     private $snippet;
+    private $isReleased;
     private $newsDetailSections;
     
-    public function __construct(String $version, $meta, String $snippet, array $newsDetailSections)
+    public function __construct(String $version, $meta, String $snippet, bool $isReleased, array $newsDetailSections)
     {
         $this->version = $version; 
         $this->snippet = $snippet;
         $this->meta = $meta;
+        $this->isReleased = $isReleased;
         $this->newsDetailSections = $newsDetailSections;
     }
 
@@ -127,6 +134,11 @@ class News
     public function getLink(): String
     {
         return "/news/$this->version";
+    }
+    
+    public function isReleased(): bool
+    {
+        return $this->isReleased;
     }
 }
 

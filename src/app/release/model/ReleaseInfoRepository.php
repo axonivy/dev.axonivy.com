@@ -58,6 +58,23 @@ class ReleaseInfoRepository
     }
     
     /**
+     * 8.0
+     * 8.0.3
+     */
+    public static function isReleased($version): bool
+    {
+        foreach (self::getAvailableReleaseInfos() as $releaseInfo)
+        {
+            $versionNumber = $releaseInfo->getVersion()->getVersionNumber();
+            if (StringUtil::startsWith($versionNumber, $version))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * e.g: latest, sprint, nightly
      * special treatment for version like 8.0, will return latest 8.0.x 
      */

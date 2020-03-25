@@ -28,10 +28,10 @@ Successfully deploying your application in your customers environment is now eas
  * __TRACKABLE__: Configuration changes get logged, showing what has been changed and where. Besides auditing configuration changes, this can also help tracking down problems after changes.
 
 <div class="short-links">
-	<a href="/doc/8.0.latest/engine-guide/configuration/" target="_blank">
+	<a href="${docBaseUrl}/engine-guide/configuration/" target="_blank">
 	  <i class="fas fa-book"></i> Engine Guide Configuration
 	</a>
-	<a href="/doc/8.0.latest/engine-guide/configuration/file-reference.html" target="_blank">
+	<a href="${docBaseUrl}/engine-guide/configuration/file-reference.html" target="_blank">
 	  <i class="fas fa-book"></i> Configuration File Reference
 	</a>
 </div>
