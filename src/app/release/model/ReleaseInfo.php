@@ -28,6 +28,14 @@ class ReleaseInfo
         return $releaseInfos;
     }
     
+    public static function sortReleaseInfosByVersionNewestFirst(array $releaseInfos)
+    {
+        usort($releaseInfos, function (ReleaseInfo $r1, ReleaseInfo $r2) {
+            return version_compare($r2->getVersion()->getVersionNumber(), $r1->getVersion()->getVersionNumber());
+        });
+        return $releaseInfos;
+    }
+    
     public function isUnsafeVersion(): bool
     {
         return !empty($this->safeVersion);

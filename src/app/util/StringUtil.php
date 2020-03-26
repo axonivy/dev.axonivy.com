@@ -27,4 +27,14 @@ class StringUtil
     {
         return implode(DIRECTORY_SEPARATOR, $elements);
     }
+
+    public static function isFirstCharacterNumeric($string): bool
+    {
+        return is_numeric(substr($string, 0, 1));
+    }
+    
+    public static function notEqual($string1, $string2): bool
+    {
+        return strcmp($string1, $string2) !== 0;
+    }
 }

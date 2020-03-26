@@ -35,4 +35,14 @@ class VersionTest extends TestCase
         Assert::assertFalse((new Version('7.1.0'))->isLowerThan('7.1.0'));
         Assert::assertTrue((new Version('7.1.0'))->isLowerThan('7.2.0'));
     }
+    
+    public function test_isMinor()
+    {
+        Assert::assertFalse((new Version('7.1.0'))->isMinor());
+        Assert::assertFalse((new Version('7'))->isMinor());
+        
+        Assert::assertTrue((new Version('7.0'))->isMinor());
+        Assert::assertTrue((new Version('11.0'))->isMinor());
+        Assert::assertTrue((new Version('7.19'))->isMinor());
+    }
 }
