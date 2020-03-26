@@ -23,13 +23,13 @@ pipeline {
 	  }
       steps {
         echo 'create distribution package'
-      	sh 'composer install --no-dev --no-progress --prefer-dist'
+      	sh 'composer install --no-dev --no-progress'
         sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases src vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
  
         echo 'test'
-      	sh 'composer install --no-progress --prefer-dist'
+      	sh 'composer install --no-progress'
         sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
         junit 'phpunit-junit.xml'
       } 
