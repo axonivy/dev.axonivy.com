@@ -7,6 +7,7 @@ use app\release\model\doc\DocProvider;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Response;
 use app\util\Redirect;
+use app\util\StringUtil;
 
 class DocAction
 {
@@ -23,6 +24,15 @@ class DocAction
 
         if (empty($version)) {
             return $this->renderDocOverview($response);
+        }
+        
+        // special treatment when using a major version e.g. 8/9/10
+        if (strlen($version) == 1 && is_numeric($version)) {
+            $bestMatchingVersion = ReleaseInfoRepository::getBestMatchingMinorVersion($version);
+            if (StringUtil::notEqual($bestMatchingVersion, $version))
+            {
+                return Redirect::to($response, "/doc/$bestMatchingVersion");
+            }
         }
 
         $docProvider = new DocProvider($version);

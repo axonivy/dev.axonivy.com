@@ -107,6 +107,22 @@ class ReleaseInfoRepository
         return self::createArtifactsFromReleaseInfo($releaseInfo, $cdnBaseUrl, $permalinkBaseUrl);
     }
 
+    public static function getBestMatchingMinorVersion(string $version): string {
+        if (StringUtil::isFirstCharacterNumeric($version)) {
+            $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());
+            foreach ($releaseInfos as $info) {
+                if ($info->getVersion()->isMinor()) {
+                    $v = $info->getVersion()->getVersionNumber();
+                    if (StringUtil::startsWith($v, $version))
+                    {
+                        return $info->getVersion()->getVersionNumber();
+                    }
+                }                
+            }
+        }
+        return $version;
+    }
+    
     private static function getBestMatchingVersion(string $version): string {
         if (StringUtil::isFirstCharacterNumeric($version)) {
             $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());

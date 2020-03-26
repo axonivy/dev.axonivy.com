@@ -13,10 +13,7 @@ class Version
     public static function isValidVersionNumber(string $versionNumber): bool
     {
         $number = str_replace('.' , '', $versionNumber);
-        if (!is_numeric($number)) {
-            return false;
-        }
-        return version_compare($versionNumber, '0.0.1', '>=') >= 0;
+        return is_numeric($number);
     }
     
     public function isLongTermSupportVersion(): bool
@@ -38,6 +35,11 @@ class Version
     public function isLowerThan(string $versionNumber): bool
     {
         return version_compare($this->versionNumber, $versionNumber, '<');
+    }
+    
+    public function isMinor(): bool
+    {
+        return substr_count($this->versionNumber, '.') == 1;
     }
     
     /**

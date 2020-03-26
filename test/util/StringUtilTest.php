@@ -40,6 +40,20 @@ class StringUtilTest extends TestCase
         Assert::assertFalse(StringUtil::endsWith('abc', 'a'));
     }
     
+    public function testNotEqual()
+    {
+        Assert::assertTrue(StringUtil::notEqual('abc', 'ab'));
+        Assert::assertTrue(StringUtil::notEqual('abc', 'a'));
+        Assert::assertTrue(StringUtil::notEqual('', 'a'));
+        Assert::assertTrue(StringUtil::notEqual('abc', ''));
+        Assert::assertTrue(StringUtil::notEqual('abc', null));
+        Assert::assertTrue(StringUtil::notEqual(null, 'a'));
+        
+        Assert::assertFalse(StringUtil::notEqual('abc', 'abc'));
+        Assert::assertFalse(StringUtil::notEqual('', ''));
+        Assert::assertFalse(StringUtil::notEqual(null, null));
+    }
+    
     public function testIsFirstCharacterNumeric()
     {
         Assert::assertFalse(StringUtil::isFirstCharacterNumeric('abc'));
@@ -50,6 +64,5 @@ class StringUtilTest extends TestCase
         Assert::assertTrue(StringUtil::isFirstCharacterNumeric('2abc'));
         Assert::assertTrue(StringUtil::isFirstCharacterNumeric('2'));
         Assert::assertTrue(StringUtil::isFirstCharacterNumeric(2));
-        
     }
 }
