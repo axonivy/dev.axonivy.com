@@ -20,6 +20,12 @@ class DocActionTest extends TestCase
         AppTester::assertThatGet('/doc/8')->redirect('/doc/8.0');
         AppTester::assertThatGet('/doc/7')->redirect('/doc/7.5');
     }
+    
+    public function testRedirectMajorToLatestMinorWithFiles()
+    {
+        AppTester::assertThatGet('/doc/8/index.html')->redirect('/doc/8.0/index.html');
+        AppTester::assertThatGet('/doc/7/directory/another')->redirect('/doc/7.5/directory/another');
+    }
  
     public function testDoNotRedirectMinor()
     {
