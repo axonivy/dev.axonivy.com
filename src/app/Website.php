@@ -123,7 +123,7 @@ class Website
         $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
         $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
         $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
-        $app->get('/doc/{version}/{document}', DocAction::class);
+        $app->get('/doc/{version}/{document:.*}', DocAction::class);
         
         $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);

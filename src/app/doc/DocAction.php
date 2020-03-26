@@ -31,7 +31,11 @@ class DocAction
             $bestMatchingVersion = ReleaseInfoRepository::getBestMatchingMinorVersion($version);
             if (StringUtil::notEqual($bestMatchingVersion, $version))
             {
-                return Redirect::to($response, "/doc/$bestMatchingVersion");
+                $doc = $args['document'] ?? '';
+                if (!empty($doc)) {
+                    $doc = '/' . $doc;
+                }
+                return Redirect::to($response, "/doc/$bestMatchingVersion" . $doc);    
             }
         }
 
