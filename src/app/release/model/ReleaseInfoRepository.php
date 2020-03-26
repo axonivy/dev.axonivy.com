@@ -90,30 +90,35 @@ class ReleaseInfoRepository
     }
 
     /**
-     * e.g: latest, sprint, nightly
-     * special treatment for version like 8.0, will return latest 8.0.x 
+     * e.g: 7.0.3, 8.0.1, latest, sprint, nightly, dev
+     * - 8.0 -> newest 8.0.x
+     * - 8 -> newest 8.x
      */
     public static function getArtifacts(string $version): array
     {
-        $versionModified = $version;
-        if (StringUtil::endsWith($version, '.0')) {
-            $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst(self::getAvailableReleaseInfos());
-            foreach ($releaseInfos as $info) {
-                $v = $info->getVersion()->getVersionNumber();
-                if (StringUtil::startsWith($v, $version))
-                {
-                    $versionModified = $info->getVersion()->getVersionNumber();
-                }
-            }
-        }
+        $versionBestMatch = self::getBestMatchingVersion($version);
         
-        $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $versionModified;
-        $cdnBaseUrl = CDN_HOST . '/' . $versionModified . '/';
-        $permalinkBaseUrl = PERMALINK_BASE_URL . $versionModified . '/';
+        $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $versionBestMatch;
+        $cdnBaseUrl = CDN_HOST . '/' . $versionBestMatch . '/';
+        $permalinkBaseUrl = PERMALINK_BASE_URL . $versionBestMatch . '/';
         
         $releaseInfo = self::createReleaseInfo($artifactsDirectory, '', '');
         
         return self::createArtifactsFromReleaseInfo($releaseInfo, $cdnBaseUrl, $permalinkBaseUrl);
+    }
+
+    private static function getBestMatchingVersion(string $version): string {
+        if (StringUtil::isFirstCharacterNumeric($version)) {
+            $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());
+            foreach ($releaseInfos as $info) {
+                $v = $info->getVersion()->getVersionNumber();
+                if (StringUtil::startsWith($v, $version))
+                {
+                    return $info->getVersion()->getVersionNumber();
+                }
+            }
+        }
+        return $version;
     }
     
     private static function createArtifactsFromReleaseInfo(ReleaseInfo $releaseInfo, string $cdnBaseUrl, string $permalinkBaseUrl): array
