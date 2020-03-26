@@ -41,3 +41,28 @@
 /portal [Portal Landing Page]
 /portal/${version} [Portal Landing Page for specific version (dev, sprint, nightly, latest also supported)]
 /portal/${version}/doc [Portal Doc for specific version (dev, sprint, nightly, latest also supported)]
+
+
+
+
+
+
+
+Latest will now point to latest LTS and not to our Leading Edge.
+
+Doc URLs
+
+    We always try to use stable minor urls like:
+        /doc/8.0
+        /doc/9.1
+    We avoid using bugfix urls (they become fast outdated):
+        /doc/8.0.1
+        /doc/9.0.0
+    It's possible to use also major urls, but they are not promoted:
+        /doc/8
+        /doc/9 
+    It's fine to use our dev versions to show a customer what we are working on:
+        /doc/dev
+        /doc/sprint
+        /doc/nightly
+    We avoid using urls like /doc/latest, its still possible, but we will remove it some day. Because at the day X, the content will completely change.
