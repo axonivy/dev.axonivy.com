@@ -23,34 +23,26 @@ class SitemapAction
             self::createSite('/doc', 1),
             self::createSite('/tutorial', 1),
             self::createSite('/market', 1),
-            
-            self::createSite('/support', 0.8),
-            self::createSite('/team', 0.8),
-            
-            self::createSite('/doc/latest/new-and-noteworthy', 0.6),
-            self::createSite('/doc/latest/release-notes', 0.6),
-            self::createSite('/doc/latest/migration-notes', 0.4),
-            self::createSite('/doc/latest/readme', 0.4)
+            self::createSite('/support', 1),
+            self::createSite('/team', 1),
         ];
-        
-        $releaseInfo = ReleaseInfoRepository::getLatest();
+
+        $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();       
         if ($releaseInfo != null) {
-            $sites = self::addSites($sites, $releaseInfo, 'designer-guide');
-            $sites = self::addSites($sites, $releaseInfo, 'engine-guide');
-            $sites = self::addSites($sites, $releaseInfo, 'PortalKitHtml');
-            $sites = self::addSites($sites, $releaseInfo, 'public-api');
+            $sites = self::addSites($sites, $releaseInfo);
         }
-        
+
         return $this->container->get('view')->render($response, 'app/sitemap/sitemap.xml', ['sites' => $sites])->withHeader('Content-Type', 'text/xml');
     }
-    
-    private static function addSites($sites, ReleaseInfo $releaseInfo, $path): array
+
+    private static function addSites($sites, ReleaseInfo $releaseInfo): array
     {
-        foreach (self::getHtmlFiles($releaseInfo->getPath() . '/documents/'.$path.'/') as $html) {
+        $minorVersion = $releaseInfo->getVersion()->getMinorVersion();
+        foreach (self::getHtmlFiles($releaseInfo->getPath() . '/documents/') as $html) {
             if (!StringUtil::startsWith($html, '/')) {
                 $html = '/' . $html;
             }
-            $sites[] = self::createSite('/doc/latest/'.$path . $html, 0.8);
+            $sites[] = self::createSite("/doc/$minorVersion$html", 0.8);
         }
         return $sites;
     }
