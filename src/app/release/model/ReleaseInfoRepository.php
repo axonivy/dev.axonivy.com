@@ -62,11 +62,7 @@ class ReleaseInfoRepository
                 continue;
             }
             
-            $safeVersion = '';
-            if (isset(UNSAFE_RELEASES[$versionNumber])) {
-                $safeVersion = UNSAFE_RELEASES[$versionNumber];
-            }            
-            $releaseInfos[] = self::createReleaseInfo($directory, $versionNumber, $safeVersion);
+            $releaseInfos[] = self::createReleaseInfo($directory, $versionNumber);
         }
         $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst($releaseInfos);
         return $releaseInfos;
@@ -150,10 +146,10 @@ class ReleaseInfoRepository
         return $artifacts;
     }
     
-    private static function createReleaseInfo($directory, $versionNumber, $safeVersion): ReleaseInfo
+    private static function createReleaseInfo($directory, $versionNumber): ReleaseInfo
     {
         $fileNames = glob($directory . '/downloads/*.{zip,deb}', GLOB_BRACE);
-        return new ReleaseInfo($versionNumber, $fileNames, $safeVersion);
+        return new ReleaseInfo($versionNumber, $fileNames);
     }
 }
 

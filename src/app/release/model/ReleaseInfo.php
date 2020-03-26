@@ -8,16 +8,14 @@ class ReleaseInfo
 {
     private $version;
     private $variants;
-    private $safeVersion;
     
-    public function __construct(string $versionNumber, array $variantNames, ?string $safeVersion)
+    public function __construct(string $versionNumber, array $variantNames)
     {
         $this->version = new Version($versionNumber);
         $this->variants = [];
         foreach ($variantNames as $variantName) {
             $this->variants[] = Variant::create($variantName);
         }
-        $this->safeVersion = $safeVersion;
     }
     
     public static function sortReleaseInfosByVersionOldestFirst(array $releaseInfos)
@@ -38,12 +36,7 @@ class ReleaseInfo
     
     public function isUnsafeVersion(): bool
     {
-        return !empty($this->safeVersion);
-    }
-    
-    public function getSafeVersion(): ?string
-    {
-        return $this->safeVersion;
+        return file_exists($this->getPath() . '/unsafe.version'); 
     }
     
     public function getVersion(): Version

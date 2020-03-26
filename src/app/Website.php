@@ -29,7 +29,6 @@ use app\release\DevReleasesDownloadAction;
 use app\release\DownloadAction;
 use app\release\MavenArchiveAction;
 use app\release\PermalinkAction;
-use app\release\SecurityVulnerabilityAction;
 use app\release\model\ReleaseInfo;
 use app\release\model\ReleaseInfoRepository;
 use app\search\SearchAction;
@@ -103,7 +102,6 @@ class Website
         $app->redirect('/download/addons[.html]', '/market', 301);
         $app->redirect('/download/community.html', '/community', 301);
         $app->redirect('/download/archive.html', '/download/archive', 301);
-        $app->redirect('/download/securityvulnerability.html', '/download/securityvulnerability', 301);
         $app->redirect('/download/sprint-release[.html]', '/download/sprint', 301);
 
         $app->get('/', FeatureAction::class);
@@ -111,7 +109,6 @@ class Website
         $app->get('/download', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class);
         $app->get('/download/maven.html', MavenArchiveAction::class);
-        $app->get('/download/securityvulnerability', SecurityVulnerabilityAction::class);
         $app->get('/download/{version}', DevReleasesDownloadAction::class);
 
         $app->get('/permalink/{version}/{file}', PermalinkAction::class);

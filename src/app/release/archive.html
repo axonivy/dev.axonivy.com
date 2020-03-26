@@ -55,11 +55,10 @@
 								<td>
 									{% if releaseInfo.UnsafeVersion %}
 										<span style="color:red;">
-										 We have identified a security issue in this version which has been fixed with {{ releaseInfo.SafeVersion }}.
-										 We highly recommend updating to the latest version or <a href="/download/securityvulnerability">patch this version!</a>
+										 We have identified a security issue in this version. We highly recommend updating to the latest update version.
 										 </span> <br /><br />
 									{% endif %}
-								
+
 									{% for variant in releaseInfo.Variants %}
 										<a href="{{ variant.DownloadUrl }}"><span class="icon fas fa-download"></a> </span>&nbsp;<a href="{{ variant.DownloadUrl }}">{{ variant.FileName }}</a><br />
 									{% endfor %}
