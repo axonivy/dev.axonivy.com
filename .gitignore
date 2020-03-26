@@ -3,3 +3,5 @@
 /src/logs
 composer.phar
 .phpunit.result.cache
+.sonar
+.scannerwork
