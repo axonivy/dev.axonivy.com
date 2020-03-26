@@ -22,10 +22,3 @@ Do not commit big files in this repo. If you need to reference binary large obje
 * SlimFramework <http://www.slimframework.com>
 * Template <https://templated.co/introspect>
 * JS-Framework <https://github.com/ajlkn/skel>
-
-## Search
-The files `src/app/search/_cse_annotations.xml` and `src/app/search/_cse_context.xml` are not referenced on the webpage.
-
-But they are needed to add _Annotation_ and _Facet_  to the custom google search.
-They could be uploaded to google on <https://cse.google.com/> with user info@ivyteam.ch.
-Menu entry > Setup > Advanced.
