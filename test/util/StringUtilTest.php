@@ -39,4 +39,17 @@ class StringUtilTest extends TestCase
         Assert::assertFalse(StringUtil::endsWith('abc', 'ab'));
         Assert::assertFalse(StringUtil::endsWith('abc', 'a'));
     }
+    
+    public function testIsFirstCharacterNumeric()
+    {
+        Assert::assertFalse(StringUtil::isFirstCharacterNumeric('abc'));
+        Assert::assertFalse(StringUtil::isFirstCharacterNumeric('a'));
+        Assert::assertFalse(StringUtil::isFirstCharacterNumeric('a3a'));
+        Assert::assertFalse(StringUtil::isFirstCharacterNumeric(''));
+        Assert::assertFalse(StringUtil::isFirstCharacterNumeric(null));
+        Assert::assertTrue(StringUtil::isFirstCharacterNumeric('2abc'));
+        Assert::assertTrue(StringUtil::isFirstCharacterNumeric('2'));
+        Assert::assertTrue(StringUtil::isFirstCharacterNumeric(2));
+        
+    }
 }
