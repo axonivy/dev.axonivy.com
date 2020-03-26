@@ -35,6 +35,16 @@ pipeline {
       } 
     }
     
+    stage('sonar') {
+      when {
+        branch 'master'
+      }
+   	  steps {
+   	    // https://github.com/SonarSource/sonar-scanner-cli-docker/issues/30
+   	    sh 'docker run -e SONAR_HOST_URL=https://sonar.ivyteam.io --user="$(id -u):$(id -g)" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
+      } 
+    }
+    
     stage('deploy') {
       when {
         branch 'master'
