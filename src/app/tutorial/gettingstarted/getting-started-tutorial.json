@@ -8,7 +8,7 @@
 				"name": "Start Axon.ivy Designer",
 				"videoUrl": "https://www.youtube.com/embed/pvDEhzSs3W0",
 				"instructions": [
-					"Switch to the folder where you <a href=\"/installation/\">unzipped the Designer</a> and start <b>Axon.ivy Designer.exe</b>",
+					"Download the <a href=\"/download/\">Axon.ivy Designer</a>, switch to the installation directory and start <b>Axon.ivy Designer.exe</b>",
 					"Click <b>OK</b> to continue with the default Workspace'",
 					"Leave the Welcome Screen by clicking <b>Go to workbench</b>"
 				]

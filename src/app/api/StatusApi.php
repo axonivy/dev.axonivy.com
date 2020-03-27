@@ -23,9 +23,19 @@ class StatusApi
                 'latestVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatest()),
                 'latestLtsVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatestLongTermSupport()),
                 'leadingEdgeVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLeadingEdge()),
+                'longTermSupportVersions' => $this->getVersionNumbers(ReleaseInfoRepository::getLongTermSupportVersions()),
                 'versions' => $this->getVersions()
-            ]            
+            ]
         ];
+    }
+
+    private function getVersionNumbers(array $releaseInfos)
+    {
+        $versions = [];
+        foreach ($releaseInfos as $releaseInfo) {
+            $versions[] = $this->getVersionNumber($releaseInfo);
+        }
+        return $versions;
     }
     
     private function getVersionNumber(?ReleaseInfo $releaseInfo)

@@ -2,6 +2,7 @@
 namespace app\release\model;
 
 use app\util\StringUtil;
+use app\util\UserAgentDetector;
 
 class Variant
 {
@@ -12,6 +13,8 @@ class Variant
     public const TYPE_LINUX = 'Linux';
     public const TYPE_DEBIAN = 'Debian';
     public const TYPE_MAC = 'MacOSX-BETA';
+    public const TYPE_ALL = 'All'; // All platforms
+    public const TYPE_DOCKER = 'docker'; // no download artifacts available
     
     public const ARCHITECTURE_X64 = 'x64';
     public const ARCHITECTURE_X86 = 'x86';
@@ -83,37 +86,6 @@ class Variant
         return $productName;
     }
     
-    public function architectureIsMoreModern(Variant $mostModernVariant, string $type): bool
-    {
-        if ($this->contains($this->type, 'OSGi'))
-        {
-            if ($this->contains($this->type, "Slim"))
-            {
-                return false;
-            }
-            if ($this->contains($this->type, $type))
-            {
-                return true;
-            }
-            if ($this->contains($this->type, "All"))
-            {
-                return true;
-            }
-            return false;
-        }
-        else if ($this->contains($mostModernVariant->type, 'OSGi'))
-        {
-            return false;
-        }
-        else if ($this->contains($this->type, $type))
-        {
-            if ($this->architecture == self::ARCHITECTURE_X64) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
     private function contains(string $candidate, string $search): bool {
         return StringUtil::contains($candidate, $search);
     }
@@ -141,7 +113,17 @@ class Variant
     
     public function getInstallationUrl(): string
     {
-        return '/installation?downloadUrl=' . $this->getDownloadUrl();    
+        $url = $this->getDownloadUrl();
+        return self::createInstallationUrl($url, $this->versionNumber, $this->productName, $this->type);    
+    }
+
+    public static function createInstallationUrl(string $url, string $version, string $product, string $type): string
+    {
+        return "/installation"
+            . "?downloadUrl=$url"
+            . "&version=$version"
+            . "&product=$product"
+            . "&type=$type";   
     }
     
     public function getProductName(): string
@@ -177,6 +159,53 @@ class Variant
     public function isMavenPluginCompatible(): bool
     {
         return $this->productName == self::PRODUCT_NAME_ENGINE;
+    }
+    
+    public function getType() {
+        return $this->type;
+    }
+    
+    public function isMatchingCurrentRequest()
+    {
+        if (UserAgentDetector::isOsLinux() && $this->type == Variant::TYPE_DEBIAN)
+        {
+            return true;
+        }
+        if (UserAgentDetector::isOsLinux() && $this->type == Variant::TYPE_LINUX)
+        {
+            return true;
+        }
+        if (UserAgentDetector::isOsMac() && $this->type == Variant::TYPE_MAC)
+        {
+            return true;
+        }
+        if (UserAgentDetector::isWindows() && $this->type == Variant::TYPE_WINDOWS)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public function getImage() {
+        if ($this->type == self::TYPE_MAC) {
+            return 'fab fa-apple';
+        }
+        if ($this->type == self::TYPE_WINDOWS) {
+            return 'fab fa-windows';
+        }
+        if ($this->type == self::TYPE_LINUX) {
+            return 'fab fa-linux';
+        }
+        if ($this->type == self::TYPE_DEBIAN) {
+            return 'fab fa-linux';
+        }
+        return "fas fa-question";
+    }
+    
+    public function isBeta(): bool
+    {
+        $filename = strtolower($this->getFileName());
+        return StringUtil::contains($filename, 'beta');
     }
 }
 

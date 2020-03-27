@@ -1,5 +1,5 @@
 <?php
-namespace app\release;
+namespace app\download\archive;
 
 use Psr\Container\ContainerInterface;
 use app\release\model\ReleaseInfoRepository;
@@ -34,7 +34,7 @@ class ArchiveAction
         
         $releaseInfos = $this->findReleaseInfos($version);
 
-        return $this->container->get('view')->render($response, 'app/release/archive.html', [
+        return $this->container->get('view')->render($response, 'app/download/archive/archive.html', [
             'releaseInfos' => $releaseInfos,
             'versionLinks' => $links,
             'currentMajorVersion' => $version

@@ -17,6 +17,9 @@ use app\doc\LegacyDesignerGuideDocAction;
 use app\doc\LegacyEngineGuideDocAction;
 use app\doc\LegacyPublicAPIAction;
 use app\doc\RedirectLatestDocVersion;
+use app\download\DownloadAction;
+use app\download\archive\ArchiveAction;
+use app\download\maven\MavenArchiveAction;
 use app\feature\FeatureAction;
 use app\installation\InstallationAction;
 use app\market\MarketAction;
@@ -24,11 +27,6 @@ use app\market\ProductAction;
 use app\news\NewsAction;
 use app\permalink\LibPermalink;
 use app\portal\PortalAction;
-use app\release\ArchiveAction;
-use app\release\DevReleasesDownloadAction;
-use app\release\DownloadAction;
-use app\release\MavenArchiveAction;
-use app\release\PermalinkAction;
 use app\release\model\ReleaseInfo;
 use app\release\model\ReleaseInfoRepository;
 use app\search\SearchAction;
@@ -38,6 +36,9 @@ use app\team\TeamAction;
 use app\tutorial\TutorialAction;
 use app\tutorial\gettingstarted\TutorialGettingStartedAction;
 use Throwable;
+use app\download\devreleases\DevReleasesDownloadAction;
+use app\permalink\PermalinkAction;
+use app\release\ReleaseCycleAction;
 
 class Website
 {
@@ -88,6 +89,10 @@ class Website
         }
         $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD', $text);
         $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD_LONG', $textLong);
+        $view->getEnvironment()->addGlobal('ARCHIVE_LINK', '/download/archive/' . ReleaseInfoRepository::getLatestLongTermSupport()->getVersion()->getMinorVersion());
+        
+        $view->getEnvironment()->addGlobal('PRODUCTIVE_SYSTEM', PRODUCTIVE_SYSTEM);
+        
     }
     
     private function getDisplayVersion(?ReleaseInfo $info): string
@@ -107,9 +112,12 @@ class Website
         $app->get('/', FeatureAction::class);
 
         $app->get('/download', DownloadAction::class);
+        $app->get('/download/leading-edge', DownloadAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class);
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/{version}', DevReleasesDownloadAction::class);
+        
+        $app->get('/release-cycle', ReleaseCycleAction::class);
 
         $app->get('/permalink/{version}/{file}', PermalinkAction::class);
         $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);

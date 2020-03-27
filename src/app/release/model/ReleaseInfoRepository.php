@@ -36,6 +36,20 @@ class ReleaseInfoRepository
         return ArrayUtil::getLastElementOrNull($releaseInfos);
     }
     
+    public static function getLongTermSupportVersions(): array
+    {
+        $releaseInfos = self::getAvailableReleaseInfos();
+        $lts = [];
+        foreach (LTS_VERSIONS as $ltsVersion) {
+            $infos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) use ($ltsVersion) {
+                $v = $releaseInfo->getVersion()->getVersionNumber();
+                return StringUtil::startsWith($v, $ltsVersion);
+            });
+            $lts[] = ArrayUtil::getLastElementOrNull($infos);
+        }
+        return array_reverse(array_filter($lts));
+    }
+    
     public static function getAvailableReleaseInfosByProductName(string $productName): array
     {
         $releaseInfos = self::getAvailableReleaseInfos();

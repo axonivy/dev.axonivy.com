@@ -95,31 +95,46 @@ class ReleaseInfo
     {
         $variant = null;
         if (UserAgentDetector::isOsLinux()) {
-            $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_DEBIAN);
+            $variant = $this->getVariantByProductNameAndType($productName, Variant::TYPE_DEBIAN);
             if ($variant == null)
             {
-                $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_LINUX);
+                $variant = $this->getVariantByProductNameAndType($productName, Variant::TYPE_LINUX);
             }
         }
         if (UserAgentDetector::isOsMac()) {
-            $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_MAC);
+            $variant = $this->getVariantByProductNameAndType($productName, Variant::TYPE_MAC);
         }
+
         if ($variant == null) {
-            $variant = $this->getVariantWithMostModernArchitecture($productName, Variant::TYPE_WINDOWS);
+            $variant = $this->getVariantByProductNameAndType($productName, Variant::TYPE_WINDOWS);
         }
         return $variant;
     }
     
-    private function getVariantWithMostModernArchitecture(string $productName, string $type): ?Variant
+    public function getVariantsByProductNameAndTypes(string $productName, array $types): array
     {
-        $mostModernVariant = null;
-        foreach ($this->variants as $variant) {
-            if ($variant->getProductName() == $productName) {
-                if ($mostModernVariant == null || $variant->architectureIsMoreModern($mostModernVariant, $type)) {
-                    $mostModernVariant = $variant;
+        $variants = [];
+        foreach ($types as $type) {
+            foreach ($this->variants as $variant) {
+                if ($variant->getProductName() == $productName) {
+                    if ($variant->getType() == $type) {
+                        $variants[] = $variant;
+                    }
                 }
             }
         }
-        return $mostModernVariant;
+        return $variants;
+    }
+    
+    public function getVariantByProductNameAndType(string $productName, string $type): ?Variant
+    {
+        foreach ($this->variants as $variant) {
+            if ($variant->getProductName() == $productName) {
+                if ($variant->getType() == $type) {
+                    return $variant;
+                }
+            }
+        }
+        return null;
     }
 }
