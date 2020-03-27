@@ -9,10 +9,10 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    class="chart"
    width="775"
-   height="360"
+   height="432"
    version="1.1"
    id="svg372"
-   sodipodi:docname="cycle.svg"
+   sodipodi:docname="release-cycle.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata378">
@@ -43,37 +43,30 @@
      showgrid="false"
      showguides="false"
      inkscape:zoom="1.8962945"
-     inkscape:cx="461.63535"
-     inkscape:cy="165.9986"
+     inkscape:cx="422.82054"
+     inkscape:cy="208.18614"
      inkscape:window-x="70"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g370" />
+     inkscape:current-layer="g256"
+     inkscape:snap-bbox="true" />
   <g
      class="gantt-chart"
      width="861"
      height="308"
-     transform="translate(144.77956,54.237332)"
+     transform="translate(144.77956,126.23733)"
      id="g370">
     <rect
        class="chart__bar--orange"
        y="195.76115"
        height="26"
-       width="319.68213"
+       width="281.186"
        id="rect214"
        x="12.483786"
-       style="fill:#007095;fill-opacity:1;stroke-width:1.95348597" />
-    <rect
-       class="chart__bar--orange"
-       y="138.70744"
-       height="26"
-       width="34.923355"
-       id="rect220"
-       x="191.75284"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.64566773" />
+       style="fill:#007095;fill-opacity:1;stroke-width:1.83209491" />
     <g
        class="x axis"
-       transform="translate(-55.006571,227.50692)"
+       transform="matrix(1,0,0,1.2149301,-55.006571,224.01612)"
        font-size="10"
        id="g312"
        style="font-size:10px;font-family:sans-serif;text-anchor:middle;fill:none">
@@ -94,6 +87,20 @@
            dy="0.70999998em"
            id="text254"
            style="fill:currentColor">2017</text>
+        <line
+           y2="-17.753412"
+           y1="-283.31241"
+           id="line252-6"
+           x1="455.86823"
+           x2="455.86823"
+           style="font-size:10px;font-family:sans-serif;text-anchor:middle;opacity:1;fill:none;stroke:currentColor;stroke-width:0.95159376;stroke-miterlimit:4;stroke-dasharray:0.95159377, 1.90318752;stroke-dashoffset:0" />
+        <line
+           y2="1.7021793"
+           y1="-168.79921"
+           id="line252-6-8"
+           x1="322.48752"
+           x2="322.94009"
+           style="font-size:10px;font-family:sans-serif;text-anchor:middle;opacity:1;fill:none;stroke:currentColor;stroke-width:0.76249158;stroke-miterlimit:4;stroke-dasharray:0.76249158, 1.52498314;stroke-dashoffset:0" />
       </g>
       <g
          class="tick"
@@ -280,7 +287,29 @@
            x="-150"
            class="chart__label--bold"
            id="text316"
-           style="fill:currentColor">Axon.ivy 11.X LE</text>
+           style="fill:currentColor">Axon.ivy 11.2 LE</text>
+        <text
+           y="-27.499851"
+           x="-150.35629"
+           class="chart__label--bold"
+           id="text316-4"
+           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">Axon.ivy 11.3 LE</text>
+        <text
+           y="-55.511524"
+           x="-149.28291"
+           class="chart__label--bold"
+           id="text316-4-0"
+           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">Axon.ivy 11.X LE</text>
+        <text
+           y="-83.51152"
+           x="-149.28291"
+           class="chart__label--bold"
+           id="text316-4-0-5"
+           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">
+          <tspan
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.99996853px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
+             id="tspan1378">Axon.ivy 12.0 LTS</tspan>
+        </text>
       </g>
       <g
          class="tick"
@@ -440,58 +469,10 @@
        class="chart__bar--orange"
        y="167.86118"
        height="26"
-       width="370.76788"
+       width="267.93576"
        id="rect214-7"
        x="158.68806"
-       style="fill:#007095;fill-opacity:1;stroke-width:2.10378885" />
-    <rect
-       class="chart__bar--orange"
-       y="26.707432"
-       height="26"
-       width="291.34259"
-       id="rect214-7-5"
-       x="331.44626"
-       style="fill:#007095;fill-opacity:1;stroke-width:1.8648895" />
-    <rect
-       class="chart__bar--orange"
-       y="110.70744"
-       height="26"
-       width="34.923355"
-       id="rect220-9"
-       x="226.67619"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.64566773" />
-    <rect
-       class="chart__bar--orange"
-       y="82.707443"
-       height="26"
-       width="34.923355"
-       id="rect220-9-1-2"
-       x="261.59958"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.64566773" />
-    <rect
-       class="chart__bar--orange"
-       y="54.707432"
-       height="26"
-       width="34.923355"
-       id="rect220-9-1-7"
-       x="296.52292"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.64566773" />
-    <rect
-       class="chart__bar--orange"
-       y="-29.292568"
-       height="26"
-       width="34.923355"
-       id="rect220-9-1-7-0"
-       x="400.3696"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.64566773" />
-    <rect
-       class="chart__bar--orange"
-       y="-1.2925677"
-       height="26"
-       width="34.923355"
-       id="rect220-9-1-7-0-9"
-       x="365.44626"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.64566773" />
+       style="fill:#007095;fill-opacity:1;stroke-width:1.78840733" />
     <rect
        class="chart__bar--orange"
        y="275.88763"
@@ -530,5 +511,109 @@
          x="-95.628365"
          y="284.95404"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">LTS Maintenance Period</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="161.08011"
+       y="272.01263"
+       id="text1019"><tspan
+         sodipodi:role="line"
+         x="161.08011"
+         y="272.01263"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
+         id="tspan1033"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
+   id="tspan1035">Note</tspan>: Subject to change without notice. The release dates and the amount of</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="196.4122"
+       y="285.19626"
+       id="text1039"><tspan
+         sodipodi:role="line"
+         id="tspan1037"
+         x="196.4122"
+         y="285.19626"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Leading Edge releases are only exemplary!</tspan></text>
+    <rect
+       class="chart__bar--orange"
+       y="26.707428"
+       height="26"
+       width="267.93576"
+       id="rect214-7-3"
+       x="293.44626"
+       style="fill:#007095;fill-opacity:1;stroke-width:1.78840733" />
+    <rect
+       class="chart__bar--orange"
+       y="54.707443"
+       height="26"
+       width="25.43116"
+       id="rect220-0"
+       x="267.39005"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="83.14917"
+       height="26"
+       width="25.43116"
+       id="rect220-0-4"
+       x="239.54431"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="110.57107"
+       height="26"
+       width="25.43116"
+       id="rect220-0-4-8"
+       x="211.4857"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="138.57108"
+       height="26"
+       width="25.43116"
+       id="rect220-0-4-8-8"
+       x="183.4857"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="-113.2924"
+       height="26"
+       width="200.4357"
+       id="rect214-7-3-5"
+       x="427.47589"
+       style="fill:#007095;fill-opacity:1;stroke-width:1.54681587" />
+    <rect
+       class="chart__bar--orange"
+       y="-85.292397"
+       height="26"
+       width="25.43116"
+       id="rect220-0-48"
+       x="402.04474"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="-57.292397"
+       height="26"
+       width="25.43116"
+       id="rect220-0-48-1"
+       x="374.61359"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="-29.292397"
+       height="26"
+       width="25.43116"
+       id="rect220-0-48-1-2"
+       x="347.18243"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="-1.2923965"
+       height="26"
+       width="25.43116"
+       id="rect220-0-48-1-2-8"
+       x="319.75128"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
   </g>
 </svg>
