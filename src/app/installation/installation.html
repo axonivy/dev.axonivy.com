@@ -4,46 +4,28 @@
 
 {% block content %}
 
-	<section id="main" >
-		<div class="inner">
-			<header><h1>Installation</h1></header>
-			<br /><br />
-			<ul class="alt" style="text-align:center;">
-				<li>
-					Download the latest Axon.ivy Designer to your desired location
-					<br /><br />
-					<ul class="actions">
-						<li><a href="{{variant.DownloadUrl}}" class="button special">Download Axon.ivy Designer {{variant.Version.MinorVersion}}</a></li>
-					</ul>
-					<img src="/images/installation/download-axonivy-designer.png" />
-					<br /><br />
-				</li>
-				<li>
-					<br /><br />
-					Extract the downloaded Zip file
-					<br /><br />
-					<img src="/images/installation/extract-axonivy-designer.png" />
-					<br /><br />
-				</li>
-				<li>
-					<br /><br />
-					Follow the Tutorial to learn how to start and use the Designer.
-					<br /><br />
-					<ul class="actions">
-						<li><a href="/tutorial/getting-started" class="button special">Start Tutorial</a></li>
-					</ul>
-				</li>
-			</ul>
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<header>
+			<h1>
+				<span class="icon fas fa-download"></span> {{ title }}
+			</h1>
+		</header>
+	</div>
+</section>
 
-		</div>
-	</section>
-	
-	{% if downloadUrl is not empty %}
-	  	<script>
-	    	$(document).ready(function(){
-	      		window.location.href = '{{ downloadUrl }}';
-	    	});
-	  	</script>
-  	{% endif %}
+<section id="main" >
+	<div class="inner-small" style="">
+		{% if type == "Debian" %}
+			{% include 'app/installation/_debian.html' %}
+		{% elseif type == "docker" %}
+			{% include 'app/installation/_docker.html' %}
+		{% elseif product == "engine" %}
+			{% include 'app/installation/_engine.html' %}
+		{% else %}
+			{% include 'app/installation/_designer.html' %}
+		{% endif %}
+	</div>
+</section>
 
 {% endblock %}

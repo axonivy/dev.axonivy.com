@@ -1,5 +1,5 @@
 <?php 
-namespace app\release;
+namespace app\download\maven;
 
 use Psr\Container\ContainerInterface;
 use app\release\model\ReleaseInfoRepository;
@@ -21,6 +21,6 @@ class MavenArchiveAction
             return $info->getVersion()->isEqualOrGreaterThan(MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
         });
         
-        return $this->container->get('view')->render($response, 'app/release/mavenArchive.html', ['releaseInfos' => $releaseInfos]);
+        return $this->container->get('view')->render($response, 'app/download/maven/maven.html', ['releaseInfos' => $releaseInfos]);
     }
 }

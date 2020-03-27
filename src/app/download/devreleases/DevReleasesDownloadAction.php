@@ -1,5 +1,5 @@
 <?php
-namespace app\release;
+namespace app\download\devreleases;
 
 use Psr\Container\ContainerInterface;
 use app\release\model\ReleaseInfoRepository;
@@ -29,7 +29,7 @@ class DevReleasesDownloadAction
 
         $artifacts = ReleaseInfoRepository::getArtifacts($version);
         $baseUrl = UrlHelper::getFullPathUrl($request);
-        return $this->container->get('view')->render($response, 'app/release/dev-releases-download.html', [
+        return $this->container->get('view')->render($response, 'app/download/devreleases/dev-releases-download.html', [
             'artifacts' => $artifacts,
             'name' => $name,
             'currentUrl' => $baseUrl,

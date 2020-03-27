@@ -25,4 +25,10 @@ class UserAgentDetector
         $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
         return StringUtil::contains($userAgent, 'macintosh');
     }
+    
+    public static function isWindows(): bool
+    {
+        $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+        return StringUtil::contains($userAgent, 'win');
+    }
 }

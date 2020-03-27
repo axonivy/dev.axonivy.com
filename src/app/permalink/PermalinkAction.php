@@ -1,5 +1,5 @@
 <?php
-namespace app\release;
+namespace app\permalink;
 
 use Psr\Container\ContainerInterface;
 use app\release\model\Artifact;

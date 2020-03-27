@@ -15,16 +15,19 @@ class Config {
         define('MAVEN_SUPPORTED_RELEASES_SINCE_VERSION', '6.0.0');
         
         $rootDir = '/home/axonivya/data/ivy-releases';
+        $productiveSystem = true;
         if (self::isDevOrTestEnv()) {
             $rootDir = __DIR__ . '/../../src/web/releases/ivy';
+            $productiveSystem = false;
         }
         define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
+        define('PRODUCTIVE_SYSTEM', $productiveSystem);
         
         define('DOC_DIRECTORY_THIRDPARTY', '/home/axonivya/data/doc-cache');
         define('CLONE_DOC_SCRIPT', '/home/axonivya/script/clonedoc.sh');
         
         define('IVY_VERSIONS', [
-             //'9' => 'Leading Edge - LE', // do not use 9.x -> 
+            //'9' => 'Leading Edge - LE', // do not use 9.x -> 
             '8.0' => 'Long Term Support - LTS',
             '7.x' => 'UNSUPPORTED',
             '7.0' => 'Long Term Support - LTS',

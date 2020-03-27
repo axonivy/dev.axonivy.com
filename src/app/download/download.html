@@ -1,0 +1,93 @@
+{% extends "templates/parts/base_content.html" %}
+
+{% block title %}Download{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<header>
+			<h1>
+				<span class="icon fas fa-download"></span> Download {{ minorVersion }} {{ edition }} 
+			</h1>
+		</header>
+		{{ subheader|raw }}
+	</div>
+</section>
+
+{% if showLeadingEdgeBanner %}
+<section id="one">
+	<div class="inner-small">
+		{% include 'app/download/_leading-edge-banner.html' only %}	
+	</div>
+</section>
+{% endif %}
+
+<section id="two">
+	<div class="inner">
+		<article>
+			<div class="content">
+				<header>
+					<h3>
+						<span class="icon fas fa-wrench"></span> Axon.ivy Designer ({{editionShort }} {{ minorVersion }})
+					</h3>
+				</header>
+
+				<p style="min-height: 200px;">
+					The Axon.ivy Designer is a state
+					of the art process modelling tool that enables you to turn your
+					business processes into real and fully functional web applications.
+					You can easily integrate your existing systems using standard
+					connectors such as web services, SQL and many more.
+				</p>
+
+				<div class="row">
+					{% include 'app/download/_artifacts.html' with {'artifacts': designerArtifacts} only %}
+				</div>
+
+				<br />
+				<p style="text-align: right;">
+					<a href="/archive/{{ minorVersion }}">other version and platforms</a>
+				</p>
+			</div>
+		</article>
+
+
+		<article class="alt">
+			<div class="content">
+				<header>
+					<h3>
+						<span class="icon fas fa-rocket"></span> Axon.ivy Engine ({{ editionShort }} {{ minorVersion }})
+					</h3>
+				</header>
+
+				<p style="min-height: 200px;">
+					Run your business processes on an Axon.ivy Engine in a single or
+					clustered environment. Please order an evaluation license and
+					further information at <a href="mailto:ivy@axonivy.com">ivy@axonivy.com</a>
+					by providing your contact details.
+					Get to know our <a href="/release-cycle">release cycle</a> for choosing the right version.
+				</p>
+
+				<div class="row">
+					{% include 'app/download/_artifacts.html' with {'artifacts': engineArtifacts} only %}
+				</div>
+
+				<br />
+				<p style="text-align: right;">
+					<a href="/archive/{{ minorVersion }}">other version and platforms</a>
+				</p>
+			</div>
+		</article>
+	</div>
+</section>
+
+{% if showOtherVersions %}
+<section id="three">
+	<div class="inner">
+		{% include 'app/download/_other-versions.html' only %}	
+	</div>
+</section>
+{% endif %}
+
+{% endblock %}
