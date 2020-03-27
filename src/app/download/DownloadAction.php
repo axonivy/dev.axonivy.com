@@ -109,7 +109,7 @@ class Loader
     {
         if ($this->isLTS())
         {
-            return '<p>Get stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> versions of the Axon.ivy Digital Business Platform.';
+            return '<p>Get the latest stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> version of the Axon.ivy Digital Business Platform.';
         }
         return '<p>Become an early adopter and take the <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Leading Edge</a> road with newest features but frequent migrations.</p>';
     }
