@@ -21,7 +21,6 @@ class MavenArchiveAction
         $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $info) {
             return $info->getVersion()->isEqualOrGreaterThan(MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
         });
-        
         return $this->view->render($response, 'download/maven/maven.twig', ['releaseInfos' => $releaseInfos]);
     }
 }

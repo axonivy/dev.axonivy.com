@@ -2,7 +2,6 @@
 namespace app\domain;
 
 use app\domain\util\StringUtil;
-use app\domain\util\UserAgentDetector;
 
 class Variant
 {
@@ -163,43 +162,6 @@ class Variant
     
     public function getType() {
         return $this->type;
-    }
-    
-    public function isMatchingCurrentRequest()
-    {
-        if (UserAgentDetector::isOsLinux() && $this->type == Variant::TYPE_DEBIAN)
-        {
-            return true;
-        }
-        if (UserAgentDetector::isOsLinux() && $this->type == Variant::TYPE_LINUX)
-        {
-            return true;
-        }
-        if (UserAgentDetector::isOsMac() && $this->type == Variant::TYPE_MAC)
-        {
-            return true;
-        }
-        if (UserAgentDetector::isWindows() && $this->type == Variant::TYPE_WINDOWS)
-        {
-            return true;
-        }
-        return false;
-    }
-    
-    public function getImage() {
-        if ($this->type == self::TYPE_MAC) {
-            return 'fab fa-apple';
-        }
-        if ($this->type == self::TYPE_WINDOWS) {
-            return 'fab fa-windows';
-        }
-        if ($this->type == self::TYPE_LINUX) {
-            return 'fab fa-linux';
-        }
-        if ($this->type == self::TYPE_DEBIAN) {
-            return 'fab fa-linux';
-        }
-        return "fas fa-question";
     }
     
     public function isBeta(): bool

@@ -8,7 +8,7 @@ use app\Website;
 
 class AppTester
 {
-    private $response;
+    private Response $response;
 
     private function __construct(Response $response)
     {
@@ -26,8 +26,17 @@ class AppTester
         $request = (new RequestFactory())->createRequest('GET', $url);
         return $app->handle($request);
     }
+    
+    public function bodyDoesNotContain(string $stringNotContain): AppTester
+    {
+        $body = $this->response->getBody();
+        $body->rewind();
+        $content = $body->getContents();
+        Assert::assertStringNotContainsStringIgnoringCase($stringNotContain, $content);
+        return $this;
+    }
 
-    public function bodyContains(string $expectedToContain)
+    public function bodyContains(string $expectedToContain): AppTester
     {
         $body = $this->response->getBody();
         $body->rewind();
@@ -36,14 +45,16 @@ class AppTester
         return $this;
     }
     
-    public function getBody() {
+    public function getBody(): string
+    {
         $body = $this->response->getBody();
         $body->rewind();
         $content = $body->getContents();
         return $content;
     }
     
-    public function header($name, $value) {
+    public function header($name, $value): AppTester
+    {
         $actual = $this->response->getHeader($name)[0];
         Assert::assertEquals($value, $actual);
         return $this;
