@@ -1,17 +1,18 @@
 <?php
 namespace app\pages\download\archive;
 
-use Psr\Container\ContainerInterface;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 use app\domain\util\StringUtil;
-use Slim\Exception\HttpNotFoundException;
 
 class ArchiveAction
 {
-    protected $container;
+    private Twig $view;
     
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
     public function __invoke($request, $response, $args)
@@ -34,7 +35,7 @@ class ArchiveAction
         
         $releaseInfos = $this->findReleaseInfos($version);
 
-        return $this->container->get('view')->render($response, 'download/archive/archive.twig', [
+        return $this->view->render($response, 'download/archive/archive.twig', [
             'releaseInfos' => $releaseInfos,
             'versionLinks' => $links,
             'currentMajorVersion' => $version

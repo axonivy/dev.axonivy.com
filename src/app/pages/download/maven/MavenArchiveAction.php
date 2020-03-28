@@ -1,17 +1,18 @@
 <?php 
 namespace app\pages\download\maven;
 
-use Psr\Container\ContainerInterface;
+use Slim\Views\Twig;
+use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
 use app\domain\Variant;
-use app\domain\ReleaseInfo;
 
 class MavenArchiveAction
 {
-    protected $container;
+    private Twig $view;
     
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
     
     public function __invoke($request, $response, $args) {
@@ -21,6 +22,6 @@ class MavenArchiveAction
             return $info->getVersion()->isEqualOrGreaterThan(MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
         });
         
-        return $this->container->get('view')->render($response, 'download/maven/maven.twig', ['releaseInfos' => $releaseInfos]);
+        return $this->view->render($response, 'download/maven/maven.twig', ['releaseInfos' => $releaseInfos]);
     }
 }

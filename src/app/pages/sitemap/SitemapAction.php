@@ -1,21 +1,22 @@
 <?php
 namespace app\pages\sitemap;
 
-use Psr\Container\ContainerInterface;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
+use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
 use app\domain\util\StringUtil;
-use Slim\Psr7\Request;
-use Slim\Psr7\Response;
 
 class SitemapAction
 {
-    protected $container;
+    private Twig $view;
     
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
-    
+
     public function __invoke(Request $request, Response $response, $args) {
         $sites = [
             self::createSite('/', 1),
@@ -32,7 +33,7 @@ class SitemapAction
             $sites = self::addSites($sites, $releaseInfo);
         }
 
-        return $this->container->get('view')->render($response, 'sitemap/sitemap.twig', ['sites' => $sites])->withHeader('Content-Type', 'text/xml');
+        return $this->view->render($response, 'sitemap/sitemap.twig', ['sites' => $sites])->withHeader('Content-Type', 'text/xml');
     }
 
     private static function addSites($sites, ReleaseInfo $releaseInfo): array

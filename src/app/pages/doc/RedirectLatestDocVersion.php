@@ -1,7 +1,6 @@
 <?php
 namespace app\pages\doc;
 
-use Psr\Container\ContainerInterface;
 use Slim\Psr7\Response;
 use app\domain\util\Redirect;
 
@@ -13,14 +12,6 @@ use app\domain\util\Redirect;
  */
 class RedirectLatestDocVersion
 {
-
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
     public function __invoke($request, Response $response, $args)
     {
         $version = $args['version'];

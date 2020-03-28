@@ -1,18 +1,19 @@
 <?php
 namespace app\pages\download\devreleases;
 
-use Psr\Container\ContainerInterface;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Psr7\Request;
+use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 use app\domain\util\UrlHelper;
-use Slim\Psr7\Request;
-use Slim\Exception\HttpNotFoundException;
 
 class DevReleasesDownloadAction
 {
-    protected $container;
-
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    private Twig $view;
+    
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
     public function __invoke(Request $request, $response, $args) {
@@ -29,7 +30,7 @@ class DevReleasesDownloadAction
 
         $artifacts = ReleaseInfoRepository::getArtifacts($version);
         $baseUrl = UrlHelper::getFullPathUrl($request);
-        return $this->container->get('view')->render($response, 'download/devreleases/dev-releases-download.twig', [
+        return $this->view->render($response, 'download/devreleases/dev-releases-download.twig', [
             'artifacts' => $artifacts,
             'name' => $name,
             'currentUrl' => $baseUrl,

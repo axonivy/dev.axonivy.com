@@ -1,23 +1,27 @@
 <?php
 namespace app\pages\tutorial;
 
-use Psr\Container\ContainerInterface;
+use Slim\Views\Twig;
 
 class TutorialAction
 {
-    protected $container;
 
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    private Twig $view;
+
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
-    public function __invoke($request, $response, $args) {
-        return $this->container->get('view')->render($response, 'tutorial/tutorial.twig', [
+    public function __invoke($request, $response, $args)
+    {
+        return $this->view->render($response, 'tutorial/tutorial.twig', [
             'tutorials' => self::getTutorials()
         ]);
     }
-    
-    private static function getTutorials(): array {
+
+    private static function getTutorials(): array
+    {
         return json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'tutorials.json'));
     }
 }

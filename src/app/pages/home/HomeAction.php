@@ -1,23 +1,26 @@
 <?php
 namespace app\pages\home;
 
-use Psr\Container\ContainerInterface;
+use Slim\Views\Twig;
 
 class HomeAction
 {
-    private $container;
+    private Twig $view;
 
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
-    public function __invoke($request, $response, $args) {
-        return $this->container->get('view')->render($response, 'home/home.twig', [
+    public function __invoke($request, $response, $args)
+    {
+        return $this->view->render($response, 'home/home.twig', [
             'features' => self::getPromotedFeatures()
         ]);
     }
-    
-    private static function getPromotedFeatures(): array {
+
+    private static function getPromotedFeatures(): array
+    {
         $jsonFile = __DIR__ . DIRECTORY_SEPARATOR . 'promoted-features.json';
         return json_decode(file_get_contents($jsonFile));
     }

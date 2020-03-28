@@ -1,19 +1,19 @@
 <?php
 namespace app\pages\tutorial\gettingstarted;
 
-use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Response;
 use app\domain\util\Redirect;
+use Slim\Views\Twig;
 
 class TutorialGettingStartedAction
 {
 
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
+    private Twig $view;
+    
+    public function __construct(Twig $view)
     {
-        $this->container = $container;
+        $this->view = $view;
     }
 
     public function __invoke($request, Response $response, $args)
@@ -30,7 +30,7 @@ class TutorialGettingStartedAction
         $step = TutorialRepository::getGettingStartedTutorialStep($args['name'], $args['stepNr']);
         $nextVideoUrl = TutorialRepository::getGettingStartedTutorialNextVideoUrl($args['name'], $args['stepNr']);;
 
-        return $this->container->get('view')->render($response, 'tutorial/gettingstarted/tutorial-getting-started.twig', [
+        return $this->view->render($response, 'tutorial/gettingstarted/tutorial-getting-started.twig', [
             'tutorial' => $tutorial,
             'step' => $step,
             'nextStepVideoUrl' => $nextVideoUrl,

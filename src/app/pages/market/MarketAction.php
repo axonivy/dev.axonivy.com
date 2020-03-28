@@ -1,22 +1,22 @@
 <?php
 namespace app\pages\market;
 
-use Psr\Container\ContainerInterface;
+use Slim\Views\Twig;
 use app\domain\market\Market;
 
 class MarketAction
 {
 
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
+    private Twig $view;
+    
+    public function __construct(Twig $view)
     {
-        $this->container = $container;
+        $this->view = $view;
     }
 
     public function __invoke($request, $response, $args)
     {
-        return $this->container->get('view')->render($response, 'market/market.twig', [
+        return $this->view->render($response, 'market/market.twig', [
             'products' => Market::getAll()
         ]);
     }

@@ -1,22 +1,14 @@
 <?php
 namespace app\permalink;
 
-use Psr\Container\ContainerInterface;
-use Slim\Psr7\Request;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Psr7\Request;
+use app\domain\market\Market;
 use app\domain\util\Redirect;
 use app\domain\util\StringUtil;
-use app\domain\market\Market;
 
 class PortalPermalinkAction
 {
-
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
 
     public function __invoke(Request $request, $response, $args)
     {

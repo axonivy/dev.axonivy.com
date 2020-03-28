@@ -71,11 +71,11 @@ class Website
     {
         $container = $this->app->getContainer();
         
-        $container->set('view', function (ContainerInterface $container) {
+        $container->set(Twig::class, function (ContainerInterface $container) {
             return Twig::create(__DIR__ . '/../app/pages');
         });
-
-        $view = $container->get('view');
+        
+        $view = $container->get(Twig::class);
         $versionLTS = $this->getDisplayVersion(ReleaseInfoRepository::getLatestLongTermSupport());
         $leRelease = ReleaseInfoRepository::getLeadingEdge();
 
@@ -92,7 +92,6 @@ class Website
         $view->getEnvironment()->addGlobal('ARCHIVE_LINK', '/download/archive/' . ReleaseInfoRepository::getLatestLongTermSupport()->getVersion()->getMinorVersion());
         
         $view->getEnvironment()->addGlobal('PRODUCTIVE_SYSTEM', PRODUCTIVE_SYSTEM);
-        
     }
     
     private function getDisplayVersion(?ReleaseInfo $info): string
@@ -129,12 +128,12 @@ class Website
         $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
         $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document:.*}', DocAction::class);
-        
+
         $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);
 
         $app->get('/portal[/{version}[/{topic}]]', PortalPermalinkAction::class);
-        
+
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
         $app->get('/tutorial/getting-started[/{name}/step-{stepNr}]', TutorialGettingStartedAction::class);
@@ -158,7 +157,7 @@ class Website
         $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
         $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
             $response = new Response();
-            return $container->get('view')
+            return $container->get(Twig::class)
                 ->render($response, '_error/404.twig')
                 ->withStatus(404);
         });
@@ -168,9 +167,9 @@ class Website
             $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
                 $response = new Response();
                 $data = ['message' => $exception->getMessage()];
-                return $container->get('view')
-                ->render($response, '_error/500.twig', $data)
-                ->withStatus(500);
+                return $container->get(Twig::class)
+                    ->render($response, '_error/500.twig', $data)
+                    ->withStatus(500);
             });
         }
     }

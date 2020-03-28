@@ -1,21 +1,21 @@
 <?php
 namespace app\pages\doc;
 
-use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Response;
-use app\domain\util\Redirect;
-use app\domain\util\StringUtil;
+use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 use app\domain\doc\DocProvider;
+use app\domain\util\Redirect;
+use app\domain\util\StringUtil;
 
 class DocAction
 {
-    private $view;
-
-    public function __construct(ContainerInterface $container)
+    private Twig $view;
+    
+    public function __construct(Twig $view)
     {
-        $this->view = $container->get('view');
+        $this->view = $view;
     }
 
     public function __invoke($request, Response $response, $args)

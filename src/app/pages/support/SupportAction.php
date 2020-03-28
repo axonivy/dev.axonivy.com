@@ -1,17 +1,20 @@
 <?php
 namespace app\pages\support;
 
-use Psr\Container\ContainerInterface;
+use Slim\Views\Twig;
 
 class SupportAction
 {
-    protected $container;
 
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    private Twig $view;
+
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
-    public function __invoke($request, $response, $args) {
-        return $this->container->get('view')->render($response, 'support/support.twig');
+    public function __invoke($request, $response, $args)
+    {
+        return $this->view->render($response, 'support/support.twig');
     }
 }

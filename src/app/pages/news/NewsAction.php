@@ -1,18 +1,18 @@
 <?php
 namespace app\pages\news;
 
-use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 
 class NewsAction
 {
 
-    protected $view;
-
-    public function __construct(ContainerInterface $container)
+    private Twig $view;
+    
+    public function __construct(Twig $view)
     {
-        $this->view = $container->get('view');
+        $this->view = $view;
     }
 
     public function __invoke($request, $response, $args)

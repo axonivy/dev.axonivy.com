@@ -1,8 +1,8 @@
 <?php
 namespace app\pages\download;
 
-use Psr\Container\ContainerInterface;
 use Slim\Psr7\Request;
+use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
 use app\domain\Variant;
@@ -10,10 +10,11 @@ use app\domain\util\StringUtil;
 
 class DownloadAction
 {
-    protected $container;
-
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    private Twig $view;
+    
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
     public function __invoke(Request $request, $response, $args) {
@@ -22,12 +23,12 @@ class DownloadAction
             $releaseInfo = ReleaseInfoRepository::getLeadingEdge();
             
             if ($releaseInfo == null) {
-                return $this->container->get('view')->render($response, 'download/no-leading-edge.twig');
+                return $this->view->render($response, 'download/no-leading-edge.twig');
             }
         }
 
         $loader = new Loader($releaseInfo);
-        return $this->container->get('view')->render($response, 'download/download.twig', [
+        return $this->view->render($response, 'download/download.twig', [
             'designerArtifacts' => array_filter($loader->designerArtifacts()),
             'engineArtifacts' => array_filter($loader->engineArtifacts()),
             'edition' => $loader->edition(),

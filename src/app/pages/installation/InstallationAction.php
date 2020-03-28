@@ -1,18 +1,19 @@
 <?php
 namespace app\pages\installation;
 
-use Psr\Container\ContainerInterface;
 use Slim\Psr7\Request;
+use Slim\Views\Twig;
 use app\domain\Variant;
 use app\domain\Version;
 use app\domain\util\Redirect;
 
 class InstallationAction
 {
-    protected $container;
-
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    private Twig $view;
+    
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
     public function __invoke(Request $request, $response, $args) {
@@ -49,7 +50,7 @@ class InstallationAction
             $title .= ' on Mac';
         }
         
-        return $this->container->get('view')->render($response, 'installation/installation.twig', [
+        return $this->view->render($response, 'installation/installation.twig', [
             'downloadUrl' => $downloadUrl,
             'minorVersion' => $minorVersion,
             'title' => $title,

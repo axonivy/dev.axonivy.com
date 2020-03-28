@@ -1,22 +1,15 @@
 <?php
 namespace app\api;
 
+use Slim\Psr7\Request;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
 use app\domain\Version;
-use app\domain\util\StringUtil;
 use app\domain\util\ArrayUtil;
-use Slim\Psr7\Request;
-use Psr\Container\ContainerInterface;
+use app\domain\util\StringUtil;
 
 class ApiCurrentRelease
 {
-    protected $container;
-    
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
-    }
-
     public function __invoke(Request $request, $response, $args) {
         $releaseVersion = $request->getQueryParams()['releaseVersion'] ?? '';
         $data = [

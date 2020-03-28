@@ -1,16 +1,18 @@
 <?php
 namespace app\pages\market;
 
-use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Views\Twig;
 use app\domain\market\Market;
 
 class ProductAction
 {
-    protected $container;
 
-    public function __construct(ContainerInterface $container) {
-        $this->container = $container;
+    private Twig $view;
+    
+    public function __construct(Twig $view)
+    {
+        $this->view = $view;
     }
 
     public function __invoke($request, $response, $args) {
@@ -43,7 +45,7 @@ class ProductAction
             }
         }
 
-        return $this->container->get('view')->render($response, 'market/product.twig', [
+        return $this->view->render($response, 'market/product.twig', [
             'product' => $product,
             'mavenArtifacts' => $mavenArtifacts,
             'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,

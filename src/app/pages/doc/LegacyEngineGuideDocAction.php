@@ -1,17 +1,17 @@
 <?php
 namespace app\pages\doc;
 
-use Psr\Container\ContainerInterface;
 use Slim\Psr7\Response;
+use Slim\Views\Twig;
 use app\domain\util\Redirect;
 
 class LegacyEngineGuideDocAction
 {
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
+    private Twig $view;
+    
+    public function __construct(Twig $view)
     {
-        $this->container = $container;
+        $this->view = $view;
     }
 
     public function __invoke($request, Response $response, $args)
@@ -24,7 +24,7 @@ class LegacyEngineGuideDocAction
         }
         
         $redirectUrl = $this->getRedirectUrl($doc);        
-        return $this->container->get('view')->render($response, 'doc/redirect-engine-guide.twig', ['redirectUrl' => $redirectUrl]);
+        return $this->view->render($response, 'doc/redirect-engine-guide.twig', ['redirectUrl' => $redirectUrl]);
     }
 
     private function getRedirectUrl($doc)
