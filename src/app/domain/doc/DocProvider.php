@@ -139,7 +139,7 @@ class DocProvider
     
     private function createRootPath(): string
     {
-        return StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'documents']);
+        return IVY_RELEASE_DIRECTORY . '/' . $this->versionNumber . '/documents';
     }
     
     private function createBaseUrl(): string
@@ -208,6 +208,6 @@ class DocProvider
     
     private function createHotFixFilePath(string $filename): string
     {
-        return StringUtil::createPath([IVY_RELEASE_DIRECTORY, $this->versionNumber, 'hotfix', $filename]);
+        return IVY_RELEASE_DIRECTORY . '/' . $this->versionNumber . '/hotfix/' . $filename;
     }
 }

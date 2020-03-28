@@ -1,8 +1,6 @@
 <?php 
 namespace app;
 
-use app\domain\util\StringUtil;
-
 class Config {
     
     public static function initConfig()
@@ -20,7 +18,7 @@ class Config {
             $rootDir = __DIR__ . '/../../src/web/releases/ivy';
             $productiveSystem = false;
         }
-        define('IVY_RELEASE_DIRECTORY', StringUtil::createPath([$rootDir]));
+        define('IVY_RELEASE_DIRECTORY', $rootDir);
         define('PRODUCTIVE_SYSTEM', $productiveSystem);
         
         define('DOC_DIRECTORY_THIRDPARTY', '/home/axonivya/data/doc-cache');
@@ -67,6 +65,6 @@ class Config {
     
     public static function isDevOrTestEnv(): bool
     {
-        return file_exists(StringUtil::createPath([__DIR__, '..', '..', 'Jenkinsfile']));
+        return file_exists(__DIR__ . '/../../Jenkinsfile');
     }
 }

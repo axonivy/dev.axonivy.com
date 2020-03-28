@@ -22,11 +22,6 @@ class StringUtil
         $length = strlen($endsWith);
         return $length === 0 || (substr($string, -$length) === $endsWith);
     }
-    
-    public static function createPath(array $elements): string
-    {
-        return implode(DIRECTORY_SEPARATOR, $elements);
-    }
 
     public static function isFirstCharacterNumeric($string): bool
     {
