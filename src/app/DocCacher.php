@@ -1,8 +1,8 @@
 <?php 
 require __DIR__ . '/../../vendor/autoload.php';
 
-use app\permalink\MavenArtifactRepository;
 use app\Config;
+use app\domain\maven\MavenArtifactRepository;
 
 Config::initConfig();
 

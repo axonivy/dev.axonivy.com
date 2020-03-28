@@ -1,0 +1,31 @@
+{% extends "_parts/base.twig" %}
+
+{% block title %}Installation{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<section id="one" class="inverse">
+	<div class="inner-small">
+		<header>
+			<h1>
+				<span class="icon fas fa-download"></span> {{ title }}
+			</h1>
+		</header>
+	</div>
+</section>
+
+<section id="main" >
+	<div class="inner-small" style="">
+		{% if type == "Debian" %}
+			{% include 'installation/_debian.twig' %}
+		{% elseif type == "docker" %}
+			{% include 'installation/_docker.twig' %}
+		{% elseif product == "engine" %}
+			{% include 'installation/_engine.twig' %}
+		{% else %}
+			{% include 'installation/_designer.twig' %}
+		{% endif %}
+	</div>
+</section>
+
+{% endblock %}

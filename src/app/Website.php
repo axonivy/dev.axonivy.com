@@ -11,34 +11,34 @@ use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
-use app\community\CommunityAction;
-use app\doc\DocAction;
-use app\doc\LegacyDesignerGuideDocAction;
-use app\doc\LegacyEngineGuideDocAction;
-use app\doc\LegacyPublicAPIAction;
-use app\doc\RedirectLatestDocVersion;
-use app\download\DownloadAction;
-use app\download\archive\ArchiveAction;
-use app\download\maven\MavenArchiveAction;
-use app\feature\FeatureAction;
-use app\installation\InstallationAction;
-use app\market\MarketAction;
-use app\market\ProductAction;
-use app\news\NewsAction;
-use app\permalink\LibPermalink;
-use app\portal\PortalAction;
-use app\release\model\ReleaseInfo;
-use app\release\model\ReleaseInfoRepository;
-use app\search\SearchAction;
-use app\sitemap\SitemapAction;
-use app\support\SupportAction;
-use app\team\TeamAction;
-use app\tutorial\TutorialAction;
-use app\tutorial\gettingstarted\TutorialGettingStartedAction;
+use app\domain\ReleaseInfo;
+use app\domain\ReleaseInfoRepository;
+use app\pages\community\CommunityAction;
+use app\pages\doc\DocAction;
+use app\pages\doc\LegacyDesignerGuideDocAction;
+use app\pages\doc\LegacyEngineGuideDocAction;
+use app\pages\doc\LegacyPublicAPIAction;
+use app\pages\doc\RedirectLatestDocVersion;
+use app\pages\download\DownloadAction;
+use app\pages\download\archive\ArchiveAction;
+use app\pages\download\devreleases\DevReleasesDownloadAction;
+use app\pages\download\maven\MavenArchiveAction;
+use app\pages\home\HomeAction;
+use app\pages\installation\InstallationAction;
+use app\pages\market\MarketAction;
+use app\pages\market\ProductAction;
+use app\pages\news\NewsAction;
+use app\pages\release\ReleaseCycleAction;
+use app\pages\search\SearchAction;
+use app\pages\sitemap\SitemapAction;
+use app\pages\support\SupportAction;
+use app\pages\team\TeamAction;
+use app\pages\tutorial\TutorialAction;
+use app\pages\tutorial\gettingstarted\TutorialGettingStartedAction;
+use app\permalink\PortalPermalinkAction;
+use app\permalink\ProductPermalinkAction;
+use app\permalink\ThirdpartyLibraryPermalink;
 use Throwable;
-use app\download\devreleases\DevReleasesDownloadAction;
-use app\permalink\PermalinkAction;
-use app\release\ReleaseCycleAction;
 
 class Website
 {
@@ -72,7 +72,7 @@ class Website
         $container = $this->app->getContainer();
         
         $container->set('view', function (ContainerInterface $container) {
-            return Twig::create(__DIR__ . '/..');
+            return Twig::create(__DIR__ . '/../app/pages');
         });
 
         $view = $container->get('view');
@@ -109,7 +109,7 @@ class Website
         $app->redirect('/download/archive.html', '/download/archive', 301);
         $app->redirect('/download/sprint-release[.html]', '/download/sprint', 301);
 
-        $app->get('/', FeatureAction::class);
+        $app->get('/', HomeAction::class);
 
         $app->get('/download', DownloadAction::class);
         $app->get('/download/leading-edge', DownloadAction::class);
@@ -119,8 +119,8 @@ class Website
         
         $app->get('/release-cycle', ReleaseCycleAction::class);
 
-        $app->get('/permalink/{version}/{file}', PermalinkAction::class);
-        $app->get('/permalink/lib/{version}/{name}', LibPermalink::class);
+        $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
+        $app->get('/permalink/lib/{version}/{name}', ThirdpartyLibraryPermalink::class);
 
         $app->get('/doc', DocAction::class);
         $app->get('/doc/{version}.latest[/{path:.*}]', RedirectLatestDocVersion::class);
@@ -133,7 +133,7 @@ class Website
         $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);
 
-        $app->get('/portal[/{version}[/{topic}]]', PortalAction::class);
+        $app->get('/portal[/{version}[/{topic}]]', PortalPermalinkAction::class);
         
         $app->get('/installation', InstallationAction::class);
         $app->get('/tutorial', TutorialAction::class);
@@ -159,7 +159,7 @@ class Website
         $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
             $response = new Response();
             return $container->get('view')
-                ->render($response, 'templates/error/404.html')
+                ->render($response, '_error/404.twig')
                 ->withStatus(404);
         });
         
@@ -169,7 +169,7 @@ class Website
                 $response = new Response();
                 $data = ['message' => $exception->getMessage()];
                 return $container->get('view')
-                ->render($response, 'templates/error/500.html', $data)
+                ->render($response, '_error/500.twig', $data)
                 ->withStatus(500);
             });
         }

@@ -3,7 +3,7 @@ namespace test\release\model;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use app\release\model\Artifact;
+use app\domain\Artifact;
 
 class ArtifactTest extends TestCase
 {

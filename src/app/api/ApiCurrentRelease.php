@@ -1,11 +1,11 @@
 <?php
 namespace app\api;
 
-use app\release\model\ReleaseInfo;
-use app\release\model\ReleaseInfoRepository;
-use app\release\model\Version;
-use app\util\StringUtil;
-use app\util\ArrayUtil;
+use app\domain\ReleaseInfo;
+use app\domain\ReleaseInfoRepository;
+use app\domain\Version;
+use app\domain\util\StringUtil;
+use app\domain\util\ArrayUtil;
 use Slim\Psr7\Request;
 use Psr\Container\ContainerInterface;
 

@@ -1,7 +1,7 @@
 <?php 
 namespace app;
 
-use app\util\StringUtil;
+use app\domain\util\StringUtil;
 
 class Config {
     

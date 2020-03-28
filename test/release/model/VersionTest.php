@@ -3,7 +3,7 @@ namespace test\release\model;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use app\release\model\Version;
+use app\domain\Version;
 
 class VersionTest extends TestCase
 {

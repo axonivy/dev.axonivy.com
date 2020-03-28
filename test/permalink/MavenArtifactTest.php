@@ -2,8 +2,8 @@
 namespace test\permalink;
 
 use PHPUnit\Framework\TestCase;
-use app\permalink\MavenArtifact;
-use app\permalink\MavenArtifactRepository;
+use app\domain\maven\MavenArtifactRepository;
+use app\domain\maven\MavenArtifact;
 
 class MavenArtifactTest extends TestCase
 {

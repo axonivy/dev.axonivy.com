@@ -1,0 +1,68 @@
+{% extends "_parts/base.twig" %}
+
+{% block title %}News{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<style>
+	.lts-marker {
+		background-color: black;
+		padding: 4px;
+		color:white;
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+
+	.fixes {
+		padding-right: 10px;
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: 800;
+		width: 210px;
+	}
+	p {
+		line-height: 26px;
+	}
+	h3 {
+		margin-bottom: 5px;
+	}
+	h5 {
+		margin-bottom: 3px;
+	}
+</style>
+
+<section id="one" class="inverse">
+	<div class="inner">
+		<header>
+			<h1><span class="icon fas fa-newspaper"></span> What's new</h1>
+		</header>
+		<p>
+			We continuously release new versions of the Axon.ivy platform.
+			Here you can get an insight into the new features.
+		</p>
+	</div>
+</section>
+
+{% for new in news %}
+	{% set inverseClass = '' %}
+	{% if loop.index is divisible by(2) %}
+        {% set inverseClass = 'inverse' %}
+    {% endif %}
+	<section id="one" class="{{ inverseClass }}">
+		<div class="inner">
+			{% set ltsMarker = 'display:none;' %}
+			{% if new.meta.lts %}
+			  {% set ltsMarker = '' %}
+			{% endif %}
+			
+			<h3 >{{ new.meta.title }} <span class="lts-marker" style="{{ ltsMarker }}">LTS</span> <span style="font-weight:80;">| {{ new.meta.slogan }}</span></h3>
+			<p class="date-section">{{ new.meta.date }}</p>
+			
+			{{ new.abstract |raw }}
+			
+			<a href="{{ new.link }}" class="button special">Read more</a>
+		</div>
+	</section>
+{% endfor %}
+
+{% endblock %}

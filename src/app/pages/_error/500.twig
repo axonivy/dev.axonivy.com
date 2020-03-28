@@ -1,0 +1,15 @@
+{% extends "_parts/base.twig" %}
+
+{% block title %}Error{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<section id="one">
+	<div class="inner">
+		<h1 class="text-center">Sorry, there was an error...</h1>
+		<p><strong>Details</strong></p>
+		<p><samp>{{ message }}</samp></p>
+	</div>
+</section>
+
+{% endblock %}

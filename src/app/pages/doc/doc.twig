@@ -1,0 +1,210 @@
+{% set hideFooter = true %}
+{% extends "_parts/base.twig" %}
+
+{% block title %}Doc {{ version }}{{ parent() }}{% endblock %}
+
+{% block content %}
+
+	<style>
+		#main img {
+			width:100%;
+			max-width:600px;
+		}
+	</style>
+    
+    
+    
+    <style>
+.dropbtn {
+  color: white;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #007095;
+}
+
+</style>
+    
+    
+    
+    
+    
+    
+    <section id="docuHeader" style="padding-bottom: 10px; padding-top: 20px;" >
+		<div class="inner">
+		
+			<div style="text-align: right; position: relative; height: 0;">
+				{% for docLink in docLinks %}
+					<a href="{{ docLink.url }}">{{ docLink.displayText }}</a>
+					{% if not loop.last %}|{% endif %}
+				{% endfor %}
+			</div>
+		
+			<header>
+				<h1>Documentation {{ version }}</h1>
+			</header>
+			
+				<div>
+						{% for doc in docProvider.releaseDocuments %}
+							<a href="{{ doc.Url }}" style="padding-left:5px;padding-right:5px;">{{ doc.Name }}</a> 
+						{% endfor %}
+						
+							
+						
+						{% if docProvider.notImportantBooks is not empty or docProvider.existingBook is not empty %}
+						<div class="dropdown" style="float:right;">
+					  		<button class="dropbtn">Further Docs</button>
+							<div class="dropdown-content">
+							
+							  {% if docProvider.notImportantBooks is not empty %}
+								  <span style="font-size:12px;padding-left:15px;">Docs</span>
+								  {% for doc in docProvider.notImportantBooks %}
+									<a href="{{ doc.Url }}" target="_blank">{{ doc.Name }}</a>
+								  {% endfor %}
+							  {% endif %}
+							  
+							  {% if docProvider.existingBooks is not empty %}
+								  <span style="font-size:12px;padding-left:15px;">PDF's</span>
+									 {% for doc in docProvider.existingBooks %}
+	 									<a href="{{ doc.PdfUrl }}" target="_blank"><span class="icon fas fa-file-pdf"></span> {{ doc.Name }}</a>
+									  {% endfor %}
+								  </div>
+							  {% endif %}							  
+							  
+						</div>
+						{% endif %}
+						
+						<br />
+						
+						{% for doc in docProvider.importantBooks %}
+						  <a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+						{% endfor %}
+						{% for doc in docProvider.externalBooks %}
+						  <a href="{{ doc.Url }}" target="_blank" style="padding-left:5px;padding-right:5px;">{{ doc.Name }} <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+						{% endfor %}
+						
+						{% if portalLink is not empty %}
+							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="{{ portalLink }}">Portal Guide<i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+						{% endif %}
+						
+						{% for doc in docProvider.zips %}
+							{% if doc.zipExists %}
+								<a href="{{ doc.zipUrl }}" target="_blank" title="{{ doc.Name }}" style="padding-left:5px;padding-right:5px;">
+									<i style="font-size:14px;" class="fas fa-download"></i>
+								</a>
+							{% endif %}
+						{% endfor %}					
+					
+			</div>
+					
+		</div>
+		
+	</section>
+	
+	<script type="text/javascript">
+		function resizeIframe(obj) {
+			removeHeader(obj);
+			openLinksInNewTab(obj);
+		}
+		function removeHeader(iframe) {
+			headerdiv = iframe.contentWindow.document.getElementById('headerdiv');
+			if (headerdiv != null) {
+				header = headerdiv.parentElement;
+				if (header != null) {
+					header.remove();
+				}
+			}
+			
+			navbars = iframe.contentWindow.document.getElementsByClassName('navbar ivy-subnav');
+			for (i = 0; i < navbars.length; i++) {
+				navbars[i].remove();
+			} 
+			
+			// since 7.x
+			containers = iframe.contentWindow.document.getElementsByClassName('container');
+			containers[0].style.marginLeft = "0px"
+			
+			navbars = iframe.contentWindow.document.getElementsByTagName('nav');
+			if (navbars != null && navbars[0]) {
+				navbars[0].remove();
+			}
+		}
+		function openLinksInNewTab(iframe) {
+			var base = document.createElement('base');
+			base.target = '_parent';
+			iframe.contentWindow.document.getElementsByTagName('head')[0].appendChild(base);
+		}
+	</script>
+	
+	
+	<style>
+		.iframe-container {
+		  overflow: hidden;
+		  position: relative;
+		  min-height:400px;
+		}
+		
+		.iframe-container iframe {
+		   border: 0;
+		   height: 100%;
+		   left: 0;
+		   position: absolute;
+		   top: 0;
+		   width: 100%;
+		}
+	</style>
+	
+	
+	<section id="main" style="padding-top: 0; padding-bottom: 0;">
+		<div class="inner">
+		  <div id="iframecontainer" class="iframe-container">
+		    <iframe src="{{ documentUrl }}" frameborder="0" onload='javascript:resizeIframe(this);'></iframe>
+		  </div>
+		</div>
+	</section>
+	
+	<script>
+	window.onresize = function(event) {
+		resizeHeighOfIframe();
+	};
+	function resizeHeighOfIframe() {
+		height = window.innerHeight - document.getElementById('header').clientHeight - document.getElementById('docuHeader').clientHeight;
+		document.getElementById("iframecontainer").style.height = height +"px"
+	}
+	resizeHeighOfIframe();
+	</script>
+	
+	
+    
+{% endblock %}

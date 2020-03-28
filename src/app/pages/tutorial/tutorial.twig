@@ -1,0 +1,57 @@
+{% extends "_parts/base.twig" %}
+
+{% block title %}Tutorial{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<section id="one" class="inverse">
+	<div class="inner">
+		<div class="row">
+			<div class="12u 12u$(xsmall)">
+				<header>
+					<h1><span class="icon fas fa-graduation-cap"></span> Tutorial</h1>
+				</header>
+				<p>Learn how to work with the Axon.ivy Digital Business Platform</p>				
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="one">
+	<div class="inner">
+		<div class="row">
+			<div class="6u 12u$(xsmall)">
+				<span class="image fit">
+					<a href="/tutorial/getting-started/first-project/step-1">
+						<img src="/images/misc/splash-screen.bmp" />
+					</a>
+				</span>
+				<ul class="actions">
+					<li><a href="/tutorial/getting-started/first-project/step-1" class="button special">Start with your first project!</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="one" class="inverse">
+	<div class="inner">
+		<h2>Videos</h2>
+		<div class="row">
+			{% for tutorial in tutorials %}
+			<div class="6u 12u$(xsmall)">
+				<h4>{{ tutorial.title }}</h4>
+				<iframe height="300px" width="100%" src="{{ tutorial.embeddedVideoUrl }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+				</iframe>
+				<p>
+					{{ tutorial.description }}
+				</p>
+				<ul class="actions">
+					<li><a href="{{ tutorial.videoUrl }}" class="button special">Watch on YouTube</a></li>
+				</ul>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endblock %}
