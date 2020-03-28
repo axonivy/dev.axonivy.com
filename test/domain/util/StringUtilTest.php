@@ -1,5 +1,5 @@
 <?php
-namespace test\util;
+namespace test\domain\util;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Assert;

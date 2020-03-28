@@ -1,5 +1,5 @@
 <?php
-namespace test\doc;
+namespace test\pages\doc;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;

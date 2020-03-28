@@ -1,5 +1,5 @@
 <?php
-namespace test\permalink;
+namespace test\domain\maven;
 
 use PHPUnit\Framework\TestCase;
 use app\domain\maven\MavenArtifactRepository;

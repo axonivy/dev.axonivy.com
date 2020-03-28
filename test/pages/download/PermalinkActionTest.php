@@ -1,5 +1,5 @@
 <?php
-namespace test\release;
+namespace test\pages\download;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
