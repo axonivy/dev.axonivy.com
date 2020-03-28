@@ -41,8 +41,7 @@
 			{% for tutorial in tutorials %}
 			<div class="6u 12u$(xsmall)">
 				<h4>{{ tutorial.title }}</h4>
-				<iframe height="300px" width="100%" src="{{ tutorial.embeddedVideoUrl }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-				</iframe>
+				<iframe height="300px" width="100%" src="{{ tutorial.embeddedVideoUrl }}"> </iframe>
 				<p>
 					{{ tutorial.description }}
 				</p>
@@ -54,4 +53,5 @@
 		</div>
 	</div>
 </section>
+
 {% endblock %}

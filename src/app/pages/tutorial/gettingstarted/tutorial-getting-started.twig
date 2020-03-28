@@ -65,50 +65,48 @@
 	}
 </style>
 
-	<section id="main" >
-		<div class="inner">
-			<header><h1><span class="icon fas fa-graduation-cap"></span> Tutorial - {{ tutorial.name }}</h1></header>
-			
-			
-			<ol class="timeline">
-				{% for step in tutorial.steps %}
-						<li class="{{ currentStepNr == step.number ? 'current' }}"> <!-- current -->
-							<input class="radio" type="radio">
-							<span class="title"><strong>Step {{ step.number }} </strong><br>{{ step.name }}</span>
-							<a href="{{ step.url }}"><i class="marker">{{ step.number }}</i></a>
-						</li>
-				{% endfor %}
-        </ol>
-			
-		</div>
-	</section>
-	
-	<section id="main">
-		<div class="inner">
-			<div class="row">
-				<div class="4u 12u$(xsmall)">
-					<ol>
+<section id="main">
+	<div class="inner">
+		<header>
+			<h1>
+				<span class="icon fas fa-graduation-cap"></span> Tutorial -
+				{{ tutorial.name }}
+			</h1>
+		</header>
+
+		<ol class="timeline">
+			{% for step in tutorial.steps %}
+			<li class="{{ currentStepNr == step.number ? 'current' }}">
+				<input class="radio" type="radio">
+				<span class="title"><strong>Step {{ step.number }}</strong><br>{{ step.name }}</span> 
+				<a href="{{ step.url }}"><i class="marker">{{ step.number }}</i></a>
+			</li>
+			{% endfor %}
+		</ol>
+	</div>
+</section>
+
+<section id="main">
+	<div class="inner">
+		<div class="row">
+			<div class="4u 12u$(xsmall)">
+				<ol>
 					{% for instruction in step.instructions %}
-						<li>{{ instruction|raw }}</li>
+					<li>{{ instruction|raw }}</li>
 					{% endfor %}
-					</ol>
-					{% if nextStepVideoUrl is not empty %}
-					<ul class="actions">
-						<li><a href="{{ nextStepVideoUrl }}" class="button special">Next</span></a></li>
-					</ul>
-					{% endif  %}
-				</div>
-				<div class="8u 12u$(xsmall)">
-					<iframe height="540" width="720"
-							src="{{ step.videoUrl }}"
-							frameborder="0"
-							allow="autoplay; encrypted-media"
-							allowfullscreen>
-						</iframe>
-				</div>
+				</ol>
+				{% if nextStepVideoUrl is not empty %}
+				<ul class="actions">
+					<li><a href="{{ nextStepVideoUrl }}" class="button special">Next</a></li>
+				</ul>
+				{% endif  %}
+			</div>
+			<div class="8u 12u$(xsmall)">
+				<iframe height="540" width="720" src="{{ step.videoUrl }}"></iframe>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
 {% endblock %}
 
