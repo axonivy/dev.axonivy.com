@@ -31,25 +31,25 @@ class InstallationAction
         $bugfixVersion = (new Version($version))->getBugfixVersion();
         
         // TODO we should move this to artifact
-        $title = 'Install Axon.ivy Designer';
+        $title = 'Install Axon.ivy Designer ';
         if ($product == Artifact::PRODUCT_NAME_ENGINE) {
-            $title = 'Install Axon.ivy Engine';
+            $title = 'Install Axon.ivy Engine ';
             if ($type == Artifact::TYPE_DEBIAN) {
-              $title .= ' Debian';
+              $title .= ' for Debian';
             }
             if ($type == Artifact::TYPE_DOCKER) {
-              $title .= ' Docker';
+              $title .= ' for Docker';
             }
         }
         
         if ($type == Artifact::TYPE_WINDOWS) {
-            $title .= ' Windows';
+            $title .= ' for Windows';
         }
         if ($type == Artifact::TYPE_LINUX || $type == Artifact::TYPE_ALL) {
-            $title .= ' Linux';
+            $title .= ' for Linux';
         }
         if ($type == Artifact::TYPE_MAC) {
-            $title .= ' Mac';
+            $title .= ' for Mac';
         }
 
         return $this->view->render($response, 'installation/installation.twig', [
