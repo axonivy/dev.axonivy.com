@@ -8,6 +8,11 @@ use app\domain\ReleaseInfoRepository;
 class ReleaseInfoRepositoryTest extends TestCase
 {
 
+    public function test_getLongTermSupportVersion()
+    {
+        Assert::assertNotNull(ReleaseInfoRepository::getLatestLongTermSupport());
+    }
+    
     public function test_getBestMatchingVersion()
     {
         Assert::assertEquals('8.0.0', self::bestMatchingVersion('8.0.0'));

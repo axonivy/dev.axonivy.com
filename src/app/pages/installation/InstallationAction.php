@@ -30,27 +30,28 @@ class InstallationAction
         $minorVersion = (new Version($version))->getMinorVersion();
         $bugfixVersion = (new Version($version))->getBugfixVersion();
         
+        // TODO we should move this to artifact
         $title = 'Install Axon.ivy Designer';
         if ($product == Artifact::PRODUCT_NAME_ENGINE) {
             $title = 'Install Axon.ivy Engine';
             if ($type == Artifact::TYPE_DEBIAN) {
-              $title .= ' as Debian Package';
+              $title .= ' Debian';
             }
             if ($type == Artifact::TYPE_DOCKER) {
-              $title .= ' as Docker Image';
+              $title .= ' Docker';
             }
         }
         
         if ($type == Artifact::TYPE_WINDOWS) {
-            $title .= ' on Windows';
+            $title .= ' Windows';
         }
         if ($type == Artifact::TYPE_LINUX || $type == Artifact::TYPE_ALL) {
-            $title .= ' on Linux';
+            $title .= ' Linux';
         }
         if ($type == Artifact::TYPE_MAC) {
-            $title .= ' on Mac';
+            $title .= ' Mac';
         }
-        
+
         return $this->view->render($response, 'installation/installation.twig', [
             'downloadUrl' => $downloadUrl,
             'minorVersion' => $minorVersion,

@@ -16,7 +16,7 @@ class ReleaseInfo
         $this->artifacts = array_map(fn (string $filename) => Artifact::create($versionNumber, $filename), $artifactFilenames);
 
         $releaseType = ReleaseType::byKey($versionNumber);
-        if ((version_compare($versionNumber, 8) >= 0) || ($releaseType != null && $releaseType->isDevRelease())) {
+        if ((version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) || ($releaseType != null && $releaseType->isDevRelease())) {
             $this->artifacts[] = new DockerArtifact($versionNumber);
         }
     }
@@ -36,9 +36,6 @@ class ReleaseInfo
         return $this->version->getMajorVersion();
     }
 
-    
-    
-    
     public function getArtifacts(): array
     {
         return $this->artifacts;

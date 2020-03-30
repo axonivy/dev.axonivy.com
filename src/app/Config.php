@@ -6,8 +6,11 @@ class Config {
     public const NUMBER_LTS = 2;
     
     public const MAVEN_SUPPORTED_RELEASES_SINCE_VERSION = '6.0.0';
+    public const DOCKER_IMAGE_SINCE_VERSION = '8.0.0';
     public const MAVEN_ARTIFACTORY_URL = 'https://repo.axonivy.rocks/';
     public const CDN_URL = 'https://download.axonivy.com';
+    public const DOCKER_HUB_IMAGE_URL = 'https://hub.docker.com/r/axonivy/axonivy-engine';
+    public const DOCKER_IMAGE_ENGINE = 'axonivy/axonivy-engine';
 
     public const CLONE_DOC_SCRIPT = '/home/axonivya/script/clonedoc.sh';
     public const DOC_DIRECTORY_THIRDPARTY = '/home/axonivya/data/doc-cache';

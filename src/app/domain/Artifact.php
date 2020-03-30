@@ -42,7 +42,6 @@ class Artifact
     private function __construct(string $folderName, string $fileName)
     {
         $this->folderName = $folderName;
-
         $this->fileName = $fileName; // AxonIvyDesigner6.4.0.52683_Windows_x86.zip
 
         $filename = pathinfo($fileName, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86
@@ -145,6 +144,7 @@ class Artifact
 
     public function getPermalink(): string
     {
+        // TODO We should not access $_SERVER
         $basePermalink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         return $basePermalink . '/permalink/' . $this->folderName . '/' . $this->getFileNameInLatestFormat();
     }
@@ -186,7 +186,7 @@ class DockerArtifact extends Artifact
     public function __construct(string $versionNumber)
     {
         $this->folderName = $versionNumber;
-        $this->fileName = "axonivy/axonivy-engine:$versionNumber";
+        $this->fileName = Config::DOCKER_IMAGE_ENGINE . ":$versionNumber";
         
         $this->architecture = Artifact::ARCHITECTURE_X64;
         $this->type = Artifact::TYPE_DOCKER;
@@ -207,6 +207,11 @@ class DockerArtifact extends Artifact
         return '';
     }
     
+    public function getFileExtension(): string
+    {
+        return '';
+    }
+    
     public function isMavenPluginCompatible(): bool
     {
         return false;
@@ -214,6 +219,11 @@ class DockerArtifact extends Artifact
     
     public function getDownloadUrl(): string
     {
-        return "https://hub.docker.com/r/axonivy/axonivy-engine";
+        return Config::DOCKER_HUB_IMAGE_URL;
+    }
+    
+    public function getFileName(): string
+    {
+        return $this->fileName;
     }
 }
