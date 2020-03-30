@@ -7,16 +7,16 @@ use app\domain\util\StringUtil;
 class ReleaseInfo
 {
     private Version $version;
-    private array $variants;
-    
-    public function __construct(string $versionNumber, array $variantNames)
+    private array $artifacts;
+
+    public function __construct(string $versionNumber, array $artifactFilenames)
     {
         $this->version = new Version($versionNumber);
-        $this->variants = array_map(fn (string $name) => Variant::create($versionNumber, $name), $variantNames);
-        
-        if (version_compare($versionNumber, 8) >= 0)
-        {
-            $this->variants[] = new VariantDocker($versionNumber, 'axonivy/axonivy-engine');
+        $this->artifacts = array_map(fn (string $filename) => Variant::create($versionNumber, $filename), $artifactFilenames);
+
+        $releaseType = ReleaseType::byKey($versionNumber);
+        if ((version_compare($versionNumber, 8) >= 0) || ($releaseType != null && $releaseType->isDevRelease())) {
+            $this->variants[] = new VariantDocker($versionNumber);
         }
     }
 
@@ -40,7 +40,7 @@ class ReleaseInfo
     
     public function getVariants(): array
     {
-        return $this->variants;
+        return $this->artifacts;
     }
     
     public function isUnsafeVersion(): bool
@@ -87,10 +87,10 @@ class ReleaseInfo
     
     public function getVariantByProductNameAndType(string $productName, string $type): ?Variant
     {
-        foreach ($this->variants as $variant) {
-            if ($variant->getProductName() == $productName) {
-                if ($variant->getType() == $type) {
-                    return $variant;
+        foreach ($this->artifacts as $artifact) {
+            if ($artifact->getProductName() == $productName) {
+                if ($artifact->getType() == $type) {
+                    return $artifact;
                 }
             }
         }
@@ -99,7 +99,7 @@ class ReleaseInfo
 
     public function findArtifactByPermalinkFile(string $permalinkFile): ?Variant
     {
-        foreach ($this->getVariants() as $artifact) {
+        foreach ($this->artifacts as $artifact) {
             if (StringUtil::endsWith($artifact->getPermalink(), $permalinkFile)) {
                 return $artifact;
             }
