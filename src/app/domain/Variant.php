@@ -142,10 +142,11 @@ class Variant
         $filename = strtolower($this->getFileName());
         return StringUtil::contains($filename, 'beta');
     }
-    
+
     public function getPermalink(): string
     {
-        return PERMALINK_BASE_URL . $this->folderName. '/' .  $this->getFileNameInLatestFormat();
+        $basePermalink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        return $basePermalink . '/permalink/' . $this->folderName . '/' . $this->getFileNameInLatestFormat();
     }
 }
 
@@ -182,11 +183,10 @@ class VariantDeb extends Variant
 
 class VariantDocker extends Variant
 {
-    
-    public function __construct(string $folderName, string $fileName)
+    public function __construct(string $versionNumber)
     {
-        $this->folderName = $folderName;
-        $this->fileName = "$fileName:$folderName";
+        $this->folderName = $versionNumber;
+        $this->fileName = "axonivy/axonivy-engine:$versionNumber";
         
         $this->architecture = Variant::ARCHITECTURE_X64;
         $this->type = Variant::TYPE_DOCKER;
@@ -194,9 +194,9 @@ class VariantDocker extends Variant
         
         $this->originaProductNamelPrefix = Variant::PRODUCT_NAME_ENGINE;
         $this->productName = Variant::PRODUCT_NAME_ENGINE;
-        $this->versionNumber = $folderName;
+        $this->versionNumber = $versionNumber;
     }
-    
+
     public function getPermalink(): string
     {
         return '';

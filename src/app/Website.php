@@ -20,8 +20,6 @@ class Website
     
     function __construct()
     {
-        Config::initConfig();
-
         $container = new Container();
         $this->app = AppFactory::createFromContainer($container);
         $this->configureTemplateEngine();

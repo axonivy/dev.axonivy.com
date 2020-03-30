@@ -12,27 +12,13 @@ class Config {
     public const CLONE_DOC_SCRIPT = '/home/axonivya/script/clonedoc.sh';
     public const DOC_DIRECTORY_THIRDPARTY = '/home/axonivya/data/doc-cache';
 
-    
-    
-    
-    public static function initConfig()
+    public static function isProductionEnvironment()
     {
-        define('PERMALINK_BASE_URL', self::getRequestedBaseUri() . '/permalink/');
-        
-        $rootDir = '/home/axonivya/data/ivy-releases';
-        if (self::isDevOrTestEnv()) {
-            $rootDir = __DIR__ . '/../../src/web/releases/ivy';
-        }
-        define('IVY_RELEASE_DIRECTORY', $rootDir);
+        return !file_exists(__DIR__ . '/../../Jenkinsfile');
     }
-    
-    private static function getRequestedBaseUri(): string
+
+    public static function releaseDirectory(): string
     {
-        return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-    }
-    
-    public static function isDevOrTestEnv(): bool
-    {
-        return file_exists(__DIR__ . '/../../Jenkinsfile');
+        return self::isProductionEnvironment() ? '/home/axonivya/data/ivy-releases' : __DIR__ . '/../../src/web/releases/ivy';
     }
 }

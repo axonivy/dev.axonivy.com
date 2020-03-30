@@ -97,7 +97,7 @@ class ReleaseInfoRepository
     public static function getAvailableReleaseInfos(): array
     {
         $releaseInfos = [];
-        $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . '/*'), 'is_dir');
+        $directories = array_filter(glob(Config::releaseDirectory() . '/*'), 'is_dir');
         foreach ($directories as $directory) {
             $releaseReadyFile = $directory . '/release.ready';
             if (!file_exists($releaseReadyFile)) {

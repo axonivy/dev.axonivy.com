@@ -3,6 +3,7 @@ namespace app\domain\doc;
 
 use app\domain\util\StringUtil;
 use app\domain\Version;
+use app\Config;
 
 class DocProvider
 {
@@ -31,7 +32,7 @@ class DocProvider
     
     private function getDocDir()
     {
-        return IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . $this->versionNumber;
+        return Config::releaseDirectory() . DIRECTORY_SEPARATOR . $this->versionNumber;
     }
     
     public function findDocumentByNiceUrlPath(string $niceUrlPath): ?AbstractDocument
@@ -139,7 +140,7 @@ class DocProvider
     
     private function createRootPath(): string
     {
-        return IVY_RELEASE_DIRECTORY . '/' . $this->versionNumber . '/documents';
+        return Config::releaseDirectory() . '/' . $this->versionNumber . '/documents';
     }
     
     private function createBaseUrl(): string
@@ -216,6 +217,6 @@ class DocProvider
     
     private function createHotFixFilePath(string $filename): string
     {
-        return IVY_RELEASE_DIRECTORY . '/' . $this->versionNumber . '/hotfix/' . $filename;
+        return Config::releaseDirectory() . '/' . $this->versionNumber . '/hotfix/' . $filename;
     }
 }

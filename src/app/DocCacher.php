@@ -4,8 +4,6 @@ require __DIR__ . '/../../vendor/autoload.php';
 use app\Config;
 use app\domain\maven\MavenArtifactRepository;
 
-Config::initConfig();
-
 foreach (MavenArtifactRepository::getDocs() as $doc) {
     foreach ($doc->getVersions() as $version) {
         $targetDir = Config::DOC_DIRECTORY_THIRDPARTY . '/' . $doc->getDocSubFolder($version);

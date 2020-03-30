@@ -3,6 +3,7 @@ namespace app\domain;
 
 use app\domain\doc\DocProvider;
 use app\domain\util\StringUtil;
+use app\Config;
 
 class ReleaseInfo
 {
@@ -82,7 +83,7 @@ class ReleaseInfo
     public function getPath(): string
     {
         $versionNumber = $this->getVersion()->getBugfixVersion();
-        return IVY_RELEASE_DIRECTORY . '/' . $versionNumber;
+        return Config::releaseDirectory() . '/' . $versionNumber;
     }
     
     public function getVariantByProductNameAndType(string $productName, string $type): ?Variant
