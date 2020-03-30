@@ -84,9 +84,9 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
         $mavenPluginComp = $productName == Artifact::PRODUCT_NAME_ENGINE;
         $fileExtension = pathinfo($originalFilename, PATHINFO_EXTENSION);
         $permalinkName = 'axonivy-' . $productName . $shortType . '.' . $fileExtension;
-        $permalink = PermalinkFactory::create("$folderName/$permalinkName");
-        $downloadUrl = Config::CDN_URL . "/$folderName/" . basename($originalFilename);
-        
+        $permalink = ArtifactLinkFactory::permalink("$folderName/$permalinkName");
+        $downloadUrl = ArtifactLinkFactory::cdn("$folderName/" . basename($originalFilename));
+
         return new Artifact(
             basename($originalFilename),
             $productName,
@@ -134,32 +134,35 @@ class DebianArtifactFilenameParser implements ArtifactFilenameParser
     public function toArtifact(string $folderName, string $originalFilename): Artifact
     {
         $filename = pathinfo($originalFilename, PATHINFO_FILENAME); // e.g. axonivy-engine-7x_7.2.0.60027
-        $fileNameArray = explode('_', $filename);
-        $shortType = '';
-        $versionNumber = end($fileNameArray);
-        $mavenPluginComp = false;
-        $permalink = PermalinkFactory::create("$folderName/axonivy-engine.deb");
-        $downloadUrl = Config::CDN_URL . "/$folderName/" . basename($originalFilename);
-        
+        $fileNameArray = explode('_', $filename); // e.g ['axonivy-engine-7x', '7.2.0.60027']
+        $versionNumber = end($fileNameArray); // e.g. '7.2.0.60027'
+        $permalink = ArtifactLinkFactory::permalink("$folderName/axonivy-engine.deb");
+        $downloadUrl = ArtifactLinkFactory::cdn("$folderName/" . basename($originalFilename));
+
         return new Artifact(
             basename($originalFilename),
             Artifact::PRODUCT_NAME_ENGINE,
             $versionNumber,
             Artifact::TYPE_DEBIAN,
             Artifact::ARCHITECTURE_X64,
-            $shortType,
-            $mavenPluginComp,
+            '',
+            false,
             $permalink,
             $downloadUrl
         );
     }
 }
 
-class PermalinkFactory
+class ArtifactLinkFactory
 {
-    public static function create($path): string
+    public static function permalink($path): string
     {
         $basePermalink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         return $basePermalink . '/permalink/' . $path;
+    }
+    
+    public static function cdn($path): string
+    {
+        return Config::CDN_URL . "/$path";
     }
 }
