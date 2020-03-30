@@ -4,7 +4,7 @@ namespace app\domain;
 use app\domain\util\StringUtil;
 use app\Config;
 
-class Variant
+class Artifact
 {
     public const PRODUCT_NAME_ENGINE = 'engine';
     public const PRODUCT_NAME_DESIGNER = 'designer';
@@ -30,12 +30,12 @@ class Variant
     protected $originaProductNamePrefix;
     protected $shortType;
 
-    public static function create(string $folderName, string $fileName): Variant
+    public static function create(string $folderName, string $fileName): Artifact
     {
         if (StringUtil::endsWith($fileName, 'deb')) {
-            return new VariantDeb($folderName, $fileName);
+            return new DebianArtifact($folderName, $fileName);
         } else {
-            return new Variant($folderName, $fileName);
+            return new Artifact($folderName, $fileName);
         }
     }
 
@@ -150,7 +150,7 @@ class Variant
     }
 }
 
-class VariantDeb extends Variant
+class DebianArtifact extends Artifact
 {
     
     public function __construct(string $folderName, string $fileName)
@@ -161,12 +161,12 @@ class VariantDeb extends Variant
         $filename = pathinfo($fileName, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86 or axonivy-engine-7x_7.2.0.60027
         
         $fileNameArray = explode('_', $filename);
-        $this->architecture = Variant::ARCHITECTURE_X64;
-        $this->type = Variant::TYPE_DEBIAN;
+        $this->architecture = Artifact::ARCHITECTURE_X64;
+        $this->type = Artifact::TYPE_DEBIAN;
         $this->shortType = '';
         
-        $this->originaProductNamelPrefix = Variant::PRODUCT_NAME_ENGINE;
-        $this->productName = Variant::PRODUCT_NAME_ENGINE;
+        $this->originaProductNamelPrefix = Artifact::PRODUCT_NAME_ENGINE;
+        $this->productName = Artifact::PRODUCT_NAME_ENGINE;
         $this->versionNumber = end($fileNameArray);
     }
     
@@ -181,19 +181,19 @@ class VariantDeb extends Variant
     }
 }
 
-class VariantDocker extends Variant
+class DockerArtifact extends Artifact
 {
     public function __construct(string $versionNumber)
     {
         $this->folderName = $versionNumber;
         $this->fileName = "axonivy/axonivy-engine:$versionNumber";
         
-        $this->architecture = Variant::ARCHITECTURE_X64;
-        $this->type = Variant::TYPE_DOCKER;
+        $this->architecture = Artifact::ARCHITECTURE_X64;
+        $this->type = Artifact::TYPE_DOCKER;
         $this->shortType = '';
         
-        $this->originaProductNamelPrefix = Variant::PRODUCT_NAME_ENGINE;
-        $this->productName = Variant::PRODUCT_NAME_ENGINE;
+        $this->originaProductNamelPrefix = Artifact::PRODUCT_NAME_ENGINE;
+        $this->productName = Artifact::PRODUCT_NAME_ENGINE;
         $this->versionNumber = $versionNumber;
     }
 

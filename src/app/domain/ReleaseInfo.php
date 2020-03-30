@@ -13,11 +13,11 @@ class ReleaseInfo
     public function __construct(string $versionNumber, array $artifactFilenames)
     {
         $this->version = new Version($versionNumber);
-        $this->artifacts = array_map(fn (string $filename) => Variant::create($versionNumber, $filename), $artifactFilenames);
+        $this->artifacts = array_map(fn (string $filename) => Artifact::create($versionNumber, $filename), $artifactFilenames);
 
         $releaseType = ReleaseType::byKey($versionNumber);
         if ((version_compare($versionNumber, 8) >= 0) || ($releaseType != null && $releaseType->isDevRelease())) {
-            $this->variants[] = new VariantDocker($versionNumber);
+            $this->artifacts[] = new DockerArtifact($versionNumber);
         }
     }
 
@@ -39,7 +39,7 @@ class ReleaseInfo
     
     
     
-    public function getVariants(): array
+    public function getArtifacts(): array
     {
         return $this->artifacts;
     }
@@ -86,7 +86,7 @@ class ReleaseInfo
         return Config::releaseDirectory() . '/' . $versionNumber;
     }
     
-    public function getVariantByProductNameAndType(string $productName, string $type): ?Variant
+    public function getArtifactByProductNameAndType(string $productName, string $type): ?Artifact
     {
         foreach ($this->artifacts as $artifact) {
             if ($artifact->getProductName() == $productName) {
@@ -98,7 +98,7 @@ class ReleaseInfo
         return null;
     }
 
-    public function findArtifactByPermalinkFile(string $permalinkFile): ?Variant
+    public function findArtifactByPermalinkFile(string $permalinkFile): ?Artifact
     {
         foreach ($this->artifacts as $artifact) {
             if (StringUtil::endsWith($artifact->getPermalink(), $permalinkFile)) {

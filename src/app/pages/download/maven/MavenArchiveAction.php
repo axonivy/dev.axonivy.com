@@ -23,9 +23,9 @@ class MavenArchiveAction
             }
 
             $artifacts = [];
-            foreach ($releaseInfo->getVariants() as $variant) {
-                if ($variant->isMavenPluginCompatible()) {
-                    $artifacts[] = new MavenArchiveArtifact($variant->getDownloadUrl(), $variant->getFilename());
+            foreach ($releaseInfo->getArtifacts() as $artifact) {
+                if ($artifact->isMavenPluginCompatible()) {
+                    $artifacts[] = new MavenArchiveArtifact($artifact->getDownloadUrl(), $artifact->getFilename());
                 }
             }
             if (!empty($artifacts)) {

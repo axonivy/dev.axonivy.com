@@ -59,8 +59,8 @@ table.alt tbody tr td {
 							<br /><br />
 						{% endif %}
 
-						{% for variant in releaseInfo.Variants %}
-							<a href="{{ variant.DownloadUrl }}"><span class="icon fas fa-download"> </span></a> &nbsp;<a href="{{ variant.DownloadUrl }}" title="{{ variant.FileName }}">{{ variant.FileName }}</a><br />
+						{% for artifact in releaseInfo.artifacts %}
+							<a href="{{ artifact.DownloadUrl }}"><span class="icon fas fa-download"> </span></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a><br />
 						{% endfor %}
 						</td>
 

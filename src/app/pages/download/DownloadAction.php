@@ -4,9 +4,9 @@ namespace app\pages\download;
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
-use app\domain\Variant;
 use Slim\Exception\HttpNotFoundException;
 use app\domain\ReleaseType;
+use app\domain\Artifact;
 
 class DownloadAction
 {
@@ -122,9 +122,9 @@ class ReleaseInfoLoader implements Loader
     function designerArtifacts(): array
     {
         $artifacts = [
-            $this->createDownloadArtifact('Windows','fab fa-windows', Variant::PRODUCT_NAME_DESIGNER, Variant::TYPE_WINDOWS),
-            $this->createDownloadArtifact('Linux', 'fab fa-linux', Variant::PRODUCT_NAME_DESIGNER, Variant::TYPE_LINUX),
-            $this->createDownloadArtifact('Mac OS', 'fab fa-apple', Variant::PRODUCT_NAME_DESIGNER, Variant::TYPE_MAC),
+            $this->createDownloadArtifact('Windows','fab fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
+            $this->createDownloadArtifact('Linux', 'fab fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
+            $this->createDownloadArtifact('Mac OS', 'fab fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC),
         ];
         return array_filter($artifacts);
     }
@@ -132,35 +132,35 @@ class ReleaseInfoLoader implements Loader
     function engineArtifacts(): array
     {
         $artifacts = [
-            $this->createDownloadArtifact('Windows','fab fa-windows', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_WINDOWS),
-            $this->createDownloadArtifact('Docker', 'fab fa-docker', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_DOCKER),
-            $this->createDownloadArtifact('Debian','fas fa-cube', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_DEBIAN),
-            $this->createDownloadArtifact('Linux','fab fa-linux', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_ALL)
+            $this->createDownloadArtifact('Windows','fab fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
+            $this->createDownloadArtifact('Docker', 'fab fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),
+            $this->createDownloadArtifact('Debian','fas fa-cube', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DEBIAN),
+            $this->createDownloadArtifact('Linux','fab fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
         ];
         return array_filter($artifacts);
     }
 
     private function createDownloadArtifact($name, $icon, $productName, $type): ?DownloadArtifact
     {
-        $variant = $this->releaseInfo->getVariantByProductNameAndType($productName, $type);
-        if ($variant == null) {
+        $artifact = $this->releaseInfo->getArtifactByProductNameAndType($productName, $type);
+        if ($artifact == null) {
             return null;
         }
         
         $description = '';
-        $beta = $variant->isBeta() ? ' BETA' : '';
+        $beta = $artifact->isBeta() ? ' BETA' : '';
         if ($this->releaseType->isDevRelease()) {
-            $description = $variant->getVersion()->getVersionNumber() . ' ' . $beta;
+            $description = $artifact->getVersion()->getVersionNumber() . ' ' . $beta;
         } else {
-            $description = $variant->getVersion()->getBugfixVersion() . ' ' . $this->releaseType->shortName() . $beta;
+            $description = $artifact->getVersion()->getBugfixVersion() . ' ' . $this->releaseType->shortName() . $beta;
         }
         
-        $permalink = $variant->getPermalink();
+        $permalink = $artifact->getPermalink();
         return new DownloadArtifact(
             $name,
             $description,
-            $variant->getInstallationUrl(),
-            $variant->getFileName(),
+            $artifact->getInstallationUrl(),
+            $artifact->getFileName(),
             $icon,
             $permalink);
     }

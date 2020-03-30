@@ -3,9 +3,9 @@ namespace app\pages\installation;
 
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
-use app\domain\Variant;
 use app\domain\Version;
 use app\domain\util\Redirect;
+use app\domain\Artifact;
 
 class InstallationAction
 {
@@ -31,23 +31,23 @@ class InstallationAction
         $bugfixVersion = (new Version($version))->getBugfixVersion();
         
         $title = 'Install Axon.ivy Designer';
-        if ($product == Variant::PRODUCT_NAME_ENGINE) {
+        if ($product == Artifact::PRODUCT_NAME_ENGINE) {
             $title = 'Install Axon.ivy Engine';
-            if ($type == Variant::TYPE_DEBIAN) {
+            if ($type == Artifact::TYPE_DEBIAN) {
               $title .= ' as Debian Package';
             }
-            if ($type == Variant::TYPE_DOCKER) {
+            if ($type == Artifact::TYPE_DOCKER) {
               $title .= ' as Docker Image';
             }
         }
         
-        if ($type == Variant::TYPE_WINDOWS) {
+        if ($type == Artifact::TYPE_WINDOWS) {
             $title .= ' on Windows';
         }
-        if ($type == Variant::TYPE_LINUX || $type == Variant::TYPE_ALL) {
+        if ($type == Artifact::TYPE_LINUX || $type == Artifact::TYPE_ALL) {
             $title .= ' on Linux';
         }
-        if ($type == Variant::TYPE_MAC) {
+        if ($type == Artifact::TYPE_MAC) {
             $title .= ' on Mac';
         }
         
