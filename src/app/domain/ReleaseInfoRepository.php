@@ -102,14 +102,7 @@ class ReleaseInfoRepository
             }
 
             $versionNumber = basename($directory);
-            $fileNames = glob($directory . '/downloads/*.{zip,deb}', GLOB_BRACE);
-            
-            $artifacts = array_map(fn (string $filename) => Artifact::create($versionNumber, $filename), $fileNames);
-            $releaseType = ReleaseType::byKey($versionNumber);
-            if ((version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) || ($releaseType != null && $releaseType->isDevRelease())) {
-                $artifacts[] = new DockerArtifact($versionNumber);
-            }
-            
+            $artifacts = ArtifactFactory::create($directory);
             $releaseInfos[] = new ReleaseInfo(new Version($versionNumber), $artifacts);
         }
         $releaseInfos = self::sortReleaseInfosByVersionOldestFirst($releaseInfos);
