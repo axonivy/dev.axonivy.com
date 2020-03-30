@@ -1,0 +1,65 @@
+{% extends "_parts/base.twig" %}
+
+{% block title %}Team{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<section id="main" class="inverse">
+	<div class="inner-small">
+		<header>
+			<h1>
+				<span class="icon fas fa-thumbs-up"></span> ivyTeam (Switzerland)
+			</h1>
+		</header>
+
+		<p>
+			<b>ivyTeam</b> is the core development team of the <b>Axon.ivy Digital Business Platform</b>.
+				The team is highly experienced in <b>agile
+				software development</b>. Since the formation in the year <b>1993</b>
+				the team is located in <b>Zug</b> in the heart of Switzerland.
+		</p>
+	</div>
+</section>
+
+<section id="main">
+	<div class="inner-small">
+		{% for employee in employees %}
+		{% if loop.index % 3 == 1 %}
+		<div class="row">
+			{% endif %}
+			<div class="4u 12u$(xsmall)">
+				<header>
+					<h4>
+						{{ employee.name }}
+					</h4>
+				</header>
+				{% if employee.imgSrc %}
+				<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+				{% else %}
+				<div
+					style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
+				{% endif %}
+				<p>
+					{{ employee.function }}
+					<br />
+					{{ employee.education }}
+				</p>
+			</div>
+			{% if loop.index % 3 == 0 %}
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
+</section>
+
+<section id="one" class="inverse">
+	<div class="inner">
+		<div class="row">
+			<iframe width="100%" height="450"
+				src="https://maps.google.com/maps?width=100%&amp;height=450&amp;hl=en&amp;coord=47.1717295,8.5166076&amp;q=Baarerstrasse%2012.%20CH-6300%20Zug+(AXON%20Ivy%20AG)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed">
+			</iframe>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

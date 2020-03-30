@@ -1,8 +1,8 @@
 <?php
 namespace app\api;
 
-use app\release\model\ReleaseInfo;
-use app\release\model\ReleaseInfoRepository;
+use app\domain\ReleaseInfo;
+use app\domain\ReleaseInfoRepository;
 
 class StatusApi
 {

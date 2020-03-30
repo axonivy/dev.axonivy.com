@@ -1,0 +1,52 @@
+<div class="row">
+{% if artifacts is empty %}
+	<b>This is currently not available. Come back soon!</b>
+{% endif %}
+
+{% for artifact in artifacts %}
+
+    {% set column = 12 / artifacts|length %}
+
+    <div class="{{ column }}u 12u$(xsmall) " style="border:0px solid black;text-align:center;padding:0 0 0 0.8em">
+    	<i class="{{ artifact.icon }}" style="font-size:65px;"></i>
+    	<br /><br />
+    	<a href="{{ artifact.url }}" title="{{ artifact.filename }}" style="padding:10px 10px 10px 10px;width:100%;line-height:25px;height:70px;font-size:18px;" class="button special">
+    		<i class="fa fa-download" style="font-size:14px;"></i> {{ artifact.name }}
+    		<br />
+    		<span style="font-size:14px;">{{ artifact.description }}</span>
+    	</a>
+    </div>
+
+{% endfor %}
+</div>
+
+<br />
+
+{% if artifacts is not empty %}
+<div>
+  <p style="float:left;"><i class="fas fa-link"></i> <a href="javascript:void(0);" onclick="javascript:showPermalinks();">Permalink</a></p>
+  <p style="float:right;"><i class="fas fa-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
+</div>
+<div style="clear: both;"></div>
+ <ul class="permalinks" style="display:none;">
+ 	{% for artifact in artifacts %}
+ 		{% if artifact.permalink is not empty %}
+ 		<li><a style="font-size:15px;" href="{{ artifact.permalink }}">{{ artifact.permalink }}</a></li>
+ 		{% endif %}
+ 	{% endfor %}
+  </ul>
+{% endif %}
+
+<script>
+function showPermalinks() {
+	var elements = document.getElementsByClassName('permalinks');
+	for (var i = 0; i < elements.length; i++) {
+		var element = elements[i];
+		if (element.style.display == 'none') {
+			element.style.display = 'block';
+		} else {
+			element.style.display = 'none';
+		}
+	}
+}
+</script>

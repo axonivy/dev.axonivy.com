@@ -1,0 +1,33 @@
+<p>
+	1. Download the Axon.ivy Engine to your desired location
+</p>
+
+<ul class="actions">
+	<li><a href="{{downloadUrl}}" class="button special">Download Axon.ivy Engine {{bugfixVersion}}</a></li>
+</ul>
+
+<img src="/images/installation/download-engine.png" />
+<br /><br />
+
+<p>
+	2. Extract the downloaded zip file
+</p>
+
+<img src="/images/installation/extract-axonivy-designer.png" />
+<br /><br />
+
+<p>
+	3. Start the Axon.ivy Engine
+</p>
+
+<ul class="actions">
+	<li><a href="/doc/{{minorVersion}}/engine-guide/getting-started/index.html" class="button special">Getting Started</a></li>
+</ul>
+
+{% if PRODUCTIVE_SYSTEM %}
+<script>
+$(document).ready(function(){
+  window.location.href = '{{ downloadUrl }}';
+});
+</script>
+{% endif %}

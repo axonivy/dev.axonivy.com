@@ -8,7 +8,7 @@ class StatusApiTest extends TestCase
 {
     public function testStatus()
     {
-        AppTester::assertThatGet('/status')
+        AppTester::assertThatGet('/api/status')
             ->statusCode(200)
             ->bodyContains('phpVersion')
             ->bodyContains('latestVersion')
