@@ -7,8 +7,6 @@ The tooling to call remote Web Services has been completely re-worked and is mor
 * __Reliable__: Logs and monitoring capabilities let you easily identify fragile Web Service communications
 * __Open__: Additional client features can easily be contributed by process developers
 
-![WebService](images/71_wsClient_requestTab.png "Web Service Request")
-
 <div class="short-links">
 	<a href="${docBaseUrl}/designer-guide/3rd-party-integration/index.html#web-services" target="_blank">
 	  <i class="fas fa-book"></i> Designer Guide

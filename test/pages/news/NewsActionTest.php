@@ -24,6 +24,7 @@ class NewsActionTest extends TestCase
         ->bodyContains('Our new Engine Cockpit has now become a mighty successor of the AdminUI with a rich feature set.')
         ->bodyContains('Smart, smart, Axon.ivy Digital Business Platform')
         ->bodyContains('Axon.ivy now runs with Java 11. Which is the most recent LTS runtime for Java.')
+        ->bodyContains('/images/news/8.0/native-mac-gtk3/01-high-sierra-rest-activity.png')
         ->bodyContains('December 4th, 2019');        
     }
 

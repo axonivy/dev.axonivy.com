@@ -87,7 +87,13 @@ class NewsRepository
     {
         $markdownFileWithoutExtension = pathinfo($markdownFile, PATHINFO_FILENAME);
         $markdownFileWithoutExtensionAndPrefix = substr($markdownFileWithoutExtension, 3);
-        $directory = __DIR__ . "/../../web/images/news/$version/$markdownFileWithoutExtensionAndPrefix";
+
+        $imagesNewsDir = __DIR__ . "/../../../web/images/news";
+        if (!file_exists($imagesNewsDir)) {
+            throw new \RuntimeException("$imagesNewsDir does not exist");
+        }
+
+        $directory = "$imagesNewsDir/$version/$markdownFileWithoutExtensionAndPrefix";
         
         $imageUrls = [];
         foreach (glob($directory . '/*') as $imagePath)
