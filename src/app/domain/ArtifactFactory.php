@@ -33,13 +33,12 @@ class ArtifactFactory
         }
     }
     
-    private static function createDockerArtifact($folderName): Artifact
+    private static function createDockerArtifact($versionNumber): Artifact
     {
         return new Artifact(
-            $folderName,
-            Config::DOCKER_IMAGE_ENGINE . ":$folderName",
+            Config::DOCKER_IMAGE_ENGINE . ":$versionNumber",
             Artifact::PRODUCT_NAME_ENGINE,
-            $folderName,
+            $versionNumber,
             Artifact::TYPE_DOCKER,
             Artifact::ARCHITECTURE_X64,
             '',
@@ -89,7 +88,6 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
         $downloadUrl = Config::CDN_URL . "/$folderName/" . basename($originalFilename);
         
         return new Artifact(
-            $folderName,
             basename($originalFilename),
             $productName,
             $versionNumber,
@@ -144,7 +142,6 @@ class DebianArtifactFilenameParser implements ArtifactFilenameParser
         $downloadUrl = Config::CDN_URL . "/$folderName/" . basename($originalFilename);
         
         return new Artifact(
-            $folderName,
             basename($originalFilename),
             Artifact::PRODUCT_NAME_ENGINE,
             $versionNumber,

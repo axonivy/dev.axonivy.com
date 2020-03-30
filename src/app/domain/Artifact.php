@@ -18,7 +18,6 @@ class Artifact
     public const ARCHITECTURE_X64 = 'x64';
     public const ARCHITECTURE_X86 = 'x86';
     
-    private string $folderName; // this is the folderName where the artifact is in (version number)
     private string $fileName; // real filename 
     private string $productName;  // see PRODUCT_* constants
     private string $versionNumber; // version parsed from filename
@@ -30,7 +29,6 @@ class Artifact
     private string $downloadUrl;
     
     public function __construct(
-        string $folderName,
         string $fileName,
         string $productName,
         string $versionNumber,
@@ -41,7 +39,6 @@ class Artifact
         string $permalink,
         string $downloadUrl)
     {
-        $this->folderName = $folderName;
         $this->fileName = $fileName;
         $this->productName = $productName;
         $this->versionNumber = $versionNumber;
