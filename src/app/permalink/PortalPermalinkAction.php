@@ -6,6 +6,7 @@ use Slim\Psr7\Request;
 use app\domain\market\Market;
 use app\domain\util\Redirect;
 use app\domain\util\StringUtil;
+use app\domain\ReleaseType;
 
 class PortalPermalinkAction
 {
@@ -33,7 +34,8 @@ class PortalPermalinkAction
 
     private static function evaluatePortalVersion(String $version): String
     {
-        if ($version == 'dev' || $version == 'nightly' || $version == 'sprint') {
+        $releaseType = ReleaseType::byKey($version);
+        if ($releaseType != null && $releaseType->isDevRelease()) {
             return Market::getPortal()->getLatestVersion();
         }
 
