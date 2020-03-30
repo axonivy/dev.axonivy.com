@@ -18,13 +18,13 @@ class DownloadAction
         $this->view = $view;
     }
 
-    public function __invoke(Request $request, $response, $args) {
+    public function __invoke(Request $request, $response, $args)
+    {
         $version = $args['version'] ?? '';
-        
+
         $releaseType = $this->releaseType($version);
-        if ($releaseType == null)
-        {
-          throw new HttpNotFoundException($request);
+        if ($releaseType == null) {
+            throw new HttpNotFoundException($request);
         }
 
         $loader = $this->createLoader($releaseType);
@@ -36,11 +36,11 @@ class DownloadAction
             'headerTitle' => $loader->headerTitle(),
             'headerSubTitle' => $releaseType->headline(),
             'banner' => $releaseType->banner(),
-            
+
             'showOtherVersions' => ReleaseType::isLTS($releaseType),
-            
+
             'archiveLink' => $loader->archiveLink(),
-            'versionShort' => $loader->versionShort(),
+            'versionShort' => $loader->versionShort()
         ]);
     }
 
@@ -64,24 +64,28 @@ class DownloadAction
 
 interface Loader
 {
+
     function designerArtifacts(): array;
+
     function engineArtifacts(): array;
 
     function headerTitle(): string;
-    
+
     function versionShort(): string;
+
     function archiveLink(): string;
 }
 
 class ReleaseTypeNotAvailableLoader implements Loader
 {
+
     private ReleaseType $releaseType;
-    
-    function __construct(ReleaseType $releaseType)
+
+    public function __construct(ReleaseType $releaseType)
     {
         $this->releaseType = $releaseType;
     }
-    
+
     public function designerArtifacts(): array
     {
         return [];
@@ -96,46 +100,48 @@ class ReleaseTypeNotAvailableLoader implements Loader
     {
         return $this->releaseType->name() . " currently not available";
     }
-    
+
     public function versionShort(): string
     {
         return $this->releaseType->shortName();
     }
-    
+
     public function archiveLink(): string
     {
-        return '/download/archive';    
+        return '/download/archive';
     }
 }
 
 class ReleaseInfoLoader implements Loader
 {
+
     private ReleaseType $releaseType;
+
     private ReleaseInfo $releaseInfo;
 
-    function __construct(ReleaseType $releaseType, ReleaseInfo $releaseInfo)
+    public function __construct(ReleaseType $releaseType, ReleaseInfo $releaseInfo)
     {
         $this->releaseType = $releaseType;
         $this->releaseInfo = $releaseInfo;
     }
 
-    function designerArtifacts(): array
+    public function designerArtifacts(): array
     {
         $artifacts = [
-            $this->createDownloadArtifact('Windows','fab fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
+            $this->createDownloadArtifact('Windows', 'fab fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
             $this->createDownloadArtifact('Linux', 'fab fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
-            $this->createDownloadArtifact('Mac OS', 'fab fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC),
+            $this->createDownloadArtifact('Mac OS', 'fab fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC)
         ];
         return array_filter($artifacts);
     }
 
-    function engineArtifacts(): array
+    public function engineArtifacts(): array
     {
         $artifacts = [
-            $this->createDownloadArtifact('Windows','fab fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
+            $this->createDownloadArtifact('Windows', 'fab fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
             $this->createDownloadArtifact('Docker', 'fab fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),
-            $this->createDownloadArtifact('Debian','fas fa-cube', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DEBIAN),
-            $this->createDownloadArtifact('Linux','fab fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
+            $this->createDownloadArtifact('Debian', 'fas fa-cube', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DEBIAN),
+            $this->createDownloadArtifact('Linux', 'fab fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
         ];
         return array_filter($artifacts);
     }
@@ -146,7 +152,7 @@ class ReleaseInfoLoader implements Loader
         if ($artifact == null) {
             return null;
         }
-        
+
         $description = '';
         $beta = $artifact->isBeta() ? ' BETA' : '';
         if ($this->releaseType->isDevRelease()) {
@@ -154,27 +160,21 @@ class ReleaseInfoLoader implements Loader
         } else {
             $description = $artifact->getVersion()->getBugfixVersion() . ' ' . $this->releaseType->shortName() . $beta;
         }
-        
+
         $permalink = $artifact->getPermalink();
-        return new DownloadArtifact(
-            $name,
-            $description,
-            $artifact->getInstallationUrl(),
-            $artifact->getFileName(),
-            $icon,
-            $permalink);
+        return new DownloadArtifact($name, $description, $artifact->getInstallationUrl(), $artifact->getFileName(), $icon, $permalink);
     }
-    
+
     public function headerTitle(): string
     {
         return "Download " . $this->releaseType->name() . $this->minorVersion();
     }
-    
+
     public function versionShort(): string
     {
         return $this->releaseType->shortName() . $this->minorVersion();
     }
-    
+
     private function minorVersion(): string
     {
         return $this->releaseType->isDevRelease() ? '' : ' ' . $this->releaseInfo->minorVersion();
@@ -188,14 +188,20 @@ class ReleaseInfoLoader implements Loader
 
 class DownloadArtifact
 {
+
     public string $name;
+
     public string $description;
+
     public string $url;
+
     public string $filename;
+
     public string $icon;
+
     public string $permalink;
-    
-    function __construct($name, $description, $url, $filename, $icon, $permalink)
+
+    public function __construct($name, $description, $url, $filename, $icon, $permalink)
     {
         $this->name = $name;
         $this->description = $description;

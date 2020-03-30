@@ -42,7 +42,7 @@ class MavenArchiveRelease
     public string $version;
     public array $artifacts;
     
-    function __construct(string $version, array $artifacts) {
+    public function __construct(string $version, array $artifacts) {
         $this->version = $version;
         $this->artifacts = $artifacts;
     }
@@ -53,7 +53,7 @@ class MavenArchiveArtifact
     public string $url;
     public string $filename;
     
-    function __construct(string $url, string $filename) {
+    public function __construct(string $url, string $filename) {
         $this->url = $url;
         $this->filename = $filename;
     }

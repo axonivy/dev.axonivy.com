@@ -10,10 +10,11 @@ use app\domain\ReleaseInfo;
 
 class ArchiveAction
 {
+
     private Twig $view;
-    
+
     private array $versions;
-    
+
     public function __construct(Twig $view)
     {
         $this->view = $view;
@@ -23,7 +24,7 @@ class ArchiveAction
     public function __invoke($request, $response, $args)
     {
         $version = $args['version'] ?? '';
-        
+
         $archiveVersion = $this->getCurrentArchiveVersion($version);
         if (empty($archiveVersion)) {
             throw new HttpNotFoundException($request);
@@ -36,10 +37,10 @@ class ArchiveAction
             'currentMajorVersion' => $archiveVersion
         ]);
     }
-    
+
     private function getCurrentArchiveVersion(string $version): string
     {
-        if (empty($version) && !empty($this->versions)) {
+        if (empty($version) && ! empty($this->versions)) {
             return ReleaseType::LTS()->releaseInfo()->minorVersion();
         } else if (array_key_exists($version, $this->versions)) {
             return $version;
@@ -50,28 +51,28 @@ class ArchiveAction
     private function findReleaseInfos(string $version): array
     {
         $releaseTypes = ReleaseType::byArchiveKey($version);
-        if (!empty($releaseTypes)) {
+        if (! empty($releaseTypes)) {
             $releaseInfos = [];
             foreach ($releaseTypes as $releaseType) {
-                $releaseInfos = array_merge($releaseInfos, $releaseType->allReleaseInfos());                
+                $releaseInfos = array_merge($releaseInfos, $releaseType->allReleaseInfos());
             }
             return $releaseInfos;
         }
-        
+
         // remove lts versions from leading edge list (e.g. 7.x => 7.0)
         $filterLTS = false;
         if (StringUtil::endsWith($version, 'x')) {
-            $version = substr($version, 0, -1);
+            $version = substr($version, 0, - 1);
             $filterLTS = true;
         }
-        
+
         $releaseInfos = ReleaseInfoRepository::getMatchingVersions($version);
-        
+
         if ($filterLTS) {
             $minorVersion = $version . '0';
-            $releaseInfos = array_filter($releaseInfos, fn(ReleaseInfo $releaseInfo) => !StringUtil::startsWith($releaseInfo->versionNumber(), $minorVersion));
+            $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => ! StringUtil::startsWith($releaseInfo->versionNumber(), $minorVersion));
         }
-        
+
         return $releaseInfos;
     }
 
@@ -87,6 +88,7 @@ class ArchiveAction
 
 class DownloadArchive
 {
+
     private static function toVersion(ReleaseInfo $releaseInfo): string
     {
         $v = $releaseInfo->versionNumber();
@@ -115,10 +117,10 @@ class DownloadArchive
         }
     }
 
-    static function versions(): array
+    public static function versions(): array
     {
         $releaseInfos = ReleaseInfoRepository::getAvailableReleaseInfos();
-        $versions = array_map(fn(ReleaseInfo $releaseInfo) => self::toVersion($releaseInfo), $releaseInfos);
+        $versions = array_map(fn (ReleaseInfo $releaseInfo) => self::toVersion($releaseInfo), $releaseInfos);
         $versions = array_unique($versions);
         $versions = array_reverse($versions);
         $versions = array_flip($versions);
@@ -144,6 +146,7 @@ class DownloadArchive
 
 class VersionLink
 {
+
     public string $id;
 
     private string $productEdition;

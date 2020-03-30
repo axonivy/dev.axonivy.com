@@ -7,7 +7,9 @@ use app\Config;
 
 class ReleaseInfo
 {
+
     private Version $version;
+
     private array $artifacts;
 
     public function __construct(string $versionNumber, array $artifactFilenames)
@@ -40,27 +42,27 @@ class ReleaseInfo
     {
         return $this->artifacts;
     }
-    
+
     public function isUnsafeVersion(): bool
     {
         return file_exists($this->getPath() . '/unsafe.version');
     }
-    
+
     public function getDocProvider(): DocProvider
     {
         return new DocProvider($this->getVersion()->getVersionNumber());
     }
-    
+
     public function hasHotfix(): bool
     {
         return file_exists($this->getHotFixPath());
     }
-    
+
     public function minorVersion(): string
     {
         return $this->version->getMinorVersion();
     }
-    
+
     public function getHotfixFileUrl(): string
     {
         $fileNames = glob($this->getHotFixPath() . '/*.zip');
@@ -68,21 +70,21 @@ class ReleaseInfo
             return '';
         }
         $fileName = basename($fileNames[0]);
-        
+
         return '/releases/ivy/' . $this->version->getVersionNumber() . '/hotfix/' . $fileName;
     }
-    
+
     private function getHotFixPath(): string
     {
         return $this->getPath() . '/hotfix';
     }
-    
+
     public function getPath(): string
     {
         $versionNumber = $this->getVersion()->getBugfixVersion();
         return Config::releaseDirectory() . '/' . $versionNumber;
     }
-    
+
     public function getArtifactByProductNameAndType(string $productName, string $type): ?Artifact
     {
         foreach ($this->artifacts as $artifact) {

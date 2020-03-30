@@ -4,7 +4,6 @@ namespace app\pages\doc;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\domain\ReleaseType;
-use app\domain\ReleaseInfoRepository;
 use app\domain\ReleaseInfo;
 
 class DocOverviewAction
@@ -18,8 +17,8 @@ class DocOverviewAction
 
     public function __invoke($request, Response $response, $args)
     {
-        $ltsVersions = ReleaseInfoRepository::getLongTermSupportVersions();
-        $leadingEdgeVersions = array_filter([ReleaseInfoRepository::getLeadingEdge()]);
+        $ltsVersions = ReleaseType::LTS()->allReleaseInfos();
+        $leadingEdgeVersions = ReleaseType::LE()->allReleaseInfos();
         $devVersions = $this->devVersions();
 
         return $this->view->render($response, 'doc/overview.twig', [
@@ -50,7 +49,7 @@ class DocLink
     public string $url;
     public string $displayText;
     
-    function __construct(string $url, string $displayText)
+    public function __construct(string $url, string $displayText)
     {
         $this->url = $url;
         $this->displayText = $displayText;
