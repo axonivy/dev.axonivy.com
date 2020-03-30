@@ -50,7 +50,7 @@ class ReleaseInfo
 
     public function getDocProvider(): DocProvider
     {
-        return new DocProvider($this->getVersion()->getVersionNumber());
+        return new DocProvider($this->versionNumber());
     }
 
     public function hasHotfix(): bool
@@ -66,7 +66,7 @@ class ReleaseInfo
         }
         $fileName = basename($fileNames[0]);
 
-        return '/releases/ivy/' . $this->version->getVersionNumber() . '/hotfix/' . $fileName;
+        return '/releases/ivy/' . $this->versionNumber() . '/hotfix/' . $fileName;
     }
 
     private function getHotFixPath(): string
@@ -76,8 +76,7 @@ class ReleaseInfo
 
     public function getPath(): string
     {
-        $versionNumber = $this->getVersion()->getBugfixVersion();
-        return Config::releaseDirectory() . '/' . $versionNumber;
+        return Config::releaseDirectory() . '/' . $this->versionNumber();
     }
 
     public function getArtifactByProductNameAndType(string $productName, string $type): ?Artifact
