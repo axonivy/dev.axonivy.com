@@ -139,9 +139,9 @@ class ReleaseType
         if ($this->allReleaseInfoSupplier != null) {
             return $this->allReleaseInfoSupplier->call($this, $this->key);
         }
-        return [$this->releaseInfo()];
+        return array_filter([$this->releaseInfo()]);
     }
-    
+
     public function key(): string
     {
         return $this->key;
