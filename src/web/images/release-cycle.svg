@@ -43,12 +43,12 @@
      showgrid="false"
      showguides="false"
      inkscape:zoom="1.8962945"
-     inkscape:cx="422.82054"
-     inkscape:cy="208.18614"
+     inkscape:cx="207.75893"
+     inkscape:cy="284.64455"
      inkscape:window-x="70"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g256"
+     inkscape:current-layer="g370"
      inkscape:snap-bbox="true" />
   <g
      class="gantt-chart"
@@ -58,12 +58,12 @@
      id="g370">
     <rect
        class="chart__bar--orange"
-       y="195.76115"
+       y="-85.292397"
        height="26"
-       width="281.186"
-       id="rect214"
-       x="12.483786"
-       style="fill:#007095;fill-opacity:1;stroke-width:1.83209491" />
+       width="25.43116"
+       id="rect220-0-48"
+       x="404.04474"
+       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <g
        class="x axis"
        transform="matrix(1,0,0,1.2149301,-55.006571,224.01612)"
@@ -79,32 +79,33 @@
            y2="6"
            y1="-288"
            id="line252"
-           x1="0"
-           x2="0"
-           style="stroke:currentColor" />
+           x1="6"
+           x2="6"
+           style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
         <text
            y="9"
-           dy="0.70999998em"
+           dy="7.0999999"
            id="text254"
-           style="fill:currentColor">2017</text>
+           style="fill:currentColor"
+           x="6">2017</text>
         <line
-           y2="-17.753412"
-           y1="-283.31241"
+           y2="-18.511805"
+           y1="-284.07083"
            id="line252-6"
-           x1="455.86823"
-           x2="455.86823"
-           style="font-size:10px;font-family:sans-serif;text-anchor:middle;opacity:1;fill:none;stroke:currentColor;stroke-width:0.95159376;stroke-miterlimit:4;stroke-dasharray:0.95159377, 1.90318752;stroke-dashoffset:0" />
+           x1="458.3356"
+           x2="458.3237"
+           style="font-size:10px;font-family:sans-serif;text-anchor:middle;opacity:1;fill:none;stroke:currentColor;stroke-width:1.36086678;stroke-miterlimit:4;stroke-dasharray:4.08260034,1.36086678;stroke-dashoffset:0" />
         <line
-           y2="1.7021793"
-           y1="-168.79921"
-           id="line252-6-8"
-           x1="322.48752"
-           x2="322.94009"
-           style="font-size:10px;font-family:sans-serif;text-anchor:middle;opacity:1;fill:none;stroke:currentColor;stroke-width:0.76249158;stroke-miterlimit:4;stroke-dasharray:0.76249158, 1.52498314;stroke-dashoffset:0" />
+           y2="5.456965"
+           y1="-167.41905"
+           id="line252-6-0"
+           x1="324.35104"
+           x2="324.33914"
+           style="font-size:10px;font-family:sans-serif;text-anchor:middle;opacity:1;fill:none;stroke:currentColor;stroke-width:1.36086678;stroke-miterlimit:4;stroke-dasharray:4.08260034,1.36086678;stroke-dashoffset:0" />
       </g>
       <g
          class="tick"
-         transform="translate(92.717005)"
+         transform="translate(94.717005)"
          id="g262"
          style="opacity:1">
         <line
@@ -113,7 +114,7 @@
            id="line258"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
         <text
            y="9"
            dy="0.70999998em"
@@ -122,7 +123,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(159.78948)"
+         transform="translate(161.78948)"
          id="g268"
          style="opacity:1">
         <line
@@ -131,7 +132,7 @@
            id="line264"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
         <text
            y="9"
            dy="0.70999998em"
@@ -140,7 +141,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(226.7702)"
+         transform="translate(228.7702)"
          id="g274"
          style="opacity:1">
         <line
@@ -149,7 +150,7 @@
            id="line270"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
         <text
            y="9"
            dy="0.70999998em"
@@ -158,7 +159,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(293.84267)"
+         transform="translate(295.84267)"
          id="g280"
          style="opacity:1">
         <line
@@ -167,7 +168,7 @@
            id="line276"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
         <text
            y="9"
            dy="0.70999998em"
@@ -176,7 +177,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(360.82339)"
+         transform="translate(362.82339)"
          id="g286"
          style="opacity:1">
         <line
@@ -185,7 +186,7 @@
            id="line282"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
         <text
            y="9"
            dy="0.70999998em"
@@ -194,7 +195,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(427.89586)"
+         transform="translate(429.89586)"
          id="g292"
          style="opacity:1">
         <line
@@ -203,7 +204,7 @@
            id="line288"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
         <text
            y="9"
            dy="0.70999998em"
@@ -212,7 +213,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(494.87658)"
+         transform="translate(496.87658)"
          id="g298"
          style="opacity:1">
         <line
@@ -221,7 +222,7 @@
            id="line294"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
         <text
            y="9"
            dy="0.70999998em"
@@ -230,7 +231,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(561.94906)"
+         transform="translate(563.94906)"
          id="g304"
          style="opacity:1">
         <line
@@ -239,7 +240,7 @@
            id="line300"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
         <text
            y="9"
            dy="0.70999998em"
@@ -248,7 +249,7 @@
       </g>
       <g
          class="tick"
-         transform="translate(628.92978)"
+         transform="translate(630.92978)"
          id="g310"
          style="opacity:1">
         <line
@@ -257,7 +258,7 @@
            id="line306"
            x1="0"
            x2="0"
-           style="stroke:currentColor" />
+           style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
         <text
            y="9"
            dy="0.70999998em"
@@ -471,7 +472,7 @@
        height="26"
        width="267.93576"
        id="rect214-7"
-       x="158.68806"
+       x="160.68806"
        style="fill:#007095;fill-opacity:1;stroke-width:1.78840733" />
     <rect
        class="chart__bar--orange"
@@ -541,15 +542,15 @@
        height="26"
        width="267.93576"
        id="rect214-7-3"
-       x="293.44626"
+       x="295.44626"
        style="fill:#007095;fill-opacity:1;stroke-width:1.78840733" />
     <rect
        class="chart__bar--orange"
-       y="54.707443"
+       y="54.268635"
        height="26"
        width="25.43116"
        id="rect220-0"
-       x="267.39005"
+       x="269.1199"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
@@ -557,7 +558,7 @@
        height="26"
        width="25.43116"
        id="rect220-0-4"
-       x="239.54431"
+       x="241.54431"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
@@ -565,7 +566,7 @@
        height="26"
        width="25.43116"
        id="rect220-0-4-8"
-       x="211.4857"
+       x="213.4857"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
@@ -573,7 +574,7 @@
        height="26"
        width="25.43116"
        id="rect220-0-4-8-8"
-       x="183.4857"
+       x="185.4857"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
@@ -581,23 +582,15 @@
        height="26"
        width="200.4357"
        id="rect214-7-3-5"
-       x="427.47589"
+       x="429.47589"
        style="fill:#007095;fill-opacity:1;stroke-width:1.54681587" />
-    <rect
-       class="chart__bar--orange"
-       y="-85.292397"
-       height="26"
-       width="25.43116"
-       id="rect220-0-48"
-       x="402.04474"
-       style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
        y="-57.292397"
        height="26"
        width="25.43116"
        id="rect220-0-48-1"
-       x="374.61359"
+       x="376.61359"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
@@ -605,7 +598,7 @@
        height="26"
        width="25.43116"
        id="rect220-0-48-1-2"
-       x="347.18243"
+       x="349.18243"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
     <rect
        class="chart__bar--orange"
@@ -613,7 +606,15 @@
        height="26"
        width="25.43116"
        id="rect220-0-48-1-2-8"
-       x="319.75128"
+       x="321.75128"
        style="fill:#c7d426;fill-opacity:1;stroke-width:0.55097789" />
+    <rect
+       class="chart__bar--orange"
+       y="195.76115"
+       height="26"
+       width="280.19724"
+       id="rect214"
+       x="14.483786"
+       style="fill:#007095;fill-opacity:1;stroke-width:1.82887089" />
   </g>
 </svg>
