@@ -12,15 +12,10 @@ class ReleaseInfo
 
     private array $artifacts;
 
-    public function __construct(string $versionNumber, array $artifactFilenames)
+    public function __construct(Version $version, array $artifacts)
     {
-        $this->version = new Version($versionNumber);
-        $this->artifacts = array_map(fn (string $filename) => Artifact::create($versionNumber, $filename), $artifactFilenames);
-
-        $releaseType = ReleaseType::byKey($versionNumber);
-        if ((version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) || ($releaseType != null && $releaseType->isDevRelease())) {
-            $this->artifacts[] = new DockerArtifact($versionNumber);
-        }
+        $this->version = $version;
+        $this->artifacts = $artifacts;
     }
 
     public function getVersion(): Version
@@ -36,6 +31,11 @@ class ReleaseInfo
     public function majorVersion(): string
     {
         return $this->version->getMajorVersion();
+    }
+
+    public function minorVersion(): string
+    {
+        return $this->version->getMinorVersion();
     }
 
     public function getArtifacts(): array
@@ -56,11 +56,6 @@ class ReleaseInfo
     public function hasHotfix(): bool
     {
         return file_exists($this->getHotFixPath());
-    }
-
-    public function minorVersion(): string
-    {
-        return $this->version->getMinorVersion();
     }
 
     public function getHotfixFileUrl(): string
