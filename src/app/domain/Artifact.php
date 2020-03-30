@@ -20,14 +20,12 @@ class Artifact
     public const ARCHITECTURE_X86 = 'x86';
     
     protected string $folderName; // this is the folderName where the artifact is in (version number)
+    protected $fileName; // real filename 
+    protected $productName;  // see PRODUCT_* constants
+    protected $versionNumber; // version parsed from filename
+    protected $type; // see TYPE_* constants
+    protected $architecture; // see ARCHITECTURE_* constants
     
-    protected $fileName;
-    protected $productName;
-    protected $versionNumber;
-    protected $type;
-    protected $architecture;
-    
-    protected $originaProductNamePrefix;
     protected $shortType;
 
     public static function create(string $folderName, string $fileName): Artifact
@@ -54,8 +52,8 @@ class Artifact
 
         $productNameVersion = $fileNameArray[0]; //AxonIvyDesigner6.4.0.52683
         $productNameVersionArray = preg_split('/(?=\d)/', $productNameVersion, 2);
-        $this->originaProductNamePrefix = $productNameVersionArray[0];
-        $this->productName = self::calculateProductName($this->originaProductNamePrefix);
+        $originaProductNamePrefix = $productNameVersionArray[0];
+        $this->productName = self::calculateProductName($originaProductNamePrefix);
         $this->versionNumber = $productNameVersionArray[1];
     }
 
