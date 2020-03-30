@@ -7,7 +7,8 @@ use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 use app\domain\doc\DocProvider;
 use app\domain\util\Redirect;
-use app\domain\util\StringUtil;
+use app\domain\ReleaseType;
+use DI\NotFoundException;
 
 class DocAction
 {
@@ -21,22 +22,19 @@ class DocAction
     public function __invoke($request, Response $response, $args)
     {
         $version = $args['version'];
-
-        if (empty($version)) {
-            return $this->renderDocOverview($response);
-        }
         
         // special treatment when using a major version e.g. 8/9/10
-        if (strlen($version) == 1 && is_numeric($version)) {
-            $bestMatchingVersion = ReleaseInfoRepository::getBestMatchingMinorVersion($version);
-            if (StringUtil::notEqual($bestMatchingVersion, $version))
-            {
+        if (strlen($version) == 1 && is_numeric($version)) { // TODO Wrong for 10
+            $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
+            if ($releaseInfo == null) {
+                throw new NotFoundException();
+            }
                 $doc = $args['document'] ?? '';
                 if (!empty($doc)) {
                     $doc = '/' . $doc;
                 }
-                return Redirect::to($response, "/doc/$bestMatchingVersion" . $doc);    
-            }
+                // TODO maybe minor url does not exist, we should redirect o bugfix version
+                return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);    
         }
 
         $docProvider = new DocProvider($version);
@@ -44,11 +42,13 @@ class DocAction
             throw new HttpNotFoundException($request);
         }
 
-        // since version 9, also for dev, nightly and sprint releases
-        // TODO: Add 'latest' to this check once latest points to release 9.1.0!
-        if (version_compare($version, 9) >= 0 || $version === 'dev' || $version === 'nightly' || $version === 'sprint') {
-            $document = $args['document'];
-            return $this->redirectOldLinksToNewReadTheDocs($request, $response, $version, $document);
+        if ($this->documentationBasedOnReadTheDocs($version)) {
+            $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document']);
+            if (empty($newDocUrl)) {
+                throw new HttpNotFoundException($request);
+            } else {
+                return Redirect::to($response, $newDocUrl);
+            }
         }
 
         // legacy, before 9
@@ -67,8 +67,6 @@ class DocAction
             throw new HttpNotFoundException($request);
         }
 
-        $docLinks = $this->getDocLinks();
-
         $portalLink = "";
         if (version_compare($version, 8) >= 0) {
             $portalLink = '/portal/8.0/doc';
@@ -78,77 +76,36 @@ class DocAction
             'docProvider' => $docProvider,
             'documentUrl' => $doc->getRessourceUrl() . '?v=' . time(),
             'currentNiceUrlPath' => $document,
-            'docLinks' => $docLinks,
             'portalLink' => $portalLink
         ]);
     }
 
-    private function redirectOldLinksToNewReadTheDocs($request, $response, $version, $document)
+    private function documentationBasedOnReadTheDocs(string $version): bool
+    {
+        if (version_compare($version, 9) >= 0) {
+            return true;
+        }
+        $releaseType = ReleaseType::byKey($version);
+        if ($releaseType != null && $releaseType->isDevRelease()) {
+            return true;
+        }
+        return false;
+    }
+
+    private function resolveNewDocUrl($baseUrl, $document): string
     {
         if (empty($document)) {
-            return Redirect::to($response, "/doc/$version/index.html");
+            return "$baseUrl/index.html";
         }
         if ($document == 'migration-notes') {
-            return Redirect::to($response, 'axonivy/migration/index.html');
+            return "$baseUrl/axonivy/migration/index.html";
         }
         if ($document == 'release-notes') {
-            return Redirect::to($response, 'axonivy/release-notes/index.html');
+            return "$baseUrl/axonivy/release-notes/index.html";
         }
         if ($document == 'new-and-noteworthy') {
-            return Redirect::to($response, '/news');
+            return '/news';
         }
-        throw new HttpNotFoundException($request);
-    }
-    
-    private function renderDocOverview($response)
-    {
-        return $this->view->render($response, 'doc/doc-overview.twig', [
-            'docLinksLTS' => self::getDocLinksLTS(),
-            'docLinksLE' => self::getDocLinksLE(),
-            'docLinksDEV' => self::getDocLinksDev()
-        ]);
-    }
-
-    private function getDocLinks(): array
-    {
-        return array_merge(self::getDocLinksLE(), self::getDocLinksLTS());
-    }
-
-    private static function getDocLinksLE(): array
-    {
-        $releaseInfo = ReleaseInfoRepository::getLeadingEdge();
-        if ($releaseInfo == null) {
-            return [];
-        }
-
-        $minorVersion = $releaseInfo->getVersion()->getMinorVersion();
-        return [
-            self::createDocLink("/doc/$minorVersion", $releaseInfo->getVersion()->getMinorVersion())
-        ];
-    }
-
-    private static function getDocLinksLTS(): array
-    {
-        $docLinks = [];
-        foreach (LTS_VERSIONS as $ltsVersion) {
-            $docLinks[] = self::createDocLink("/doc/$ltsVersion", $ltsVersion);
-        }
-        return $docLinks;
-    }
-
-    private static function getDocLinksDev(): array
-    {
-        return [
-            self::createDocLink('/doc/sprint', 'Sprint'),
-            self::createDocLink('/doc/nightly', 'Nightly')
-        ];
-    }
-
-    private static function createDocLink($url, $text)
-    {
-        return [
-            'url' => $url,
-            'displayText' => $text
-        ];
+        return '';
     }
 }

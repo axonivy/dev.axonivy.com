@@ -18,32 +18,33 @@ class SitemapAction
     }
 
     public function __invoke(Request $request, Response $response, $args) {
+        $baseUrl = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost();
         $sites = [
-            self::createSite('/', 1),
-            self::createSite('/download', 1),
-            self::createSite('/doc', 1),
-            self::createSite('/tutorial', 1),
-            self::createSite('/market', 1),
-            self::createSite('/support', 1),
-            self::createSite('/team', 1),
+            self::createSite($baseUrl, '/', 1),
+            self::createSite($baseUrl, '/download', 1),
+            self::createSite($baseUrl, '/doc', 1),
+            self::createSite($baseUrl, '/tutorial', 1),
+            self::createSite($baseUrl, '/market', 1),
+            self::createSite($baseUrl, '/support', 1),
+            self::createSite($baseUrl, '/team', 1),
         ];
-
+        
         $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();       
         if ($releaseInfo != null) {
-            $sites = self::addSites($sites, $releaseInfo);
+            $sites = self::addSites($baseUrl, $sites, $releaseInfo);
         }
 
         return $this->view->render($response, 'sitemap/sitemap.twig', ['sites' => $sites])->withHeader('Content-Type', 'text/xml');
     }
 
-    private static function addSites($sites, ReleaseInfo $releaseInfo): array
+    private static function addSites($baseUrl, $sites, ReleaseInfo $releaseInfo): array
     {
         $minorVersion = $releaseInfo->getVersion()->getMinorVersion();
         foreach (self::getHtmlFiles($releaseInfo->getPath() . '/documents/') as $html) {
             if (!StringUtil::startsWith($html, '/')) {
                 $html = '/' . $html;
             }
-            $sites[] = self::createSite("/doc/$minorVersion$html", 0.8);
+            $sites[] = self::createSite($baseUrl, "/doc/$minorVersion$html", 0.8);
         }
         return $sites;
     }
@@ -67,15 +68,14 @@ class SitemapAction
         return $files;
     }
     
-    private static function createSite($relativeUrl, $prio): Site
+    private static function createSite($baseUrl, $relativeUrl, $prio): Site
     {
         $site = new Site();
-        $site->url =  BASE_URL . $relativeUrl;
+        $site->url =  $baseUrl . $relativeUrl;
         $site->changeFreq = 'daily';
         $site->prio = $prio;
         return $site;
     }
-    
 }
 
 class Site
@@ -84,4 +84,3 @@ class Site
     public $changeFreq;
     public $prio;
 }
-

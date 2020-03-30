@@ -27,4 +27,25 @@ class MavenArchiveActionTest extends TestCase
     {
         AppTester::assertThatGet('/download/maven.html')->ok()->bodyDoesNotContain('deb');
     }
+    
+    public function testDoesNotContainDocker()
+    {
+        AppTester::assertThatGet('/download/maven.html')->ok()->bodyDoesNotContain('docker');
+    }
+    
+    public function testDoesNotContainDevReleases()
+    {
+        AppTester::assertThatGet('/download/maven.html')
+            ->ok()
+            ->bodyDoesNotContain('dev')
+            ->bodyDoesNotContain('sprint')
+            ->bodyDoesNotContain('nightly');
+    }
+    
+    public function testDoesNotVersionLowerThan6()
+    {
+        AppTester::assertThatGet('/download/maven.html')
+            ->ok()
+            ->bodyDoesNotContain('3.9.0');
+    }
 }

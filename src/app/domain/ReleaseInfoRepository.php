@@ -3,167 +3,162 @@ namespace app\domain;
 
 use app\domain\util\ArrayUtil;
 use app\domain\util\StringUtil;
+use app\Config;
 
 class ReleaseInfoRepository
 {
-    public static function getLeadingEdge(): ?ReleaseInfo
-    {
-        $leVersion = LE_VERSION;
-        if (empty($leVersion)) {
-            return null;
-        }
-        
-        $releaseInfos = self::getAvailableReleaseInfos();
-        $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) {
-            $v = $releaseInfo->getVersion()->getVersionNumber();
-            return StringUtil::startsWith($v, LE_VERSION);
-        });
-        return ArrayUtil::getLastElementOrNull($releaseInfos);
-    }
-    
+
+    /**
+     * release with highest version
+     */
     public static function getLatest(): ?ReleaseInfo
     {
         $releaseInfos = self::getAvailableReleaseInfos();
         return ArrayUtil::getLastElementOrNull($releaseInfos);
     }
-    
+
+    /**
+     * current leading edge
+     */
+    public static function getLeadingEdge(): ?ReleaseInfo
+    {
+        $releaseInfo = self::getLatest();
+        if ($releaseInfo == null) {
+            return null;
+        }
+        if ($releaseInfo->getVersion()->getMajorVersion() % 2 == 1) {
+            return $releaseInfo;
+        }
+        return null;
+    }
+
+    /**
+     * lts with highest version
+     */
     public static function getLatestLongTermSupport(): ?ReleaseInfo
     {
-        $releaseInfos = self::getAvailableReleaseInfos();
-        $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) {
-            return $releaseInfo->getVersion()->isLongTermSupportVersion();
-        });
+        $releaseInfos = self::getLongTermSupportVersions();
         return ArrayUtil::getLastElementOrNull($releaseInfos);
     }
     
+    /**
+     * lts releases
+     */
     public static function getLongTermSupportVersions(): array
     {
         $releaseInfos = self::getAvailableReleaseInfos();
-        $lts = [];
-        foreach (LTS_VERSIONS as $ltsVersion) {
-            $infos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) use ($ltsVersion) {
-                $v = $releaseInfo->getVersion()->getVersionNumber();
-                return StringUtil::startsWith($v, $ltsVersion);
-            });
-            $lts[] = ArrayUtil::getLastElementOrNull($infos);
+        
+        $majorVersions = array_map(fn(ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->getMajorVersion(), $releaseInfos);
+        $uniqueMajorVersions = array_reverse(array_unique($majorVersions));
+        
+        $ltsMajorVersions = [];
+        foreach ($uniqueMajorVersions as $majorVersion) {
+            if ($majorVersion % 2 == 0) {
+                $ltsMajorVersions[] = $majorVersion;
+            }
+            
+            if ($majorVersion == 7) { // when LTS 10.0 has been released, remove this
+                $ltsMajorVersions[] = $majorVersion;
+            }
+            
+            if (count($ltsMajorVersions) == Config::NUMBER_LTS) {
+                break;
+            }
         }
-        return array_reverse(array_filter($lts));
+        
+        $ltsMajorVersions = array_reverse($ltsMajorVersions);
+        return array_filter(array_map(fn(string $ltsMajorVersion) => self::findNewestLTSVersion($ltsMajorVersion), $ltsMajorVersions));
     }
     
-    public static function getAvailableReleaseInfosByProductName(string $productName): array
+    /**
+     * version: 7.0.1, 7.0, 7
+     */
+    private static function findNewestLTSVersion($version): ?ReleaseInfo
     {
-        $releaseInfos = self::getAvailableReleaseInfos();
-        $releaseInfos = array_filter($releaseInfos, function(ReleaseInfo $releaseInfo) use ($productName) {
-            return $releaseInfo->hasVariantWithProductName($productName);
-        });
-        return $releaseInfos;
+        if ($version == 7) { // remove this when LTS 10.0 has been released
+            $version = '7.0';
+        }
+        
+        $releaseInfos = array_reverse(self::getAvailableReleaseInfos());
+        foreach ($releaseInfos as $releaseInfo)
+        {
+            if ($releaseInfo->getVersion()->isMinor())
+            {
+                continue;
+            }
+            if (StringUtil::startsWith($releaseInfo->getVersion()->getVersionNumber(), $version))
+            {
+               return $releaseInfo;
+            }
+        }
+        return null;
     }
-    
+
     public static function getAvailableReleaseInfos(): array
     {
         $releaseInfos = [];
-        $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . DIRECTORY_SEPARATOR . '*'), 'is_dir');
+        $directories = array_filter(glob(IVY_RELEASE_DIRECTORY . '/*'), 'is_dir');
         foreach ($directories as $directory) {
-            // check release.ready files, it is uploaded
-            $releaseReadyFile = $directory . DIRECTORY_SEPARATOR . 'release.ready';
+            $releaseReadyFile = $directory . '/release.ready';
             if (!file_exists($releaseReadyFile)) {
                 continue;
             }
-            
+
             $versionNumber = basename($directory);
-            // drop e.g. nightly or sprint
-            if (!Version::isValidVersionNumber($versionNumber)) {
-                continue;
-            }
-            
-            $releaseInfos[] = self::createReleaseInfo($directory, $versionNumber);
+            $fileNames = glob($directory . '/downloads/*.{zip,deb}', GLOB_BRACE);
+            $releaseInfos[] = new ReleaseInfo($versionNumber, $fileNames);
         }
-        $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionOldestFirst($releaseInfos);
+        $releaseInfos = self::sortReleaseInfosByVersionOldestFirst($releaseInfos);
         return $releaseInfos;
     }
-    
+
     /**
      * 8.0
      * 8.0.3
      */
     public static function isReleased($version): bool
     {
-        foreach (self::getAvailableReleaseInfos() as $releaseInfo)
-        {
-            $versionNumber = $releaseInfo->getVersion()->getVersionNumber();
-            if (StringUtil::startsWith($versionNumber, $version))
-            {
-                return true;
-            }
-        }
-        return false;
+        return self::getBestMatchingVersion($version) != null;
     }
 
     /**
-     * e.g: 7.0.3, 8.0.1, latest, sprint, nightly, dev
+     * e.g: 7.0.3, 8.0.1, sprint, nightly, dev
      * - 8.0 -> newest 8.0.x
      * - 8 -> newest 8.x
      */
-    public static function getArtifacts(string $version): array
+    public static function getBestMatchingVersion(string $version): ?ReleaseInfo
     {
-        $versionBestMatch = self::getBestMatchingVersion($version);
-        
-        $artifactsDirectory = IVY_RELEASE_DIRECTORY . '/' . $versionBestMatch;
-        $cdnBaseUrl = CDN_HOST . '/' . $versionBestMatch . '/';
-        $permalinkBaseUrl = PERMALINK_BASE_URL . $versionBestMatch . '/';
-        
-        $releaseInfo = self::createReleaseInfo($artifactsDirectory, '', '');
-        
-        return self::createArtifactsFromReleaseInfo($releaseInfo, $cdnBaseUrl, $permalinkBaseUrl);
+        $versions = self::getMatchingVersions($version);
+        $versions = array_reverse($versions);
+        return ArrayUtil::getLastElementOrNull($versions);
     }
 
-    public static function getBestMatchingMinorVersion(string $version): string {
-        if (StringUtil::isFirstCharacterNumeric($version)) {
-            $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());
-            foreach ($releaseInfos as $info) {
-                if ($info->getVersion()->isMinor()) {
-                    $v = $info->getVersion()->getVersionNumber();
-                    if (StringUtil::startsWith($v, $version))
-                    {
-                        return $info->getVersion()->getVersionNumber();
-                    }
-                }                
+    public static function getMatchingVersions(string $version): array
+    {
+        $releaseInfos = self::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());
+        $infos = [];
+        foreach ($releaseInfos as $info) {
+            $versionNumber = $info->getVersion()->getVersionNumber();
+            if (StringUtil::startsWith($versionNumber, $version)) {
+                $infos[] = $info;                
             }
         }
-        return $version;
+        return $infos;
     }
     
-    private static function getBestMatchingVersion(string $version): string {
-        if (StringUtil::isFirstCharacterNumeric($version)) {
-            $releaseInfos = ReleaseInfo::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());
-            foreach ($releaseInfos as $info) {
-                $v = $info->getVersion()->getVersionNumber();
-                if (StringUtil::startsWith($v, $version))
-                {
-                    return $info->getVersion()->getVersionNumber();
-                }
-            }
-        }
-        return $version;
-    }
-    
-    private static function createArtifactsFromReleaseInfo(ReleaseInfo $releaseInfo, string $cdnBaseUrl, string $permalinkBaseUrl): array
+    private static function sortReleaseInfosByVersionOldestFirst(array $releaseInfos)
     {
-        $artifacts = [];
-        foreach ($releaseInfo->getVariants() as $variant) {
-            $fileName = $variant->getFileName();
-            $downloadUrl = $cdnBaseUrl . $variant->getFileName();
-            $permalink = $permalinkBaseUrl .  Variant::create($fileName)->getFileNameInLatestFormat();
-            
-            $artifacts[] = new Artifact($fileName, $downloadUrl, $permalink);
-        }
-        return $artifacts;
+        usort($releaseInfos, function (ReleaseInfo $r1, ReleaseInfo $r2) {
+            return version_compare($r1->getVersion()->getVersionNumber(), $r2->getVersion()->getVersionNumber());
+        });
+        return $releaseInfos;
     }
     
-    private static function createReleaseInfo($directory, $versionNumber): ReleaseInfo
+    private static function sortReleaseInfosByVersionNewestFirst(array $releaseInfos)
     {
-        $fileNames = glob($directory . '/downloads/*.{zip,deb}', GLOB_BRACE);
-        return new ReleaseInfo($versionNumber, $fileNames);
+        usort($releaseInfos, function (ReleaseInfo $r1, ReleaseInfo $r2) {
+            return version_compare($r2->getVersion()->getVersionNumber(), $r1->getVersion()->getVersionNumber());
+        });
+        return $releaseInfos;
     }
 }
-

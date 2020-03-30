@@ -13,9 +13,4 @@ class CommunityActionTest extends TestCase
             ->statusCode(200)
             ->bodyContains('See how it works on GitHub.');
     }
-    
-    public function testRedirect()
-    {
-        AppTester::assertThatGet('/download/community.html')->permanentRedirect('/community');
-    }
 }

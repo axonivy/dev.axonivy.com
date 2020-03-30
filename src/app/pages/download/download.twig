@@ -8,17 +8,21 @@
 	<div class="inner-small">
 		<header>
 			<h1>
-				<span class="icon fas fa-download"></span> Download {{ minorVersion }} {{ edition }} 
+				<span class="icon fas fa-download"></span> {{ headerTitle }}
 			</h1>
 		</header>
-		{{ subheader|raw }}
+		{{ headerSubTitle|raw }}
 	</div>
 </section>
 
-{% if showLeadingEdgeBanner %}
+{% if banner %}
 <section id="one">
 	<div class="inner-small">
-		{% include 'download/_leading-edge-banner.twig' only %}	
+		<article>
+        	<div class="content">
+        		<p>{{ banner|raw }}</p>
+        	</div>
+        </article>	
 	</div>
 </section>
 {% endif %}
@@ -29,7 +33,7 @@
 			<div class="content">
 				<header>
 					<h3>
-						<span class="icon fas fa-wrench"></span> Axon.ivy Designer ({{editionShort }} {{ minorVersion }})
+						<span class="icon fas fa-wrench"></span> Axon.ivy Designer ({{ versionShort }})
 					</h3>
 				</header>
 
@@ -41,23 +45,15 @@
 					connectors such as web services, SQL and many more.
 				</p>
 
-				<div class="row">
-					{% include 'download/_artifacts.twig' with {'artifacts': designerArtifacts} only %}
-				</div>
-
-				<br />
-				<p style="text-align: right;">
-					<a href="/download/archive/{{ minorVersion }}">other version and platforms</a>
-				</p>
+				{% include 'download/_artifacts.twig' with {'artifacts': designerArtifacts} %}
 			</div>
 		</article>
-
 
 		<article class="alt">
 			<div class="content">
 				<header>
 					<h3>
-						<span class="icon fas fa-rocket"></span> Axon.ivy Engine ({{ editionShort }} {{ minorVersion }})
+						<span class="icon fas fa-rocket"></span> Axon.ivy Engine ({{ versionShort }})
 					</h3>
 				</header>
 
@@ -69,14 +65,7 @@
 					Get to know our <a href="/release-cycle">release cycle</a> for choosing the right version.
 				</p>
 
-				<div class="row">
-					{% include 'download/_artifacts.twig' with {'artifacts': engineArtifacts} only %}
-				</div>
-
-				<br />
-				<p style="text-align: right;">
-					<a href="/download/archive/{{ minorVersion }}">other version and platforms</a>
-				</p>
+				{% include 'download/_artifacts.twig' with {'artifacts': engineArtifacts} %}
 			</div>
 		</article>
 	</div>
@@ -85,7 +74,7 @@
 {% if showOtherVersions %}
 <section id="three">
 	<div class="inner">
-		{% include 'download/_other-versions.twig' only %}	
+		{% include 'download/_other-versions.twig' %}	
 	</div>
 </section>
 {% endif %}

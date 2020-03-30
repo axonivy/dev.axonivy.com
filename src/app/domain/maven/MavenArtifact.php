@@ -2,6 +2,7 @@
 namespace app\domain\maven;
 
 use app\domain\util\StringUtil;
+use app\Config;
 
 class MavenArtifact
 {
@@ -85,7 +86,7 @@ class MavenArtifact
 
     public function docExists($version)
     {
-        return file_exists(DOC_DIRECTORY_THIRDPARTY . '/' . $this->getDocSubFolder($version));
+        return file_exists(Config::DOC_DIRECTORY_THIRDPARTY . '/' . $this->getDocSubFolder($version));
     }
 
     public function getDevUrl()
@@ -122,7 +123,7 @@ class MavenArtifact
     private function getBaseUrl()
     {
         $groupId = str_replace('.', '/', $this->groupId);
-        return MAVEN_ARTIFACTORY_URL . "$groupId/" . $this->artifactId;
+        return Config::MAVEN_ARTIFACTORY_URL . "$groupId/" . $this->artifactId;
     }
 
     public function getPermalinkDev()

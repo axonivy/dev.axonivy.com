@@ -2,6 +2,7 @@
 namespace app\domain;
 
 use app\domain\util\StringUtil;
+use app\Config;
 
 class Variant
 {
@@ -18,6 +19,8 @@ class Variant
     public const ARCHITECTURE_X64 = 'x64';
     public const ARCHITECTURE_X86 = 'x86';
     
+    protected string $folderName; // this is the folderName where the artifact is in (version number)
+    
     protected $fileName;
     protected $productName;
     protected $versionNumber;
@@ -26,21 +29,20 @@ class Variant
     
     protected $originaProductNamePrefix;
     protected $shortType;
-    
-    public static function create(string $fileName): Variant
+
+    public static function create(string $folderName, string $fileName): Variant
     {
-        if (StringUtil::endsWith($fileName, 'deb'))
-        {
-            return new VariantDeb($fileName);
-        }
-        else
-        {
-            return new Variant($fileName);
+        if (StringUtil::endsWith($fileName, 'deb')) {
+            return new VariantDeb($folderName, $fileName);
+        } else {
+            return new Variant($folderName, $fileName);
         }
     }
 
-    private function __construct(string $fileName)
+    private function __construct(string $folderName, string $fileName)
     {
+        $this->folderName = $folderName;
+
         $this->fileName = $fileName; // AxonIvyDesigner6.4.0.52683_Windows_x86.zip
 
         $filename = pathinfo($fileName, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86
@@ -84,47 +86,27 @@ class Variant
         $productName = str_replace('Server', 'Engine', $productName);
         return $productName;
     }
-    
-    private function contains(string $candidate, string $search): bool {
-        return StringUtil::contains($candidate, $search);
-    }
-    
-    public function getVersion(): Version {
+
+    public function getVersion(): Version
+    {
         return new Version($this->versionNumber);
     }
-    
-    public function getDownloadUrl(): string {
-        $version = $this->getVersion();
-        
-        $versionNumber = $version->getBugfixVersion();
-        if ($version->getMinorVersion() == '4.2') {
-            $versionNumber = $version->getVersionNumber();
-        }
-        if ($version->getVersionNumber() == '3.9.52.8') {
-            $versionNumber = '3.9.8';
-        }
-        if ($version->getVersionNumber() == '3.9.52.9') {
-            $versionNumber = '3.9.9';
-        }
-        
-        return CDN_HOST . "/$versionNumber/" . basename($this->fileName);
+
+    public function getDownloadUrl(): string
+    {
+        return Config::CDN_URL . "/" . $this->folderName . "/" . basename($this->fileName);
     }
-    
+
     public function getInstallationUrl(): string
     {
         $url = $this->getDownloadUrl();
-        return self::createInstallationUrl($url, $this->versionNumber, $this->productName, $this->type);    
-    }
-
-    public static function createInstallationUrl(string $url, string $version, string $product, string $type): string
-    {
         return "/installation"
             . "?downloadUrl=$url"
-            . "&version=$version"
-            . "&product=$product"
-            . "&type=$type";   
+            . "&version=$this->versionNumber"
+            . "&product=$this->productName"
+            . "&type=$this->type";
     }
-    
+
     public function getProductName(): string
     {
         return $this->productName;
@@ -144,23 +126,14 @@ class Variant
     {
         return pathinfo($this->fileName, PATHINFO_EXTENSION);
     }
-    
-    public function getFileExtensionIfNecessary(): string
-    {
-        $ext = $this->getFileExtension();
-        if (StringUtil::contains($ext, 'deb'))
-        {
-            return '.deb';
-        }
-        return '';
-    }
 
     public function isMavenPluginCompatible(): bool
     {
         return $this->productName == self::PRODUCT_NAME_ENGINE;
     }
-    
-    public function getType() {
+
+    public function getType()
+    {
         return $this->type;
     }
     
@@ -169,13 +142,19 @@ class Variant
         $filename = strtolower($this->getFileName());
         return StringUtil::contains($filename, 'beta');
     }
+    
+    public function getPermalink(): string
+    {
+        return PERMALINK_BASE_URL . $this->folderName. '/' .  $this->getFileNameInLatestFormat();
+    }
 }
 
 class VariantDeb extends Variant
 {
     
-    public function __construct(string $fileName)
+    public function __construct(string $folderName, string $fileName)
     {
+        $this->folderName = $folderName;
         $this->fileName = $fileName; // AxonIvyDesigner6.4.0.52683_Windows_x86.zip or axonivy-engine-7x_7.2.0.60027.deb
         
         $filename = pathinfo($fileName, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86 or axonivy-engine-7x_7.2.0.60027
@@ -198,5 +177,43 @@ class VariantDeb extends Variant
     public function isMavenPluginCompatible(): bool
     {
         return false;
+    }
+}
+
+class VariantDocker extends Variant
+{
+    
+    public function __construct(string $folderName, string $fileName)
+    {
+        $this->folderName = $folderName;
+        $this->fileName = "$fileName:$folderName";
+        
+        $this->architecture = Variant::ARCHITECTURE_X64;
+        $this->type = Variant::TYPE_DOCKER;
+        $this->shortType = '';
+        
+        $this->originaProductNamelPrefix = Variant::PRODUCT_NAME_ENGINE;
+        $this->productName = Variant::PRODUCT_NAME_ENGINE;
+        $this->versionNumber = $folderName;
+    }
+    
+    public function getPermalink(): string
+    {
+        return '';
+    }
+    
+    public function getFileNameInLatestFormat(): string
+    {
+        return '';
+    }
+    
+    public function isMavenPluginCompatible(): bool
+    {
+        return false;
+    }
+    
+    public function getDownloadUrl(): string
+    {
+        return "https://hub.docker.com/r/axonivy/axonivy-engine";
     }
 }

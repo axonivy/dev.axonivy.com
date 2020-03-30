@@ -64,13 +64,6 @@
     <section id="docuHeader" style="padding-bottom: 10px; padding-top: 20px;" >
 		<div class="inner">
 		
-			<div style="text-align: right; position: relative; height: 0;">
-				{% for docLink in docLinks %}
-					<a href="{{ docLink.url }}">{{ docLink.displayText }}</a>
-					{% if not loop.last %}|{% endif %}
-				{% endfor %}
-			</div>
-		
 			<header>
 				<h1>Documentation {{ version }}</h1>
 			</header>

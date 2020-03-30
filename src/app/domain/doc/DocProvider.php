@@ -8,7 +8,7 @@ class DocProvider
 {
     /**
      * For example:
-     * <li> latest
+     * <li> sprint
      * <li> 7.0.0
      * @var $versionNumber
      */
@@ -69,7 +69,7 @@ class DocProvider
     
     public function getImportantBooks(): array
     {
-        return array_filter(self::getBooks(), function (Book $book) { return !StringUtil::startsWith(strtolower($book->getName()), "portal"); });
+        return array_filter(self::getBooks(), fn (Book $book) => !StringUtil::startsWith(strtolower($book->getName()), "portal"));
     }
     
     public function getNotImportantBooks(): array
@@ -190,6 +190,14 @@ class DocProvider
     public function getOverviewUrl(): string
     {
         return self::createBaseUrl();
+    }
+    
+    public function getMinorUrl(): string
+    {
+        if (Version::isValidVersionNumber($this->versionNumber)) {
+            return '/doc/' . (new Version($this->versionNumber))->getMinorVersion();
+        }
+        return '/doc/' . $this->versionNumber;
     }
     
     public function getHotfixHowToDocument(): SimpleDocument

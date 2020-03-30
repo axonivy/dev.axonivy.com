@@ -4,120 +4,185 @@ namespace app\pages\download;
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
-use app\domain\ReleaseInfoRepository;
 use app\domain\Variant;
-use app\domain\util\StringUtil;
+use Slim\Exception\HttpNotFoundException;
+use app\domain\ReleaseType;
 
 class DownloadAction
 {
+
     private Twig $view;
-    
+
     public function __construct(Twig $view)
     {
         $this->view = $view;
     }
 
     public function __invoke(Request $request, $response, $args) {
-        $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();
-        if (StringUtil::endsWith($request->getUri()->getPath(), 'leading-edge')) {
-            $releaseInfo = ReleaseInfoRepository::getLeadingEdge();
-            
-            if ($releaseInfo == null) {
-                return $this->view->render($response, 'download/no-leading-edge.twig');
-            }
+        $version = $args['version'] ?? '';
+        
+        $releaseType = $this->releaseType($version);
+        if ($releaseType == null)
+        {
+          throw new HttpNotFoundException($request);
         }
 
-        $loader = new Loader($releaseInfo);
+        $loader = $this->createLoader($releaseType);
+
         return $this->view->render($response, 'download/download.twig', [
-            'designerArtifacts' => array_filter($loader->designerArtifacts()),
-            'engineArtifacts' => array_filter($loader->engineArtifacts()),
-            'edition' => $loader->edition(),
-            'editionShort' => $loader->editionShort(),
-            'minorVersion' => $loader->minorVersion(),
-            'showOtherVersions' => $loader->isLTS(),
-            'subheader' => $loader->subheader(),
-            'showLeadingEdgeBanner' => !$loader->isLTS()
+            'designerArtifacts' => $loader->designerArtifacts(),
+            'engineArtifacts' => $loader->engineArtifacts(),
+
+            'headerTitle' => $loader->headerTitle(),
+            'headerSubTitle' => $releaseType->headline(),
+            'banner' => $releaseType->banner(),
+            
+            'showOtherVersions' => ReleaseType::isLTS($releaseType),
+            
+            'archiveLink' => $loader->archiveLink(),
+            'versionShort' => $loader->versionShort(),
         ]);
+    }
+
+    private function releaseType(string $version): ?ReleaseType
+    {
+        if (empty($version)) {
+            return ReleaseType::LTS();
+        }
+        return ReleaseType::byKey($version);
+    }
+
+    private function createLoader(ReleaseType $releaseType)
+    {
+        $releaseInfo = $releaseType->releaseInfo();
+        if ($releaseInfo == null) {
+            return new ReleaseTypeNotAvailableLoader($releaseType);
+        }
+        return new ReleaseInfoLoader($releaseType, $releaseInfo);
     }
 }
 
-class Loader
+interface Loader
 {
+    function designerArtifacts(): array;
+    function engineArtifacts(): array;
+
+    function headerTitle(): string;
+    
+    function versionShort(): string;
+    function archiveLink(): string;
+}
+
+class ReleaseTypeNotAvailableLoader implements Loader
+{
+    private ReleaseType $releaseType;
+    
+    function __construct(ReleaseType $releaseType)
+    {
+        $this->releaseType = $releaseType;
+    }
+    
+    public function designerArtifacts(): array
+    {
+        return [];
+    }
+
+    public function engineArtifacts(): array
+    {
+        return [];
+    }
+
+    public function headerTitle(): string
+    {
+        return $this->releaseType->name() . " currently not available";
+    }
+    
+    public function versionShort(): string
+    {
+        return $this->releaseType->shortName();
+    }
+    
+    public function archiveLink(): string
+    {
+        return '/download/archive';    
+    }
+}
+
+class ReleaseInfoLoader implements Loader
+{
+    private ReleaseType $releaseType;
     private ReleaseInfo $releaseInfo;
 
-    function __construct(ReleaseInfo $releaseInfo)
+    function __construct(ReleaseType $releaseType, ReleaseInfo $releaseInfo)
     {
+        $this->releaseType = $releaseType;
         $this->releaseInfo = $releaseInfo;
     }
 
     function designerArtifacts(): array
     {
-        return [
+        $artifacts = [
             $this->createDownloadArtifact('Windows','fab fa-windows', Variant::PRODUCT_NAME_DESIGNER, Variant::TYPE_WINDOWS),
             $this->createDownloadArtifact('Linux', 'fab fa-linux', Variant::PRODUCT_NAME_DESIGNER, Variant::TYPE_LINUX),
             $this->createDownloadArtifact('Mac OS', 'fab fa-apple', Variant::PRODUCT_NAME_DESIGNER, Variant::TYPE_MAC),
         ];
+        return array_filter($artifacts);
     }
 
     function engineArtifacts(): array
     {
-        return [
+        $artifacts = [
             $this->createDownloadArtifact('Windows','fab fa-windows', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_WINDOWS),
-            $this->createDockerDownloadArtifact(),
+            $this->createDownloadArtifact('Docker', 'fab fa-docker', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_DOCKER),
             $this->createDownloadArtifact('Debian','fas fa-cube', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_DEBIAN),
             $this->createDownloadArtifact('Linux','fab fa-linux', Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_ALL)
         ];
+        return array_filter($artifacts);
     }
-    
-    private function createDockerDownloadArtifact(): DownloadArtifact
-    {
-        $version = $this->releaseInfo->getVersion()->getMinorVersion();
-        $url = Variant::createInstallationUrl('', $version, Variant::PRODUCT_NAME_ENGINE, Variant::TYPE_DOCKER);
-        return new DownloadArtifact('Docker', $this->description(false), $url, "axonivy/axonivy-engine:$version", 'fab fa-docker');
-    }
-    
-    function createDownloadArtifact($name, $icon, $productName, $type): ?DownloadArtifact
+
+    private function createDownloadArtifact($name, $icon, $productName, $type): ?DownloadArtifact
     {
         $variant = $this->releaseInfo->getVariantByProductNameAndType($productName, $type);
         if ($variant == null) {
             return null;
         }
-        return new DownloadArtifact($name, $this->description($variant->isBeta()), $variant->getInstallationUrl(), $variant->getFileName(), $icon);
+        
+        $description = '';
+        $beta = $variant->isBeta() ? ' BETA' : '';
+        if ($this->releaseType->isDevRelease()) {
+            $description = $variant->getVersion()->getVersionNumber() . ' ' . $beta;
+        } else {
+            $description = $variant->getVersion()->getBugfixVersion() . ' ' . $this->releaseType->shortName() . $beta;
+        }
+        
+        $permalink = $variant->getPermalink();
+        return new DownloadArtifact(
+            $name,
+            $description,
+            $variant->getInstallationUrl(),
+            $variant->getFileName(),
+            $icon,
+            $permalink);
     }
     
-    function minorVersion(): string
+    public function headerTitle(): string
     {
-        return $this->releaseInfo->getVersion()->getMinorVersion();
+        return "Download " . $this->releaseType->name() . $this->minorVersion();
     }
     
-    function description(bool $isBeta): string
+    public function versionShort(): string
     {
-        $beta = $isBeta ? ' BETA' : '';
-        return $this->releaseInfo->getVersion()->getDisplayVersion() . ' ' . $this->editionShort() . $beta;
+        return $this->releaseType->shortName() . $this->minorVersion();
     }
     
-    function edition(): string
+    private function minorVersion(): string
     {
-        return $this->isLTS() ? 'Long Term Support' : 'Leading Edge';
+        return $this->releaseType->isDevRelease() ? '' : ' ' . $this->releaseInfo->minorVersion();
     }
 
-    function editionShort(): string
+    public function archiveLink(): string
     {
-        return $this->isLTS() ? 'LTS' : 'LE';
-    }
-    
-    function subheader(): string
-    {
-        if ($this->isLTS())
-        {
-            return '<p>Get the latest stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> version of the Axon.ivy Digital Business Platform.';
-        }
-        return '<p>Become an early adopter and take the <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Leading Edge</a> road with newest features but frequent migrations.</p>';
-    }
-    
-    function isLTS(): bool
-    {
-        return $this->releaseInfo->getVersion()->isLongTermSupportVersion();
+        return $this->releaseType->archiveLink($this->releaseInfo);
     }
 }
 
@@ -128,15 +193,15 @@ class DownloadArtifact
     public string $url;
     public string $filename;
     public string $icon;
-    public bool $matchesCurrentRequest;
+    public string $permalink;
     
-    function __construct($name, $description, $url, $filename, $icon)
+    function __construct($name, $description, $url, $filename, $icon, $permalink)
     {
         $this->name = $name;
         $this->description = $description;
         $this->url = $url;
         $this->filename = $filename;
         $this->icon = $icon;
-        $this->matchesCurrentRequest = true;
+        $this->permalink = $permalink;
     }
 }

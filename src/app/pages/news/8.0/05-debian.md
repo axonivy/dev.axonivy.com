@@ -12,7 +12,7 @@ The Axon.ivy Engine is now available as a Debian package. Now Engine operators c
 	<a href="${docBaseUrl}/engine-guide/getting-started/debian.html" target="_blank">
 	  <i class="fas fa-plane-departure"></i> Debian : Getting Started
 	</a>
-	<a href="/permalink/latest/axonivy-engine.deb" target="_blank">
+	<a href="/permalink/8.0/axonivy-engine.deb" target="_blank">
 	  <i class="fas fa-download"></i> Download Debian package
 	</a>
 </div>

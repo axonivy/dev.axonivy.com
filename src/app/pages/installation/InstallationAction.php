@@ -28,6 +28,7 @@ class InstallationAction
         }
         
         $minorVersion = (new Version($version))->getMinorVersion();
+        $bugfixVersion = (new Version($version))->getBugfixVersion();
         
         $title = 'Install Axon.ivy Designer';
         if ($product == Variant::PRODUCT_NAME_ENGINE) {
@@ -56,7 +57,7 @@ class InstallationAction
             'title' => $title,
             'type' => $type,
             'product' => $product,
-            'version' => $version
+            'bugfixVersion' => $bugfixVersion
         ]);
     }
 }

@@ -2,8 +2,9 @@
 
 /doc/8.0.3								example for a specific version
 /doc/8.0                                symlink, created while deployment
-/doc/latest|dev|nightly|sprint          symlinks
+/doc/dev|nightly|sprint                 symlinks
 /doc/8.0.latest                         DEPRECATED, always use use /doc/8.0, redirect to latest 8.0 e.g. /doc/8.0.3 
+/doc/latest								redirect to lts 
 
 /download                               browseable user page, outlines you want LTS
 /download/nightly|sprint			    browseable user page, for development releases

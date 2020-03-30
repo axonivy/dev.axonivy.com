@@ -1,13 +1,11 @@
 <h1>Axon.ivy Maven Engine Archive</h1>
 <p>The engine archive that can be used with the Maven plugin <code>com.axonivy.ivy.ci:project-compile-plugin</code>.</p>
 
-{% for releaseInfo in releaseInfos %}
-	<h2>Release {{ releaseInfo.version.versionNumber }} </h2>
+{% for release in releases %}
+	<h2>Release {{ release.version }} </h2>
 	<ul>
-		{% for variant in releaseInfo.Variants %}
-			{% if variant.mavenPluginCompatible %}
-				<li><a href="{{ variant.downloadUrl }}">{{ variant.filename }}</a></li>
-			{% endif %}
+		{% for artifact in release.artifacts %}
+			<li><a href="{{ artifact.url }}">{{ artifact.filename }}</a></li>
 		{% endfor %}
 	</ul>
 {% endfor %}

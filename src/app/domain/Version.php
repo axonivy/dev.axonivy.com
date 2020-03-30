@@ -3,7 +3,7 @@ namespace app\domain;
 
 class Version
 {
-    private $versionNumber;
+    private string $versionNumber;
     
     public function __construct(string $versionNumber)
     {
@@ -16,12 +16,6 @@ class Version
         return is_numeric($number);
     }
     
-    public function isLongTermSupportVersion(): bool
-    {
-        $minorVersion = $this->getMinorVersion();
-        return in_array($minorVersion, LTS_VERSIONS);
-    }
-    
     public function getVersionNumber(): string
     {
         return $this->versionNumber;
@@ -30,11 +24,6 @@ class Version
     public function isEqualOrGreaterThan(string $versionNumber): bool
     {
         return version_compare($this->versionNumber, $versionNumber, '>=');
-    }
-    
-    public function isLowerThan(string $versionNumber): bool
-    {
-        return version_compare($this->versionNumber, $versionNumber, '<');
     }
     
     public function isMinor(): bool
