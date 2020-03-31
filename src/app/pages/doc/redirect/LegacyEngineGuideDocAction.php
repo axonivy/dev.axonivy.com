@@ -22,7 +22,7 @@ class LegacyEngineGuideDocAction
         {
             return Redirect::to($response, 'engine-guide/');
         }
-        
+
         $redirectUrl = $this->getRedirectUrl($doc);        
         return $this->view->render($response, 'doc/redirect/redirect-engine-guide.twig', ['redirectUrl' => $redirectUrl]);
     }
