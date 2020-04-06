@@ -22,12 +22,12 @@
 </section>
 
 <section id="main">
-	<div class="inner-small">
+	<div class="inner">
 		{% for employee in employees %}
-		{% if loop.index % 3 == 1 %}
+		{% if loop.index % 4 == 1 %}
 		<div class="row">
 			{% endif %}
-			<div class="4u 12u$(xsmall)">
+			<div class="3u 12u$(xsmall)" style="text-align: center;">
 				<header>
 					<h4>
 						{{ employee.name }}
@@ -45,7 +45,7 @@
 					{{ employee.education }}
 				</p>
 			</div>
-			{% if loop.index % 3 == 0 %}
+			{% if loop.index % 4 == 0 %}
 		</div>
 		{% endif %}
 		{% endfor %}
