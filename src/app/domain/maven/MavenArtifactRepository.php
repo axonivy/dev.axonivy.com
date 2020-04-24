@@ -93,7 +93,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('quick-start-tutorial')
             ->name('Quick Start Tutorial')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('quick-start-tutorial')
             ->build();
     }
@@ -102,7 +102,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('workflow-demos')
             ->name('Workflow Demos')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('workflow-demos')
             ->build();
     }
@@ -111,7 +111,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('error-handling-demos')
             ->name('Error Handling Demos')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('error-handling-demos')
             ->build();
     }
@@ -120,7 +120,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('connectivity-demos')
             ->name('Connectivity Demos')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('connectivity-demos')
             ->build();
     }
@@ -129,7 +129,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('rule-engine-demos')
             ->name('Rule Engine Demos')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('rule-engine-demos')
             ->build();
     }
@@ -138,7 +138,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('html-dialog-demos')
             ->name('Html Dialog Demos')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('html-dialog-demos')
             ->build();
     }
@@ -147,7 +147,7 @@ class MavenArtifactRepository
     {
         return MavenArtifact::create('demos')
             ->name('Demo App')
-            ->groupId('ch.ivyteam.ivy.project.demo')
+            ->groupId('ch.ivyteam.demo')
             ->artifactId('ivy-demos-app')
             ->type('zip')
             ->build();
