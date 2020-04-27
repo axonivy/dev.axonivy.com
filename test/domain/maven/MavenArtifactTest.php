@@ -35,7 +35,7 @@ class MavenArtifactTest extends TestCase
     public function testMavenArtifact() {
         $artifact = MavenArtifactRepository::getMavenArtifact('connectivity-demos', 'iar');
         $this->assertEquals('Connectivity Demos', $artifact->getName());
-        $this->assertEquals('ch.ivyteam.ivy.project.demo', $artifact->getGroupId());
+        $this->assertEquals('ch.ivyteam.demo', $artifact->getGroupId());
         $this->assertEquals('connectivity-demos', $artifact->getArtifactId());
         $this->assertEquals('/permalink/lib/dev/connectivity-demos.iar', $artifact->getPermalinkDev());
     }
