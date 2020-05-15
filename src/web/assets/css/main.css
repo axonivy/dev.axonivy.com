@@ -3118,6 +3118,9 @@
 		top: 0;
 		width: 100%;
 		z-index: 10001;
+		-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+		-moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
 	}
 
 		#header .inner {
@@ -3313,8 +3316,13 @@
 			text-decoration: none;
 		}
 
+		#navPanel a.button {
+			padding: 0;
+		}
+
 			#navPanel a:not(.close):first-child {
 				border: none;
+				margin-top: 60px;
 			}
 
 		#navPanel .close {
@@ -3330,6 +3338,7 @@
 			display: block;
 			height: 4em;
 			padding-right: 1.25em;
+			margin: 10px;
 			position: absolute;
 			right: 0;
 			text-align: right;
@@ -3341,9 +3350,9 @@
 			#navPanel .close:before {
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
+				font-family: "Font Awesome 5 Free";
 				font-style: normal;
-				font-weight: normal;
+				font-weight: 900;
 				text-transform: none !important;
 				content: '\f00d';
 				width: 3em;
@@ -3443,7 +3452,7 @@
 			#banner input[type="button"].alt,
 			#banner button.alt,
 			#banner .button.alt {
-				background-color: transparent;
+				background-color: rgba(0, 0, 0, 0.5);
 				box-shadow: inset 0 0 0 2px #fff;
 				color: #ffffff !important;
 			}
@@ -3453,7 +3462,7 @@
 				#banner input[type="button"].alt:hover,
 				#banner button.alt:hover,
 				#banner .button.alt:hover {
-					background: rgba(255, 255, 255, 0.25);
+					background: rgba(0, 0, 0, 0.25);
 				}
 
 				#banner input[type="submit"].alt:active,
