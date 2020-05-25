@@ -15,8 +15,10 @@ class Product
     private $importWizard;
     
     private $versionDisplayFilter;
+
+    private $listed;
     
-    public function __construct(string $key, string $name, array $mavenArtifacts, string $description, VersionDisplayFilter $versionDisplayFilter, bool $importWizard = true, string $installInstructions = '')
+    public function __construct(string $key, string $name, array $mavenArtifacts, string $description, VersionDisplayFilter $versionDisplayFilter, bool $importWizard = true, string $installInstructions = '', bool $listed = true)
     {
         $this->key = $key;
         $this->name = $name;
@@ -25,11 +27,17 @@ class Product
         $this->importWizard = $importWizard;
         $this->versionDisplayFilter = $versionDisplayFilter;
         $this->installInstructions = $installInstructions;
+        $this->listed = $listed;
     }
 
     public function getKey()
     {
         return $this->key;
+    }
+
+    public function isListed()
+    {
+        return $this->listed;
     }
 
     public function getName()

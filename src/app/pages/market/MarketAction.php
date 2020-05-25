@@ -17,7 +17,7 @@ class MarketAction
     public function __invoke($request, $response, $args)
     {
         return $this->view->render($response, 'market/market.twig', [
-            'products' => Market::getAll()
+            'products' => Market::listed()
         ]);
     }
 }

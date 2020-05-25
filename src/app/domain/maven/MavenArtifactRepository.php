@@ -21,7 +21,7 @@ class MavenArtifactRepository
         return array_merge(
             self::getProjectDemos(),
             [self::getProcessingValve()],
-            [self::getJsfWorkflowUi()],
+            [self::getBasicWorkflowUi()],
             self::getPortal(),
             self::getDocFactory(),
             [self::getVisualVMPlugin()]
@@ -251,12 +251,12 @@ class MavenArtifactRepository
             ->build();
     }
 
-    private static function getJsfWorkflowUi(): MavenArtifact
+    public static function getBasicWorkflowUi(): MavenArtifact
     {
-        return MavenArtifact::create('jsf-workflow-ui')
-            ->name('JSF Workflow UI')
+        return MavenArtifact::create('basic-workflow-ui')
+            ->name('Basic Workflow UI')
             ->groupId('ch.ivyteam.ivy.project.wf')
-            ->artifactId('JsfWorkflowUi')
+            ->artifactId('basic-workflow-ui')
             ->build();
     }
 
