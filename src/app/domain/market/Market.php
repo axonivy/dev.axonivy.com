@@ -65,7 +65,17 @@ class Market
         $docFactory = new Product('doc-factory', 'Doc Factory', MavenArtifactRepository::getDocFactory(), $descDocFactory, VersionDisplayFilterFactory::createHideSnapshots());
         $demos = new Product('demos', 'Demos', MavenArtifactRepository::getProjectDemos(), $descriptionDemo, VersionDisplayFilterFactory::createShowAll());
 
-        return [$portal, $visualVm, $docFactory, $demos];
+        $basicWorkflowUi = new Product(
+            'basic-workflow-ui',
+            'Basic Workflow UI',
+            [MavenArtifactRepository::getBasicWorkflowUI()],
+            'The Basic Workflow UI is a smart worklow user interface with a minimal set of features to perform all necessary workflow activities.',
+            VersionDisplayFilterFactory::createShowAll(),
+            true,
+            '',
+            false);
+
+        return [$portal, $visualVm, $docFactory, $demos, $basicWorkflowUi];
     }
 
     public static function getPortal(): Product {
@@ -97,5 +107,17 @@ class Market
             }
         }
         return null;
+    }
+
+    public static function listed(): array
+    {
+        $listed = [];
+        foreach (self::getAll() as $product)
+        {
+            if ($product->isListed()) {
+                $listed[] = $product;
+            }
+        }
+        return $listed;
     }
 }
