@@ -124,10 +124,20 @@ class ReleaseInfoRepository
      * - 8 -> newest 8.x
      */
     public static function getBestMatchingVersion(string $version): ?ReleaseInfo
-    {
-        $versions = self::getMatchingVersions($version);
-        $versions = array_reverse($versions);
-        return ArrayUtil::getLastElementOrNull($versions);
+    {        
+        $releaseInfos = self::getMatchingVersions($version);
+
+        // prefer perfect match for alphanumeric versions (e.g. nightly instead nightly-8 for nightly)
+        if (!is_numeric($version)) {
+            foreach ($releaseInfos as $releaseInfo) {
+                if ($releaseInfo->getVersion()->getVersionNumber() == $version) {
+                    return $releaseInfo;
+                }
+            }
+        }
+
+        $releaseInfos = array_reverse($releaseInfos);
+        return ArrayUtil::getLastElementOrNull($releaseInfos);
     }
 
     public static function getMatchingVersions(string $version): array

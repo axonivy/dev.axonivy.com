@@ -53,6 +53,8 @@ class ArchiveActionTest extends TestCase
     {
         AppTester::assertThatGet('/download/archive/unstable')->ok()
             ->bodyContains('sprint')
-            ->bodyContains('nightly');
+            ->bodyContains('nightly')
+            ->bodyContains('nightly-8')
+            ->bodyContains('nightly-7');
     }
 }

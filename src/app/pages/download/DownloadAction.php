@@ -38,12 +38,22 @@ class DownloadAction
             'banner' => $releaseType->banner(),
 
             'showOtherVersions' => ReleaseType::isLTS($releaseType),
+            'devReleases' => $this->devReleases(),
 
             'archiveLink' => $loader->archiveLink(),
             'versionShort' => $loader->versionShort()
         ]);
     }
 
+    private function devReleases(): array
+    {
+        $links = [];
+        foreach (ReleaseType::PROMOTED_DEV_TYPES() as $devType) {
+            $links[] = new Link($devType->downloadLink(), $devType->name()); 
+        }
+        return $links;
+    }
+    
     private function releaseType(string $version): ?ReleaseType
     {
         if (empty($version)) {
@@ -59,6 +69,28 @@ class DownloadAction
             return new ReleaseTypeNotAvailableLoader($releaseType);
         }
         return new ReleaseInfoLoader($releaseType, $releaseInfo);
+    }
+}
+
+class Link
+{
+    private $url;
+    private $name;
+    
+    function __construct(string $url, string $name)
+    {
+        $this->url = $url;
+        $this->name = $name;
+    }
+    
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }
 

@@ -53,8 +53,12 @@ class ArtifactFactory
         if (version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) {
             return true;
         }
-        $releaseType = ReleaseType::byKey($versionNumber);
-        return $releaseType != null && $releaseType->isDevRelease();
+        // TODO Should be improved ...
+        if ($versionNumber == 'sprint' || $versionNumber == 'nightly' || $versionNumber == 'dev')
+        {
+          return true;
+        }
+        return false;
     }
 }
 

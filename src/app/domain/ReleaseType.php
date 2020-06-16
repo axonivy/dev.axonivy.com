@@ -68,6 +68,16 @@ class ReleaseType
         $type->promotedDevVersion = false;
         return $type;
     }
+    
+    public static function LTS_NIGHTLY($majorVersion): ReleaseType
+    {
+        $type = self::createDevReleaseType();
+        $type->key = 'nightly-' . $majorVersion;
+        $type->name = 'Nightly Build ' . $majorVersion;
+        $type->shortName = 'Nightly ' . $majorVersion;
+        $type->promotedDevVersion = true;
+        return $type;
+    }
 
     private static function createDevReleaseType(): ReleaseType
     {
@@ -93,13 +103,24 @@ class ReleaseType
 
     private static function types(): array
     {
-        return [
-            self::DEV(),
-            self::NIGHTLY(),
-            self::SPRINT(),
+         $nightlyLtsReleases = [];
+         foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $releaseInfo)
+         {
+             $nightlyLtsRelease = self::LTS_NIGHTLY($releaseInfo->getVersion()->getMajorVersion());
+             if ($nightlyLtsRelease->releaseInfo() != null)
+             {
+                 $nightlyLtsReleases[] = $nightlyLtsRelease;
+             }
+         }
+        
+        return array_merge(
+         [
+            self::LTS(),
             self::LE(),
-            self::LTS()
-        ];
+            self::SPRINT(),
+            self::NIGHTLY(),
+            self::DEV(),
+         ], $nightlyLtsReleases);
     }
 
     public static function PROMOTED_DEV_TYPES(): array
@@ -188,6 +209,11 @@ class ReleaseType
     public function headline(): string
     {
         return $this->headline;
+    }
+    
+    public function downloadLink(): string
+    {
+        return '/download/' . $this->key;
     }
 
     public function archiveLink(ReleaseInfo $releaseInfo): string
