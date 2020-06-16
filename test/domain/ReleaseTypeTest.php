@@ -25,6 +25,9 @@ class ReleaseTypTest extends TestCase
          Assert::assertEquals('dev', ReleaseType::DEV()->releaseInfo()->getVersion()->getVersionNumber());
          Assert::assertEquals('nightly', ReleaseType::NIGHTLY()->releaseInfo()->getVersion()->getVersionNumber());
          Assert::assertEquals('sprint', ReleaseType::SPRINT()->releaseInfo()->getVersion()->getVersionNumber());
+         
+         Assert::assertEquals('nightly-8', ReleaseType::byKey('nightly-8')->key());
+         Assert::assertEquals('nightly-7', ReleaseType::byKey('nightly-7')->key());
     }
     
     public function test_allReleaseInfos()
@@ -35,7 +38,7 @@ class ReleaseTypTest extends TestCase
     
     public function test_byArchiveKey()
     {
-        Assert::assertEquals(3, count(ReleaseType::byArchiveKey('unstable')));
+        Assert::assertEquals(5, count(ReleaseType::byArchiveKey('unstable')));
         Assert::assertEquals(1, count(ReleaseType::byArchiveKey('lts')));
     }
 }

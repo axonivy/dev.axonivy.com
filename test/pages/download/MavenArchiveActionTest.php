@@ -39,7 +39,9 @@ class MavenArchiveActionTest extends TestCase
             ->ok()
             ->bodyDoesNotContain('dev')
             ->bodyDoesNotContain('sprint')
-            ->bodyDoesNotContain('nightly');
+            ->bodyDoesNotContain('nightly')
+            ->bodyDoesNotContain('nightly-8')
+            ->bodyDoesNotContain('nightly-7');
     }
     
     public function testDoesNotVersionLowerThan6()

@@ -53,10 +53,12 @@ class DocActionTest extends TestCase
         AppTester::assertThatGet('/doc/dev')->redirect('/doc/dev/index.html');
         AppTester::assertThatGet('/doc/sprint')->redirect('/doc/sprint/index.html');
         AppTester::assertThatGet('/doc/nightly')->redirect('/doc/nightly/index.html');
+        AppTester::assertThatGet('/doc/nightly-8')->redirect('/doc/nightly-8/index.html');
         
         AppTester::assertThatGet('/doc/latest')->redirect('/doc/8.0');
         AppTester::assertThatGet('/doc/2.0.0')->notFound();
         AppTester::assertThatGet('/doc/notexisting')->notFound();
+        AppTester::assertThatGet('/doc/nightly-7')->ok();
     }
     
     public function testRedirectMigrationNotesSinceVersion9()
@@ -66,10 +68,12 @@ class DocActionTest extends TestCase
         AppTester::assertThatGet('/doc/dev/migration-notes')->redirect('/doc/dev/axonivy/migration/index.html');
         AppTester::assertThatGet('/doc/sprint/migration-notes')->redirect('/doc/sprint/axonivy/migration/index.html');
         AppTester::assertThatGet('/doc/nightly/migration-notes')->redirect('/doc/nightly/axonivy/migration/index.html');
+        AppTester::assertThatGet('/doc/nightly-8/migration-notes')->redirect('/doc/nightly-8/axonivy/migration/index.html');
         
         AppTester::assertThatGet('/doc/latest/migration-notes')->redirect('/doc/8.0/migration-notes');
         AppTester::assertThatGet('/doc/2.0.0/migration-notes')->notFound();
         AppTester::assertThatGet('/doc/notexisting/migration-notes')->notFound();
+        AppTester::assertThatGet('/doc/nightly-7/migration-notes')->ok();
     }
     
     public function testRedirectReleaseNotesSinceVersion9()
@@ -79,10 +83,12 @@ class DocActionTest extends TestCase
         AppTester::assertThatGet('/doc/dev/release-notes')->redirect('/doc/dev/axonivy/release-notes/index.html');
         AppTester::assertThatGet('/doc/sprint/release-notes')->redirect('/doc/sprint/axonivy/release-notes/index.html');
         AppTester::assertThatGet('/doc/nightly/release-notes')->redirect('/doc/nightly/axonivy/release-notes/index.html');
+        AppTester::assertThatGet('/doc/nightly-8/release-notes')->redirect('/doc/nightly-8/axonivy/release-notes/index.html');
         
         AppTester::assertThatGet('/doc/latest/release-notes')->redirect('/doc/8.0/release-notes');
         AppTester::assertThatGet('/doc/2.0.0/release-notes')->notFound();
         AppTester::assertThatGet('/doc/notexisting/release-notes')->notFound();
+        AppTester::assertThatGet('/doc/nightly-7/release-notes')->ok();
     }
     
     public function testRedirectNewAndNoteworthySinceVersion9()
@@ -92,6 +98,7 @@ class DocActionTest extends TestCase
         AppTester::assertThatGet('/doc/dev/new-and-noteworthy')->redirect('/news');
         AppTester::assertThatGet('/doc/sprint/new-and-noteworthy')->redirect('/news');
         AppTester::assertThatGet('/doc/nightly/new-and-noteworthy')->redirect('/news');
+        AppTester::assertThatGet('/doc/nightly-8/new-and-noteworthy')->redirect('/news');
         
         AppTester::assertThatGet('/doc/latest/new-and-noteworthy')->redirect('/doc/8.0/new-and-noteworthy');
         AppTester::assertThatGet('/doc/2.0.0/new-and-noteworthy')->notFound();

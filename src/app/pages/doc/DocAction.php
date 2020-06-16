@@ -23,7 +23,7 @@ class DocAction
     {
         $version = $args['version'];
         
-        // special treatment when using a major version e.g. 8/9/10
+        // TODO FIX THIS special treatment when using a major version e.g. 8/9/10
         if (strlen($version) == 1 && is_numeric($version)) { // TODO Wrong for 10
             $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
             if ($releaseInfo == null) {
@@ -82,6 +82,10 @@ class DocAction
 
     private function documentationBasedOnReadTheDocs(string $version): bool
     {
+        // TODO
+        if ($version == 'nightly-7') {
+            return false;
+        }
         if (version_compare($version, 9) >= 0) {
             return true;
         }
