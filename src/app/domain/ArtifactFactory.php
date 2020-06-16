@@ -54,7 +54,7 @@ class ArtifactFactory
             return true;
         }
         // TODO Should be improved ...
-        if ($versionNumber == 'sprint' || $versionNumber == 'nightly' || $versionNumber == 'dev')
+        if ($versionNumber == 'sprint' || $versionNumber == 'nightly' || $versionNumber == 'dev' || $versionNumber == 'nightly-8')
         {
           return true;
         }
