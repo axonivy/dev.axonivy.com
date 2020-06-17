@@ -5,6 +5,7 @@ use app\domain\util\ArrayUtil;
 
 class ReleaseType
 {
+    private static $typeCache;
 
     public static function LTS(): ReleaseType
     {
@@ -103,17 +104,19 @@ class ReleaseType
 
     private static function types(): array
     {
-         $nightlyLtsReleases = [];
-         foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $releaseInfo)
-         {
-             $nightlyLtsRelease = self::LTS_NIGHTLY($releaseInfo->getVersion()->getMajorVersion());
-             if ($nightlyLtsRelease->releaseInfo() != null)
-             {
-                 $nightlyLtsReleases[] = $nightlyLtsRelease;
-             }
-         }
+        if (!empty(self::$typeCache)) {
+            return self::$typeCache;
+        }
+
+        $nightlyLtsReleases = [];
+        foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $releaseInfo) {
+            $nightlyLtsRelease = self::LTS_NIGHTLY($releaseInfo->getVersion()->getMajorVersion());
+            if ($nightlyLtsRelease->releaseInfo() != null) {
+                $nightlyLtsReleases[] = $nightlyLtsRelease;
+            }
+        }
         
-        return array_merge(
+        self::$typeCache = array_merge(
          [
             self::LTS(),
             self::LE(),
@@ -121,6 +124,8 @@ class ReleaseType
             self::NIGHTLY(),
             self::DEV(),
          ], $nightlyLtsReleases);
+        
+        return self::$typeCache;
     }
 
     public static function PROMOTED_DEV_TYPES(): array
