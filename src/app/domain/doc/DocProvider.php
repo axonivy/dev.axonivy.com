@@ -201,6 +201,16 @@ class DocProvider
         return '/doc/' . $this->versionNumber;
     }
     
+    public function getMinorUrlOrBugfixUrl(): string
+    {
+        if (Version::isValidVersionNumber($this->versionNumber)) {
+            if ((new DocProvider((new Version($this->versionNumber))->getMinorVersion()))->exists()) {
+                return $this->getMinorUrl();
+            }
+        }
+        return $this->getOverviewUrl();        
+    }
+    
     public function getHotfixHowToDocument(): SimpleDocument
     {
         $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';

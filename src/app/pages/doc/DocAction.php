@@ -9,11 +9,13 @@ use app\domain\doc\DocProvider;
 use app\domain\util\Redirect;
 use app\domain\ReleaseType;
 use DI\NotFoundException;
+use app\domain\util\StringUtil;
 
 class DocAction
 {
+
     private Twig $view;
-    
+
     public function __construct(Twig $view)
     {
         $this->view = $view;
@@ -22,19 +24,18 @@ class DocAction
     public function __invoke($request, Response $response, $args)
     {
         $version = $args['version'];
-        
-        // TODO FIX THIS special treatment when using a major version e.g. 8/9/10
-        if (strlen($version) == 1 && is_numeric($version)) { // TODO Wrong for 10
+
+        // special treatment when using a major version e.g. 8/9/10
+        if (!StringUtil::contains($version, '.') && is_numeric($version)) {
             $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
             if ($releaseInfo == null) {
                 throw new NotFoundException();
             }
-                $doc = $args['document'] ?? '';
-                if (!empty($doc)) {
-                    $doc = '/' . $doc;
-                }
-                // TODO maybe minor url does not exist, we should redirect o bugfix version
-                return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);    
+            $doc = $args['document'] ?? '';
+            if (!empty($doc)) {
+                $doc = '/' . $doc;
+            }
+            return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrlOrBugfixUrl() . $doc);    
         }
 
         $docProvider = new DocProvider($version);
@@ -82,7 +83,6 @@ class DocAction
 
     private function documentationBasedOnReadTheDocs(string $version): bool
     {
-        // TODO
         if ($version == 'nightly-7') {
             return false;
         }

@@ -53,10 +53,8 @@ class ArtifactFactory
         if (version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) {
             return true;
         }
-        // TODO Should be improved ...
-        if ($versionNumber == 'sprint' || $versionNumber == 'nightly' || $versionNumber == 'dev' || $versionNumber == 'nightly-8')
-        {
-          return true;
+        if (!is_numeric($versionNumber) && $versionNumber != 'nightly-7') {
+            return true;
         }
         return false;
     }
