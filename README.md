@@ -9,6 +9,11 @@
 
 	docker-compose exec web ./vendor/bin/phpunit
 
+# IDE Setup
+
+ * Use Eclipse PHP
+ * Install Twig Plugin from Eclipse Marketplace
+
 # Update a php library
 
 	docker-compose exec web composer require --update-with-dependencies slim/slim
