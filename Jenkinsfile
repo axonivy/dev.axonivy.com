@@ -34,27 +34,32 @@ pipeline {
         junit 'phpunit-junit.xml'
       } 
     }
-    
+
     stage('sonar') {
       when {
         branch 'master'
       }
+      agent {
+        docker {
+          image 'sonarsource/sonar-scanner-cli'
+          args '-e SONAR_HOST_URL=https://sonar.ivyteam.io'
+        }
+      }
    	  steps {
-   	    // https://github.com/SonarSource/sonar-scanner-cli-docker/issues/30
-   	    sh 'docker run -e SONAR_HOST_URL=https://sonar.ivyteam.io --user="$(id -u):$(id -g)" -v "$PWD:/usr/src" sonarsource/sonar-scanner-cli'
-      } 
+   	    sh 'sonar-scanner'
+      }
     }
-    
+
     stage('deploy') {
       when {
         branch 'master'
       }
       agent {
       	docker {
-	      image 'axonivy/build-container:ssh-client-1.0'
-	    }
+	        image 'axonivy/build-container:ssh-client-1.0'
+	      }
       }
-      
+
       steps {
         sshagent(['zugprojenkins-ssh']) {
           script {
