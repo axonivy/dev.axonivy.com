@@ -4,7 +4,7 @@ namespace app\domain\market;
 class Market
 {
 
-    private static function all(): array
+    public static function all(): array
     {
         $dirs = array_filter(glob(__DIR__ . '/products/*'), 'is_dir');
         $products = [];
