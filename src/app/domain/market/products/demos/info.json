@@ -1,0 +1,14 @@
+{
+	"name": "Demos",
+	"listed": true,
+	"importWizard": true,
+	"mavenArtifacts": [
+		"quick-start-tutorial",
+		"workflow-demos", 
+		"error-handling-demos",
+		"connectivity-demos",
+		"rule-engine-demos",
+		"html-dialog-demos",
+		"demos"
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Portal",
+	"listed": true,
+	"importWizard": true,
+	"versionDisplay": "portal",
+	"mavenArtifacts": [
+		"portal",
+		"portal-template",
+		"portal-style",
+		"portal-kit",
+		"axonivy-express",
+		"portal-developer-examples",
+		"portal-user-examples",
+		"portal-examples",
+		"portal-guide"
+	]
+}

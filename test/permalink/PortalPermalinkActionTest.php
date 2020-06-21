@@ -37,18 +37,18 @@ class PortalPermalinkActionTest extends TestCase
     
     public function testPortalLatest()
     {
-        AppTester::assertThatGet('/portal/latest')->redirect('/market/portal/' . Market::getPortal()->getLatestVersionToDisplay());
+        AppTester::assertThatGet('/portal/latest')->redirect('/market/portal/' . Market::getProductByKey('portal')->getLatestVersionToDisplay());
     }
 
     public function testPortalDoc()
     {
         AppTester::assertThatGet('/portal/8.0.3/doc')->redirect('/documentation/portal-guide/8.0.3');
-        AppTester::assertThatGet('/portal/8.0/doc')->redirect('/documentation/portal-guide/' . Market::getPortal()->getLatestVersionToDisplay());
+        AppTester::assertThatGet('/portal/8.0/doc')->redirect('/documentation/portal-guide/' . Market::getProductByKey('portal')->getLatestVersionToDisplay());
     }
 
     private function getLatestVersion($version)
     {
-        $portalVersions = Market::getPortal()->getVersionsToDisplay();
+        $portalVersions = Market::getProductByKey('portal')->getVersionsToDisplay();
         foreach ($portalVersions as $v) {
             if (StringUtil::startsWith($v, $version)) {
                 return $v;
@@ -59,6 +59,6 @@ class PortalPermalinkActionTest extends TestCase
     
     private function latestAvailableRelease(): string
     {
-        return Market::getPortal()->getLatestVersion();
+        return Market::getProductByKey('portal')->getLatestVersion();
     }
 }

@@ -1,0 +1,7 @@
+{
+	"name": "Doc Factory",
+	"listed": true,
+	"importWizard": true,
+	"versionDisplay": "hide-snapshots",
+	"mavenArtifacts": ["doc-factory", "doc-factory-demo", "doc-factory-doc"]
+}

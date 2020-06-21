@@ -14,8 +14,16 @@ class MavenArtifactRepository
         return null;
     }
     
-
-
+    public static function getByKey(string $key): ?MavenArtifact
+    {
+        foreach (self::getAll() as $artifact) {
+            if ($artifact->getKey() == $key) {
+                return $artifact;
+            }
+        }
+        return null;
+    }
+    
     private static function getAll(): array
     {
         return array_merge(

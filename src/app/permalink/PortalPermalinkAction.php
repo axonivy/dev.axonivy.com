@@ -34,17 +34,19 @@ class PortalPermalinkAction
 
     private static function evaluatePortalVersion(String $version): String
     {
+        $portal = Market::getProductByKey('portal');
+        
         $releaseType = ReleaseType::byKey($version);
         if ($releaseType != null && $releaseType->isDevRelease()) {
-            return Market::getPortal()->getLatestVersion();
+            return $portal->getLatestVersion();
         }
 
         if ($version == 'latest') {
-            return Market::getPortal()->getLatestVersionToDisplay();
+            return $portal->getLatestVersionToDisplay();
         }
 
         if (self::isMinorVersion($version)) {
-            $portalVersions = Market::getPortal()->getVersionsToDisplay();
+            $portalVersions = $portal->getVersionsToDisplay();
             foreach ($portalVersions as $v) {
                 if (StringUtil::startsWith($v, $version)) {
                     return $v;

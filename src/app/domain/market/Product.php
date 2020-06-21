@@ -1,14 +1,14 @@
 <?php
 namespace app\domain\market;
 
+use app\domain\maven\MavenArtifactRepository;
+
 class Product
 {
 
     private $key;
 
     private $name;
-
-    private $description;
 
     private $mavenArtifacts;
 
@@ -18,16 +18,16 @@ class Product
 
     private $listed;
     
-    public function __construct(string $key, string $name, array $mavenArtifacts, string $description, VersionDisplayFilter $versionDisplayFilter, bool $importWizard = true, string $installInstructions = '', bool $listed = true)
+    public function __construct(string $key, string $infoFile)
     {
-        $this->key = $key;
-        $this->name = $name;
-        $this->mavenArtifacts = $mavenArtifacts;
-        $this->description = $description;
-        $this->importWizard = $importWizard;
-        $this->versionDisplayFilter = $versionDisplayFilter;
-        $this->installInstructions = $installInstructions;
-        $this->listed = $listed;
+       $infoFileContent = file_get_contents($infoFile);
+       $infoJson = json_decode($infoFileContent);
+       $this->key = $key;
+       $this->name = $infoJson->name;
+       $this->mavenArtifacts = array_map(fn ($mavenArtifactKey) => MavenArtifactRepository::getByKey($mavenArtifactKey), $infoJson->mavenArtifacts);
+       $this->importWizard = $infoJson->importWizard;
+       $this->versionDisplayFilter = VersionDisplayFilterFactory::create($infoJson->versionDisplay);
+       $this->listed = $infoJson->listed;
     }
 
     public function getKey()
@@ -45,11 +45,26 @@ class Product
         return $this->name;
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
-        return $this->description;
+        return $this->getHtmlOfMarkdown('description.md');
     }
 
+    public function getInstructions(): string
+    {
+        return $this->getHtmlOfMarkdown('instructions.md');
+    }
+
+    private function getHtmlOfMarkdown(string $filename): string
+    {
+        $markdownFile = dirname(__FILE__) . '/products/' . $this->key . '/' . $filename;
+        if (file_exists($markdownFile)) {
+            $markdownContent = file_get_contents($markdownFile);
+            return \ParsedownExtra::instance()->text($markdownContent);
+        }
+        return '';
+    }
+    
     public function getImgSrc()
     {
         return '/images/market/' . $this->key . '.png';

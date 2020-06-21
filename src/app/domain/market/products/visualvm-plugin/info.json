@@ -1,0 +1,7 @@
+{
+	"name": "VisualVM Plugin",
+	"listed": true,
+	"importWizard": false,
+	"versionDisplay": "hide-snapshots",
+	"mavenArtifacts": ["visualvm-plugin"]
+}
