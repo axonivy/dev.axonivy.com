@@ -18,6 +18,8 @@ class Product
 
     private $listed;
     
+    private int $sort;
+    
     public function __construct(string $key, string $infoFile)
     {
        $infoFileContent = file_get_contents($infoFile);
@@ -28,6 +30,7 @@ class Product
        $this->importWizard = $infoJson->importWizard;
        $this->versionDisplayFilter = VersionDisplayFilterFactory::create($infoJson->versionDisplay);
        $this->listed = $infoJson->listed;
+       $this->sort = $infoJson->sort;
     }
 
     public function getKey()
@@ -43,6 +46,11 @@ class Product
     public function getName()
     {
         return $this->name;
+    }
+    
+    public function getSort(): int
+    {
+        return $this->sort;
     }
 
     public function getDescription(): string

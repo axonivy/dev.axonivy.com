@@ -4,6 +4,7 @@ namespace test\domain\market;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\domain\market\Market;
+use app\domain\market\Product;
 
 class MarketTest extends TestCase
 {
@@ -33,5 +34,17 @@ class MarketTest extends TestCase
     {
         $product = Market::getProductByKey('basic-workflow-ui');
         Assert::assertFalse($product->isListed());
+    }
+    
+    public function test_all_sort()
+    {
+        $products = Market::all();
+        $sorts = array_map(fn (Product $p) => $p->getSort(), $products);
+        $count  = count($sorts);
+        
+        for ($i = 0; $i < $count - 1; $i++) {
+            Assert::assertGreaterThan($sorts[$i], $sorts[$i + 1]);
+        }
+        Assert::assertEquals('portal', $products[0]->getKey());
     }
 }

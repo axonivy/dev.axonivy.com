@@ -1,5 +1,6 @@
 {
 	"name": "Portal",
+	"sort": 100,
 	"listed": true,
 	"importWizard": true,
 	"versionDisplay": "portal",

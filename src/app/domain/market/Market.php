@@ -15,6 +15,7 @@ class Market
                 $products[] = new Product($key, $infoFile);
             }
         }
+        usort($products, fn (Product $a, Product $b) => $a->getSort() > $b->getSort());
         return $products;
     }
 

@@ -1,5 +1,6 @@
 {
 	"name": "Demos",
+	"sort": 400,
 	"listed": true,
 	"importWizard": true,
 	"mavenArtifacts": [

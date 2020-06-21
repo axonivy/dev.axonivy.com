@@ -1,5 +1,6 @@
 {
 	"name": "VisualVM Plugin",
+	"sort": 200,
 	"listed": true,
 	"importWizard": false,
 	"versionDisplay": "hide-snapshots",
