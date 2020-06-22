@@ -3,6 +3,7 @@ namespace app\api;
 
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
+use app\domain\market\Market;
 
 class StatusApi
 {
@@ -24,7 +25,8 @@ class StatusApi
                 'latestLtsVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatestLongTermSupport()),
                 'leadingEdgeVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLeadingEdge()),
                 'longTermSupportVersions' => $this->getVersionNumbers(ReleaseInfoRepository::getLongTermSupportVersions()),
-                'versions' => $this->getVersions()
+                'versions' => $this->getVersions(),
+                'market' => $this->getMarketProducts()
             ]
         ];
     }
@@ -51,5 +53,20 @@ class StatusApi
             $versions[] = $releaseInfo->getVersion()->getVersionNumber();
         }
         return $versions;
+    }
+    
+    private function getMarketProducts(): array
+    {
+        $products = [];
+        foreach (Market::all() as $product) {
+            $products[] = [
+                'key' => $product->getKey(),
+                'name' => $product->getName(),
+                'latest-version-to-display' => $product->getLatestVersionToDisplay(),
+                'latest-version-available' => $product->getLatestVersion(),
+                'url' => $product->getUrl()
+            ];
+        }
+        return $products;
     }
 }

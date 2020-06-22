@@ -5,19 +5,14 @@ use app\domain\util\StringUtil;
 
 class VersionDisplayFilterFactory
 {
-    public function createShowAll(): VersionDisplayFilter
+    public static function create($key): VersionDisplayFilter
     {
+        if ($key == 'hide-snapshots') {
+            return new VersionDisplayFilterHideSnapshots();
+        } else if ($key == 'portal') {
+            return new VersionDisplayFilterHidePortalSprintReleases();
+        }
         return new VersionDisplayFilterShowAll();
-    }
-    
-    public function createHideSnapshots(): VersionDisplayFilter
-    {
-        return new VersionDisplayFilterHideSnapshots();
-    }
-    
-    public function createHidePortalSprintReleases(): VersionDisplayFilter
-    {
-        return new VersionDisplayFilterHidePortalSprintReleases();
     }
 }
 
