@@ -1624,6 +1624,9 @@
 			body, input, select, textarea {
 				font-size: 12pt;
 			}
+			#main select {
+				max-height: 2.2em;
+			}
 
 		}
 
@@ -3205,6 +3208,12 @@
 		display: inline-block;
 	}
 
+		@media screen and (max-width: 1280px) {
+			#header #nav a {
+				padding: 0 0.5em;
+			}
+		}
+
 		@media screen and (max-width: 980px) {
 
 			#nav {
@@ -3599,7 +3608,7 @@
 	}
 
 	#one {
-		padding: 6em 0 4em 0;
+		padding: 4em 0 2em 0;
 	}
 
 		@media screen and (max-width: 980px) {
@@ -3624,7 +3633,7 @@
 	}
 
 	#two {
-		padding: 6em 0 4em 0;
+		padding: 4em 0 2em 0;
 		background: #f3f3f3;
 		background: -moz-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
 		background: -webkit-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
@@ -3698,7 +3707,7 @@
 		}
 
 	#three {
-		padding: 6em 0 4em 0;
+		padding: 4em 0 2em 0;
 	}
 
 		#three .inner {

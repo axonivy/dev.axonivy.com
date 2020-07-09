@@ -35,26 +35,26 @@
     
    	<span id="video"></span>
 	{% for feature in features %}
-		<section id="one" style="padding: 3em 0 2em 0;">
+		<section style="padding: 3em 0 2em 0;">
 			<div class="inner-small" style="text-align:center;max-width: 50em;">
 				<header><h2>{{ feature.title }}</h2></header>
 				<p>{{ feature.description }}</p>
 				
 				{% if not feature.videoUrl is empty %}
 				<div class="embed-container">
-					<iframe src="{{ feature.videoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<iframe title="{{ feature.title }}" src="{{ feature.videoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 				</div>
 				{% endif %}
 				
 				{% if not feature.imageUrl is empty %}
 					<span class="image fit">
-						<center><img src="{{ feature.imageUrl }}" style="max-width:{{ feature.imageMaxWidth }};" /></center>
+						<center><img src="{{ feature.imageUrl }}" style="max-width:{{ feature.imageMaxWidth }};" alt="{{ feature.title }}" /></center>
 					</span>
 				{% endif %}
 			</div>
 		</section>
 	{% endfor %}
 	
-	<span class="image fit" style="margin-bottom:0px;"><img src="/images/misc/visionar-gartner.jpg" /></span>
+	<span class="image fit" style="margin-bottom:0px;"><img src="/images/misc/visionar-gartner.jpg" alt="Visionar Gartner" /></span>
 	
 {% endblock %}

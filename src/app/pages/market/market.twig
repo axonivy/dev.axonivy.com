@@ -5,7 +5,7 @@
 {% block content %}
 
    <section id="main" class="inverse">
-		<div class="inner-small">
+		<div class="inner">
 			<header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
 
 			<p>
@@ -16,11 +16,11 @@
 		</div>
 	</section>
 
-	<section id="main">
+	<section id="two">
 		<div class="inner">
 			<div class="row">
 				{% for product in products %}
-					<div class="6u 12u$(xsmall)">
+					<div class="6u 12u$(small)">
 						<header><h3>{{ product.name }}</h3></header>					
 						<img src="{{ product.imgSrc }}" alt="{{ product.name }}" class="image fit"/>
 						

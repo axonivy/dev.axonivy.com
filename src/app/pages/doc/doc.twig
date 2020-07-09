@@ -61,11 +61,13 @@
     
     
     
-    <section id="docuHeader" style="padding-bottom: 10px; padding-top: 20px;" >
+    <section id="main" class="inverse">
 		<div class="inner">
 		
 			<header>
-				<h1>Documentation {{ version }}</h1>
+				<h1>
+					<span class="icon fas fa-book"></span> Documentation {{ version }}
+				</h1>
 			</header>
 			
 				<div>
@@ -108,7 +110,7 @@
 						{% endfor %}
 						
 						{% if portalLink is not empty %}
-							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="{{ portalLink }}">Portal Guide<i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
+							 <a  target="_blank" style="padding-left:5px;padding-right:5px;" href="{{ portalLink }}">Portal Guide <i style="font-size:14px;" class="fas fa-external-link-alt"></i></a>
 						{% endif %}
 						
 						{% for doc in docProvider.zips %}
@@ -179,25 +181,12 @@
 	</style>
 	
 	
-	<section id="main" style="padding-top: 0; padding-bottom: 0;">
+	<section style="padding-top: 0; padding-bottom: 0;">
 		<div class="inner">
-		  <div id="iframecontainer" class="iframe-container">
-		    <iframe src="{{ documentUrl }}" onload='javascript:resizeIframe(this);'></iframe>
+		  <div id="iframecontainer" class="iframe-container" style="height: calc(100vh - 315px);">
+		    <iframe title="Document frame" src="{{ documentUrl }}" onload='javascript:resizeIframe(this);'></iframe>
 		  </div>
 		</div>
 	</section>
 	
-	<script>
-	window.onresize = function(event) {
-		resizeHeighOfIframe();
-	};
-	function resizeHeighOfIframe() {
-		height = window.innerHeight - document.getElementById('header').clientHeight - document.getElementById('docuHeader').clientHeight;
-		document.getElementById("iframecontainer").style.height = height +"px"
-	}
-	resizeHeighOfIframe();
-	</script>
-	
-	
-    
 {% endblock %}

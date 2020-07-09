@@ -5,7 +5,7 @@
 {% block content %}
 
 <section id="main" class="inverse">
-	<div class="inner-small">
+	<div class="inner">
 		<header>
 			<h1>
 				<span class="icon fas fa-thumbs-up"></span> ivyTeam (Switzerland)
@@ -21,41 +21,36 @@
 	</div>
 </section>
 
-<section id="main">
+<section style="padding: 4em 0 2em 0;">
 	<div class="inner">
-		{% for employee in employees %}
-		{% if loop.index % 4 == 1 %}
 		<div class="row">
-			{% endif %}
-			<div class="3u 12u$(xsmall)" style="text-align: center;">
-				<header>
-					<h4>
-						{{ employee.name }}
-					</h4>
-				</header>
+		{% for employee in employees %}
+			<div class="4u 12u$(small)" style="text-align: center;">
 				{% if employee.imgSrc %}
 				<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
 				{% else %}
-				<div
-					style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
+				<div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
 				{% endif %}
-				<p>
+				<header>
+					<h4 style="margin: 17px 0 0 0;">
+						{{ employee.name }}
+					</h4>
+				</header>
+				<p style="min-height: 85px; color: grey;">
 					{{ employee.function }}
 					<br />
 					{{ employee.education }}
 				</p>
 			</div>
-			{% if loop.index % 4 == 0 %}
-		</div>
-		{% endif %}
 		{% endfor %}
+		</div>
 	</div>
 </section>
 
 <section id="one" class="inverse">
 	<div class="inner">
 		<div class="row">
-			<iframe width="100%" height="450"
+			<iframe title="ivyTeam location Baarerstrasse 12 6300 Zug" width="100%" height="450"
 				src="https://maps.google.com/maps?width=100%&amp;height=450&amp;hl=en&amp;coord=47.1717295,8.5166076&amp;q=Baarerstrasse%2012.%20CH-6300%20Zug+(AXON%20Ivy%20AG)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed">
 			</iframe>
 		</div>
