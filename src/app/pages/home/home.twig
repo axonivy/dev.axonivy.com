@@ -46,27 +46,44 @@
 	</section>
     
    	<span id="video"></span>
-	{% for feature in features %}
-		<section style="padding: 3em 0 2em 0;">
-			<div class="inner-small" style="text-align:center;max-width: 50em;">
-				<header><h2>{{ feature.title }}</h2></header>
-				<p>{{ feature.description }}</p>
-				
+
+	<section id="two">
+		<div class="inner">
+			{% for feature in features %}
 				{% if not feature.videoUrl is empty %}
-				<div class="embed-container">
-					<iframe title="{{ feature.title }}" src="{{ feature.videoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				</div>
+				<article>
+					<div class="content">
+						<span class="icon {{ feature.icon }}"></span>
+						<header><h3>{{ feature.title }}</h3></header>
+						<p>{{ feature.description }}</p>
+						<ul class="actions">
+							<li>
+								<a href="{{ feature.videoUrl }}" class="button special">
+									<i class="icon fab fa-youtube"></i> Watch on vimeo
+								</a>
+							</li>
+						</ul>
+					</div>
+				</article>
 				{% endif %}
-				
-				{% if not feature.imageUrl is empty %}
-					<span class="image fit">
-						<center><img src="{{ feature.imageUrl }}" style="max-width:{{ feature.imageMaxWidth }};" alt="{{ feature.title }}" /></center>
-					</span>
+			{% endfor %}
+		</div>
+	</section>
+
+	<section id="three">
+		<div class="inner">
+			{% for feature in features %}
+				{% if feature.videoUrl is empty %}
+				<article>
+					<div class="content">
+						<span class="icon {{ feature.icon }}"></span>
+						<header><h3>{{ feature.title }}</h3></header>
+						<p>{{ feature.description }}</p>
+					</div>
+				</article>
 				{% endif %}
-			</div>
-		</section>
-	{% endfor %}
-	
-	<span class="image fit" style="margin-bottom:0px;"><img src="/images/misc/visionar-gartner.jpg" alt="Visionar Gartner" /></span>
+			{% endfor %}
+		</div>
+	</section>
 	
 {% endblock %}
