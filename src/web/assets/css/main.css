@@ -3629,7 +3629,8 @@
 		
     #two .inner article .icon {
     	color: #b3b3b3;
-   		 font-size: 3em;
+		font-size: 3em;
+		line-height: unset;
 	}
 
 	#two {
@@ -3739,6 +3740,7 @@
 				#three .inner article .icon {
 					color: #b3b3b3;
 					font-size: 3em;
+					line-height: unset;
 				}
 
 			@media screen and (max-width: 980px) {
@@ -4030,5 +4032,24 @@
 			border-color: white;
 			color: #007095;
 		  }
+
+		  
+.inner .button:not(.download-link),		
+#one .inner .button,
+#two .inner .button:not(.download-link),
+#three .inner .button {
+	min-width: 200px;
+	padding: 0 15px;
+}
+.inner .button .icon,
+#one .inner .button .icon,
+#two .inner .button .icon,
+#three .inner .button .icon {
+	color: white;
+	font-size: 1em;
+	float: left;
+	padding: 0 10px;
+	line-height: unset;
+}
 
 		  

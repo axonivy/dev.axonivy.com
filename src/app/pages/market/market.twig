@@ -25,7 +25,11 @@
 						<img src="{{ product.imgSrc }}" alt="{{ product.name }}" class="image fit"/>
 						
 						<ul class="actions">
-							<li><a href="{{ product.url }}" class="button special">More</a></li>
+							<li>
+								<a href="{{ product.url }}" class="button special">
+									<i class="icon fas fa-angle-right"></i> More
+								</a>
+							</li>
 						</ul>
 					</div>
 				{% endfor %}
