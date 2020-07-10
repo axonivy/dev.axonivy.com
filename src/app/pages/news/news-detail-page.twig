@@ -17,6 +17,18 @@ h2 {
 
 .image.fit {
 	margin-bottom: 15px;
+	width: 75%;
+	max-height: 480px;
+	overflow: hidden;
+	object-fit: cover;
+	object-position: top;
+	float: left;
+}
+
+.image.fit.gallery {
+	max-width: 25%;
+	max-height: 150px;
+	padding-left: 15px;
 }
 
 ul {
@@ -29,12 +41,6 @@ p {
 
 .short-links {
 	margin-top: 15px;
-}
-
-.galery {
-	max-width: 200px;
-	padding-right: 5px;
-	float: left;
 }
 
 .collapsible {
@@ -68,11 +74,11 @@ p {
 
 </style>
 
-<link href="/assets/css/lightbox.min.css" rel="stylesheet" />
-<script src="/assets/js/lightbox.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/css/lightbox.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/js/lightbox.min.js"></script>
 
 <section id="main" class="inverse">
-	<div class="inner-small">
+	<div class="inner">
 		<img src="{{ news.meta.logo }}" style="width:100px;float:left;margin:1em;" />
 		<div>
 			<header>
@@ -92,16 +98,16 @@ p {
         {% set background = '#f7f7f7' %}
     {% endif %}
 	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
-		<div class="inner-small">
+		<div class="inner">
 			{{ newsDetailSection.html|raw }}
 			
 			{% for image in newsDetailSection.images %}
-				{% set galeryClass = '' %}
+				{% set galleryClass = '' %}
 				{% if not loop.first %}
-			        {% set galeryClass = 'galery' %}
+			        {% set galleryClass = 'gallery' %}
 			    {% endif %}
 				<a href="{{ image }}" data-lightbox="cockpit">
-  					<img class="image fit {{ galeryClass }}" src="{{ image }}" />
+  					<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
 				</a>
 			{% endfor %}
 
