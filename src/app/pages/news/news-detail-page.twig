@@ -71,23 +71,27 @@ p {
 <link href="/assets/css/lightbox.min.css" rel="stylesheet" />
 <script src="/assets/js/lightbox.min.js"></script>
 
-<section id="one" style="background-color:#007095">
-	<div class="inner-small" style="color: white;">
-		<img src="{{ news.meta.logo }}" style="width:100px;position:relative;right:120px;top:120px;" />
-		<h1 style="color:white;">{{ news.meta.title }}</h1>
-		<p style="margin-bottom:0px;font-size:28px;font-weight:bold;color:#007095;color:white;">
-			{{ news.meta.slogan }}<br />
-		</p>
-		<p>{{ news.meta.date }}</p>
+<section id="main" class="inverse">
+	<div class="inner-small">
+		<img src="{{ news.meta.logo }}" style="width:100px;float:left;margin:1em;" />
+		<div>
+			<header>
+				<h1>{{ news.meta.title }}</h1>
+			</header>
+			<p style="margin-bottom:0px;font-size:28px;font-weight:bold;">
+				{{ news.meta.slogan }}
+			</p>
+			<p>{{ news.meta.date }}</p>
+		</div>
 	</div>
 </section>
 
 {% for newsDetailSection in news.newsDetailSections %}
-	{% set inverseClass = '' %}
+	{% set background = 'white' %}
 	{% if loop.index is divisible by(2) %}
-        {% set inverseClass = 'inverse' %}
+        {% set background = '#f7f7f7' %}
     {% endif %}
-	<section id="one" class="{{ inverseClass }}">
+	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
 		<div class="inner-small">
 			{{ newsDetailSection.html|raw }}
 			
