@@ -1624,6 +1624,9 @@
 			body, input, select, textarea {
 				font-size: 12pt;
 			}
+			#main select {
+				max-height: 2.2em;
+			}
 
 		}
 
@@ -3205,6 +3208,12 @@
 		display: inline-block;
 	}
 
+		@media screen and (max-width: 1280px) {
+			#header #nav a {
+				padding: 0 0.5em;
+			}
+		}
+
 		@media screen and (max-width: 980px) {
 
 			#nav {
@@ -3599,7 +3608,7 @@
 	}
 
 	#one {
-		padding: 6em 0 4em 0;
+		padding: 4em 0 2em 0;
 	}
 
 		@media screen and (max-width: 980px) {
@@ -3620,11 +3629,12 @@
 		
     #two .inner article .icon {
     	color: #b3b3b3;
-   		 font-size: 3em;
+		font-size: 3em;
+		line-height: unset;
 	}
 
 	#two {
-		padding: 6em 0 4em 0;
+		padding: 4em 0 2em 0;
 		background: #f3f3f3;
 		background: -moz-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
 		background: -webkit-linear-gradient(left, #f3f3f3 0%, #f3f3f3 50%, #f7f7f7 0%, #f7f7f7 100%);
@@ -3698,7 +3708,7 @@
 		}
 
 	#three {
-		padding: 6em 0 4em 0;
+		padding: 4em 0 2em 0;
 	}
 
 		#three .inner {
@@ -3730,6 +3740,7 @@
 				#three .inner article .icon {
 					color: #b3b3b3;
 					font-size: 3em;
+					line-height: unset;
 				}
 
 			@media screen and (max-width: 980px) {
@@ -4021,5 +4032,24 @@
 			border-color: white;
 			color: #007095;
 		  }
+
+		  
+.inner .button:not(.download-link),		
+#one .inner .button,
+#two .inner .button:not(.download-link),
+#three .inner .button {
+	min-width: 200px;
+	padding: 0 15px;
+}
+.inner .button .icon,
+#one .inner .button .icon,
+#two .inner .button .icon,
+#three .inner .button .icon {
+	color: white;
+	font-size: 1em;
+	float: left;
+	padding: 0 10px;
+	line-height: unset;
+}
 
 		  

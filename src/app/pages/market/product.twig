@@ -19,7 +19,7 @@
 			</header>
 			
 			<div class="row">
-				<div class="6u 12u$(xsmall)">
+				<div class="6u 12u$(small)">
 					{{ product.description|raw }}
 					
 					
@@ -30,8 +30,8 @@
 					    {% endfor %}
 					 
 				</div>
-				<div class="6u 12u$(xsmall)" >
-					<img src="{{ product.imgSrc }}" class="image fit" style="max-width: 680px;" />
+				<div class="6u 12u$(small)" >
+					<img src="{{ product.imgSrc }}" class="image fit" style="max-width: 680px;" alt="{{ product.name }}" />
 				</div>
 				
 	    	</div>
@@ -68,7 +68,7 @@
 										You can use the import wizard in Axon.ivy Designer
 										<br ><i style="font-size:12px;">File > Import > Axon.ivy > Ivy Projects</i>					
 									</p>
-									<img src="/images/market/import-wizard.png" class="image fit" />
+									<img src="/images/market/import-wizard.png" class="image fit" alt="Import Wizard" />
 								</div>
 							{% endif %}
 

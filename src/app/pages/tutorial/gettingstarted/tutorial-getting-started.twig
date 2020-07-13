@@ -8,8 +8,9 @@
 	.timeline {
 	  margin: 50px 0;
 	  padding: 0;
-	  border-top: 2px solid #428bca;
+	  border-top: 2px solid #fff;
 	  list-style: none;
+	  --background: #007095
 	}
 
 	.timeline li {
@@ -22,7 +23,7 @@
 		content: "";
 		width: 50%;
 		height: 100%;
-		background: #fff;
+		background: #007095;
 		position: absolute;
 		top: -2px;
 		left: 0;
@@ -38,6 +39,7 @@
 	  text-align: center;
 	  position: absolute;
 	  top: 0;
+	  right: 0;
 	}
 	.timeline .radio {
 	  display: none;
@@ -46,26 +48,26 @@
 	  width: 50px;
 	  height: 50px;
 	  margin-left: -25px;
-	  background: #fff;
-	  border: 4px solid #428bca;
+	  background: #007095;
+	  border: 4px solid #fff;
 	  border-radius: 50%;
-	  box-shadow: 0 0 0 10px #fff;
+	  box-shadow: 0 0 0 10px #007095;
 	  text-align: center;
 	  line-height: 50px -10;
-	  color: #428bca;
-	  font-size: 26px;
+	  color: #fff;
+	  font-size: 24px;
 	  font-style: normal;
 	  position: absolute;
 	  top: -26px;
 	  left: 50%;
 	}
 	.current .marker {
-	  color: #333;
+	  color: #fff;
 	  border: 5px solid #C7D426;
 	}
 </style>
 
-<section id="main">
+<section id="main" class="inverse" style="padding-bottom: 3em;">
 	<div class="inner">
 		<header>
 			<h1>
@@ -85,10 +87,10 @@
 	</div>
 </section>
 
-<section id="main">
+<section id="one">
 	<div class="inner">
 		<div class="row">
-			<div class="4u 12u$(xsmall)">
+			<div class="4u 12u$(small)">
 				<ol>
 					{% for instruction in step.instructions %}
 					<li>{{ instruction|raw }}</li>
@@ -100,8 +102,8 @@
 				</ul>
 				{% endif  %}
 			</div>
-			<div class="8u 12u$(xsmall)">
-				<iframe height="540" width="720" src="{{ step.videoUrl }}"></iframe>
+			<div class="8u 12u$(small)">
+				<iframe title="{{ step.name }}" style="width: 100%; height: 40vh;" src="{{ step.videoUrl }}"></iframe>
 			</div>
 		</div>
 	</div>

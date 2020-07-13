@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<section id="one" class="inverse">
-	<div class="inner-small">
+<section id="main" class="inverse">
+	<div class="inner">
 		<header>
 			<h1>
 				<span class="icon fas fa-book"></span> Documentation
@@ -29,8 +29,11 @@
 					<header><h3>Long Term Support (LTS)</h3></header>
 					<ul class="actions">
 					{% for docLink in docLinksLTS %}
-					<li>	<a href="{{ docLink.url }}" style="width: 120px;padding-left:15px;padding-right:15px;"class="button special">
-						<span style="color:white;font-size:18px;" class="icon fas fa-book"></span> {{ docLink.displayText }}</a></li>
+					<li>
+						<a href="{{ docLink.url }}" class="button special">
+							<span class="icon fas fa-book"></span> {{ docLink.displayText }}
+						</a>
+					</li>
 					{% endfor %}					
 				</ul>
 				</div>
@@ -44,8 +47,11 @@
 					</header>
 					<ul class="actions">
 						{% for docLink in docLinksLE %}
-							<li><a href="{{ docLink.url }}" style="width: 120px;padding-left:15px;padding-right:15px;" class="button special">
-								<span style="color:white;font-size:18px;" class="icon fas fa-book"></span> {{ docLink.displayText }}</a></li>
+							<li>
+								<a href="{{ docLink.url }}" class="button special">
+									<span class="icon fas fa-book"></span> {{ docLink.displayText }}
+								</a>
+							</li>
 						{% endfor %}
 					</ul>
 				</div>
@@ -59,9 +65,11 @@
 					</header>
 					<ul class="actions">
 						{% for docLink in docLinksDEV %}
-							<li><a href="{{ docLink.url }}" style="width: 120px;padding-left:15px;padding-right:15px;" class="button special">
-								<span style="color:white;font-size:18px;" class="icon fas fa-book"></span>
-								{{ docLink.displayText }}</a></li>
+							<li>
+								<a href="{{ docLink.url }}" class="button">
+									<span class="icon fas fa-book"></span> {{ docLink.displayText }}
+								</a>
+							</li>
 						{% endfor %}
 					</ul>
 				</div>

@@ -17,6 +17,18 @@ h2 {
 
 .image.fit {
 	margin-bottom: 15px;
+	width: 75%;
+	max-height: 480px;
+	overflow: hidden;
+	object-fit: cover;
+	object-position: top;
+	float: left;
+}
+
+.image.fit.gallery {
+	max-width: 25%;
+	max-height: 150px;
+	padding-left: 15px;
 }
 
 ul {
@@ -29,12 +41,6 @@ p {
 
 .short-links {
 	margin-top: 15px;
-}
-
-.galery {
-	max-width: 200px;
-	padding-right: 5px;
-	float: left;
 }
 
 .collapsible {
@@ -68,38 +74,47 @@ p {
 
 </style>
 
-<link href="/assets/css/lightbox.min.css" rel="stylesheet" />
-<script src="/assets/js/lightbox.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/css/lightbox.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/js/lightbox.min.js"></script>
 
-<section id="one" style="background-color:#007095">
-	<div class="inner-small" style="color: white;">
-		<img src="{{ news.meta.logo }}" style="width:100px;position:relative;right:120px;top:120px;" />
-		<h1 style="color:white;">{{ news.meta.title }}</h1>
-		<p style="margin-bottom:0px;font-size:28px;font-weight:bold;color:#007095;color:white;">
-			{{ news.meta.slogan }}<br />
-		</p>
-		<p>{{ news.meta.date }}</p>
+<section id="main" class="inverse">
+	<div class="inner">
+		<img src="{{ news.meta.logo }}" style="width:100px;float:left;margin:1em;" />
+		<div>
+			<header>
+				<h1>{{ news.meta.title }}</h1>
+			</header>
+			<p style="margin-bottom:0px;font-size:28px;font-weight:bold;">
+				{{ news.meta.slogan }}
+			</p>
+			<p>{{ news.meta.date }}</p>
+		</div>
 	</div>
 </section>
 
 {% for newsDetailSection in news.newsDetailSections %}
-	{% set inverseClass = '' %}
+	{% set background = 'white' %}
 	{% if loop.index is divisible by(2) %}
-        {% set inverseClass = 'inverse' %}
+        {% set background = '#f7f7f7' %}
     {% endif %}
-	<section id="one" class="{{ inverseClass }}">
-		<div class="inner-small">
-			{{ newsDetailSection.html|raw }}
-			
-			{% for image in newsDetailSection.images %}
-				{% set galeryClass = '' %}
-				{% if not loop.first %}
-			        {% set galeryClass = 'galery' %}
-			    {% endif %}
-				<a href="{{ image }}" data-lightbox="cockpit">
-  					<img class="image fit {{ galeryClass }}" src="{{ image }}" />
-				</a>
-			{% endfor %}
+	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
+		<div class="inner">
+			<div class="row">
+				<div class="6u 12u$(medium)">
+					{{ newsDetailSection.html|raw }}
+					</div>
+					<div class="6u 12u$(medium)">
+					{% for image in newsDetailSection.images %}
+						{% set galleryClass = '' %}
+						{% if not loop.first %}
+							{% set galleryClass = 'gallery' %}
+						{% endif %}
+						<a href="{{ image }}" data-lightbox="cockpit">
+							<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
+						</a>
+					{% endfor %}
+				</div>
+			</div>
 
 			<div style="clear:both;"></div>
 		</div>

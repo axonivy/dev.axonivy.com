@@ -11,6 +11,7 @@
 		color:white;
 		padding-right: 10px;
 		padding-left: 10px;
+		border-radius: 5px;
 	}
 
 	.fixes {
@@ -31,8 +32,8 @@
 	}
 </style>
 
-<section id="one" class="inverse">
-	<div class="inner-small">
+<section id="main" class="inverse">
+	<div class="inner">
 		<header>
 			<h1><span class="icon fas fa-newspaper"></span> What's new</h1>
 		</header>
@@ -44,11 +45,11 @@
 </section>
 
 {% for new in news %}
-	{% set inverseClass = '' %}
+	{% set background = 'white' %}
 	{% if loop.index is divisible by(2) %}
-        {% set inverseClass = 'inverse' %}
+        {% set background = '#f7f7f7' %}
     {% endif %}
-	<section id="one" class="{{ inverseClass }}">
+	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
 		<div class="inner">
 			{% set ltsMarker = 'display:none;' %}
 			{% if new.meta.lts %}
@@ -60,7 +61,9 @@
 			
 			{{ new.abstract |raw }}
 			
-			<a href="{{ new.link }}" class="button special">Read more</a>
+			<a href="{{ new.link }}" class="button special">
+				<i class="icon fas fa-newspaper"></i> Read more
+			</a>
 		</div>
 	</section>
 {% endfor %}
