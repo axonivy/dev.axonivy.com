@@ -99,17 +99,22 @@ p {
     {% endif %}
 	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
 		<div class="inner">
-			{{ newsDetailSection.html|raw }}
-			
-			{% for image in newsDetailSection.images %}
-				{% set galleryClass = '' %}
-				{% if not loop.first %}
-			        {% set galleryClass = 'gallery' %}
-			    {% endif %}
-				<a href="{{ image }}" data-lightbox="cockpit">
-  					<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
-				</a>
-			{% endfor %}
+			<div class="row">
+				<div class="6u 12u$(medium)">
+					{{ newsDetailSection.html|raw }}
+					</div>
+					<div class="6u 12u$(medium)">
+					{% for image in newsDetailSection.images %}
+						{% set galleryClass = '' %}
+						{% if not loop.first %}
+							{% set galleryClass = 'gallery' %}
+						{% endif %}
+						<a href="{{ image }}" data-lightbox="cockpit">
+							<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
+						</a>
+					{% endfor %}
+				</div>
+			</div>
 
 			<div style="clear:both;"></div>
 		</div>
