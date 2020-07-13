@@ -17,7 +17,6 @@ h2 {
 
 .image.fit {
 	margin-bottom: 15px;
-	width: 75%;
 	max-height: 480px;
 	overflow: hidden;
 	object-fit: cover;
@@ -26,9 +25,9 @@ h2 {
 }
 
 .image.fit.gallery {
-	max-width: 25%;
+	max-width: 33%;
 	max-height: 150px;
-	padding-left: 15px;
+	padding-right: 15px;
 }
 
 ul {
@@ -37,10 +36,6 @@ ul {
 
 p {
 	margin-bottom: 15px;
-}
-
-.short-links {
-	margin-top: 15px;
 }
 
 .collapsible {
@@ -57,14 +52,16 @@ p {
 }
 
 .short-links {
-	margin-bottom:15px;
+	margin-bottom: 15px 0;
 }
 .short-links > a {
 	background-color: #007095;
 	color: white;
-	padding: 7px;
-	margin-right: 4px;
+	padding: 4px 7px;
+	margin: 4px 4px 0 0;
 	border-radius: 6px;
+	white-space: nowrap;
+	display: inline-block;
 }
 
 .inverse .short-links > a {
@@ -102,8 +99,8 @@ p {
 			<div class="row">
 				<div class="6u 12u$(medium)">
 					{{ newsDetailSection.html|raw }}
-					</div>
-					<div class="6u 12u$(medium)">
+				</div>
+				<div class="6u 12u$(medium) images">
 					{% for image in newsDetailSection.images %}
 						{% set galleryClass = '' %}
 						{% if not loop.first %}
