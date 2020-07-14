@@ -13,13 +13,13 @@ The roll-out of a new application version should never take more effort than one
 * __Via HTTP__: Deployment to remote engines has never been easier! Just upload your new application with one HTTP file transfer and you're done, perfect for your CI/CD environment!
 
 <div class="short-links">
-	<a href="${docBaseUrl}/engine-guide/administration/deployment.html" target="_blank">
+	<a href="${docBaseUrl}/engine-guide/administration/deployment.html" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-book"></i> Engine Guide
 	</a>
-	<a href="https://axonivy.github.io/project-build-plugin" target="_blank">
+	<a href="https://axonivy.github.io/project-build-plugin" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-book"></i> Maven Plugin
 	</a>
-	<a href="https://github.com/axonivy/project-build-examples" target="_blank">
+	<a href="https://github.com/axonivy/project-build-examples" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-flask"></i> GitHub Examples
 	</a>
 </div>

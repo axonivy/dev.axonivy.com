@@ -19,10 +19,11 @@ You don't need them anymore. But we are fully backward compatible. All legacy AP
 All inscribed inscriptions in your project will automatically be converted.
 
 <div class="short-links">
-	<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html" target="_blank">
+	<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html" target="_blank" rel="noopener noreferrer">
 	  <i class="fab fa-java"></i> Public API Custom Field
 	</a>
-	<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--" target="_blank">
+	<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--" 
+		target="_blank" rel="noopener noreferrer">
 	  <i class="fab fa-java"></i> Public API Query
 	</a>
 </div>

@@ -8,10 +8,10 @@ We updated the platform of the Designer in order to bring even more fun and prod
  * __MARKETPLACE__: The now included Eclipse Marketplace allows you to access the universe of Eclipse tools. This will make you even more efficient.
 
 <div class="short-links">
-	<a href="https://www.eclipse.org/downloads/" target="_blank">
+	<a href="https://www.eclipse.org/downloads/" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-dice-d20"></i> Eclipse 2019-09
 	</a>
-	<a href="https://marketplace.eclipse.org/" target="_blank">
+	<a href="https://marketplace.eclipse.org/" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-shopping-cart"></i> Marketplace
 	</a>
 </div>

@@ -20,7 +20,7 @@ It's completely based on web technologies and simply open in your favorite brows
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/tool-reference/engine-cockpit/index.html"
-		target="_blank">
+		target="_blank" rel="noopener noreferrer">
 		<i class="fas fa-book"></i> Engine Guide
 	</a>
 </div>

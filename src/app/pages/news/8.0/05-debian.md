@@ -9,10 +9,10 @@ The Axon.ivy Engine is now available as a Debian package. Now Engine operators c
  * __FRIENDLY__: Organize files compliant with the Linux file structure and re-use the JVM provided by the system.
 
 <div class="short-links">
-	<a href="${docBaseUrl}/engine-guide/getting-started/debian.html" target="_blank">
+	<a href="${docBaseUrl}/engine-guide/getting-started/debian.html" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-plane-departure"></i> Debian : Getting Started
 	</a>
-	<a href="/permalink/8.0/axonivy-engine.deb" target="_blank">
+	<a href="/permalink/8.0/axonivy-engine.deb" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-download"></i> Download Debian package
 	</a>
 </div>

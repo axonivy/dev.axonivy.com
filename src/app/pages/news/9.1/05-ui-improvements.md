@@ -9,7 +9,7 @@ our internal pages.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/designer-guide/user-interface/user-dialogs.html#color-customizing"
-		target="_blank">
+		target="_blank" rel="noopener noreferrer">
 		<i class="fas fa-pen"></i> Color Customizing
 	</a>
 </div>
