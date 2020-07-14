@@ -10,7 +10,7 @@ reengineer this initial setup as a new **Setup Wizard**.
 * **Better guidance**: We are now giving you better feedback to smoothly configure your engine.
 
 <div class="short-links">
-  <a href="${docBaseUrl}/engine-guide/tool-reference/setup-wizard.html" target="_blank">
+  <a href="${docBaseUrl}/engine-guide/tool-reference/setup-wizard.html" target="_blank" rel="noopener noreferrer">
     <i class="fas fa-book"></i> Engine Guide
   </a>
 </div>

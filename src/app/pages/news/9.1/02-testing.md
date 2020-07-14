@@ -8,7 +8,7 @@ Though testing of your components has always been possible, the new Axon.ivy pla
 - __@IvyWebTest__: orchestrates a real browser in order to simulate users working on your Html Dialogs.
 
 <div class="short-links">
-	<a href="${docBaseUrl}/concepts/testing/index.html" target="_blank">
+	<a href="${docBaseUrl}/concepts/testing/index.html" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-check-circle"></i> Concepts: Testing
 	</a>
 </div>
