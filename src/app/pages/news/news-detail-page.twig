@@ -90,6 +90,7 @@ p {
 </section>
 
 {% for newsDetailSection in news.newsDetailSections %}
+	{% set sectionIndex = loop.index %}
 	{% set background = 'white' %}
 	{% if loop.index is divisible by(2) %}
         {% set background = '#f7f7f7' %}
@@ -106,7 +107,7 @@ p {
 						{% if not loop.first %}
 							{% set galleryClass = 'gallery' %}
 						{% endif %}
-						<a href="{{ image }}" data-lightbox="cockpit">
+						<a href="{{ image }}" data-lightbox="screenshot-{{ sectionIndex }}">
 							<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
 						</a>
 					{% endfor %}
