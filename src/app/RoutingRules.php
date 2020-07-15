@@ -65,7 +65,7 @@ class RoutingRules
         $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);
         
-        $app->get('/portal[/{version}[/{topic}]]', PortalPermalinkAction::class);
+        $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
         
         $app->get('/installation', InstallationAction::class);
         

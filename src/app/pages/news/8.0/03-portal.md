@@ -7,7 +7,7 @@ We re-styled the Portal  application completely and implemented a lot of new fea
  * __Express data providers__: Add your custom data source to provide data for Axon.ivy Express form widgets
 
 <div class="short-links">
-	<a href=/portal/8.0/doc/portal-developer-guide/introduction/index.html#new-and-noteworthy" target="_blank" rel="noopener noreferrer">
+	<a href="/portal/8.0/doc/portal-developer-guide/introduction/index.html#new-and-noteworthy" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-book"></i> Portal New & Noteworthy
 	</a>
 </div>
