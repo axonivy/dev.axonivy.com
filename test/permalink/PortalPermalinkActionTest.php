@@ -46,6 +46,24 @@ class PortalPermalinkActionTest extends TestCase
         AppTester::assertThatGet('/portal/8.0/doc')->redirect('/documentation/portal-guide/' . Market::getProductByKey('portal')->getLatestVersionToDisplay());
     }
 
+    public function testPortalDocWithDocument()
+    {
+        AppTester::assertThatGet('/portal/8.0.3/doc/test.html')->redirect('/documentation/portal-guide/8.0.3/test.html');
+        AppTester::assertThatGet('/portal/8.0/doc/test.html')->redirect('/documentation/portal-guide/' . Market::getProductByKey('portal')->getLatestVersionToDisplay() . '/test.html');
+    }
+
+    public function testPortalDocWithDocumentInSubfolder()
+    {
+        AppTester::assertThatGet('/portal/8.0.3/doc/subfolder/test.html')->redirect('/documentation/portal-guide/8.0.3/subfolder/test.html');
+        AppTester::assertThatGet('/portal/8.0/doc/subfolder/test.html')->redirect('/documentation/portal-guide/' . Market::getProductByKey('portal')->getLatestVersionToDisplay() . '/subfolder/test.html');
+    }
+
+    public function testPortalBrokenLink()
+    {
+        AppTester::assertThatGet('/portal/8.0/doc/portal-developer-guide/introduction/index.html#new-and-noteworthy')
+            ->redirect('/documentation/portal-guide/' . Market::getProductByKey('portal')->getLatestVersionToDisplay() . '/portal-developer-guide/introduction/index.html');
+    }
+
     private function getLatestVersion($version)
     {
         $portalVersions = Market::getProductByKey('portal')->getVersionsToDisplay();

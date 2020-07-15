@@ -27,7 +27,11 @@ class PortalPermalinkAction
         }
 
         if ($topic == 'doc') {
-            return Redirect::to($response, '/documentation/portal-guide/' . $version);
+            $path = $args['path'] ?? '';
+            if (!empty($path)) {
+                $path = '/' . $path;
+            }
+            return Redirect::to($response, '/documentation/portal-guide/' . $version . $path);
         }
         throw new HttpNotFoundException($request);
     }
