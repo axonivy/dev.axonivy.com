@@ -11,9 +11,8 @@
 
 ## Generate the issue list for the new and noteworthy (improvements/bugs)
 
-* Configure credentials for server `axonivy.jira` in your `settings.xml`
-* `mvn -f tools/issue-list-generator package -Dversion=9.1`
-* Copy&Paste the issues from the console to the files in the news folder
+* Run https://jenkins.ivyteam.io/job/ivy-website-developer_issue-list-generator with the ivy version to release
+* Copy and paste the issues from the console log to the files in the news folder
 
 # IDE Setup
 
