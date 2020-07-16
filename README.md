@@ -9,6 +9,11 @@
 
 	docker-compose exec web ./vendor/bin/phpunit
 
+## Generate the issue list for the new and noteworthy (improvements/bugs)
+
+* `mvn -f tools/issue-list-generator package -Dversion=9.1`
+* Copy&Paste the issues from the console to the files in the news folder
+
 # IDE Setup
 
  * Use Eclipse PHP
