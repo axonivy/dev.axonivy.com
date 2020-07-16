@@ -1,0 +1,29 @@
+pipeline {
+  agent {
+    docker {
+      image 'maven:3.6.3-jdk-11'
+    }
+  }
+
+  parameters {
+    string defaultValue: '9.1', description: 'version to query jira', name: 'version', trim: true
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '3'))
+  }
+
+  triggers {
+    cron '@midnight'
+  }
+
+  stages {
+    stage('build') {
+      steps {
+        script {
+          maven cmd: "-f tools/issue-list-generator/pom.xml package -Dversion=${params.version}"
+        }
+      }
+    }
+  }
+}

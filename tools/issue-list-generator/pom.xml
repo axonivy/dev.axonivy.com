@@ -6,6 +6,16 @@
   <artifactId>changelist-generator</artifactId>
   <packaging>pom</packaging>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>nexus.ivyteam.io</id>
+      <url>https://nexus.ivyteam.io/repository/maven/</url>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
   <build>
     <plugins>
       <plugin>
