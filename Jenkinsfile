@@ -17,10 +17,10 @@ pipeline {
   stages {
     stage('build') {
       agent {
-	    dockerfile {
-	      dir 'docker/apache'    
+	      dockerfile {
+	        dir 'docker/apache'    
+	      }
 	    }
-	  }
       steps {
         echo 'create distribution package'
       	sh 'composer install --no-dev --no-progress'
@@ -59,7 +59,6 @@ pipeline {
 	        image 'axonivy/build-container:ssh-client-1.0'
 	      }
       }
-
       steps {
         sshagent(['zugprojenkins-ssh']) {
           script {
