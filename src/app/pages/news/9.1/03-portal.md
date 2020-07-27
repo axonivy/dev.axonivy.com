@@ -4,8 +4,8 @@ Besides many improvements to the user experience and the user interface, there a
 features in the portal!
 
 - __Overlay guide__: Welcome guide for new users
-- __My profile__: New clear settings view for email and language
-- __New absence management__: A refreshed look to manage absences, improved
+- __My profile__: New simplified settings view for email and language
+- __New absence management__: A fresh new look to manage absences, with improved
   deputy features and more transparency
 
 <div class="short-links">
