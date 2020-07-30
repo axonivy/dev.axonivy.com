@@ -14,6 +14,7 @@
 * [XIVY-3495](https://jira.axonivy.com/jira/browse/XIVY-3495) Ivy Components not updated after project dependency change 
 * [XIVY-3506](https://jira.axonivy.com/jira/browse/XIVY-3506) CaseQuery order descriptions not working with OracleDb, HsqlDb and MSSql 
 * [XIVY-3519](https://jira.axonivy.com/jira/browse/XIVY-3519) Could not find any registered converter-class in Axon.ivy Designer 
+* [XIVY-3523](https://jira.axonivy.com/jira/browse/XIVY-3523) Licence file loading problems not reported in Log 
 * [XIVY-3526](https://jira.axonivy.com/jira/browse/XIVY-3526) Fix Runtimelog for MAC Designer 
 * [XIVY-3533](https://jira.axonivy.com/jira/browse/XIVY-3533) IvyComponents not sorted alphabetically in HtmlDialog Toolbar 
 * [XIVY-3541](https://jira.axonivy.com/jira/browse/XIVY-3541) Synchronize User does not respect deleted users for license check when creating new users 
@@ -72,13 +73,14 @@
 * [XIVY-4249](https://jira.axonivy.com/jira/browse/XIVY-4249) NullPointerException when opening External Case Map Editor 
 * [XIVY-4283](https://jira.axonivy.com/jira/browse/XIVY-4283) Show growls for engine cockpit action errors instead of error page 
 * [XIVY-4295](https://jira.axonivy.com/jira/browse/XIVY-4295) Support annotation associations for BPMN Export 
-* [XIVY-4303](https://jira.axonivy.com/jira/browse/XIVY-4303) Special characters wrongfully URL encrypted in engincockpit redirects 
+* [XIVY-4303](https://jira.axonivy.com/jira/browse/XIVY-4303) Special characters wrongfully URL encrypted in Engine Cockpit redirects 
 * [XIVY-4378](https://jira.axonivy.com/jira/browse/XIVY-4378) Bad performance when create a rule session of a rule base the first time 
 * [XIVY-4387](https://jira.axonivy.com/jira/browse/XIVY-4387) BasicWFUI CaseDetail Page does not implement "Show System Tasks" option 
 * [XIVY-4390](https://jira.axonivy.com/jira/browse/XIVY-4390) SystemDatabase overview in Engine-Cockpit checks connection initial with empty password 
-* [XIVY-4426](https://jira.axonivy.com/jira/browse/XIVY-4426) Reduce swallow letters in some search inputs  
+* [XIVY-4426](https://jira.axonivy.com/jira/browse/XIVY-4426) Reduce swallow letters in some search inputs in Engine Cockpit 
 * [XIVY-4441](https://jira.axonivy.com/jira/browse/XIVY-4441) HTML Dialogs should be good looking on mobile too 
 * [XIVY-4478](https://jira.axonivy.com/jira/browse/XIVY-4478) OutOfMemory Exception when calling IWorkflowContext.getRunningCasesCount(IProcessModelVersion) 
+* [XIVY-4504](https://jira.axonivy.com/jira/browse/XIVY-4504) Infopage shows error "Parameter cms must not be null" if file resouces of app with casemaps is not available 
 * [IVYPORTAL-7778](https://jira.axonivy.com/jira/browse/IVYPORTAL-7778) Error when clean up obsolete data 
 * [IVYPORTAL-9453](https://jira.axonivy.com/jira/browse/IVYPORTAL-9453) Inconsistent Behaviour Case Details and related tasks and cases 
 * [IVYPORTAL-9730](https://jira.axonivy.com/jira/browse/IVYPORTAL-9730) Saved filter is not reseted after changing filters 
@@ -87,4 +89,4 @@
 * [IVYPORTAL-10128](https://jira.axonivy.com/jira/browse/IVYPORTAL-10128) Permission UserCreateSubstitute not respected in add absence dialog 
 * [IVYPORTAL-10214](https://jira.axonivy.com/jira/browse/IVYPORTAL-10214) Navigation technical case back to business case 
 * [IVYPORTAL-10351](https://jira.axonivy.com/jira/browse/IVYPORTAL-10351) Portal chat doesn't work with load balance 
-* [IVYPORTAL-10563](https://jira.axonivy.com/jira/browse/IVYPORTAL-10563) Portal totally blocked due to parallel request from Chat and XHR II 
+* [IVYPORTAL-10563](https://jira.axonivy.com/jira/browse/IVYPORTAL-10563) Portal totally blocked due to parallel request from Chat and XHR II
