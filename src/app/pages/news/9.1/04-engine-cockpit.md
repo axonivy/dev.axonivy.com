@@ -1,4 +1,4 @@
-## Engine Cockpit 2.0
+## Engine Cockpit 2.0 {#engine-cockpit}
 
 We have worked hard to make the Engine Cockpit even better! And because we want
 everyone to benefit from these new features, we have ported some of them (like the

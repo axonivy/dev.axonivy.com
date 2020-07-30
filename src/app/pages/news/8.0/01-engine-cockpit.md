@@ -1,4 +1,4 @@
-## Engine Cockpit
+## Engine Cockpit {#engine-cockpit}
 
 Our new Engine Cockpit has now become a mighty successor of the AdminUI with a rich feature set.
 It's completely based on web technologies and simply open in your favorite browser or even on mobile devices.

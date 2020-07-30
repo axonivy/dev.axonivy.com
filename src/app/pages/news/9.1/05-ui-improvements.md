@@ -1,4 +1,4 @@
-## General UI/UX improvements
+## General UI/UX improvements {#general-ui-ux-improvements}
 
 As we started to make our theme customizable we made a lot of improvements to
 our internal pages.

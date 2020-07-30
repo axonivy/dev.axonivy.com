@@ -1,4 +1,4 @@
-## Improvements
+## Improvements {#improvements}
 
 * Improve Logging in User Synchronization <a href="https://jira.axonivy.com/jira/browse/XIVY-3011" target="_blank"><span class="fas fa-link"></span></a> 
 * On demand synchronisation of AD users <a href="https://jira.axonivy.com/jira/browse/XIVY-3106" target="_blank"><span class="fas fa-link"></span></a> 

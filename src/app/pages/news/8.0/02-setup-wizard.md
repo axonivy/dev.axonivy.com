@@ -1,4 +1,4 @@
-## Setup Wizard
+## Setup Wizard {#setup-wizard}
 
 With the new theme and the introduction of the **Engine Cockpit**,
 the **Engine Config UI** doesn't really fit in our product toolset any longer. Because of that, we decided to

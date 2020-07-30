@@ -1,4 +1,4 @@
-## New Web Service Client Tooling
+## New Web Service Client Tooling {#ws-client}
 The tooling to call remote Web Services has been completely re-worked and is more powerful than ever.
 
 * __Simple__: Clean and intuitive configuration mask on the Web Service Call activity
