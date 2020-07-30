@@ -142,6 +142,16 @@ class News
         return "/news/$this->version";
     }
     
+    public function getLinkDoc(): String
+    {
+        return "/doc/$this->version";
+    }
+
+    public function getLinkMigiNote(): String
+    {
+        return "/doc/$this->version/migration-notes";
+    }
+    
     public function isReleased(): bool
     {
         return $this->isReleased;
