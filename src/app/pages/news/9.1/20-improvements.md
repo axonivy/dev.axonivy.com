@@ -1,4 +1,4 @@
-## Improvements
+## Improvements {#improvements}
 
 * Self managed users in a managed security system <a href="https://jira.axonivy.com/jira/browse/XIVY-3372" target="_blank"><span class="fas fa-link"></span></a> 
 * Use external identifier (AD: objectGUID, ND: guid) to synchronize external users  <a href="https://jira.axonivy.com/jira/browse/XIVY-3432" target="_blank"><span class="fas fa-link"></span></a> 

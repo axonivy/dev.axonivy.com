@@ -1,4 +1,4 @@
-## Modern Platform
+## Modern Platform {#modern-platform}
 
 We updated the platform of the Designer in order to bring even more fun and productivity into your daily work. Stay ahead!
 

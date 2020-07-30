@@ -1,4 +1,4 @@
-## Customizable Designer
+## Customizable Designer {#customizable-designer}
 We made the latest Axon.ivy Designer much more flexible, so that it serves best for your development needs.
 
 * __Lighter__: 

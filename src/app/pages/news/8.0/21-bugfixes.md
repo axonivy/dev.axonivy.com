@@ -1,4 +1,4 @@
-## Bug Fixes
+## Bug Fixes {#bugfixes}
 
 * [XIVY-85](https://jira.axonivy.com/jira/browse/XIVY-85) Enable Edit button on WS endpoint 
 * [XIVY-118](https://jira.axonivy.com/jira/browse/XIVY-118) Process editor context menu selected text is white on Windows 10 

@@ -1,4 +1,4 @@
-## Highly Configurable
+## Highly Configurable {#highly-configurable}
 
 Successfully deploying your application in your customers environment is now easier than ever. The days of manual installations and the related chatty documentation are over!
 

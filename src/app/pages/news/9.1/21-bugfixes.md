@@ -1,4 +1,4 @@
-## Bug Fixes
+## Bug Fixes {#bugfixes}
 
 * [XIVY-2221](https://jira.axonivy.com/jira/browse/XIVY-2221) JUNIT runtime classpath in Designer 
 * [XIVY-2397](https://jira.axonivy.com/jira/browse/XIVY-2397) Maven project build plugin does not work if engine directory is not writable 
