@@ -12,13 +12,13 @@
 * Include Mavenizer into the product <a href="https://jira.axonivy.com/jira/browse/XIVY-2982" target="_blank"><span class="fas fa-link"></span></a> 
 * Transform release documents to readthedocs <a href="https://jira.axonivy.com/jira/browse/XIVY-3147" target="_blank"><span class="fas fa-link"></span></a> 
 * Mapping function Recordset.toList(Class<T>) : List<T> <a href="https://jira.axonivy.com/jira/browse/XIVY-1260" target="_blank"><span class="fas fa-link"></span></a> 
-* Switch Axon.ivy Project Tree to Eclipse navigator framework <a href="https://jira.axonivy.com/jira/browse/XIVY-3557" target="_blank"><span class="fas fa-link"></span></a> 
+* Switch Axon.ivy Project Tree to Eclipse navigator framework <a href="https://jira.axonivy.com/jira/browse/XIVY-3557" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">performance</span>
 * Introduce new versioning concept for LE and LTS versions <a href="https://jira.axonivy.com/jira/browse/XIVY-3726" target="_blank"><span class="fas fa-link"></span></a> 
 * Simplify licence model and introduce a new licence 9.x <a href="https://jira.axonivy.com/jira/browse/XIVY-3850" target="_blank"><span class="fas fa-link"></span></a> 
 * Upgrade eclipse target platform to 2020-06 <a href="https://jira.axonivy.com/jira/browse/XIVY-4081" target="_blank"><span class="fas fa-link"></span></a> 
-* Upgrade CXF to 3.3.7 <a href="https://jira.axonivy.com/jira/browse/XIVY-4466" target="_blank"><span class="fas fa-link"></span></a> 
 * Add loading icon to Html Dialog templates <a href="https://jira.axonivy.com/jira/browse/XIVY-3748" target="_blank"><span class="fas fa-link"></span></a> 
 * Upgrade Tomcat to fix CVE-2020-13935 <a href="https://jira.axonivy.com/jira/browse/XIVY-4440" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">security</span>
+* Upgrade CXF to 3.3.7 <a href="https://jira.axonivy.com/jira/browse/XIVY-4466" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">security</span>
 * Support Swimlanes for BPMN Export <a href="https://jira.axonivy.com/jira/browse/XIVY-3501" target="_blank"><span class="fas fa-link"></span></a> 
 * Cache REST client to improve performance <a href="https://jira.axonivy.com/jira/browse/XIVY-4014" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">performance</span>
 * Upgrade JAX-RS REST library Jersey to 2.31 <a href="https://jira.axonivy.com/jira/browse/XIVY-4241" target="_blank"><span class="fas fa-link"></span></a> 
@@ -27,4 +27,4 @@
 * Improve security concept for static pages <a href="https://jira.axonivy.com/jira/browse/XIVY-3538" target="_blank"><span class="fas fa-link"></span></a> <span class="badge badge-pill badge-success">security</span>
 * Add new APIs to easily iterate over large datasets  <a href="https://jira.axonivy.com/jira/browse/XIVY-3535" target="_blank"><span class="fas fa-link"></span></a> 
 * Support workstation for NTLM Authentication in CXF Web Service Client <a href="https://jira.axonivy.com/jira/browse/XIVY-3592" target="_blank"><span class="fas fa-link"></span></a> 
-* Provide Apache http as connection provider for CXF Web Service Calls <a href="https://jira.axonivy.com/jira/browse/XIVY-3597" target="_blank"><span class="fas fa-link"></span></a> 
+* Provide Apache http as connection provider for CXF Web Service Calls <a href="https://jira.axonivy.com/jira/browse/XIVY-3597" target="_blank"><span class="fas fa-link"></span></a>
