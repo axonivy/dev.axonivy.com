@@ -1,4 +1,4 @@
-## Portal
+## The new shiny Portal
 
 Besides many improvements to the user experience and the user interface, there are some cool new
 features in the portal!

@@ -118,20 +118,26 @@ p {
 	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
 		<div class="inner">
 			<div class="row">
-				<div class="6u 12u$(medium)">
-					{{ newsDetailSection.html|raw }}
-				</div>
-				<div class="6u 12u$(medium) images">
-					{% for image in newsDetailSection.images %}
-						{% set galleryClass = '' %}
-						{% if not loop.first %}
-							{% set galleryClass = 'gallery' %}
-						{% endif %}
-						<a href="{{ image }}" data-lightbox="screenshot-{{ sectionIndex }}">
-							<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
-						</a>
-					{% endfor %}
-				</div>
+				{% if newsDetailSection.images is empty %}
+					<div class="12u 12u$(medium)">
+						{{ newsDetailSection.html|raw }}
+					</div>
+				{% else %}
+					<div class="6u 12u$(medium)">
+						{{ newsDetailSection.html|raw }}
+					</div>
+					<div class="6u 12u$(medium) images">
+						{% for image in newsDetailSection.images %}
+							{% set galleryClass = '' %}
+							{% if not loop.first %}
+								{% set galleryClass = 'gallery' %}
+							{% endif %}
+							<a href="{{ image }}" data-lightbox="screenshot-{{ sectionIndex }}">
+								<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
+							</a>
+						{% endfor %}
+					</div>
+				{% endif %}
 			</div>
 
 			<div style="clear:both;"></div>

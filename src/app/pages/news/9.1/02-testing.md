@@ -1,4 +1,4 @@
-## Testing
+## Simplified Testing
 
 It has never been easier to write unit tests that verify the quality of your workflow application.
 Though testing of your components has always been possible, the new Axon.ivy platform makes writing and maintaining tests much easier:
