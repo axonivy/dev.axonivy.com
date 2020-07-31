@@ -134,7 +134,7 @@
 				"instructions": [
 					"Execute the process a few times and vary the product prices in the <b>Enter Product</b> User Dialog.<ul><li>Does the Alternative Gateway behave as expected?</li></ul>",
 					"Congratulations! You&apos;ve just created and executed your first user dialog!",
-					"<p>Want to know more?</p><ul><li>Use the <b><a href=\"https://answers.axonivy.com\">Axon.ivy Q&amp;A</a></b> to get community support.</li><li>Import the HtmlDialogDemos project found in the <i>applications/samples/</i> folder of your unzipped designer.</li></ul>"
+					"<p>Want to know more?</p><ul><li>Use the <b><a href=\"https://community.axonivy.com\">Axon.ivy Community</a></b> to get community support.</li><li>Import the HtmlDialogDemos project found in the <i>applications/samples/</i> folder of your unzipped designer.</li></ul>"
 				]
 			}
 		]
