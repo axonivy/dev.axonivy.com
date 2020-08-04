@@ -81,6 +81,7 @@
 * [XIVY-4441](https://jira.axonivy.com/jira/browse/XIVY-4441) HTML Dialogs should be good looking on mobile too 
 * [XIVY-4478](https://jira.axonivy.com/jira/browse/XIVY-4478) OutOfMemory Exception when calling IWorkflowContext.getRunningCasesCount(IProcessModelVersion) 
 * [XIVY-4504](https://jira.axonivy.com/jira/browse/XIVY-4504) Infopage shows error "Parameter cms must not be null" if file resouces of app with casemaps is not available 
+* [XIVY-4515](https://jira.axonivy.com/jira/browse/XIVY-4515) REST activity does not show active POST method 
 * [IVYPORTAL-7778](https://jira.axonivy.com/jira/browse/IVYPORTAL-7778) Error when clean up obsolete data 
 * [IVYPORTAL-9453](https://jira.axonivy.com/jira/browse/IVYPORTAL-9453) Inconsistent Behaviour Case Details and related tasks and cases 
 * [IVYPORTAL-9730](https://jira.axonivy.com/jira/browse/IVYPORTAL-9730) Saved filter is not reseted after changing filters 
@@ -89,4 +90,4 @@
 * [IVYPORTAL-10128](https://jira.axonivy.com/jira/browse/IVYPORTAL-10128) Permission UserCreateSubstitute not respected in add absence dialog 
 * [IVYPORTAL-10214](https://jira.axonivy.com/jira/browse/IVYPORTAL-10214) Navigation technical case back to business case 
 * [IVYPORTAL-10351](https://jira.axonivy.com/jira/browse/IVYPORTAL-10351) Portal chat doesn't work with load balance 
-* [IVYPORTAL-10563](https://jira.axonivy.com/jira/browse/IVYPORTAL-10563) Portal totally blocked due to parallel request from Chat and XHR II
+* [IVYPORTAL-10563](https://jira.axonivy.com/jira/browse/IVYPORTAL-10563) Portal totally blocked due to parallel request from Chat and XHR II 
