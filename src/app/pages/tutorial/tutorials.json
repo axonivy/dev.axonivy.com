@@ -22,5 +22,11 @@
 		"description": "Axon.ivy core developers Reguel and Alex shows how to build a CI/CD pipeline with Axon.ivy.",
 		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnJR0Nc3Zmtem9FFHW0g6Jsz",
 		"videoUrl": "https://www.youtube.com/playlist?list=PLrFKpclzHMnJR0Nc3Zmtem9FFHW0g6Jsz"
+	},
+	{
+		"title": "Testing",
+		"description": "Axon.ivy core developers Reguel and Lukas shows how to test your processes with Axon.ivy.",
+		"embeddedVideoUrl": "https://www.youtube.com/embed/videoseries?list=PLrFKpclzHMnJXhDEWjY8Bp_kqXdgdc_b_",
+		"videoUrl": "https://www.youtube.com/playlist?list=PLrFKpclzHMnJXhDEWjY8Bp_kqXdgdc_b_"
 	}
 ]
