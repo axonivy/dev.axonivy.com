@@ -11,4 +11,7 @@ Though testing of your components has always been possible, the new Axon.ivy pla
 	<a href="${docBaseUrl}/concepts/testing/index.html" target="_blank" rel="noopener noreferrer">
 	  <i class="fas fa-check-circle"></i> Concepts: Testing
 	</a>
+	<a href="https://www.youtube.com/playlist?list=PLrFKpclzHMnJXhDEWjY8Bp_kqXdgdc_b_" target="_blank" rel="noopener noreferrer">
+	  <i class="fab fa-youtube"></i> Youtube: Tutorial
+	</a>
 </div>
