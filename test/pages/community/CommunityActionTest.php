@@ -11,6 +11,6 @@ class CommunityActionTest extends TestCase
     {
         AppTester::assertThatGet('/community')
             ->statusCode(200)
-            ->bodyContains('See how it works on GitHub.');
+            ->bodyContains('on GitHub.');
     }
 }
