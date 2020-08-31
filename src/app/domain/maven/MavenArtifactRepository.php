@@ -151,7 +151,7 @@ class MavenArtifactRepository
             ->build();
     }
 
-    private static function getDemosApp(): MavenArtifact
+    public static function getDemosApp(): MavenArtifact
     {
         return MavenArtifact::create('demos')
             ->name('Demo App')

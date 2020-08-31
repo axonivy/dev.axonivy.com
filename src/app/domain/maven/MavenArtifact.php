@@ -100,17 +100,22 @@ class MavenArtifact
 
     public function getUrl($version)
     {
-        $concretVersion = $version;
-
+        $concretVersion = $this->getConcreteVersion($version);
         $baseUrl = $this->getBaseUrl();
+        return $baseUrl . '/' . $version . '/' . $this->artifactId . '-' . $concretVersion . '.' . $this->type;
+    }
+
+    public function getConcreteVersion($version)
+    {
         if (StringUtil::contains($version, 'SNAPSHOT')) {
+            $baseUrl = $this->getBaseUrl();
             $xml = HttpRequester::request("$baseUrl/$version/maven-metadata.xml");
             if (empty($xml)) {
                 return "";
             }
-            $concretVersion = self::parseVersionIdentifierFromXml($xml);
+            return self::parseVersionIdentifierFromXml($xml);
         }
-        return $baseUrl . '/' . $version . '/' . $this->artifactId . '-' . $concretVersion . '.' . $this->type;
+        return $version;
     }
 
     public static function parseVersionIdentifierFromXml(string $xml): string
