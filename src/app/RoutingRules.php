@@ -27,7 +27,7 @@ use app\pages\tutorial\TutorialAction;
 use app\pages\tutorial\gettingstarted\TutorialGettingStartedAction;
 use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
-use app\permalink\ThirdpartyLibraryPermalink;
+use app\permalink\LibraryPermalinkAction;
 
 class RoutingRules
 {
@@ -50,7 +50,7 @@ class RoutingRules
         $app->get('/release-cycle', ReleaseCycleAction::class);
         
         $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
-        $app->get('/permalink/lib/{version}/{name}', ThirdpartyLibraryPermalink::class);
+        $app->get('/permalink/lib/{version}/{name}', LibraryPermalinkAction::class);
         
         $app->get('/doc', DocOverviewAction::class);
         
