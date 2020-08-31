@@ -23,7 +23,11 @@
 		{% elseif product == "engine" %}
 			{% include 'installation/_engine.twig' %}
 		{% else %}
-			{% include 'installation/_designer.twig' %}
+			{% if type == "MacOSX-BETA" %}
+				{% include 'installation/_mac_designer.twig' %}
+			{% else %}
+				{% include 'installation/_designer.twig' %}
+			{% endif %}
 		{% endif %}
 	</div>
 </section>
