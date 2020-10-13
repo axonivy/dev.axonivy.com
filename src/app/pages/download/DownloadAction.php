@@ -41,7 +41,9 @@ class DownloadAction
             'devReleases' => $this->devReleases(),
 
             'archiveLink' => $loader->archiveLink(),
-            'versionShort' => $loader->versionShort()
+            'versionShort' => $loader->versionShort(),
+
+            'releaseDate' => $loader->releaseDate()
         ]);
     }
 
@@ -106,6 +108,8 @@ interface Loader
     function versionShort(): string;
 
     function archiveLink(): string;
+
+    function releaseDate(): string;
 }
 
 class ReleaseTypeNotAvailableLoader implements Loader
@@ -141,6 +145,11 @@ class ReleaseTypeNotAvailableLoader implements Loader
     public function archiveLink(): string
     {
         return '/download/archive';
+    }
+
+    public function releaseDate(): string
+    {
+        return "";
     }
 }
 
@@ -215,6 +224,11 @@ class ReleaseInfoLoader implements Loader
     public function archiveLink(): string
     {
         return $this->releaseType->archiveLink($this->releaseInfo);
+    }
+
+    public function releaseDate(): string
+    {
+        return $this->releaseInfo->getReleaseDate();
     }
 }
 
