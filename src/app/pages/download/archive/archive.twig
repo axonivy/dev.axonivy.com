@@ -73,7 +73,10 @@ table.alt tbody tr td {
 				<tbody>
 				{% for releaseInfo in releaseInfos %}
 					<tr>
-						<td>{{ releaseInfo.version.VersionNumber }}</td>
+						<td>
+							<div>{{ releaseInfo.version.VersionNumber }}</div>
+							<div style="font-size: 13px;">{{ releaseInfo.ReleaseDate }}</div>
+						</td>
 						<td>
 						{% if releaseInfo.UnsafeVersion %}
 							<span style="color:red;">

@@ -43,7 +43,8 @@ class DownloadActionTest extends TestCase
     {
         AppTester::assertThatGet('/download')->ok()
             ->bodyContains('Long Term Support')
-            ->bodyContains('https://download.axonivy.com/8.0.1/AxonIvyEngine8.0.1.96047_All_x64.zip');
+            ->bodyContains('https://download.axonivy.com/8.0.1/AxonIvyEngine8.0.1.96047_All_x64.zip')
+            ->bodyContains('24.12.2019');
     }
 
     public function testLeadingEdge()

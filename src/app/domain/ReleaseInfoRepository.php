@@ -103,7 +103,7 @@ class ReleaseInfoRepository
 
             $versionNumber = basename($directory);
             $artifacts = ArtifactFactory::create($directory);
-            $releaseInfos[] = new ReleaseInfo(new Version($versionNumber), $artifacts);
+            $releaseInfos[] = new ReleaseInfo(new Version($versionNumber), $artifacts, $releaseReadyFile);
         }
         $releaseInfos = self::sortReleaseInfosByVersionOldestFirst($releaseInfos);
         return $releaseInfos;

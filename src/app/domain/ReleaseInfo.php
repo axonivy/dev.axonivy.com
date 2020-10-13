@@ -12,10 +12,16 @@ class ReleaseInfo
 
     private array $artifacts;
 
-    public function __construct(Version $version, array $artifacts)
+    private string $releaseReadyFile;
+
+    private ?string $releaseDate;
+
+    public function __construct(Version $version, array $artifacts, string $releaseReadyFile)
     {
         $this->version = $version;
         $this->artifacts = $artifacts;
+        $this->releaseReadyFile = $releaseReadyFile;
+        $this->releaseDate = null;
     }
 
     public function getVersion(): Version
@@ -99,5 +105,25 @@ class ReleaseInfo
             }
         }
         return null;
+    }
+
+    public function getReleaseDate(): string
+    {
+        if (is_null($this->releaseDate))
+        {
+            $this->releaseDate = self::readReleaseDate($this->releaseReadyFile);
+        }
+        return $this->releaseDate;
+    }
+
+    private static function readReleaseDate(string $releaseReadyFile)
+    {
+        $releaseReadyInfos = parse_ini_file($releaseReadyFile);
+        $releaseDate = $releaseReadyInfos["releaseDate"];
+        if (is_null($releaseDate))
+        {
+            return "";
+        }
+        return $releaseDate;
     }
 }

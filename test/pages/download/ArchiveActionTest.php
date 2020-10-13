@@ -19,6 +19,7 @@ class ArchiveActionTest extends TestCase
     {
         AppTester::assertThatGet('/download/archive/8.0')->ok()
         ->bodyContains('https://download.axonivy.com/8.0.0/AxonIvyDesigner8.0.0.56047_Linux_x64.zip')
+        ->bodyContains('24.12.2019')
         ->bodyDoesNotContain('7.0.1');
     }
     
