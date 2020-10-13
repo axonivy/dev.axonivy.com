@@ -119,11 +119,6 @@ class ReleaseInfo
     private static function readReleaseDate(string $releaseReadyFile)
     {
         $releaseReadyInfos = parse_ini_file($releaseReadyFile);
-        $releaseDate = $releaseReadyInfos["releaseDate"];
-        if (is_null($releaseDate))
-        {
-            return "";
-        }
-        return $releaseDate;
+        return $releaseReadyInfos["releaseDate"] ?? "";
     }
 }
