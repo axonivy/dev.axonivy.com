@@ -58,22 +58,22 @@ class ArchiveAction
             }
             return $releaseInfos;
         }
-
+        
         // remove lts versions from leading edge list (e.g. 7.x => 7.0)
         $filterLTS = false;
         if (StringUtil::endsWith($version, 'x')) {
             $version = substr($version, 0, - 1);
             $filterLTS = true;
         }
-
+        
         $releaseInfos = ReleaseInfoRepository::getMatchingVersions($version);
-
+        
         if ($filterLTS) {
             $minorVersion = $version . '0';
             $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => ! StringUtil::startsWith($releaseInfo->versionNumber(), $minorVersion));
         }
-
-        return $releaseInfos;
+        //remove virtual versions from list
+        return array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => strlen($releaseInfo->versionNumber()) !== 3);
     }
 
     private function createLinks(): array
