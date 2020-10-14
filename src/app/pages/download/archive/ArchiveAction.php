@@ -72,8 +72,7 @@ class ArchiveAction
             $minorVersion = $version . '0';
             $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => ! StringUtil::startsWith($releaseInfo->versionNumber(), $minorVersion));
         }
-        //remove virtual versions from list
-        return array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => strlen($releaseInfo->versionNumber()) !== 3);
+        return self::filterVirtualVersions($releaseInfos);
     }
 
     private function createLinks(): array
@@ -83,6 +82,11 @@ class ArchiveAction
             $links[] = new VersionLink($version, $description);
         }
         return $links;
+    }
+
+    private static function filterVirtualVersions(array $releaseInfos): array
+    {
+        return array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isBugfix());
     }
 }
 
