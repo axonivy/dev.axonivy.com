@@ -5,7 +5,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\domain\ReleaseType;
 
-class ReleaseTypTest extends TestCase
+class ReleaseTypeTest extends TestCase
 {
 
     public function test_byKey()

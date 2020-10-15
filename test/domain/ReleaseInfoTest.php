@@ -77,4 +77,42 @@ class ReleaseInfoTest extends TestCase
         Assert::assertFalse($artifact->isBeta());
         Assert::assertFalse($artifact->isMavenPluginCompatible());
     }
+
+    public function test_artifactDockerNotAvailableBefore720()
+    {
+        $artifact = self::loadDockerArtifact('7.1.0');
+        Assert::assertNull($artifact);
+    }
+
+    public function test_artifactDockerAvailableSince720()
+    {
+        $artifact = self::loadDockerArtifact('7.2.0');
+        Assert::assertEquals('axonivy/axonivy-engine:7.2.0', $artifact->getFileName());
+
+        $artifact = self::loadDockerArtifact('8.0.0');
+        Assert::assertEquals('axonivy/axonivy-engine:8.0.0', $artifact->getFileName());
+    }
+
+    public function test_artifactDockerAvailableForAllUnstableReleaseButNot7()
+    {
+        $artifact = self::loadDockerArtifact('dev');
+        Assert::assertEquals('axonivy/axonivy-engine:dev', $artifact->getFileName());
+
+        $artifact = self::loadDockerArtifact('nightly');
+        Assert::assertEquals('axonivy/axonivy-engine:nightly', $artifact->getFileName());
+
+        $artifact = self::loadDockerArtifact('nightly-8');
+        Assert::assertEquals('axonivy/axonivy-engine:nightly-8', $artifact->getFileName());
+
+        $artifact = self::loadDockerArtifact('nightly-7');
+        Assert::assertNull($artifact);
+
+        $artifact = self::loadDockerArtifact('sprint');
+        Assert::assertEquals('axonivy/axonivy-engine:sprint', $artifact->getFileName());
+    }
+
+    private static function loadDockerArtifact($version): ?Artifact
+    {
+        return ReleaseInfoRepository::getBestMatchingVersion($version)->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER);;
+    }
 }

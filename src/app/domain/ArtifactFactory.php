@@ -47,13 +47,17 @@ class ArtifactFactory
             Config::DOCKER_HUB_IMAGE_URL
         );
     }
-    
+
     private static function isDockerAvailableForVersion(string $versionNumber): bool
     {
+        if ($versionNumber == 'nightly-7') {
+            return false;
+        }
         if (version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) {
             return true;
         }
-        if (!is_numeric($versionNumber) && $versionNumber != 'nightly-7') {
+        $versionWithoutDots = str_replace('.', '', $versionNumber);
+        if (!is_numeric($versionWithoutDots)) { // dev, nighlty, ...
             return true;
         }
         return false;
