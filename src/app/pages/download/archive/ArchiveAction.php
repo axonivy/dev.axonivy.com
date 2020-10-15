@@ -58,22 +58,21 @@ class ArchiveAction
             }
             return $releaseInfos;
         }
-
+        
         // remove lts versions from leading edge list (e.g. 7.x => 7.0)
         $filterLTS = false;
         if (StringUtil::endsWith($version, 'x')) {
             $version = substr($version, 0, - 1);
             $filterLTS = true;
         }
-
+        
         $releaseInfos = ReleaseInfoRepository::getMatchingVersions($version);
-
+        
         if ($filterLTS) {
             $minorVersion = $version . '0';
             $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => ! StringUtil::startsWith($releaseInfo->versionNumber(), $minorVersion));
         }
-
-        return $releaseInfos;
+        return self::filterVirtualVersions($releaseInfos);
     }
 
     private function createLinks(): array
@@ -83,6 +82,11 @@ class ArchiveAction
             $links[] = new VersionLink($version, $description);
         }
         return $links;
+    }
+
+    private static function filterVirtualVersions(array $releaseInfos): array
+    {
+        return array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isBugfix());
     }
 }
 

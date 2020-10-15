@@ -20,7 +20,8 @@ class ArchiveActionTest extends TestCase
         AppTester::assertThatGet('/download/archive/8.0')->ok()
         ->bodyContains('https://download.axonivy.com/8.0.0/AxonIvyDesigner8.0.0.56047_Linux_x64.zip')
         ->bodyContains('24.12.2019')
-        ->bodyDoesNotContain('7.0.1');
+        ->bodyDoesNotContain('7.0.1')
+        ->bodyDoesNotContain('<div>8.0</div>');
     }
     
     public function testArchive70()
@@ -53,6 +54,7 @@ class ArchiveActionTest extends TestCase
     public function testUnstable()
     {
         AppTester::assertThatGet('/download/archive/unstable')->ok()
+            ->bodyContains('dev')
             ->bodyContains('sprint')
             ->bodyContains('nightly')
             ->bodyContains('nightly-8')

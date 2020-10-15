@@ -32,6 +32,11 @@ class Version
         return substr_count($this->versionNumber, '.') == 1;
     }
 
+    public function isBugfix(): bool
+    {
+        return substr_count($this->versionNumber, '.') == 2;
+    }
+
     /**
      * e.g.
      * 6, 7
