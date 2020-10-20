@@ -13,6 +13,6 @@ then
     exit 1
 fi
 
-php composer-setup.php --version=1.9.0 --install-dir=/var
+php composer-setup.php --version=2.0.0-RC2 --install-dir=/var
 rm composer-setup.php
 mv /var/composer.phar /usr/local/bin/composer
