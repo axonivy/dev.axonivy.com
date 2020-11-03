@@ -3,5 +3,5 @@ namespace app\domain\market;
 
 interface VersionDisplayFilter
 {
-    function versionsToDisplay(Product $product): array;
+    function versionsToDisplay(MavenProductInfo $info): array;
 }

@@ -59,13 +59,18 @@ class StatusApi
     {
         $products = [];
         foreach (Market::all() as $product) {
-            $products[] = [
+            $p = [
                 'key' => $product->getKey(),
                 'name' => $product->getName(),
-                'latest-version-to-display' => $product->getLatestVersionToDisplay(),
-                'latest-version-available' => $product->getLatestVersion(),
                 'url' => $product->getUrl()
             ];
+            $mavenProductInfo = $product->getMavenProductInfo();
+            if ($mavenProductInfo != null)
+            {
+                $p['latest-version-to-display'] = $mavenProductInfo->getLatestVersionToDisplay();
+                $p['latest-version-available'] = $mavenProductInfo->getLatestVersion();
+            }
+            $products[] = $p;
         }
         return $products;
     }

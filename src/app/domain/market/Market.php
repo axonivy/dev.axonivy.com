@@ -1,18 +1,20 @@
 <?php
 namespace app\domain\market;
 
+use app\Config;
+
 class Market
 {
 
     public static function all(): array
     {
-        $dirs = array_filter(glob(__DIR__ . '/products/*'), 'is_dir');
+        $dirs = array_filter(glob(Config::marketDirectory() . '/*'), 'is_dir');
         $products = [];
         foreach ($dirs as $dir) {
-            $infoFile = $dir . '/info.json';
-            if (file_exists($infoFile)) {
+            $metaFile = $dir . '/meta.json';
+            if (file_exists($metaFile)) {
                 $key = basename($dir);
-                $products[] = new Product($key, $infoFile);
+                $products[] = ProductFactory::create($key, $dir, $metaFile);
             }
         }
         usort($products, fn (Product $a, Product $b) => $a->getSort() > $b->getSort());

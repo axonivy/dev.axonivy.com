@@ -21,16 +21,23 @@ class ProductAction
         if ($product == null) {
             throw new HttpNotFoundException($request);
         }
-        
+
+        $mavenProductInfo = $product->getMavenProductInfo();
+        if ($mavenProductInfo == null)
+        {
+            return $this->view->render($response, 'market/product.twig', [
+                'product' => $product
+            ]);
+        }
+
         $version = $args['version'] ?? '';
         if (empty($version)) {
-            $version = $product->getLatestVersionToDisplay();
-        } else if (!$product->hasVersion($version)) {
+            $version = $mavenProductInfo->getLatestVersionToDisplay();
+        } else if (!$mavenProductInfo->hasVersion($version)) {
            throw new HttpNotFoundException($request);
         }
         
-        $mavenArtifacts = $product->getMavenArtifactsForVersion($version);
-        
+        $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
         $mavenArtifactsAsDependency = [];
         foreach ($mavenArtifacts as $artifact) {
             if ($artifact->getMakesSenseAsMavenDependency()) {
@@ -45,8 +52,9 @@ class ProductAction
             }
         }
 
-        return $this->view->render($response, 'market/product.twig', [
+        return $this->view->render($response, 'market/maven-product.twig', [
             'product' => $product,
+            'mavenProductInfo' => $mavenProductInfo,
             'mavenArtifacts' => $mavenArtifacts,
             'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
             'docArtifacts' => $docArtifacts,

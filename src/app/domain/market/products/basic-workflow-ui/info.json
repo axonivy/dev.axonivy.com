@@ -1,7 +1,0 @@
-{
-	"name": "Basic Workflow UI",
-	"sort": 999,
-	"listed": false,
-	"importWizard": true,
-	"mavenArtifacts": ["basic-workflow-ui"]
-}

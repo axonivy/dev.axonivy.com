@@ -38,7 +38,7 @@ class PortalPermalinkAction
 
     private static function evaluatePortalVersion(String $version): String
     {
-        $portal = Market::getProductByKey('portal');
+        $portal = Market::getProductByKey('portal')->getMavenProductInfo();
         
         $releaseType = ReleaseType::byKey($version);
         if ($releaseType != null && $releaseType->isDevRelease()) {
