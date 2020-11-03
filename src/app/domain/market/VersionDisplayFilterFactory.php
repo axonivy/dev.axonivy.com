@@ -19,19 +19,19 @@ class VersionDisplayFilterFactory
 class VersionDisplayFilterShowAll implements VersionDisplayFilter
 {
 
-    public function versionsToDisplay(Product $product): array
+    public function versionsToDisplay(MavenProductInfo $info): array
     {
-        return $product->getVersions();
+        return $info->getVersions();
     }
 }
 
 class VersionDisplayFilterHideSnapshots implements VersionDisplayFilter
 {
 
-    public function versionsToDisplay(Product $product): array
+    public function versionsToDisplay(MavenProductInfo $info): array
     {
         $versions = [];
-        foreach ($product->getVersions() as $v) {
+        foreach ($info->getVersions() as $v) {
             if (!StringUtil::contains($v, '-SNAPSHOT')) {
                 $versions[] = $v;
             }
@@ -43,11 +43,11 @@ class VersionDisplayFilterHideSnapshots implements VersionDisplayFilter
 class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilter
 {
 
-    public function versionsToDisplay(Product $product): array
+    public function versionsToDisplay(MavenProductInfo $info): array
     {
         $versionsToDisplay = [];
         
-        $allVersions = $product->getVersions();
+        $allVersions = $info->getVersions();
         $highesSprintReleases = [];
         foreach ($allVersions as $v) {
             if ($v == '1.0.0.0' || $v == '2.0.0.0') {

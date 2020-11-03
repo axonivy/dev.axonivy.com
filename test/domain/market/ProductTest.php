@@ -46,9 +46,9 @@ class ProductTest extends TestCase
     public function test_importWizard()
     {
         $product = Market::getProductByKey('visualvm-plugin');
-        Assert::assertFalse($product->getImportWizard());
+        Assert::assertFalse($product->getMavenProductInfo()->getImportWizard());
         
         $product = Market::getProductByKey('basic-workflow-ui');
-        Assert::assertTrue($product->getImportWizard());
+        Assert::assertTrue($product->getMavenProductInfo()->getImportWizard());
     }
 }

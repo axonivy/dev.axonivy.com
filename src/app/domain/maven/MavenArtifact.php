@@ -226,15 +226,15 @@ class MavenArtifactBuilder
         return $this;
     }
     
-    public function makesSenseAsMavenDependency(): MavenArtifactBuilder
+    public function makesSenseAsMavenDependency(bool $makesSenseAsMavenDependency): MavenArtifactBuilder
     {
-        $this->makesSenseAsMavenDependency = true;
+        $this->makesSenseAsMavenDependency = $makesSenseAsMavenDependency;
         return $this;
     }
     
-    public function doc(): MavenArtifactBuilder
+    public function doc(bool $doc): MavenArtifactBuilder
     {
-        $this->isDocumentation = true;
+        $this->isDocumentation = $doc;
         return $this;
     }
     

@@ -1,8 +1,0 @@
-{
-	"name": "Doc Factory",
-	"sort": 300,
-	"listed": true,
-	"importWizard": true,
-	"versionDisplay": "hide-snapshots",
-	"mavenArtifacts": ["doc-factory", "doc-factory-demo", "doc-factory-doc"]
-}
