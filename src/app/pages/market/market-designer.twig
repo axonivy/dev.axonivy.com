@@ -53,8 +53,8 @@
     			<div class="9u">
     				{{ product.description|raw }}
     
-    				<a href="{{ product.url }}" class="button special disabled"> <i
-    					class="icon fas fa-angle-right"></i> Install
+    				<a href="javascript:void(0)" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special">
+    					<i class="icon fas fa-angle-right"></i> Install
     				</a>
     			</div>
     		</div>

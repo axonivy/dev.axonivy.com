@@ -51,4 +51,10 @@ class ProductTest extends TestCase
         $product = Market::getProductByKey('basic-workflow-ui');
         Assert::assertTrue($product->getMavenProductInfo()->getImportWizard());
     }
+
+    public function test_metaUrl()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertEquals('/_market/visualvm-plugin/meta.json', $product->getMetaUrl());
+    }
 }

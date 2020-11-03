@@ -72,6 +72,11 @@ class Product
         return '/market/' . $this->key;
     }
 
+    public function getMetaUrl(): string
+    {
+        return  '/_market/' . $this->key . '/meta.json';
+    }
+
     public function getMavenProductInfo(): ?MavenProductInfo
     {
         return $this->mavenProductInfo;
