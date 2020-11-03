@@ -27,6 +27,6 @@ class Config {
     
     public static function marketDirectory(): string
     {
-        return self::isProductionEnvironment() ? '/home/axonivya/data/market/market' : __DIR__ . '/../../src/web/_market';
+        return self::isProductionEnvironment() ? '/home/axonivya/data/market' : __DIR__ . '/../../src/web/_market';
     }
 }
