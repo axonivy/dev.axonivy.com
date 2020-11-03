@@ -1,0 +1,65 @@
+{% set hideFooter = true %}
+{% set hideHeader = true %}
+
+{% extends "_parts/base.twig" %}
+
+{% block title %}Axon.ivy Market{{ parent() }}{% endblock %}
+
+{% block content %}
+    <style>
+    body {
+    	padding: 0em;
+    }
+    
+    #main {
+    	padding: 1em;
+    }
+    </style>
+    
+    <section id="main" class="inverse">
+    	<div class="inner">
+    		<header>
+    			<h1>
+    				<span class="icon fas fa-store "></span> Axon.ivy Market
+    			</h1>
+    		</header>
+    
+    		<p style="margin: 0em;">In our market we provide powerful
+    			extensions around the Axon.ivy Platform. From complete workflow user
+    			interfaces, components to generate documents to simple demo projects
+    			and much more. Take a look around.</p>
+    	</div>
+    </section>
+
+    {% for product in products %}
+        {% set background = 'white' %}
+        {% if loop.index is divisible by(2) %}
+            {% set background = '#f7f7f7' %}
+        {% endif %}
+    <section
+    	style="padding: 4em 0 2em 0; background-color: {{ background }}">
+    	<div class="inner">
+    		<header>
+    			<h3>
+    				{{ product.name }}
+    			</h3>
+    		</header>
+    
+    		<div class="row" style="background-color: {{ background }}">
+    			<div class="3u">
+    				<img src="{{ product.imgSrc }}" alt="{{ product.name }}"
+    					class="image fit" />
+    			</div>
+    			<div class="9u">
+    				{{ product.description|raw }}
+    
+    				<a href="javascript:void(0)" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special">
+    					<i class="icon fas fa-angle-right"></i> Install
+    				</a>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+    {% endfor %}
+
+{% endblock %}

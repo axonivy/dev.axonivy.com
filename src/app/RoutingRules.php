@@ -28,6 +28,7 @@ use app\pages\tutorial\gettingstarted\TutorialGettingStartedAction;
 use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
+use app\pages\market\MarketDesignerAction;
 
 class RoutingRules
 {
@@ -61,10 +62,11 @@ class RoutingRules
         $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
         $app->get('/doc/{version}/{document:.*}', DocAction::class);
         $app->get('/doc/{version}', DocAction::class);
-        
+
         $app->get('/market', MarketAction::class);
         $app->get('/market/{key}[/{version}]', ProductAction::class);
-        
+        $app->get('/market-designer', MarketDesignerAction::class);
+
         $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
         
         $app->get('/installation', InstallationAction::class);
