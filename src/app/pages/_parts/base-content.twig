@@ -42,6 +42,7 @@
     </head>
     <body>
 
+	{% if hideHeader is not defined %}
 	<header id="header">
 		<div class="inner">
 			<a href="/" class="logo"> <img src="/images/misc/axonivy-logo.svg" style="width: 180px; position: relative; top: 15px;" alt="Axon.ivy"> </a>
@@ -59,6 +60,7 @@
 	</header>
 
 	<a href="#menu" class="navPanelToggle"><span class="fa fas fa-bars"></span></a>
+    {% endif %}
 
 	<div class="sticky-footer-wrapper">
 		{% block global %}{% endblock %}
