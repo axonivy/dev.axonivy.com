@@ -1,4 +1,11 @@
 {
 	"name": "UI Path RPA",
-	"installable": true
+	"listed": false,
+
+	"installer": {
+		"id": "open-api-rest-client",
+		"properties": {
+			"openApiUrl": "https://platform.uipath.com/AXONPRESALES/AXONPRESALES/swagger/v11.0/swagger.json"
+		}
+	}
 }
