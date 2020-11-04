@@ -41,4 +41,15 @@ class Market
         }
         return $listed;
     }
+
+    public static function installable(): array
+    {
+        $listed = [];
+        foreach (self::all() as $product) {
+            if ($product->isInstallable()) {
+                $listed[] = $product;
+            }
+        }
+        return $listed;
+    }
 }

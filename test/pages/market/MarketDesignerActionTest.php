@@ -11,8 +11,8 @@ class MarketDesignerActionTest extends TestCase
     {
         AppTester::assertThatGet('/market-designer')
             ->ok()
-            ->bodyContains('Portal')
-            ->bodyContains('VisualVM Plugin')
+            ->bodyContains('UI Path RPA')
+            ->bodyDoesNotContain('VisualVM Plugin')
             ->bodyContains('Install') // install button
             ->bodyDoesNotContain("Team") // header
             ->bodyDoesNotContain("Support") // footer

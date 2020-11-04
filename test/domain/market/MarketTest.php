@@ -17,6 +17,15 @@ class MarketTest extends TestCase
             Assert::assertTrue($product->isListed());
         }
     }
+    
+    public function test_installable()
+    {
+        $products = Market::installable();
+        Assert::assertGreaterThanOrEqual(1, count($products));
+        foreach ($products as $product) {
+            Assert::assertTrue($product->isInstallable());
+        }
+    }
 
     public function test_getProductByKey()
     {
