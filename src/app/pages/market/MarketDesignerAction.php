@@ -20,7 +20,7 @@ class MarketDesignerAction
         $uri = $request->getUri();
         $baseUri = $uri->getScheme() . '://' . $uri->getHost();
         return $this->view->render($response, 'market/market-designer.twig', [
-            'products' => Market::listed(),
+            'products' => Market::installable(),
             'baseUri' => $baseUri
         ]);
     }
