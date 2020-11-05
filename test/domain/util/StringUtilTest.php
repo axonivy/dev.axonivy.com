@@ -7,6 +7,21 @@ use app\domain\util\StringUtil;
 
 class StringUtilTest extends TestCase
 {
+    public function testContains()
+    {
+        Assert::assertTrue(StringUtil::contains('abc', 'abc'));
+        Assert::assertTrue(StringUtil::contains('abc', 'ab'));
+        Assert::assertFalse(StringUtil::contains('abc', 'd'));
+        Assert::assertFalse(StringUtil::contains('ABC', 'abc'));
+    }
+    
+    public function testContainsIgnoreCase()
+    {
+        Assert::assertTrue(StringUtil::containsIgnoreCase('abc', 'abc'));
+        Assert::assertTrue(StringUtil::containsIgnoreCase('abc', 'ab'));
+        Assert::assertFalse(StringUtil::containsIgnoreCase('abc', 'd'));
+        Assert::assertTrue(StringUtil::containsIgnoreCase('ABC', 'abc'));
+    }
     
     public function testStartsWith()
     {
