@@ -3,6 +3,8 @@ namespace app\pages\market;
 
 use Slim\Views\Twig;
 use app\domain\market\Market;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 class MarketAction
 {
@@ -14,10 +16,13 @@ class MarketAction
         $this->view = $view;
     }
 
-    public function __invoke($request, $response, $args)
+    public function __invoke(Request $request, Response $response, $args)
     {
+        $queryParams = $request->getQueryParams();
+        $searchQuery = $queryParams['search'] ?? '';
         return $this->view->render($response, 'market/market.twig', [
-            'products' => Market::listed()
+            'products' => Market::search(Market::listed(), $searchQuery),
+            'searchQuery' => $searchQuery
         ]);
     }
 }

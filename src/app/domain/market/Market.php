@@ -2,6 +2,7 @@
 namespace app\domain\market;
 
 use app\Config;
+use app\domain\util\StringUtil;
 
 class Market
 {
@@ -31,6 +32,23 @@ class Market
         return null;
     }
 
+    public static function search(array $products, string $searchQuery): array
+    {
+        if (empty($searchQuery))
+        {
+            return $products;
+        }
+        $listed = [];
+        foreach ($products as $product) {
+            if (StringUtil::containsIgnoreCase($product->getName(), $searchQuery)) {
+                $listed[] = $product;
+            } else if (StringUtil::containsIgnoreCase($product->getDescription(), $searchQuery)) {
+                $listed[] = $product;
+            }
+        }
+        return $listed;
+    }
+    
     public static function listed(): array
     {
         $listed = [];

@@ -17,11 +17,14 @@ class MarketDesignerAction
 
     public function __invoke(Request $request, $response, $args)
     {
+        $queryParams = $request->getQueryParams();
+        $searchQuery = $queryParams['search'] ?? '';
         $uri = $request->getUri();
         $baseUri = $uri->getScheme() . '://' . $uri->getHost();
         return $this->view->render($response, 'market/market-designer.twig', [
-            'products' => Market::installable(),
-            'baseUri' => $baseUri
+            'baseUri' => $baseUri,
+            'products' => Market::search(Market::installable(), $searchQuery),
+            'searchQuery' => $searchQuery
         ]);
     }
 }

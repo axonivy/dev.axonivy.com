@@ -45,6 +45,32 @@ class MarketTest extends TestCase
         Assert::assertFalse($product->isListed());
     }
     
+    public function test_search_emptyDoNtFilter()
+    {
+        $products = Market::search(Market::listed(), '');
+        Assert::assertEquals(4, count($products));        
+    }
+    
+    public function test_search_noMatch()
+    {
+        $products = Market::search(Market::listed(), 'thisdoesnotexistatall');
+        Assert::assertEquals(0, count($products));
+    }
+
+    public function test_searchInName()
+    {
+        $products = Market::search(Market::listed(), 'visual');
+        Assert::assertEquals(1, count($products));
+        Assert::assertEquals('VisualVM Plugin', $products[0]->getName());
+    }
+
+    public function test_searchInDescription()
+    {
+        $products = Market::search(Market::listed(), 'on-the-spot statistics');
+        Assert::assertEquals(1, count($products));
+        Assert::assertEquals('Portal', $products[0]->getName());
+    }
+    
     public function test_all_sort()
     {
         $products = Market::all();

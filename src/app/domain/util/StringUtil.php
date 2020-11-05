@@ -12,6 +12,14 @@ class StringUtil
         return false;
     }
     
+    public static function containsIgnoreCase($string, $contains): bool
+    {
+        if (stripos($string, $contains) !== false) {
+            return true;
+        }
+        return false;
+    }
+    
     public static function startsWith($string, $startsWith): bool
     {
         return substr($string, 0, strlen($startsWith)) == $startsWith;

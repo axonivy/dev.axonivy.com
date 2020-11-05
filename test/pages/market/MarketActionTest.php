@@ -15,4 +15,24 @@ class MarketActionTest extends TestCase
             ->bodyContains('VisualVM Plugin')
             ->bodyDoesNotContain('Basic Workflow'); // not listed
     }
+    
+    public function testMarketPageSearch()
+    {
+        AppTester::assertThatGet('/market?search=portal')
+        ->ok()
+        ->bodyContains('Portal')
+        ->bodyDoesNotContain('No products found')
+        ->bodyDoesNotContain('VisualVM Plugin')
+        ->bodyDoesNotContain('Basic Workflow'); // not listed
+    }
+    
+    public function testMarketPageSearchNothingFound()
+    {
+        AppTester::assertThatGet('/market?search=doesnotexist')
+        ->ok()
+        ->bodyContains('No products found')
+        ->bodyDoesNotContain('Portal')
+        ->bodyDoesNotContain('VisualVM Plugin')
+        ->bodyDoesNotContain('Basic Workflow'); // not listed
+    }
 }

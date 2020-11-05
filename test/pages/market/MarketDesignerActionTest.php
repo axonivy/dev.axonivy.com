@@ -18,4 +18,13 @@ class MarketDesignerActionTest extends TestCase
             ->bodyDoesNotContain("Support") // footer
             ->bodyDoesNotContain('Basic Workflow'); // not listed
     }
+    
+    public function testMarketPageSearch()
+    {
+        AppTester::assertThatGet('/market-designer?search=notexisting')
+        ->ok()
+        ->bodyDoesNotContain('UI Path RPA')
+        ->bodyContains("No products found")
+        ->bodyDoesNotContain('VisualVM Plugin');
+    }
 }
