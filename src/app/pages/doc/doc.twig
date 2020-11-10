@@ -125,6 +125,7 @@
 	
 	<script type="text/javascript">
 		function resizeIframe(obj) {
+			obj.height = obj.contentWindow.document.body.scrollHeight;
 			removeHeader(obj);
 			openLinksInNewTab(obj);
 		}
@@ -144,7 +145,9 @@
 			
 			// since 7.x
 			containers = iframe.contentWindow.document.getElementsByClassName('container');
-			containers[0].style.marginLeft = "0px"
+			if (containers != null && containers[0]) {
+				containers[0].style.marginLeft = "0px"
+			}
 			
 			navbars = iframe.contentWindow.document.getElementsByTagName('nav');
 			if (navbars != null && navbars[0]) {
@@ -161,14 +164,12 @@
 	
 	<style>
 		.iframe-container {
-		  overflow: hidden;
 		  position: relative;
 		  min-height:400px;
 		}
 		
 		.iframe-container iframe {
 		   border: 0;
-		   height: 100%;
 		   left: 0;
 		   position: absolute;
 		   top: 0;
@@ -179,7 +180,7 @@
 	
 	<section style="padding-top: 0; padding-bottom: 0;">
 		<div class="inner">
-		  <div id="iframecontainer" class="iframe-container" style="height: calc(100vh - 18em);">
+		  <div id="iframecontainer" class="iframe-container">
 		    <iframe title="Document frame" src="{{ documentUrl }}" onload='javascript:resizeIframe(this);'></iframe>
 		  </div>
 		</div>
