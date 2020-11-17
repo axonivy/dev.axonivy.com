@@ -13,7 +13,7 @@ class ProductFactory
         
         $listed = $json->listed ?? true;
         $sort = $json->sort ?? 999999;
-        $installable = isset($json->installer);
+        $installable = isset($json->installers);
         $info = null;
         if (isset($json->mavenArtifacts))
         {
