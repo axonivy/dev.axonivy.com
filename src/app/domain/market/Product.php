@@ -9,16 +9,18 @@ class Product
     private string $name;
     private bool $listed;
     private int $sort;
-
+    private array $installers;
+    
     private ?MavenProductInfo $mavenProductInfo;
 
-    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, ?MavenProductInfo $mavenProductInfo)
+    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, array $installers, ?MavenProductInfo $mavenProductInfo)
     {
         $this->key = $key;
         $this->path = $path;
         $this->name = $name;
         $this->listed = $listed;
         $this->sort = $sort;
+        $this->installers = $installers;
         $this->mavenProductInfo = $mavenProductInfo;
     }
     
@@ -51,7 +53,20 @@ class Product
     {
         return $this->getHtmlOfMarkdown('INSTALLATION.md');
     }
-    
+
+    public function getInstallers(): string
+    {
+        if (empty($this->installers)) {
+            return "can-not-install-product";
+        }
+        
+        $installers = ' ';
+        foreach ($this->installers as $id) {
+            $installers .= "$id ";
+        }        
+        return $installers;
+    }
+
     private function getHtmlOfMarkdown(string $filename): string
     {
         $markdownFile = $this->path . "/$filename";

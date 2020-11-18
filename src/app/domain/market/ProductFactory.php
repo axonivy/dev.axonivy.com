@@ -18,7 +18,13 @@ class ProductFactory
         {
             $info = self::createMavenProductInfo($json);
         }
-        return new Product($key, $path, $json->name, $listed, $sort, $info);
+        $installers = [];
+        if (isset($json->installers)) {
+            foreach ($json->installers as $installer) {
+                $installers[] = $installer->id;
+            }
+        }
+        return new Product($key, $path, $json->name, $listed, $sort, $installers, $info);
     }
 
     private static function createMavenProductInfo($json): MavenProductInfo

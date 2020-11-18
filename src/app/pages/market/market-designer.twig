@@ -18,7 +18,22 @@
     	margin: 0em;
     }
     </style>
-    
+
+    <script>
+    	function enableInstallButtons(installers) {    	
+    		var installButtons = document.getElementsByClassName("installbutton");    	   
+    		for (var i = 0; i < installButtons.length; i++) {
+    		   var installButton = installButtons.item(i);
+    		   for (var k = 0; k < installers.length; k++) {
+    		     var installer = installers[k];
+    		   	 installButton.classList.remove(installer);
+    		   }
+			   if (installButton.classList.length == 4) { // button special installbutton disabled
+   		         installButton.classList.remove('disabled');
+  			   }
+            }
+    	}
+    </script>
     
     {% include 'market/_market-header.twig' %}
 
@@ -44,7 +59,7 @@
     			<div class="9u">
     				{{ product.description|raw }}
     
-    				<a href="javascript:void(0)" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special disabled">
+    				<a href="javascript:void(0)" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special installbutton disabled {{ product.installers }}">
     					<i class="icon fas fa-angle-right"></i> Install
     				</a>
     			</div>
