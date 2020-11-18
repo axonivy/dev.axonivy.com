@@ -25,15 +25,6 @@ class ProductTest extends TestCase
         Assert::assertFalse($product->isListed());
     }
     
-    public function test_installable()
-    {
-        $product = Market::getProductByKey('uipath');
-        Assert::assertTrue($product->isInstallable());
-        
-        $product = Market::getProductByKey('basic-workflow-ui');
-        Assert::assertFalse($product->isInstallable());
-    }
-    
     public function test_name()
     {
         $product = Market::getProductByKey('visualvm-plugin');
@@ -65,5 +56,14 @@ class ProductTest extends TestCase
     {
         $product = Market::getProductByKey('visualvm-plugin');
         Assert::assertEquals('/_market/visualvm-plugin/meta.json', $product->getMetaUrl());
+    }
+    
+    public function test_installers()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertEquals('can-not-install-product', $product->getInstallers());
+        
+        $product = Market::getProductByKey('uipath');
+        Assert::assertEquals('open-api-rest-client ', $product->getInstallers());
     }
 }
