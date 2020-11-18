@@ -59,11 +59,11 @@ class Product
         if (empty($this->installers)) {
             return "can-not-install-product";
         }
-        
-        $installers = ' ';
+
+        $installers = '';
         foreach ($this->installers as $id) {
             $installers .= "$id ";
-        }        
+        }
         return $installers;
     }
 

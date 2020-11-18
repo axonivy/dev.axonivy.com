@@ -57,4 +57,13 @@ class ProductTest extends TestCase
         $product = Market::getProductByKey('visualvm-plugin');
         Assert::assertEquals('/_market/visualvm-plugin/meta.json', $product->getMetaUrl());
     }
+    
+    public function test_installers()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertEquals('can-not-install-product', $product->getInstallers());
+        
+        $product = Market::getProductByKey('uipath');
+        Assert::assertEquals('open-api-rest-client ', $product->getInstallers());
+    }
 }

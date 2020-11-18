@@ -35,4 +35,13 @@ class MarketDesignerActionTest extends TestCase
             ->bodyDoesNotContain("No products found")
             ->bodyDoesNotContain('VisualVM Plugin');
     }
+
+    public function testJavascriptInterfaceForDesignerAvailable()
+    {
+        AppTester::assertThatGet('/market-designer')
+            ->ok()
+            ->bodyContains('function enableInstallButtons(installers)')
+            ->bodyContains('button special installbutton disabled can-not-install-product')
+            ->bodyContains('button special installbutton disabled open-api-rest-client');
+    }
 }
