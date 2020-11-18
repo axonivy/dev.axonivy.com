@@ -13,13 +13,12 @@ class ProductFactory
         
         $listed = $json->listed ?? true;
         $sort = $json->sort ?? 999999;
-        $installable = isset($json->installers);
         $info = null;
         if (isset($json->mavenArtifacts))
         {
             $info = self::createMavenProductInfo($json);
         }
-        return new Product($key, $path, $json->name, $listed, $sort, $installable, $info);
+        return new Product($key, $path, $json->name, $listed, $sort, $info);
     }
 
     private static function createMavenProductInfo($json): MavenProductInfo

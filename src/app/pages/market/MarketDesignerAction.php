@@ -23,7 +23,7 @@ class MarketDesignerAction
         $baseUri = $uri->getScheme() . '://' . $uri->getHost();
         return $this->view->render($response, 'market/market-designer.twig', [
             'baseUri' => $baseUri,
-            'products' => Market::search(Market::installable(), $searchQuery),
+            'products' => Market::search(Market::listed(), $searchQuery),
             'searchQuery' => $searchQuery
         ]);
     }

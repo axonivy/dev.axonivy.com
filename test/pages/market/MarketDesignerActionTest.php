@@ -12,19 +12,27 @@ class MarketDesignerActionTest extends TestCase
         AppTester::assertThatGet('/market-designer')
             ->ok()
             ->bodyContains('UI Path RPA')
-            ->bodyDoesNotContain('VisualVM Plugin')
+            ->bodyContains('VisualVM Plugin')
             ->bodyContains('Install') // install button
             ->bodyDoesNotContain("Team") // header
             ->bodyDoesNotContain("Support") // footer
             ->bodyDoesNotContain('Basic Workflow'); // not listed
     }
-    
+
+    public function testMarketPageSearchNonExisting()
+    {
+        AppTester::assertThatGet('/market-designer?search=notexisting')->ok()
+            ->bodyDoesNotContain('UI Path RPA')
+            ->bodyContains("No products found")
+            ->bodyDoesNotContain('VisualVM Plugin');
+    }
+
     public function testMarketPageSearch()
     {
-        AppTester::assertThatGet('/market-designer?search=notexisting')
-        ->ok()
-        ->bodyDoesNotContain('UI Path RPA')
-        ->bodyContains("No products found")
-        ->bodyDoesNotContain('VisualVM Plugin');
+        AppTester::assertThatGet('/market-designer?search=portal')->ok()
+            ->bodyContains('Portal')
+            ->bodyDoesNotContain('UI Path RPA')
+            ->bodyDoesNotContain("No products found")
+            ->bodyDoesNotContain('VisualVM Plugin');
     }
 }

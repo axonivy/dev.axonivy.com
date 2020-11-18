@@ -25,15 +25,6 @@ class ProductTest extends TestCase
         Assert::assertFalse($product->isListed());
     }
     
-    public function test_installable()
-    {
-        $product = Market::getProductByKey('uipath');
-        Assert::assertTrue($product->isInstallable());
-        
-        $product = Market::getProductByKey('basic-workflow-ui');
-        Assert::assertFalse($product->isInstallable());
-    }
-    
     public function test_name()
     {
         $product = Market::getProductByKey('visualvm-plugin');

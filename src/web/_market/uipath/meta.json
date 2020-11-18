@@ -1,7 +1,6 @@
 {
 	"__comment": "prototype for first connector",
 	"name": "UI Path RPA",
-	"listed": false,
 	"installers": [
 		{
 			"id": "open-api-rest-client",

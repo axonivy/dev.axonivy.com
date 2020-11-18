@@ -9,18 +9,16 @@ class Product
     private string $name;
     private bool $listed;
     private int $sort;
-    private bool $installable;
 
     private ?MavenProductInfo $mavenProductInfo;
 
-    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, bool $installable, ?MavenProductInfo $mavenProductInfo)
+    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, ?MavenProductInfo $mavenProductInfo)
     {
         $this->key = $key;
         $this->path = $path;
         $this->name = $name;
         $this->listed = $listed;
         $this->sort = $sort;
-        $this->installable = $installable;
         $this->mavenProductInfo = $mavenProductInfo;
     }
     
@@ -32,11 +30,6 @@ class Product
     public function isListed(): bool
     {
         return $this->listed;
-    }
-
-    public function isInstallable(): bool
-    {
-        return $this->installable;
     }
 
     public function getName(): string
