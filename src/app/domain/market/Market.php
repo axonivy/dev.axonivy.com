@@ -38,8 +38,9 @@ class Market
         {
             return $products;
         }
+        
         $listed = [];
-        foreach ($products as $product) {
+        foreach ($products as $product) {            
             if (StringUtil::containsIgnoreCase($product->getName(), $searchQuery)) {
                 $listed[] = $product;
             } else if (StringUtil::containsIgnoreCase($product->getDescription(), $searchQuery)) {
@@ -49,8 +50,40 @@ class Market
         return $listed;
     }
     
+    public static function searchByTag(array $products, string $searchTag): array
+    {
+        if (empty($searchTag))
+        {
+            return $products;
+        }
+        
+        $listed = [];
+        foreach ($products as $product) {
+            foreach ($product->getTags() as $tag) {
+                if (strtoupper($tag) == strtoupper($searchTag)) {
+                    $listed[] = $product;
+                    break;
+                }
+            }
+        }
+        return $listed;
+    }
+    
     public static function listed(): array
     {
         return array_filter(self::all(), fn (Product $product) => $product->isListed());
+    }
+    
+    public static function tags(array $products): array
+    {
+        $tags = [];
+        foreach ($products as $product) {
+            foreach ($product->getTags() as $tag) {
+                $tags[] = strtoupper($tag);
+            }
+        }
+        $tags = array_unique($tags);
+        sort($tags);
+        return $tags;
     }
 }

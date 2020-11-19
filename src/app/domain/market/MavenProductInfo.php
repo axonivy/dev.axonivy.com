@@ -4,19 +4,12 @@ namespace app\domain\market;
 class MavenProductInfo
 {
     private array $mavenArtifacts;
-    private bool $importWizard;
     private VersionDisplayFilter $versionDisplayFilter;
     
-    public function __construct(array $mavenArtifacts, bool $importWizard, VersionDisplayFilter $versionDisplayFilter)
+    public function __construct(array $mavenArtifacts, VersionDisplayFilter $versionDisplayFilter)
     {
         $this->mavenArtifacts = $mavenArtifacts;
-        $this->importWizard = $importWizard;
         $this->versionDisplayFilter = $versionDisplayFilter;
-    }
-    
-    public function getImportWizard(): bool
-    {
-        return $this->importWizard;
     }
     
     public function getMavenArtifacts(): array

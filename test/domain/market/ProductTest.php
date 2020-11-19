@@ -43,15 +43,6 @@ class ProductTest extends TestCase
         Assert::assertEquals('/market/visualvm-plugin', $product->getUrl());
     }
     
-    public function test_importWizard()
-    {
-        $product = Market::getProductByKey('visualvm-plugin');
-        Assert::assertFalse($product->getMavenProductInfo()->getImportWizard());
-        
-        $product = Market::getProductByKey('basic-workflow-ui');
-        Assert::assertTrue($product->getMavenProductInfo()->getImportWizard());
-    }
-
     public function test_metaUrl()
     {
         $product = Market::getProductByKey('visualvm-plugin');
@@ -65,5 +56,17 @@ class ProductTest extends TestCase
         
         $product = Market::getProductByKey('uipath');
         Assert::assertEquals('open-api-rest-client ', $product->getInstallers());
+    }
+    
+    public function test_tags()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertEquals(['monitoring'], $product->getTags());
+        
+        $product = Market::getProductByKey('uipath');
+        Assert::assertEquals(['connector', 'RPA'], $product->getTags());
+        
+        $product = Market::getProductByKey('demos');
+        Assert::assertEquals(['demo'], $product->getTags());
     }
 }

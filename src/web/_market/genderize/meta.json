@@ -1,0 +1,14 @@
+{
+	"id": "genderize-io-connector",
+	"name": "Genderize.io Connector",
+	"tags": ["connector"],
+	"installers": [
+		{
+			"id": "open-api-rest-client",
+			"data": {
+				"openApiUrl": "openapi.json",
+				"namespace": "io.genderize"
+			}
+		}
+	]
+}

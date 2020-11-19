@@ -1,6 +1,8 @@
 {
+	"id": "portal",
 	"name": "Portal",
 	"sort": 100,
+	"tags": ["workflow-ui"],
 	"versionDisplay": "portal",
 	"mavenArtifacts": [
 		{

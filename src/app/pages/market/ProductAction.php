@@ -21,39 +21,42 @@ class ProductAction
         if ($product == null) {
             throw new HttpNotFoundException($request);
         }
+        
+        $uri = $request->getUri();
+        $baseUri = $uri->getScheme() . '://' . $uri->getHost();
 
         $mavenProductInfo = $product->getMavenProductInfo();
-        if ($mavenProductInfo == null)
-        {
-            return $this->view->render($response, 'market/product.twig', [
-                'product' => $product
-            ]);
-        }
+        
 
         $version = $args['version'] ?? '';
-        if (empty($version)) {
-            $version = $mavenProductInfo->getLatestVersionToDisplay();
-        } else if (!$mavenProductInfo->hasVersion($version)) {
-           throw new HttpNotFoundException($request);
-        }
-        
-        $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
         $mavenArtifactsAsDependency = [];
-        foreach ($mavenArtifacts as $artifact) {
-            if ($artifact->getMakesSenseAsMavenDependency()) {
-                $mavenArtifactsAsDependency[] = $artifact;
-            }
-        }
-
+        $mavenArtifacts = [];
         $docArtifacts = [];
-        foreach ($mavenArtifacts as $artifact) {
-            if ($artifact->isDocumentation()) {
-                $docArtifacts[] = $artifact;
+        
+        if ($mavenProductInfo != null)
+        {
+            if (empty($version)) {
+                $version = $mavenProductInfo->getLatestVersionToDisplay();
+            } else if (!$mavenProductInfo->hasVersion($version)) {
+                throw new HttpNotFoundException($request);
+            }
+            
+            $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
+            foreach ($mavenArtifacts as $artifact) {
+                if ($artifact->getMakesSenseAsMavenDependency()) {
+                    $mavenArtifactsAsDependency[] = $artifact;
+                }
+            }
+            
+            foreach ($mavenArtifacts as $artifact) {
+                if ($artifact->isDocumentation()) {
+                    $docArtifacts[] = $artifact;
+                }
             }
         }
-
-        return $this->view->render($response, 'market/maven-product.twig', [
+        return $this->view->render($response, 'market/product.twig', [
             'product' => $product,
+            'baseUri' => $baseUri,
             'mavenProductInfo' => $mavenProductInfo,
             'mavenArtifacts' => $mavenArtifacts,
             'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
