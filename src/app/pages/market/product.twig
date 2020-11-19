@@ -7,9 +7,9 @@
 <script>
     	function enableInstallButtons(installers) {    	
     		var installButtons = document.getElementsByClassName("installbutton");
-    		installButton.style.display='inline';   
     		for (var i = 0; i < installButtons.length; i++) {
     		   var installButton = installButtons.item(i);
+	     	   installButton.style.display='block';   
     		   for (var k = 0; k < installers.length; k++) {
     		     var installer = installers[k];
     		   	 installButton.classList.remove(installer);
@@ -40,9 +40,13 @@
     				    {% endif %}
     				    
     				    <div style="clear:both;"></div>
-    				    <a href="javascript:void(0)" style="display:none;" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special installbutton disabled {{ product.installers }}">
-    						<i class="icon fas fa-angle-right"></i> Install
-    					</a>
+    				    <ul class="actions small" style="margin-bottom:0px;">
+    				    	<li>
+    				    		<a href="javascript:void(0)" style="display:none;" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special installbutton disabled {{ product.installers }}">
+    								<i class="icon fas fa-angle-right" style="color:#007095;"></i> Install
+    							</a>
+    						</li>
+    					</ul>
     				</header>
 				</div>
 			</div>
@@ -54,6 +58,8 @@
 	
 	<section id="two" style="padding-top: 60px;">
 				<div class="inner">
+				
+				
 					<article>
 						<div class="content">
 						
@@ -63,17 +69,18 @@
 					<article class="alt">
 						<div class="content">
 						
-						
-			<div class="row">
-				<div class="6u 12u$(small)">
-						{% for artifact in docArtifacts %}
-						    {% if artifact.docExists(selectedVersion) %}
-								&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><span class="icon fas fa-book"></span> {{ artifact.name }}</a>
-							{% endif %}
-					   {% endfor %}
-				</div>
-	    	</div>
-						
+						{% if docArtifacts is not empty %}
+							<header>
+								<h3>Documentation</h3>
+							</header>
+    						{% for artifact in docArtifacts %}
+    						    {% if artifact.docExists(selectedVersion) %}
+    								&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><i class="icon fas fa-book" style="font-size:20px;"></i> {{ artifact.name }}</a>
+    							{% endif %}
+    					   {% endfor %}
+    					   <br />
+						{% endif %}
+
 						{% if mavenArtifacts is not empty %}
 							<header>
 								<h3>Download</h3>
@@ -89,11 +96,11 @@
 							    {% endfor %}
 							    </ul>
 							</div>
+							<br />
 						{% endif %}
 						
 						
 						{% if mavenArtifactsAsDependency is not empty %}
-						
 							<header>
 								<h3>Maven</h3>
 							</header>
