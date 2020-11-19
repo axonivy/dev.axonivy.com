@@ -22,10 +22,11 @@ class Website
     {
         $container = new Container();
         $this->app = AppFactory::createFromContainer($container);
-        $this->configureTemplateEngine();
+        $view = $this->configureTemplateEngine();
         $this->installTrailingSlashRedirect();
         $this->installRoutes();
         $this->installErrorHandling();
+        $this->installViewerMiddleware($view);
     }
 
     public function getApp(): App
@@ -38,7 +39,7 @@ class Website
         $this->app->run();
     }
     
-    private function configureTemplateEngine()
+    private function configureTemplateEngine(): Twig
     {
         $container = $this->app->getContainer();
         
@@ -65,6 +66,8 @@ class Website
         $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD_LONG', $textLong);
         
         $view->getEnvironment()->addGlobal('PRODUCTIVE_SYSTEM', Config::isProductionEnvironment());
+        
+        return $view;
     }
 
     private function getDisplayVersion(?ReleaseInfo $info): string
@@ -75,6 +78,11 @@ class Website
     private function installTrailingSlashRedirect()
     {
         $this->app->add((new TrailingSlash(false))->redirect());
+    }
+
+    private function installViewerMiddleware(Twig $view)
+    {
+        $this->app->add(new ViewerMiddleware($view));
     }
     
     private function installRoutes()

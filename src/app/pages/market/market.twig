@@ -6,14 +6,51 @@
   	
 	{% include 'market/_market-header.twig' %}
 
-	<section id="two">
+	<style>
+	    .product-card {
+	    cursor: pointer;
+	    	background-color:white;
+	    	padding:10px;
+	    	overflow:hidden;
+	    	min-height:200px;
+	    	max-height:200px;
+	    }
+	    .product-tag {
+	    	color:white;
+	    	font-size:11px;
+	    	padding:5px;
+	    	background-color:#bbb;
+	    	border-radius: 15px;
+	    	text-transform: uppercase;
+	    	font-weight:bold;
+	    }
+		.zoom:hover {
+  			transform: scale(1.1);
+		}
+	</style>
+
+	<section style="background-color:#f7f7f7;padding-top:10px;padding-bottom:10px;">
 		<div class="inner">
 			<div class="row">
 				{% for product in products %}
-					<div class="6u 12u$(small)">
-						<header><h3>{{ product.name }}</h3></header>					
-						<img src="{{ product.imgSrc }}" alt="{{ product.name }}" class="image fit"/>
+					<div class="3u 4u(medium) 6u(small) 12u(xsmall)" style="padding:10px;">
+						<div class="product-card zoom" onclick="location.href='{{ product.url }}';">
 						
+							<div style="height:40px;">
+							{% for tag in product.tags %}
+								<span class="product-tag">{{ tag }}</span>
+							{% endfor %}
+							</div>
+						
+							<center>
+								<img src="{{ product.imgSrc }}" style="height:100px;" alt="{{ product.name }}" class="image"/>
+							</center>
+							
+							<center style="color:#444;font-size:15px;">
+						        {{ product.name }}
+						    </center>
+						</div>
+						<!-- 						
 						<ul class="actions">
 							<li>
 								<a href="{{ product.url }}" class="button special">
@@ -21,6 +58,9 @@
 								</a>
 							</li>
 						</ul>
+						 -->
+						 
+						 
 					</div>
 				{% endfor %}
 			</div>

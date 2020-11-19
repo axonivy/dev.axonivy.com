@@ -10,12 +10,11 @@ class ProductFactory
     {
         $content = file_get_contents($pathMetaFile);
         $json = json_decode($content);
-        
+
         $listed = $json->listed ?? true;
         $sort = $json->sort ?? 999999;
         $info = null;
-        if (isset($json->mavenArtifacts))
-        {
+        if (isset($json->mavenArtifacts)) {
             $info = self::createMavenProductInfo($json);
         }
         $installers = [];
@@ -24,17 +23,17 @@ class ProductFactory
                 $installers[] = $installer->id;
             }
         }
-        return new Product($key, $path, $json->name, $listed, $sort, $installers, $info);
+        $tags = $json->tags ?? [];
+        return new Product($key, $path, $json->name, $listed, $sort, $installers, $tags, $info);
     }
 
     private static function createMavenProductInfo($json): MavenProductInfo
     {
         $mavenArtifacts = self::createMavenArtifacts($json);
-        $importWizard = $json->importWizard ?? true;
         $versionDisplayFilter = VersionDisplayFilterFactory::create($json->versionDisplay);
-        return new MavenProductInfo($mavenArtifacts, $importWizard, $versionDisplayFilter);
+        return new MavenProductInfo($mavenArtifacts, $versionDisplayFilter);
     }
-    
+
     private static function createMavenArtifacts($json): array
     {
         $mavenArtifacts = [];

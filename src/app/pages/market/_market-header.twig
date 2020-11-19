@@ -2,6 +2,8 @@
 		<div class="inner">
 			<header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
 
+			</style>
+
 			<p>
 				In our market we provide powerful extensions around the Axon.ivy Platform.
 				From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
@@ -9,21 +11,41 @@
 			</p>
 			
 			<div class="row">
-				<div class="9u 12u$(small)" style="margin-bottom:5px;">
-					<input type="text" id="searchQuery" style="border: 1px solid white;" value="{{ searchQuery }}"></input>
+				<div class="5u 5u(medium) 12u(small)" style="margin-bottom:5px;">
+					<select id="types">
+                      {% for tag in tags %}
+                      	<option value="{{ tag }}" {{ (selectedTag == tag) ? 'selected' : '' }}>Type: {{ tag }}</option>
+                      {% endfor %}
+                    </select>
 				</div>
-    			<div class="3u$ 12u$(small)">
-    				<ul class="actions vertical small">
-    					<li>
-    						<a onclick="searchMarket()" id="searchButton" href="javascript:void(0)" class="button small fit"> <i class="icon fas fa-search"></i> Search</a>
-    					</li>
-    				</ul>
+                    
+				<div class="6u 6u(medium) 10u(small)" style="margin-bottom:5px;">
+					<input type="text" id="searchQuery" placeholder="Search ..." style="border: 1px solid white" value="{{ searchQuery }}"></input>
+				</div>
+				
+    			<div class="1u 1u(medium) 2u(small)">
+           			<a onclick="searchMarket()" id="searchButton" href="javascript:void(0)" class="button small" style="min-width:60px;"><i class="icon fas fa-search"></i></a>
     			</div>
 			</div>
+
+			<div class="row" style="margin-top:5px;">
+				<div class="12u$">
+					{% if filterSet %}
+						<a href="/market" style="font-size:16px;"><i class="icon fas fa-undo" style="color:white;"></i> reset filter</a>
+					{% else %}
+						<a href="/market" style="font-size:16px;">&ensp;</a>
+					{% endif %}
+				</div>
+			</div>
+
 			<script>
+                var typesDropdown = document.getElementById('types');
+                typesDropdown.onchange = function() { searchMarket(); };
+
         		function searchMarket() {
-        			var element = document.getElementById('searchQuery');
-        			window.location.href = "?search="+element.value;
+        			var searchQuery = document.getElementById('searchQuery').value;
+        			var type = document.getElementById('types').value;
+        			window.location.href = "?search=" + searchQuery + "&type=" + type;
         		}
         		
         		var input = document.getElementById("searchQuery");
@@ -43,15 +65,14 @@
 		</div>
 	</section>
 	
-	
 	{% if products is empty %}
 		<section  style="background-color:#f7f7f7">
         	<div class="inner">
-        			<br />
+        		<br />
         			<h3>
         				No products found
         			</h3>
-        			<br />
+        		<br />
           	</div>
         </section>
 	{% endif %}

@@ -36,10 +36,10 @@ class MarketTest extends TestCase
         Assert::assertFalse($product->isListed());
     }
     
-    public function test_search_emptyDoNtFilter()
+    public function test_search_emptyDoNotFilter()
     {
         $products = Market::search(Market::listed(), '');
-        Assert::assertEquals(5, count($products));        
+        Assert::assertEquals(6, count($products));        
     }
     
     public function test_search_noMatch()
@@ -69,8 +69,22 @@ class MarketTest extends TestCase
         $count  = count($sorts);
         
         for ($i = 0; $i < $count - 1; $i++) {
-            Assert::assertGreaterThan($sorts[$i], $sorts[$i + 1]);
+            Assert::assertGreaterThanOrEqual($sorts[$i], $sorts[$i + 1]);
         }
         Assert::assertEquals('portal', $products[0]->getKey());
+    }
+
+    public function test_tags()
+    {
+        $tags = Market::tags(Market::listed());
+        $expectedTags = [
+            'CONNECTOR',
+            'DEMO',
+            'MONITORING',
+            'RPA',
+            'UTIL',
+            'WORKFLOW-UI',
+        ];
+        Assert::assertEquals($expectedTags, $tags);
     }
 }

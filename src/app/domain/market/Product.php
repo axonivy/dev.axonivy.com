@@ -10,10 +10,11 @@ class Product
     private bool $listed;
     private int $sort;
     private array $installers;
+    private array $tags;
     
     private ?MavenProductInfo $mavenProductInfo;
 
-    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, array $installers, ?MavenProductInfo $mavenProductInfo)
+    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, array $installers, array $tags, ?MavenProductInfo $mavenProductInfo)
     {
         $this->key = $key;
         $this->path = $path;
@@ -21,6 +22,7 @@ class Product
         $this->listed = $listed;
         $this->sort = $sort;
         $this->installers = $installers;
+        $this->tags = $tags;
         $this->mavenProductInfo = $mavenProductInfo;
     }
     
@@ -49,11 +51,6 @@ class Product
         return $this->getHtmlOfMarkdown('README.md');
     }
     
-    public function getInstallation(): string
-    {
-        return $this->getHtmlOfMarkdown('INSTALLATION.md');
-    }
-
     public function getInstallers(): string
     {
         if (empty($this->installers)) {
@@ -67,19 +64,29 @@ class Product
         return $installers;
     }
 
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
     private function getHtmlOfMarkdown(string $filename): string
     {
         $markdownFile = $this->path . "/$filename";
         if (file_exists($markdownFile)) {
             $markdownContent = file_get_contents($markdownFile);
-            return \ParsedownExtra::instance()->text($markdownContent);
+            return (new ParsedownCustom($this->assetBaseUrl()))->text($markdownContent);
         }
         return '';
+    }
+    
+    private function assetBaseUrl()
+    {
+        return '/_market/' . $this->key;
     }
 
     public function getImgSrc()
     {
-        return '/_market/' . $this->key . '/logo.png';
+        return $this->assetBaseUrl() . '/logo.png';
     }
     
     public function getUrl(): string
@@ -89,11 +96,67 @@ class Product
 
     public function getMetaUrl(): string
     {
-        return  '/_market/' . $this->key . '/meta.json';
+        return $this->assetBaseUrl() . '/meta.json';
     }
 
     public function getMavenProductInfo(): ?MavenProductInfo
     {
         return $this->mavenProductInfo;
+    }
+}
+
+class ParsedownCustom extends \ParsedownExtra
+{
+    private String $baseUrl;
+    
+    public function __construct(String $baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+    }
+    
+    protected function inlineImage($Excerpt)
+    {
+        if ( ! isset($Excerpt['text'][1]) or $Excerpt['text'][1] !== '[')
+        {
+            return;
+        }
+        
+        $Excerpt['text']= substr($Excerpt['text'], 1);
+        
+        $Link = $this->inlineLink($Excerpt);
+        
+        if ($Link === null)
+        {
+            return;
+        }
+        
+        $imageUrl = $Link['element']['attributes']['href'];
+        if (!self::isAbsolute($imageUrl))
+        {
+           $imageUrl = $this->baseUrl . "/$imageUrl";
+        }
+        
+        $Inline = array(
+            'extent' => $Link['extent'] + 1,
+            'element' => array(
+                'name' => 'img',
+                'attributes' => array(
+                    'src' => $imageUrl,
+                    'alt' => $Link['element']['text'],
+                    'class' => 'image fit'
+                ),
+            ),
+        );
+        
+        $Inline['element']['attributes'] += $Link['element']['attributes'];
+        
+        unset($Inline['element']['attributes']['href']);
+        
+        return $Inline;
+    }
+
+    private static function isAbsolute($uri)
+    {
+        return strpos($uri, '://') !== false;
     }
 }
