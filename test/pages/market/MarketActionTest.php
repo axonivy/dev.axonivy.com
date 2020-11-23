@@ -30,7 +30,7 @@ class MarketActionTest extends TestCase
     {
         AppTester::assertThatGet('/market?search=doesnotexist')
         ->ok()
-        ->bodyContains('No products found')
+        ->bodyContains('Nothing found')
         ->bodyDoesNotContain('Portal')
         ->bodyDoesNotContain('VisualVM Plugin')
         ->bodyDoesNotContain('Basic Workflow'); // not listed
