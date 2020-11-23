@@ -2,6 +2,7 @@
 	"id": "genderize-io-connector",
 	"name": "Genderize.io Connector",
 	"tags": ["connector"],
+	"minVersion": "9.2.0",
 	"installers": [
 		{
 			"id": "open-api-rest-client",

@@ -49,15 +49,51 @@ class ProductTest extends TestCase
         Assert::assertEquals('/_market/visualvm-plugin/meta.json', $product->getMetaUrl());
     }
     
-    public function test_installers()
+    public function test_installable()
     {
         $product = Market::getProductByKey('visualvm-plugin');
-        Assert::assertEquals('can-not-install-product', $product->getInstallers());
+        Assert::assertFalse($product->isInstallable());
         
         $product = Market::getProductByKey('uipath');
-        Assert::assertEquals('open-api-rest-client ', $product->getInstallers());
+        Assert::assertTrue($product->isInstallable());
     }
     
+    public function test_minVersion()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertEquals('0.0.0', $product->getMinVersion());
+        
+        $product = Market::getProductByKey('genderize');
+        Assert::assertEquals('9.2.0', $product->getMinVersion());
+    }
+    
+    public function test_isVersionSupported()
+    {
+        $product = Market::getProductByKey('genderize');
+        Assert::assertEquals('9.2.0', $product->getMinVersion());
+
+        Assert::assertTrue($product->isVersionSupported('9.2.0'));
+        Assert::assertTrue($product->isVersionSupported('9.2.1'));
+        Assert::assertTrue($product->isVersionSupported('9.3.0'));
+        Assert::assertTrue($product->isVersionSupported('10.0.0'));
+        
+        Assert::assertFalse($product->isVersionSupported('9.1.0'));
+        Assert::assertFalse($product->isVersionSupported('9.1.5'));
+        Assert::assertFalse($product->isVersionSupported('9.0.0'));
+        Assert::assertFalse($product->isVersionSupported('8.6.0'));
+    }
+    
+    public function test_getReasonWhyNotInstallable()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertEquals('Product is not installable.', $product->getReasonWhyNotInstallable('9.2.0'));
+        
+        $product = Market::getProductByKey('genderize');
+        Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.2.0'));
+        Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.3.0'));
+        Assert::assertEquals('Your Axon.ivy Designer is too old (9.1.0). You need 9.2.0 or newer.', $product->getReasonWhyNotInstallable('9.1.0'));
+    }
+
     public function test_tags()
     {
         $product = Market::getProductByKey('visualvm-plugin');

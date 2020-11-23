@@ -9,20 +9,22 @@ class Product
     private string $name;
     private bool $listed;
     private int $sort;
-    private array $installers;
     private array $tags;
+    private string $minVersion;
+    private bool $installable;
     
     private ?MavenProductInfo $mavenProductInfo;
 
-    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, array $installers, array $tags, ?MavenProductInfo $mavenProductInfo)
+    public function __construct(string $key, string $path, string $name, bool $listed, int $sort, array $tags, string $minVersion, bool $installable, ?MavenProductInfo $mavenProductInfo)
     {
         $this->key = $key;
         $this->path = $path;
         $this->name = $name;
         $this->listed = $listed;
         $this->sort = $sort;
-        $this->installers = $installers;
         $this->tags = $tags;
+        $this->minVersion = $minVersion;
+        $this->installable = $installable;
         $this->mavenProductInfo = $mavenProductInfo;
     }
     
@@ -46,22 +48,24 @@ class Product
         return $this->sort;
     }
     
+    public function isInstallable(): bool
+    {
+        return $this->installable;
+    }
+    
+    public function getMinVersion(): string
+    {
+        return $this->minVersion;
+    }
+    
+    public function isVersionSupported(string $version): bool
+    {
+        return version_compare($this->minVersion, $version) <= 0;
+    }
+    
     public function getDescription(): string
     {
         return $this->getHtmlOfMarkdown('README.md');
-    }
-    
-    public function getInstallers(): string
-    {
-        if (empty($this->installers)) {
-            return "can-not-install-product";
-        }
-
-        $installers = '';
-        foreach ($this->installers as $id) {
-            $installers .= "$id ";
-        }
-        return $installers;
     }
 
     public function getTags(): array
@@ -102,6 +106,16 @@ class Product
     public function getMavenProductInfo(): ?MavenProductInfo
     {
         return $this->mavenProductInfo;
+    }
+
+    public function getReasonWhyNotInstallable(string $version): string
+    {
+        if (! $this->isInstallable()) {
+            return 'Product is not installable.';
+        } elseif (! $this->isVersionSupported($version)) {
+            return 'Your Axon.ivy Designer is too old (' . $version . '). You need ' . $this->getMinVersion() . ' or newer.';
+        }
+        return '';
     }
 }
 

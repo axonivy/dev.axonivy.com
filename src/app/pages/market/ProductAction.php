@@ -4,6 +4,8 @@ namespace app\pages\market;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Views\Twig;
 use app\domain\market\Market;
+use app\domain\market\Product;
+use Slim\Psr7\Request;
 
 class ProductAction
 {
@@ -22,12 +24,7 @@ class ProductAction
             throw new HttpNotFoundException($request);
         }
         
-        $uri = $request->getUri();
-        $baseUri = $uri->getScheme() . '://' . $uri->getHost();
-
         $mavenProductInfo = $product->getMavenProductInfo();
-        
-
         $version = $args['version'] ?? '';
         $mavenArtifactsAsDependency = [];
         $mavenArtifacts = [];
@@ -49,27 +46,61 @@ class ProductAction
             }
             
             foreach ($mavenArtifacts as $artifact) {
-                if ($artifact->isDocumentation()) {
+                if ($artifact->isDocumentation() && $artifact->docExists($version)) {
                     $docArtifacts[] = $artifact;
                 }
             }
         }
         
-        $existingDocArtifacts = [];
-        foreach ($docArtifacts as $docArtifact) {
-            if ($docArtifact->docExists($version)) {
-                $existingDocArtifacts[] = $docArtifact;
-            }
-        }
+        $installButton = self::createInstallButton($request, $product);
         
         return $this->view->render($response, 'market/product.twig', [
             'product' => $product,
-            'baseUri' => $baseUri,
             'mavenProductInfo' => $mavenProductInfo,
             'mavenArtifacts' => $mavenArtifacts,
             'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
-            'docArtifacts' => $existingDocArtifacts,
-            'selectedVersion' => $version
+            'docArtifacts' => $docArtifacts,
+            'selectedVersion' => $version,
+            'installButton' => $installButton
         ]);
+    }
+
+    private static function createInstallButton(Request $request, Product $product): InstallButton
+    {
+        $uri = $request->getUri();
+        $metaUrl = $uri->getScheme() . '://' . $uri->getHost() . $product->getMetaUrl();
+
+        $cookies = $request->getCookieParams();
+        $version = $cookies['ivy-version'] ?? '';
+
+        $show = !empty($version);
+        $reason = $product->getReasonWhyNotInstallable($version);
+        return new InstallButton($show, $reason, $metaUrl);
+    }
+}
+
+class InstallButton
+{
+    public bool $show;
+
+    public string $reason;
+
+    private string $metaUrl;
+
+    function __construct(bool $show, string $reason, string $metaUrl)
+    {
+        $this->show = $show;
+        $this->reason = $reason;
+        $this->metaUrl = $metaUrl;
+    }
+
+    public function isEnabled(): bool
+    {
+        return empty($this->reason);
+    }
+    
+    public function getJavascriptCallback(): string
+    {
+        return "install('". $this->metaUrl ."')";
     }
 }
