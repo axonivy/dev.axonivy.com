@@ -2213,26 +2213,6 @@
 		border-radius: 100%;
 	}
 
-	::-webkit-input-placeholder {
-		opacity: 1.0;
-	}
-
-	:-moz-placeholder {
-		opacity: 1.0;
-	}
-
-	::-moz-placeholder {
-		opacity: 1.0;
-	}
-
-	:-ms-input-placeholder {
-		opacity: 1.0;
-	}
-
-	.formerize-placeholder {
-		opacity: 1.0;
-	}
-
 	label {
 		color: #C7D426;
 	}
@@ -2282,26 +2262,6 @@
 	input[type="radio"]:focus + label:before {
 		border-color: #C7D426;
 		box-shadow: 0 0 0 1px #C7D426;
-	}
-
-	::-webkit-input-placeholder {
-		color: #717171 !important;
-	}
-
-	:-moz-placeholder {
-		color: #717171 !important;
-	}
-
-	::-moz-placeholder {
-		color: #717171 !important;
-	}
-
-	:-ms-input-placeholder {
-		color: #717171 !important;
-	}
-
-	.formerize-placeholder {
-		color: #717171 !important;
 	}
 
 /* Icon */
@@ -2830,26 +2790,6 @@
 				box-shadow: 0 0 0 1px #ffffff;
 			}
 
-			.wrapper.style1 ::-webkit-input-placeholder {
-				color: #f8d1d2 !important;
-			}
-
-			.wrapper.style1 :-moz-placeholder {
-				color: #f8d1d2 !important;
-			}
-
-			.wrapper.style1 ::-moz-placeholder {
-				color: #f8d1d2 !important;
-			}
-
-			.wrapper.style1 :-ms-input-placeholder {
-				color: #f8d1d2 !important;
-			}
-
-			.wrapper.style1 .formerize-placeholder {
-				color: #f8d1d2 !important;
-			}
-
 			.wrapper.style1 ul.alt li {
 				border-top-color: #fff;
 			}
@@ -3032,26 +2972,6 @@
 			.wrapper.style2 input[type="radio"]:focus + label:before {
 				border-color: #C7D426;
 				box-shadow: 0 0 0 1px #C7D426;
-			}
-
-			.wrapper.style2 ::-webkit-input-placeholder {
-				color: #bdbdbd !important;
-			}
-
-			.wrapper.style2 :-moz-placeholder {
-				color: #bdbdbd !important;
-			}
-
-			.wrapper.style2 ::-moz-placeholder {
-				color: #bdbdbd !important;
-			}
-
-			.wrapper.style2 :-ms-input-placeholder {
-				color: #bdbdbd !important;
-			}
-
-			.wrapper.style2 .formerize-placeholder {
-				color: #bdbdbd !important;
 			}
 
 			.wrapper.style2 ul.alt li {
@@ -3929,26 +3849,6 @@
 		#footer input[type="radio"]:focus + label:before {
 			border-color: #ffffff;
 			box-shadow: 0 0 0 1px #ffffff;
-		}
-
-		#footer ::-webkit-input-placeholder {
-			color: #f8d1d2 !important;
-		}
-
-		#footer :-moz-placeholder {
-			color: #f8d1d2 !important;
-		}
-
-		#footer ::-moz-placeholder {
-			color: #f8d1d2 !important;
-		}
-
-		#footer :-ms-input-placeholder {
-			color: #f8d1d2 !important;
-		}
-
-		#footer .formerize-placeholder {
-			color: #f8d1d2 !important;
 		}
 
 		#footer .inner {
