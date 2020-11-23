@@ -4,8 +4,6 @@
 
 {% block content %}
   	
-	{% include 'market/_market-header.twig' %}
-
 	<style>
 	    .product-card {
 	    cursor: pointer;
@@ -19,7 +17,7 @@
 	    	color:white;
 	    	font-size:11px;
 	    	padding:5px;
-	    	background-color:#bbb;
+	    	background-color:#888;
 	    	border-radius: 15px;
 	    	text-transform: uppercase;
 	    	font-weight:bold;
@@ -27,44 +25,96 @@
 		.zoom:hover {
   			transform: scale(1.1);
 		}
+		input::placeholder {
+  			color: white;
+		}
 	</style>
 
-	<section style="background-color:#f7f7f7;padding-top:10px;padding-bottom:10px;">
+	 <section id="main" class="inverse">
 		<div class="inner">
+			<header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
+			<p>
+				In our market we provide powerful extensions around the Axon.ivy Platform.
+				From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
+				Take a look around.
+			</p>
+			
+			<div class="row">
+				<div class="5u 12u(small)">
+					<select id="types">
+                      {% for tag in tags %}
+                      	<option value="{{ tag }}" {{ (selectedTag == tag) ? 'selected' : '' }}>{{ tag }}</option>
+                      {% endfor %}
+                    </select>
+				</div>
+                    
+				<div class="6u 10u(small)">
+					<input type="text" id="searchQuery" placeholder="Search ..." style="border: 1px solid white" value="{{ searchQuery }}"></input>
+				</div>
+				
+    			<div class="1u 2u(small)">
+           			<a onclick="searchMarket()" id="searchButton" href="javascript:void(0)" class="button small" style="min-width:50px;">
+           				<i class="icon fas fa-search"></i>
+           			</a>
+    			</div>
+			</div>
+
+			<div class="row" style="margin-top:5px;">
+				<div class="12u$">
+						<a href="/market" style="font-size:16px;{{ (filterSet) ? '' : 'visibility:hidden;' }}"><i class="icon fas fa-undo" style="color:white;"></i> reset filter</a>
+				</div>
+			</div>
+
+			<script>
+                var typesDropdown = document.getElementById('types');
+                typesDropdown.onchange = function() { searchMarket(); };
+
+        		function searchMarket() {
+        			var searchQuery = document.getElementById('searchQuery').value;
+        			var type = document.getElementById('types').value;
+        			window.location.href = "?search=" + searchQuery + "&type=" + type;
+        		}
+
+        		var input = document.getElementById("searchQuery");
+                input.addEventListener("keyup", function(event) {
+                  if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("searchButton").click();
+                  }
+                });
+
+                var input = document.getElementById("searchQuery");
+                var len = input.value.length;
+                input.focus();
+                input.setSelectionRange(len, len);
+        	</script>
+		</div>
+	</section>
+
+	<section style="background-color:#f7f7f7;padding-top:20px;padding-bottom:20px;">
+		<div class="inner">
+			{% if products is empty %}
+          		Nothing found
+            {% endif %}
 			<div class="row">
 				{% for product in products %}
 					<div class="3u 4u(medium) 6u(small) 12u(xsmall)" style="padding:10px;">
 						<div class="product-card zoom" onclick="location.href='{{ product.url }}';">
-						
 							<div style="height:40px;">
 							{% for tag in product.tags %}
 								<span class="product-tag">{{ tag }}</span>
 							{% endfor %}
 							</div>
-						
 							<center>
-								<img src="{{ product.imgSrc }}" style="height:100px;" alt="{{ product.name }}" class="image"/>
+								<img src="{{ product.imgSrc }}" height="100px" alt="{{ product.name }}" class="image"/>
 							</center>
-							
 							<center style="color:#444;font-size:15px;">
 						        {{ product.name }}
 						    </center>
 						</div>
-						<!-- 						
-						<ul class="actions">
-							<li>
-								<a href="{{ product.url }}" class="button special">
-									<i class="icon fas fa-angle-right"></i> More
-								</a>
-							</li>
-						</ul>
-						 -->
-						 
-						 
 					</div>
 				{% endfor %}
 			</div>
 		</div>
 	</section>
-
 {% endblock %}

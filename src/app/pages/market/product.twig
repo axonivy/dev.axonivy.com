@@ -38,94 +38,83 @@
     					    {% endfor %}					
     					</select>
     				    {% endif %}
-    				    
     				    <div style="clear:both;"></div>
-    				    <ul class="actions small" style="margin-bottom:0px;">
-    				    	<li>
-    				    		<a href="javascript:void(0)" style="display:none;" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special installbutton disabled {{ product.installers }}">
-    								<i class="icon fas fa-angle-right" style="color:#007095;"></i> Install
-    							</a>
-    						</li>
-    					</ul>
+
+			    		<a href="javascript:void(0)" style="display:none;" onclick="install('{{ baseUri }}{{ product.metaUrl }}')" class="button special installbutton disabled {{ product.installers }}">
+							<i class="icon fas fa-angle-right" style="color:#007095;"></i> Install
+    					</a>
     				</header>
 				</div>
 			</div>
 		</div>
 	</section>
 	
-	
-	
+	<style>
+		h3 {
+			margin-bottom: 0.2em;
+		}
+		.meta-content {
+			margin-bottom:20px;
+		}
+		ul {
+			margin-bottom: 0.3em;
+		}
+		p {
+			margin-bottom: 0.3em;
+		}
+	</style>
 	
 	<section id="two" style="padding-top: 60px;">
-				<div class="inner">
-				
-				
-					<article>
-						<div class="content">
-						
-							{{ product.description|raw }}
+		<div class="inner">
+			<article>
+				<div class="content">
+					{{ product.description|raw }}
+				</div>
+			</article>
+			<article class="alt">
+				<div class="content">
+					{% if docArtifacts is not empty %}
+						<header><h3>Documentation</h3></header>
+						<div class="meta-content">
+   						{% for artifact in docArtifacts %}
+							<a href="{{ artifact.getDocUrl(selectedVersion) }}"><i class="icon fas fa-book" style="font-size:20px;"></i> {{ artifact.name }}</a>
+   					    {% endfor %}
 						</div>
-					</article>
-					<article class="alt">
-						<div class="content">
-						
-						{% if docArtifacts is not empty %}
-							<header>
-								<h3>Documentation</h3>
-							</header>
-    						{% for artifact in docArtifacts %}
-    						    {% if artifact.docExists(selectedVersion) %}
-    								&ensp;<a href="{{ artifact.getDocUrl(selectedVersion) }}"><i class="icon fas fa-book" style="font-size:20px;"></i> {{ artifact.name }}</a>
-    							{% endif %}
-    					   {% endfor %}
-    					   <br />
-						{% endif %}
+       				{% endif %}
 
-						{% if mavenArtifacts is not empty %}
-							<header>
-								<h3>Download</h3>
-							</header>
-							<div>
-							    <ul>
-								{% for artifact in mavenArtifacts %}
-								<li>
-									<a style="font-size:16px;" href="{{ artifact.getUrl(selectedVersion) }}">
+					{% if mavenArtifacts is not empty %}
+						<header><h3>Download</h3></header>
+						<div class="meta-content">
+						<ul>
+						    {% for artifact in mavenArtifacts %}
+							<li>
+								<a style="font-size:16px;" href="{{ artifact.getUrl(selectedVersion) }}">
 									{{ artifact.name }} {{ selectedVersion }} ({{ artifact.type }})
-									</a>
-									</li>
-							    {% endfor %}
-							    </ul>
-							</div>
-							<br />
-						{% endif %}
+								</a>
+							</li>
+							{% endfor %}
+					    </ul>
+					    </div>
+					{% endif %}
 						
-						
-						{% if mavenArtifactsAsDependency is not empty %}
-							<header>
-								<h3>Maven</h3>
-							</header>
-							<div>
-								<p>
-									You can consume it as maven artifact in your <i>pom.xml</i>
-								</p>
-								{% for artifact in mavenArtifactsAsDependency %}
-
-									<pre><code>&lt;!-- {{ artifact.name }} --&gt;
+					{% if mavenArtifactsAsDependency is not empty %}
+						<header><h3>Maven</h3></header>
+						<div class="meta-content">
+							<p>You can consume it as maven artifact in your <i>pom.xml</i></p>
+							{% for artifact in mavenArtifactsAsDependency %}
+								<pre><code>&lt;!-- {{ artifact.name }} --&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;{{ artifact.groupId }}&lt;/groupId&gt;
   &lt;artifactId&gt;{{ artifact.artifactId }}&lt;/artifactId&gt;
   &lt;version&gt;{{ selectedVersion }}&lt;/version&gt;
   &lt;type&gt;{{ artifact.type }}&lt;/type&gt;
 &lt;/dependency&gt;</code></pre>
-
-							    {% endfor %}
-							</div>
-						
-						 {% endif %}
-							
+						    {% endfor %}
 						</div>
-					</article>
+					 {% endif %}
 				</div>
-			</section>
+			</article>
+		</div>
+	</section>
 
 {% endblock %}

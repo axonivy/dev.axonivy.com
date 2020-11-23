@@ -54,13 +54,21 @@ class ProductAction
                 }
             }
         }
+        
+        $existingDocArtifacts = [];
+        foreach ($docArtifacts as $docArtifact) {
+            if ($docArtifact->docExists($version)) {
+                $existingDocArtifacts[] = $docArtifact;
+            }
+        }
+        
         return $this->view->render($response, 'market/product.twig', [
             'product' => $product,
             'baseUri' => $baseUri,
             'mavenProductInfo' => $mavenProductInfo,
             'mavenArtifacts' => $mavenArtifacts,
             'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
-            'docArtifacts' => $docArtifacts,
+            'docArtifacts' => $existingDocArtifacts,
             'selectedVersion' => $version
         ]);
     }
