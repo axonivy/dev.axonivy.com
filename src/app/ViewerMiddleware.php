@@ -21,7 +21,7 @@ class ViewerMiddleware implements MiddlewareInterface
     {
         $cookies = $request->getCookieParams();
         $viewer = $cookies['ivy-viewer'] ?? '';
-        if ($viewer == 'designer') {
+        if ($viewer == 'designer-market') {
             $env = $this->view->getEnvironment();
             $env->addGlobal('hideHeader', true);
             $env->addGlobal('hideFooter', true);
