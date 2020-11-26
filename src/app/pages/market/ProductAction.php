@@ -30,6 +30,11 @@ class ProductAction
         $mavenArtifacts = [];
         $docArtifacts = [];
         
+        if ($mavenProductInfo == null && !empty($version))
+        {
+            throw new HttpNotFoundException($request);
+        }
+
         if ($mavenProductInfo != null)
         {
             if (empty($version)) {

@@ -59,4 +59,16 @@ class ProductActionTest extends TestCase
         ->ok()
         ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=8.0.0')");
     }
+
+    public function testNotFoundWhenVersionDoesNotExistOfMavenBackedArtifact()
+    {
+        AppTester::assertThatGet('/market/basic-workflow-ui')->ok();
+        AppTester::assertThatGet('/market/basic-workflow-ui/444')->notFound();
+    }
+
+    public function testNotFoundWhenVersionDoesNotExistOfNonMavenArtifact()
+    {
+        AppTester::assertThatGet('/market/genderize')->ok();
+        AppTester::assertThatGet('/market/genderize/444')->notFound();
+    }
 }
