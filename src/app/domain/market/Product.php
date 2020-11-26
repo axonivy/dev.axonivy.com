@@ -1,6 +1,8 @@
 <?php
 namespace app\domain\market;
 
+use app\Config;
+
 class Product
 {
     private string $key;
@@ -98,9 +100,14 @@ class Product
         return '/market/' . $this->key;
     }
 
-    public function getMetaUrl(): string
+    public function getMetaUrl(string $version): string
     {
-        return $this->assetBaseUrl() . '/meta.json';
+        return $this->assetBaseUrl() . "/_meta.json?version=$version";
+    }
+
+    public function getMetaJson(): string
+    {
+        return file_get_contents(Config::marketDirectory() . "/$this->key/meta.json");
     }
 
     public function getMavenProductInfo(): ?MavenProductInfo

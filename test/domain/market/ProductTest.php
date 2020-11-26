@@ -46,7 +46,13 @@ class ProductTest extends TestCase
     public function test_metaUrl()
     {
         $product = Market::getProductByKey('visualvm-plugin');
-        Assert::assertEquals('/_market/visualvm-plugin/meta.json', $product->getMetaUrl());
+        Assert::assertEquals('/_market/visualvm-plugin/_meta.json?version=9.1', $product->getMetaUrl('9.1'));
+    }
+    
+    public function test_metaJson()
+    {
+        $product = Market::getProductByKey('visualvm-plugin');
+        Assert::assertStringContainsString('"id": "visualvm-plugin"', $product->getMetaJson());
     }
     
     public function test_installable()

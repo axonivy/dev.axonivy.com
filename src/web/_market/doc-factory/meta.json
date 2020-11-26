@@ -4,6 +4,7 @@
 	"sort": 300,
 	"versionDisplay": "hide-snapshots",
 	"tags": ["util"],
+	"version": "${version}",
 	"mavenArtifacts": [
 		{
 			"name": "Doc Factory",
