@@ -30,6 +30,11 @@ class ProductAction
         $mavenArtifacts = [];
         $docArtifacts = [];
         
+        if ($mavenProductInfo == null && !empty($version))
+        {
+            throw new HttpNotFoundException($request);
+        }
+
         if ($mavenProductInfo != null)
         {
             if (empty($version)) {
@@ -52,7 +57,7 @@ class ProductAction
             }
         }
         
-        $installButton = self::createInstallButton($request, $product);
+        $installButton = self::createInstallButton($request, $product, $version);
         
         return $this->view->render($response, 'market/product.twig', [
             'product' => $product,
@@ -65,10 +70,10 @@ class ProductAction
         ]);
     }
 
-    private static function createInstallButton(Request $request, Product $product): InstallButton
+    private static function createInstallButton(Request $request, Product $product, string $currentVersion): InstallButton
     {
         $uri = $request->getUri();
-        $metaUrl = $uri->getScheme() . '://' . $uri->getHost() . $product->getMetaUrl();
+        $metaUrl = $uri->getScheme() . '://' . $uri->getHost() . $product->getMetaUrl($currentVersion);
 
         $cookies = $request->getCookieParams();
         $version = $cookies['ivy-version'] ?? '';
