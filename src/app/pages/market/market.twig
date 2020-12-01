@@ -40,7 +40,7 @@
 			</p>
 			
 			<div class="row">
-				<div class="5u 12u(small)">
+				<div class="5u 12u(small)" style="margin-bottom:10px;">
 					<select id="types">
                       {% for tag in tags %}
                       	<option value="{{ tag }}" {{ (selectedTag == tag) ? 'selected' : '' }}>{{ tag }}</option>
@@ -48,15 +48,9 @@
                     </select>
 				</div>
                     
-				<div class="6u 10u(small)">
+				<div class="7u 12u(small)">
 					<input type="text" id="searchQuery" placeholder="Search ..." style="border: 1px solid white" value="{{ searchQuery }}"></input>
 				</div>
-				
-    			<div class="1u 2u(small)">
-           			<a onclick="searchMarket()" id="searchButton" href="javascript:void(0)" class="button small" style="min-width:50px;">
-           				<i class="icon fas fa-search"></i>
-           			</a>
-    			</div>
 			</div>
 
 			<div class="row" style="margin-top:5px;">
@@ -75,13 +69,14 @@
         			window.location.href = "?search=" + searchQuery + "&type=" + type;
         		}
 
-        		var input = document.getElementById("searchQuery");
+				var delayTimer;
+        		var input = document.getElementById("searchQuery");                
                 input.addEventListener("keyup", function(event) {
-                  if (event.keyCode === 13) {
-                    event.preventDefault();
-                    document.getElementById("searchButton").click();
-                  }
-                });
+                  clearTimeout(delayTimer);
+                    delayTimer = setTimeout(function() {
+                        searchMarket();
+                    }, 600);
+                });                
 
                 var input = document.getElementById("searchQuery");
                 var len = input.value.length;
