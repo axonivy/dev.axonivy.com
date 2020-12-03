@@ -21,26 +21,23 @@ class MarketAction
     {
         $queryParams = $request->getQueryParams();
         $searchQuery = $queryParams['search'] ?? '';
-        $selectedTag = $queryParams['type'] ?? '';
-        if (StringUtil::containsIgnoreCase($selectedTag, 'All Types')) {
-            $selectedTag = '';
-        }
+        $selectedTags = $queryParams['type'] ?? '';
         
         $listedProducts = Market::listed();
         
         $tags = Market::tags($listedProducts);
-        array_unshift($tags, 'All Types');
+        array_unshift($tags);
 
         $filteredProducts = Market::search($listedProducts, $searchQuery);
-        $filteredProducts = Market::searchByTag($filteredProducts, $selectedTag);
+        $filteredProducts = Market::searchByTag($filteredProducts, explode(",", $selectedTags));
         
-        $filterSet = !empty($searchQuery) || !empty($selectedTag);
+        $filterSet = !empty($searchQuery) || !empty($selectedTags);
         
         return $this->view->render($response, 'market/market.twig', [
             'products' => $filteredProducts,
             'searchQuery' => $searchQuery,
             'tags' => $tags,
-            'selectedTag' => $selectedTag,
+            'selectedTags' => $selectedTags,
             'filterSet' => $filterSet
         ]);
     }
