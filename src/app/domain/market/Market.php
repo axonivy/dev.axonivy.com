@@ -60,7 +60,7 @@ class Market
         $listed = [];
         foreach ($products as $product) {
             foreach ($product->getTags() as $tag) {
-                if (strtoupper($tag) == strtoupper($searchTag)) {
+                if (in_array(strtoupper($tag), explode(",", $searchTag))) {
                     $listed[] = $product;
                     break;
                 }
