@@ -13,25 +13,27 @@
     					<h1 style="float:left;">{{ product.name }}</h1>
     
     				    {% if mavenProductInfo != null %}
-    					<select name="version" id="version" onchange="location = this.value;" style="width:auto;float:right;">
-    					    {% for version in mavenProductInfo.versionsToDisplay %}
-    						<a href="#">
-    							<option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version }}</option>
-    						</a>
-    					    {% endfor %}
-    					</select>
+							<select name="version" id="version" onchange="location = this.value;" style="width:auto;float:right;">
+								{% for version in mavenProductInfo.versionsToDisplay %}
+								<a href="#">
+									<option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version }}</option>
+								</a>
+								{% endfor %}
+							</select>
     				    {% endif %}
     				    <div style="clear:both;"></div>
 
-						{% if installButton.show %}
-			    		<a href="javascript:void(0)" onclick="{{ installButton.javascriptCallback|raw }}" class="button special {{ (installButton.enabled) ? '' : 'disabled' }}">
-							<i class="icon fas fa-angle-right" style="color:#007095;"></i> Install
+						<a href="javascript:void(0)" onclick="{{ (installButton.enabled) ? installButton.javascriptCallback|raw : '$(\'.product-install\').slideToggle();' }}" class="button special">
+							<i class="icon fas fa-download" style="color:#007095;"></i> Install
     					</a>
-        					{% if not installButton.enabled %}
-        						<br />
-        						<i style="font-size:12px;">{{ installButton.reason }}</i>
-        					{% endif %}
-    					{% endif %}
+						{% if mavenArtifacts is not empty %}
+							<a href="javascript:void(0)" onclick="$('.product-download').slideToggle();" class="header-link">Download</a>
+						{% endif %}
+						{% if docArtifacts is not empty %}
+							<a href="{{ docArtifacts|first.getDocUrl(selectedVersion) }}" class="header-link">
+								Documentation <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
+							</a>
+						{% endif %}
     				</header>
 				</div>
 			</div>
@@ -39,6 +41,21 @@
 	</section>
 
 	<style>
+		.header-link {
+			padding-left: 20px;
+			line-height: 3.5em;
+		}
+		.product-download,
+		.product-install {
+			display: none;
+			background-color: #f7f7f7;
+			padding: 1em 0;
+		}
+		.product-download .p-col {
+			min-width: 250px;
+			max-height: 400px;
+			overflow: auto;
+		}
 		.product-meta h1 {
 			margin-bottom: 0.2em;
 		}
@@ -58,7 +75,7 @@
 			margin-bottom: 0.2em;
 		}
 		.meta-content {
-			margin-bottom:20px;
+			margin-bottom: 20px;
 		}
 		.product-meta ul {
 			margin-bottom: 0.3em;
@@ -66,27 +83,41 @@
 		.product-meta p {
 			margin-bottom: 0.3em;
 		}
+		.image.fit {
+			max-width: 100%;
+			width: unset;
+		}
 	</style>
-	
-	<section id="two" style="padding-top: 60px;">
+
+	<section class="product-install">
 		<div class="inner product-meta">
-			<article>
-				<div class="content">
-					{{ product.description|raw }}
-				</div>
-			</article>
 			<article class="alt">
-				<div class="content">
-					{% if docArtifacts is not empty %}
+				{% if not installButton.isDesigner %}
+					<i class="fas fa-info-circle"></i> Please open the 
+					<a href="/doc/dev/market/index.html">Axon.ivy Market</a> inside your  
+					<a href="/download">Axon.ivy Designer</a> (min 9.2.0)
+				{% else %}
+					<i class="fas fa-exclamation-triangle"></i> {{ installButton.reason }}
+				{% endif %}
+			</article>
+		</div>
+	</section>
+
+	<section class="product-download">
+		<div class="inner product-meta">
+			<article class="alt p-grid">
+				{% if docArtifacts is not empty %}
+					<div class="p-col">
 						<header><h3>Documentation</h3></header>
 						<div class="meta-content">
    						{% for artifact in docArtifacts %}
 							<a href="{{ artifact.getDocUrl(selectedVersion) }}"><i class="icon fas fa-book" style="font-size:20px;"></i> {{ artifact.name }}</a>
    					    {% endfor %}
 						</div>
-       				{% endif %}
-
-					{% if mavenArtifacts is not empty %}
+					</div>
+				{% endif %}
+				{% if mavenArtifacts is not empty %}
+					<div class="p-col">
 						<header><h3>Download</h3></header>
 						<div class="meta-content">
 						<ul>
@@ -99,23 +130,33 @@
 							{% endfor %}
 					    </ul>
 					    </div>
-					{% endif %}
-						
-					{% if mavenArtifactsAsDependency is not empty %}
+					</div>
+				{% endif %}
+				{% if mavenArtifactsAsDependency is not empty %}
+					<div class="p-col">
 						<header><h3>Maven</h3></header>
 						<div class="meta-content">
 							<p>You can consume it as maven artifact in your <i>pom.xml</i></p>
-							{% for artifact in mavenArtifactsAsDependency %}
-								<pre><code>&lt;!-- {{ artifact.name }} --&gt;
+							<pre><code>{% for artifact in mavenArtifactsAsDependency %}&lt;!-- {{ artifact.name }} --&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;{{ artifact.groupId }}&lt;/groupId&gt;
   &lt;artifactId&gt;{{ artifact.artifactId }}&lt;/artifactId&gt;
   &lt;version&gt;{{ selectedVersion }}&lt;/version&gt;
   &lt;type&gt;{{ artifact.type }}&lt;/type&gt;
-&lt;/dependency&gt;</code></pre>
-						    {% endfor %}
+&lt;/dependency&gt;
+{% endfor %}</code></pre>
 						</div>
-					 {% endif %}
+					</div>
+				{% endif %}
+			</article>
+		</div>
+	</section>
+	
+	<section id="one">
+		<div class="inner product-meta product-readme">
+			<article>
+				<div class="content">
+					{{ product.description|raw }}
 				</div>
 			</article>
 		</div>
