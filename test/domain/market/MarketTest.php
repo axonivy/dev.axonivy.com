@@ -90,14 +90,14 @@ class MarketTest extends TestCase
 
     public function test_searchByTag()
     {
-        $products = Market::searchByTag(Market::listed(), 'DEMO');
+        $products = Market::searchByTag(Market::listed(), ['DEMO']);
         Assert::assertEquals(1, count($products));
         Assert::assertEquals('Demos', $products[0]->getName());
     }
 
     public function test_searchByMultipleTags()
     {
-        $products = Market::searchByTag(Market::listed(), 'DEMO,WORKFLOW-UI');
+        $products = Market::searchByTag(Market::listed(), ['DEMO', 'WORKFLOW-UI']);
         Assert::assertEquals(2, count($products));
         Assert::assertEquals('Portal', $products[0]->getName());
         Assert::assertEquals('Demos', $products[1]->getName());

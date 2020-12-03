@@ -50,9 +50,9 @@ class Market
         return $listed;
     }
     
-    public static function searchByTag(array $products, string $searchTag): array
+    public static function searchByTag(array $products, array $searchTags): array
     {
-        if (empty($searchTag))
+        if (empty($searchTags) || count($searchTags) == 1 && empty($searchTags[0]))
         {
             return $products;
         }
@@ -60,7 +60,7 @@ class Market
         $listed = [];
         foreach ($products as $product) {
             foreach ($product->getTags() as $tag) {
-                if (in_array(strtoupper($tag), explode(",", $searchTag))) {
+                if (in_array(strtoupper($tag), $searchTags)) {
                     $listed[] = $product;
                     break;
                 }

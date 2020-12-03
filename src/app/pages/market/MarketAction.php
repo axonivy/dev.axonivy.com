@@ -29,7 +29,7 @@ class MarketAction
         array_unshift($tags);
 
         $filteredProducts = Market::search($listedProducts, $searchQuery);
-        $filteredProducts = Market::searchByTag($filteredProducts, $selectedTags);
+        $filteredProducts = Market::searchByTag($filteredProducts, explode(",", $selectedTags));
         
         $filterSet = !empty($searchQuery) || !empty($selectedTags);
         
