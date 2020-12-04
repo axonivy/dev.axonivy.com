@@ -1,4 +1,5 @@
 <?php
+
 namespace app;
 
 use app\api\ApiCurrentRelease;
@@ -31,49 +32,49 @@ use app\pages\market\MetaJsonAction;
 
 class RoutingRules
 {
-    public static function installRoutes($app)
-    {
-        $app->redirect('/download/sprint-release', '/download/sprint', 301);
-        
-        $app->get('/', HomeAction::class);
-        $app->get('/team', TeamAction::class);
-        $app->get('/support', SupportAction::class);
-        $app->get('/search', SearchAction::class);
-        $app->get('/community', CommunityAction::class);
-        $app->get('/tutorial', TutorialAction::class);
-        
-        $app->get('/download/maven.html', MavenArchiveAction::class);
-        $app->get('/download/archive[/{version}]', ArchiveAction::class);
-        $app->get('/download[/{version}]', DownloadAction::class); // leading-edge/sprint/nightly/dev
-        
-        $app->get('/release-cycle', ReleaseCycleAction::class);
-        
-        $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
-        $app->get('/permalink/lib/{version}/{name}', LibraryPermalinkAction::class);
-        
-        $app->get('/doc', DocOverviewAction::class);
-        
-        $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
-        $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
-        $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
-        $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
-        $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
-        $app->get('/doc/{version}/{document:.*}', DocAction::class);
-        $app->get('/doc/{version}', DocAction::class);
+  public static function installRoutes($app)
+  {
+    $app->redirect('/download/sprint-release', '/download/sprint', 301);
 
-        $app->get('/market', MarketAction::class);
-        $app->get('/market/{key}[/{version}]', ProductAction::class);
-        $app->get('/_market/{key}/_meta.json', MetaJsonAction::class);
+    $app->get('/', HomeAction::class);
+    $app->get('/team', TeamAction::class);
+    $app->get('/support', SupportAction::class);
+    $app->get('/search', SearchAction::class);
+    $app->get('/community', CommunityAction::class);
+    $app->get('/tutorial', TutorialAction::class);
 
-        $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
-        
-        $app->get('/installation', InstallationAction::class);
-        
-        $app->get('/api/currentRelease', ApiCurrentRelease::class);
-        $app->get('/api/status', StatusApi::class);
-        
-        $app->get('/sitemap.xml', SitemapAction::class);
-        
-        $app->get('/news[/{version}]', NewsAction::class);
-    }
+    $app->get('/download/maven.html', MavenArchiveAction::class);
+    $app->get('/download/archive[/{version}]', ArchiveAction::class);
+    $app->get('/download[/{version}]', DownloadAction::class); // leading-edge/sprint/nightly/dev
+
+    $app->get('/release-cycle', ReleaseCycleAction::class);
+
+    $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
+    $app->get('/permalink/lib/{version}/{name}', LibraryPermalinkAction::class);
+
+    $app->get('/doc', DocOverviewAction::class);
+
+    $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
+    $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
+    $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
+    $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
+    $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
+    $app->get('/doc/{version}/{document:.*}', DocAction::class);
+    $app->get('/doc/{version}', DocAction::class);
+
+    $app->get('/market', MarketAction::class);
+    $app->get('/market/{key}[/{version}]', ProductAction::class);
+    $app->get('/_market/{key}/_meta.json', MetaJsonAction::class);
+
+    $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
+
+    $app->get('/installation', InstallationAction::class);
+
+    $app->get('/api/currentRelease', ApiCurrentRelease::class);
+    $app->get('/api/status', StatusApi::class);
+
+    $app->get('/sitemap.xml', SitemapAction::class);
+
+    $app->get('/news[/{version}]', NewsAction::class);
+  }
 }

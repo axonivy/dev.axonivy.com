@@ -5,78 +5,78 @@
 {% block content %}
 
 <section id="main" class="inverse">
-	<div class="inner">
-		<header>
-			<h1>
-				<span class="icon fas fa-download"></span> {{ headerTitle }}
-				<div  title="Latest Release Date" style="float: right; font-size: 18px;">{{ releaseDate }}</div>
-			</h1>
-		</header>
-		{{ headerSubTitle|raw }}
-	</div>
+  <div class="inner">
+    <header>
+      <h1>
+        <span class="icon fas fa-download"></span> {{ headerTitle }}
+        <div  title="Latest Release Date" style="float: right; font-size: 18px;">{{ releaseDate }}</div>
+      </h1>
+    </header>
+    {{ headerSubTitle|raw }}
+  </div>
 </section>
 
 {% if banner %}
-<section id="one">
-	<div class="inner-small">
-		<article>
-        	<div class="content">
-        		<p>{{ banner|raw }}</p>
-        	</div>
-        </article>	
-	</div>
-</section>
+  <section id="one">
+    <div class="inner-small">
+      <article>
+        <div class="content">
+          <p>{{ banner|raw }}</p>
+        </div>
+      </article>	
+    </div>
+  </section>
 {% endif %}
 
 <section id="two">
-	<div class="inner">
-		<article>
-			<div class="content">
-				<header>
-					<h3>
-						<span class="icon fas fa-wrench"></span> Axon.ivy Designer ({{ versionShort }})
-					</h3>
-				</header>
+  <div class="inner">
+    <article>
+      <div class="content">
+        <header>
+          <h3>
+            <span class="icon fas fa-wrench"></span> Axon.ivy Designer ({{ versionShort }})
+          </h3>
+        </header>
 
-				<p style="min-height: 200px;">
-					The Axon.ivy Designer is a state
-					of the art process modelling tool that enables you to turn your
-					business processes into real and fully functional web applications.
-					You can easily integrate your existing systems using standard
-					connectors such as web services, SQL and many more.
-				</p>
+        <p style="min-height: 200px;">
+          The Axon.ivy Designer is a state
+          of the art process modelling tool that enables you to turn your
+          business processes into real and fully functional web applications.
+          You can easily integrate your existing systems using standard
+          connectors such as web services, SQL and many more.
+        </p>
 
-				{% include 'download/_artifacts.twig' with {'artifacts': designerArtifacts} %}
-			</div>
-		</article>
+        {% include 'download/_artifacts.twig' with {'artifacts': designerArtifacts} %}
+      </div>
+    </article>
 
-		<article class="alt">
-			<div class="content">
-				<header>
-					<h3>
-						<span class="icon fas fa-rocket"></span> Axon.ivy Engine ({{ versionShort }})
-					</h3>
-				</header>
+    <article class="alt">
+      <div class="content">
+        <header>
+          <h3>
+            <span class="icon fas fa-rocket"></span> Axon.ivy Engine ({{ versionShort }})
+          </h3>
+        </header>
 
-				<p style="min-height: 200px;">
-					Run your business processes on an Axon.ivy Engine in a single or
-					clustered environment. Please order an evaluation license and
-					further information at <a href="mailto:ivy@axonivy.com">ivy@axonivy.com</a>
-					by providing your contact details.
-					Get to know our <a href="/release-cycle">release cycle</a> for choosing the right version.
-				</p>
+        <p style="min-height: 200px;">
+          Run your business processes on an Axon.ivy Engine in a single or
+          clustered environment. Please order an evaluation license and
+          further information at <a href="mailto:ivy@axonivy.com">ivy@axonivy.com</a>
+          by providing your contact details.
+          Get to know our <a href="/release-cycle">release cycle</a> for choosing the right version.
+        </p>
 
-				{% include 'download/_artifacts.twig' with {'artifacts': engineArtifacts} %}
-			</div>
-		</article>
-	</div>
+        {% include 'download/_artifacts.twig' with {'artifacts': engineArtifacts} %}
+      </div>
+    </article>
+  </div>
 </section>
 
 {% if showOtherVersions %}
 <section id="three">
-	<div class="inner">
-		{% include 'download/_other-versions.twig' %}	
-	</div>
+  <div class="inner">
+    {% include 'download/_other-versions.twig' %}	
+  </div>
 </section>
 {% endif %}
 

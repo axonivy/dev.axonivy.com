@@ -4,162 +4,160 @@
 
 {% block content %}
 
-
 <style>
-h1 {
-	color: #007095;
-}
+  h1 {
+    color: #007095;
+  }
 
-h2 {
-	color: black;
-	margin-bottom: 15px;
-}
+  h2 {
+    color: black;
+    margin-bottom: 15px;
+  }
 
-.image.fit {
-	margin-bottom: 15px;
-	max-height: 480px;
-	overflow: hidden;
-	object-fit: cover;
-	object-position: top;
-	float: left;
-}
+  .image.fit {
+    margin-bottom: 15px;
+    max-height: 480px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: top;
+    float: left;
+  }
 
-.image.fit.gallery {
-	max-width: 33%;
-	max-height: 150px;
-	padding-right: 15px;
-}
+  .image.fit.gallery {
+    max-width: 33%;
+    max-height: 150px;
+    padding-right: 15px;
+  }
 
-ul {
-	margin-bottom: 15px;
-}
+  ul {
+    margin-bottom: 15px;
+  }
 
-p {
-	margin-bottom: 15px;
-}
+  p {
+    margin-bottom: 15px;
+  }
 
-.collapsible {
-	cursor: pointer;
-	margin-bottom: 10px;
-}
+  .collapsible {
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
 
-.collapsible-content {
-	display: none;
-	overflow: hidden;
-	background-color: #f1f1f1;
-	padding: 20px;
-	margin-bottom: 10px;
-}
+  .collapsible-content {
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
 
-.short-links {
-	margin-bottom: 15px 0;
-}
-.short-links > a {
-	background-color: #007095;
-	color: white;
-	padding: 4px 7px;
-	margin: 4px 4px 0 0;
-	border-radius: 6px;
-	white-space: nowrap;
-	display: inline-block;
-}
+  .short-links {
+    margin-bottom: 15px 0;
+  }
+  .short-links > a {
+    background-color: #007095;
+    color: white;
+    padding: 4px 7px;
+    margin: 4px 4px 0 0;
+    border-radius: 6px;
+    white-space: nowrap;
+    display: inline-block;
+  }
 
-.inverse .short-links > a {
-	background-color: white;
-	color: #007095;
-}
+  .inverse .short-links > a {
+    background-color: white;
+    color: #007095;
+  }
 
-.badge {
-	display: inline-block;
-	padding: .25em .4em;
-	font-size: 75%;
-	font-weight: 700;
-	line-height: 1;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: text-top;
-}
-.badge-pill {
-    padding-right: .6em;
-    padding-left: .6em;
-    border-radius: 10rem;
-}
-.badge-success {
-    color: #fff;
-    background-color: #28a745;
-}
-
+  .badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-top;
+  }
+  .badge-pill {
+      padding-right: .6em;
+      padding-left: .6em;
+      border-radius: 10rem;
+  }
+  .badge-success {
+      color: #fff;
+      background-color: #28a745;
+  }
 </style>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/css/lightbox.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/js/lightbox.min.js"></script>
 
 <section id="main" class="inverse">
-	<div class="inner">
-		<img src="{{ news.meta.logo }}" style="width:100px;float:left;margin:1em;" alt="Axon.ivy release" />
-		<div>
-			<header>
-				<h1>{{ news.meta.title }}</h1>
-			</header>
-			<p style="margin-bottom:0px;font-size:28px;font-weight:bold;">
-				{{ news.meta.slogan }}
-			</p>
-			<p>{{ news.meta.date }}</p>
-		</div>
-	</div>
+  <div class="inner">
+    <img src="{{ news.meta.logo }}" style="width:100px;float:left;margin:1em;" alt="Axon.ivy release" />
+    <div>
+      <header>
+        <h1>{{ news.meta.title }}</h1>
+      </header>
+      <p style="margin-bottom:0px;font-size:28px;font-weight:bold;">
+        {{ news.meta.slogan }}
+      </p>
+      <p>{{ news.meta.date }}</p>
+    </div>
+  </div>
 </section>
 
 {% for newsDetailSection in news.newsDetailSections %}
-	{% set sectionIndex = loop.index %}
-	{% set background = 'white' %}
-	{% if loop.index is divisible by(2) %}
-        {% set background = '#f7f7f7' %}
-    {% endif %}
-	<section style="padding: 4em 0 2em 0; background-color: {{ background }}">
-		<div class="inner">
-			<div class="row">
-				{% if newsDetailSection.images is empty %}
-					<div class="12u 12u$(medium)">
-						{{ newsDetailSection.html|raw }}
-					</div>
-				{% else %}
-					<div class="6u 12u$(medium)">
-						{{ newsDetailSection.html|raw }}
-					</div>
-					<div class="6u 12u$(medium) images">
-						{% for image in newsDetailSection.images %}
-							{% set galleryClass = '' %}
-							{% if not loop.first %}
-								{% set galleryClass = 'gallery' %}
-							{% endif %}
-							<a href="{{ image }}" data-lightbox="screenshot-{{ sectionIndex }}">
-								<img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
-							</a>
-						{% endfor %}
-					</div>
-				{% endif %}
-			</div>
+  {% set sectionIndex = loop.index %}
+  {% set background = 'white' %}
+  {% if loop.index is divisible by(2) %}
+    {% set background = '#f7f7f7' %}
+  {% endif %}
+  <section style="padding: 4em 0 2em 0; background-color: {{ background }}">
+    <div class="inner">
+      <div class="row">
+        {% if newsDetailSection.images is empty %}
+          <div class="12u 12u$(medium)">
+            {{ newsDetailSection.html|raw }}
+          </div>
+        {% else %}
+          <div class="6u 12u$(medium)">
+            {{ newsDetailSection.html|raw }}
+          </div>
+          <div class="6u 12u$(medium) images">
+            {% for image in newsDetailSection.images %}
+              {% set galleryClass = '' %}
+              {% if not loop.first %}
+                {% set galleryClass = 'gallery' %}
+              {% endif %}
+              <a href="{{ image }}" data-lightbox="screenshot-{{ sectionIndex }}">
+                <img class="image fit {{ galleryClass }}" src="{{ image }}" alt="{{ image }}">
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
 
-			<div style="clear:both;"></div>
-		</div>
-	</section>
+      <div style="clear:both;"></div>
+    </div>
+  </section>
 {% endfor %}
 
 <script>
-	var coll = document.getElementsByClassName("collapsible");
-	var i;
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
 
-	for (i = 0; i < coll.length; i++) {
-		coll[i].addEventListener("click", function() {
-			this.classList.toggle("active");
-			var content = this.nextElementSibling;
-			if (content.style.display === "block") {
-				content.style.display = "none";
-			} else {
-				content.style.display = "block";
-			}
-		});
-	}
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
 </script>
 
 {% endblock %}

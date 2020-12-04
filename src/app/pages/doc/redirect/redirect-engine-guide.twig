@@ -4,211 +4,211 @@
 
 {% block content %}
 
-    <meta http-equiv="refresh" content="3; URL={{ redirectUrl }}"> <!-- fallback if no javascript is enabled -->
+<meta http-equiv="refresh" content="3; URL={{ redirectUrl }}"> <!-- fallback if no javascript is enabled -->
 
-	<section id="main" >
-		<div class="inner">
-			<header><h1>Redirect</h1></header>
-			<div class="row">
-				<div id="redirectText" class="12u 12u$(xsmall)">
-					You will be redirected in 3 seconds to our brand new documentation.
-					Otherwise click on the following link.
-				</div>
-				<div class="12u 12u$(xsmall)">
-					<a href="{{ redirectUrl }}" id="redirectPage">{{ redirectUrl }}</a>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<script type="text/javascript">
-		var redirects = {
-		  'EngineGuideHtml' : '',
-		  'index.html' : '',
-		  
-	      'introduction.html' : 'introduction/',
-		  'introduction.html#ivy-introduction-whatis' : 'introduction/index.html#what-is-axon-ivy',
-		  'introduction.html#introduction-overview' : 'introduction/index.html#about-this-guide',
-		  'introduction.html#introduction-installation' : 'introduction/index.html#installation-environment',
-		  'introduction.html#introduction-severtypes' : 'introduction/index.html#engine-edition',
-		  
-		  'gettingstarted.html' : 'getting-started/',
-		  'gettingstarted.html#gettingstarted-windows' : 'getting-started/windows.html',
-		  'gettingstarted.html#gettingstarted-debian' : 'getting-started/debian.html',
-		  'gettingstarted.html#gettingstarted-linux' : 'getting-started/linux.html',
-		  'gettingstarted.html#gettingstarted-docker' : 'getting-started/docker.html',
-		  
-		  'installation.html' : 'installation/',
-		  'installation.html#installation-upgrade' : 'installation/upgrade.html',
-		  'installation.html#installation-upgrade-preparation' : 'installation/upgrade.html#preparation',
-		  'installation.html#installation-upgrade-project-migration' : 'installation/upgrade.html#project-migration',
-		  'installation.html#installation-upgrade-upgrade' : 'installation/upgrade.html#upgrade',
-		  'installation.html#installation-standardsteps' : 'installation/index.html#install-axon-ivy-engine',
-		  'installation.html#installation-demomode' : 'installation/standard-edition.html#demo-mode',
-		  'installation.html#installation-cluster' : 'installation/enterprise-edition.html',
-		  'installation.html#installation-standard' : 'installation/standard-edition.html',
-		  'installation.html#installation-licence' : 'installation/index.html#installing-a-licence',
-		  'installation.html#installation-systemdatabase' : 'installation/systemdatabase.html',
-		  'installation.html#installation-systemdatabase-mysql' : 'installation/systemdatabase.html#mysql',
-		  'installation.html#installation-systemdatabase-mariadb' : 'installation/systemdatabase.html#mariadb',
-		  'installation.html#installation-systemdatabase-oracle' : 'installation/systemdatabase.html#oracle',
-		  'installation.html#installation-systemdatabase-mssqlserver' : 'installation/systemdatabase.html#microsoft-sql-server',
-		  'installation.html#installation-systemdatabase-postgresql' : 'installation/systemdatabase.html#postgresql',
-		  	
-		  'configuration.html' : 'configuration/',
-		  'configuration.html#engine-configuration' : 'configuration/',
-		  'configuration.html#configuration-users' : 'configuration/index.html#users',
-		  'configuration.html#configuration-email' : 'configuration/index.html#email',
-		  'configuration.html#configuration-jsf-theme' : 'configuration/index.html#html-theme',
-		  'configuration.html#configuration-password' : 'configuration/index.html#passwords',
-		  'configuration.html#configuration-override' : 'configuration/index.html#overriding-configuration',
-		  'configuration.html#engine-configuration-docker' : 'configuration/index.html#docker-containers',
-		  'configuration.html#configuration-file-ref' : 'configuration/index.html#configuration-file-reference',
-		  'configuration.html#configuration-file-ref-ivy-yaml' : 'configuration/files/ivy-yaml.html',
-		  'configuration.html#configuration-file-ref-app-yaml' : 'configuration/files/app-yaml.html',
-		  'configuration.html#configuration-file-ref-ivy-securitysystem-yaml' : 'configuration/files/ivy-securitysystem-yaml.html',
-		  'configuration.html#configuration-file-ref-ivy-webserver-yaml' : 'configuration/files/ivy-webserver-yaml.html',
-		  'configuration.html#configuration-file-ref-ivy-cache-properties' : 'configuration/files/ivy-cache-properties.html',
-		  'configuration.html#configuration-file-ref-log4jconfig-xml' : 'configuration/files/log4jconfig-xml.html',
-		  'configuration.html#configuration-file-ref-web-xml' : 'configuration/files/web-xml.html',
-		  'configuration.html#configuration-file-ref-context-xml' : 'configuration/files/context-xml.html',
-		  
-		  'security.html' : 'security/',
-		  'security.html#security-general' : 'security/',
-		  'security.html#security-frontend' : 'security/index.html#front-end-server',
-		  'security.html#security-frontend-ports' : 'security/index.html#port-configuration',
-		  'security.html#security-frontend-headers' : 'security/index.html#additional-security-headers',
-		  'security.html#security-frontend-paths' : 'security/index.html#path-configuration',
-		  'security.html#security-https' : 'security/index.html#https',
-		  'security.html#security-ivyengine' : 'security/index.html#axon-ivy-engine',
-		  'security.html#security-ivyengine-disablefeatures' : 'security/index.html#disable-not-required-features',
-		  'security.html#security-ivyengine-permissions' : 'security/index.html#only-grant-ivy-permissions-where-required',
-		  'security.html#security-ivyengine-releasenotes' : 'security/index.html#security-issues-in-the-axon-ivy-engine',
-		  
-		  'integration.html' : 'integration/',
-		  'integration.html#integration-introduction' : 'integration/',
-		  'integration.html#integration-directory' : 'integration/',
-		  'integration.html#integration-external-url' : 'integration/',
-		  'integration.html#integration-apacheserver' : 'integration/apache-httpd.html',
-		  'integration.html#integration-apacheserver-windows' : 'apache-httpd.html#windows-configuration',
-		  'integration.html#integration-apacheserver-linux' : 'integration/apache-httpd.html#linux-configuration',
-		  'integration.html#integration-apacheserver-contexturi' : 'integration/apache-httpd.html#change-context-uri-ivy',
-		  'integration.html#integration-iis' : 'integration/microsoft-iis.html',
-		  'integration.html#integration-iis8' : 'integration/microsoft-iis.html#iis-8-windows-server-2012',
-		  'integration.html#integration-context-uri' : 'integration/microsoft-iis.html#change-context-uri-ivy',
-		  'integration.html#integration-iis-multiple-instances' : 'integration/microsoft-iis.html#access-multiple-axon-ivy-engines-through-one-iis',
-		  'integration.html#integration-single_sign_on' : 'integration/microsoft-iis.html#single-sign-on',
-		  'integration.html#integration-basic_auth' : 'integration/microsoft-iis.html#basic-authentication',
-		  'integration.html#integration-iis-errorhandling' : 'integration/microsoft-iis.html#error-handling',
-		  'integration.html#integration-ivyclusterserver' : 'integration/axonivy-cluster.html',
-		  'integration.html#integration-ivyclusterserver-iis_tomcat' : 'integration/axonivy-cluster.html#load-balancing-with-tomcat-connector-iis-apache',
-		  'integration.html#integration-ivyclusterserver-other' : 'integration/axonivy-cluster.html#load-balancing-with-other-load-balancer-products',
-		  'integration.html#integration-waf' : 'integration/web-application-firewall.html',
-		  'integration.html#integration-waf-sso' : 'integration/web-application-firewall.html#single-sign-on',
-		  
-	      'administration.html' : 'administration/',
-		  'administration.html#administration-deployment' : 'administration/deployment.html',
-		  'administration.html#administration-deployment-prepare' : 'administration/deployment.html#prepare',
-     	  'administration.html#administration-deployment-deploying' : 'administration/deployment.html#deploying',
-		  'administration.html#administration-deployment-checkresults' : 'administration/deployment.html#check-the-results',
-		  'administration.html#administration-deployment-advanced' : 'administration/deployment.html#advanced-deployment',
-		  'administration.html#administration-deployment-maven' : 'administration/deployment.html#maven-plugin',
-		  'administration.html#administration-standardprocess' : 'administration/standard-processes.html',
-		  'administration.html#administration-standardprocess-defaultpages' : 'administration/standard-processes.html#default-pages',
-		  'administration.html#administration-standardprocess-emailnotifications' : 'administration/standard-processes.html#email-notifications',
-		  'administration.html#misc' : 'administration/systemdb-encryption.html',
-		  'administration.html#configuration-systemdatabase-encryption' : 'administration/systemdb-encryption.html',
-		  'administration.html#misc-replacejdk' : 'administration/upgrade-java.html',
+<section id="main" >
+  <div class="inner">
+    <header><h1>Redirect</h1></header>
+    <div class="row">
+      <div id="redirectText" class="12u 12u$(xsmall)">
+        You will be redirected in 3 seconds to our brand new documentation.
+        Otherwise click on the following link.
+      </div>
+      <div class="12u 12u$(xsmall)">
+        <a href="{{ redirectUrl }}" id="redirectPage">{{ redirectUrl }}</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-		  'monitoring.html' : 'monitoring/',
-		  'monitoring.html#monitoring-logging' : 'monitoring/logging.html',
-		  'monitoring.html#monitoring-logging-performance' : 'monitoring/logging.html#request-performance-logging',
-		  'monitoring.html#monitoring-performancestatistic' : 'monitoring/process-element-performance.html',
-		  'monitoring.html#monitoring-performancestatistic-configure' : 'monitoring/process-element-performance.html#configure',
-		  'monitoring.html#monitoring-performancestatistic-analyse' : 'monitoring/process-element-performance.html#analyse',
-		  'monitoring.html#monitoring-jmx' : 'monitoring/jmx.html',
-		  'monitoring.html#monitoring-visualvm' : 'monitoring/visualvm.html',
-
-		  'tools.html' : 'tool-reference/',
-		  'tools.html#tool-axonivyengine' : 'tool-reference/axonivy-engine.html',
-		  'tools.html#tool-engineconfigcli' : 'tool-reference/engine-config-cli.html',
-		  'tools.html#tool-service' : 'tool-reference/engine-service.html',
-		  'tools.html#tool-service-windows' : 'tool-reference/engine-service.html#windows-service',
-		  'tools.html#tool-installservice' : 'tool-reference/engine-service.html#linux-service',
-		  'tools.html#tools-launch-config' : 'tool-reference/launch-config.html',
-		  'tools.html#tool-windows-ilc' : 'tool-reference/launch-config.html#windows-program-launcher-configuration',
-		  'tools.html#tool-unix-conf' : 'tool-reference/launch-config.html#linux-launcher-configuration',
-		  'tools.html#tool-engineconfigui' : 'tool-reference/engine-config-ui.html',
-		  'tools.html#tool-engineconfigui-launch' : 'tool-reference/engine-config-ui.html#launchers',
-		  'tools.html#tool-engineconfigui-licence' : 'tool-reference/engine-config-ui.html#licence',
-		  'tools.html#tool-engineconfigui-systemdatabase' : 'tool-reference/engine-config-ui.html#system-database',
-		  'tools.html#tool-engineconfigui-webserver' : 'tool-reference/engine-config-ui.html#web-server-ports',
-		  'tools.html#tool-engineconfigui-cluster' : 'tool-reference/engine-config-ui.html#cluster',
-		  'tools.html#tool-enginecockpit' : 'tool-reference/engine-cockpit.html',
-		  'tools.html#tool-enginecockpit-launch' : 'tool-reference/engine-cockpit.html#opening-the-tool',
-		  'tools.html#tool-enginecockpit-dashboard' : 'tool-reference/engine-cockpit.html#dashboard',
-		  'tools.html#tool-enginecockpit-applications' : 'tool-reference/engine-cockpit.html#applications',
-		  'tools.html#tool-enginecockpit-securitysystem' : 'tool-reference/engine-cockpit.html#security-system',
-		  'tools.html#tool-enginecockpit-users' : 'tool-reference/engine-cockpit.html#users',
-		  'tools.html#tool-enginecockpit-roles' : 'tool-reference/engine-cockpit.html#roles',
-		  'tools.html#tool-enginecockpit-email' : 'tool-reference/engine-cockpit.html#email',
-		  'tools.html#tool-enginecockpit-advancedconfig' : 'tool-reference/engine-cockpit.html#advanced-configuration',
-		  'tools.html#tool-enginecockpit-monitor' : 'tool-reference/engine-cockpit.html#monitor',
-		  'tools.html#tool-controlcenter' : 'tool-reference/control-center.html',
-		  'tools.html#tool-controlcenter-start' : 'tool-reference/control-center.html#start-stop',
-   	      'tools.html#tool-controlcenter-windowsservice' : 'tool-reference/control-center.html#register-windows-service',
-		   
-		  'troubleshooting.html' : 'troubleshooting/'
-		}
-		
-		var page = getPageWithAnchor();
-		if (!redirect(page)) {
-			page = getPage();
-			if (!redirect(page)) {
-				page = 'index.html'
-				redirect(page);
-			}
-		}
-		
-		function redirect(from) {
-			if (redirects.hasOwnProperty(from)) {
-				var to = redirects[from];
-				console.log("redirect " + from + " to " + to);
-				targetPage = "../engine-guide/" + to
-
-				var link = document.getElementById("redirectPage");
-				link.href = targetPage;
-				link.innerHTML = targetPage;
-				
-				setTimeout(function() {
-					window.location.href = targetPage;
-				}, 500);
-				return true;
-			} else {
-				console.log("no redirection found for page " + page);
-				return false;
-			}
-		}
-
-		function getPageWithAnchor() {
-			var page = getPage();
-			var anchor = getAnchor();
-			if (anchor) {
-				return page + "#" + anchor;
-			}
-			return page;
-		}
-
-		function getPage() {
-			var path = window.location.pathname;
-			return path.split("/").pop();
-		}
-		
-		function getAnchor() {
-		    var currentUrl = document.URL,
-			urlParts   = currentUrl.split('#');				
-		    return (urlParts.length > 1) ? urlParts[1] : null;
-		}		
-	</script>
+<script type="text/javascript">
+  var redirects = {
+    'EngineGuideHtml' : '',
+    'index.html' : '',
     
+    'introduction.html' : 'introduction/',
+    'introduction.html#ivy-introduction-whatis' : 'introduction/index.html#what-is-axon-ivy',
+    'introduction.html#introduction-overview' : 'introduction/index.html#about-this-guide',
+    'introduction.html#introduction-installation' : 'introduction/index.html#installation-environment',
+    'introduction.html#introduction-severtypes' : 'introduction/index.html#engine-edition',
+    
+    'gettingstarted.html' : 'getting-started/',
+    'gettingstarted.html#gettingstarted-windows' : 'getting-started/windows.html',
+    'gettingstarted.html#gettingstarted-debian' : 'getting-started/debian.html',
+    'gettingstarted.html#gettingstarted-linux' : 'getting-started/linux.html',
+    'gettingstarted.html#gettingstarted-docker' : 'getting-started/docker.html',
+    
+    'installation.html' : 'installation/',
+    'installation.html#installation-upgrade' : 'installation/upgrade.html',
+    'installation.html#installation-upgrade-preparation' : 'installation/upgrade.html#preparation',
+    'installation.html#installation-upgrade-project-migration' : 'installation/upgrade.html#project-migration',
+    'installation.html#installation-upgrade-upgrade' : 'installation/upgrade.html#upgrade',
+    'installation.html#installation-standardsteps' : 'installation/index.html#install-axon-ivy-engine',
+    'installation.html#installation-demomode' : 'installation/standard-edition.html#demo-mode',
+    'installation.html#installation-cluster' : 'installation/enterprise-edition.html',
+    'installation.html#installation-standard' : 'installation/standard-edition.html',
+    'installation.html#installation-licence' : 'installation/index.html#installing-a-licence',
+    'installation.html#installation-systemdatabase' : 'installation/systemdatabase.html',
+    'installation.html#installation-systemdatabase-mysql' : 'installation/systemdatabase.html#mysql',
+    'installation.html#installation-systemdatabase-mariadb' : 'installation/systemdatabase.html#mariadb',
+    'installation.html#installation-systemdatabase-oracle' : 'installation/systemdatabase.html#oracle',
+    'installation.html#installation-systemdatabase-mssqlserver' : 'installation/systemdatabase.html#microsoft-sql-server',
+    'installation.html#installation-systemdatabase-postgresql' : 'installation/systemdatabase.html#postgresql',
+      
+    'configuration.html' : 'configuration/',
+    'configuration.html#engine-configuration' : 'configuration/',
+    'configuration.html#configuration-users' : 'configuration/index.html#users',
+    'configuration.html#configuration-email' : 'configuration/index.html#email',
+    'configuration.html#configuration-jsf-theme' : 'configuration/index.html#html-theme',
+    'configuration.html#configuration-password' : 'configuration/index.html#passwords',
+    'configuration.html#configuration-override' : 'configuration/index.html#overriding-configuration',
+    'configuration.html#engine-configuration-docker' : 'configuration/index.html#docker-containers',
+    'configuration.html#configuration-file-ref' : 'configuration/index.html#configuration-file-reference',
+    'configuration.html#configuration-file-ref-ivy-yaml' : 'configuration/files/ivy-yaml.html',
+    'configuration.html#configuration-file-ref-app-yaml' : 'configuration/files/app-yaml.html',
+    'configuration.html#configuration-file-ref-ivy-securitysystem-yaml' : 'configuration/files/ivy-securitysystem-yaml.html',
+    'configuration.html#configuration-file-ref-ivy-webserver-yaml' : 'configuration/files/ivy-webserver-yaml.html',
+    'configuration.html#configuration-file-ref-ivy-cache-properties' : 'configuration/files/ivy-cache-properties.html',
+    'configuration.html#configuration-file-ref-log4jconfig-xml' : 'configuration/files/log4jconfig-xml.html',
+    'configuration.html#configuration-file-ref-web-xml' : 'configuration/files/web-xml.html',
+    'configuration.html#configuration-file-ref-context-xml' : 'configuration/files/context-xml.html',
+    
+    'security.html' : 'security/',
+    'security.html#security-general' : 'security/',
+    'security.html#security-frontend' : 'security/index.html#front-end-server',
+    'security.html#security-frontend-ports' : 'security/index.html#port-configuration',
+    'security.html#security-frontend-headers' : 'security/index.html#additional-security-headers',
+    'security.html#security-frontend-paths' : 'security/index.html#path-configuration',
+    'security.html#security-https' : 'security/index.html#https',
+    'security.html#security-ivyengine' : 'security/index.html#axon-ivy-engine',
+    'security.html#security-ivyengine-disablefeatures' : 'security/index.html#disable-not-required-features',
+    'security.html#security-ivyengine-permissions' : 'security/index.html#only-grant-ivy-permissions-where-required',
+    'security.html#security-ivyengine-releasenotes' : 'security/index.html#security-issues-in-the-axon-ivy-engine',
+    
+    'integration.html' : 'integration/',
+    'integration.html#integration-introduction' : 'integration/',
+    'integration.html#integration-directory' : 'integration/',
+    'integration.html#integration-external-url' : 'integration/',
+    'integration.html#integration-apacheserver' : 'integration/apache-httpd.html',
+    'integration.html#integration-apacheserver-windows' : 'apache-httpd.html#windows-configuration',
+    'integration.html#integration-apacheserver-linux' : 'integration/apache-httpd.html#linux-configuration',
+    'integration.html#integration-apacheserver-contexturi' : 'integration/apache-httpd.html#change-context-uri-ivy',
+    'integration.html#integration-iis' : 'integration/microsoft-iis.html',
+    'integration.html#integration-iis8' : 'integration/microsoft-iis.html#iis-8-windows-server-2012',
+    'integration.html#integration-context-uri' : 'integration/microsoft-iis.html#change-context-uri-ivy',
+    'integration.html#integration-iis-multiple-instances' : 'integration/microsoft-iis.html#access-multiple-axon-ivy-engines-through-one-iis',
+    'integration.html#integration-single_sign_on' : 'integration/microsoft-iis.html#single-sign-on',
+    'integration.html#integration-basic_auth' : 'integration/microsoft-iis.html#basic-authentication',
+    'integration.html#integration-iis-errorhandling' : 'integration/microsoft-iis.html#error-handling',
+    'integration.html#integration-ivyclusterserver' : 'integration/axonivy-cluster.html',
+    'integration.html#integration-ivyclusterserver-iis_tomcat' : 'integration/axonivy-cluster.html#load-balancing-with-tomcat-connector-iis-apache',
+    'integration.html#integration-ivyclusterserver-other' : 'integration/axonivy-cluster.html#load-balancing-with-other-load-balancer-products',
+    'integration.html#integration-waf' : 'integration/web-application-firewall.html',
+    'integration.html#integration-waf-sso' : 'integration/web-application-firewall.html#single-sign-on',
+    
+    'administration.html' : 'administration/',
+    'administration.html#administration-deployment' : 'administration/deployment.html',
+    'administration.html#administration-deployment-prepare' : 'administration/deployment.html#prepare',
+    'administration.html#administration-deployment-deploying' : 'administration/deployment.html#deploying',
+    'administration.html#administration-deployment-checkresults' : 'administration/deployment.html#check-the-results',
+    'administration.html#administration-deployment-advanced' : 'administration/deployment.html#advanced-deployment',
+    'administration.html#administration-deployment-maven' : 'administration/deployment.html#maven-plugin',
+    'administration.html#administration-standardprocess' : 'administration/standard-processes.html',
+    'administration.html#administration-standardprocess-defaultpages' : 'administration/standard-processes.html#default-pages',
+    'administration.html#administration-standardprocess-emailnotifications' : 'administration/standard-processes.html#email-notifications',
+    'administration.html#misc' : 'administration/systemdb-encryption.html',
+    'administration.html#configuration-systemdatabase-encryption' : 'administration/systemdb-encryption.html',
+    'administration.html#misc-replacejdk' : 'administration/upgrade-java.html',
+
+    'monitoring.html' : 'monitoring/',
+    'monitoring.html#monitoring-logging' : 'monitoring/logging.html',
+    'monitoring.html#monitoring-logging-performance' : 'monitoring/logging.html#request-performance-logging',
+    'monitoring.html#monitoring-performancestatistic' : 'monitoring/process-element-performance.html',
+    'monitoring.html#monitoring-performancestatistic-configure' : 'monitoring/process-element-performance.html#configure',
+    'monitoring.html#monitoring-performancestatistic-analyse' : 'monitoring/process-element-performance.html#analyse',
+    'monitoring.html#monitoring-jmx' : 'monitoring/jmx.html',
+    'monitoring.html#monitoring-visualvm' : 'monitoring/visualvm.html',
+
+    'tools.html' : 'tool-reference/',
+    'tools.html#tool-axonivyengine' : 'tool-reference/axonivy-engine.html',
+    'tools.html#tool-engineconfigcli' : 'tool-reference/engine-config-cli.html',
+    'tools.html#tool-service' : 'tool-reference/engine-service.html',
+    'tools.html#tool-service-windows' : 'tool-reference/engine-service.html#windows-service',
+    'tools.html#tool-installservice' : 'tool-reference/engine-service.html#linux-service',
+    'tools.html#tools-launch-config' : 'tool-reference/launch-config.html',
+    'tools.html#tool-windows-ilc' : 'tool-reference/launch-config.html#windows-program-launcher-configuration',
+    'tools.html#tool-unix-conf' : 'tool-reference/launch-config.html#linux-launcher-configuration',
+    'tools.html#tool-engineconfigui' : 'tool-reference/engine-config-ui.html',
+    'tools.html#tool-engineconfigui-launch' : 'tool-reference/engine-config-ui.html#launchers',
+    'tools.html#tool-engineconfigui-licence' : 'tool-reference/engine-config-ui.html#licence',
+    'tools.html#tool-engineconfigui-systemdatabase' : 'tool-reference/engine-config-ui.html#system-database',
+    'tools.html#tool-engineconfigui-webserver' : 'tool-reference/engine-config-ui.html#web-server-ports',
+    'tools.html#tool-engineconfigui-cluster' : 'tool-reference/engine-config-ui.html#cluster',
+    'tools.html#tool-enginecockpit' : 'tool-reference/engine-cockpit.html',
+    'tools.html#tool-enginecockpit-launch' : 'tool-reference/engine-cockpit.html#opening-the-tool',
+    'tools.html#tool-enginecockpit-dashboard' : 'tool-reference/engine-cockpit.html#dashboard',
+    'tools.html#tool-enginecockpit-applications' : 'tool-reference/engine-cockpit.html#applications',
+    'tools.html#tool-enginecockpit-securitysystem' : 'tool-reference/engine-cockpit.html#security-system',
+    'tools.html#tool-enginecockpit-users' : 'tool-reference/engine-cockpit.html#users',
+    'tools.html#tool-enginecockpit-roles' : 'tool-reference/engine-cockpit.html#roles',
+    'tools.html#tool-enginecockpit-email' : 'tool-reference/engine-cockpit.html#email',
+    'tools.html#tool-enginecockpit-advancedconfig' : 'tool-reference/engine-cockpit.html#advanced-configuration',
+    'tools.html#tool-enginecockpit-monitor' : 'tool-reference/engine-cockpit.html#monitor',
+    'tools.html#tool-controlcenter' : 'tool-reference/control-center.html',
+    'tools.html#tool-controlcenter-start' : 'tool-reference/control-center.html#start-stop',
+    'tools.html#tool-controlcenter-windowsservice' : 'tool-reference/control-center.html#register-windows-service',
+      
+    'troubleshooting.html' : 'troubleshooting/'
+  }
+  
+  var page = getPageWithAnchor();
+  if (!redirect(page)) {
+    page = getPage();
+    if (!redirect(page)) {
+      page = 'index.html'
+      redirect(page);
+    }
+  }
+  
+  function redirect(from) {
+    if (redirects.hasOwnProperty(from)) {
+      var to = redirects[from];
+      console.log("redirect " + from + " to " + to);
+      targetPage = "../engine-guide/" + to
+
+      var link = document.getElementById("redirectPage");
+      link.href = targetPage;
+      link.innerHTML = targetPage;
+      
+      setTimeout(function() {
+        window.location.href = targetPage;
+      }, 500);
+      return true;
+    } else {
+      console.log("no redirection found for page " + page);
+      return false;
+    }
+  }
+
+  function getPageWithAnchor() {
+    var page = getPage();
+    var anchor = getAnchor();
+    if (anchor) {
+      return page + "#" + anchor;
+    }
+    return page;
+  }
+
+  function getPage() {
+    var path = window.location.pathname;
+    return path.split("/").pop();
+  }
+  
+  function getAnchor() {
+    var currentUrl = document.URL,
+    urlParts   = currentUrl.split('#');
+    return (urlParts.length > 1) ? urlParts[1] : null;
+  }
+</script>
+  
 {% endblock %}

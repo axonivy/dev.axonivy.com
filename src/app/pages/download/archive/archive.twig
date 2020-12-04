@@ -5,112 +5,112 @@
 {% block content %}
 
 <style>
-table.alt tbody tr td {
-	border-color: #C7D426;
-}
+  table.alt tbody tr td {
+    border-color: #C7D426;
+  }
 
-table.alt tbody tr td {
-	border: 0px;
-	border-top: 1px solid black;
-}
+  table.alt tbody tr td {
+    border: 0px;
+    border-top: 1px solid black;
+  }
 
-.tooltip {
-	color: lightblue;
-}
-.tooltip .tooltiptext {
-	visibility: hidden;
-	width: 200px;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	padding: 5px;
-	border-radius: 6px;
-	position: absolute;
-	z-index: 1;
-	top: -5px;
-	left: 105%; 
-	font-weight: normal;
-	font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
-	font-size: 14px;
-}
-.tooltip:hover .tooltiptext {
-	visibility: visible;
-}
+  .tooltip {
+    color: lightblue;
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%; 
+    font-weight: normal;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
 </style>
 
 <section id="main" class="inverse">
-	<div class="inner">
-		<header>
-			<h1>
-				<span class="icon fas fa-archive"></span> Archive
-			</h1>
-		</header>
-		<p>You are looking for older versions? Browse our archive!</p>
-	</div>
+  <div class="inner">
+    <header>
+      <h1>
+        <span class="icon fas fa-archive"></span> Archive
+      </h1>
+    </header>
+    <p>You are looking for older versions? Browse our archive!</p>
+  </div>
 </section>
 
 <section id="one" >
-	<div class="inner">
-		<div class="table-wrapper">
-			<div class="select-wrapper">
-				<select name="version" id="version" onchange="location = this.value;">
-				    {% for versionLink in versionLinks %}
-						<a href="#"><option value="{{ versionLink.url }}" {{ (versionLink.id == currentMajorVersion) ? 'selected' : '' }}>{{ versionLink.displayText }}</option></a>
-					{% endfor %}
-				</select>
-			</div>
-				
-			<br />
-				
-			<table class="alt">
-				<thead>
-					<tr>
-						<th>Version</th>
-						<th>Download</th>
-						<th>Documents</th>
-					</tr>
-				</thead>
-				<tbody>
-				{% for releaseInfo in releaseInfos %}
-					<tr>
-						<td>
-							<div>{{ releaseInfo.version.VersionNumber }}</div>
-							<div style="font-size: 13px;">{{ releaseInfo.ReleaseDate }}</div>
-						</td>
-						<td>
-						{% if releaseInfo.UnsafeVersion %}
-							<span style="color:red;">
-								 We have identified a security issue in this version. We highly recommend updating to the latest update version.
-							</span>
-							<br /><br />
-						{% endif %}
+  <div class="inner">
+    <div class="table-wrapper">
+      <div class="select-wrapper">
+        <select name="version" id="version" onchange="location = this.value;">
+          {% for versionLink in versionLinks %}
+            <a href="#"><option value="{{ versionLink.url }}" {{ (versionLink.id == currentMajorVersion) ? 'selected' : '' }}>{{ versionLink.displayText }}</option></a>
+          {% endfor %}
+        </select>
+      </div>
+        
+      <br />
+        
+      <table class="alt">
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Download</th>
+            <th>Documents</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for releaseInfo in releaseInfos %}
+          <tr>
+            <td>
+              <div>{{ releaseInfo.version.VersionNumber }}</div>
+              <div style="font-size: 13px;">{{ releaseInfo.ReleaseDate }}</div>
+            </td>
+            <td>
+            {% if releaseInfo.UnsafeVersion %}
+              <span style="color:red;">
+                We have identified a security issue in this version. We highly recommend updating to the latest update version.
+              </span>
+              <br /><br />
+            {% endif %}
 
-						{% for artifact in releaseInfo.artifacts %}
-							<a href="{{ artifact.DownloadUrl }}"><span class="icon fas fa-download"> </span></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a>
-							{% if artifact.Type == "Slim All" %}
-								<span class="icon fas fa-info-circle tooltip">
-									<span class="tooltiptext">This version is similar to the 'All' product, but without the 'Axis' extension and 'demo-portal'.</span>
-								</span>
-							{% endif %}
-							<br />
-						{% endfor %}
-						</td>
+            {% for artifact in releaseInfo.artifacts %}
+              <a href="{{ artifact.DownloadUrl }}"><span class="icon fas fa-download"> </span></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a>
+              {% if artifact.Type == "Slim All" %}
+                <span class="icon fas fa-info-circle tooltip">
+                  <span class="tooltiptext">This version is similar to the 'All' product, but without the 'Axis' extension and 'demo-portal'.</span>
+                </span>
+              {% endif %}
+              <br />
+            {% endfor %}
+            </td>
 
-						<td style="min-width:200px;">
-						{% if releaseInfo.DocProvider.hasDocuments %}
-							<a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fas fa-file"> </span></a>&nbsp;<a href="{{ releaseInfo.DocProvider.OverviewUrl }}">Documentation</a><br />
-						{% endif %}
-						{% if releaseInfo.hasHotfix %}
-							<a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;Hotfix<br />
-							<a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fas fa-file"> </span></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
-						{% endif %}
-						</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
+            <td style="min-width:200px;">
+            {% if releaseInfo.DocProvider.hasDocuments %}
+              <a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fas fa-file"> </span></a>&nbsp;<a href="{{ releaseInfo.DocProvider.OverviewUrl }}">Documentation</a><br />
+            {% endif %}
+            {% if releaseInfo.hasHotfix %}
+              <a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;Hotfix<br />
+              <a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fas fa-file"> </span></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
+            {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
     
 {% endblock %}

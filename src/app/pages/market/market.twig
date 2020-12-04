@@ -3,143 +3,143 @@
 {% block title %}Axon.ivy Market{{ parent() }}{% endblock %}
 
 {% block content %}
-  	
-	<style>
-	    .product-card {
-	    	cursor: pointer;
-	    	background-color: white;
-	    	padding: 10px;
-	    	overflow: hidden;
-	    	min-height: 200px;
-	    	max-height: 200px;
-			border: 1px solid #e8e9ea;
-			box-shadow: 1px 1px 2px #e8e9ea;
-	    }
-	    .product-tag {
-	    	color: white;
-	    	font-size: 11px;
-	    	padding: 5px;
-	    	background-color: #888;
-	    	border-radius: 15px;
-	    	text-transform: uppercase;
-	    	font-weight: bold;
-	    }
-		.zoom:hover {
-  			transform: scale(1.05);
-			transition: transform 0.3s ease;
-		}
-		input::placeholder {
-  			color: white;
-		}
-		select {
-			visibility: hidden;
-		}
-		#main .select2-container--default .select2-selection--multiple {
-			border: 1px solid white;
-			border-radius: 0px;
-			background-color: inherit;
-		}
-		#main .select2-container--default .select2-search__field {
-			margin-bottom: 0.1em;
-			color: white;
-		}
-		#main .select2-container--default .select2-selection--multiple .select2-selection__choice {
-			background-color: #888;
-		}
-		#main .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-			color: white;
-		}
-	</style>
 
-	<section id="main" class="inverse">
-		<div class="inner">
-			<header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
-			<p>
-				In our market we provide powerful extensions around the Axon.ivy Platform.
-				From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
-				Take a look around.
-			</p>
+<style>
+  .product-card {
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+    overflow: hidden;
+    min-height: 200px;
+    max-height: 200px;
+    border: 1px solid #e8e9ea;
+    box-shadow: 1px 1px 2px #e8e9ea;
+  }
+  .product-tag {
+    color: white;
+    font-size: 11px;
+    padding: 5px;
+    background-color: #888;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .zoom:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  input::placeholder {
+    color: white;
+  }
+  select {
+    visibility: hidden;
+  }
+  #main .select2-container--default .select2-selection--multiple {
+    border: 1px solid white;
+    border-radius: 0px;
+    background-color: inherit;
+  }
+  #main .select2-container--default .select2-search__field {
+    margin-bottom: 0.1em;
+    color: white;
+  }
+  #main .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #888;
+  }
+  #main .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: white;
+  }
+</style>
 
-			<div class="row">
-				<div class="5u 12u(small)" style="margin-bottom:10px;">
-					<select id="types" multiple="multiple">
-                      {% for tag in tags %}
-                      	<option value="{{ tag }}">{{ tag }}</option>
-                      {% endfor %}
-                    </select>
-				</div>
-                    
-				<div class="7u 12u(small)">
-					<input type="text" id="searchQuery" placeholder="Search ..." style="border: 1px solid white" value="{{ searchQuery }}"></input>
-				</div>
-			</div>
+<section id="main" class="inverse">
+  <div class="inner">
+    <header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
+    <p>
+      In our market we provide powerful extensions around the Axon.ivy Platform.
+      From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
+      Take a look around.
+    </p>
 
-			<div class="row" style="margin-top:5px;">
-				<div class="12u$">
-						<a href="/market" style="font-size:16px;{{ (filterSet) ? '' : 'visibility:hidden;' }}"><i class="icon fas fa-undo" style="color:white;"></i> reset filter</a>
-				</div>
-			</div>
+    <div class="row">
+      <div class="5u 12u(small)" style="margin-bottom:10px;">
+        <select id="types" multiple="multiple">
+          {% for tag in tags %}
+            <option value="{{ tag }}">{{ tag }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      
+      <div class="7u 12u(small)">
+        <input type="text" id="searchQuery" placeholder="Search ..." style="border: 1px solid white" value="{{ searchQuery }}"></input>
+      </div>
+    </div>
 
-			<script>
+    <div class="row" style="margin-top:5px;">
+      <div class="12u$">
+          <a href="/market" style="font-size:16px;{{ (filterSet) ? '' : 'visibility:hidden;' }}"><i class="icon fas fa-undo" style="color:white;"></i> reset filter</a>
+      </div>
+    </div>
 
-				$(document).ready(function() {
-					$("#types").select2({
-						placeholder: 'All types',
-						width: '100%'
-					});
-					$("#types").val('{{ selectedTags }}'.split(',')).trigger("change");
-					var typesDropdown = document.getElementById('types');
-					typesDropdown.onchange = function() { searchMarket(); };
-				});
+    <script>
+
+      $(document).ready(function() {
+        $("#types").select2({
+          placeholder: 'All types',
+          width: '100%'
+        });
+        $("#types").val('{{ selectedTags }}'.split(',')).trigger("change");
+        var typesDropdown = document.getElementById('types');
+        typesDropdown.onchange = function() { searchMarket(); };
+      });
 
 
-        		function searchMarket() {
-        			var searchQuery = document.getElementById('searchQuery').value;
-					var type = $('#types').val().join(',');
-        			window.location.href = "?search=" + searchQuery + "&type=" + type;
-        		}
+      function searchMarket() {
+        var searchQuery = document.getElementById('searchQuery').value;
+        var type = $('#types').val().join(',');
+        window.location.href = "?search=" + searchQuery + "&type=" + type;
+      }
 
-				var delayTimer;
-        		var input = document.getElementById("searchQuery");                
-                input.addEventListener("keyup", function(event) {
-                  clearTimeout(delayTimer);
-                    delayTimer = setTimeout(function() {
-                        searchMarket();
-                    }, 600);
-                });                
+      var delayTimer;
+      var input = document.getElementById("searchQuery");                
+      input.addEventListener("keyup", function(event) {
+        clearTimeout(delayTimer);
+        delayTimer = setTimeout(function() {
+          searchMarket();
+        }, 600);
+      });
 
-                var input = document.getElementById("searchQuery");
-                var len = input.value.length;
-                input.focus();
-                input.setSelectionRange(len, len);
-        	</script>
-		</div>
-	</section>
+      var input = document.getElementById("searchQuery");
+      var len = input.value.length;
+      input.focus();
+      input.setSelectionRange(len, len);
+    </script>
+  </div>
+</section>
 
-	<section style="background-color:#f7f7f7;padding-top:20px;padding-bottom:20px;">
-		<div class="inner">
-			{% if products is empty %}
-          		Nothing found
-            {% endif %}
-			<div class="row p-grid p-align-stretch">
-				{% for product in products %}
-					<div class="p-col-fixed p-col-12 p-md-6 p-lg-3">
-						<div class="product-card zoom" onclick="location.href='{{ product.url }}';">
-							<div style="height:40px;">
-							{% for tag in product.tags %}
-								<span class="product-tag">{{ tag }}</span>
-							{% endfor %}
-							</div>
-							<center>
-								<img src="{{ product.imgSrc }}" height="100px" alt="{{ product.name }}" class="image"/>
-							</center>
-							<center style="color:#444;font-size:15px;">
-						        {{ product.name }}
-						    </center>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	</section>
+<section style="background-color:#f7f7f7;padding-top:20px;padding-bottom:20px;">
+  <div class="inner">
+    {% if products is empty %}
+      Nothing found
+    {% endif %}
+    <div class="row p-grid p-align-stretch">
+      {% for product in products %}
+        <div class="p-col-fixed p-col-12 p-md-6 p-lg-3">
+          <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
+            <div style="height:40px;">
+            {% for tag in product.tags %}
+              <span class="product-tag">{{ tag }}</span>
+            {% endfor %}
+            </div>
+            <center>
+              <img src="{{ product.imgSrc }}" height="100px" alt="{{ product.name }}" class="image"/>
+            </center>
+            <center style="color:#444;font-size:15px;">
+              {{ product.name }}
+            </center>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 {% endblock %}

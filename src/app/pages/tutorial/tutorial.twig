@@ -5,56 +5,56 @@
 {% block content %}
 
 <section id="main" class="inverse">
-	<div class="inner">
-		<header>
-			<h1><span class="icon fas fa-graduation-cap"></span> Tutorial</h1>
-		</header>
-		<p>Learn how to work with the Axon.ivy Digital Business Platform</p>				
-	</div>
+  <div class="inner">
+    <header>
+      <h1><span class="icon fas fa-graduation-cap"></span> Tutorial</h1>
+    </header>
+    <p>Learn how to work with the Axon.ivy Digital Business Platform</p>				
+  </div>
 </section>
 
 <section id="one">
-	<div class="inner">
-		<div class="row">
-			<div class="6u 12u$(xsmall)">
-				<span class="image fit">
-					<a href="https://www.axonivy.com/tutorials">
-						<img src="/images/misc/splash-screen.bmp" alt="Splash Screen" />
-					</a>
-				</span>
-				<ul class="actions">
-					<li>
-						<a href="https://www.axonivy.com/tutorials" class="button special">
-							<i class="icon fas fa-graduation-cap"></i> Start with your first project!
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+  <div class="inner">
+    <div class="row">
+      <div class="6u 12u$(xsmall)">
+        <span class="image fit">
+          <a href="https://www.axonivy.com/tutorials">
+            <img src="/images/misc/splash-screen.bmp" alt="Splash Screen" />
+          </a>
+        </span>
+        <ul class="actions">
+          <li>
+            <a href="https://www.axonivy.com/tutorials" class="button special">
+              <i class="icon fas fa-graduation-cap"></i> Start with your first project!
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="two">
-	<div class="inner">
-		<div class="row">
-			{% for tutorial in tutorials %}
-			<div class="6u 12u$(small)">
-				<h4>{{ tutorial.title }}</h4>
-				<iframe title="{{ tutorial.title }}" height="300px" width="100%" src="{{ tutorial.embeddedVideoUrl }}"> </iframe>
-				<p>
-					{{ tutorial.description }}
-				</p>
-				<ul class="actions">
-					<li>
-						<a href="{{ tutorial.videoUrl }}" class="button special small">
-							<i class="icon fab fa-youtube"></i> Watch on YouTube
-						</a>
-					</li>
-				</ul>
-			</div>
-			{% endfor %}
-		</div>
-	</div>
+  <div class="inner">
+    <div class="row">
+      {% for tutorial in tutorials %}
+      <div class="6u 12u$(small)">
+        <h4>{{ tutorial.title }}</h4>
+        <iframe title="{{ tutorial.title }}" height="300px" width="100%" src="{{ tutorial.embeddedVideoUrl }}"> </iframe>
+        <p>
+          {{ tutorial.description }}
+        </p>
+        <ul class="actions">
+          <li>
+            <a href="{{ tutorial.videoUrl }}" class="button special small">
+              <i class="icon fab fa-youtube"></i> Watch on YouTube
+            </a>
+          </li>
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 {% endblock %}

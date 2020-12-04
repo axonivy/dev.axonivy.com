@@ -1,57 +1,56 @@
 [
-	{
-		"name": "Alexander Suter",
-		"imgSrc": "/images/team/alex.jpg",
-		"education": "B.Sc. Computer Science",
-		"function": "Core Developer"
-	},
-	{
-		"name": "Andreas Rusch",
-		"imgSrc": "/images/team/andreas.jpg",
-		"education": "Lic. oec. publ. Business IT",
-		"function": "Core Developer"
-	},
-	{
-		"name": "Bruno Bütler",
-		"imgSrc": "/images/team/bruno.jpg",
-		"education": "Inf. Ing. HTL",
-		"function": "Product Owner & Team Leader"
-	},
-	{
-		"name": "Caty Hürlimann",
-		"imgSrc": "/images/team/caty.jpg",
-		"education": "",
-		"function": "Office Manager"
-	},
-	{
-		"name": "Christian Strebel",
-		"imgSrc": "/images/team/christian.jpg",
-		"education": "Inf. Ing. HTL",
-		"function": "Core Developer"
-	},
-	{
-		"name": "Jacek Lajdecki",
-		"imgSrc": "/images/team/jacek.jpg",
-		"education": "Apprentice in Information Technology",
-		"function": "Graduand Core Developer"
-	},
-	{
-		"name": "Lukas Lieb",
-		"imgSrc": "/images/team/lukas.jpg",
-		"education": "B.Sc. Computer Science",
-		"function": "Core Developer"
-	},
-	{
-		"name": "Reguel Wermelinger",
-		"imgSrc": "/images/team/reguel.jpg",
-		"education": "B.Sc. Computer Science",
-		"function": "Core Developer"
-	},
-	{
-		"name": "Reto Weiss",
-		"imgSrc": "/images/team/reto.jpg",
-		"education": "El. Ing. HTL",
-		"function": "Product Owner & Core Developer"
-	}
-	
+  {
+    "name": "Alexander Suter",
+    "imgSrc": "/images/team/alex.jpg",
+    "education": "B.Sc. Computer Science",
+    "function": "Core Developer"
+  },
+  {
+    "name": "Andreas Rusch",
+    "imgSrc": "/images/team/andreas.jpg",
+    "education": "Lic. oec. publ. Business IT",
+    "function": "Core Developer"
+  },
+  {
+    "name": "Bruno Bütler",
+    "imgSrc": "/images/team/bruno.jpg",
+    "education": "Inf. Ing. HTL",
+    "function": "Product Owner & Team Leader"
+  },
+  {
+    "name": "Caty Hürlimann",
+    "imgSrc": "/images/team/caty.jpg",
+    "education": "",
+    "function": "Office Manager"
+  },
+  {
+    "name": "Christian Strebel",
+    "imgSrc": "/images/team/christian.jpg",
+    "education": "Inf. Ing. HTL",
+    "function": "Core Developer"
+  },
+  {
+    "name": "Jacek Lajdecki",
+    "imgSrc": "/images/team/jacek.jpg",
+    "education": "Apprentice in Information Technology",
+    "function": "Graduand Core Developer"
+  },
+  {
+    "name": "Lukas Lieb",
+    "imgSrc": "/images/team/lukas.jpg",
+    "education": "B.Sc. Computer Science",
+    "function": "Core Developer"
+  },
+  {
+    "name": "Reguel Wermelinger",
+    "imgSrc": "/images/team/reguel.jpg",
+    "education": "B.Sc. Computer Science",
+    "function": "Core Developer"
+  },
+  {
+    "name": "Reto Weiss",
+    "imgSrc": "/images/team/reto.jpg",
+    "education": "El. Ing. HTL",
+    "function": "Product Owner & Core Developer"
+  }
 ]
