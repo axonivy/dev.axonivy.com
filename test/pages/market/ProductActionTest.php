@@ -22,14 +22,15 @@ class ProductActionTest extends TestCase
             ->bodyContains('Portal');
     }
 
-    public function testInstallButton_notDisplayedInOfficalMarket()
+    public function testInstallButton_canNotInstallInOfficalMarket()
     {
         AppTester::assertThatGet('/market/genderize')
             ->ok()
-            ->bodyDoesNotContain('install(');
+            ->bodyDoesNotContain('install(')
+            ->bodyContains("Please open the");
     }
     
-    public function testInstallButton_displayInDesignerMarket()
+    public function testInstallButton_canInstallInDesignerMarket()
     {
         AppTester::assertThatGetWithCookie('http://localhost/market/genderize', ['ivy-version' => '9.2.0'])
             ->ok()

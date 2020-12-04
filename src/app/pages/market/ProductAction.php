@@ -78,23 +78,23 @@ class ProductAction
         $cookies = $request->getCookieParams();
         $version = $cookies['ivy-version'] ?? '';
 
-        $show = !empty($version);
+        $isDesigner = !empty($version);
         $reason = $product->getReasonWhyNotInstallable($version);
-        return new InstallButton($show, $reason, $metaUrl);
+        return new InstallButton($isDesigner, $reason, $metaUrl);
     }
 }
 
 class InstallButton
 {
-    public bool $show;
+    public bool $isDesigner;
 
     public string $reason;
 
     private string $metaUrl;
 
-    function __construct(bool $show, string $reason, string $metaUrl)
+    function __construct(bool $isDesigner, string $reason, string $metaUrl)
     {
-        $this->show = $show;
+        $this->isDesigner = $isDesigner;
         $this->reason = $reason;
         $this->metaUrl = $metaUrl;
     }
