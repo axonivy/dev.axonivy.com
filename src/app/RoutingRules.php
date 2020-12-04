@@ -24,7 +24,6 @@ use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
 use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
-use app\pages\tutorial\gettingstarted\TutorialGettingStartedAction;
 use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
@@ -42,7 +41,6 @@ class RoutingRules
         $app->get('/search', SearchAction::class);
         $app->get('/community', CommunityAction::class);
         $app->get('/tutorial', TutorialAction::class);
-        $app->get('/tutorial/getting-started[/{name}/step-{stepNr}]', TutorialGettingStartedAction::class);
         
         $app->get('/download/maven.html', MavenArchiveAction::class);
         $app->get('/download/archive[/{version}]', ArchiveAction::class);
