@@ -17,19 +17,19 @@ pipeline {
   stages {
     stage('build') {
       agent {
-	      dockerfile {
-	        dir 'docker/apache'    
-	      }
-	    }
+        dockerfile {
+          dir 'docker/apache'    
+        }
+      }
       steps {
         echo 'create distribution package'
-      	sh 'composer install --no-dev --no-progress'
+        sh 'composer install --no-dev --no-progress'
         sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases --exclude=src/web/_market src vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
  
         echo 'test'
-      	sh 'composer install --no-progress'
+        sh 'composer install --no-progress'
         sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
         junit 'phpunit-junit.xml'
       } 
@@ -43,10 +43,23 @@ pipeline {
         docker {
           image 'sonarsource/sonar-scanner-cli'
           args '-e SONAR_HOST_URL=https://sonar.ivyteam.io'
+          registryCredentialsId 'docker.io'
         }
       }
-   	  steps {
-   	    sh 'sonar-scanner'
+      steps {
+        sh 'sonar-scanner'
+      }
+    }
+
+    stage('check editorconfig') {
+      steps {
+        script {
+          docker.withRegistry('', 'docker.io') {
+            docker.image('mstruebing/editorconfig-checker').inside {
+              sh 'ec -no-color'
+            }
+          }
+        }
       }
     }
 
@@ -55,9 +68,10 @@ pipeline {
         branch 'master'
       }
       agent {
-      	docker {
-	        image 'axonivy/build-container:ssh-client-1.0'
-	      }
+        docker {
+          image 'axonivy/build-container:ssh-client-1.0'
+          registryCredentialsId 'docker.io'
+        }
       }
       steps {
         sshagent(['zugprojenkins-ssh']) {

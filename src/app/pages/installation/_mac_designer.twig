@@ -1,36 +1,36 @@
 <p>
-	1. Download the Axon.ivy Designer
+  1. Download the Axon.ivy Designer
 </p>
 
 <ul class="actions">
-	<li><a href="{{downloadUrl}}" class="button special">Download Axon.ivy Designer {{bugfixVersion}}</a></li>
+  <li><a href="{{downloadUrl}}" class="button special">Download Axon.ivy Designer {{bugfixVersion}}</a></li>
 </ul>
 
 <p>
-	2. Open the Downloads folder in Finder
+  2. Open the Downloads folder in Finder
 </p>
 
 <img src="/images/installation/mac_open_downloads.png" />
 <br /><br />
 
 <p>
-	3. Copy Axon.ivy Designer to the Applications folder
+  3. Copy Axon.ivy Designer to the Applications folder
 </p>
 
 <img src="/images/installation/mac_copy_to_applications.png" />
 <br /><br />
 
 <p>
-	4. Open a new terminal at the Axon.ivy Designer folder 
+  4. Open a new terminal at the Axon.ivy Designer folder 
 </p>
 
 <img src="/images/installation/mac_open_terminal.png" />
 <br /><br />
 
 <p>
-	5. Execute the following command in the Terminal: <br />
-	<code>sudo xattr -r -d com.apple.quarantine .</code> <br />
-	This allows GateKeeper to start Axon.ivy Designer.
+  5. Execute the following command in the Terminal: <br />
+  <code>sudo xattr -r -d com.apple.quarantine .</code> <br />
+  This allows GateKeeper to start Axon.ivy Designer.
 </p>
 
 
@@ -39,29 +39,29 @@
 <br /><br />
 
 <p>
-	5. Open Axon.ivy Designer
+  5. Open Axon.ivy Designer
 </p>
 
 <img src="/images/installation/mac_open.png" />
 <br /><br />
 
 <p>
-	6. You need a Java Developer Kit (JDK) to run Axon.ivy Designer. 
-	If you haven't installed it yet you will see the following message. 
-	Press <b>More Info ...</b> to learn how to install it.
+  6. You need a Java Developer Kit (JDK) to run Axon.ivy Designer. 
+  If you haven't installed it yet you will see the following message. 
+  Press <b>More Info ...</b> to learn how to install it.
 </p>
 
 <img src="/images/installation/mac_java.png" />
 <br /><br />
 
 <ul class="actions">
-	<li><a href="https://www.axonivy.com/tutorials" class="button special">Start with your first project!</a></li>
+  <li><a href="https://www.axonivy.com/tutorials" class="button special">Start with your first project!</a></li>
 </ul>
 
 {% if PRODUCTIVE_SYSTEM %}
-<script>
-$(document).ready(function(){
-  window.location.href = '{{ downloadUrl }}';
-});
-</script>
+  <script>
+    $(document).ready(function(){
+      window.location.href = '{{ downloadUrl }}';
+    });
+  </script>
 {% endif %}

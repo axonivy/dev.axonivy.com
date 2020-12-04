@@ -1,29 +1,29 @@
 [
-	{
-		"icon" : "fas fa-project-diagram",
-		"title": "Visualize your business processes",
-		"description": "The Axon.ivy Digital Business Platform allows you to document business processes quickly and intuitively. A shared view on all the users, roles, departments and technical systems that are involved in a business process simplifies the task.",
-		"videoUrl": "https://player.vimeo.com/video/236916642"
-	},
-	{
-		"icon" : "fas fa-magic",
-		"title": "Automate your business processes",
-		"description": "Documenting your processes is good. But what you really want is to automate your high-value processes. Build applications that lead users through processes without the need to hire a software engineer.",
-		"videoUrl": "https://player.vimeo.com/video/236916913"
-	},
-	{
-		"icon" : "fas fa-plug",
-		"title": "Integrate with other systems",
-		"description": "The Axon.ivy Digital Business Platform integrates well with countless 3rd party systems (e.g. REST, Web Services, Databases, SAP, Email, Reporting)."
-	},
-	{
-		"icon" : "fas fa-code",
-		"title": "Solve complex problems",
-		"description": "With our Java integration you have the ability to break out of our predefined tooling and use the advanced features of Tomcat, JPA, JSF, JAX-RS and more."
-	},
-	{
-		"icon" : "fas fa-chart-line",
-		"title": "Monitor your engines",
-		"description": "We provide insightful and effective monitoring and logging interfaces that give you confidence that the application is healthy and accessible."
-	}
+  {
+    "icon": "fas fa-project-diagram",
+    "title": "Visualize your business processes",
+    "description": "The Axon.ivy Digital Business Platform allows you to document business processes quickly and intuitively. A shared view on all the users, roles, departments and technical systems that are involved in a business process simplifies the task.",
+    "videoUrl": "https://player.vimeo.com/video/236916642"
+  },
+  {
+    "icon": "fas fa-magic",
+    "title": "Automate your business processes",
+    "description": "Documenting your processes is good. But what you really want is to automate your high-value processes. Build applications that lead users through processes without the need to hire a software engineer.",
+    "videoUrl": "https://player.vimeo.com/video/236916913"
+  },
+  {
+    "icon": "fas fa-plug",
+    "title": "Integrate with other systems",
+    "description": "The Axon.ivy Digital Business Platform integrates well with countless 3rd party systems (e.g. REST, Web Services, Databases, SAP, Email, Reporting)."
+  },
+  {
+    "icon": "fas fa-code",
+    "title": "Solve complex problems",
+    "description": "With our Java integration you have the ability to break out of our predefined tooling and use the advanced features of Tomcat, JPA, JSF, JAX-RS and more."
+  },
+  {
+    "icon": "fas fa-chart-line",
+    "title": "Monitor your engines",
+    "description": "We provide insightful and effective monitoring and logging interfaces that give you confidence that the application is healthy and accessible."
+  }
 ]

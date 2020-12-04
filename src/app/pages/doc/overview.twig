@@ -5,75 +5,75 @@
 {% block content %}
 
 <section id="main" class="inverse">
-	<div class="inner">
-		<header>
-			<h1>
-				<span class="icon fas fa-book"></span> Documentation
-			</h1>
-		</header>
-		<p>Find all information about the Axon.ivy Digital Business Platform in our documents.</p>
-	</div>
+  <div class="inner">
+    <header>
+      <h1>
+        <span class="icon fas fa-book"></span> Documentation
+      </h1>
+    </header>
+    <p>Find all information about the Axon.ivy Digital Business Platform in our documents.</p>
+  </div>
 </section>
 
 
 {% if docLinksLE is not empty %}
-	<section id="three">
-	{% else %}
-	<section id="two">
-	{% endif %}
-	
-		<div class="inner">
-			<article>
-				<div class="content">
-					<span class="icon fas fa-balance-scale"></span>
-					<header><h3>Long Term Support (LTS)</h3></header>
-					<ul class="actions">
-					{% for docLink in docLinksLTS %}
-					<li>
-						<a href="{{ docLink.url }}" class="button special">
-							<span class="icon fas fa-book"></span> {{ docLink.displayText }}
-						</a>
-					</li>
-					{% endfor %}					
-				</ul>
-				</div>
-			</article>
-			{% if docLinksLE is not empty %}
-			<article>
-				<div class="content">
-					<span class="icon fas fa-star"></span>
-					<header>
-						<h3>Leading Edge (LE)</h3>
-					</header>
-					<ul class="actions">
-						{% for docLink in docLinksLE %}
-							<li>
-								<a href="{{ docLink.url }}" class="button special">
-									<span class="icon fas fa-book"></span> {{ docLink.displayText }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</article>
-			{% endif %}
-			<article>
-				<div class="content">
-					<span class="icon fas fa-flask"></span>
-					<header>
-						<h3>Dev Releases</h3>
-					</header>
-					<ul class="actions">
-						{% for docLink in docLinksDEV %}
-							<li>
-								<a href="{{ docLink.url }}" class="button">
-									<span class="icon fas fa-book"></span> {{ docLink.displayText }}
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</article>
-		</div>
+  <section id="three">
+  {% else %}
+  <section id="two">
+  {% endif %}
+
+    <div class="inner">
+      <article>
+        <div class="content">
+          <span class="icon fas fa-balance-scale"></span>
+          <header><h3>Long Term Support (LTS)</h3></header>
+          <ul class="actions">
+          {% for docLink in docLinksLTS %}
+            <li>
+              <a href="{{ docLink.url }}" class="button special">
+                <span class="icon fas fa-book"></span> {{ docLink.displayText }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+        </div>
+      </article>
+      {% if docLinksLE is not empty %}
+        <article>
+          <div class="content">
+            <span class="icon fas fa-star"></span>
+            <header>
+              <h3>Leading Edge (LE)</h3>
+            </header>
+            <ul class="actions">
+              {% for docLink in docLinksLE %}
+                <li>
+                  <a href="{{ docLink.url }}" class="button special">
+                    <span class="icon fas fa-book"></span> {{ docLink.displayText }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      {% endif %}
+      <article>
+        <div class="content">
+          <span class="icon fas fa-flask"></span>
+          <header>
+            <h3>Dev Releases</h3>
+          </header>
+          <ul class="actions">
+            {% for docLink in docLinksDEV %}
+              <li>
+                <a href="{{ docLink.url }}" class="button">
+                  <span class="icon fas fa-book"></span> {{ docLink.displayText }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </article>
+    </div>
   </section>
 {% endblock %}

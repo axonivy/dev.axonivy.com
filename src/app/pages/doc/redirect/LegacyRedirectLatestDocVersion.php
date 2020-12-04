@@ -1,4 +1,5 @@
 <?php
+
 namespace app\pages\doc\redirect;
 
 use Slim\Psr7\Response;
@@ -15,23 +16,23 @@ use Slim\Exception\HttpNotFoundException;
  */
 class LegacyRedirectLatestDocVersion
 {
-    public function __invoke($request, Response $response, $args)
-    {
-        $version = $args['version'] ?? '';
-        $path = $args['path'] ?? '';
-        if (! empty($path)) {
-            $path = '/' . $path;
-        }
-
-        if ($version == 'latest') {
-            $lts = ReleaseInfoRepository::getLatestLongTermSupport();
-            if ($lts == null) {
-                throw new HttpNotFoundException($request);
-            }
-            return Redirect::to($response, $lts->getDocProvider()->getMinorUrl() . $path);
-        }
-
-        $version = substr($version, 0, 3);
-        return Redirect::to($response, "/doc/$version" . $path);
+  public function __invoke($request, Response $response, $args)
+  {
+    $version = $args['version'] ?? '';
+    $path = $args['path'] ?? '';
+    if (!empty($path)) {
+      $path = '/' . $path;
     }
+
+    if ($version == 'latest') {
+      $lts = ReleaseInfoRepository::getLatestLongTermSupport();
+      if ($lts == null) {
+        throw new HttpNotFoundException($request);
+      }
+      return Redirect::to($response, $lts->getDocProvider()->getMinorUrl() . $path);
+    }
+
+    $version = substr($version, 0, 3);
+    return Redirect::to($response, "/doc/$version" . $path);
+  }
 }

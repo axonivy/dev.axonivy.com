@@ -5,56 +5,56 @@
 {% block content %}
 
 <section id="main" class="inverse">
-	<div class="inner">
-		<header>
-			<h1>
-				<span class="icon fas fa-thumbs-up"></span> ivyTeam (Switzerland)
-			</h1>
-		</header>
+  <div class="inner">
+    <header>
+      <h1>
+        <span class="icon fas fa-thumbs-up"></span> ivyTeam (Switzerland)
+      </h1>
+    </header>
 
-		<p>
-			<b>ivyTeam</b> is the core development team of the <b>Axon.ivy Digital Business Platform</b>.
-				The team is highly experienced in <b>agile
-				software development</b>. Since the formation in the year <b>1993</b>
-				the team is located in <b>Zug</b> in the heart of Switzerland.
-		</p>
-	</div>
+    <p>
+      <b>ivyTeam</b> is the core development team of the <b>Axon.ivy Digital Business Platform</b>.
+        The team is highly experienced in <b>agile
+        software development</b>. Since the formation in the year <b>1993</b>
+        the team is located in <b>Zug</b> in the heart of Switzerland.
+    </p>
+  </div>
 </section>
 
 <section style="padding: 4em 0 2em 0;">
-	<div class="inner">
-		<div class="row">
-		{% for employee in employees %}
-			<div class="4u 12u$(small)" style="text-align: center;">
-				{% if employee.imgSrc %}
-				<img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
-				{% else %}
-				<div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
-				{% endif %}
-				<header>
-					<h4 style="margin: 17px 0 0 0;">
-						{{ employee.name }}
-					</h4>
-				</header>
-				<p style="min-height: 85px; color: grey;">
-					{{ employee.function }}
-					<br />
-					{{ employee.education }}
-				</p>
-			</div>
-		{% endfor %}
-		</div>
-	</div>
+  <div class="inner">
+    <div class="row">
+    {% for employee in employees %}
+      <div class="4u 12u$(small)" style="text-align: center;">
+        {% if employee.imgSrc %}
+        <img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+        {% else %}
+        <div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
+        {% endif %}
+        <header>
+          <h4 style="margin: 17px 0 0 0;">
+            {{ employee.name }}
+          </h4>
+        </header>
+        <p style="min-height: 85px; color: grey;">
+          {{ employee.function }}
+          <br />
+          {{ employee.education }}
+        </p>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
 </section>
 
 <section id="one" class="inverse">
-	<div class="inner">
-		<div class="row">
-			<iframe title="ivyTeam location Baarerstrasse 12 6300 Zug" width="100%" height="450"
-				src="https://maps.google.com/maps?width=100%&amp;height=450&amp;hl=en&amp;coord=47.1717295,8.5166076&amp;q=Baarerstrasse%2012.%20CH-6300%20Zug+(AXON%20Ivy%20AG)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed">
-			</iframe>
-		</div>
-	</div>
+  <div class="inner">
+    <div class="row">
+      <iframe title="ivyTeam location Baarerstrasse 12 6300 Zug" width="100%" height="450"
+        src="https://maps.google.com/maps?width=100%&amp;height=450&amp;hl=en&amp;coord=47.1717295,8.5166076&amp;q=Baarerstrasse%2012.%20CH-6300%20Zug+(AXON%20Ivy%20AG)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=B&amp;output=embed">
+      </iframe>
+    </div>
+  </div>
 </section>
 
 {% endblock %}

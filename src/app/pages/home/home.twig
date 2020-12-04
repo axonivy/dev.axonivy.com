@@ -4,86 +4,86 @@
 
 {% block content %}
 
-		<style>
-		.embed-container {
-		  position: relative; 
-		  padding-bottom: 56.25%; /* ratio 16x9 */
-		  height: 0; 
-		  overflow: hidden; 
-		  width: 100%;
-		  height: auto;
-		}
-		.embed-container iframe {
-		  position: absolute; 
-		  top: 0; 
-		  left: 0; 
-		  width: 100%; 
-		  height: 100%; 
-		}
-	</style>
+<style>
+  .embed-container {
+    position: relative; 
+    padding-bottom: 56.25%; /* ratio 16x9 */
+    height: 0; 
+    overflow: hidden; 
+    width: 100%;
+    height: auto;
+  }
+  .embed-container iframe {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+  }
+</style>
 
-	<section id="banner">
-		<div class="inner">
-			<h1>AXON.IVY DIGITAL BUSINESS PLATFORM</h1>
-			<ul class="actions">
-				<li>
-					<a href="/download" class="button alt">
-						<i class="icon fas fa-download"></i> Download {{ CURRENT_VERSION_DOWNLOAD_LONG }}
-					</a>
-				</li>
-				<li>
-					<a href="/news" class="button alt">
-						<i class="icon fas fa-newspaper"></i> New and Noteworthy
-					</a>
-				</li>
-				<li>
-					<a href="https://release.axonivy.com" target="_blank" rel="noreferrer" class="button alt">
-						<i class="icon fas fa-rocket"></i> Release 8.0
-					</a>
-				</li>
-			</ul>
-		</div>
-	</section>
+<section id="banner">
+  <div class="inner">
+    <h1>AXON.IVY DIGITAL BUSINESS PLATFORM</h1>
+    <ul class="actions">
+      <li>
+        <a href="/download" class="button alt">
+          <i class="icon fas fa-download"></i> Download {{ CURRENT_VERSION_DOWNLOAD_LONG }}
+        </a>
+      </li>
+      <li>
+        <a href="/news" class="button alt">
+          <i class="icon fas fa-newspaper"></i> New and Noteworthy
+        </a>
+      </li>
+      <li>
+        <a href="https://release.axonivy.com" target="_blank" rel="noreferrer" class="button alt">
+          <i class="icon fas fa-rocket"></i> Release 8.0
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
     
-   	<span id="video"></span>
+<span id="video"></span>
 
-	<section id="two">
-		<div class="inner">
-			{% for feature in features %}
-				{% if not feature.videoUrl is empty %}
-				<article>
-					<div class="content">
-						<span class="icon {{ feature.icon }}"></span>
-						<header><h3>{{ feature.title }}</h3></header>
-						<p>{{ feature.description }}</p>
-						<ul class="actions">
-							<li>
-								<a href="{{ feature.videoUrl }}" class="button special">
-									<i class="icon fab fa-youtube"></i> Watch on vimeo
-								</a>
-							</li>
-						</ul>
-					</div>
-				</article>
-				{% endif %}
-			{% endfor %}
-		</div>
-	</section>
+<section id="two">
+  <div class="inner">
+    {% for feature in features %}
+      {% if not feature.videoUrl is empty %}
+      <article>
+        <div class="content">
+          <span class="icon {{ feature.icon }}"></span>
+          <header><h3>{{ feature.title }}</h3></header>
+          <p>{{ feature.description }}</p>
+          <ul class="actions">
+            <li>
+              <a href="{{ feature.videoUrl }}" class="button special">
+                <i class="icon fab fa-youtube"></i> Watch on vimeo
+              </a>
+            </li>
+          </ul>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
 
-	<section id="three">
-		<div class="inner">
-			{% for feature in features %}
-				{% if feature.videoUrl is empty %}
-				<article>
-					<div class="content">
-						<span class="icon {{ feature.icon }}"></span>
-						<header><h3>{{ feature.title }}</h3></header>
-						<p>{{ feature.description }}</p>
-					</div>
-				</article>
-				{% endif %}
-			{% endfor %}
-		</div>
-	</section>
-	
+<section id="three">
+  <div class="inner">
+    {% for feature in features %}
+      {% if feature.videoUrl is empty %}
+      <article>
+        <div class="content">
+          <span class="icon {{ feature.icon }}"></span>
+          <header><h3>{{ feature.title }}</h3></header>
+          <p>{{ feature.description }}</p>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
 {% endblock %}

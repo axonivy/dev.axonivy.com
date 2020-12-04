@@ -1,4 +1,5 @@
 <?php
+
 namespace app;
 
 use DI\Container;
@@ -16,100 +17,98 @@ use Throwable;
 
 class Website
 {
-    private $app;
-    
-    function __construct()
-    {
-        $container = new Container();
-        $this->app = AppFactory::createFromContainer($container);
-        $view = $this->configureTemplateEngine();
-        $this->installTrailingSlashRedirect();
-        $this->installRoutes();
-        $this->installErrorHandling();
-        $this->installViewerMiddleware($view);
-    }
+  private $app;
 
-    public function getApp(): App
-    {
-        return $this->app;
-    }
+  function __construct()
+  {
+    $container = new Container();
+    $this->app = AppFactory::createFromContainer($container);
+    $view = $this->configureTemplateEngine();
+    $this->installTrailingSlashRedirect();
+    $this->installRoutes();
+    $this->installErrorHandling();
+    $this->installViewerMiddleware($view);
+  }
 
-    public function start()
-    {
-        $this->app->run();
-    }
-    
-    private function configureTemplateEngine(): Twig
-    {
-        $container = $this->app->getContainer();
-        
-        $this->app->getContainer()->set(Twig::class, function (ContainerInterface $container) {
-            return Twig::create(__DIR__ . '/../app/pages');
-        });
-        
-        $view = $container->get(Twig::class);
-        
-        $releaseTypeLTS = ReleaseType::LTS();
-        $releaseTypeLE = ReleaseType::LE();
-        
-        $versionLTS = $this->getDisplayVersion($releaseTypeLTS->releaseInfo());
-        $leRelease = $this->getDisplayVersion($releaseTypeLE->releaseInfo());
+  public function getApp(): App
+  {
+    return $this->app;
+  }
 
-        $text = $versionLTS;
-        $textLong = $releaseTypeLTS->shortName() . " $versionLTS";
-        if (!empty($leRelease))
-        {
-            $text .= " / $leRelease";
-            $textLong .= " / " . $releaseTypeLE->shortName() . " $leRelease";
-        }
-        $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD', $text);
-        $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD_LONG', $textLong);
-        
-        $view->getEnvironment()->addGlobal('PRODUCTIVE_SYSTEM', Config::isProductionEnvironment());
-        
-        return $view;
-    }
+  public function start()
+  {
+    $this->app->run();
+  }
 
-    private function getDisplayVersion(?ReleaseInfo $info): string
-    {
-        return $info == null ? '' : $info->getVersion()->getDisplayVersion();
-    }
-    
-    private function installTrailingSlashRedirect()
-    {
-        $this->app->add((new TrailingSlash(false))->redirect());
-    }
+  private function configureTemplateEngine(): Twig
+  {
+    $container = $this->app->getContainer();
 
-    private function installViewerMiddleware(Twig $view)
-    {
-        $this->app->add(new ViewerMiddleware($view));
-    }
-    
-    private function installRoutes()
-    {
-        RoutingRules::installRoutes($this->app);
-    }
+    $this->app->getContainer()->set(Twig::class, function (ContainerInterface $container) {
+      return Twig::create(__DIR__ . '/../app/pages');
+    });
 
-    private function installErrorHandling()
-    {
-        $container = $this->app->getContainer();
-        $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
-        $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
-            $response = new Response();
-            return $container->get(Twig::class)
-                ->render($response, '_error/404.twig')
-                ->withStatus(404);
-        });
+    $view = $container->get(Twig::class);
 
-        if (Config::isProductionEnvironment())
-        {
-            $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
-                $response = new Response();
-                $data = ['message' => $exception->getMessage()];
-                return $container->get(Twig::class)
-                    ->render($response, '_error/500.twig', $data)
-                    ->withStatus(500);
-            });
-        }
+    $releaseTypeLTS = ReleaseType::LTS();
+    $releaseTypeLE = ReleaseType::LE();
+
+    $versionLTS = $this->getDisplayVersion($releaseTypeLTS->releaseInfo());
+    $leRelease = $this->getDisplayVersion($releaseTypeLE->releaseInfo());
+
+    $text = $versionLTS;
+    $textLong = $releaseTypeLTS->shortName() . " $versionLTS";
+    if (!empty($leRelease)) {
+      $text .= " / $leRelease";
+      $textLong .= " / " . $releaseTypeLE->shortName() . " $leRelease";
     }
+    $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD', $text);
+    $view->getEnvironment()->addGlobal('CURRENT_VERSION_DOWNLOAD_LONG', $textLong);
+
+    $view->getEnvironment()->addGlobal('PRODUCTIVE_SYSTEM', Config::isProductionEnvironment());
+
+    return $view;
+  }
+
+  private function getDisplayVersion(?ReleaseInfo $info): string
+  {
+    return $info == null ? '' : $info->getVersion()->getDisplayVersion();
+  }
+
+  private function installTrailingSlashRedirect()
+  {
+    $this->app->add((new TrailingSlash(false))->redirect());
+  }
+
+  private function installViewerMiddleware(Twig $view)
+  {
+    $this->app->add(new ViewerMiddleware($view));
+  }
+
+  private function installRoutes()
+  {
+    RoutingRules::installRoutes($this->app);
+  }
+
+  private function installErrorHandling()
+  {
+    $container = $this->app->getContainer();
+    $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
+    $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
+      $response = new Response();
+      return $container->get(Twig::class)
+        ->render($response, '_error/404.twig')
+        ->withStatus(404);
+    });
+
+    if (Config::isProductionEnvironment()) {
+      $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
+        $response = new Response();
+        $data = ['message' => $exception->getMessage()];
+        return $container->get(Twig::class)
+          ->render($response, '_error/500.twig', $data)
+          ->withStatus(500);
+      });
+    }
+  }
 }

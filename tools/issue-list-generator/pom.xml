@@ -29,8 +29,8 @@
             <goals>
               <goal>generate-changelog</goal>
             </goals>
-	          <configuration>
-	          <jiraServerId>axonivy.jira</jiraServerId>
+            <configuration>
+            <jiraServerId>axonivy.jira</jiraServerId>
               <console>true</console>
               <filterBy>project in (XIVY,IVYPORTAL) AND fixVersion = ${version}</filterBy>
               <orderBy>project,"Epic Link" ASC,fixVersion DESC,key</orderBy>
