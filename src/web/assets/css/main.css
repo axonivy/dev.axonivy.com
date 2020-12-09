@@ -4135,5 +4135,5 @@ body.is-loading #banner:after {
   font-size: 1em;
   float: left;
   padding: 0 10px;
-  line-height: unset;
+  line-height: inherit;
 }
