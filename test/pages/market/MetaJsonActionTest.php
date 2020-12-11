@@ -4,7 +4,6 @@ namespace test\pages\market;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
-use app\domain\market\Market;
 
 class MetaJsonActionTest extends TestCase
 {

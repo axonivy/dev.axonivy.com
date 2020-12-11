@@ -1,22 +1,50 @@
 {
 	"id": "uipath",
-	"name": "UI Path RPA Connector",
+	"name": "UiPath Robotic Process Automation",
 	"tags": ["connector", "RPA"],
 	"installers": [
 		{
-			"id": "open-api-rest-client",
+			"id": "project-resource",
+			"data": {
+				"directories": [
+					{
+						"source": "demo/uiPathDemo/src/com/uipath/orchestrator/feature",
+						"includes": [ 
+							"TenantHeaderFeature.java", 
+							"OAuth2Feature.java", 
+							"FeatureConfig.java", 
+							"TokenStore.java"
+						],
+						"path": "src/com/uipath/orchestrator/feature"
+					}
+				]
+			}
+		},
+		{
+			"id": "rest-client",
 			"data": {
 				"openApiUrl": "https://platform.uipath.com/AXONPRESALES/AXONPRESALES/swagger/v11.0/swagger.json",
 				"namespace": "com.uipath.orchestrator",
+				"clientId": "699e715f-63b1-4355-a974-ee3cac26985e", 
+				"baseUri": "https://platform.uipath.com/",
 				"features": [
-					"com.axonivy.connectivity.rest.client.auth.OAuth2Feature",
-					"com.axonivy.connectivity.rest.sample.uipath.TenantHeaderFeature",
+					"com.uipath.orchestrator.feature.OAuth2Feature",
+					"com.uipath.orchestrator.feature.TenantHeaderFeature",
 					"ch.ivyteam.ivy.rest.client.mapper.JsonFeature"
 				],
 				"properties": [
 					{
-						"name": "tenant",
+						"name": "AUTH.tenant",
 						"value": "AXONPRESALES"
+					},
+					{
+						"name": "AUTH.clientId",
+						"value": ""
+					},
+					{
+						"name": "AUTH.userKey",
+						"value": "",
+						"password": true
 					},
 					{
 						"name": "jersey.config.client.followRedirects",
@@ -30,6 +58,37 @@
 						"name": "JSON.Mapper.ACCEPT_CASE_INSENSITIVE_PROPERTIES",
 						"value": "true"
 					}
+				]
+			}
+		},
+		{
+			"id": "project-resource",
+			"data": {
+				"resources": [
+					{
+						"source": "demo/uiPathDemo/dataclasses/com/uipath/connector/UiPathData.ivyClass",
+						"path": "dataclasses/com/uipath/connector/UiPathData.ivyClass"
+					},
+					{
+						"source": "demo/uiPathDemo/dataclasses/com/uipath/connector/UiPathDemoData.ivyClass",
+						"path": "dataclasses/com/uipath/connector/UiPathDemoData.ivyClass"
+					},
+					{
+						"source": "demo/uiPathDemo/processes/RPA/uiPathRpa.mod",
+						"path": "processes/RPA/uiPathRpa.mod"
+					},
+					{
+						"source": "demo/uiPathDemo/processes/RPA/uiPathDemo.mod",
+						"path": "processes/RPA/uiPathDemo.mod"
+					}
+				]
+			}
+		},
+		{
+			"id": "open-resource",
+			"data": {
+				"resources": [
+					"processes/RPA/uiPathDemo.mod"
 				]
 			}
 		}
