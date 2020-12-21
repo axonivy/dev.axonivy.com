@@ -5,6 +5,7 @@ namespace app;
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
 use app\pages\community\CommunityAction;
+use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
 use app\pages\doc\DocOverviewAction;
 use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
@@ -29,6 +30,7 @@ use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
 use app\pages\market\MetaJsonAction;
+use app\pages\market\OpenApiJsonAction;
 
 class RoutingRules
 {
@@ -62,9 +64,12 @@ class RoutingRules
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
 
+    $app->get('/api-browser', ApiBrowserAction::class);
+
     $app->get('/market', MarketAction::class);
     $app->get('/market/{key}[/{version}]', ProductAction::class);
     $app->get('/_market/{key}/_meta.json', MetaJsonAction::class);
+    $app->get('/_market/{key}/openapi', OpenApiJsonAction::class);
 
     $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
 

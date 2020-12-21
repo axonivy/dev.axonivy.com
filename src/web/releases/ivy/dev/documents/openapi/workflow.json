@@ -1,0 +1,841 @@
+{
+  "openapi": "3.0.1",
+  "servers": [
+    {
+      "url": "http://localhost:{port}/demo-portal/api",
+      "variables": {
+        "port": {
+          "default": "8080"
+        }
+      }
+    }
+  ],
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "paths": {
+    "/workflow/case/{caseId}/document": {
+      "post": {
+        "tags": [
+          "mobile"
+        ],
+        "operationId": "add",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflow/case/{caseId}/document/{documentId}": {
+      "get": {
+        "tags": [
+          "mobile"
+        ],
+        "operationId": "getContent",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/octet-stream": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "mobile"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engine/info": {
+      "get": {
+        "tags": [
+          "mobile"
+        ],
+        "description": "Returns the version and the name of the engine",
+        "operationId": "getInfo",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EngineInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflow/processstarts": {
+      "get": {
+        "tags": [
+          "mobile"
+        ],
+        "description": "Returns all process starts that can be started by the authenticated user.",
+        "operationId": "get",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessStartBean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflow/tasks": {
+      "get": {
+        "tags": [
+          "mobile"
+        ],
+        "description": "Returns the tasks the authenticated user can work on.",
+        "operationId": "getTasks",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskBean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflow/tasks/count": {
+      "get": {
+        "tags": [
+          "mobile"
+        ],
+        "description": "Returns the number of tasks the authenticated user can work on.",
+        "operationId": "count",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflow/task/{taskId}": {
+      "get": {
+        "tags": [
+          "mobile"
+        ],
+        "description": "Returns the task with the given task identifier.",
+        "operationId": "getTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/group/read/{caseId}/{clientId}": {
+      "post": {
+        "operationId": "readGroupMessage",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/messages/{clientId}/{lastResponseId}/{lastResponseStatus}": {
+      "post": {
+        "operationId": "registerMessage",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/messages-next/{clientId}/{lastResponseId}/{lastResponseStatus}": {
+      "post": {
+        "operationId": "reRegisterMessage",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lastResponseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lastResponseStatus",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/unread/senders": {
+      "get": {
+        "operationId": "getSendersOfUnreadMessages",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/messages/{participant}": {
+      "get": {
+        "operationId": "loadPreviousMessages",
+        "parameters": [
+          {
+            "name": "participant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChatMessage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/{receiver}/{clientId}": {
+      "post": {
+        "operationId": "sendPrivateMessage",
+        "parameters": [
+          {
+            "name": "receiver",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/group/{caseId}": {
+      "get": {
+        "operationId": "loadPreviousGroupMessages",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChatMessage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/group/{caseId}/{clientId}": {
+      "post": {
+        "operationId": "sendGroupMessage",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/group/participants/{caseId}": {
+      "get": {
+        "operationId": "getParticipantsForGroupChat",
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "uniqueItems": true,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/groups/{clientId}": {
+      "get": {
+        "operationId": "loadAllGroupChat",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/users/{clientId}": {
+      "get": {
+        "operationId": "getUsers",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/read/{participant}/{clientId}": {
+      "post": {
+        "operationId": "readMessage",
+        "parameters": [
+          {
+            "name": "participant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Requested-By",
+            "in": "header",
+            "required": true,
+            "example": "ivy"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DocumentBean": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageBean": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "document": {
+            "$ref": "#/components/schemas/DocumentBean"
+          }
+        }
+      },
+      "EngineInfo": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "engineName": {
+            "type": "string"
+          },
+          "minimumSupportedMobileAppVersion": {
+            "type": "string"
+          }
+        }
+      },
+      "ProcessStartBean": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "activatorName": {
+            "type": "string"
+          },
+          "fullRequestPath": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "CaseBean": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentBean"
+            }
+          }
+        }
+      },
+      "TaskBean": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startTimeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiryTimeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "state": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activatorName": {
+            "type": "string"
+          },
+          "fullRequestPath": {
+            "type": "string",
+            "format": "uri"
+          },
+          "offline": {
+            "type": "boolean"
+          },
+          "case": {
+            "$ref": "#/components/schemas/CaseBean"
+          }
+        }
+      },
+      "ChatMessage": {
+        "type": "object",
+        "properties": {
+          "sender": {
+            "type": "string"
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}

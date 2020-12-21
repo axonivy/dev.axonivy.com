@@ -34,6 +34,11 @@
               Documentation <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
             </a>
           {% endif %}
+          {% if product.openApiJsonUrl is not empty %}
+            <a href="/api-browser?url={{ product.openApiJsonUrl }}" class="header-link">
+              Browse API <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
+            </a>
+          {% endif %}
         </header>
       </div>
     </div>

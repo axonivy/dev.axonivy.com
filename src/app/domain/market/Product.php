@@ -108,7 +108,53 @@ class Product
 
   public function getMetaJson(): string
   {
-    return file_get_contents(Config::marketDirectory() . "/$this->key/meta.json");
+    return file_get_contents($this->getMarketFile("meta.json"));
+  }
+
+  public function getOpenApiJsonUrl(): string
+  {
+    $url = $this->evaluateOpenApiUrl();
+    if (filter_var($url, FILTER_VALIDATE_URL))
+    {
+      return $url;
+    }
+    else if (!empty($url) && file_exists($this->getMarketFile($url)))
+    {
+      return $this->assetBaseUrl() . "/openapi";
+    }
+    return "";
+  }
+
+  public function getOpenApiJson(): string
+  {
+    $openapiFile = $this->getMarketFile($this->evaluateOpenApiUrl());
+    if (file_exists($openapiFile))
+    {
+      return file_get_contents($openapiFile);
+    }
+    return "";
+  }
+
+  private function getMarketFile(string $file)
+  {
+    return Config::marketDirectory() . "/$this->key/" . $file;
+  }
+
+  private function evaluateOpenApiUrl(): string
+  {
+    if ($this->installable)
+    {
+      $content = $this->getMetaJson();
+      $json = json_decode($content);
+      foreach($json->installers as $installer)
+      {
+        if ($installer->id == 'rest-client')
+        {
+          return $installer->data->openApiUrl;
+        }
+      }
+    }
+    return '';
   }
 
   public function getMavenProductInfo(): ?MavenProductInfo
