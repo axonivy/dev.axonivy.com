@@ -1,10 +1,10 @@
 <?php
 
-namespace app\pages\doc;
+namespace app\pages\api;
 
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
-class DocApiAction
+class ApiBrowserAction
 {
 
   private Twig $view;
@@ -16,8 +16,7 @@ class DocApiAction
 
   public function __invoke($request, Response $response, $args)
   {
-    return $this->view->render($response, 'doc/api.twig', [
-    ]);
+    return $this->view->render($response, 'api/api.twig');
   }
 
 }

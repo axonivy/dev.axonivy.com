@@ -78,20 +78,20 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGet('market/genderize')
       ->ok()
-      ->bodyContains("/doc-api-browser?url=/_market/genderize/openapi");
+      ->bodyContains("/api-browser?url=/_market/genderize/openapi");
   }
 
   public function testAPIBrowserButton_existsExtern()
   {
     AppTester::assertThatGet('market/uipath')
       ->ok()
-      ->bodyContains("/doc-api-browser?url=https://platform.uipath.com/AXONPRESALES/AXONPRESALES/swagger/v11.0/swagger.json");
+      ->bodyContains("/api-browser?url=https://platform.uipath.com/AXONPRESALES/AXONPRESALES/swagger/v11.0/swagger.json");
   }
 
   public function testAPIBrowserButton_existsNot()
   {
     AppTester::assertThatGet('market/basic-workflow-ui')
       ->ok()
-      ->bodyDoesNotContain("/doc-api-browser?url");
+      ->bodyDoesNotContain("/api-browser?url");
   }
 }

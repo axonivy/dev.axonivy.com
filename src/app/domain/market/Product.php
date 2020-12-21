@@ -108,7 +108,7 @@ class Product
 
   public function getMetaJson(): string
   {
-    return file_get_contents(Config::marketDirectory() . "/$this->key/meta.json");
+    return file_get_contents($this->getMarketFile("meta.json"));
   }
 
   public function getOpenApiJsonUrl(): string
@@ -118,7 +118,7 @@ class Product
     {
       return $url;
     }
-    else if (!empty($url) && file_exists(Config::marketDirectory() . "/$this->key/" . $url))
+    else if (!empty($url) && file_exists($this->getMarketFile($url)))
     {
       return $this->assetBaseUrl() . "/openapi";
     }
@@ -127,7 +127,17 @@ class Product
 
   public function getOpenApiJson(): string
   {
-    return file_get_contents(Config::marketDirectory() . "/$this->key/" . $this->evaluateOpenApiUrl());
+    $openapiFile = $this->getMarketFile($this->evaluateOpenApiUrl());
+    if (file_exists($openapiFile))
+    {
+      return file_get_contents($openapiFile);
+    }
+    return "";
+  }
+
+  private function getMarketFile(string $file)
+  {
+    return Config::marketDirectory() . "/$this->key/" . $file;
   }
 
   private function evaluateOpenApiUrl(): string

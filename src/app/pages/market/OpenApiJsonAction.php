@@ -16,10 +16,15 @@ class OpenApiJsonAction
       throw new HttpNotFoundException($request);
     }
     
-    $content = $product->getOpenApiJson();
+    $content = $product->getOpenApiJson($request);
+    if (empty($content))
+    {
+      throw new HttpNotFoundException($request);
+    }
 
     $response->getBody()->write($content);
     $response = $response->withHeader('Content-Type', 'application/json');
     return $response;
   }
+
 }

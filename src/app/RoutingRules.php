@@ -5,9 +5,9 @@ namespace app;
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
 use app\pages\community\CommunityAction;
+use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
 use app\pages\doc\DocOverviewAction;
-use app\pages\doc\DocApiAction;
 use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
 use app\pages\doc\redirect\LegacyEngineGuideDocAction;
 use app\pages\doc\redirect\LegacyPublicAPIAction;
@@ -64,7 +64,7 @@ class RoutingRules
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
 
-    $app->get('/doc-api-browser', DocApiAction::class);
+    $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/market', MarketAction::class);
     $app->get('/market/{key}[/{version}]', ProductAction::class);

@@ -24,6 +24,13 @@
     text-transform: uppercase;
     font-weight: bold;
   }
+  .product-title {
+    color: #444;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .zoom:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
@@ -133,7 +140,7 @@
             <center>
               <img src="{{ product.imgSrc }}" height="100px" alt="{{ product.name }}" class="image"/>
             </center>
-            <center style="color:#444;font-size:15px;">
+            <center class="product-title">
               {{ product.name }}
             </center>
           </div>

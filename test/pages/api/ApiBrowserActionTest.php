@@ -5,13 +5,13 @@ namespace test\pages\doc;
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
 
-class DocApiActionTest extends TestCase
+class ApiBrowserActionTest extends TestCase
 {
   public function testApiBrowser()
   {
-    AppTester::assertThatGet('/doc-api-browser')
+    AppTester::assertThatGet('/api-browser')
       ->ok()
-      ->bodyContains('/doc/dev/public-api/system.json');
+      ->bodyContains('/doc/dev/openapi/system.json');
   }
   
 }
