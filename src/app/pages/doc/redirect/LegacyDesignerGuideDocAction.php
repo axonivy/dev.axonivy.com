@@ -17,7 +17,7 @@ class LegacyDesignerGuideDocAction
 
   public function __invoke($request, Response $response, $args)
   {
-    $doc = $args['htmlDocument'];
+    $doc = $args['htmlDocument'] ?? '';
 
     if (empty($doc)) {
       return Redirect::to($response, 'designer-guide/');

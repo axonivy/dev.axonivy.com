@@ -27,7 +27,7 @@ class ProductFactory
   private static function createMavenProductInfo($json): MavenProductInfo
   {
     $mavenArtifacts = self::createMavenArtifacts($json);
-    $versionDisplayFilter = VersionDisplayFilterFactory::create($json->versionDisplay);
+    $versionDisplayFilter = VersionDisplayFilterFactory::create($json->versionDisplay ?? '');
     return new MavenProductInfo($mavenArtifacts, $versionDisplayFilter);
   }
 

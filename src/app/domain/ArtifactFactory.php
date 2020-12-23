@@ -164,7 +164,8 @@ class ArtifactLinkFactory
 {
   public static function permalink($path): string
   {
-    $basePermalink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $basePermalink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$host";
     return $basePermalink . '/permalink/' . $path;
   }
 
