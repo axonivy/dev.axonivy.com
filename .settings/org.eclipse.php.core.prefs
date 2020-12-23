@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 include_path=0;/ivy-website-developer
-phpVersion=php7.4
+phpVersion=php8.0
 useShortTags=true
 use_asp_tags_as_php=false
