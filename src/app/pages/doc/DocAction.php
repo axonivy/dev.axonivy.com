@@ -45,7 +45,7 @@ class DocAction
     }
 
     if ($this->documentationBasedOnReadTheDocs($version)) {
-      $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document']);
+      $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document'] ?? '');
       if (empty($newDocUrl)) {
         throw new HttpNotFoundException($request);
       } else {
@@ -55,6 +55,7 @@ class DocAction
 
     // legacy, before 9
     $doc = null;
+    $document = '';
     if (isset($args['document'])) {
       $document = $args['document'];
       if ($document == 'ReleaseNotes.html') {

@@ -17,7 +17,7 @@ class LegacyEngineGuideDocAction
 
   public function __invoke($request, Response $response, $args)
   {
-    $doc = $args['htmlDocument'];
+    $doc = $args['htmlDocument'] ?? '';
 
     if (empty($doc)) {
       return Redirect::to($response, 'engine-guide/');
