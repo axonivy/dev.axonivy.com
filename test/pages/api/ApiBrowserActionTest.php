@@ -11,7 +11,7 @@ class ApiBrowserActionTest extends TestCase
   {
     AppTester::assertThatGet('/api-browser')
       ->ok()
-      ->bodyContains('/doc/dev/openapi/system.json');
+      ->bodyContains('#swagger-ui');
   }
   
 }
