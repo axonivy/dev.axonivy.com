@@ -43,7 +43,6 @@ pipeline {
         docker {
           image 'sonarsource/sonar-scanner-cli'
           args '-e SONAR_HOST_URL=https://sonar.ivyteam.io'
-          registryCredentialsId 'docker.io'
         }
       }
       steps {
@@ -54,10 +53,8 @@ pipeline {
     stage('check editorconfig') {
       steps {
         script {
-          docker.withRegistry('', 'docker.io') {
-            docker.image('mstruebing/editorconfig-checker').inside {
-              sh 'ec -no-color'
-            }
+          docker.image('mstruebing/editorconfig-checker').inside {
+            sh 'ec -no-color'
           }
         }
       }
@@ -70,7 +67,6 @@ pipeline {
       agent {
         docker {
           image 'axonivy/build-container:ssh-client-1.0'
-          registryCredentialsId 'docker.io'
         }
       }
       steps {
