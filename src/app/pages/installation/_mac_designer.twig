@@ -57,11 +57,3 @@
 <ul class="actions">
   <li><a href="https://www.axonivy.com/tutorials" class="button special">Start with your first project!</a></li>
 </ul>
-
-{% if PRODUCTIVE_SYSTEM %}
-  <script>
-    $(document).ready(function(){
-      window.location.href = '{{ downloadUrl }}';
-    });
-  </script>
-{% endif %}

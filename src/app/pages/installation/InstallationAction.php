@@ -23,7 +23,12 @@ class InstallationAction
     $type = $request->getQueryParams()['type'] ?? ''; // e.g. 'docker', 'debian'
     $version = $request->getQueryParams()['version'] ?? ''; // e.g. '8.0.1', '9.0.1'
     $downloadUrl = $request->getQueryParams()['downloadUrl'] ?? ''; // e.g. https://download/... -> case of docker empty!
-
+    $startDownload = $request->getQueryParams()['startDownload'] ?? true; // e.g. wether to start the download or not
+    if ($startDownload == 'false')
+    {
+      $startDownload = false;
+    }
+    
     if (empty($product) || empty($version) || empty($type)) {
       return Redirect::to($response, '/download');
     }
@@ -37,9 +42,11 @@ class InstallationAction
       $title = 'Install Axon.ivy Engine ';
       if ($type == Artifact::TYPE_DEBIAN) {
         $title .= ' for Debian';
+        $startDownload = false;
       }
       if ($type == Artifact::TYPE_DOCKER) {
         $title .= ' for Docker';
+        $startDownload = false;
       }
     }
 
@@ -59,7 +66,8 @@ class InstallationAction
       'title' => $title,
       'type' => $type,
       'product' => $product,
-      'bugfixVersion' => $bugfixVersion
+      'bugfixVersion' => $bugfixVersion,
+      'startDownload' => $startDownload
     ]);
   }
 }

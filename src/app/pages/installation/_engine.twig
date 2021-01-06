@@ -23,11 +23,3 @@
 <ul class="actions">
   <li><a href="/doc/{{minorVersion}}/engine-guide/getting-started/index.html" class="button special">Getting Started</a></li>
 </ul>
-
-{% if PRODUCTIVE_SYSTEM %}
-  <script>
-    $(document).ready(function(){
-      window.location.href = '{{ downloadUrl }}';
-    });
-  </script>
-{% endif %}
