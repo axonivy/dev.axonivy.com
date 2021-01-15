@@ -85,7 +85,7 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGet('market/uipath')
       ->ok()
-      ->bodyContains("/api-browser?url=https://platform.uipath.com/AXONPRESALES/AXONPRESALES/swagger/v11.0/swagger.json");
+      ->bodyContains("/api-browser?url=https%3A%2F%2Fplatform.uipath.com%2FAXONPRESALES%2FAXONPRESALES%2Fswagger%2Fv11.0%2Fswagger.json");
   }
 
   public function testAPIBrowserButton_existsNot()
