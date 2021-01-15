@@ -116,7 +116,7 @@ class Product
     $url = $this->evaluateOpenApiUrl();
     if (filter_var($url, FILTER_VALIDATE_URL))
     {
-      return $url;
+      return urlencode($url);
     }
     else if (!empty($url) && file_exists($this->getMarketFile($url)))
     {
