@@ -36,4 +36,20 @@ class MarketActionTest extends TestCase
       ->bodyDoesNotContain('VisualVM Plugin')
       ->bodyDoesNotContain('Basic Workflow'); // not listed
   }
+  
+  public function testMarketPage_querySearch()
+  {
+    AppTester::assertThatGet('/market?type=CONNECTOR&search=uipath')
+      ->ok()
+      ->bodyContains('uipath')
+      ->bodyContains('id="main"');
+  }
+  
+  public function testMarketPage_querySearchOnly()
+  {
+    AppTester::assertThatGet('/market?resultsOnly&type=CONNECTOR&search=uipath') // stable URI since Designer 9.2!
+      ->ok()
+      ->bodyContains('uipath')
+      ->bodyDoesNotContain('id="main"'); // no search input!
+  }
 }

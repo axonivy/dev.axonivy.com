@@ -67,6 +67,7 @@ class RoutingRules
     $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/market', MarketAction::class);
+    $app->get('/market/{key}/meta.json', MetaJsonAction::class);
     $app->get('/market/{key}[/{version}]', ProductAction::class);
     $app->get('/_market/{key}/_meta.json', MetaJsonAction::class);
     $app->get('/_market/{key}/openapi', OpenApiJsonAction::class);

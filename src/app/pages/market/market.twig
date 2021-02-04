@@ -66,6 +66,7 @@
   }
 </style>
 
+{% if hideSearch is not defined %}
 <section id="main" class="inverse">
   <div class="inner">
     <header><h1><span class="icon fas fa-store "></span> Axon.ivy Market</h1></header>
@@ -130,6 +131,7 @@
     </script>
   </div>
 </section>
+{% endif %}
 
 <section style="background-color:#f7f7f7;padding-top:20px;padding-bottom:20px;">
   <div class="inner">
@@ -138,7 +140,7 @@
     {% endif %}
     <div class="row p-grid p-align-stretch">
       {% for product in products %}
-        <div class="p-col-fixed p-col-12 p-md-6 p-lg-3">
+        <div class="p-col-fixed p-col-6 p-md-6 p-lg-3">
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
             <div style="height:40px;">
             {% for tag in product.tags %}

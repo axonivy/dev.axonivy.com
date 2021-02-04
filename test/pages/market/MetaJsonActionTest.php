@@ -23,6 +23,13 @@ class MetaJsonActionTest extends TestCase
       ->header('Content-Type', 'application/json')
       ->bodyContains('"version": "version-get-param-missing"');
   }
+  
+  public function testServeMetaJson_stableForDesigner()
+  {
+    AppTester::assertThatGet('/market/doc-factory/meta.json') // stable URI since Designer 9.2!
+      ->ok()
+      ->header('Content-Type', 'application/json');
+  }
 
   public function testNotFound()
   {

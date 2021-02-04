@@ -24,6 +24,11 @@ class MarketAction
     $searchQuery = $queryParams['search'] ?? '';
     $selectedTags = $queryParams['type'] ?? '';
 
+    if (isset($queryParams['resultsOnly'])) {
+      $env = $this->view->getEnvironment();
+      $env->addGlobal('hideSearch', true);
+    }
+
     $listedProducts = Market::listed();
 
     $tags = Market::tags($listedProducts);
