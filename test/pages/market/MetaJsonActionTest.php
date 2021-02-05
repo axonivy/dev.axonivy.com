@@ -27,7 +27,7 @@ class MetaJsonActionTest extends TestCase
   public function testServeMetaJson_stableForDesigner()
   {
     AppTester::assertThatGet('/market/doc-factory/meta.json') // stable URI since Designer 9.2!
-      ->permanentRedirect('/_market/doc-factory/_meta.json'); 
+      ->redirect('/_market/doc-factory/_meta.json'); 
       // link to real location: for resolving logo.png and other artifacts.
   }
 
