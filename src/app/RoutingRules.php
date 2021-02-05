@@ -31,6 +31,7 @@ use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
 use app\pages\market\MetaJsonAction;
 use app\pages\market\OpenApiJsonAction;
+use app\pages\market\MetaPermalinkAction;
 
 class RoutingRules
 {
@@ -67,7 +68,7 @@ class RoutingRules
     $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/market', MarketAction::class);
-    $app->get('/market/{key}/meta.json', MetaJsonAction::class);
+    $app->get('/market/{key}/meta.json', MetaPermalinkAction::class);
     $app->get('/market/{key}[/{version}]', ProductAction::class);
     $app->get('/_market/{key}/_meta.json', MetaJsonAction::class);
     $app->get('/_market/{key}/openapi', OpenApiJsonAction::class);
