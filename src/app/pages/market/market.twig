@@ -22,6 +22,9 @@
     max-height: 100%; 
     max-width: 100%;"
   }
+  .product-card .product-tags {
+    height: 40px;
+  }
   .product-card .product-tag {
     color: white;
     font-size: 11px;
@@ -64,6 +67,37 @@
   #main .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     color: white;
   }
+
+  {% if hideSearch is defined %}
+  .product-card {
+    min-height: 120px;
+    max-height: 120px;
+  }
+  .product-card .product-logo {
+    height: 40px;
+  }
+  .product-card .product-tags {
+    height: 20px;
+  }
+  .product-card .product-tag {
+    font-size: 9px;
+    padding: 2px;
+    border-radius: 4px;
+    font-weight: normal;
+    position: relative;
+    top: -10px;
+  }
+  @media screen and (min-width: 768px) {
+    .p-md-6 {
+      width: 25%;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .p-lg-3 {
+      width: 12.5%;
+    }
+  }
+  {% endif %}
 </style>
 
 {% if hideSearch is not defined %}
@@ -142,7 +176,7 @@
       {% for product in products %}
         <div class="p-col-fixed p-col-6 p-md-6 p-lg-3">
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
-            <div style="height:40px;">
+            <div class="product-tags">
             {% for tag in product.tags %}
               <span class="product-tag">{{ tag }}</span>
             {% endfor %}
