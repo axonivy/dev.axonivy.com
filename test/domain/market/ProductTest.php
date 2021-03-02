@@ -55,6 +55,15 @@ class ProductTest extends TestCase
     $product = Market::getProductByKey('visualvm-plugin');
     Assert::assertStringContainsString('"id": "visualvm-plugin"', $product->getMetaJson());
   }
+  
+  public function test_metaJson_includes()
+  {
+    $product = Market::getProductByKey('ms365');
+    Assert::assertStringContainsString('"id": "msgraph"', $product->getMetaJson());
+    
+    $product = Market::getProductByKey('toDo');
+    Assert::assertStringContainsString('"id": "ms-todo"', $product->getMetaJson());
+  }
 
   public function test_installable()
   {
