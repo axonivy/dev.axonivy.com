@@ -13,7 +13,7 @@ class ProductTest extends TestCase
   public function test_description()
   {
     $product = Market::getProductByKey('visualvm-plugin');
-    Assert::assertStringContainsString('The Axon.ivy VisualVM plugin enables real-time monitoring of an Axon.ivy Engine for', $product->getDescription());
+    Assert::assertStringContainsString('The Axon Ivy VisualVM plugin enables real-time monitoring of an Axon Ivy Engine for', $product->getDescription());
     Assert::assertStringContainsString('<p>', $product->getDescription());
   }
 
@@ -107,7 +107,7 @@ class ProductTest extends TestCase
     $product = Market::getProductByKey('genderize');
     Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.2.0'));
     Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.3.0'));
-    Assert::assertEquals('Your Axon.ivy Designer is too old (9.1.0). You need 9.2.0 or newer.', $product->getReasonWhyNotInstallable('9.1.0'));
+    Assert::assertEquals('Your Axon Ivy Designer is too old (9.1.0). You need 9.2.0 or newer.', $product->getReasonWhyNotInstallable('9.1.0'));
   }
 
   public function test_tags()

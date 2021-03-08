@@ -167,7 +167,7 @@ class Product
     if (!$this->isInstallable()) {
       return 'Product is not installable.';
     } elseif (!$this->isVersionSupported($version)) {
-      return 'Your Axon.ivy Designer is too old (' . $version . '). You need ' . $this->getMinVersion() . ' or newer.';
+      return 'Your Axon Ivy Designer is too old (' . $version . '). You need ' . $this->getMinVersion() . ' or newer.';
     }
     return '';
   }

@@ -11,7 +11,7 @@ class SupportActionTest extends TestCase
   {
     AppTester::assertThatGet('/support')
       ->statusCode(200)
-      ->bodyContains('Axon.ivy Support is committing to provide high-quality, technical support for quick problem solving, training or consulting.');
+      ->bodyContains('Axon Ivy Support is committing to provide high-quality, technical support for quick problem solving, training or consulting.');
   }
 
   public function testOfficialSupportLinkProvidedByPeterHochstrasser()

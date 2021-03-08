@@ -1,6 +1,6 @@
 {% extends "_parts/base.twig" %}
 
-{% block title %}{{ product.name }} | Axon.ivy Market {{ parent() }}{% endblock %}
+{% block title %}{{ product.name }} | Axon Ivy Market {{ parent() }}{% endblock %}
 
 {% block content %}
 
@@ -99,8 +99,8 @@
     <article class="alt">
       {% if not installButton.isDesigner %}
         <i class="fas fa-info-circle"></i> Please open the 
-        <a href="/doc/dev/market/index.html">Axon.ivy Market</a> inside your  
-        <a href="/download">Axon.ivy Designer</a> (min 9.2.0)
+        <a href="/doc/dev/market/index.html">Axon Ivy Market</a> inside your  
+        <a href="/download">Axon Ivy Designer</a> (min 9.2.0)
       {% else %}
         <i class="fas fa-exclamation-triangle"></i> {{ installButton.reason }}
       {% endif %}
