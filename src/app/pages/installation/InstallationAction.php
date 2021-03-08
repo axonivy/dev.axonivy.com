@@ -41,9 +41,9 @@ class InstallationAction
     $bugfixVersion = (new Version($version))->getBugfixVersion();
 
     // TODO we should move this to artifact
-    $title = 'Install Axon.ivy Designer ';
+    $title = 'Install Axon Ivy Designer ';
     if ($product == Artifact::PRODUCT_NAME_ENGINE) {
-      $title = 'Install Axon.ivy Engine ';
+      $title = 'Install Axon Ivy Engine ';
       if ($type == Artifact::TYPE_DEBIAN) {
         $title .= ' for Debian';
         $startDownload = false;

@@ -42,7 +42,7 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGetWithCookie('/market/genderize', ['ivy-version' => '9.1.0'])
       ->ok()
-      ->bodyContains("Your Axon.ivy Designer is too old (9.1.0). You need 9.2.0 or newer.");
+      ->bodyContains("Your Axon Ivy Designer is too old (9.1.0). You need 9.2.0 or newer.");
   }
 
   public function testInstallButton_byDefaultWithCurrentVersion()

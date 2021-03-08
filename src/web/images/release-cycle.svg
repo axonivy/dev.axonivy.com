@@ -288,19 +288,19 @@
            x="-150"
            class="chart__label--bold"
            id="text316"
-           style="fill:currentColor">Axon.ivy 11.2 LE</text>
+           style="fill:currentColor">Axon Ivy 11.2 LE</text>
         <text
            y="-27.499851"
            x="-150.35629"
            class="chart__label--bold"
            id="text316-4"
-           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">Axon.ivy 11.3 LE</text>
+           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">Axon Ivy 11.3 LE</text>
         <text
            y="-55.511524"
            x="-149.28291"
            class="chart__label--bold"
            id="text316-4-0"
-           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">Axon.ivy 11.X LE</text>
+           style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">Axon Ivy 11.X LE</text>
         <text
            y="-83.51152"
            x="-149.28291"
@@ -309,7 +309,7 @@
            style="font-size:10px;font-family:sans-serif;text-anchor:start;opacity:1;fill:currentColor;stroke-width:1">
           <tspan
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.99996853px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan1378">Axon.ivy 12.0 LTS</tspan>
+             id="tspan1378">Axon Ivy 12.0 LTS</tspan>
         </text>
       </g>
       <g
@@ -327,7 +327,7 @@
         <text
            x="-150"
            id="text322"
-           style="fill:currentColor">Axon.ivy 11.1 LE</text>
+           style="fill:currentColor">Axon Ivy 11.1 LE</text>
       </g>
       <g
          class="tick"
@@ -347,7 +347,7 @@
            style="fill:currentColor">
           <tspan
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.99996853px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan5139">Axon.ivy 10.0 LTS</tspan>
+             id="tspan5139">Axon Ivy 10.0 LTS</tspan>
         </text>
       </g>
       <g
@@ -366,7 +366,7 @@
            x="-150"
            dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
            id="text334"
-           style="fill:currentColor">Axon.ivy 9.X LE</text>
+           style="fill:currentColor">Axon Ivy 9.X LE</text>
       </g>
       <g
          class="tick"
@@ -384,7 +384,7 @@
            x="-150"
            class="chart__label--bold"
            id="text340"
-           style="fill:currentColor">Axon.ivy 9.3 LE</text>
+           style="fill:currentColor">Axon Ivy 9.3 LE</text>
       </g>
       <g
          class="tick"
@@ -401,7 +401,7 @@
         <text
            x="-150"
            id="text346"
-           style="fill:currentColor">Axon.ivy 9.2 LE</text>
+           style="fill:currentColor">Axon Ivy 9.2 LE</text>
       </g>
       <g
          class="tick"
@@ -419,7 +419,7 @@
            x="-150"
            class="chart__label--bold"
            id="text352"
-           style="fill:currentColor">Axon.ivy 9.1 LE</text>
+           style="fill:currentColor">Axon Ivy 9.1 LE</text>
       </g>
       <g
          class="tick"
@@ -440,7 +440,7 @@
            style="fill:currentColor">
           <tspan
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.99996853px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan5141">Axon.ivy 8.0 LTS</tspan>
+             id="tspan5141">Axon Ivy 8.0 LTS</tspan>
         </text>
       </g>
       <g
@@ -462,7 +462,7 @@
            style="fill:currentColor">
           <tspan
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.99996853px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan5143">Axon.ivy 7.0 LTS</tspan>
+             id="tspan5143">Axon Ivy 7.0 LTS</tspan>
         </text>
       </g>
     </g>
