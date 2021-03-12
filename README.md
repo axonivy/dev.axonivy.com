@@ -1,9 +1,10 @@
 # dev.axonivy.com
 
 ## Setup
-
-  docker-compose up -d
-  docker-compose exec web composer install
+  
+  Run the script to start docker and update web compose using `./up.sh`
+  
+  ... and later `docker-compose down` to stop the webserver.
 
 ## Execute tests
 
