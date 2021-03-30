@@ -11,7 +11,7 @@ supporting:
   overview of your available processes.
 - __Configurable detail pages__: The task and case detail pages can now be
   customized to your needs without a single line of code.
-- __Advanced user specific settings__: There is now even more options to
+- __Advanced user specific settings__: There are now even more options to
   configure the Portal to your wishes and preferences. So take a look at the new
   settings in the *My Profile* section.
 
