@@ -33,7 +33,7 @@ Use the Axon Ivy Designer <a href="/download/sprint">9.2</a> or newer to work wi
 
 <img src="/images/installation/mac_copy_to_applications.png" />
 <br /><br />
-
+{% if minorVersion < 9.2 %}
 <p>
   4. Open a new terminal at the Axon Ivy Designer folder 
 </p>
@@ -51,10 +51,14 @@ Use the Axon Ivy Designer <a href="/download/sprint">9.2</a> or newer to work wi
 
 <img src="/images/installation/mac_xattr.png" />
 <br /><br />
-
 <p>
   5. Open Axon Ivy Designer
 </p>
+{% else %}
+<p>
+  4. Open Axon Ivy Designer
+</p>
+{% endif %}
 
 <img src="/images/installation/mac_open.png" />
 <br /><br />
