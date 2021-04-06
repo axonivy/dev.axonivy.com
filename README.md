@@ -23,8 +23,12 @@
 # Update a php library
 
   docker-compose exec web composer show --outdated
+
   docker-compose exec web composer require --update-with-dependencies slim/slim
   docker-compose exec web composer require --update-with-dependencies slim/twig-view
+  docker-compose exec web composer require --update-with-dependencies slim/psr7
+  docker-compose exec web composer require --update-with-dependencies php-di/php-di
+
   docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
 
 ## Ressources
