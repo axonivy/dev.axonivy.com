@@ -23,15 +23,23 @@
           {% endif %}
           <div style="clear:both;"></div>
 
-          <a href="javascript:void(0)" onclick="{{ (installButton.enabled) ? installButton.javascriptCallback|raw : '$(\'.product-install\').slideToggle();' }}" class="button special">
-            <i class="icon fas fa-download" style="color:#007095;"></i> Install
-          </a>
+		  {% if installButton.isShow %}
+            <a href="javascript:void(0)" onclick="{{ (installButton.enabled) ? installButton.javascriptCallback|raw : '$(\'.product-install\').slideToggle();' }}" class="button special">
+              <i class="icon fas fa-download" style="color:#007095;"></i> Install
+            </a>
+		  {% endif %}
+
           {% if mavenArtifacts is not empty %}
             <a href="javascript:void(0)" onclick="$('.product-download').slideToggle();" class="header-link">Download</a>
           {% endif %}
           {% if docArtifacts is not empty %}
             <a href="{{ docArtifacts|first.getDocUrl(selectedVersion) }}" class="header-link">
               Documentation <i class="fas fa-external-link-alt" style="font-size:14px;"></i>
+            </a>
+          {% endif %}
+          {% if getInTouchLink is not empty %}
+            <a href="{{ getInTouchLink }}" class="button special">
+              <i class="fas fa-envelope-square" style=""></i> Get in touch
             </a>
           {% endif %}
           {% if product.openApiJsonUrl is not empty %}

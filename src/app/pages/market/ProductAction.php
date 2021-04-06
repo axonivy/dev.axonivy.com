@@ -58,6 +58,12 @@ class ProductAction
     }
 
     $installButton = self::createInstallButton($request, $product, $version);
+    
+    $getInTouchLink = '';
+    if (!$product->isInstallable() && empty($product->getMavenProductInfo()))
+    {
+      $getInTouchLink = 'https://www.axonivy.com/marketplace/contact/?market_solutions=' . $product->getKey();
+    }
 
     return $this->view->render($response, 'market/product.twig', [
       'product' => $product,
@@ -66,7 +72,8 @@ class ProductAction
       'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
       'docArtifacts' => $docArtifacts,
       'selectedVersion' => $version,
-      'installButton' => $installButton
+      'installButton' => $installButton,
+      'getInTouchLink' => $getInTouchLink
     ]);
   }
 
@@ -80,7 +87,8 @@ class ProductAction
 
     $isDesigner = !empty($version);
     $reason = $product->getReasonWhyNotInstallable($version);
-    return new InstallButton($isDesigner, $reason, $metaUrl);
+    $isShow = $product->isInstallable();
+    return new InstallButton($isDesigner, $reason, $metaUrl, $isShow);
   }
 }
 
@@ -91,12 +99,15 @@ class InstallButton
   public string $reason;
 
   private string $metaUrl;
+  
+  public bool $isShow;
 
-  function __construct(bool $isDesigner, string $reason, string $metaUrl)
+  function __construct(bool $isDesigner, string $reason, string $metaUrl, bool $isShow)
   {
     $this->isDesigner = $isDesigner;
     $this->reason = $reason;
     $this->metaUrl = $metaUrl;
+    $this->isShow = $isShow;
   }
 
   public function isEnabled(): bool
