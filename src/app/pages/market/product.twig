@@ -23,11 +23,11 @@
           {% endif %}
           <div style="clear:both;"></div>
 
-		  {% if installButton.isShow %}
+          {% if installButton.isShow %}
             <a href="javascript:void(0)" onclick="{{ (installButton.enabled) ? installButton.javascriptCallback|raw : '$(\'.product-install\').slideToggle();' }}" class="button special">
               <i class="icon fas fa-download" style="color:#007095;"></i> Install
             </a>
-		  {% endif %}
+          {% endif %}
 
           {% if mavenArtifacts is not empty %}
             <a href="javascript:void(0)" onclick="$('.product-download').slideToggle();" class="header-link">Download</a>
