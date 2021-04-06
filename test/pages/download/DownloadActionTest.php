@@ -4,6 +4,7 @@ namespace test\pages\download;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
+use app\domain\ReleaseInfoRepository;
 
 class DownloadActionTest extends TestCase
 {
@@ -50,9 +51,13 @@ class DownloadActionTest extends TestCase
 
   public function testLeadingEdge()
   {
-    AppTester::assertThatGet('/download/leading-edge')->ok()
-      ->bodyContains('Leading Edge')
-      ->bodyContains('https://download.axonivy.com/9.1.1/AxonIvyDesigner9.1.0.96047_MacOSX-BETA_x64.zip');
+    $responseAssert = AppTester::assertThatGet('/download/leading-edge')->ok()->bodyContains('Leading Edge');
+
+    $le = ReleaseInfoRepository::getLeadingEdge();
+    if ($le != null)
+    {
+      $responseAssert->bodyContains("axonivy/axonivy-engine:" . $le->getVersion()->getBugfixVersion());
+    }
   }
 
   public function testNotExisting()
