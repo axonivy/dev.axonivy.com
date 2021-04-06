@@ -23,7 +23,7 @@
     {% elseif product == "engine" %}
       {% include 'installation/_engine.twig' %}
     {% else %}
-      {% if type == "MacOSX-BETA" or type =="MacOSX" %}
+      {% if type == "MacOSX-BETA" or type =="macOS" %}
         {% include 'installation/_mac_designer.twig' %}
       {% else %}
         {% include 'installation/_designer.twig' %}
