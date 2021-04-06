@@ -94,4 +94,19 @@ class ProductActionTest extends TestCase
       ->ok()
       ->bodyDoesNotContain("/api-browser?url");
   }
+  
+  public function testGetInTouchLink()
+  {
+      AppTester::assertThatGet('market/employee-onboarding')
+      ->ok()
+      ->bodyContains('https://www.axonivy.com/marketplace/contact/?market_solutions=employee-onboarding');
+  }
+  
+  public function testGetInTouchLink_existsNot()
+  {
+      AppTester::assertThatGet('market/basic-workflow-ui')
+      ->ok()
+      ->bodyDoesNotContain('https://www.axonivy.com/marketplace/contact');
+  }
+  
 }
