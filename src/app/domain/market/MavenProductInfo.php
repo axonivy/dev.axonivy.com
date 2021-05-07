@@ -6,11 +6,13 @@ class MavenProductInfo
 {
   private array $mavenArtifacts;
   private VersionDisplayFilter $versionDisplayFilter;
+  private InstallMatcher $installMatcher;
 
-  public function __construct(array $mavenArtifacts, VersionDisplayFilter $versionDisplayFilter)
+  public function __construct(array $mavenArtifacts, VersionDisplayFilter $versionDisplayFilter, InstallMatcher $installMatcher)
   {
     $this->mavenArtifacts = $mavenArtifacts;
     $this->versionDisplayFilter = $versionDisplayFilter;
+    $this->installMatcher = $installMatcher;
   }
 
   public function getMavenArtifacts(): array
@@ -79,12 +81,6 @@ class MavenProductInfo
 
   public function findBestMatchingVersion(string $v): ?string
   {
-    $versions = $this->getVersions();
-    foreach ($versions as $version) {
-      if (version_compare($version, $v) <= 0) {
-        return $version;
-      }        
-    }
-    return '';
+    return $this->installMatcher->match($this, $v);    
   }
 }

@@ -28,7 +28,8 @@ class ProductFactory
   {
     $mavenArtifacts = self::createMavenArtifacts($json);
     $versionDisplayFilter = VersionDisplayFilterFactory::create($json->versionDisplay ?? '');
-    return new MavenProductInfo($mavenArtifacts, $versionDisplayFilter);
+    $installMatcher = InstallMatcherFactory::create($json->installMatcher ?? '');
+    return new MavenProductInfo($mavenArtifacts, $versionDisplayFilter, $installMatcher);
   }
 
   private static function createMavenArtifacts($json): array

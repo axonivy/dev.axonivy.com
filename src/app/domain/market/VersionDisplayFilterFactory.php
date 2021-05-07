@@ -51,7 +51,7 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
     $allVersions = $info->getVersions();
     $highesSprintReleases = [];
     foreach ($allVersions as $v) {
-      if ($v == '1.0.0.0' || $v == '2.0.0.0') {
+      if ($v == '1.0.0.0' || $v == '1.0.0.2' || $v == '1.0.0.3' || $v == '2.0.0.0') {
         continue;
       }
 
