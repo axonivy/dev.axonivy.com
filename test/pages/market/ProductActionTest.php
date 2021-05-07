@@ -5,6 +5,7 @@ namespace test\pages\market;
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
 use app\domain\market\Market;
+use app\domain\util\StringUtil;
 
 class ProductActionTest extends TestCase
 {
@@ -55,11 +56,45 @@ class ProductActionTest extends TestCase
       ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=$version')");
   }
   
-  public function testInstallButton_respectCookie()
+  public function testInstallButton_respectCookie_ltsMatchInstaller()
   {
-      AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
+    $product = Market::getProductByKey('doc-factory');
+    // grab latest minor version of doc factory
+    $version = '';    
+    foreach ($product->getMavenProductInfo()->getVersionsToDisplay() as $v)
+    {
+        if (StringUtil::startsWith($v, '9.2')) {
+           $version = $v;
+           break;
+        }
+    }
+    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=9.2.0')");
+      ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=$version')");
+  }
+
+  public function testInstallButton_respectCookie_bestMatchInstaller()
+  {
+      AppTester::assertThatGetWithCookie('http://localhost/market/portal', ['ivy-version' => '8.0.10'])
+        ->ok()
+        ->bodyContains("install('http://localhost/_market/portal/_meta.json?version=8.0.10')");
+  }
+  
+  public function testInstallButton_respectCookie_bestMatchInstaller_ifNotExistUseLast()
+  {
+    $product = Market::getProductByKey('portal');
+    $version = '';
+    // grab latest minor version of doc factory
+    foreach ($product->getMavenProductInfo()->getVersionsToDisplay() as $v)
+    {
+        if (StringUtil::startsWith($v, '8.0')) {
+            $version = $v;
+            break;
+        }
+    }
+    AppTester::assertThatGetWithCookie('http://localhost/market/portal', ['ivy-version' => '8.0.99'])
+      ->ok()
+      ->bodyContains("install('http://localhost/_market/portal/_meta.json?version=$version')");
   }
 
   public function testInstallButton_useSpecificVersion()
