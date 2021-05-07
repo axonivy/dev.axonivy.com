@@ -7,6 +7,7 @@ use Slim\Views\Twig;
 use app\domain\market\Market;
 use app\domain\market\Product;
 use Slim\Psr7\Request;
+use app\domain\market\MavenProductInfo;
 
 class ProductAction
 {
@@ -38,7 +39,10 @@ class ProductAction
 
     if ($mavenProductInfo != null) {
       if (empty($version)) {
-        $version = $mavenProductInfo->getLatestVersionToDisplay();
+        $version = self::findBestMatchingVersionFromCookie($request, $mavenProductInfo);
+        if (empty($version)) {
+          $version = $mavenProductInfo->getLatestVersionToDisplay();
+        }
       } else if (!$mavenProductInfo->hasVersion($version)) {
         throw new HttpNotFoundException($request);
       }
@@ -82,13 +86,26 @@ class ProductAction
     $uri = $request->getUri();
     $metaUrl = $uri->getScheme() . '://' . $uri->getHost() . $product->getMetaUrl($currentVersion);
 
-    $cookies = $request->getCookieParams();
-    $version = $cookies['ivy-version'] ?? '';
-
+    $version = self::readIvyVersionCookie($request);
     $isDesigner = !empty($version);
     $reason = $product->getReasonWhyNotInstallable($version);
     $isShow = $product->isInstallable();
     return new InstallButton($isDesigner, $reason, $metaUrl, $isShow);
+  }
+
+  private static function readIvyVersionCookie(Request $request)
+  {
+    $cookies = $request->getCookieParams();
+    return $cookies['ivy-version'] ?? '';
+  }
+  
+  private static function findBestMatchingVersionFromCookie(Request $request, MavenProductInfo $mavenProductInfo)
+  {
+    $version = self::readIvyVersionCookie($request);
+    if (empty($version)) {
+      return '';
+    }
+    return $mavenProductInfo->findBestMatchingVersion($version);
   }
 }
 

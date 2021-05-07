@@ -76,4 +76,15 @@ class MavenProductInfo
     }
     return false;
   }
+
+  public function findBestMatchingVersion(string $v): ?string
+  {
+    $versions = $this->getVersions();
+    foreach ($versions as $version) {
+      if (version_compare($version, $v) <= 0) {
+        return $version;
+      }        
+    }
+    return '';
+  }
 }
