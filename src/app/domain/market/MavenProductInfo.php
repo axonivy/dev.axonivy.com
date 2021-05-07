@@ -2,6 +2,8 @@
 
 namespace app\domain\market;
 
+use app\domain\util\StringUtil;
+
 class MavenProductInfo
 {
   private array $mavenArtifacts;
@@ -75,5 +77,16 @@ class MavenProductInfo
       }
     }
     return false;
+  }
+
+  public function findBestMatchingVersion(string $v): ?string
+  {
+    $versions = $this->getVersions();
+    foreach ($versions as $version) {
+      if (version_compare($version, $v) <= 0) {
+        return $version;
+      }        
+    }
+    return '';
   }
 }

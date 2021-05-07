@@ -50,9 +50,16 @@ class ProductActionTest extends TestCase
     $product = Market::getProductByKey('doc-factory');
     $version = $product->getMavenProductInfo()->getLatestVersionToDisplay();
 
-    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
+    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => $version])
       ->ok()
       ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=$version')");
+  }
+  
+  public function testInstallButton_respectCookie()
+  {
+      AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
+      ->ok()
+      ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=9.2.0')");
   }
 
   public function testInstallButton_useSpecificVersion()
