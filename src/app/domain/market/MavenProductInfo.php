@@ -2,8 +2,6 @@
 
 namespace app\domain\market;
 
-use app\domain\util\StringUtil;
-
 class MavenProductInfo
 {
   private array $mavenArtifacts;
