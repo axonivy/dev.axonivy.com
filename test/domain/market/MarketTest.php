@@ -100,15 +100,15 @@ class MarketTest extends TestCase
   {
     $tags = Market::tags(Market::listed());
     $expectedTags = [
-      'DEMO',
-      'DOCUMENT',
-      'HELPER',
-      'HR',
-      'MONITORING',
-      'OFFICE',
-      'OUTLOOK',
-      'RPA',
-      'WORKFLOW-UI',
+      'demo',
+      'document',
+      'helper',
+      'hr',
+      'monitoring',
+      'office',
+      'outlook',
+      'rpa',
+      'workflow-ui',
     ];
     Assert::assertEquals($expectedTags, $tags);
   }
