@@ -1,5 +1,6 @@
 {
 	"id": "doc-factory",
+	"version": "9.3",
 	"name": "Doc Factory",
 	"description": "Generate documents",
 	"sort": 300,
@@ -7,9 +8,11 @@
 	"type": "process",
 	"tags": ["document"],
 	"vendor": "Axon Ivy AG",
+	"platformReview": "4.5",
 	"costs": "free",
 	"language": "en",
 	"industry": "Cross-Industry",
+	"compatibility": "8.0+",
 	"mavenArtifacts": [
 		{
 			"name": "Doc Factory",

@@ -56,14 +56,15 @@
         <span>Review</span>
       </div>
       <div class="product-data-content">
-        <span>4.5</span>
+        <span>{{ product.platformReview }}</span>
       </div>
       <div class="product-data-info">
-        <i class="si si-star-bold"></i>
-        <i class="si si-star-bold"></i>
-        <i class="si si-star-bold"></i>
-        <i class="si si-star-bold"></i>
-        <i class="si si-star-half-bold"></i>
+        {% for i in range(1, product.starCount) %}
+          <i class="si si-star-bold"></i>
+        {% endfor %}
+        {% if product.halfStar %}
+          <i class="si si-star-half-bold"></i>
+        {% endif %}
       </div>
     </div>
 

@@ -10,39 +10,43 @@ class Product
   private string $path;
 
   private string $name;
+  private string $version;
   private string $shortDesc;
   private bool $listed;
   private string $type;
   private array $tags;
   private string $vendor;
+  private string $platformReview;
   private string $costs;
   private string $sourceUrl;
   private string $language;
   private string $industry;
-  private string $minVersion;
+  private string $compatibility;
   private bool $installable;
 
   private array $readMeParts;
 
   private ?MavenProductInfo $mavenProductInfo;
 
-  public function __construct(string $key, string $path, string $name, string $shortDesc, bool $listed, 
-    string $type, array $tags, string $vendor, string $costs, string $sourceUrl, string $language, string $industry,
-    string $minVersion, bool $installable, ?MavenProductInfo $mavenProductInfo)
+  public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
+    string $type, array $tags, string $vendor, string $platformReview, string $costs, string $sourceUrl, string $language, string $industry,
+    string $compatibility, bool $installable, ?MavenProductInfo $mavenProductInfo)
   {
     $this->key = $key;
     $this->path = $path;
     $this->name = $name;
+    $this->version = $version;
     $this->shortDesc = $shortDesc;
     $this->listed = $listed;
     $this->type = $type;
     $this->tags = $tags;
     $this->vendor = $vendor;
+    $this->platformReview = $platformReview;
     $this->costs = $costs;
     $this->sourceUrl = $sourceUrl;
     $this->language = $language;
     $this->industry = $industry;
-    $this->minVersion = $minVersion;
+    $this->compatibility = $compatibility;
     $this->installable = $installable;
     $this->mavenProductInfo = $mavenProductInfo;
     $this->readMeParts = [];
@@ -63,6 +67,11 @@ class Product
     return $this->name;
   }
 
+  public function getVersion(): string
+  {
+    return $this->version;
+  }
+
   public function getShortDescription(): string
   {
     return $this->shortDesc;
@@ -76,6 +85,21 @@ class Product
   public function getVendor(): string
   {
     return $this->vendor;
+  }
+
+  public function getPlatformReview(): string
+  {
+    return $this->platformReview;
+  }
+
+  public function getStarCount(): int
+  {
+    return (int) $this->platformReview;
+  }
+
+  public function getHalfStar(): bool
+  {
+    return (float) $this->platformReview != (float) $this->getStarCount();
   }
 
   public function getCosts(): string
@@ -103,14 +127,17 @@ class Product
     return $this->industry;
   }
 
-  public function getMinVersion(): string
+  public function getCompatibility(): string
   {
-    return $this->minVersion;
+    return $this->compatibility;
   }
 
   public function isVersionSupported(string $version): bool
   {
-    return version_compare($this->minVersion, $version) <= 0;
+    if (str_ends_with($this->compatibility, '+')) {
+      return version_compare(substr($this->compatibility, 0, -1), $version) <= 0;
+    }
+    return version_compare($this->compatibility, $version) == 0;
   }
 
   public function getDescription(): string
@@ -270,7 +297,7 @@ class Product
     if (!$this->isInstallable()) {
       return 'Product is not installable.';
     } elseif (!$this->isVersionSupported($version)) {
-      return 'Your Axon Ivy Designer is too old (' . $version . '). You need ' . $this->getMinVersion() . ' or newer.';
+      return 'Your Axon Ivy Designer is too old (' . $version . '). You need version ' . $this->getCompatibility() . '.';
     }
     return '';
   }

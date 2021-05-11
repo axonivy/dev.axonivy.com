@@ -1,11 +1,13 @@
 {
 	"id": "visualvm-plugin",
+	"version": "8.0",
 	"name": "VisualVM Plugin",
 	"sort": 200,
 	"type": "util",
 	"tags": ["monitoring"],
 	"versionDisplay": "hide-snapshots",
 	"vendor": "Oracle",
+	"platformReview": "4",
 	"costs": "free",
 	"sourceUrl": "https://visualvm.github.io/releases.html",
 	"language": "en",

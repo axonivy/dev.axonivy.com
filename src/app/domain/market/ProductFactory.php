@@ -19,16 +19,18 @@ class ProductFactory
     }
     $type = $json->type ?? [];
     $tags = $json->tags ?? [];
+    $version = $json->version ?? 'Unknown';
     $shortDesc = $json->description ?? '';
     $vendor = $json->vendor ?? 'Unknown';
+    $platformReview = $json->platformReview ?? '4.0';
     $costs = $json->costs ?? 'Free';
     $sourceUrl = $json->sourceUrl ?? '';
     $language = $json->language ?? '';
     $industry = $json->industry ?? '';
     $installable = isset($json->installers);
-    $minVersion = $json->minVersion ?? '0.0.0';
-    return new Product($key, $path, $json->name, $shortDesc, $listed, $type, $tags, 
-      $vendor, $costs, $sourceUrl, $language, $industry, $minVersion, $installable, $info);
+    $compatibility = $json->compatibility ?? '0.0.0';
+    return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
+      $vendor, $platformReview, $costs, $sourceUrl, $language, $industry, $compatibility, $installable, $info);
   }
 
   private static function createMavenProductInfo($json): MavenProductInfo

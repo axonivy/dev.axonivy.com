@@ -104,19 +104,19 @@ class ProductTest extends TestCase
     Assert::assertTrue($product->isInstallable());
   }
 
-  public function test_minVersion()
+  public function test_compatibility()
   {
     $product = Market::getProductByKey('visualvm-plugin');
-    Assert::assertEquals('0.0.0', $product->getMinVersion());
+    Assert::assertEquals('0.0.0', $product->getCompatibility());
 
     $product = Market::getProductByKey('genderize');
-    Assert::assertEquals('9.2.0', $product->getMinVersion());
+    Assert::assertEquals('9.2+', $product->getCompatibility());
   }
 
   public function test_isVersionSupported()
   {
     $product = Market::getProductByKey('genderize');
-    Assert::assertEquals('9.2.0', $product->getMinVersion());
+    Assert::assertEquals('9.2+', $product->getCompatibility());
 
     Assert::assertTrue($product->isVersionSupported('9.2.0'));
     Assert::assertTrue($product->isVersionSupported('9.2.1'));
@@ -137,7 +137,7 @@ class ProductTest extends TestCase
     $product = Market::getProductByKey('genderize');
     Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.2.0'));
     Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.3.0'));
-    Assert::assertEquals('Your Axon Ivy Designer is too old (9.1.0). You need 9.2.0 or newer.', $product->getReasonWhyNotInstallable('9.1.0'));
+    Assert::assertEquals('Your Axon Ivy Designer is too old (9.1.0). You need version 9.2+.', $product->getReasonWhyNotInstallable('9.1.0'));
   }
 
   public function test_type()

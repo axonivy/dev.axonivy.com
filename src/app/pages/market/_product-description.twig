@@ -173,12 +173,14 @@
         </div>
         <div class="product-meta-info">
           <span class="meta-type">Version</span>
-          <span class="meta-data">1.0</span>
+          <span class="meta-data">{{ product.version }}</span>
         </div>
-        <div class="product-meta-info">
-          <span class="meta-type">Compatibility</span>
-          <span class="meta-data">9.2+</span>
-        </div>
+        {% if product.compatibility is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Compatibility</span>
+            <span class="meta-data">{{ product.compatibility }}</span>
+          </div>
+        {% endif %}
         <div class="product-meta-info">
           <span class="meta-type">Costs</span>
           <span class="meta-data capitalize">{{ product.costs }}</span>

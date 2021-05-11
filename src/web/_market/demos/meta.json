@@ -1,14 +1,17 @@
 {
 	"id": "demos",
+	"version": "9.3",
 	"name": "Demos",
 	"description": "A collection of demos, with some simple explanations of you can solve things.",
 	"sort": 400,
 	"type": "solution",
 	"tags": ["demo"],
 	"vendor": "Axon Ivy AG",
+	"platformReview": "4.5",
 	"costs": "free",
 	"sourceUrl": "https://github.com/ivy-samples/ivy-project-demos",
 	"language": "en",
+	"compatibility": "8.0+",
 	"mavenArtifacts": [
 		{
 			"name": "Quick Start Tutorial",

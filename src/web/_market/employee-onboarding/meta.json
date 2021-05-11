@@ -1,5 +1,6 @@
 {
 	"id": "employee-onboarding",
+	"version": "1.0",
 	"name": "Employee Onboarding",
 	"sort": 400,
 	"type": "solution",

@@ -1,13 +1,16 @@
 {
 	"id": "uipath",
+	"version": "1.0",
 	"name": "UiPath Robotic Process Automation",
 	"type": "connector",
 	"tags": ["RPA"],
 	"vendor": "Axon Ivy AG",
+	"platformReview": "4.5",
 	"costs": "free",
 	"sourceUrl": "https://github.com/axonivy/market",
 	"language": "en",
 	"industry": "Cross-Industry",
+	"compatibility": "9.2+",
 	"installers": [
 		{
 			"id": "project-resource",

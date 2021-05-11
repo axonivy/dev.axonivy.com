@@ -1,13 +1,16 @@
 {
 	"id": "ms-todo",
+	"version": "1.0",
 	"name": "Microsoft ToDo",
 	"type": "connector",
 	"tags": ["office", "outlook"],
 	"vendor": "Axon Ivy AG",
+	"platformReview": "4.5",
 	"costs": "free",
 	"sourceUrl": "https://github.com/axonivy/market",
 	"language": "en",
 	"industry": "Cross-Industry",
+	"compatibility": "9.2+",
 	"properties": {
 		"tags": "me.todo",
 		"scopes": "Tasks.ReadWrite",
