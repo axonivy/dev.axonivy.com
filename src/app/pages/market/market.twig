@@ -49,6 +49,9 @@
     margin: 0;
     overflow: hidden;
   }
+  .product-type-icon {
+    margin-right: auto;
+  }
   .product-tag {
     color: white;
     font-size: 14px;
@@ -156,6 +159,9 @@
       height: 40px;
       margin-top: 0.5em;
     }
+    .product-card .product-type-icon {
+      height: 1em;
+    }
     .product-card .product-tags {
       height: 20px;
     }
@@ -226,7 +232,7 @@
     <p>
       In our market we provide powerful extensions around the Axon Ivy Platform.
       From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
-      Take a look around.
+      Take a look.
     </p>
 
     <div class="row">
@@ -313,9 +319,10 @@
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
             <div class="product-type {{ product.type }}"></div>
             <div class="product-tags p-grid p-dir-rev">
-            {% for tag in product.tags %}
-              <span class="product-tag">{{ tag }}</span>
-            {% endfor %}
+              {% for tag in product.tags %}
+                <span class="product-tag">{{ tag }}</span>
+              {% endfor %}
+              <i class="product-type-icon si {{ product.typeIcon }}"></i>
             </div>
             <center class="product-logo">
               <img src="{{ product.imgSrc }}" alt="{{ product.name }}" class="image"/>
