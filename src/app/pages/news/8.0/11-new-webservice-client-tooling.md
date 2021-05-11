@@ -9,9 +9,9 @@ The tooling to call remote Web Services has been completely re-worked and is mor
 
 <div class="short-links">
 	<a href="${docBaseUrl}/designer-guide/3rd-party-integration/index.html#web-services" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-book"></i> Designer Guide
+	  <i class="si si-book"></i> Designer Guide
 	</a>
 	<a href="/tutorial" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-video"></i> Tutorial Video
+	  <i class="si si-movie"></i> Tutorial Video
 	</a>
 </div>

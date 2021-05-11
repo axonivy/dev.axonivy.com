@@ -30,12 +30,15 @@
   h5 {
     margin-bottom: 3px;
   }
+  .button.fixed-margin {
+    margin: 0 1em 0.5em 0;
+  }
 </style>
 
-<section id="main" class="inverse">
+<section id="main">
   <div class="inner">
     <header>
-      <h1><span class="icon fas fa-newspaper"></span> What's new</h1>
+      <h1><i class="si si-news"></i> What's new</h1>
     </header>
     <p>
       We continuously release new versions of the Axon Ivy Platform.
@@ -45,11 +48,7 @@
 </section>
 
 {% for new in news %}
-  {% set background = 'white' %}
-  {% if loop.index is divisible by(2) %}
-    {% set background = '#f7f7f7' %}
-  {% endif %}
-  <section style="padding: 4em 0 2em 0; background-color: {{ background }}">
+  <section style="padding: 2em 0;">
     <div class="inner">
       {% set ltsMarker = 'display:none;' %}
       {% if new.meta.lts %}
@@ -64,15 +63,15 @@
       
       {{ new.abstract |raw }}
       
-      <a href="{{ new.link }}" class="button special">
-        <i class="icon fas fa-newspaper"></i> Read more
+      <a href="{{ new.link }}" class="button special fixed-margin">
+        <i class="si si-news"></i> Read more
       </a>
       
-      <a href="{{ new.linkDoc }}" class="button">
-        <i class="icon fas fa-book"></i> Documentation
+      <a href="{{ new.linkDoc }}" class="button fixed-margin">
+        <i class="si si-book"></i> Documentation
       </a>
-      <a href="{{ new.linkMigiNote }}" class="button">
-        <i class="icon fas fa-caret-square-up"></i> Migration Notes
+      <a href="{{ new.linkMigiNote }}" class="button fixed-margin">
+        <i class="si si-update"></i> Migration Notes
       </a>
     </div>
   </section>

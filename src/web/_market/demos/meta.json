@@ -1,8 +1,14 @@
 {
 	"id": "demos",
 	"name": "Demos",
+	"description": "A collection of demos, with some simple explanations of you can solve things.",
 	"sort": 400,
+	"type": "solution",
 	"tags": ["demo"],
+	"vendor": "Axon Ivy AG",
+	"costs": "free",
+	"sourceUrl": "https://github.com/ivy-samples/ivy-project-demos",
+	"language": "en",
 	"mavenArtifacts": [
 		{
 			"name": "Quick Start Tutorial",

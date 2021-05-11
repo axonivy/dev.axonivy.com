@@ -1,7 +1,13 @@
 {
 	"id": "ms-todo",
 	"name": "Microsoft ToDo",
-	"tags": ["connector", "outlook"],
+	"type": "connector",
+	"tags": ["office", "outlook"],
+	"vendor": "Axon Ivy AG",
+	"costs": "free",
+	"sourceUrl": "https://github.com/axonivy/market",
+	"language": "en",
+	"industry": "Cross-Industry",
 	"properties": {
 		"tags": "me.todo",
 		"scopes": "Tasks.ReadWrite",
@@ -10,16 +16,16 @@
 	},
 	"installers": [
 		{
-			"...": "<../msgraph/project-res.json>"
+			"...": "<../ms365/project-res.json>"
 		},
 		{
-			"...": "<../msgraph/rest-client.json>"
+			"...": "<../ms365/rest-client.json>"
 		},
 		{
-			"...": "<../msgraph/demo-copy.json>"
+			"...": "<../ms365/demo-copy.json>"
 		},
 		{
-			"...": "<../msgraph/demo-open.json>"
+			"...": "<../ms365/demo-open.json>"
 		}
 	]
 }

@@ -9,9 +9,9 @@ We updated the platform of the Designer in order to bring even more fun and prod
 
 <div class="short-links">
 	<a href="https://www.eclipse.org/downloads/" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-dice-d20"></i> Eclipse 2019-09
+	  <i class="si si-cd"></i> Eclipse 2019-09
 	</a>
 	<a href="https://marketplace.eclipse.org/" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-shopping-cart"></i> Marketplace
+	  <i class="si si-shopping-cart"></i> Marketplace
 	</a>
 </div>

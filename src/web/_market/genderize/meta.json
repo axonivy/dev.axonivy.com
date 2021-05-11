@@ -1,8 +1,15 @@
 {
 	"id": "genderize-io-connector",
 	"name": "Genderize.io Connector",
-	"tags": ["connector"],
+	"description": "A simple rest connector to a generdize service.",
+	"type": "connector",
+	"tags": ["helper"],
 	"minVersion": "9.2.0",
+	"vendor": "Axon Ivy AG",
+	"costs": "free",
+	"sourceUrl": "https://github.com/axonivy/market",
+	"language": "en",
+	"industry": "Cross-Industry",
 	"installers": [
 		{
 			"id": "rest-client",

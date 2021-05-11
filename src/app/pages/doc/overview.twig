@@ -4,12 +4,10 @@
 
 {% block content %}
 
-<section id="main" class="inverse">
+<section id="main">
   <div class="inner">
     <header>
-      <h1>
-        <span class="icon fas fa-book"></span> Documentation
-      </h1>
+      <h1><i class="si si-book"></i> Documentation</h1>
     </header>
     <p>Find all information about the Axon Ivy Platform in our documents.</p>
   </div>
@@ -25,13 +23,14 @@
     <div class="inner">
       <article>
         <div class="content">
-          <span class="icon fas fa-balance-scale"></span>
-          <header><h3>Long Term Support (LTS)</h3></header>
+          <header>
+            <h3><i class="si si-lts"></i> Long Term Support (LTS)</h3>
+          </header>
           <ul class="actions">
           {% for docLink in docLinksLTS %}
             <li>
-              <a href="{{ docLink.url }}" class="button special">
-                <span class="icon fas fa-book"></span> {{ docLink.displayText }}
+              <a href="{{ docLink.url }}" class="button special min-width">
+                <i class="si si-book"></i> {{ docLink.displayText }}
               </a>
             </li>
           {% endfor %}
@@ -41,15 +40,14 @@
       {% if docLinksLE is not empty %}
         <article>
           <div class="content">
-            <span class="icon fas fa-star"></span>
             <header>
-              <h3>Leading Edge (LE)</h3>
+              <h3><i class="si si-star"></i> Leading Edge (LE)</h3>
             </header>
             <ul class="actions">
               {% for docLink in docLinksLE %}
                 <li>
-                  <a href="{{ docLink.url }}" class="button special">
-                    <span class="icon fas fa-book"></span> {{ docLink.displayText }}
+                  <a href="{{ docLink.url }}" class="button special min-width">
+                    <i class="si si-book"></i> {{ docLink.displayText }}
                   </a>
                 </li>
               {% endfor %}
@@ -59,15 +57,14 @@
       {% endif %}
       <article>
         <div class="content">
-          <span class="icon fas fa-flask"></span>
           <header>
-            <h3>Dev Releases</h3>
+            <h3><i class="si si-lab-flask"></i> Dev Releases</h3>
           </header>
           <ul class="actions">
             {% for docLink in docLinksDEV %}
               <li>
-                <a href="{{ docLink.url }}" class="button">
-                  <span class="icon fas fa-book"></span> {{ docLink.displayText }}
+                <a href="{{ docLink.url }}" class="button min-width">
+                  <i class="si si-book"></i> {{ docLink.displayText }}
                 </a>
               </li>
             {% endfor %}

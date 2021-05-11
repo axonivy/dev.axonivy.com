@@ -14,12 +14,12 @@ The roll-out of a new application version should never take more effort than one
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/administration/deployment.html" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-book"></i> Engine Guide
+	  <i class="si si-book"></i> Engine Guide
 	</a>
 	<a href="https://axonivy.github.io/project-build-plugin" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-book"></i> Maven Plugin
+	  <i class="si si-book"></i> Maven Plugin
 	</a>
 	<a href="https://github.com/axonivy/project-build-examples" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-flask"></i> GitHub Examples
+	  <i class="si si-lab-flask"></i> GitHub Examples
 	</a>
 </div>

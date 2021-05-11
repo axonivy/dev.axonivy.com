@@ -29,9 +29,9 @@ Successfully deploying your application in your customers environment is now eas
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/configuration/" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-book"></i> Engine Guide Configuration
+	  <i class="si si-book"></i> Engine Guide Configuration
 	</a>
 	<a href="${docBaseUrl}/engine-guide/configuration/file-reference.html" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-book"></i> Configuration File Reference
+	  <i class="si si-book"></i> Configuration File Reference
 	</a>
 </div>

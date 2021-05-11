@@ -10,25 +10,44 @@ class Product
   private string $path;
 
   private string $name;
+  private string $shortDesc;
   private bool $listed;
   private int $sort;
+  private string $type;
   private array $tags;
+  private string $vendor;
+  private string $costs;
+  private string $sourceUrl;
+  private string $language;
+  private string $industry;
   private string $minVersion;
   private bool $installable;
 
+  private array $readMeParts;
+
   private ?MavenProductInfo $mavenProductInfo;
 
-  public function __construct(string $key, string $path, string $name, bool $listed, int $sort, array $tags, string $minVersion, bool $installable, ?MavenProductInfo $mavenProductInfo)
+  public function __construct(string $key, string $path, string $name, string $shortDesc, bool $listed, 
+    int $sort, string $type, array $tags, string $vendor, string $costs, string $sourceUrl, string $language, string $industry,
+    string $minVersion, bool $installable, ?MavenProductInfo $mavenProductInfo)
   {
     $this->key = $key;
     $this->path = $path;
     $this->name = $name;
+    $this->shortDesc = $shortDesc;
     $this->listed = $listed;
     $this->sort = $sort;
+    $this->type = $type;
     $this->tags = $tags;
+    $this->vendor = $vendor;
+    $this->costs = $costs;
+    $this->sourceUrl = $sourceUrl;
+    $this->language = $language;
+    $this->industry = $industry;
     $this->minVersion = $minVersion;
     $this->installable = $installable;
     $this->mavenProductInfo = $mavenProductInfo;
+    $this->readMeParts = [];
   }
 
   public function getKey(): string
@@ -46,6 +65,11 @@ class Product
     return $this->name;
   }
 
+  public function getShortDescription(): string
+  {
+    return $this->shortDesc;
+  }
+
   public function getSort(): int
   {
     return $this->sort;
@@ -54,6 +78,36 @@ class Product
   public function isInstallable(): bool
   {
     return $this->installable;
+  }
+
+  public function getVendor(): string
+  {
+    return $this->vendor;
+  }
+
+  public function getCosts(): string
+  {
+    return $this->costs;
+  }
+
+  public function getSourceUrl(): string
+  {
+    return $this->sourceUrl;
+  }
+
+  public function getSourceUrlDomain(): string
+  {
+    return parse_url($this->sourceUrl)['host'] ?? '';
+  }
+
+  public function getLanguage(): string
+  {
+    return $this->language;
+  }
+
+  public function getIndustry(): string
+  {
+    return $this->industry;
   }
 
   public function getMinVersion(): string
@@ -68,7 +122,35 @@ class Product
 
   public function getDescription(): string
   {
-    return $this->getHtmlOfMarkdown('README.md');
+    $desc = $this->splitMarkdownToParts();
+    return $this->getHtmlOfMarkdown($desc['description']);
+  }
+
+  public function getDemoDescription(): string
+  {
+    $desc = $this->splitMarkdownToParts();
+    return $this->getHtmlOfMarkdown($desc['demo']);
+  }
+
+  public function getSetupDescription(): string
+  {
+    $desc = $this->splitMarkdownToParts();
+    return $this->getHtmlOfMarkdown($desc['setup']);
+  }
+
+  public function getType(): string
+  {
+    return $this->type;
+  }
+
+  public function getTypeIcon(): string
+  {
+    foreach (Market::types() as $type) {
+      if ($type->getFilter() == $this->type) {
+        return $type->getIcon();
+      }
+    }
+    return 'si-types';
   }
 
   public function getTags(): array
@@ -76,14 +158,31 @@ class Product
     return $this->tags;
   }
 
-  private function getHtmlOfMarkdown(string $filename): string
+  private function splitMarkdownToParts(): array
   {
-    $markdownFile = $this->path . "/$filename";
-    if (file_exists($markdownFile)) {
-      $markdownContent = file_get_contents($markdownFile);
-      return (new ParsedownCustom($this->assetBaseUrl()))->text($markdownContent);
+    if (empty($this->readMeParts)) {
+      $filename = 'README.md';
+      $markdownFile = $this->path . "/$filename";
+      if (file_exists($markdownFile)) {
+        $markdownParts[] = [];
+        $markdownContent = file_get_contents($markdownFile);
+
+        $setupContent = explode('## Setup', $markdownContent);
+        $demoContent = explode("## Demo", $setupContent[0]);
+        $this->readMeParts['description'] = $demoContent[0];
+        $this->readMeParts['demo'] = $demoContent[1] ?? '';
+        $this->readMeParts['setup'] = $setupContent[1] ?? '';
+      }
     }
-    return '';
+    return $this->readMeParts;
+  }
+
+  private function getHtmlOfMarkdown(?string $markdownContent): string
+  {
+    if (empty($markdownContent)) {
+      return '';
+    }
+    return (new ParsedownCustom($this->assetBaseUrl()))->text($markdownContent);
   }
 
   private function assetBaseUrl()
@@ -148,13 +247,24 @@ class Product
       $json = json_decode($content);
       foreach($json->installers as $installer)
       {
-        if ($installer->id == 'rest-client')
+        $realInstaller = $this->evaluateInstaller($installer);
+        if ($realInstaller->id == 'rest-client')
         {
-          return $installer->data->openApiUrl;
+          return $realInstaller->data->openApiUrl;
         }
       }
     }
     return '';
+  }
+
+  private function evaluateInstaller($installer): mixed
+  {
+    if (property_exists($installer, 'id')) {
+      return $installer;
+    }
+    $externalJson = $installer->{'...'};
+    $installerJson = file_get_contents($this->getMarketFile(substr($externalJson, 1, -1)));
+    return json_decode($installerJson);
   }
 
   public function getMavenProductInfo(): ?MavenProductInfo

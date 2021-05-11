@@ -5,6 +5,7 @@ namespace test\domain\market;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\domain\market\Market;
+use app\domain\market\Type;
 use app\domain\market\Product;
 
 class MarketTest extends TestCase
@@ -75,17 +76,38 @@ class MarketTest extends TestCase
     Assert::assertEquals('portal', $products[0]->getKey());
   }
 
+  public function test_types()
+  {
+    $types = Market::types();
+    $expectedTypes = [
+      new Type('All Types', '', 'si-types'), 
+      new Type('Connectors', 'connector', 'si-connector'), 
+      new Type('Diagrams', 'diagram', 'si-diagram'),
+      new Type('Solutions', 'solution', 'si-lab-flask'), 
+      new Type('Utils', 'util', 'si-util')];
+    Assert::assertEquals($expectedTypes, $types);
+  }
+
+  public function test_searchByType()
+  {
+    $products = Market::searchByType(Market::listed(), 'util');
+    Assert::assertEquals(2, count($products));
+    Assert::assertEquals('Portal', $products[0]->getName());
+    Assert::assertEquals('VisualVM Plugin', $products[1]->getName());
+  }
+
   public function test_tags()
   {
     $tags = Market::tags(Market::listed());
     $expectedTags = [
-      'CONNECTOR',
       'DEMO',
+      'DOCUMENT',
+      'HELPER',
+      'HR',
       'MONITORING',
+      'OFFICE',
       'OUTLOOK',
       'RPA',
-      'SOLUTION',
-      'UTIL',
       'WORKFLOW-UI',
     ];
     Assert::assertEquals($expectedTags, $tags);

@@ -8,6 +8,8 @@ use app\domain\util\StringUtil;
 class Market
 {
 
+  private static $types = null;
+
   public static function all(): array
   {
     $dirs = array_filter(glob(Config::marketDirectory() . '/*'), 'is_dir');
@@ -50,6 +52,20 @@ class Market
     return $listed;
   }
 
+  public static function searchByType(array $products, string $searchType) {
+    if (empty($searchType)) {
+      return $products;
+    }
+
+    $listed = [];
+    foreach ($products as $product) {
+      if (strcasecmp($product->getType(), $searchType) == 0) {
+        $listed[] = $product;
+      }
+    }
+    return $listed;
+  }
+
   public static function searchByTag(array $products, array $searchTags): array
   {
     if (empty($searchTags) || count($searchTags) == 1 && empty($searchTags[0])) {
@@ -57,9 +73,10 @@ class Market
     }
 
     $listed = [];
+    $tags = array_map('strtolower', $searchTags);
     foreach ($products as $product) {
       foreach ($product->getTags() as $tag) {
-        if (in_array(strtoupper($tag), $searchTags)) {
+        if (in_array(strtolower($tag), $tags)) {
           $listed[] = $product;
           break;
         }
@@ -71,6 +88,20 @@ class Market
   public static function listed(): array
   {
     return array_filter(self::all(), fn (Product $product) => $product->isListed());
+  }
+
+  public static function types(): array
+  {
+    if (self::$types == null)
+    {
+      self::$types = [
+        new Type('All Types', '', 'si-types'), 
+        new Type('Connectors', 'connector', 'si-connector'), 
+        new Type('Diagrams', 'diagram', 'si-diagram'),
+        new Type('Solutions', 'solution', 'si-lab-flask'), 
+        new Type('Utils', 'util', 'si-util')];
+    }
+    return self::$types;
   }
 
   public static function tags(array $products): array

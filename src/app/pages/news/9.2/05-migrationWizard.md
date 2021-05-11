@@ -10,6 +10,6 @@ Keeping Axon Ivy Engines up-to-date, stable and protected against security vulne
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/tool-reference/migration-wizard.html" target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-check-circle"></i> Migration Wizard docs
+		<i class="si si-check"></i> Migration Wizard docs
 	</a>
 </div>

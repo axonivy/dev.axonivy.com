@@ -35,7 +35,7 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLeadingEdge();
     $type->isDevRelease = false;
     $type->headline = '<p>Become an early adopter and take the <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Leading Edge</a> road with newest features but frequent migrations.</p>';
-    $type->banner = '<i class="fas fa-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
+    $type->banner = '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->majorVersion();
     $type->promotedDevVersion = false;
     return $type;
@@ -88,7 +88,7 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => self::devReleaseInfoSupplier($key);
     $type->isDevRelease = true;
     $type->headline = '<p>Our development releases are very unstable and only available for testing purposes.</p>';
-    $type->banner = '<i class="fas fa-bell" style="color:red;"></i> <b style="color:red;">These artifacts are for testing purposes only. Never use them on a productive system!</b>';
+    $type->banner = '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">These artifacts are for testing purposes only. Never use them on a productive system!</b>';
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/unstable';
     return $type;
   }

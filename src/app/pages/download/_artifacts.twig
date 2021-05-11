@@ -20,6 +20,14 @@
   .download-icon {
     font-size: 14px;
   }
+  .permalinks {
+    display: none; 
+    list-style: none;
+    padding: 0;
+  }
+  .permalinks li {
+    padding: 0;
+  }
 </style>
 
 <div class="row">
@@ -48,14 +56,14 @@
 
 {% if artifacts is not empty %}
   <div>
-    <p style="float:left;"><i class="fas fa-link"></i> <a href="javascript:void(0);" onclick="javascript:showPermalinks();">Permalink</a></p>
-    <p style="float:right;"><i class="fas fa-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
+    <p style="float:left;"><i class="si si-hyperlink"></i> <a href="javascript:void(0);" onclick="javascript:showPermalinks();">Permalink</a></p>
+    <p style="float:right;"><i class="si si-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
   </div>
   <div style="clear: both;"></div>
-  <ul class="permalinks" style="display:none;">
+  <ul class="permalinks">
     {% for artifact in artifacts %}
       {% if artifact.permalink is not empty %}
-      <li><a class="permalink-link" href="{{ artifact.permalink }}">{{ artifact.permalink }}</a></li>
+      <li><i class="{{ artifact.icon }}"></i><a class="permalink-link" href="{{ artifact.permalink }}"> {{ artifact.permalink }}</a></li>
       {% endif %}
     {% endfor %}
   </ul>

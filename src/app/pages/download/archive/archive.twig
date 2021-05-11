@@ -15,6 +15,7 @@
   }
 
   .tooltip {
+    position: relative;
     color: lightblue;
   }
   .tooltip .tooltiptext {
@@ -38,11 +39,11 @@
   }
 </style>
 
-<section id="main" class="inverse">
+<section id="main">
   <div class="inner">
     <header>
       <h1>
-        <span class="icon fas fa-archive"></span> Archive
+        <i class="si si-archive"></i> Archive
       </h1>
     </header>
     <p>You are looking for older versions? Browse our archive!</p>
@@ -86,9 +87,10 @@
             {% endif %}
 
             {% for artifact in releaseInfo.artifacts %}
-              <a href="{{ artifact.DownloadUrl }}"><span class="icon fas fa-download"> </span></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a>
+              <a href="{{ artifact.DownloadUrl }}"><i class="si si-download"> </i></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a>
               {% if artifact.Type == "Slim All" %}
-                <span class="icon fas fa-info-circle tooltip">
+                <span class="tooltip">
+                  <i class="si si-info"></i>
                   <span class="tooltiptext">This version is similar to the 'All' product, but without the 'Axis' extension and 'demo-portal'.</span>
                 </span>
               {% endif %}
@@ -98,11 +100,11 @@
 
             <td style="min-width:200px;">
             {% if releaseInfo.DocProvider.hasDocuments %}
-              <a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><span class="icon fas fa-file"> </span></a>&nbsp;<a href="{{ releaseInfo.DocProvider.OverviewUrl }}">Documentation</a><br />
+              <a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><i class="si si-file"> </i></a>&nbsp;<a href="{{ releaseInfo.DocProvider.OverviewUrl }}">Documentation</a><br />
             {% endif %}
             {% if releaseInfo.hasHotfix %}
-              <a href="{{ releaseInfo.HotfixFileUrl }}"><span class="icon fas fa-download"> </span></a>&nbsp;Hotfix<br />
-              <a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><span class="icon fas fa-file"> </span></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
+              <a href="{{ releaseInfo.HotfixFileUrl }}"><i class="si si-download"> </i></a>&nbsp;Hotfix<br />
+              <a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><i class="si si-file"> </i></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
             {% endif %}
             </td>
           </tr>

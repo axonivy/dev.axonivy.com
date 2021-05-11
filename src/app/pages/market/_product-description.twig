@@ -1,0 +1,240 @@
+<script>
+  function openTab(tab) {
+    $('.readme-content').each(function() {
+      $(this).hide();
+    });
+    $('.tab-button.selected').removeClass('selected');
+    $('#' + tab).show();
+    $('.product-' + tab + '-tab').parent().addClass('selected');
+  }
+</script>
+
+<style>
+  .product-description {
+    gap: 2em;
+  }
+  .tab-button {
+    height: 2em;
+    display: inline-block;
+    margin-bottom: 1em;
+  }
+  .tab-button.selected {
+    font-weight: 700;
+    border-bottom: 2px solid #007095;
+  }
+  .tab-button a {
+    text-decoration: none;
+    color: #1b1b1b;
+    padding: 1em;
+  }
+  .product-meta {
+    width: 12em;
+  }
+  .product-meta-title {
+    font-weight: 700;
+    height: 2em;
+    margin-bottom: 1em;
+  }
+  .product-meta-info {
+    font-size: 14px;
+  }
+  .product-meta-info .meta-type {
+    color: #7c7c7c;
+  }
+  .product-meta-info .meta-data {
+    float: right;
+  }
+  .product-meta-info .meta-data.capitalize {
+    text-transform: capitalize;
+  }
+  .product-meta-spaceer {
+    margin: 1em 0;
+  }
+
+  .readme-content h1 {
+    display: none;
+  }
+  .readme-content h2,
+  .readme-content h3,
+  .readme-content h4,
+  .readme-content h5,
+  .readme-content h6 {
+    margin-bottom: 0.2em;
+  }
+  .readme-content .meta-content {
+    margin-bottom: 20px;
+  }
+  .readme-content ul,
+  .readme-content p {
+    margin-bottom: 0.3em;
+  }
+  .readme-content ul {
+    list-style: none;
+  }
+  .readme-content ul li {
+    position: relative;
+  }
+  .readme-content ul li:before {
+    content: '';
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    mask: url('/images/icons/check-circle-1.svg') no-repeat center;
+    -webkit-mask: url('/images/icons/check-circle-1.svg') no-repeat center;
+    background-color: #1b1b1b;
+    margin-right: 0.5em;
+    position: absolute;
+    left: -1em;
+    top: 6px;
+  }
+  .image.fit {
+    max-width: 100%;
+    width: unset;
+  }
+
+  @media screen and (max-width: 768px) {
+    .product-description {
+      flex-direction: column;
+    }
+    /*IE11 fix*/
+    .product-description .p-col {
+      flex: 0 0 auto;
+    }
+    .product-meta {
+      width: 100%;
+    }
+  }
+  /*IE11 fix*/
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .readme-content ul {
+      list-style: disc;
+    }
+    .readme-content ul li:before {
+      display: none;
+    }
+  }
+</style>
+
+<section id="one">
+  <div class="inner product-description p-grid">
+    <article class="p-col">
+
+      <span class="tab-button selected">
+        <a href="#" class="product-description-tab" onclick="openTab('description');">Description</a>
+      </span>
+      {% if product.demoDescription is not empty %}
+        <span class="tab-button">
+          <a href="#" class="product-demo-tab" onclick="openTab('demo');">Demo</a>
+        </span>
+      {% endif %}
+      {% if product.setupDescription is not empty %}
+        <span class="tab-button">
+          <a href="#" class="product-setup-tab" onclick="openTab('setup');">Setup</a>
+        </span>
+      {% endif %}
+      {% if mavenArtifactsAsDependency is not empty %}
+        <span class="tab-button">
+          <a href="#" class="product-maven-tab" onclick="openTab('maven');">Maven</a>
+        </span>
+      {% endif %}
+
+      <div id="description" class="readme-content">
+        {{ product.description|raw }}
+      </div>
+      <div id="demo" class="readme-content" style="display: none;">
+        {{ product.demoDescription|raw }}
+      </div>
+      <div id="setup" class="readme-content" style="display: none;">
+        {{ product.setupDescription|raw }}
+      </div>
+      <div id="maven" class="readme-content" style="display: none;">
+        <div class="meta-content">
+          <p>You can consume it as maven artifact in your <i>pom.xml</i></p>
+          <pre><code>{% for artifact in mavenArtifactsAsDependency %}&lt;!-- {{ artifact.name }} --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;{{ artifact.groupId }}&lt;/groupId&gt;
+  &lt;artifactId&gt;{{ artifact.artifactId }}&lt;/artifactId&gt;
+  &lt;version&gt;{{ selectedVersion }}&lt;/version&gt;
+  &lt;type&gt;{{ artifact.type }}&lt;/type&gt;
+&lt;/dependency&gt;
+{% endfor %}</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="p-col-fixed">
+      <div class="product-meta">
+        <div class="product-meta-title">
+          Information
+        </div> 
+        <div class="product-meta-info">
+          <span class="meta-type">Author/Support</span>
+          <span class="meta-data capitalize">{{ product.vendor }}</span>
+        </div>
+        <div class="product-meta-info">
+          <span class="meta-type">Version</span>
+          <span class="meta-data">1.0</span>
+        </div>
+        <div class="product-meta-info">
+          <span class="meta-type">Compatibility</span>
+          <span class="meta-data">9.2+</span>
+        </div>
+        <div class="product-meta-info">
+          <span class="meta-type">Costs</span>
+          <span class="meta-data capitalize">{{ product.costs }}</span>
+        </div>
+        {% if product.language is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Language</span>
+            <span class="meta-data">{{ product.language }}</span>
+          </div>
+        {% endif %}
+        <div class="product-meta-info">
+          <span class="meta-type">Type</span>
+          <span class="meta-data capitalize">{{ product.type }}</span>
+        </div>
+
+        <div class="product-meta-spaceer"></div>
+
+        {% if product.industry is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Industry</span>
+            <span class="meta-data capitalize">{{ product.industry }}</span>
+          </div>
+        {% endif %}
+        <div class="product-meta-info">
+          <span class="meta-type">Tags</span>
+          <span class="meta-data">{{ product.tags | join(', ') }}</span>
+        </div>
+
+        <div class="product-meta-spaceer"></div>
+
+        {% if docArtifacts is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Documentation</span>
+            <span class="meta-data"><a href="{{ docArtifacts|first.getDocUrl(selectedVersion) }}">External Link</a></span>
+          </div>
+        {% endif %}
+        {% if product.openApiJsonUrl is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Public API</span>
+            <span class="meta-data"><a href="/api-browser?url={{ product.openApiJsonUrl }}">Browse API</a></span>
+          </div>
+        {% endif %}
+        {% if product.sourceUrl is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Source</span>
+            <span class="meta-data"><a href="{{ product.sourceUrl }}">{{ product.sourceUrlDomain }}</a></span>
+          </div>
+        {% endif %}
+
+        <div class="product-meta-spaceer"></div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">More Information</span>
+          <span class="meta-data"><a href="{{ getInTouchLink }}">Contact us</a></span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

@@ -10,9 +10,9 @@ The Axon.ivy Engine is now available as a Debian package. Now Engine operators c
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/getting-started/debian.html" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-plane-departure"></i> Debian : Getting Started
+	  <i class="si si-release"></i> Debian : Getting Started
 	</a>
 	<a href="/permalink/8.0/axonivy-engine.deb" target="_blank" rel="noopener noreferrer">
-	  <i class="fas fa-download"></i> Download Debian package
+	  <i class="si si-download"></i> Download Debian package
 	</a>
 </div>

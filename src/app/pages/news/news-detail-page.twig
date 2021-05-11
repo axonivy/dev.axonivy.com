@@ -5,15 +5,6 @@
 {% block content %}
 
 <style>
-  h1 {
-    color: #007095;
-  }
-
-  h2 {
-    color: black;
-    margin-bottom: 15px;
-  }
-
   .image.fit {
     margin-bottom: 15px;
     max-height: 480px;
@@ -65,11 +56,6 @@
     display: inline-block;
   }
 
-  .inverse .short-links > a {
-    background-color: white;
-    color: #007095;
-  }
-
   .badge {
     display: inline-block;
     padding: .25em .4em;
@@ -89,34 +75,59 @@
       color: #fff;
       background-color: #28a745;
   }
+  .news-entry ul {
+    list-style: none;
+  }
+  .news-entry ul li {
+    position: relative;
+  }
+  .news-entry ul li:before {
+    content: '';
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    mask: url('/images/icons/check-circle-1.svg') no-repeat center;
+    -webkit-mask: url('/images/icons/check-circle-1.svg') no-repeat center;
+    background-color: #1b1b1b;
+    margin-right: 0.5em;
+    position: absolute;
+    left: -1em;
+    top: 6px;
+  }
+  #improvements~ul li:before {
+    mask: url('/images/icons/startup-launch.svg') no-repeat center;
+    -webkit-mask: url('/images/icons/startup-launch.svg') no-repeat center;
+  }
+  #bugfixes~ul li:before {
+    mask: url('/images/icons/computer-bug-1.svg') no-repeat center;
+    -webkit-mask: url('/images/icons/computer-bug-1.svg') no-repeat center;
+  }
 </style>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/css/lightbox.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/js/lightbox.min.js"></script>
 
-<section id="main" class="inverse">
+<section id="main">
   <div class="inner">
-    <img src="{{ news.meta.logo }}" style="width:100px;float:left;margin:1em;" alt="Axon Ivy release" />
     <div>
       <header>
-        <h1>{{ news.meta.title }}</h1>
+        <h1>
+          <img src="{{ news.meta.logo }}" style="width:100px;float:left;margin-right:1rem;" alt="Axon Ivy release" />
+          {{ news.meta.title }}
+          <div  title="Latest Release Date" style="float: right; font-size: 18px;">{{ news.meta.date }}</div>
+        </h1>
       </header>
       <p style="margin-bottom:0px;font-size:28px;font-weight:bold;">
         {{ news.meta.slogan }}
       </p>
-      <p>{{ news.meta.date }}</p>
     </div>
   </div>
 </section>
 
 {% for newsDetailSection in news.newsDetailSections %}
   {% set sectionIndex = loop.index %}
-  {% set background = 'white' %}
-  {% if loop.index is divisible by(2) %}
-    {% set background = '#f7f7f7' %}
-  {% endif %}
-  <section style="padding: 4em 0 2em 0; background-color: {{ background }}">
-    <div class="inner">
+  <section style="padding: 2em 0;">
+    <div class="inner news-entry">
       <div class="row">
         {% if newsDetailSection.images is empty %}
           <div class="12u 12u$(medium)">

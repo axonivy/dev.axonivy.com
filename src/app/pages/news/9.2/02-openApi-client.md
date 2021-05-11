@@ -15,16 +15,16 @@ based services are presented with a simple look and only show you the configs th
 
 <div class="short-links">
 	<a href="${docBaseUrl}/designer-guide/configuration/rest-clients.html#openapi-client-generator" target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-check-circle"></i> OpenAPI client
+		<i class="si si-check"></i> OpenAPI client
 	</a>
 	<a href="${docBaseUrl}/designer-guide/process-modeling/process-elements/rest-client-activity.html#process-element-rest-client-activity-browser" target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-check-circle"></i> API browser
+		<i class="si si-check"></i> API browser
 	</a>
 	<a href="${docBaseUrl}/designer-guide/configuration/rest-clients.html#rest-clients-openapi-migrate" target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-check-circle"></i> OpenAPI converters
+		<i class="si si-check"></i> OpenAPI converters
 	</a>
 	<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/rest/client/oauth2/OAuth2BearerFilter.html" target="_blank" rel="noopener noreferrer">
-		<i class="fab fa-youtube"></i> Public API: OAuth2
+		<i class="si si-movie"></i> Public API: OAuth2
 	</a>
 </div>
 

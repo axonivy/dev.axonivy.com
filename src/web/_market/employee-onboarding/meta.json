@@ -2,5 +2,9 @@
 	"id": "employee-onboarding",
 	"name": "Employee Onboarding",
 	"sort": 400,
-	"tags": ["solution"]
+	"type": "solution",
+	"tags": ["hr"],
+	"vendor": "Axon Ivy AG",
+	"costs": "Contact us",
+	"industry": "Cross-Industry"
 }

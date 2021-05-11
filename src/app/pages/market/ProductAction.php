@@ -63,11 +63,7 @@ class ProductAction
 
     $installButton = self::createInstallButton($request, $product, $version);
     
-    $getInTouchLink = '';
-    if (!$product->isInstallable() && empty($product->getMavenProductInfo()))
-    {
-      $getInTouchLink = 'https://www.axonivy.com/marketplace/contact/?market_solutions=' . $product->getKey();
-    }
+    $getInTouchLink = 'https://www.axonivy.com/marketplace/contact/?market_solutions=' . $product->getKey();
 
     return $this->view->render($response, 'market/product.twig', [
       'product' => $product,

@@ -13,6 +13,6 @@ improvements that hopefully make your life easier. Let's have a look at them:
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/tool-reference/engine-cockpit/index.html"
 		target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-book"></i> Engine Guide
+		<i class="si si-book"></i> Engine Guide
 	</a>
 </div>

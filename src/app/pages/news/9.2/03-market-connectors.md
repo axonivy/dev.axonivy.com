@@ -14,10 +14,10 @@ eco-system, far from it. We are eager to see new powerful, installable component
 
 <div class="short-links">
 	<a href="${docBaseUrl}/market/index.html" target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-check-circle"></i> Market docs
+		<i class="si si-check"></i> Market docs
 	</a>
 	<a href="https://dev.axonivy.com/market" target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-check-circle"></i> Browse the Market
+		<i class="si si-check"></i> Browse the Market
 	</a>
 </div>
 

@@ -18,10 +18,18 @@ class ProductFactory
     if (isset($json->mavenArtifacts)) {
       $info = self::createMavenProductInfo($json);
     }
+    $type = $json->type ?? [];
     $tags = $json->tags ?? [];
+    $shortDesc = $json->description ?? '';
+    $vendor = $json->vendor ?? 'Unknown';
+    $costs = $json->costs ?? 'Free';
+    $sourceUrl = $json->sourceUrl ?? '';
+    $language = $json->language ?? '';
+    $industry = $json->industry ?? '';
     $installable = isset($json->installers);
     $minVersion = $json->minVersion ?? '0.0.0';
-    return new Product($key, $path, $json->name, $listed, $sort, $tags, $minVersion, $installable, $info);
+    return new Product($key, $path, $json->name, $shortDesc, $listed, $sort, $type, $tags, 
+      $vendor, $costs, $sourceUrl, $language, $industry, $minVersion, $installable, $info);
   }
 
   private static function createMavenProductInfo($json): MavenProductInfo

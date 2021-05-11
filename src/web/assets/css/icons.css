@@ -1,0 +1,229 @@
+.si {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  top: 4px;
+  background-color: #1b1b1b;
+}
+h1 .si {
+  height: 2rem;
+  width: 2rem;
+}
+h3 .si {
+  height: 1.8rem;
+  width: 1.8rem;
+}
+.button.alt .si,
+.button.special .si,
+.short-links .si,
+#header .si {
+  background-color: white;
+}
+.button .si {
+  margin: 0 10px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .si {
+    width: 0 !important;
+  }
+}
+
+.si.si-shop {
+  mask: url('/images/icons/shop.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/shop.svg') no-repeat center;
+}
+.si.si-search {
+  mask: url('/images/icons/search.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/search.svg') no-repeat center;
+}
+.si.si-download {
+  mask: url('/images/icons/download-bottom.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/download-bottom.svg') no-repeat center;
+}
+.si.si-news {
+  mask: url('/images/icons/newspaper-fold.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/newspaper-fold.svg') no-repeat center;
+}
+.si.si-rocket {
+  mask: url('/images/icons/startup-launch.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/startup-launch.svg') no-repeat center;
+}
+.si.si-movie {
+  mask: url('/images/icons/video-player-movie-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/video-player-movie-1.svg') no-repeat center;
+}
+.si.si-connector {
+  mask: url('/images/icons/charger.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/charger.svg') no-repeat center;
+}
+.si.si-magic {
+  mask: url('/images/icons/design-tool-selection-wand.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/design-tool-selection-wand.svg') no-repeat center;
+}
+.si.si-monitor {
+  mask: url('/images/icons/pie-line-graph-desktop.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/pie-line-graph-desktop.svg') no-repeat center;
+}
+.si.si-code {
+  mask: url('/images/icons/programming-hold-code.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/programming-hold-code.svg') no-repeat center;
+}
+.si.si-diagram {
+  mask: url('/images/icons/diagram.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/diagram.svg') no-repeat center;
+}
+.si.si-arrow-up {
+  mask: url('/images/icons/arrow-up.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/arrow-up.svg') no-repeat center;
+}
+.si.si-hyperlink {
+  mask: url('/images/icons/hyperlink-2.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/hyperlink-2.svg') no-repeat center;
+}
+.si.si-archive {
+  mask: url('/images/icons/archive.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/archive.svg') no-repeat center;
+}
+.si.si-lab-flask {
+  mask: url('/images/icons/lab-flask-experiment.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/lab-flask-experiment.svg') no-repeat center;
+}
+.si.si-star {
+  mask: url('/images/icons/rating-star.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/rating-star.svg') no-repeat center;
+}
+.si.si-star-bold {
+  mask: url('/images/icons/rating-star-bold.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/rating-star-bold.svg') no-repeat center;
+}
+.si.si-star-half-bold {
+  mask: url('/images/icons/rating-half-star-bold.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/rating-half-star-bold.svg') no-repeat center;
+}
+.si.si-wrench {
+  mask: url('/images/icons/wrench.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/wrench.svg') no-repeat center;
+}
+.si.si-bell {
+  mask: url('/images/icons/alarm-bell.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/alarm-bell.svg') no-repeat center;
+}
+.si.si-info {
+  mask: url('/images/icons/information-circle.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/information-circle.svg') no-repeat center;
+}
+.si.si-file {
+  mask: url('/images/icons/common-file-text.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/common-file-text.svg') no-repeat center;
+}
+.si.si-book {
+  mask: url('/images/icons/book-close-2.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/book-close-2.svg') no-repeat center;
+}
+.si.si-tutorial {
+  mask: url('/images/icons/e-learning-monitor.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/e-learning-monitor.svg') no-repeat center;
+}
+.si.si-refresh {
+  mask: url('/images/icons/button-refresh-arrows.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/button-refresh-arrows.svg') no-repeat center;
+}
+.si.si-lts {
+  mask: url('/images/icons/legal-scale-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/legal-scale-1.svg') no-repeat center;
+}
+.si.si-release {
+  mask: url('/images/icons/plane-take-off.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/plane-take-off.svg') no-repeat center;
+}
+.si.si-update {
+  mask: url('/images/icons/desktop-monitor-upload.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/desktop-monitor-upload.svg') no-repeat center;
+}
+.si.si-bug {
+  mask: url('/images/icons/computer-bug-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/computer-bug-1.svg') no-repeat center;
+}
+.si.si-shopping-cart {
+  mask: url('/images/icons/shopping-cart-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/shopping-cart-1.svg') no-repeat center;
+}
+.si.si-cd {
+  mask: url('/images/icons/cd.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/cd.svg') no-repeat center;
+}
+.si.si-java {
+  mask: url('/images/icons/file-java.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/file-java.svg') no-repeat center;
+}
+.si.si-check {
+  mask: url('/images/icons/check-circle-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/check-circle-1.svg') no-repeat center;
+}
+.si.si-pen {
+  mask: url('/images/icons/pencil.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/pencil.svg') no-repeat center;
+}
+.si.si-team {
+  mask: url('/images/icons/programming-team-chat-3.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/programming-team-chat-3.svg') no-repeat center;
+}
+.si.si-support {
+  mask: url('/images/icons/question-circle.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/question-circle.svg') no-repeat center;
+}
+.si.si-email {
+  mask: url('/images/icons/email-action-unread.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/email-action-unread.svg') no-repeat center;
+}
+.si.si-phone {
+  mask: url('/images/icons/phone.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/phone.svg') no-repeat center;
+}
+.si.si-ticket {
+  mask: url('/images/icons/ticket.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/ticket.svg') no-repeat center;
+}
+.si.si-github {
+  mask: url('/images/icons/developer-community-github-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/developer-community-github-1.svg') no-repeat center;
+}
+.si.si-500 {
+  mask: url('/images/icons/server-warning-500.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/server-warning-500.svg') no-repeat center;
+}
+.si.si-404 {
+  mask: url('/images/icons/coffee-cup-hot.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/coffee-cup-hot.svg') no-repeat center;
+}
+.si.si-undo {
+  mask: url('/images/icons/undo.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/undo.svg') no-repeat center;
+}
+.si.si-types {
+  mask: url('/images/icons/layout-module-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/layout-module-1.svg') no-repeat center;
+}
+.si.si-util {
+  mask: url('/images/icons/design-tool-pencil-ruler.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/design-tool-pencil-ruler.svg') no-repeat center;
+}
+.si.si-warning {
+  mask: url('/images/icons/road-sign-warning.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/road-sign-warning.svg') no-repeat center;
+}
+.si.si-menu {
+  mask: url('/images/icons/navigation-menu.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/navigation-menu.svg') no-repeat center;
+}
+.si.si-close {
+  mask: url('/images/icons/close.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/close.svg') no-repeat center;
+}
+.si.si-answers {
+  mask: url('/images/icons/multiple-actions-chat.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/multiple-actions-chat.svg') no-repeat center;
+}
+

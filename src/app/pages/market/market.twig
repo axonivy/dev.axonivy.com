@@ -6,117 +6,195 @@
 
 <style>
   .product-card {
+    position: relative;
     cursor: pointer;
     background-color: white;
-    padding: 10px;
+    padding: 1em;
     overflow: hidden;
-    min-height: 200px;
-    max-height: 200px;
-    border: 1px solid #e8e9ea;
-    box-shadow: 1px 1px 2px #e8e9ea;
+    min-height: 420px;
+    max-height: 420px;
+    box-shadow: 0px 4px 16px rgba(27, 27, 27, 0.24);
+    border-radius: 8px;
   }
-  .product-card .product-logo {
+  .product-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: hsl(0, 0%, 79%);
+  }
+  .product-type.connector {
+    background-color: hsl(65, 65%, 50%);
+  }
+  .product-type.diagram {
+    background-color: hsl(46, 100%, 58%);
+  }
+  .product-type.solution {
+    background-color: hsl(164, 59%, 40%);
+  }
+  .product-type.util {
+    background-color: hsl(192, 63%, 56%);
+  }
+  .product-logo {
     height: 100px;
+    margin-top: 2em;
   }
-  .product-card .product-logo img {
+  .product-logo img {
     max-height: 100%; 
     max-width: 100%;
   }
-  .product-card .product-tags {
-    height: 40px;
+  .product-tags {
+    height: 32px;
+    margin: 0;
+    overflow: hidden;
   }
-  .product-card .product-tag {
+  .product-tag {
     color: white;
-    font-size: 11px;
-    padding: 5px;
-    background-color: #888;
-    border-radius: 15px;
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: #007095;
+    border-radius: 16px;
     text-transform: uppercase;
     font-weight: bold;
+    height: 32px;
+    margin-left: 0.5em;
   }
   .product-title {
-    margin-top: 10px;
-    color: #444;
-    font-size: 15px;
+    margin-top: 2em;
+    font-size: 20px;
+    font-weight: 700;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .product-desc {
+    max-height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
   }
   .zoom:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
   input::placeholder {
-    color: white;
+    color: #1b1b1b;
   }
   select {
     visibility: hidden;
   }
-  #main .select2-container--default .select2-selection--multiple {
-    border: 1px solid white;
-    border-radius: 0px;
-    background-color: inherit;
+  #main .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: solid #007095 2px;
   }
   #main .select2-container--default .select2-search__field {
     margin-bottom: 0.1em;
-    color: white;
   }
-  #main .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #888;
+
+  .types {
+    margin-top: 1em;
+    width: 100%;
   }
-  #main .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: white;
+  .types .type {
+    padding: 0.2em 1em;
+    margin: 0.5em;
+    border-radius: 2em;
+    border: solid 2px;
+    cursor: pointer;
+    border-color: hsl(0, 0%, 79%);
+  }
+  .types .type.selected {
+    background-color: hsl(0, 0%, 90%);
+  }
+  .types .type:hover {
+    background-color: hsl(0, 0%, 95%);
+  }
+  .types .type[data-filter='connector'] {
+    border-color: hsl(65, 65%, 50%);
+  }
+  .types .selected[data-filter='connector'] {
+    background-color: hsl(65, 65%, 90%);
+  }
+  .types [data-filter='connector']:hover {
+    background-color: hsl(65, 65%, 95%);
+  }
+  .types .type[data-filter='diagram'] {
+    border-color: hsl(46, 100%, 58%);
+  }
+  .types .selected[data-filter='diagram'] {
+    background-color: hsl(46, 100%, 90%);
+  }
+  .types [data-filter='diagram']:hover {
+    background-color: hsl(46, 100%, 95%);
+  }
+  .types .type[data-filter='solution'] {
+    border-color: hsl(164, 59%, 40%);
+  }
+  .types .selected[data-filter='solution'] {
+    background-color: hsl(164, 59%, 90%);
+  }
+  .types [data-filter='solution']:hover {
+    background-color: hsl(164, 59%, 95%);
+  }
+  .types .type[data-filter='util'] {
+    border-color: hsl(192, 63%, 56%);
+  }
+  .types .selected[data-filter='util'] {
+    background-color: hsl(192, 63%, 90%);
+  }
+  .types [data-filter='util']:hover {
+    background-color: hsl(192, 63%, 95%);
   }
 
   {% if hideSearch is defined %}
-  .product-card {
-    min-height: 120px;
-    max-height: 120px;
-  }
-  .product-card .product-logo {
-    height: 40px;
-  }
-  .product-card .product-tags {
-    height: 20px;
-  }
-  .product-title{
-    font-size: 0.9em;
-  }
-  .product-card .product-tag {
-    font-size: 9px;
-    padding: 2px;
-    border-radius: 4px;
-    font-weight: normal;
-    position: relative;
-    top: -10px;
-  }
-  
-  section .inner {
-    width: calc(100% - 1em);
-  }
-  
-  @media screen and (min-width: 300px) {
-    .p-lg-3 {
-      width: 30%;
+    .product-card {
+      min-height: 120px;
+      max-height: 120px;
     }
-  }
-  @media screen and (min-width: 768px) {
-    .p-md-6 {
-      width: 25%;
+    .product-card .product-logo {
+      height: 40px;
     }
-  }
-  @media screen and (min-width: 992px) {
-    .p-lg-3 {
-      width: 12.5%;
+    .product-card .product-tags {
+      height: 20px;
     }
-  }
+    .product-title{
+      font-size: 0.9em;
+    }
+    .product-card .product-tag {
+      font-size: 9px;
+      padding: 2px;
+      border-radius: 4px;
+      font-weight: normal;
+      position: relative;
+      top: -10px;
+    }
+    
+    section .inner {
+      width: calc(100% - 1em);
+    }
+    
+    @media screen and (min-width: 300px) {
+      .p-lg-3 {
+        width: 30%;
+      }
+    }
+    @media screen and (min-width: 768px) {
+      .p-md-6 {
+        width: 25%;
+      }
+    }
+    @media screen and (min-width: 992px) {
+      .p-lg-3 {
+        width: 12.5%;
+      }
+    }
   {% endif %}
 </style>
 
 {% if hideSearch is not defined %}
-<section id="main" class="inverse">
+<section id="main">
   <div class="inner">
-    <header><h1><span class="icon fas fa-store "></span> Axon Ivy Market</h1></header>
+    <header><h1><i class="si si-shop"></i> Axon Ivy Market</h1></header>
     <p>
       In our market we provide powerful extensions around the Axon Ivy Platform.
       From complete workflow user interfaces, components to generate documents to simple demo projects and much more.
@@ -124,42 +202,58 @@
     </p>
 
     <div class="row">
-      <div class="5u 12u(small)" style="margin-bottom:10px;">
-        <select id="types" multiple="multiple">
+      <div class="6u 12u(small)" style="margin-bottom:10px;">
+        <select id="tags" multiple="multiple">
           {% for tag in tags %}
             <option value="{{ tag }}">{{ tag }}</option>
           {% endfor %}
         </select>
       </div>
       
-      <div class="7u 12u(small)">
-        <input type="text" id="searchQuery" placeholder="Search ..." style="border: 1px solid white" value="{{ searchQuery }}"></input>
+      <div class="6u 12u(small)">
+        <input type="text" id="searchQuery" placeholder="Search ..." value="{{ searchQuery }}"></input>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="p-grid p-justify-center types">
+        {% for type in types %}
+          <div class="p-col-fixed type {{ (type.filter == selectedType) ? 'selected' : '' }}" data-filter="{{ type.filter }}" onclick="selectType('{{ type.filter }}')">
+            <i class="si {{ type.icon }}"></i> {{ type.name }}
+          </div>
+        {% endfor %}
       </div>
     </div>
 
     <div class="row" style="margin-top:5px;">
       <div class="12u$">
-          <a href="/market" style="font-size:16px;{{ (filterSet) ? '' : 'visibility:hidden;' }}"><i class="icon fas fa-undo" style="color:white;"></i> reset filter</a>
+          <a href="/market" style="font-size:16px;{{ (filterSet) ? '' : 'visibility:hidden;' }}"><i class="si si-undo"></i> Reset Filter</a>
       </div>
     </div>
 
     <script>
 
       $(document).ready(function() {
-        $("#types").select2({
-          placeholder: 'All types',
+        $("#tags").select2({
+          placeholder: 'All tags',
           width: '100%'
         });
-        $("#types").val('{{ selectedTags }}'.split(',')).trigger("change");
-        var typesDropdown = document.getElementById('types');
-        typesDropdown.onchange = function() { searchMarket(); };
+        $("#tags").val('{{ selectedTags }}'.split(',')).trigger("change");
+        var typesDropdown = document.getElementById('tags');
+        typesDropdown.onchange = function() { searchMarket(''); };
       });
 
+      function selectType(filterType) {
+        $('.types .selected').removeClass('selected');
+        $('.types .type[data-filter="' + filterType + '"]').addClass('selected');
+        searchMarket();
+      }
 
       function searchMarket() {
         var searchQuery = document.getElementById('searchQuery').value;
-        var type = $('#types').val().join(',');
-        window.location.href = "?search=" + searchQuery + "&type=" + type;
+        var searchTags = $('#tags').val().join(',');
+        var selectedType = $('.types .selected').attr('data-filter');
+        window.location.href = "?search=" + searchQuery + "&type=" + selectedType + "&tags=" + searchTags;
       }
 
       var delayTimer;
@@ -180,16 +274,17 @@
 </section>
 {% endif %}
 
-<section style="background-color:#f7f7f7;padding-top:20px;padding-bottom:20px;">
+<section>
   <div class="inner">
     {% if products is empty %}
       Nothing found
     {% endif %}
     <div class="row p-grid p-align-stretch">
       {% for product in products %}
-        <div class="p-col-fixed p-col-6 p-md-6 p-lg-3">
+        <div class="p-col-fixed p-col-6 p-md-4 p-lg-3">
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
-            <div class="product-tags">
+            <div class="product-type {{ product.type }}"></div>
+            <div class="product-tags p-grid p-dir-rev">
             {% for tag in product.tags %}
               <span class="product-tag">{{ tag }}</span>
             {% endfor %}
@@ -199,6 +294,9 @@
             </center>
             <center class="product-title">
               {{ product.name }}
+            </center>
+            <center class="product-desc">
+              {{ product.shortDescription }}
             </center>
           </div>
         </div>

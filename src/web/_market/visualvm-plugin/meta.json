@@ -2,8 +2,14 @@
 	"id": "visualvm-plugin",
 	"name": "VisualVM Plugin",
 	"sort": 200,
+	"type": "util",
 	"tags": ["monitoring"],
 	"versionDisplay": "hide-snapshots",
+	"vendor": "Oracle",
+	"costs": "free",
+	"sourceUrl": "https://visualvm.github.io/releases.html",
+	"language": "en",
+	"industry": "Cross-Industry",
 	"mavenArtifacts": [
 		{
 			"name": "Visual VM Plugin",

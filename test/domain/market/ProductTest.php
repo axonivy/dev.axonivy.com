@@ -15,6 +15,42 @@ class ProductTest extends TestCase
     $product = Market::getProductByKey('visualvm-plugin');
     Assert::assertStringContainsString('The Axon Ivy VisualVM plugin enables real-time monitoring of an Axon Ivy Engine for', $product->getDescription());
     Assert::assertStringContainsString('<p>', $product->getDescription());
+
+    $product2 = Market::getProductByKey('toDo');
+    Assert::assertStringNotContainsString('Follow the generic', $product2->getDescription());
+
+    $product3 = Market::getProductByKey('doc-factory');
+    Assert::assertStringNotContainsString('Demo part', $product3->getDescription());
+  }
+
+  public function test_demoDescription()
+  {
+    $product = Market::getProductByKey('visualvm-plugin');
+    Assert::assertEmpty('', $product->getDemoDescription());
+
+    $product2 = Market::getProductByKey('toDo');
+    Assert::assertEmpty('', $product2->getDemoDescription());
+
+    $product3 = Market::getProductByKey('doc-factory');
+    Assert::assertStringContainsString('Demo part', $product3->getDemoDescription());
+  }
+
+  public function test_setupDescription()
+  {
+    $product = Market::getProductByKey('visualvm-plugin');
+    Assert::assertEmpty('', $product->getSetupDescription());
+    
+    $product2 = Market::getProductByKey('toDo');
+    Assert::assertStringContainsString('Follow the generic', $product2->getSetupDescription());
+
+    $product3 = Market::getProductByKey('doc-factory');
+    Assert::assertStringContainsString('You can use the import wizard', $product3->getSetupDescription());
+  }
+
+  public function test_shortDescription()
+  {
+    $product = Market::getProductByKey('demos');
+    Assert::assertStringContainsString('A collection of demos, with some simple explanations of you can solve things.', $product->getShortDescription());
   }
 
   public function test_listed()
@@ -110,15 +146,38 @@ class ProductTest extends TestCase
     Assert::assertEquals('Your Axon Ivy Designer is too old (9.1.0). You need 9.2.0 or newer.', $product->getReasonWhyNotInstallable('9.1.0'));
   }
 
+  public function test_type()
+  {
+    $product = Market::getProductByKey('visualvm-plugin');
+    Assert::assertEquals('util', $product->getType());
+
+    $product = Market::getProductByKey('demos');
+    Assert::assertEquals('solution', $product->getType());
+
+    $product = Market::getProductByKey('toDo');
+    Assert::assertEquals('connector', $product->getType());
+  }
+
   public function test_tags()
   {
     $product = Market::getProductByKey('visualvm-plugin');
     Assert::assertEquals(['monitoring'], $product->getTags());
 
-    $product = Market::getProductByKey('uipath');
-    Assert::assertEquals(['connector', 'RPA'], $product->getTags());
+    $product = Market::getProductByKey('toDo');
+    Assert::assertEquals(['office', 'outlook'], $product->getTags());
 
     $product = Market::getProductByKey('demos');
     Assert::assertEquals(['demo'], $product->getTags());
+  }
+
+  public function test_meta()
+  {
+    $product = Market::getProductByKey('toDo');
+    Assert::assertEquals('Axon Ivy AG', $product->getVendor());
+    Assert::assertEquals('free', $product->getCosts());
+    Assert::assertEquals('https://github.com/axonivy/market', $product->getSourceUrl());
+    Assert::assertEquals('github.com', $product->getSourceUrlDomain());
+    Assert::assertEquals('en', $product->getLanguage());
+    Assert::assertEquals('Cross-Industry', $product->getIndustry());
   }
 }

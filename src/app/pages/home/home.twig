@@ -28,17 +28,17 @@
     <ul class="actions">
       <li>
         <a href="/download" class="button alt">
-          <i class="icon fas fa-download"></i> Download {{ CURRENT_VERSION_DOWNLOAD_LONG }}
+          <i class="si si-download"></i> Download {{ CURRENT_VERSION_DOWNLOAD_LONG }}
         </a>
       </li>
       <li>
         <a href="/news" class="button alt">
-          <i class="icon fas fa-newspaper"></i> New and Noteworthy
+          <i class="si si-news"></i> New and Noteworthy
         </a>
       </li>
       <li>
         <a href="https://release.axonivy.com" target="_blank" rel="noreferrer" class="button alt">
-          <i class="icon fas fa-rocket"></i> Release 8.0
+          <i class="si si-rocket"></i> Release 8.0
         </a>
       </li>
     </ul>
@@ -53,13 +53,14 @@
       {% if not feature.videoUrl is empty %}
       <article>
         <div class="content">
-          <span class="icon {{ feature.icon }}"></span>
-          <header><h3>{{ feature.title }}</h3></header>
+          <header>
+            <h3><i class="si {{ feature.icon }}"></i> {{ feature.title }}</h3>
+          </header>
           <p>{{ feature.description }}</p>
           <ul class="actions">
             <li>
               <a href="{{ feature.videoUrl }}" class="button special">
-                <i class="icon fab fa-youtube"></i> Watch on vimeo
+                <i class="si si-movie"></i> Watch on vimeo
               </a>
             </li>
           </ul>
@@ -76,8 +77,9 @@
       {% if feature.videoUrl is empty %}
       <article>
         <div class="content">
-          <span class="icon {{ feature.icon }}"></span>
-          <header><h3>{{ feature.title }}</h3></header>
+          <header>
+            <h3><i class="si {{ feature.icon }}"></i> {{ feature.title }}</h3>
+          </header>
           <p>{{ feature.description }}</p>
         </div>
       </article>

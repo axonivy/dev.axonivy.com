@@ -11,6 +11,6 @@ features in the portal!
 <div class="short-links">
 	<a href="/portal/9.1/doc/portal-developer-guide/introduction/index.html#new-noteworthy-9-1"
 		target="_blank" rel="noopener noreferrer">
-		<i class="fas fa-book"></i> Portal New & Noteworthy
+		<i class="si si-book"></i> Portal New & Noteworthy
 	</a>
 </div>

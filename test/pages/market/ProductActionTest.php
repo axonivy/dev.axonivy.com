@@ -139,16 +139,16 @@ class ProductActionTest extends TestCase
   
   public function testGetInTouchLink()
   {
-      AppTester::assertThatGet('market/employee-onboarding')
+    AppTester::assertThatGet('market/employee-onboarding')
       ->ok()
-      ->bodyContains('https://www.axonivy.com/marketplace/contact/?market_solutions=employee-onboarding');
+      ->bodyContains('a class="button special install" href="https://www.axonivy.com/marketplace/contact/?market_solutions=employee-onboarding');
   }
   
   public function testGetInTouchLink_existsNot()
   {
-      AppTester::assertThatGet('market/basic-workflow-ui')
+    AppTester::assertThatGet('market/basic-workflow-ui')
       ->ok()
-      ->bodyDoesNotContain('https://www.axonivy.com/marketplace/contact');
+      ->bodyDoesNotContain('a class="button special install" href="https://www.axonivy.com/marketplace/contact');
   }
   
 }
