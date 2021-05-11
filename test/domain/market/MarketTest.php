@@ -76,7 +76,7 @@ class MarketTest extends TestCase
     $expectedTypes = [
       new Type('All Types', '', 'si-types'), 
       new Type('Connectors', 'connector', 'si-connector'), 
-      //new Type('Process Model', 'process', 'si-diagram'),
+      new Type('Process Model', 'process', 'si-diagram'),
       new Type('Solutions', 'solution', 'si-lab-flask'), 
       new Type('Utils', 'util', 'si-util')];
     Assert::assertEquals($expectedTypes, $types);
