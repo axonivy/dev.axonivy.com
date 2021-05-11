@@ -4,7 +4,7 @@
 	"description": "Generate documents",
 	"sort": 300,
 	"versionDisplay": "hide-snapshots",
-	"type": "diagram",
+	"type": "process",
 	"tags": ["document"],
 	"vendor": "Axon Ivy AG",
 	"costs": "free",

@@ -97,7 +97,7 @@ class Market
       self::$types = [
         new Type('All Types', '', 'si-types'), 
         new Type('Connectors', 'connector', 'si-connector'), 
-        new Type('Diagrams', 'diagram', 'si-diagram'),
+        new Type('Process Model', 'process', 'si-diagram'),
         new Type('Solutions', 'solution', 'si-lab-flask'), 
         new Type('Utils', 'util', 'si-util')];
     }
@@ -109,7 +109,7 @@ class Market
     $tags = [];
     foreach ($products as $product) {
       foreach ($product->getTags() as $tag) {
-        $tags[] = strtoupper($tag);
+        $tags[] = strtolower($tag);
       }
     }
     $tags = array_unique($tags);

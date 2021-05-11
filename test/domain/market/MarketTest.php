@@ -76,7 +76,7 @@ class MarketTest extends TestCase
     $expectedTypes = [
       new Type('All Types', '', 'si-types'), 
       new Type('Connectors', 'connector', 'si-connector'), 
-      new Type('Diagrams', 'diagram', 'si-diagram'),
+      new Type('Process Model', 'process', 'si-diagram'),
       new Type('Solutions', 'solution', 'si-lab-flask'), 
       new Type('Utils', 'util', 'si-util')];
     Assert::assertEquals($expectedTypes, $types);
@@ -94,15 +94,15 @@ class MarketTest extends TestCase
   {
     $tags = Market::tags(Market::listed());
     $expectedTags = [
-      'DEMO',
-      'DOCUMENT',
-      'HELPER',
-      'HR',
-      'MONITORING',
-      'OFFICE',
-      'OUTLOOK',
-      'RPA',
-      'WORKFLOW-UI',
+      'demo',
+      'document',
+      'helper',
+      'hr',
+      'monitoring',
+      'office',
+      'outlook',
+      'rpa',
+      'workflow-ui',
     ];
     Assert::assertEquals($expectedTags, $tags);
   }
