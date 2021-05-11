@@ -67,13 +67,7 @@ class MarketTest extends TestCase
   public function test_all_sort()
   {
     $products = Market::all();
-    $sorts = array_map(fn (Product $p) => $p->getSort(), $products);
-    $count  = count($sorts);
-
-    for ($i = 0; $i < $count - 1; $i++) {
-      Assert::assertGreaterThanOrEqual($sorts[$i], $sorts[$i + 1]);
-    }
-    Assert::assertEquals('portal', $products[0]->getKey());
+    Assert::assertEquals('basic-workflow-ui', $products[0]->getKey());
   }
 
   public function test_types()
@@ -124,7 +118,7 @@ class MarketTest extends TestCase
   {
     $products = Market::searchByTag(Market::listed(), ['DEMO', 'WORKFLOW-UI']);
     Assert::assertEquals(2, count($products));
-    Assert::assertEquals('Portal', $products[0]->getName());
-    Assert::assertEquals('Demos', $products[1]->getName());
+    Assert::assertEquals('Portal', $products[1]->getName());
+    Assert::assertEquals('Demos', $products[0]->getName());
   }
 }

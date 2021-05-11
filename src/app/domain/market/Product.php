@@ -12,7 +12,6 @@ class Product
   private string $name;
   private string $shortDesc;
   private bool $listed;
-  private int $sort;
   private string $type;
   private array $tags;
   private string $vendor;
@@ -28,7 +27,7 @@ class Product
   private ?MavenProductInfo $mavenProductInfo;
 
   public function __construct(string $key, string $path, string $name, string $shortDesc, bool $listed, 
-    int $sort, string $type, array $tags, string $vendor, string $costs, string $sourceUrl, string $language, string $industry,
+    string $type, array $tags, string $vendor, string $costs, string $sourceUrl, string $language, string $industry,
     string $minVersion, bool $installable, ?MavenProductInfo $mavenProductInfo)
   {
     $this->key = $key;
@@ -36,7 +35,6 @@ class Product
     $this->name = $name;
     $this->shortDesc = $shortDesc;
     $this->listed = $listed;
-    $this->sort = $sort;
     $this->type = $type;
     $this->tags = $tags;
     $this->vendor = $vendor;
@@ -68,11 +66,6 @@ class Product
   public function getShortDescription(): string
   {
     return $this->shortDesc;
-  }
-
-  public function getSort(): int
-  {
-    return $this->sort;
   }
 
   public function isInstallable(): bool

@@ -21,7 +21,7 @@ class Market
         $products[] = ProductFactory::create($key, $dir, $metaFile);
       }
     }
-    usort($products, fn (Product $a, Product $b) => $a->getSort() - $b->getSort());
+    ProductSorter::sort($products);
     return $products;
   }
 

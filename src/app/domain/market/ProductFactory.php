@@ -13,7 +13,6 @@ class ProductFactory
     $json = json_decode($content);
 
     $listed = $json->listed ?? true;
-    $sort = $json->sort ?? 999999;
     $info = null;
     if (isset($json->mavenArtifacts)) {
       $info = self::createMavenProductInfo($json);
@@ -28,7 +27,7 @@ class ProductFactory
     $industry = $json->industry ?? '';
     $installable = isset($json->installers);
     $minVersion = $json->minVersion ?? '0.0.0';
-    return new Product($key, $path, $json->name, $shortDesc, $listed, $sort, $type, $tags, 
+    return new Product($key, $path, $json->name, $shortDesc, $listed, $type, $tags, 
       $vendor, $costs, $sourceUrl, $language, $industry, $minVersion, $installable, $info);
   }
 
