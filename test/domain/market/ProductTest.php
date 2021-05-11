@@ -68,12 +68,6 @@ class ProductTest extends TestCase
     Assert::assertEquals('VisualVM Plugin', $product->getName());
   }
 
-  public function test_sort()
-  {
-    $product = Market::getProductByKey('visualvm-plugin');
-    Assert::assertEquals(200, $product->getSort());
-  }
-
   public function test_url()
   {
     $product = Market::getProductByKey('visualvm-plugin');
