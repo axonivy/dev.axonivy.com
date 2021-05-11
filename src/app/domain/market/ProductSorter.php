@@ -7,29 +7,28 @@ use app\domain\util\StringUtil;
 
 class ProductSorter
 {
-    public static function sort(array $products)
+    public static function sort(array $products): array
     {
       usort($products, fn (Product $a, Product $b) => self::compare($a, $b));
+      return $products;
     }
 
-    private static function compare(Product $a, Product $b)
+    private static function compare(Product $a, Product $b): int
     {
-      $sortA = self::typeSort($a);
-      $sortB = self::typeSort($b);
-      if ($sortA == $sortB) {
-        return strcasecmp(strtolower($a->getName()), strtolower($b->getName()));
-      }
-      return $sortA - $sortB;
+      return 
+        self::typeSort($a) <=> self::typeSort($b)?:
+        $a->getName() <=> $b->getName();
     }
   
     private static function typeSort(Product $product): int
     {
       $prio = 0;
       foreach (Market::types() as $type) {
-        if ($type->getFilter() == $product->getType()) {
+        $prio++;
+        if ($type->getFilter() === $product->getType()) {
           return $prio;
         }
-        $prio++;
+        
       }
       return $prio;
     }
