@@ -67,7 +67,7 @@ class MarketTest extends TestCase
   public function test_all_sort()
   {
     $products = Market::all();
-    Assert::assertEquals('basic-workflow-ui', $products[0]->getKey());
+    Assert::assertEquals('genderize', $products[0]->getKey());
   }
 
   public function test_types()

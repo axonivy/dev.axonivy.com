@@ -21,7 +21,7 @@ class Market
         $products[] = ProductFactory::create($key, $dir, $metaFile);
       }
     }
-    ProductSorter::sort($products);
+    $products = ProductSorter::sort($products);
     return $products;
   }
 
