@@ -148,6 +148,27 @@
   .types [data-filter='util']:hover {
     background-color: hsl(192, 63%, 95%);
   }
+  
+  @media screen and (max-width: 500px) {
+    .p-col-6 {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .product-card {
+      min-height: 300px;
+      max-height: 300px;
+    }
+    .product-logo {
+      margin-top: 1em;
+    }
+    .product-title {
+      margin-top: 1em;
+    }
+    .product-desc {
+      max-height: 4.5em;
+    }
+  }
 
   {% if hideSearch is defined %}
     .product-card {
@@ -194,7 +215,7 @@
     }
     @media screen and (min-width: 500px) {
       .p-col-fixed {
-        width: 30%;
+        width: 33%;
       }
     }
     @media screen and (min-width: 768px) {
@@ -208,21 +229,6 @@
       }
     }
   {% endif %}
-  @media screen and (min-width: 600px) {
-    .p-col-12 {
-      width: 50%;
-    }
-  }
-  @media screen and (min-width: 868px) {
-    .p-md-6 {
-      width: 33%;
-    }
-  }
-  @media screen and (min-width: 1100px) {
-    .p-lg-3 {
-      width: 25%;
-    }
-  }
 </style>
 
 {% if hideSearch is not defined %}
@@ -315,7 +321,7 @@
     {% endif %}
     <div class="row p-grid p-align-stretch">
       {% for product in products %}
-        <div class="p-col-fixed p-col-12 p-md-6 p-lg-3">
+        <div class="p-col-fixed p-col-6 p-md-4 p-lg-3">
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
             <div class="product-type {{ product.type }}"></div>
             <div class="product-tags p-grid p-dir-rev">
