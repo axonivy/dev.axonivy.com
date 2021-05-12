@@ -4,6 +4,7 @@ namespace app\pages\market;
 
 use Slim\Exception\HttpNotFoundException;
 use app\domain\market\Market;
+use app\domain\market\MarketInstallCounter;
 use Slim\Psr7\Request;
 
 class MetaJsonAction
@@ -15,6 +16,8 @@ class MetaJsonAction
     if ($product == null) {
       throw new HttpNotFoundException($request);
     }
+
+    MarketInstallCounter::incrementInstallCount($key);
 
     $version = $request->getQueryParams()['version'] ?? 'version-get-param-missing';
 

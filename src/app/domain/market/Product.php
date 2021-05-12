@@ -25,6 +25,7 @@ class Product
   private bool $installable;
 
   private array $readMeParts;
+  private int $installationCount;
 
   private ?MavenProductInfo $mavenProductInfo;
 
@@ -218,6 +219,15 @@ class Product
   public function getUrl(): string
   {
     return '/market/' . $this->key;
+  }
+
+  public function getInstallationCount(): int
+  {
+    if (empty($this->installationCount))
+    {
+      $this->installationCount = MarketInstallCounter::getInstallCount($this->key);
+    }
+    return $this->installationCount;
   }
 
   public function getMetaUrl(string $version): string

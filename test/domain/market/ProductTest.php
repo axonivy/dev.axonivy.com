@@ -5,6 +5,7 @@ namespace test\domain\market;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\domain\market\Market;
+use app\domain\market\MarketInstallCounter;
 use app\domain\market\Product;
 
 class ProductTest extends TestCase
@@ -173,5 +174,21 @@ class ProductTest extends TestCase
     Assert::assertEquals('github.com', $product->getSourceUrlDomain());
     Assert::assertEquals('en', $product->getLanguage());
     Assert::assertEquals('Cross-Industry', $product->getIndustry());
+    Assert::assertEquals('4.5', $product->getPlatformReview());
+    Assert::assertEquals('1.0', $product->getVersion());
+  }
+
+  public function test_installationCount()
+  {
+    $product = Market::getProductByKey('toDo');
+    $count = $product->getInstallationCount();
+    Assert::assertIsInt($count);
+    Assert::assertTrue($count >= 20 && $count <= 50);
+    MarketInstallCounter::incrementInstallCount('toDo');
+    //cached value
+    Assert::assertEquals($count, $product->getInstallationCount());
+    //reload with incremented value
+    $product = Market::getProductByKey('toDo');
+    Assert::assertEquals($count + 1, $product->getInstallationCount());
   }
 }

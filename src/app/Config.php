@@ -31,4 +31,9 @@ class Config
   {
     return self::isProductionEnvironment() ? '/home/axonivya/data/market' : __DIR__ . '/../../src/web/_market';
   }
+
+  public static function marketInstallationsFile(): string
+  {
+    return self::isProductionEnvironment() ? '/home/axonivya/data/market-installations.json' : __DIR__ . '/../../src/web/market-installations.json';
+  }
 }
