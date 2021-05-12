@@ -150,5 +150,12 @@ class ProductActionTest extends TestCase
       ->ok()
       ->bodyDoesNotContain('a class="button special install" href="https://www.axonivy.com/marketplace/contact');
   }
+
+  public function testDontShowInstallCountForUninstallableProducts() 
+  {
+    AppTester::assertThatGet('market/employee-onboarding')
+      ->ok()
+      ->bodyDoesNotContain('Installations');
+  }
   
 }
