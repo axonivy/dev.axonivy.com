@@ -68,17 +68,19 @@
       </div>
     </div>
 
-    <div class="p-col-fixed">
-      <div class="product-data-title">
-        <span>Installations</span>
+    {% if installButton.isShow %}
+      <div class="p-col-fixed">
+        <div class="product-data-title">
+          <span>Installations</span>
+        </div>
+        <div class="product-data-content">
+          <span>{{ product.installationCount }}</span>
+        </div>
+        <div class="product-data-info">
+          <span>times</span>
+        </div>
       </div>
-      <div class="product-data-content">
-        <span>{{ product.installationCount }}</span>
-      </div>
-      <div class="product-data-info">
-        <span>times</span>
-      </div>
-    </div>
+    {% endif %}
 
     <div class="p-col-fixed">
       <div class="product-data-title">
