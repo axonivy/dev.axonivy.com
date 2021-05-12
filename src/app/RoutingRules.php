@@ -29,6 +29,7 @@ use app\pages\tutorial\TutorialAction;
 use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
+use app\permalink\LinkAction;
 use app\pages\market\MetaJsonAction;
 use app\pages\market\OpenApiJsonAction;
 use app\pages\market\MetaRedirectAction;
@@ -64,6 +65,8 @@ class RoutingRules
     $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
+    
+    $app->get('/link/{key}', LinkAction::class);
 
     $app->get('/api-browser', ApiBrowserAction::class);
 
