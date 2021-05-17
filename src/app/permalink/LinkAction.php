@@ -23,7 +23,7 @@ class LinkAction
   {
     $samplesPrefix = 'https://github.com/ivy-samples/docker-samples/tree/master/';
     $redirects = [
-        'docker' => 'https://github.com/ivy-samples/docker-samples',
+        'docker-samples' => 'https://github.com/ivy-samples/docker-samples',
         'docker-elasticsearch-cluster' => $samplesPrefix . 'ivy-elasticsearch-cluster',
         'docker-elasticsearch' => $samplesPrefix . 'ivy-elasticsearch',
         'docker-reverse-proxy-apache' => $samplesPrefix . 'ivy-reverse-proxy-apache',
