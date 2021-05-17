@@ -1,6 +1,6 @@
 <?php
 
-namespace test\pages\link;
+namespace test\permalink;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
@@ -29,5 +29,23 @@ class LinkActionTest extends TestCase
     AppTester::assertThatGet('/link/docker-reverse-proxy-nginx')->redirect($prefix . 'ivy-reverse-proxy-nginx');
     AppTester::assertThatGet('/link/docker-scaling')->redirect($prefix . 'ivy-scaling');
     AppTester::assertThatGet('/link/docker-secrets')->redirect($prefix . 'ivy-secrets');
+    
+    AppTester::assertThatGet('/link/docker')->redirect('https://github.com/ivy-samples/docker-samples');
+  }
+  
+  public function testRedirectToDemos()
+  {
+      $prefix = 'https://github.com/ivy-samples/ivy-project-demos';
+      
+      AppTester::assertThatGet('/link/demos')->redirect($prefix);
+  }
+  
+  public function testRedirectToFile()
+  {
+      $prefixDocker = 'https://github.com/ivy-samples/docker-samples/';
+      $prefixDemos = 'https://github.com/ivy-samples/ivy-project-demos/';
+      
+      AppTester::assertThatGet('/link/docker/blob/master/ivy-scaling/README.md')->redirect($prefixDocker . 'blob/master/ivy-scaling/README.md');
+      AppTester::assertThatGet('/link/demos/blob/master/README.md')->redirect($prefixDemos . 'blob/master/README.md');
   }
 }
