@@ -33,7 +33,9 @@ class LinkAction
         
         'demos' => 'https://github.com/ivy-samples/ivy-project-demos',
         
-        'build-plugin' => 'https://github.com/axonivy/project-build-plugin'
+        'build-plugin' => 'https://github.com/axonivy/project-build-plugin',
+        
+        'webtester' => 'https://github.com/axonivy/web-tester'
     ];
 
     $newPage = $redirects[$linkKey] ?? '';

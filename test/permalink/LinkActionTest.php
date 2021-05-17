@@ -43,14 +43,21 @@ class LinkActionTest extends TestCase
       AppTester::assertThatGet('/link/build-plugin')->redirect('https://github.com/axonivy/project-build-plugin');
   }
   
+  public function testRedirectToWebtester()
+  {
+      AppTester::assertThatGet('/link/webtester')->redirect('https://github.com/axonivy/web-tester');
+  }
+  
   public function testRedirectToFile()
   {
       $prefixDocker = 'https://github.com/ivy-samples/docker-samples/';
       $prefixDemos = 'https://github.com/ivy-samples/ivy-project-demos/';
       $prefixBuildPlugin = 'https://github.com/axonivy/project-build-plugin/';
+      $prefixWebtester = 'https://github.com/axonivy/web-tester/';
 
       AppTester::assertThatGet('/link/docker/blob/master/ivy-scaling/README.md')->redirect($prefixDocker . 'blob/master/ivy-scaling/README.md');
       AppTester::assertThatGet('/link/demos/blob/master/README.md')->redirect($prefixDemos . 'blob/master/README.md');
       AppTester::assertThatGet('/link/build-plugin/blob/master/README.md')->redirect($prefixBuildPlugin . 'blob/master/README.md');
+      AppTester::assertThatGet('/link/webtester/blob/master/web-tester/CHANGELOG.md')->redirect($prefixWebtester . 'blob/master/web-tester/CHANGELOG.md');
   }
 }
