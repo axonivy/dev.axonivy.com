@@ -31,7 +31,9 @@ class LinkAction
         'docker-scaling' => $samplesPrefix . 'ivy-scaling',
         'docker-secrets' => $samplesPrefix . 'ivy-secrets',
         
-        'demos' => 'https://github.com/ivy-samples/ivy-project-demos'
+        'demos' => 'https://github.com/ivy-samples/ivy-project-demos',
+        
+        'build-plugin' => 'https://github.com/axonivy/project-build-plugin'
     ];
 
     $newPage = $redirects[$linkKey] ?? '';
