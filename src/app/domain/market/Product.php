@@ -263,6 +263,12 @@ class Product
     }
     return "";
   }
+  
+  public function hasInstaller(string $installerId): bool
+  {
+    $installers = $this->getInstallers($installerId);
+    return !empty($installers);
+  }
 
   private function getMarketFile(string $file)
   {
@@ -271,6 +277,18 @@ class Product
 
   private function evaluateOpenApiUrl(): string
   {
+    $installers = $this->getInstallers('rest-client');
+    if (empty($installers))
+    {
+      return '';
+    }
+    $installer = array_values($installers)[0];
+    return $installer->data->openApiUrl;
+  }
+  
+  private function getInstallers(string $installerId): array
+  {
+    $installers = [];
     if ($this->installable)
     {
       $content = $this->getMetaJson();
@@ -278,13 +296,13 @@ class Product
       foreach($json->installers as $installer)
       {
         $realInstaller = $this->evaluateInstaller($installer);
-        if ($realInstaller->id == 'rest-client')
+        if ($realInstaller->id == $installerId)
         {
-          return $realInstaller->data->openApiUrl;
+            $installers[] = $realInstaller;
         }
       }
     }
-    return '';
+    return $installers;
   }
 
   private function evaluateInstaller($installer): mixed

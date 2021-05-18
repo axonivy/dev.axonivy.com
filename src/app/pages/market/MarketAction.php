@@ -24,6 +24,7 @@ class MarketAction
     $searchQuery = $queryParams['search'] ?? '';
     $selectedType = $queryParams['type'] ?? '';
     $selectedTags = $queryParams['tags'] ?? '';
+    $selectedInstaller = $queryParams['installer'] ?? '';
 
     if (isset($queryParams['resultsOnly'])) {
       $env = $this->view->getEnvironment();
@@ -39,6 +40,7 @@ class MarketAction
     $filteredProducts = Market::search($listedProducts, $searchQuery);
     $filteredProducts = Market::searchByType($filteredProducts, $selectedType);
     $filteredProducts = Market::searchByTag($filteredProducts, explode(",", $selectedTags));
+    $filteredProducts = Market::searchByInstaller($filteredProducts, $selectedInstaller);
 
     $filterSet = !empty($searchQuery) || !empty($selectedType) || !empty($selectedTags);
 
