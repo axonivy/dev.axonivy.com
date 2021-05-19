@@ -84,6 +84,21 @@ class Market
     }
     return $listed;
   }
+  
+  public static function searchByInstaller(array $products, string $searchInstaller): array
+  {
+    if (empty($searchInstaller)) {
+      return $products;
+    }
+    
+    $listed = [];
+    foreach ($products as $product) {
+        if ($product->hasInstaller($searchInstaller)) {
+        $listed[] = $product;
+      }
+    }
+    return $listed;
+  }
 
   public static function listed(): array
   {
