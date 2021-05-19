@@ -35,7 +35,9 @@ class LinkAction
         
         'build-plugin' => 'https://github.com/axonivy/project-build-plugin',
         
-        'webtester' => 'https://github.com/axonivy/web-tester'
+        'webtester' => 'https://github.com/axonivy/web-tester',
+
+        'market-contribute' => 'https://github.com/axonivy/market/blob/master/doc/contribute.md',
     ];
 
     $newPage = $redirects[$linkKey] ?? '';
