@@ -109,7 +109,7 @@ class Market
     $tags = [];
     foreach ($products as $product) {
       foreach ($product->getTags() as $tag) {
-        $tags[] = strtolower($tag);
+        $tags[] = strtoupper($tag);
       }
     }
     $tags = array_unique($tags);
