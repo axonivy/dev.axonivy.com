@@ -226,4 +226,7 @@ h3 .si {
   mask: url('/images/icons/multiple-actions-chat.svg') no-repeat center;
   -webkit-mask: url('/images/icons/multiple-actions-chat.svg') no-repeat center;
 }
-
+.si.si-arrow-down {
+  mask: url('/images/icons/arrow-down-1.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/arrow-down-1.svg') no-repeat center;
+}

@@ -1820,7 +1820,7 @@ i {
 }
 
 p {
-  margin: 0 0 2em 0;
+  margin: 0 0 3em 0;
 }
 
 h1,
@@ -1845,8 +1845,8 @@ h6 a {
 }
 
 h1 {
-  font-size: 2em;
-  margin: 0 0 0.25em 0;
+  font-size: 2.5em;
+  margin: 0 0 .5em 0;
 }
 
 h2 {
@@ -2534,6 +2534,7 @@ ul {
 
 ul li {
   padding-left: 0.5em;
+  padding-bottom: .25em;
 }
 
 ul.alt {
@@ -3209,16 +3210,16 @@ table.alt tbody tr td {
 
 body {
   position: relative;
-  padding-top: 5em;
+  padding-top: 5rem;
 }
 
 #header {
   background: #007095;
   color: #d5d5d5;
   cursor: default;
-  height: 5em;
+  height: 5rem;
   left: 0;
-  line-height: 5em;
+  line-height: 5rem;
   position: fixed;
   text-align: right;
   top: 0;
@@ -3618,7 +3619,7 @@ body {
 }
 
 #banner h1 {
-  font-size: 2em;
+  font-size: 2.5em;
   margin: 0 0 1em 0;
   padding: 0;
   letter-spacing: 3px;
