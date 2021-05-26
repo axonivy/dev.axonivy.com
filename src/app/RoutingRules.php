@@ -4,7 +4,7 @@ namespace app;
 
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
-use app\pages\community\CommunityAction;
+use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
 use app\pages\doc\DocOverviewAction;
@@ -44,7 +44,7 @@ class RoutingRules
     $app->get('/team', TeamAction::class);
     $app->get('/support', SupportAction::class);
     $app->get('/search', SearchAction::class);
-    $app->get('/community', CommunityAction::class);
+    $app->get('/github', GitHubAction::class);
     $app->get('/tutorial', TutorialAction::class);
 
     $app->get('/download/maven.html', MavenArchiveAction::class);

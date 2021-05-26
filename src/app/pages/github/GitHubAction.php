@@ -1,10 +1,10 @@
 <?php
 
-namespace app\pages\community;
+namespace app\pages\github;
 
 use Slim\Views\Twig;
 
-class CommunityAction
+class GitHubAction
 {
 
   private Twig $view;
@@ -16,6 +16,6 @@ class CommunityAction
 
   public function __invoke($request, $response, $args)
   {
-    return $this->view->render($response, 'community/community.twig');
+    return $this->view->render($response, 'github/github.twig');
   }
 }
