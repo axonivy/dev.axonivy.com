@@ -21,9 +21,9 @@ class LinkAction
 
   private function getRedirectUrl($request, $linkKey)
   {
-    $samplesPrefix = 'https://github.com/ivy-samples/docker-samples/tree/master/';
+    $samplesPrefix = 'https://github.com/axonivy/docker-samples/tree/master/';
     $redirects = [
-        'docker-samples' => 'https://github.com/ivy-samples/docker-samples',
+        'docker-samples' => 'https://github.com/axonivy/docker-samples',
         'docker-elasticsearch-cluster' => $samplesPrefix . 'ivy-elasticsearch-cluster',
         'docker-elasticsearch' => $samplesPrefix . 'ivy-elasticsearch',
         'docker-reverse-proxy-apache' => $samplesPrefix . 'ivy-reverse-proxy-apache',
@@ -31,7 +31,7 @@ class LinkAction
         'docker-scaling' => $samplesPrefix . 'ivy-scaling',
         'docker-secrets' => $samplesPrefix . 'ivy-secrets',
         
-        'demos' => 'https://github.com/ivy-samples/ivy-project-demos',
+        'demos' => 'https://github.com/axonivy-market/demo-projects',
         
         'build-plugin' => 'https://github.com/axonivy/project-build-plugin',
         

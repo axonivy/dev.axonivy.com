@@ -21,7 +21,7 @@ class LinkActionTest extends TestCase
 
   public function testRedirectToDockerSamples()
   {
-    $prefix = 'https://github.com/ivy-samples/docker-samples/tree/master/';
+    $prefix = 'https://github.com/axonivy/docker-samples/tree/master/';
     
     AppTester::assertThatGet('/link/docker-elasticsearch-cluster')->redirect($prefix . 'ivy-elasticsearch-cluster');
     AppTester::assertThatGet('/link/docker-elasticsearch')->redirect($prefix . 'ivy-elasticsearch');
@@ -30,12 +30,12 @@ class LinkActionTest extends TestCase
     AppTester::assertThatGet('/link/docker-scaling')->redirect($prefix . 'ivy-scaling');
     AppTester::assertThatGet('/link/docker-secrets')->redirect($prefix . 'ivy-secrets');
     
-    AppTester::assertThatGet('/link/docker-samples')->redirect('https://github.com/ivy-samples/docker-samples');
+    AppTester::assertThatGet('/link/docker-samples')->redirect('https://github.com/axonivy/docker-samples');
   }
   
   public function testRedirectToDemos()
   {
-      AppTester::assertThatGet('/link/demos')->redirect('https://github.com/ivy-samples/ivy-project-demos');
+      AppTester::assertThatGet('/link/demos')->redirect('https://github.com/axonivy-market/demo-projects');
   }
   
   public function testRedirectToBuildPlugin()
@@ -50,8 +50,8 @@ class LinkActionTest extends TestCase
   
   public function testRedirectToFile()
   {
-      $prefixDocker = 'https://github.com/ivy-samples/docker-samples/';
-      $prefixDemos = 'https://github.com/ivy-samples/ivy-project-demos/';
+      $prefixDocker = 'https://github.com/axonivy/docker-samples/';
+      $prefixDemos = 'https://github.com/axonivy-market/demo-projects/';
       $prefixBuildPlugin = 'https://github.com/axonivy/project-build-plugin/';
       $prefixWebtester = 'https://github.com/axonivy/web-tester/';
 

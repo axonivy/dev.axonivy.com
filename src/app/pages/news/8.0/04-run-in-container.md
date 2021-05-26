@@ -16,7 +16,7 @@ This means that the barriers between Docker, Kubernetes, OpenShift and all other
 	<a href="https://hub.docker.com/r/axonivy/axonivy-engine/" target="_blank" rel="noopener noreferrer">
 	  <i class="fab fa-docker"></i> Axon.ivy Engine Docker Image
 	</a>
-	<a href="https://github.com/ivy-samples/docker-samples" target="_blank" rel="noopener noreferrer">
+	<a href="https://github.com/axonivy/docker-samples" target="_blank" rel="noopener noreferrer">
 	  <i class="si si-lab-flask"></i> Docker Examples
 	</a>
 </div>
