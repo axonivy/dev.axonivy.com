@@ -17,7 +17,7 @@ class Product
   private array $tags;
   private string $vendor;
   private string $platformReview;
-  private string $costs;
+  private string $cost;
   private string $sourceUrl;
   private string $language;
   private string $industry;
@@ -30,7 +30,7 @@ class Product
   private ?MavenProductInfo $mavenProductInfo;
 
   public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
-    string $type, array $tags, string $vendor, string $platformReview, string $costs, string $sourceUrl, string $language, string $industry,
+    string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $language, string $industry,
     string $compatibility, bool $installable, ?MavenProductInfo $mavenProductInfo)
   {
     $this->key = $key;
@@ -43,7 +43,7 @@ class Product
     $this->tags = $tags;
     $this->vendor = $vendor;
     $this->platformReview = $platformReview;
-    $this->costs = $costs;
+    $this->cost = $cost;
     $this->sourceUrl = $sourceUrl;
     $this->language = $language;
     $this->industry = $industry;
@@ -103,9 +103,9 @@ class Product
     return (float) $this->platformReview != (float) $this->getStarCount();
   }
 
-  public function getCosts(): string
+  public function getCost(): string
   {
-    return $this->costs;
+    return $this->cost;
   }
 
   public function getSourceUrl(): string

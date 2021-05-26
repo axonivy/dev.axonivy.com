@@ -169,7 +169,7 @@ class ProductTest extends TestCase
   {
     $product = Market::getProductByKey('toDo');
     Assert::assertEquals('Axon Ivy AG', $product->getVendor());
-    Assert::assertEquals('free', $product->getCosts());
+    Assert::assertEquals('free', $product->getCost());
     Assert::assertEquals('https://github.com/axonivy/market', $product->getSourceUrl());
     Assert::assertEquals('github.com', $product->getSourceUrlDomain());
     Assert::assertEquals('en', $product->getLanguage());
