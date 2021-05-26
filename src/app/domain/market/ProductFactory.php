@@ -23,14 +23,14 @@ class ProductFactory
     $shortDesc = $json->description ?? '';
     $vendor = $json->vendor ?? 'Unknown';
     $platformReview = $json->platformReview ?? '4.0';
-    $costs = $json->costs ?? 'Free';
+    $cost = $json->cost ?? 'Free';
     $sourceUrl = $json->sourceUrl ?? '';
     $language = $json->language ?? '';
     $industry = $json->industry ?? '';
     $installable = isset($json->installers);
     $compatibility = $json->compatibility ?? '0.0.0';
     return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
-      $vendor, $platformReview, $costs, $sourceUrl, $language, $industry, $compatibility, $installable, $info);
+      $vendor, $platformReview, $cost, $sourceUrl, $language, $industry, $compatibility, $installable, $info);
   }
 
   private static function createMavenProductInfo($json): MavenProductInfo

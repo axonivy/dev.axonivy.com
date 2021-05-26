@@ -10,7 +10,7 @@
 	"installMatcher": "best-match",
 	"vendor": "Axon Ivy AG",
 	"platformReview": "5",
-	"costs": "free",
+	"cost": "free",
 	"sourceUrl": "https://bitbucket.org/axonivy-prod/axonivyportal/src/master/",
 	"language": "en, de, fr, es",
 	"industry": "Cross-Industry",

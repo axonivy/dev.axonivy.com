@@ -8,7 +8,7 @@
 	"tags": ["demo"],
 	"vendor": "Axon Ivy AG",
 	"platformReview": "4.5",
-	"costs": "free",
+	"cost": "free",
 	"sourceUrl": "https://github.com/ivy-samples/ivy-project-demos",
 	"language": "en",
 	"compatibility": "8.0+",

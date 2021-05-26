@@ -8,7 +8,7 @@
 	"versionDisplay": "hide-snapshots",
 	"vendor": "Oracle",
 	"platformReview": "4",
-	"costs": "free",
+	"cost": "free",
 	"sourceUrl": "https://visualvm.github.io/releases.html",
 	"language": "en",
 	"industry": "Cross-Industry",
