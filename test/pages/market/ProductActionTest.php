@@ -157,5 +157,11 @@ class ProductActionTest extends TestCase
       ->ok()
       ->bodyDoesNotContain('Installations');
   }
-  
+
+  public function testDontDisplaySnapshotInVersionDropdown() 
+  {
+    AppTester::assertThatGet('market/demos')
+      ->ok()
+      ->bodyDoesNotContain('-SNAPSHOT</option>');
+  }  
 }

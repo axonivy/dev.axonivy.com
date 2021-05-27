@@ -145,9 +145,9 @@
        <span class="dropdown">
           <label>Choose target platform</label>
           <select name="version" id="version" onchange="location = this.value + '#download';">
-          {% for version in mavenProductInfo.versionsToDisplay %}
+          {% for version in mavenProductInfo.versionsToDisplay %}            
             <a href="#">
-              <option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version }}</option>
+              <option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
             </a>
           {% endfor %}
           </select>
