@@ -163,5 +163,12 @@ class ProductActionTest extends TestCase
     AppTester::assertThatGet('market/demos')
       ->ok()
       ->bodyDoesNotContain('-SNAPSHOT</option>');
+  }
+  
+  public function testShowBuildStatusBadge() 
+  {
+    AppTester::assertThatGet('market/demos')
+      ->ok()
+      ->bodyContains('<img src="https://github.com/axonivy-market/demo-projects/actions/workflows/ci.yml/badge.svg" />');
   }  
 }

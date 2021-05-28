@@ -229,6 +229,12 @@
             <span class="meta-data"><a href="{{ product.sourceUrl }}">{{ product.sourceUrlDomain }}</a></span>
           </div>
         {% endif %}
+        {% if product.statusBadgeUrl is not empty %}
+          <div class="product-meta-info">
+            <span class="meta-type">Status</span>
+            <span class="meta-data"><img src="{{ product.statusBadgeUrl }}" /></span>
+          </div>
+        {% endif %}
 
         <div class="product-meta-spaceer"></div>
 
