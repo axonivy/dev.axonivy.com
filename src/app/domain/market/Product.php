@@ -19,6 +19,7 @@ class Product
   private string $platformReview;
   private string $cost;
   private string $sourceUrl;
+  private string $statusBadgeUrl;
   private string $language;
   private string $industry;
   private string $compatibility;
@@ -30,7 +31,7 @@ class Product
   private ?MavenProductInfo $mavenProductInfo;
 
   public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
-    string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $language, string $industry,
+    string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $statusBadgeUrl, string $language, string $industry,
     string $compatibility, bool $installable, ?MavenProductInfo $mavenProductInfo)
   {
     $this->key = $key;
@@ -45,6 +46,7 @@ class Product
     $this->platformReview = $platformReview;
     $this->cost = $cost;
     $this->sourceUrl = $sourceUrl;
+    $this->statusBadgeUrl = $statusBadgeUrl;
     $this->language = $language;
     $this->industry = $industry;
     $this->compatibility = $compatibility;
@@ -111,6 +113,11 @@ class Product
   public function getSourceUrl(): string
   {
     return $this->sourceUrl;
+  }
+
+  public function getStatusBadgeUrl(): string
+  {
+    return $this->statusBadgeUrl;
   }
 
   public function getSourceUrlDomain(): string

@@ -10,6 +10,7 @@
 	"platformReview": "4.5",
 	"cost": "free",
 	"sourceUrl": "https://github.com/axonivy-market/demo-projects",
+	"statusBadgeUrl": "https://github.com/axonivy-market/demo-projects/actions/workflows/ci.yml/badge.svg",
 	"language": "en",
 	"compatibility": "8.0+",
 	"mavenArtifacts": [
