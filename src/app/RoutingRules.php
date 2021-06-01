@@ -66,7 +66,7 @@ class RoutingRules
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
     
-    $app->get('/link/{key}[/{path:.*}]', LinkAction::class);
+    $app->get('/link/{key}[/{branchVersion}]', LinkAction::class);
 
     $app->get('/api-browser', ApiBrowserAction::class);
 
