@@ -79,14 +79,11 @@ class ProductAction
 
   private static function createInstallButton(Request $request, Product $product, string $currentVersion): InstallButton
   {
-    $uri = $request->getUri();
-    $metaUrl = $uri->getScheme() . '://' . $uri->getHost() . $product->getMetaUrl($currentVersion);
-
     $version = self::readIvyVersionCookie($request);
     $isDesigner = !empty($version);
     $reason = $product->getReasonWhyNotInstallable($version);
     $isShow = $product->isInstallable();
-    return new InstallButton($isDesigner, $reason, $metaUrl, $isShow);
+    return new InstallButton($isDesigner, $reason, $product, $isShow, $request, $currentVersion);
   }
 
   private static function readIvyVersionCookie(Request $request)
@@ -108,19 +105,20 @@ class ProductAction
 class InstallButton
 {
   public bool $isDesigner;
-
   public string $reason;
-
-  private string $metaUrl;
-  
   public bool $isShow;
-
-  function __construct(bool $isDesigner, string $reason, string $metaUrl, bool $isShow)
+  private Product $product;
+  private Request $request;
+  private string $currentVersion;
+  
+  function __construct(bool $isDesigner, string $reason, Product $product, bool $isShow, Request $request, string $currentVersion)
   {
     $this->isDesigner = $isDesigner;
     $this->reason = $reason;
-    $this->metaUrl = $metaUrl;
+    $this->product = $product;
     $this->isShow = $isShow;
+    $this->request = $request;
+    $this->currentVersion = $currentVersion;
   }
 
   public function isEnabled(): bool
@@ -131,5 +129,27 @@ class InstallButton
   public function getJavascriptCallback(): string
   {
     return "install('" . $this->metaUrl . "')";
+  }
+  
+  public function getMultipleVersions(): bool
+  {
+    return $this->product->getMavenProductInfo() != null;
+  }
+  
+  public function getMetaUrl($version): string
+  {
+    return $this->metaJsonUrl($this->currentVersion);
+  }
+  
+  public function getMetaJsonUrl($version): string
+  {
+    return $this->metaJsonUrl($version);
+  }
+  
+  private function metaJsonUrl($version): string
+  {
+    $uri = $this->request->getUri();
+    $baseUrl = $uri->getScheme() . '://' . $uri->getHost();
+    return $baseUrl . $this->product->getMetaUrl($version);
   }
 }
