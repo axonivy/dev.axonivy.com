@@ -128,17 +128,12 @@ class InstallButton
 
   public function getJavascriptCallback(): string
   {
-    return "install('" . $this->metaUrl . "')";
+    return "install('" . $this->metaJsonUrl($this->currentVersion) . "')";
   }
   
   public function getMultipleVersions(): bool
   {
     return $this->product->getMavenProductInfo() != null;
-  }
-  
-  public function getMetaUrl($version): string
-  {
-    return $this->metaJsonUrl($this->currentVersion);
   }
   
   public function getMetaJsonUrl($version): string
