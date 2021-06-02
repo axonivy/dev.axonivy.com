@@ -21,7 +21,7 @@ class MarketInstallCounter
     self::writeInstallations($json);
   }
   
-  private static function readInstallations(): mixed
+  private static function readInstallations()
   {
     $installFile = Config::marketInstallationsFile();
     $json = [];
@@ -32,7 +32,7 @@ class MarketInstallCounter
     return $json;
   }
   
-  private static function writeInitialInstallations(mixed $json, string $key): int
+  private static function writeInitialInstallations($json, string $key): int
   {
     $initialCount = rand(20, 50);
     $json[$key] = $initialCount;
@@ -40,7 +40,7 @@ class MarketInstallCounter
     return $initialCount;
   }
 
-  private static function writeInstallations(mixed $json)
+  private static function writeInstallations($json)
   {
     if ($file = fopen(Config::marketInstallationsFile(), 'w')) {
       fwrite($file, json_encode($json));

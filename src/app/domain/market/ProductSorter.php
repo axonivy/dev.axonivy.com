@@ -2,9 +2,6 @@
 
 namespace app\domain\market;
 
-use app\Config;
-use app\domain\util\StringUtil;
-
 class ProductSorter
 {
     public static function sort(array $products): array

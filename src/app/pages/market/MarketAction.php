@@ -1,12 +1,10 @@
 <?php
-
 namespace app\pages\market;
 
 use Slim\Views\Twig;
 use app\domain\market\Market;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use app\domain\util\StringUtil;
 
 class MarketAction
 {
