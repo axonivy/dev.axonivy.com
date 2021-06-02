@@ -28,7 +28,6 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGet('/market/genderize')
       ->ok()
-      ->bodyDoesNotContain('install(')
       ->bodyContains("Please open the");
   }
 
@@ -36,7 +35,7 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGetWithCookie('http://localhost/market/genderize', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("install('http://localhost/_market/genderize/_meta.json?version=')");
+      ->bodyContains("'http://localhost/_market/genderize/_meta.json?version=");
   }
 
   public function testInstallButton_displayInDesignerMarketShowWhyNotReason()
@@ -53,7 +52,7 @@ class ProductActionTest extends TestCase
 
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => $version])
       ->ok()
-      ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=$version')");
+      ->bodyContains("http://localhost/_market/doc-factory/_meta.json?version=$version");
   }
   
   public function testInstallButton_respectCookie_ltsMatchInstaller()
@@ -70,14 +69,14 @@ class ProductActionTest extends TestCase
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=$version')");
+      ->bodyContains("http://localhost/_market/doc-factory/_meta.json?version=$version");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller()
   {
       AppTester::assertThatGetWithCookie('http://localhost/market/portal', ['ivy-version' => '8.0.10'])
         ->ok()
-        ->bodyContains("install('http://localhost/_market/portal/_meta.json?version=8.0.10')");
+        ->bodyContains("http://localhost/_market/portal/_meta.json?version=8.0.10");
   }
   
   public function testInstallButton_respectCookie_bestMatchInstaller_ifNotExistUseLast()
@@ -94,14 +93,14 @@ class ProductActionTest extends TestCase
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/portal', ['ivy-version' => '8.0.99'])
       ->ok()
-      ->bodyContains("install('http://localhost/_market/portal/_meta.json?version=$version')");
+      ->bodyContains("http://localhost/_market/portal/_meta.json?version=$version");
   }
 
   public function testInstallButton_useSpecificVersion()
   {
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory/8.0.0', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("install('http://localhost/_market/doc-factory/_meta.json?version=8.0.0')");
+      ->bodyContains("http://localhost/_market/doc-factory/_meta.json?version=8.0.0");
   }
 
   public function testNotFoundWhenVersionDoesNotExistOfMavenBackedArtifact()
