@@ -192,7 +192,6 @@ class Product
       $filename = 'README.md';
       $markdownFile = $this->path . "/$filename";
       if (file_exists($markdownFile)) {
-        $markdownParts[] = [];
         $markdownContent = file_get_contents($markdownFile);
 
         $setupContent = explode('## Setup', $markdownContent);
@@ -312,7 +311,7 @@ class Product
     return $installers;
   }
 
-  private function evaluateInstaller($installer): mixed
+  private function evaluateInstaller($installer)
   {
     if (property_exists($installer, 'id')) {
       return $installer;

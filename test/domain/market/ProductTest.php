@@ -183,7 +183,8 @@ class ProductTest extends TestCase
     $product = Market::getProductByKey('toDo');
     $count = $product->getInstallationCount();
     Assert::assertIsInt($count);
-    Assert::assertTrue($count >= 20 && $count <= 50);
+    Assert::assertGreaterThanOrEqual(20, $count);
+    Assert::assertLessThanOrEqual(50, $count);
     MarketInstallCounter::incrementInstallCount('toDo');
     //cached value
     Assert::assertEquals($count, $product->getInstallationCount());

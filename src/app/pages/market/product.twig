@@ -14,6 +14,7 @@
     float: left; 
     margin-right: 1rem;
   }
+  .product-install .button.special,
   .product-download .button.special,
   .product-header .button.special {
     color: #1b1b1b;
@@ -25,16 +26,19 @@
     height: 3rem;
     line-height: 2.7rem;
   }
+  .product-install .button.special.install,
   .product-download .button.special.install, 
   .product-header .button.special.install {
     background-color: #C7D426;
   }
+  .product-install .button.special.download,
   .product-download .button.special.download, 
   .product-header .button.special.download {
     background-color: white;
   }
   .product-download,
-  .product-install {
+  .product-install,
+  .product-install-open-market {
     display: none;
     background-color: #f7f7f7;
     padding: 1em 0;
@@ -97,7 +101,7 @@
             </a>
           {% endif %}
           {% if installButton.isShow %}
-            <a class="button special install" href="javascript:void(0)" onclick="{{ (installButton.enabled) ? installButton.javascriptCallback|raw : '$(\'.product-install\').slideToggle();' }}">
+            <a class="button special install" href="javascript:void(0)" onclick="{{ (installButton.enabled) ? (installButton.multipleVersions ? 'toggleInstallPanelForMultipleVersions();' : installButton.javascriptCallback|raw) : '$(\'.product-install-open-market\').slideToggle();' }}">
               <span>Install now</span>
             </a>
           {% endif %}
@@ -112,7 +116,7 @@
   </div>
 </section>
 
-<section class="product-install">
+<section class="product-install-open-market">
   <div class="inner product-meta">
     <article class="alt">
       {% if not installButton.isDesigner %}
@@ -161,6 +165,30 @@
   </div>
 </section>
 
+<section class="product-install">
+  <div class="inner product-meta">
+    <article class="alt p-grid p-justify-end p-align-center">
+      {% if mavenProductInfo != null %}
+       <span class="dropdown">
+          <label>Version</label>
+          <select name="installVersion" id="installVersion" onchange="location = this.value + '#install';">
+          {% for version in mavenProductInfo.versionsToDisplay %}            
+            <a href="#">
+              <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getMetaJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
+            </a>
+          {% endfor %}
+          </select>
+        </span>
+      {% endif %}
+
+      <a class="button special install artifact" href="javascript:void(0)" onclick="installInDesigner()">
+        <span>Install</span>
+      </a>
+    </article>
+  </div>
+</section>
+
+
 <script>
   function downloadArtifact() {
     window.location = $('#artifact').val();
@@ -175,6 +203,22 @@
   }
   if (window.location.hash === '#download') {
     $('.product-download').show();
+  }
+  
+  function toggleInstallPanelForMultipleVersions() {
+    $('.product-install').slideToggle();
+    if (window.location.hash === '') {
+      window.location.hash = '#install';
+    } else {
+      window.location.hash = '';
+    }
+  }  
+  function installInDesigner() {
+    var url = $('#installVersion').find(':selected').data('meta-json-url');
+    install(url);
+  }
+  if (window.location.hash === '#install') {
+    $('.product-install').show();
   }
 </script>
 
