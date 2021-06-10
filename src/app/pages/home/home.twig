@@ -88,4 +88,13 @@
   </div>
 </section>
 
+{% if ANNOUNCMENT_SHOW %}
+  <div class="fixed-news-image">
+    <span class="close-button" onclick="hideAnnouncment()"></span>
+    <a href="/team">
+      <img src="/images/misc/hiring.png" />
+    </a>
+  </div>
+{% endif %}
+
 {% endblock %}

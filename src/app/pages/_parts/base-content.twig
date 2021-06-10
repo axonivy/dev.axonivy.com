@@ -29,10 +29,10 @@
       min-height: 100%;
       /* Equal to height of footer */
       /* But also accounting for potential margin-bottom of last child */
-      margin-bottom: -230px;
+      margin-bottom: -11rem;
     }
     #footer, .sticky-footer-push {
-      height: 230px;
+      height: 11rem;
     }
     a {
       color: #007095;
@@ -76,6 +76,25 @@
         </nav>
       </div>
     </header>
+    {% if ANNOUNCMENT_SHOW %}
+      <div class="fixed-news-panel">
+        <div class="inner">
+          <i class="si si-megaphone"></i> We're hiring! Do you want to work at our team? Learn more <a href="/team">here</a>
+          <div class="close-panel" onclick="hideAnnouncment()">
+            <i class="si si-close"></i>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function hideAnnouncment() {
+          $('.fixed-news-panel').hide();
+          let expiryDate = new Date();
+          expiryDate.setMonth(expiryDate.getMonth() + 3)
+          document.cookie = `announcment=false; expires=${expiryDate}`;
+        }
+      </script>
+    {% endif %}
 
     <a href="#menu" class="navPanelToggle"><span class="si si-menu"></span></a>
   {% else %}

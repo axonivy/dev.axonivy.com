@@ -230,3 +230,7 @@ h3 .si {
   mask: url('/images/icons/arrow-down-1.svg') no-repeat center;
   -webkit-mask: url('/images/icons/arrow-down-1.svg') no-repeat center;
 }
+.si.si-megaphone {
+  mask: url('/images/icons/megaphone.svg') no-repeat center;
+  -webkit-mask: url('/images/icons/megaphone.svg') no-repeat center;
+}
