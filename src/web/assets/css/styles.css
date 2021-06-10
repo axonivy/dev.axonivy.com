@@ -3,6 +3,37 @@
   padding: .75rem;
 }
 
+/* Home page */
+.fixed-news-image {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  z-index: 10000;
+}
+.fixed-news-image img {
+  width: 15rem;
+}
+.fixed-news-image .close-button {
+  width: 30px;
+  height: 30px;
+  background-color: #f7f7f7;
+  border-radius: 50%;
+  border: 2px solid #007095;
+  padding: 5px;
+  position: fixed;
+  right: 1em;
+  cursor: pointer;
+}
+.fixed-news-image .close-button::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  top: -5px;
+  background-image: url('/images/icons/close.svg');
+}
+
 /* Team page */
 .team-card {
   height: 170px;
