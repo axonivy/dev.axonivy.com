@@ -21,24 +21,24 @@
 
 <section style="padding: 2em 0;">
   <div class="inner">
-    <div class="row">
+    <div class="row p-grid p-align-stretch">
     {% for employee in employees %}
-      <div class="4u 12u$(small)" style="text-align: center;">
-        {% if employee.imgSrc %}
-        <img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
-        {% else %}
-        <div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
-        {% endif %}
-        <header>
-          <h4 style="margin: 17px 0 0 0;">
-            {{ employee.name }}
-          </h4>
-        </header>
-        <p style="min-height: 85px; color: grey;">
-          {{ employee.function }}
-          <br />
-          {{ employee.education }}
-        </p>
+      <div class="p-col-fixed p-col-12 p-md-6 p-lg-4">
+        <div class="team-card">
+          {% if employee.imgSrc %}
+            <img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+          {% else %}
+            <div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
+          {% endif %}
+          <div class="p-grid p-dir-col p-justify-center team-member">
+            <h4>{{ employee.name }}</h4>
+            <p>
+              {{ employee.function }}
+              <br />
+              {{ employee.education }}
+          </p>
+          </div>
+        </div>
       </div>
     {% endfor %}
     </div>
