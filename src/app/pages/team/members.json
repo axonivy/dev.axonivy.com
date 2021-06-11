@@ -18,35 +18,35 @@
     "imgSrc": "/images/team/bruno.jpg",
     "education": "Inf. Ing. HTL",
     "function": "Product Owner & Team Leader",
-    "slogan": ""
+    "slogan": "Platform primal rock 🗿"
   },
   {
     "name": "Caty Hürlimann",
     "imgSrc": "/images/team/caty.jpg",
     "education": "",
     "function": "Office Manager",
-    "slogan": ""
+    "slogan": "Backoffice glue 📎"
   },
   {
     "name": "Christian Strebel",
     "imgSrc": "/images/team/christian.jpg",
     "education": "Inf. Ing. HTL",
     "function": "Core Developer",
-    "slogan": ""
+    "slogan": "Infrastructure fundamet 🏗️"
   },
   {
     "name": "Jacek Lajdecki",
     "imgSrc": "/images/team/jacek.jpg",
     "education": "Apprentice in Information Technology",
     "function": "Graduand Core Developer",
-    "slogan": ""
+    "slogan": "Young talent 🎯"
   },
   {
     "name": "Lukas Lieb",
     "imgSrc": "/images/team/lukas.jpg",
     "education": "B.Sc. Computer Science",
     "function": "Core Developer",
-    "slogan": ""
+    "slogan": "Pixel mover 🌄"
   },
   {
     "name": "Reguel Wermelinger",
@@ -60,6 +60,6 @@
     "imgSrc": "/images/team/reto.jpg",
     "education": "El. Ing. HTL",
     "function": "Product Owner & Core Developer",
-    "slogan": ""
+    "slogan": "Universal tool 🛠️"
   }
 ]
