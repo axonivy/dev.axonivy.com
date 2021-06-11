@@ -130,9 +130,6 @@
 input::placeholder {
   color: #1b1b1b;
 }
-select {
-  visibility: hidden;
-}
 #main .select2-container--default.select2-container--focus .select2-selection--multiple {
   border: solid #007095 2px;
 }
