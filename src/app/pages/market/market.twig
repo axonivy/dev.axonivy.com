@@ -4,269 +4,59 @@
 
 {% block content %}
 
+{% if hideSearch is defined %}
 <style>
   .product-card {
-    position: relative;
-    cursor: pointer;
-    background-color: white;
-    padding: 1.5em;
-    overflow: hidden;
-    box-shadow: 0px 4px 16px rgba(27, 27, 27, 0.24);
-    border-radius: 8px;
-    height: 100%;
+    padding: 0.5em;
   }
-  .product-type {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    width: 100%;
-    background-color: hsl(0, 0%, 79%);
-  }
-  .product-type.connector {
-    background-color: hsl(65, 65%, 50%);
-  }
-  .product-type.process {
-    background-color: hsl(46, 100%, 58%);
-  }
-  .product-type.solution {
-    background-color: hsl(164, 59%, 40%);
-  }
-  .product-type.util {
-    background-color: hsl(192, 63%, 56%);
-  }
-  .product-logo {
-    height: 100px;
-    margin-top: 1.5em;
-  }
-  .product-logo img {
-    max-height: 100%; 
-    max-width: 100%;
-  }
-  .product-tags {
-    margin: 0;
-    overflow: hidden;
-  }
-  .product-tag {
-    color: white;
-    font-size: 14px;
-    padding: 6px 12px;
-    background-color: #007095;
-    border-radius: 18px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin: 0 0 0.5em 0.5em;
+  .product-card .product-logo {
+    height: 40px;
+    margin-top: 0.5em;
   }
   .product-title {
-    margin-top: 2em;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 1.25em;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+    line-height: 1.1em;
+    white-space: normal;
+    max-height: 2.2em;
   }
   .product-desc {
-    max-height: 7.5em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.5em;
+    display: none;
   }
-  input::placeholder {
-    color: #1b1b1b;
-  }
-  select {
-    visibility: hidden;
-  }
-  #main .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: solid #007095 2px;
-  }
-  #main .select2-container--default .select2-search__field {
-    line-height: 100%;
-  }
-  #main .select2-selection--multiple {
-    padding-top: 18px;
-    height: 3.3em;
-  }
-  #main .select2-selection--multiple:before {
-    content: "";
-    position: absolute;
-    right: 12px;
-    top: 40%;
-    background-image: url('/images/icons/arrow-down-1.svg');
-    width: 12px;
-    height: 12px;
-  }
-  #main .select2-selection__choice {
-    font-size: 12px;
-    line-height: 2em;
-  }
-  #main .selection {
-    line-height: 10px;
-  }
-  .dropdown {
-    position: relative;
-    width: 100%;
-    min-width: 240px;
-    display: inline-block;
-  }
-  .dropdown label {
-    position: absolute;
-    top: 3px;
-    left: 1rem;
+  .product-card .product-tag {
+    font-size: 9px;
+    padding: 2px 4px;
+    border-radius: 4px;
     font-weight: normal;
-    font-size: 12px;
-    color: #1b1b1b;
-    text-transform: none;
-    z-index: 1;
-  }
-
-  .types {
-    margin-top: 3em;
-    width: 100%;
-  }
-  .types .type {
-    padding: 0.2em 1em;
-    margin: 0.5em;
-    border-radius: 2em;
-    border: solid 2px;
-    cursor: pointer;
-    border-color: hsl(0, 0%, 79%);
-  }
-  .types .type.selected {
-    font-weight: 700;
-    color: white;
-  }
-  .types .selected[data-filter=''] {
-    color: #1b1b1b;
-  }
-  .types .selected[data-filter=''] .si {
-    color: #1b1b1b;
-    background-color: #1b1b1b;
-  }
-  .types .type:hover:not(.selected) {
-    background-color: hsl(0, 0%, 95%);
-  }
-  .types .type[data-filter='connector'] {
-    border-color: hsl(65, 65%, 50%);
-  }
-  .types .selected[data-filter='connector'] {
-    background-color: hsl(65, 65%, 50%);
-  }
-  .types [data-filter='connector']:hover:not(.selected) {
-    background-color: hsl(65, 65%, 95%);
-  }
-  .types .type[data-filter='process'] {
-    border-color: hsl(46, 100%, 58%);
-  }
-  .types .selected[data-filter='process'] {
-    background-color: hsl(46, 100%, 58%);
-  }
-  .types [data-filter='process']:hover:not(.selected) {
-    background-color: hsl(46, 100%, 95%);
-  }
-  .types .type[data-filter='solution'] {
-    border-color: hsl(164, 59%, 40%);
-  }
-  .types .selected[data-filter='solution'] {
-    background-color: hsl(164, 59%, 40%);
-  }
-  .types [data-filter='solution']:hover:not(.selected) {
-    background-color: hsl(164, 59%, 95%);
-  }
-  .types .type[data-filter='util'] {
-    border-color: hsl(192, 63%, 56%);
-  }
-  .types .selected[data-filter='util'] {
-    background-color: hsl(192, 63%, 56%);
-  }
-  .types [data-filter='util']:hover:not(.selected) {
-    background-color: hsl(192, 63%, 95%);
-  }
-  .types .selected .si {
-    background-color: white;
+    position: relative;
+    height: 18px;
   }
   
-  @media screen and (max-width: 500px) {
-    .p-col-6 {
-      width: 100%;
+  section .inner {
+    width: calc(100% - 1em);
+  }
+  @media screen and (min-width: 300px) {
+    .p-col-fixed {
+      width: 50%;
     }
   }
-  @media screen and (max-width: 768px) {
-    .product-card {
-      padding: 1em;
-    }
-    .product-tag {
-      font-size: 12px;
-      padding: 4px 8px;
-    }
-    .product-logo {
-      height: 80px;
-      margin-top: 1em;
-    }
-    .product-title {
-      margin-top: 1em;
-      font-size: 17px;
-      margin-bottom: 0.5em;
-    }
-    .product-desc {
-      max-height: 4.5em;
-      font-size: 14px;
+  @media screen and (min-width: 500px) {
+    .p-col-fixed {
+      width: 33%;
     }
   }
-  .p-sm-1, .p-sm-2, .p-sm-3, .p-sm-4, .p-sm-5, .p-sm-6, .p-sm-7, .p-sm-8, .p-sm-9, .p-sm-10, .p-sm-11, .p-sm-12, .p-md-1, .p-md-2, .p-md-3, .p-md-4, .p-md-5, .p-md-6, .p-md-7, .p-md-8, .p-md-9, .p-md-10, .p-md-11, .p-md-12, .p-lg-1, .p-lg-2, .p-lg-3, .p-lg-4, .p-lg-5, .p-lg-6, .p-lg-7, .p-lg-8, .p-lg-9, .p-lg-10, .p-lg-11, .p-lg-12, .p-xl-1, .p-xl-2, .p-xl-3, .p-xl-4, .p-xl-5, .p-xl-6, .p-xl-7, .p-xl-8, .p-xl-9, .p-xl-10, .p-xl-11, .p-xl-12 {
-    padding: .75rem;
+  @media screen and (min-width: 768px) {
+    .p-col-fixed {
+      width: 25%;
+    }
   }
-
-  {% if hideSearch is defined %}
-    .product-card {
-      padding: 0.5em;
+  @media screen and (min-width: 992px) {
+    .p-col-fixed {
+      width: 20%;
     }
-    .product-card .product-logo {
-      height: 40px;
-      margin-top: 0.5em;
-    }
-    .product-title {
-      font-size: 0.9em;
-      margin-top: 0.5em;
-      line-height: 1.1em;
-      white-space: normal;
-      max-height: 2.2em;
-    }
-    .product-desc {
-      display: none;
-    }
-    .product-card .product-tag {
-      font-size: 9px;
-      padding: 2px 4px;
-      border-radius: 4px;
-      font-weight: normal;
-      position: relative;
-      height: 18px;
-    }
-    
-    section .inner {
-      width: calc(100% - 1em);
-    }
-    @media screen and (min-width: 300px) {
-      .p-col-fixed {
-        width: 50%;
-      }
-    }
-    @media screen and (min-width: 500px) {
-      .p-col-fixed {
-        width: 33%;
-      }
-    }
-    @media screen and (min-width: 768px) {
-      .p-col-fixed {
-        width: 25%;
-      }
-    }
-    @media screen and (min-width: 992px) {
-      .p-col-fixed {
-        width: 20%;
-      }
-    }
-  {% endif %}
+  }
 </style>
+{% endif %}
 
 {% if hideSearch is not defined %}
 <section id="main">

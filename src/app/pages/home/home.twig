@@ -88,4 +88,22 @@
   </div>
 </section>
 
+{% if ANNOUNCMENT_SHOW %}
+  <div class="fixed-news-image">
+    <span class="close-button" onclick="hideAnnouncment()"></span>
+    <a href="/team">
+      <img src="/images/misc/hiring.png" />
+    </a>
+  </div>
+
+  <script>
+    function hideAnnouncment() {
+      $('.fixed-news-image').hide();
+      let expiryDate = new Date();
+      expiryDate.setMonth(expiryDate.getMonth() + 3)
+      document.cookie = `announcment=false; expires=${expiryDate}`;
+    }
+  </script>
+{% endif %}
+
 {% endblock %}

@@ -7,7 +7,7 @@
 <section id="main">
   <div class="inner">
     <header>
-      <h1>ivyTeam (Switzerland)</h1>
+      <h1>ivyTeam 🇨🇭</h1>
     </header>
 
     <p>
@@ -21,24 +21,49 @@
 
 <section style="padding: 2em 0;">
   <div class="inner">
-    <div class="row">
+    <header>
+      <h3>
+        <i class="si si-megaphone"></i>
+        We're hiring!
+      </h3>
+    </header>
+    <p>
+      We are currently expanding our team of software developers for the <b>Next Gen Axon Ivy Platform</b> using the latest technology stacks.
+      Axon Ivy is offering attractive positions and innovative development opportunities, with central offices located in the heart of Zug city. 
+      <br>
+      Please visit our community blog for an informative insight into the development of our product.
+    </p>
+    <ul class="actions">
+      <li>
+        <a class="button special" href="https://www.axonactive.ch/axon-ivy/zug/software-engineer-java"><i class="si si-team"></i>Software Engineer Java</a>
+      </li>
+      <li>
+        <a class="button" href="https://community.axonivy.com/t/blog"><i class="si si-book"></i>Blog</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding: 2em 0;">
+  <div class="inner">
+    <div class="row p-grid p-align-stretch">
     {% for employee in employees %}
-      <div class="4u 12u$(small)" style="text-align: center;">
-        {% if employee.imgSrc %}
-        <img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
-        {% else %}
-        <div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
-        {% endif %}
-        <header>
-          <h4 style="margin: 17px 0 0 0;">
-            {{ employee.name }}
-          </h4>
-        </header>
-        <p style="min-height: 85px; color: grey;">
-          {{ employee.function }}
-          <br />
-          {{ employee.education }}
-        </p>
+      <div class="p-col-fixed p-col-12 p-md-6 p-lg-4">
+        <div class="team-card">
+          {% if employee.imgSrc %}
+            <img src="{{ employee.imgSrc }}" alt="{{ employee.name }}">
+          {% else %}
+            <div style="width: 101px; height: 170px; border: 1px solid #C7D426; text-align: center;"></div>
+          {% endif %}
+          <div class="p-grid p-dir-col p-justify-center team-member">
+            <h4>{{ employee.name }}</h4>
+            <p>
+              {{ employee.function }}
+              <br />
+              {{ employee.education }}
+          </p>
+          </div>
+        </div>
       </div>
     {% endfor %}
     </div>
