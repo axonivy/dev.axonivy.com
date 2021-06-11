@@ -36,7 +36,7 @@
 
 /* Team page */
 .team-card {
-  height: 170px;
+  height: 250px;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(27, 27, 27, 0.24);
 }
@@ -44,6 +44,7 @@
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   float: left;
+  height: 250px;
 }
 .team-member {
   margin-left: 6rem;
@@ -54,7 +55,7 @@
   font-size: 1em;
 }
 .team-member p {
-  margin: 0;
+  margin-bottom: 1em;
   font-size: 14px;
   color: #3a3a3a;
   line-height: 1.5em;
