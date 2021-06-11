@@ -3,54 +3,63 @@
     "name": "Alexander Suter",
     "imgSrc": "/images/team/alex.jpg",
     "education": "B.Sc. Computer Science",
-    "function": "Core Developer"
+    "function": "Core Developer",
+    "slogan": "Whale whisperer 🐋"
   },
   {
     "name": "Andreas Rusch",
     "imgSrc": "/images/team/andreas.jpg",
     "education": "Lic. oec. publ. Business IT",
-    "function": "Core Developer"
+    "function": "Core Developer",
+    "slogan": ""
   },
   {
     "name": "Bruno Bütler",
     "imgSrc": "/images/team/bruno.jpg",
     "education": "Inf. Ing. HTL",
-    "function": "Product Owner & Team Leader"
+    "function": "Product Owner & Team Leader",
+    "slogan": "Primal rock 🗿"
   },
   {
     "name": "Caty Hürlimann",
     "imgSrc": "/images/team/caty.jpg",
     "education": "",
-    "function": "Office Manager"
+    "function": "Office Manager",
+    "slogan": "Backoffice glue 📎"
   },
   {
     "name": "Christian Strebel",
     "imgSrc": "/images/team/christian.jpg",
-    "education": "Inf. Ing. HTL",
-    "function": "Core Developer"
+    "education": "Inf. Ing. FH",
+    "function": "Core Developer",
+    "slogan": "Infrastructure fundamet 🏗️"
   },
   {
     "name": "Jacek Lajdecki",
     "imgSrc": "/images/team/jacek.jpg",
     "education": "Apprentice in Information Technology",
-    "function": "Graduand Core Developer"
+    "function": "Graduand Core Developer",
+    "slogan": "Young talent 🎯"
   },
   {
     "name": "Lukas Lieb",
     "imgSrc": "/images/team/lukas.jpg",
     "education": "B.Sc. Computer Science",
-    "function": "Core Developer"
+    "function": "Core Developer",
+    "slogan": "Pixel mover 🌄"
   },
   {
     "name": "Reguel Wermelinger",
     "imgSrc": "/images/team/reguel.jpg",
     "education": "B.Sc. Computer Science",
-    "function": "Core Developer"
+    "function": "Core Developer",
+    "slogan": "Swiss knife ⌨️"
   },
   {
     "name": "Reto Weiss",
     "imgSrc": "/images/team/reto.jpg",
     "education": "El. Ing. HTL",
-    "function": "Product Owner & Core Developer"
+    "function": "Product Owner & Core Developer",
+    "slogan": "Universal tool 🛠️"
   }
 ]
