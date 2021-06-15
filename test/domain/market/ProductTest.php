@@ -6,7 +6,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\domain\market\Market;
 use app\domain\market\MarketInstallCounter;
-use app\domain\market\Product;
+use app\Config;
 
 class ProductTest extends TestCase
 {
@@ -180,6 +180,7 @@ class ProductTest extends TestCase
 
   public function test_installationCount()
   {
+    unlink(Config::marketInstallationsFile());
     $product = Market::getProductByKey('toDo');
     $count = $product->getInstallationCount();
     Assert::assertIsInt($count);

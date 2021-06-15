@@ -82,6 +82,15 @@ class MavenArtifactTest extends TestCase
     $artifact = MavenArtifactRepository::getMavenArtifact('doc-factory', 'iar');
     Assert::assertTrue($artifact->getMakesSenseAsMavenDependency());
   }
+  
+  public function test_repoUrl()
+  {
+    $artifact = MavenArtifactRepository::getMavenArtifact('a-trust-connector', 'iar');
+    Assert::assertEquals('https://maven.axonivy.com/', $artifact->getRepoUrl());
+    
+    $artifact = MavenArtifactRepository::getMavenArtifact('visualvm-plugin', 'nbm');
+    Assert::assertEquals('https://repo.axonivy.rocks/', $artifact->getRepoUrl());
+  }
 
   public function test_isDocumentation()
   {

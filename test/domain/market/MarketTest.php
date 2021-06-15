@@ -41,7 +41,7 @@ class MarketTest extends TestCase
   public function test_search_emptyDoNotFilter()
   {
     $products = Market::search(Market::listed(), '');
-    Assert::assertEquals(9, count($products));
+    Assert::assertEquals(10, count($products));
   }
 
   public function test_search_noMatch()
@@ -67,7 +67,7 @@ class MarketTest extends TestCase
   public function test_all_sort()
   {
     $products = Market::all();
-    Assert::assertEquals('genderize', $products[0]->getKey());
+    Assert::assertEquals('a-trust', $products[0]->getKey());
   }
 
   public function test_types()
@@ -96,6 +96,7 @@ class MarketTest extends TestCase
     $expectedTags = [
       'DEMO',
       'DOCUMENT',
+      'E-SIGNATURE',
       'HELPER',
       'HR',
       'MONITORING',

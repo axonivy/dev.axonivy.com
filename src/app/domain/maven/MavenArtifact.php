@@ -11,6 +11,8 @@ class MavenArtifact
 
   private $name;
 
+  private string $repoUrl;
+  
   private $groupId;
 
   private $artifactId;
@@ -23,10 +25,11 @@ class MavenArtifact
 
   private $isDocumentation;
 
-  function __construct($key, $name, $groupId, $artifactId, $type, bool $makesSenseAsMavenDependency, bool $isDocumentation)
+  function __construct($key, $name, string $repoUrl, $groupId, $artifactId, $type, bool $makesSenseAsMavenDependency, bool $isDocumentation)
   {
     $this->key = $key;
     $this->name = $name;
+    $this->repoUrl = $repoUrl;
     $this->groupId = $groupId;
     $this->artifactId = $artifactId;
     $this->type = $type;
@@ -43,7 +46,12 @@ class MavenArtifact
   {
     return $this->key;
   }
-
+  
+  public function getRepoUrl(): string
+  {
+    return $this->repoUrl;
+  }
+  
   public function getGroupId(): string
   {
     return $this->groupId;
@@ -130,7 +138,7 @@ class MavenArtifact
   private function getBaseUrl()
   {
     $groupId = str_replace('.', '/', $this->groupId);
-    return Config::MAVEN_ARTIFACTORY_URL . "$groupId/" . $this->artifactId;
+    return $this->repoUrl . "$groupId/" . $this->artifactId;
   }
 
   public function getPermalinkDev()
@@ -192,6 +200,7 @@ class HttpRequester
 class MavenArtifactBuilder
 {
   private $key;
+  private string $repoUrl = Config::MAVEN_ARTIFACTORY_URL;
   private $name;
   private $groupId;
   private $artifactId;
@@ -202,6 +211,16 @@ class MavenArtifactBuilder
   public function __construct($key)
   {
     $this->key = $key;
+  }
+  
+  public function repoUrl(string $repoUrl): MavenArtifactBuilder
+  {
+    if (!StringUtil::endsWith($repoUrl, '/'))
+    {
+      $repoUrl = $repoUrl . '/';
+    }
+    $this->repoUrl = $repoUrl;
+    return $this;
   }
 
   public function name(string $name): MavenArtifactBuilder
@@ -245,6 +264,7 @@ class MavenArtifactBuilder
     return new MavenArtifact(
       $this->key,
       $this->name,
+      $this->repoUrl,
       $this->groupId,
       $this->artifactId,
       $this->type,
