@@ -67,8 +67,15 @@ class StatusApi
       ];
       $mavenProductInfo = $product->getMavenProductInfo();
       if ($mavenProductInfo != null) {
-        $p['latest-version-to-display'] = $mavenProductInfo->getLatestVersionToDisplay();
-        $p['latest-version-available'] = $mavenProductInfo->getLatestVersion();
+        
+        $latestVersionToDisplay = 'unavailable';
+        $latestVersionAvailable = 'unavailable';
+        try {
+          $latestVersionToDisplay = $mavenProductInfo->getLatestVersionToDisplay();
+          $latestVersionAvailable = $mavenProductInfo->getLatestVersion();
+        } catch (\Exception $ex) { }
+        $p['latest-version-to-display'] = $latestVersionToDisplay;
+        $p['latest-version-available'] = $latestVersionAvailable;
       }
       $products[] = $p;
     }

@@ -3,10 +3,10 @@
 namespace app\domain\market;
 
 use app\domain\maven\MavenArtifact;
+use app\Config;
 
 class ProductFactory
 {
-
   public static function create(string $key, string $path, string $pathMetaFile): Product
   {
     $content = file_get_contents($pathMetaFile);
@@ -48,6 +48,7 @@ class ProductFactory
     foreach ($json->mavenArtifacts as $mavenArtifact) {
       $mavenArtifacts[] = MavenArtifact::create($mavenArtifact->key ?? $mavenArtifact->artifactId)
         ->name($mavenArtifact->name)
+        ->repoUrl($mavenArtifact->repoUrl ?? Config::MAVEN_ARTIFACTORY_URL)
         ->groupId($mavenArtifact->groupId)
         ->artifactId($mavenArtifact->artifactId)
         ->type($mavenArtifact->type ?? 'iar')
