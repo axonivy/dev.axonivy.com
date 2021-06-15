@@ -180,7 +180,10 @@ class ProductTest extends TestCase
 
   public function test_installationCount()
   {
-    unlink(Config::marketInstallationsFile());
+    $file = Config::marketInstallationsFile();
+    if (file_exists($file)) {
+      unlink($file);
+    }
     $product = Market::getProductByKey('toDo');
     $count = $product->getInstallationCount();
     Assert::assertIsInt($count);
