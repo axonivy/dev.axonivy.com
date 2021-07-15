@@ -36,7 +36,8 @@ class LinkActionTest extends TestCase
     AppTester::assertThatGet('/link/docker-elasticsearch')->redirect($prefix . 'ivy-elasticsearch');
     AppTester::assertThatGet('/link/docker-reverse-proxy-apache')->redirect($prefix . 'ivy-reverse-proxy-apache');
     AppTester::assertThatGet('/link/docker-reverse-proxy-nginx')->redirect($prefix . 'ivy-reverse-proxy-nginx');
-    AppTester::assertThatGet('/link/docker-scaling')->redirect($prefix . 'ivy-scaling');
+    AppTester::assertThatGet('/link/docker-scaling-haproxy')->redirect($prefix . 'ivy-scaling-haproxy');
+    AppTester::assertThatGet('/link/docker-scaling-nginx')->redirect($prefix . 'ivy-scaling-nginx');
     AppTester::assertThatGet('/link/docker-secrets')->redirect($prefix . 'ivy-secrets');
     
     AppTester::assertThatGet('/link/docker-samples')->redirect('https://github.com/axonivy/docker-samples/');

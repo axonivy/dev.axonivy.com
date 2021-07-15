@@ -35,7 +35,8 @@ class LinkAction
         'docker-elasticsearch' => $samplesTreePrefix . 'ivy-elasticsearch',
         'docker-reverse-proxy-apache' => $samplesTreePrefix . 'ivy-reverse-proxy-apache',
         'docker-reverse-proxy-nginx' => $samplesTreePrefix . 'ivy-reverse-proxy-nginx',
-        'docker-scaling' => $samplesTreePrefix . 'ivy-scaling',
+        'docker-scaling-haproxy' => $samplesTreePrefix . 'ivy-scaling-haproxy',
+        'docker-scaling-nginx' => $samplesTreePrefix . 'ivy-scaling-nginx',
         'docker-secrets' => $samplesTreePrefix . 'ivy-secrets',
         
         'demos' => $demosPrefix,
