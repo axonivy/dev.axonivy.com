@@ -47,7 +47,7 @@ class LinkAction
         
         'webtester' => 'https://github.com/axonivy/web-tester/',
 
-        'market-contribute' => 'https://github.com/axonivy/market/blob/master/doc/contribute.md',
+        'market-contribute' => 'https://github.com/axonivy/market/wiki/c0-Contribute',
         
         'build-examples' => $buildExamplePrefix . 'tree/' . $branchVersion,
         'build-examples-test-project' => $buildExampleBlobPrefix,
