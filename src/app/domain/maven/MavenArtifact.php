@@ -185,7 +185,7 @@ class HttpRequester
   static function request($url)
   {
     // prevent metadata requests to CDN (maven.axonivy.com) - cache last too long.
-    //$url = str_replace("https://maven.axonivy.com/", "https://nexus.axonivy.com/repository/maven/", $url);    
+    $url = str_replace("https://maven.axonivy.com/", "https://nexus.axonivy.com/repository/maven/", $url);    
 
     if (!isset(self::$cache[$url])) {
       $headers = get_headers($url);
