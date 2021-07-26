@@ -80,7 +80,8 @@ class Website
     } else{
       $protocol = 'http';
     }
-    return $protocol . "://" . $_SERVER['HTTP_HOST'];
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    return $protocol . "://" . $host;
   }
 
   private function getDisplayVersion(?ReleaseInfo $info): string
