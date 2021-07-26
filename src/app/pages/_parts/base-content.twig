@@ -3,9 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Automate your business processes with the Axon Ivy Platform">
-  <meta property="og:image" content="https://developer.axonivy.com/images/misc/axonivy-logo-round.png">
-  <meta property="og:image:alt" content="Axon Ivy Logo">
+  
+  {% if block("meta") is defined %}  
+    {{ block("meta")|raw }}
+  {% else %}
+    <meta name="description" content="Automate your business processes with the Axon Ivy Platform">  
+    <meta property="og:image" content="https://developer.axonivy.com/images/misc/axonivy-logo-round.png">
+    <meta property="og:image:alt" content="Axon Ivy Logo">
+  {% endif %}
+
+
   <title>{% block title %} | DEV Axon Ivy{% endblock %}</title>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

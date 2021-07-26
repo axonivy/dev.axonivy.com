@@ -2,6 +2,13 @@
 
 {% block title %}{{ product.name }} | Axon Ivy Market {{ parent() }}{% endblock %}
 
+{% block meta %}
+  <meta property="description" content="{{ product.shortDescription }}" />
+  <meta property="og:title" content="{{ product.name }}" />
+  <meta property="og:description" content="{{ product.shortDescription }}" />
+  <meta property="og:image" content="{{ BASE_URL }}{{ product.imgSrc }}" />
+{% endblock %}
+
 {% block content %}
 
 <style>
@@ -84,10 +91,6 @@
     }
   }
 </style>
-
-<meta property="og:title" content="{{ product.name }}" />
-<meta property="og:description" content="{{ product.description }}" />
-<meta property="og:image" content="{{ product.imgSrc }}" />
 
 <section id="main">
   <div class="inner product-header">

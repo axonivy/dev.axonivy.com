@@ -69,7 +69,18 @@ class Website
 
     $view->getEnvironment()->addGlobal('ANNOUNCMENT_SHOW', !isset($_COOKIE["announcment"]));
 
+    $view->getEnvironment()->addGlobal('BASE_URL', $this->baseUrl());
+
     return $view;
+  }
+
+  private function baseUrl(){
+    if (isset($_SERVER['HTTPS'])){
+      $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+    } else{
+      $protocol = 'http';
+    }
+    return $protocol . "://" . $_SERVER['HTTP_HOST'];
   }
 
   private function getDisplayVersion(?ReleaseInfo $info): string
