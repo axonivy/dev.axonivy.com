@@ -12,15 +12,16 @@
   }
 
   .dropbtn {
-    color: white;
     font-size: 14px;
-    border: none;
     cursor: pointer;
   }
 
   .dropdown {
     position: relative;
     display: inline-block;
+    float: right;
+    width: auto;
+    min-width: auto;
   }
 
   .dropdown-content {
@@ -58,7 +59,7 @@
       {% endfor %}
           
       {% if docProvider.notImportantBooks is not empty or docProvider.existingBook is not empty %}
-        <div class="dropdown" style="float:right;">
+        <div class="dropdown">
           <a class="button dropbtn"><i class="si si-book"></i> Further Docs</a>
           <div class="dropdown-content">
             {% if docProvider.notImportantBooks is not empty %}
