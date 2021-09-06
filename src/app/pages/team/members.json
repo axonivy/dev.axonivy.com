@@ -7,25 +7,11 @@
     "slogan": "Whale whisperer 🐋"
   },
   {
-    "name": "Andreas Rusch",
-    "imgSrc": "/images/team/andreas.jpg",
-    "education": "Lic. oec. publ. Business IT",
-    "function": "Core Developer",
-    "slogan": ""
-  },
-  {
     "name": "Bruno Bütler",
     "imgSrc": "/images/team/bruno.jpg",
     "education": "Inf. Ing. HTL",
     "function": "Product Owner & Team Leader",
     "slogan": "Primal rock 🗿"
-  },
-  {
-    "name": "Caty Hürlimann",
-    "imgSrc": "/images/team/caty.jpg",
-    "education": "",
-    "function": "Office Manager",
-    "slogan": "Backoffice glue 📎"
   },
   {
     "name": "Christian Strebel",
