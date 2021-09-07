@@ -13,6 +13,12 @@
   .product-description {
     gap: 2em;
   }
+  .product-tabs-anchor {
+    display: block;
+    position: relative;
+    top: -100px;
+    visibility: hidden;
+  }
   .tab-button {
     height: 2em;
     display: inline-block;
@@ -118,23 +124,24 @@
 <section id="one">
   <div class="inner product-description p-grid">
     <article class="p-col">
+      <a class="product-tabs-anchor" id="tabs"></a>
 
       <span class="tab-button selected">
-        <a href="#" class="product-description-tab" onclick="openTab('description');">Description</a>
+        <a href="#tabs" class="product-description-tab" onclick="openTab('description');">Description</a>
       </span>
       {% if product.demoDescription is not empty %}
         <span class="tab-button">
-          <a href="#" class="product-demo-tab" onclick="openTab('demo');">Demo</a>
+          <a href="#tabs" class="product-demo-tab" onclick="openTab('demo');">Demo</a>
         </span>
       {% endif %}
       {% if product.setupDescription is not empty %}
         <span class="tab-button">
-          <a href="#" class="product-setup-tab" onclick="openTab('setup');">Setup</a>
+          <a href="#tabs" class="product-setup-tab" onclick="openTab('setup');">Setup</a>
         </span>
       {% endif %}
       {% if mavenArtifactsAsDependency is not empty %}
         <span class="tab-button">
-          <a href="#" class="product-maven-tab" onclick="openTab('maven');">Maven</a>
+          <a href="#tabs" class="product-maven-tab" onclick="openTab('maven');">Maven</a>
         </span>
       {% endif %}
 
