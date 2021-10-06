@@ -38,6 +38,7 @@ class LinkAction
         'docker-scaling-haproxy' => $samplesTreePrefix . 'ivy-scaling-haproxy',
         'docker-scaling-nginx' => $samplesTreePrefix . 'ivy-scaling-nginx',
         'docker-secrets' => $samplesTreePrefix . 'ivy-secrets',
+        'docker-tracing-jaeger' => $samplesTreePrefix . 'ivy-tracing-jaeger',
         
         'demos' => $demosPrefix,
         'demos-connect-secure-service-java' => $demosBlobPrefix . 'connectivity/connectivity-demos/src/com/axonivy/connectivity/rest/provider/SecureService.java',
