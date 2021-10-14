@@ -37,11 +37,17 @@
   .product-download .button.special.install, 
   .product-header .button.special.install {
     background-color: #C7D426;
+    min-width: 150px;
   }
   .product-install .button.special.download,
   .product-download .button.special.download, 
   .product-header .button.special.download {
     background-color: white;
+  }
+  .product-install .button.special.install .si,
+  .product-download .button.special.install .si, 
+  .product-header .button.special.install .si {
+    background-color: #1b1b1b;
   }
   .product-download,
   .product-install,
@@ -155,7 +161,7 @@
       {% if mavenProductInfo != null %}
        <span class="dropdown">
           <label>Choose target platform</label>
-          <select name="version" id="version" onchange="location = this.value + '#download';">
+          <select name="version" id="version" onchange="updateDownloadArtifact(this);">
           {% for version in mavenProductInfo.versionsToDisplay %}            
             <a href="#">
               <option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
@@ -166,7 +172,7 @@
       {% endif %}
 
       <a class="button special install artifact" href="javascript:void(0)" onclick="downloadArtifact()">
-        <span>Download</span>
+        <span class="download-artifact-btn">Download</span>
       </a>
     </article>
   </div>
@@ -197,8 +203,15 @@
 
 
 <script>
+  function updateDownloadArtifact(selection) { 
+    $('.download-artifact-btn').parent().addClass('disabled');
+    $('.download-artifact-btn').text('').addClass('si si-refresh si-is-spinning');
+    location = selection.value + '#download';
+  }
   function downloadArtifact() {
-    window.location = $('#artifact').val();
+    if (!$('.download-artifact-btn').parent().hasClass('disabled')) {
+      window.location = $('#artifact').val();
+    }
   }
   function toggleDownloadPanel() {
     $('.product-download').slideToggle();
