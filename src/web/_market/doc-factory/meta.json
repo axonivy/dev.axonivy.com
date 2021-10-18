@@ -4,7 +4,6 @@
 	"name": "Doc Factory",
 	"description": "Generate documents",
 	"sort": 300,
-	"versionDisplay": "hide-snapshots",
 	"type": "process",
 	"tags": ["document"],
 	"vendor": "Axon Ivy AG",

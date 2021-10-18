@@ -36,7 +36,7 @@ class BestMatchFirstInstallMatcher implements InstallMatcher
 }
 
 /**
- * Will try to always install the latest version on the current LTS traing
+ * Will try to always install the latest version on the current LTS train
  * Comming with Axon Ivy 9.2.0 will try to install the latest 9.2.x
  * 
  * - doc factory
