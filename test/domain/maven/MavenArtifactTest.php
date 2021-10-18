@@ -89,7 +89,7 @@ class MavenArtifactTest extends TestCase
     Assert::assertEquals('https://maven.axonivy.com/', $artifact->getRepoUrl());
     
     $artifact = MavenArtifactRepository::getMavenArtifact('visualvm-plugin', 'nbm');
-    Assert::assertEquals('https://repo.axonivy.rocks/', $artifact->getRepoUrl());
+    Assert::assertEquals('https://maven.axonivy.com/', $artifact->getRepoUrl());
   }
 
   public function test_isDocumentation()

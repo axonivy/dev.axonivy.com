@@ -8,9 +8,7 @@ class VersionDisplayFilterFactory
 {
   public static function create($key): VersionDisplayFilter
   {
-    if ($key == 'hide-snapshots') {
-      return new VersionDisplayFilterHideSnapshots();
-    } else if ($key == 'portal') {
+    if ($key == 'portal') {
       return new VersionDisplayFilterHidePortalSprintReleases();
     }
     return new VersionDisplayFilterShowAll();
@@ -23,21 +21,6 @@ class VersionDisplayFilterShowAll implements VersionDisplayFilter
   public function versionsToDisplay(MavenProductInfo $info): array
   {
     return $info->getVersions();
-  }
-}
-
-class VersionDisplayFilterHideSnapshots implements VersionDisplayFilter
-{
-
-  public function versionsToDisplay(MavenProductInfo $info): array
-  {
-    $versions = [];
-    foreach ($info->getVersions() as $v) {
-      if (!StringUtil::contains($v, '-SNAPSHOT')) {
-        $versions[] = $v;
-      }
-    }
-    return $versions;
   }
 }
 
