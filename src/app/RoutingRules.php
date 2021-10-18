@@ -33,6 +33,7 @@ use app\permalink\LinkAction;
 use app\pages\market\MetaJsonAction;
 use app\pages\market\OpenApiJsonAction;
 use app\pages\market\MetaRedirectAction;
+use app\pages\internal\MarketRCPTTAction;
 
 class RoutingRules
 {
@@ -75,6 +76,7 @@ class RoutingRules
     $app->get('/market/{key}[/{version}]', ProductAction::class);
     $app->get('/_market/{key}/_meta.json', MetaJsonAction::class);
     $app->get('/_market/{key}/openapi', OpenApiJsonAction::class);
+    $app->get('/internal/market-rcptt', MarketRCPTTAction::class);
 
     $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
 
