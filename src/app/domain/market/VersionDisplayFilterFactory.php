@@ -31,10 +31,16 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
   {
     $versionsToDisplay = [];
 
+    $latestDevRelease = true;
+
     $allVersions = $info->getVersions();
     $highesSprintReleases = [];
     foreach ($allVersions as $v) {
       if (StringUtil::contains($v, '-m')) { // hide sprint releases (maven milestone releases)
+        if ($latestDevRelease) {
+          $versionsToDisplay[] = $v;
+          $latestDevRelease = false;
+        }
         continue;
       }
 
