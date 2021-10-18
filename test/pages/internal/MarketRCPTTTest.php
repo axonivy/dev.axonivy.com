@@ -11,7 +11,7 @@ class MarketRCPTTTest extends TestCase
   {
     AppTester::assertThatGet('/internal/market-rcptt?designerVersion=9.2.0')
       ->ok()
-      ->bodyContains('runTest https://fakehost/_market/portal/_meta.json?version=9.2.0');
+      ->bodyContains('runTest "https://fakehost/_market/portal/_meta.json?version=9.2.0"');
   }
 
   public function notFound()
