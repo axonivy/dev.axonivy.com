@@ -30,8 +30,9 @@ class ProductFactory
     $industry = $json->industry ?? '';
     $installable = isset($json->installers);
     $compatibility = $json->compatibility ?? '0.0.0';
+    $validate = $json->validate ?? true;
     return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
-      $vendor, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $installable, $info);
+      $vendor, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $installable, $info, $validate);
   }
 
   private static function createMavenProductInfo($json): MavenProductInfo
