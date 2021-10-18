@@ -108,7 +108,7 @@ class ProductTest extends TestCase
   public function test_compatibility()
   {
     $product = Market::getProductByKey('visualvm-plugin');
-    Assert::assertEquals('0.0.0', $product->getCompatibility());
+    Assert::assertEquals('8.0+', $product->getCompatibility());
 
     $product = Market::getProductByKey('genderize');
     Assert::assertEquals('9.2+', $product->getCompatibility());
