@@ -47,6 +47,7 @@ class MarketRCPTTAction
     $products = Market::listed();
     $products = array_filter($products, fn (Product $product) => $product->getMavenProductInfo() != null);
     $products = array_filter($products, fn (Product $product) => $product->isInstallable());
+    $products = array_filter($products, fn (Product $product) => $product->toValidate());
     return $products;
   }
 

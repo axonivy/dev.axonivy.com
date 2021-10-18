@@ -24,6 +24,7 @@ class Product
   private string $industry;
   private string $compatibility;
   private bool $installable;
+  private bool $validate;
 
   private array $readMeParts;
   private int $installationCount;
@@ -32,7 +33,7 @@ class Product
 
   public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
     string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $statusBadgeUrl, string $language, string $industry,
-    string $compatibility, bool $installable, ?MavenProductInfo $mavenProductInfo)
+    string $compatibility, bool $installable, ?MavenProductInfo $mavenProductInfo, bool $validate)
   {
     $this->key = $key;
     $this->path = $path;
@@ -53,6 +54,7 @@ class Product
     $this->installable = $installable;
     $this->mavenProductInfo = $mavenProductInfo;
     $this->readMeParts = [];
+    $this->validate = $validate;
   }
 
   public function getKey(): string
@@ -63,6 +65,11 @@ class Product
   public function isListed(): bool
   {
     return $this->listed;
+  }
+
+  public function toValidate(): bool
+  {
+    return $this->validate;
   }
 
   public function getName(): string
