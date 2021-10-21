@@ -184,7 +184,7 @@
       {% if mavenProductInfo != null %}
        <span class="dropdown">
           <label>Version</label>
-          <select name="installVersion" id="installVersion" onchange="location = this.value + '#install';">
+          <select name="installVersion" id="installVersion" onchange="updateInstallArtifact(this);">
           {% for version in mavenProductInfo.versionsToDisplay %}            
             <a href="#">
               <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getMetaJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
@@ -195,7 +195,7 @@
       {% endif %}
 
       <a class="button special install artifact" href="javascript:void(0)" onclick="installInDesigner()">
-        <span>Install</span>
+        <span class="install-artifact-btn">Install</span>
       </a>
     </article>
   </div>
@@ -207,6 +207,11 @@
     $('.download-artifact-btn').parent().addClass('disabled');
     $('.download-artifact-btn').text('').addClass('si si-refresh si-is-spinning');
     location = selection.value + '#download';
+  }
+  function updateInstallArtifact(selection) {
+    $('.install-artifact-btn').parent().addClass('disabled');
+    $('.install-artifact-btn').text('').addClass('si si-refresh si-is-spinning');
+    location = selection.value + '#install';
   }
   function downloadArtifact() {
     if (!$('.download-artifact-btn').parent().hasClass('disabled')) {

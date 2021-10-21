@@ -24,6 +24,13 @@ class ProductActionTest extends TestCase
       ->bodyContains('Portal');
   }
 
+  public function testSonatypeArtifact()
+  {
+    AppTester::assertThatGet('/market/web-tester')
+      ->ok()
+      ->bodyContains('Web Tester');
+  }
+
   public function testInstallButton_canNotInstallInOfficalMarket()
   {
     AppTester::assertThatGet('/market/genderize')
