@@ -186,7 +186,11 @@ class HttpRequester
   {
     // prevent metadata requests to CDN (maven.axonivy.com) - cache last too long.
     $url = str_replace("https://maven.axonivy.com/", "https://nexus.axonivy.com/repository/maven/", $url);    
-
+    if (str_starts_with($url, "https://oss.sonatype.org"))
+    {
+      $url = HttpRequester::follow_redirects($url, 5);
+    }
+    
     if (!isset(self::$cache[$url])) {
       $headers = get_headers($url);
       $statusCode = substr($headers[0], 9, 3);
@@ -197,6 +201,28 @@ class HttpRequester
       self::$cache[$url] = $content;
     }
     return self::$cache[$url];
+  }
+
+  static function follow_redirects($url, $maxdepth = 10, $depth = 0)
+  {
+    //return the current url if we have hit the maximum depth
+    if($depth >= $maxdepth)
+      return $url;
+
+    //download the headers from the url and make all the keys lowercase
+    $headers = get_headers($url, true);
+    $headers = array_change_key_case($headers);
+    //we have a redirect if the `location` header is set
+    if(isset($headers["location"]))
+    {
+      $location = $headers["location"];
+      if(is_array($location))
+      {
+        $location = $location[0];
+      }
+      return HttpRequester::follow_redirects($location, $maxdepth, $depth + 1);
+    }
+    return $url;
   }
 }
 
