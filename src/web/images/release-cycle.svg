@@ -82,12 +82,6 @@
            x1="6"
            x2="6"
            style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
-        <text
-           y="9"
-           dy="7.0999999"
-           id="text254"
-           style="fill:currentColor"
-           x="6">2017</text>
         <line
            y2="-18.511805"
            y1="-284.07083"
@@ -115,11 +109,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text260"
-           style="fill:currentColor">2018</text>
       </g>
       <g
          class="tick"
@@ -133,11 +122,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text266"
-           style="fill:currentColor">2019</text>
       </g>
       <g
          class="tick"
@@ -151,11 +135,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text272"
-           style="fill:currentColor">2020</text>
       </g>
       <g
          class="tick"
@@ -169,11 +148,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text278"
-           style="fill:currentColor">2021</text>
       </g>
       <g
          class="tick"
@@ -187,11 +161,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text284"
-           style="fill:currentColor">2022</text>
       </g>
       <g
          class="tick"
@@ -205,11 +174,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text290"
-           style="fill:currentColor">2023</text>
       </g>
       <g
          class="tick"
@@ -223,11 +187,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-opacity:0.47058824;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text296"
-           style="fill:currentColor">2024</text>
       </g>
       <g
          class="tick"
@@ -241,11 +200,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text302"
-           style="fill:currentColor">2025</text>
       </g>
       <g
          class="tick"
@@ -259,11 +213,6 @@
            x1="0"
            x2="0"
            style="stroke:#000000;stroke-width:0.90724452;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.47058824" />
-        <text
-           y="9"
-           dy="0.70999998em"
-           id="text308"
-           style="fill:currentColor">2026</text>
       </g>
     </g>
     <g
