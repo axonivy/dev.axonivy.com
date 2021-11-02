@@ -47,5 +47,12 @@
     "education": "El. Ing. HTL",
     "function": "Product Owner & Core Developer",
     "slogan": "Universal tool 🛠️"
+  },
+  {
+    "name": "Louis Müller",
+    "imgSrc": "/images/team/reto.jpg",
+    "education": "M.Sc. Computer Science",
+    "function": "Core Developer",
+    "slogan": ""
   }
 ]
