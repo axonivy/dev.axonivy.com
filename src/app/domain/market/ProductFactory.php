@@ -19,7 +19,7 @@ class ProductFactory
     }
     $type = $json->type ?? [];
     $tags = $json->tags ?? [];
-    $version = $json->version ?? 'Unknown';
+    $version = $json->version ?? '';
     $shortDesc = $json->description ?? '';
     $vendor = $json->vendor ?? 'Unknown';
     $platformReview = $json->platformReview ?? '4.0';

@@ -79,6 +79,11 @@ class Product
 
   public function getVersion(): string
   {
+    if (empty($this->version)) {
+      if ($this->mavenProductInfo != null) {
+        $this->version = $this->mavenProductInfo->getLatestVersion();        
+      }
+    }
     return $this->version;
   }
 
