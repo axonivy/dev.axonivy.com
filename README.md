@@ -8,7 +8,9 @@
 
 ## Execute tests
 
-  docker-compose exec web ./vendor/bin/phpunit
+```
+docker-compose exec web ./vendor/bin/phpunit
+```
 
 ## Generate the issue list for the new and noteworthy (improvements/bugs)
 
@@ -22,15 +24,17 @@
 
 # Update a php library
 
-  docker-compose exec web composer show --outdated
+```
+docker-compose exec web composer show --outdated
 
-  docker-compose exec web composer require --update-with-dependencies slim/slim
-  docker-compose exec web composer require --update-with-dependencies slim/twig-view
-  docker-compose exec web composer require --update-with-dependencies slim/psr7
-  docker-compose exec web composer require --update-with-dependencies php-di/php-di
-  docker-compose exec web composer require --update-with-dependencies middlewares/trailing-slash
+docker-compose exec web composer require --update-with-dependencies slim/slim
+doocker-compose exec web composer require --update-with-dependencies slim/twig-view
+docker-compose exec web composer require --update-with-dependencies slim/psr7
+docker-compose exec web composer require --update-with-dependencies php-di/php-di
+docker-compose exec web composer require --update-with-dependencies middlewares/trailing-slash
 
-  docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
+docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
+```
 
 ## Ressources
 
