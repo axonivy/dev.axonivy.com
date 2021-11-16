@@ -185,6 +185,13 @@ class ProductTest extends TestCase
     Assert::assertNotEmpty($product->getVersion());
   }
 
+  public function test_load_compatibilty_from_maven()
+  {
+    $product = Market::getProductByKey('a-trust');
+    Assert::assertNotEquals('1.0', $product->getCompatibility());
+    Assert::assertNotEmpty($product->getCompatibility());
+  }
+
   public function test_installationCount()
   {
     $file = Config::marketInstallationsFile();

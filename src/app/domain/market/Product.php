@@ -3,6 +3,7 @@
 namespace app\domain\market;
 
 use app\Config;
+use app\domain\Version;
 
 class Product
 {
@@ -81,7 +82,7 @@ class Product
   {
     if (empty($this->version)) {
       if ($this->mavenProductInfo != null) {
-        $this->version = $this->mavenProductInfo->getLatestVersion();        
+        $this->version = $this->mavenProductInfo->getLatestVersion() ?? '';        
       }
     }
     return $this->version;
@@ -149,6 +150,15 @@ class Product
 
   public function getCompatibility(): string
   {
+    if (empty($this->compatibility)) {
+      if ($this->mavenProductInfo != null) {
+        $this->compatibility = $this->mavenProductInfo->getOldestVersion() ?? '';
+        if (Version::isValidVersionNumber($this->compatibility)) {
+          $version = new Version($this->compatibility);
+          $this->compatibility = $version->getMinorVersion() . '+';
+        }
+      }
+    }
     return $this->compatibility;
   }
 

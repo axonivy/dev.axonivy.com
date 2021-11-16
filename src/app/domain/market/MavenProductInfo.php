@@ -59,6 +59,15 @@ class MavenProductInfo
     return $versions[0];
   }
 
+  public function getOldestVersion(): ?string
+  {
+    $versions = $this->getVersions();
+    if (empty($versions)) {
+      return null;
+    }
+    return $versions[count($versions) - 1];
+  }
+
   public function getLatestVersionToDisplay(): ?string
   {
     $versions = $this->getVersionsToDisplay();
