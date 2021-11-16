@@ -19,7 +19,7 @@ class ProductFactory
     }
     $type = $json->type ?? [];
     $tags = $json->tags ?? [];
-    $version = $json->version ?? 'Unknown';
+    $version = $json->version ?? '';
     $shortDesc = $json->description ?? '';
     $vendor = $json->vendor ?? 'Unknown';
     $platformReview = $json->platformReview ?? '4.0';
@@ -29,7 +29,7 @@ class ProductFactory
     $language = $json->language ?? '';
     $industry = $json->industry ?? '';
     $installable = isset($json->installers);
-    $compatibility = $json->compatibility ?? '0.0.0';
+    $compatibility = $json->compatibility ?? '';
     $validate = $json->validate ?? true;
     return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
       $vendor, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $installable, $info, $validate);
