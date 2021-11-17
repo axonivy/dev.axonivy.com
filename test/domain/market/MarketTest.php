@@ -41,7 +41,7 @@ class MarketTest extends TestCase
   public function test_search_emptyDoNotFilter()
   {
     $products = Market::search(Market::listed(), '');
-    Assert::assertEquals(13, count($products));
+    Assert::assertEquals(14, count($products));
   }
 
   public function test_search_noMatch()
@@ -113,15 +113,15 @@ class MarketTest extends TestCase
   public function test_searchByTag()
   {
     $products = Market::searchByTag(Market::listed(), ['DEMO']);
-    Assert::assertEquals(1, count($products));
-    Assert::assertEquals('Demos', $products[0]->getName());
+    Assert::assertEquals(2, count($products));
+    Assert::assertEquals('Connectivity Demos', $products[0]->getName());
   }
 
   public function test_searchByMultipleTags()
   {
     $products = Market::searchByTag(Market::listed(), ['DEMO', 'WORKFLOW-UI']);
-    Assert::assertEquals(2, count($products));
-    Assert::assertEquals('Portal', $products[1]->getName());
-    Assert::assertEquals('Demos', $products[0]->getName());
+    Assert::assertEquals(3, count($products));
+    Assert::assertEquals('Connectivity Demos', $products[0]->getName());
+    Assert::assertEquals('Demos', $products[1]->getName());
   }
 }

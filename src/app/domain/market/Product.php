@@ -166,10 +166,12 @@ class Product
 
   public function isVersionSupported(string $version): bool
   {
-    if (str_ends_with($this->compatibility, '+')) {
-      return version_compare(substr($this->compatibility, 0, -1), $version) <= 0;
+    $compatibility = $this->getCompatibility();
+    if (str_ends_with($compatibility, '+')) {
+      $minorVersion = substr($compatibility, 0, -1);
+      return version_compare($minorVersion, $version) <= 0;
     }
-    return version_compare($this->compatibility, $version) == 0;
+    return version_compare($compatibility, $version) == 0;
   }
 
   public function getDescription(): string
