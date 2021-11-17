@@ -41,7 +41,7 @@ class MarketTest extends TestCase
   public function test_search_emptyDoNotFilter()
   {
     $products = Market::search(Market::listed(), '');
-    Assert::assertEquals(12, count($products));
+    Assert::assertEquals(13, count($products));
   }
 
   public function test_search_noMatch()

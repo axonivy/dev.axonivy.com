@@ -82,7 +82,8 @@ class Product
   {
     if (empty($this->version)) {
       if ($this->mavenProductInfo != null) {
-        $this->version = $this->mavenProductInfo->getLatestVersion() ?? '';        
+        $this->version = $this->mavenProductInfo->getLatestVersion() ?? '';
+        $this->version = str_replace('-SNAPSHOT', '', $this->version);
       }
     }
     return $this->version;
@@ -153,6 +154,7 @@ class Product
     if (empty($this->compatibility)) {
       if ($this->mavenProductInfo != null) {
         $this->compatibility = $this->mavenProductInfo->getOldestVersion() ?? '';
+        $this->compatibility = str_replace('-SNAPSHOT', '', $this->compatibility);
         if (Version::isValidVersionNumber($this->compatibility)) {
           $version = new Version($this->compatibility);
           $this->compatibility = $version->getMinorVersion() . '+';
@@ -172,20 +174,27 @@ class Product
 
   public function getDescription(): string
   {
-    $desc = $this->splitMarkdownToParts();
-    return $this->getHtmlOfMarkdown($desc['description']);
+    return $this->markdown('description');
   }
 
   public function getDemoDescription(): string
   {
-    $desc = $this->splitMarkdownToParts();
-    return $this->getHtmlOfMarkdown($desc['demo']);
+    return $this->markdown('demo');
   }
 
   public function getSetupDescription(): string
   {
+    return $this->markdown('setup');
+  }
+  
+  private function markdown(string $section): string
+  {
     $desc = $this->splitMarkdownToParts();
-    return $this->getHtmlOfMarkdown($desc['setup']);
+    $markdown = $desc[$section] ?? '';
+    if (empty($markdown)) {
+      return '';
+    }
+    return $this->getHtmlOfMarkdown($markdown);
   }
 
   public function getType(): string
