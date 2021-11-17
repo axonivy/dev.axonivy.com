@@ -34,6 +34,6 @@ class Config
 
   public static function marketInstallationsFile(): string
   {
-    return self::isProductionEnvironment() ? '/home/axonivya/data/market-installations.json' : __DIR__ . '/../../src/web/market-installations.json';
+    return self::isProductionEnvironment() ? '/home/axonivya/data/market-installations.json' : '/tmp/market-installations.json';
   }
 }
