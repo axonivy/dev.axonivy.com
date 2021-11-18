@@ -75,9 +75,7 @@
         <span class="dropdown">
           <label>Topic</label>
           <select id="tags" multiple="multiple">
-            {% for tag in tags %}
-              <option value="{{ tag }}">{{ tag }}</option>
-            {% endfor %}
+	          <option value="{{ tag }}">{{ tag }}</option>
           </select>
         <span>
       </div>
@@ -157,9 +155,7 @@
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
             <div class="product-type {{ product.type }}"></div>
             <div class="product-tags p-grid p-dir-rev">
-              {% for tag in product.tags %}
-                <span class="product-tag">{{ tag }}</span>
-              {% endfor %}
+              <span class="product-tag">{{ product.firstTag }}</span>
             </div>
             <center class="product-logo">
               <img src="{{ product.imgSrc }}" alt="{{ product.name }}" class="image"/>
