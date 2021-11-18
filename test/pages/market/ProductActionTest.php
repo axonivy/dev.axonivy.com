@@ -45,12 +45,12 @@ class ProductActionTest extends TestCase
       ->bodyContains("'http://localhost/_market/genderize/_meta.json?version=");
   }
 
-  public function testInstallButton_displayInDesignerMarketShowWhyNotReason()
+  /*public function testInstallButton_displayInDesignerMarketShowWhyNotReason()
   {
     AppTester::assertThatGetWithCookie('/market/genderize', ['ivy-version' => '9.1.0'])
       ->ok()
       ->bodyContains("Your Axon Ivy Designer is too old (9.1.0). You need version 9.2+.");
-  }
+  }*/
 
   public function testInstallButton_byDefaultWithCurrentVersion()
   {

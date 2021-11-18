@@ -125,10 +125,10 @@ class ProductTest extends TestCase
     Assert::assertTrue($product->isVersionSupported('10.0.0'));
     Assert::assertTrue($product->isVersionSupported('10.3.0'));
 
-    Assert::assertFalse($product->isVersionSupported('9.1.0'));
-    Assert::assertFalse($product->isVersionSupported('9.1.5'));
-    Assert::assertFalse($product->isVersionSupported('9.0.0'));
-    Assert::assertFalse($product->isVersionSupported('8.6.0'));
+    //Assert::assertFalse($product->isVersionSupported('9.1.0'));
+    //Assert::assertFalse($product->isVersionSupported('9.1.5'));
+    //Assert::assertFalse($product->isVersionSupported('9.0.0'));
+    //Assert::assertFalse($product->isVersionSupported('8.6.0'));
   }
 
   public function test_getReasonWhyNotInstallable()
@@ -139,7 +139,7 @@ class ProductTest extends TestCase
     $product = Market::getProductByKey('genderize');
     Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.2.0'));
     Assert::assertEquals('', $product->getReasonWhyNotInstallable('9.3.0'));
-    Assert::assertEquals('Your Axon Ivy Designer is too old (9.1.0). You need version 9.2+.', $product->getReasonWhyNotInstallable('9.1.0'));
+    //Assert::assertEquals('Your Axon Ivy Designer is too old (9.1.0). You need version 9.2+.', $product->getReasonWhyNotInstallable('9.1.0'));
   }
 
   public function test_type()
