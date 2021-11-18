@@ -13,7 +13,7 @@ class MetaJsonActionTest extends TestCase
     AppTester::assertThatGet('/_market/doc-factory/_product.json?version=8.0.1')
       ->ok()
       ->header('Content-Type', 'application/json')
-      ->bodyContains('"version": "8.0.1"');
+      ->bodyContains('"version":"8.0.1"');
   }
 
   public function testServeMetaJsonMissingVersion()
@@ -21,7 +21,7 @@ class MetaJsonActionTest extends TestCase
     AppTester::assertThatGet('/_market/doc-factory/_product.json')
       ->ok()
       ->header('Content-Type', 'application/json')
-      ->bodyContains('"version": "version-get-param-missing"');
+      ->bodyContains('"version":"version-get-param-missing"');
   }
   
   public function testServeMetaJson_stableForDesigner()

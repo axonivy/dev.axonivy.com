@@ -25,6 +25,10 @@ class ProductJsonAction
     MarketInstallCounter::incrementInstallCount($key);
     $content = $product->getProductJson($version);
     $content = str_replace('${version}', $version, $content);
+    
+    $json = json_decode($content);
+    $json->name = $product->getName();
+    $content = json_encode($json);
 
     $response->getBody()->write($content);
     $response = $response->withHeader('Content-Type', 'application/json');
