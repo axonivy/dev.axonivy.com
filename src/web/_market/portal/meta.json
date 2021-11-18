@@ -1,20 +1,17 @@
 {
 	"id": "portal",
-	"version": "9.3",
-	"name": "Portal",
-	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-	"sort": 100,
+	"name": "Axon Ivy Portal",
+	"description": "The Axon Ivy Portal is the single point of contact for any end-user using the Axon Ivy platform.",
 	"type": "util",
+	"vendor": "Axon Ivy AG",
+	"platformReview": "5",
+	"sourceUrl": "https://bitbucket.org/axonivy-prod/axonivyportal/src/master/",
+	"language": "EN/DE/FR/ES",
+	"industry": "Cross-Industry",
 	"tags": ["workflow-ui"],
 	"versionDisplay": "portal",
 	"installMatcher": "best-match",
-	"vendor": "Axon Ivy AG",
-	"platformReview": "5",
-	"cost": "free",
-	"sourceUrl": "https://bitbucket.org/axonivy-prod/axonivyportal/src/master/",
-	"language": "en, de, fr, es",
-	"industry": "Cross-Industry",
-	"compatibility": "8.0+",
+	"validate": false,
 	"mavenArtifacts": [
 		{
 			"key": "portal",
@@ -74,61 +71,5 @@
 			"type" : "zip",
 			"doc": true
 		}
-	],
-	"installers": [
-		{
-			"id": "maven-dependency",
-			"data": {
-				"dependencies": [
-					{
-						"groupId": "ch.ivyteam.ivy.project.portal",
-						"artifactId": "portalTemplate",
-						"version": "${version}",
-						"type": "iar"
-					}
-				],
-				"repositories":[
-					{
-						"id":"axonivy.public",
-						"url":"http://repo.axonivy.rocks",
-						"snapshots":{"enabled":"true"}
-					}
-				]
-			}
-		},
-		{
-			"id": "maven-import",
-			"data": {
-				"projects":[
-					{
-						"groupId": "com.axonivy.portal",
-						"artifactId": "portal-user-examples",
-						"version": "${version}",
-						"type": "iar"
-					},
-					{
-						"groupId": "com.axonivy.portal",
-						"artifactId": "portal-developer-examples",
-						"version": "${version}",
-						"type": "iar"
-					}
-				],
-				"repositories":[
-					{
-						"id":"axonivy.public",
-						"url":"http://repo.axonivy.rocks"
-					}
-				]
-			}
-		},
-		{
-			"id": "open-resource",
-			"data": {
-				"project": "portal-user-examples",
-				"resources": [
-					"processes/Start Processes/LeaveRequest.mod"
-				]
-			}
-		}
-	]
+	]	
 }

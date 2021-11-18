@@ -6,3 +6,4 @@ composer.phar
 .sonar
 .scannerwork
 market-installations.json
+/src/web/market-cache

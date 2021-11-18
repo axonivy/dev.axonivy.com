@@ -8,6 +8,10 @@ use app\domain\market\Market;
 use app\domain\market\Product;
 use Slim\Psr7\Request;
 use app\domain\market\MavenProductInfo;
+use app\domain\market\ProductDescription;
+use app\domain\market\ProductMavenArtifactDownloader;
+use app\domain\maven\MavenArtifact;
+use app\domain\market\OpenAPIProvider;
 
 class ProductAction
 {
@@ -59,21 +63,34 @@ class ProductAction
           $docArtifacts[] = $artifact;
         }
       }
+
+      $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->hide());
     }
 
     $installButton = self::createInstallButton($request, $product, $version);
     
     $getInTouchLink = 'https://www.axonivy.com/marketplace/contact/?market_solutions=' . $product->getKey();
 
+    if (!empty($version)) {
+      $downloader = new ProductMavenArtifactDownloader();
+      $downloader->download($product, $version);
+    }
+    $productDescription = ProductDescription::create($product, $version);
+    
+    $openApiProvider = new OpenAPIProvider($product);
+    $openApiJsonUrl = $openApiProvider->getOpenApiJsonUrl($version);
+    
     return $this->view->render($response, 'market/product.twig', [
       'product' => $product,
       'mavenProductInfo' => $mavenProductInfo,
+      'productDescription' => $productDescription,
       'mavenArtifacts' => $mavenArtifacts,
       'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
       'docArtifacts' => $docArtifacts,
       'selectedVersion' => $version,
       'installButton' => $installButton,
-      'getInTouchLink' => $getInTouchLink
+      'getInTouchLink' => $getInTouchLink,
+      'openApiJsonUrl' => $openApiJsonUrl,
     ]);
   }
 
@@ -82,7 +99,7 @@ class ProductAction
     $version = self::readIvyVersionCookie($request);
     $isDesigner = !empty($version);
     $reason = $product->getReasonWhyNotInstallable($version);
-    $isShow = $product->isInstallable();
+    $isShow = $product->isInstallable($currentVersion);
     return new InstallButton($isDesigner, $reason, $product, $isShow, $request, $currentVersion);
   }
 
@@ -128,23 +145,18 @@ class InstallButton
 
   public function getJavascriptCallback(): string
   {
-    return "install('" . $this->metaJsonUrl($this->currentVersion) . "')";
+    return "install('" . $this->getInstallerJsonUrl($this->currentVersion) . "')";
   }
   
   public function getMultipleVersions(): bool
   {
     return $this->product->getMavenProductInfo() != null;
   }
-  
-  public function getMetaJsonUrl($version): string
-  {
-    return $this->metaJsonUrl($version);
-  }
-  
-  private function metaJsonUrl($version): string
+
+  public function getInstallerJsonUrl($version): string
   {
     $uri = $this->request->getUri();
     $baseUrl = $uri->getScheme() . '://' . $uri->getHost();
-    return $baseUrl . $this->product->getMetaUrl($version);
+    return $baseUrl . $this->product->getInstallerJson($version);
   }
 }

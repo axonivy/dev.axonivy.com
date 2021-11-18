@@ -8,7 +8,7 @@ foreach (MavenArtifactRepository::getDocs() as $doc) {
   foreach ($doc->getVersions() as $version) {
     $targetDir = Config::DOC_DIRECTORY_THIRDPARTY . '/' . $doc->getDocSubFolder($version);
     if (!file_exists($targetDir)) {
-      $cmd = Config::CLONE_DOC_SCRIPT . ' ' . $doc->getUrl($version) . ' ' . $targetDir;
+      $cmd = Config::unzipper() . ' ' . $doc->getUrl($version) . ' ' . $targetDir;
       echo "Execute: " . $cmd . "\n";
       exec($cmd);
     } else {

@@ -129,12 +129,12 @@
       <span class="tab-button selected">
         <a href="#tabs" class="product-description-tab" onclick="openTab('description');">Description</a>
       </span>
-      {% if product.demoDescription is not empty %}
+      {% if productDescription.demo is not empty %}
         <span class="tab-button">
           <a href="#tabs" class="product-demo-tab" onclick="openTab('demo');">Demo</a>
         </span>
       {% endif %}
-      {% if product.setupDescription is not empty %}
+      {% if productDescription.setup is not empty %}
         <span class="tab-button">
           <a href="#tabs" class="product-setup-tab" onclick="openTab('setup');">Setup</a>
         </span>
@@ -146,13 +146,13 @@
       {% endif %}
 
       <div id="description" class="readme-content">
-        {{ product.description|raw }}
+        {{ productDescription.description|raw }}
       </div>
       <div id="demo" class="readme-content" style="display: none;">
-        {{ product.demoDescription|raw }}
+        {{ productDescription.demo|raw }}
       </div>
       <div id="setup" class="readme-content" style="display: none;">
-        {{ product.setupDescription|raw }}
+        {{ productDescription.setup|raw }}
       </div>
       <div id="maven" class="readme-content" style="display: none;">
         <div class="meta-content">
@@ -224,10 +224,10 @@
             <span class="meta-data"><a href="{{ docArtifacts|first.getDocUrl(selectedVersion) }}">External Link</a></span>
           </div>
         {% endif %}
-        {% if product.openApiJsonUrl is not empty %}
+        {% if openApiJsonUrl is not empty %}
           <div class="product-meta-info">
             <span class="meta-type">Public API</span>
-            <span class="meta-data"><a href="/api-browser?url={{ product.openApiJsonUrl }}">Browse API</a></span>
+            <span class="meta-data"><a href="/api-browser?url={{ openApiJsonUrl }}">Browse API</a></span>
           </div>
         {% endif %}
         {% if product.sourceUrl is not empty %}

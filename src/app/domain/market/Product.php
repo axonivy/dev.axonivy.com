@@ -24,8 +24,8 @@ class Product
   private string $language;
   private string $industry;
   private string $compatibility;
-  private bool $installable;
   private bool $validate;
+  private bool $contactUs;
 
   private array $readMeParts;
   private int $installationCount;
@@ -34,7 +34,7 @@ class Product
 
   public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
     string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $statusBadgeUrl, string $language, string $industry,
-    string $compatibility, bool $installable, ?MavenProductInfo $mavenProductInfo, bool $validate)
+    string $compatibility, ?MavenProductInfo $mavenProductInfo, bool $validate, bool $contactUs)
   {
     $this->key = $key;
     $this->path = $path;
@@ -52,10 +52,9 @@ class Product
     $this->language = $language;
     $this->industry = $industry;
     $this->compatibility = $compatibility;
-    $this->installable = $installable;
     $this->mavenProductInfo = $mavenProductInfo;
-    $this->readMeParts = [];
     $this->validate = $validate;
+    $this->contactUs = $contactUs;
   }
 
   public function getKey(): string
@@ -94,9 +93,13 @@ class Product
     return $this->shortDesc;
   }
 
-  public function isInstallable(): bool
+  public function isInstallable(string $version): bool
   {
-    return $this->installable;
+    $productJson = $this->getProductJsonFile($version);
+    if (file_exists($productJson)) {
+      return true;
+    }
+    return file_exists($this->getMarketFile('product.json'));
   }
 
   public function getVendor(): string
@@ -177,31 +180,6 @@ class Product
     return true;
   }
 
-  public function getDescription(): string
-  {
-    return $this->markdown('description');
-  }
-
-  public function getDemoDescription(): string
-  {
-    return $this->markdown('demo');
-  }
-
-  public function getSetupDescription(): string
-  {
-    return $this->markdown('setup');
-  }
-  
-  private function markdown(string $section): string
-  {
-    $desc = $this->splitMarkdownToParts();
-    $markdown = $desc[$section] ?? '';
-    if (empty($markdown)) {
-      return '';
-    }
-    return $this->getHtmlOfMarkdown($markdown);
-  }
-
   public function getType(): string
   {
     return $this->type;
@@ -222,37 +200,11 @@ class Product
     return $this->tags;
   }
 
-  private function splitMarkdownToParts(): array
-  {
-    if (empty($this->readMeParts)) {
-      $filename = 'README.md';
-      $markdownFile = $this->path . "/$filename";
-      if (file_exists($markdownFile)) {
-        $markdownContent = file_get_contents($markdownFile);
-
-        $setupContent = explode('## Setup', $markdownContent);
-        $demoContent = explode("## Demo", $setupContent[0]);
-        $this->readMeParts['description'] = $demoContent[0];
-        $this->readMeParts['demo'] = $demoContent[1] ?? '';
-        $this->readMeParts['setup'] = $setupContent[1] ?? '';
-      }
-    }
-    return $this->readMeParts;
-  }
-
-  private function getHtmlOfMarkdown(?string $markdownContent): string
-  {
-    if (empty($markdownContent)) {
-      return '';
-    }
-    return (new ParsedownCustom($this->assetBaseUrl()))->text($markdownContent);
-  }
-
-  private function assetBaseUrl()
+  public function assetBaseUrl()
   {
     return '/_market/' . $this->key;
   }
-
+  
   public function getImgSrc()
   {
     return $this->assetBaseUrl() . '/logo.png';
@@ -272,156 +224,94 @@ class Product
     return $this->installationCount;
   }
 
-  public function getMetaUrl(string $version): string
+  public function getInstallerJson(string $version): string
   {
-    return $this->assetBaseUrl() . "/_meta.json?version=$version";
+    $productFile = Config::marketCacheDirectory() . "/$this->key/$version/product.json";
+    if (file_exists($productFile)) {
+      return $this->assetBaseUrlReadme($version) . '/_product.json';
+    }
+    return $this->assetBaseUrl() . "/_product.json?version=$version";
+  }
+  
+  public function getProductJsonContent(string $version): string
+  {
+    $productJson = $this->getProductJsonFile($version);
+    if (file_exists($productJson)) {
+      return file_get_contents($productJson);
+    }
+    
+    $productJson = $this->getMarketFile("product.json");
+    if (file_exists($productJson)) {
+      return file_get_contents($productJson);
+    }
+    
+    return '';
   }
 
   public function getMetaJson(): string
   {
-    return file_get_contents($this->getMarketFile("meta.json"));
-  }
-
-  public function getOpenApiJsonUrl(): string
-  {
-    $url = $this->evaluateOpenApiUrl();
-    if (filter_var($url, FILTER_VALIDATE_URL))
-    {
-      return urlencode($url);
-    }
-    else if (!empty($url) && file_exists($this->getMarketFile($url)))
-    {
-      return $this->assetBaseUrl() . "/openapi";
-    }
-    return "";
-  }
-
-  public function getOpenApiJson(): string
-  {
-    $openapiFile = $this->getMarketFile($this->evaluateOpenApiUrl());
-    if (file_exists($openapiFile))
-    {
-      return file_get_contents($openapiFile);
-    }
-    return "";
+    return file_get_contents($this->getMarketFile("product.json"));
   }
   
-  public function hasInstaller(string $installerId): bool
+  public function getProductJson(string $version): string
   {
-    $installers = $this->getInstallers($installerId);
-    return !empty($installers);
+    return file_get_contents($this->getProductJsonFile($version));
+  }
+  
+  private function getProductJsonFile(string $version): string
+  {
+    return $this->getProductFile($version, 'product.json');
   }
 
-  private function getMarketFile(string $file)
+  public function assetBaseUrlReadme($version)
+  {
+    $readme = Config::marketCacheDirectory() . "/$this->key/$version/README.md";
+    if (file_exists($readme)) {
+      return '/market-cache/' . $this->key . '/' . $version;
+    }
+    return $this->assetBaseUrl();
+  }
+  
+  public function getReadmeFile(string $version): string
+  {
+    $file = $this->getProductFile($version, 'README.md');
+    if (file_exists($file)) {
+      return $file;
+    }
+    return $this->getMarketFile('README.md');   
+  }
+  
+  public function getMarketFile(string $file)
   {
     return Config::marketDirectory() . "/$this->key/" . $file;
   }
 
-  private function evaluateOpenApiUrl(): string
+  public function getProductFile(string $version, $file): string
   {
-    $installers = $this->getInstallers('rest-client');
-    if (empty($installers))
-    {
-      return '';
+    $productFile = Config::marketCacheDirectory() . "/$this->key/$version/" . $file;
+    if (file_exists($productFile)) {
+      return $productFile;
     }
-    $installer = array_values($installers)[0];
-    return $installer->data->openApiUrl;
-  }
-  
-  private function getInstallers(string $installerId): array
-  {
-    $installers = [];
-    if ($this->installable)
-    {
-      $content = $this->getMetaJson();
-      $json = json_decode($content);
-      foreach($json->installers as $installer)
-      {
-        $realInstaller = $this->evaluateInstaller($installer);
-        if ($realInstaller->id == $installerId)
-        {
-            $installers[] = $realInstaller;
-        }
-      }
-    }
-    return $installers;
-  }
-
-  private function evaluateInstaller($installer)
-  {
-    if (property_exists($installer, 'id')) {
-      return $installer;
-    }
-    $externalJson = $installer->{'...'};
-    $installerJson = file_get_contents($this->getMarketFile(substr($externalJson, 1, -1)));
-    return json_decode($installerJson);
+    return $this->getMarketFile($file);
   }
 
   public function getMavenProductInfo(): ?MavenProductInfo
   {
     return $this->mavenProductInfo;
   }
+  
+  public function isContactUs(): bool
+  {
+    return $this->contactUs;
+  }
 
   public function getReasonWhyNotInstallable(string $version): string
   {
-    if (!$this->isInstallable()) {
+    if (!$this->isInstallable($version)) {
       return 'Product is not installable.';
     } elseif (!$this->isVersionSupported($version)) {
       return 'Your Axon Ivy Designer is too old (' . $version . '). You need version ' . $this->getCompatibility() . '.';
     }
     return '';
-  }
-}
-
-class ParsedownCustom extends \ParsedownExtra
-{
-  private String $baseUrl;
-
-  public function __construct(String $baseUrl)
-  {
-    $this->baseUrl = $baseUrl;
-  }
-
-  protected function inlineImage($Excerpt)
-  {
-    if (!isset($Excerpt['text'][1]) or $Excerpt['text'][1] !== '[') {
-      return;
-    }
-
-    $Excerpt['text'] = substr($Excerpt['text'], 1);
-
-    $Link = $this->inlineLink($Excerpt);
-
-    if ($Link === null) {
-      return;
-    }
-
-    $imageUrl = $Link['element']['attributes']['href'];
-    if (!self::isAbsolute($imageUrl)) {
-      $imageUrl = $this->baseUrl . "/$imageUrl";
-    }
-
-    $Inline = array(
-      'extent' => $Link['extent'] + 1,
-      'element' => array(
-        'name' => 'img',
-        'attributes' => array(
-          'src' => $imageUrl,
-          'alt' => $Link['element']['text'],
-          'class' => 'image fit'
-        ),
-      ),
-    );
-
-    $Inline['element']['attributes'] += $Link['element']['attributes'];
-
-    unset($Inline['element']['attributes']['href']);
-
-    return $Inline;
-  }
-
-  private static function isAbsolute($uri)
-  {
-    return strpos($uri, '://') !== false;
   }
 }

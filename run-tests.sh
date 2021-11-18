@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose exec web ./vendor/bin/phpunit
+docker-compose exec -u www-data web ./vendor/bin/phpunit

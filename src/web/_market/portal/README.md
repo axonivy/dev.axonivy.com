@@ -1,5 +1,7 @@
-The portal is a complete workflow user interface that fully exploits all the features of the Axon Ivy Platform
-with a web-based, modern interface the Portal provides you with key functionalities on all your devices:
+# Portal
+The portal is a complete workflow user interface that fully exploits all the
+features of the Axon Ivy Platform with a web-based, modern interface the Portal
+provides you with key functionalities on all your devices:
 
 * Access your company’s applications and start new cases
 * Manage and fulfil tasks assigned to you or your roles
@@ -7,11 +9,3 @@ with a web-based, modern interface the Portal provides you with key functionalit
 * Improve your Axon Ivy Portal experience and efficiency through the built-in customization options
 
 ![Portal](portal.png)
-
-### Import
-
-You can use the import wizard in Axon Ivy Designer
-
-`File > Import > Axon Ivy > Ivy Projects`
-
-![Import Wizard](import-wizard.png)

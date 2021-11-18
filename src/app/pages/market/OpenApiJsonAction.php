@@ -1,13 +1,14 @@
 <?php
-
 namespace app\pages\market;
 
 use Slim\Exception\HttpNotFoundException;
 use app\domain\market\Market;
 use Slim\Psr7\Request;
+use app\domain\market\OpenAPIProvider;
 
 class OpenApiJsonAction
 {
+
   public function __invoke(Request $request, $response, $args)
   {
     $key = $args['key'] ?? '';
@@ -16,9 +17,11 @@ class OpenApiJsonAction
       throw new HttpNotFoundException($request);
     }
     
-    $content = $product->getOpenApiJson($request);
-    if (empty($content))
-    {
+    $version = $args['version'] ?? '';
+
+    $openApiProvider = new OpenAPIProvider($product);
+    $content = $openApiProvider->getOpenApiJson($version);
+    if (empty($content)) {
       throw new HttpNotFoundException($request);
     }
 
@@ -26,5 +29,4 @@ class OpenApiJsonAction
     $response = $response->withHeader('Content-Type', 'application/json');
     return $response;
   }
-
 }

@@ -118,7 +118,7 @@
               <span>Install now</span>
             </a>
           {% endif %}
-          {% if not product.installable and product.mavenProductInfo is empty %}
+          {% if product.contactUs %}
             <a class="button special install" href="{{ getInTouchLink }}">
               <span>Contact us</span>
             </a>
@@ -187,7 +187,7 @@
           <select name="installVersion" id="installVersion" onchange="updateInstallArtifact(this);">
           {% for version in mavenProductInfo.versionsToDisplay %}            
             <a href="#">
-              <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getMetaJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
+              <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getInstallerJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
             </a>
           {% endfor %}
           </select>

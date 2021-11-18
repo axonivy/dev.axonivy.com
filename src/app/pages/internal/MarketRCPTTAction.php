@@ -24,17 +24,17 @@ class MarketRCPTTAction
     $designerVersion = $queryParams['designerVersion'] ?? null;
 
     if ($designerVersion == null) {
-        throw new HttpNotFoundException($request);
+      throw new HttpNotFoundException($request);
     }
 
-    $products = self::products();
+    $products = self::products($designerVersion);
     $baseUrl = self::baseUrl();
 
     $urls = [];
     foreach ($products as $product) {
         $mavenInfo = $product->getMavenProductInfo();
         $bestMatchingVersion = $mavenInfo->findBestMatchingVersion($designerVersion);
-        $urls[] = $baseUrl . $product->getMetaUrl($bestMatchingVersion);
+        $urls[] = $baseUrl . $product->getInstallerJson($bestMatchingVersion);
     }
 
     $response = $response->withHeader('Content-Type', 'text/plain');
@@ -43,10 +43,10 @@ class MarketRCPTTAction
     ]);
   }
 
-  private static function products(): array {
+  private static function products(string $version): array {
     $products = Market::listed();
     $products = array_filter($products, fn (Product $product) => $product->getMavenProductInfo() != null);
-    $products = array_filter($products, fn (Product $product) => $product->isInstallable());
+    $products = array_filter($products, fn (Product $product) => $product->isInstallable($version));
     $products = array_filter($products, fn (Product $product) => $product->toValidate());
     return $products;
   }

@@ -33,21 +33,21 @@ class ProductActionTest extends TestCase
 
   public function testInstallButton_canNotInstallInOfficalMarket()
   {
-    AppTester::assertThatGet('/market/genderize')
+    AppTester::assertThatGet('/market/genderize-io-connector')
       ->ok()
       ->bodyContains("Please open the");
   }
 
   public function testInstallButton_canInstallInDesignerMarket()
   {
-    AppTester::assertThatGetWithCookie('http://localhost/market/genderize', ['ivy-version' => '9.2.0'])
+    AppTester::assertThatGetWithCookie('http://localhost/market/genderize-io-connector', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("'http://localhost/_market/genderize/_meta.json?version=");
+      ->bodyContains("'http://localhost/_market/genderize-io-connector/_product.json?version=");
   }
 
   /*public function testInstallButton_displayInDesignerMarketShowWhyNotReason()
   {
-    AppTester::assertThatGetWithCookie('/market/genderize', ['ivy-version' => '9.1.0'])
+    AppTester::assertThatGetWithCookie('/market/genderize-io-connector', ['ivy-version' => '9.1.0'])
       ->ok()
       ->bodyContains("Your Axon Ivy Designer is too old (9.1.0). You need version 9.2+.");
   }*/
@@ -59,7 +59,7 @@ class ProductActionTest extends TestCase
 
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => $version])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_meta.json?version=$version");
+      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=$version");
   }
   
   public function testInstallButton_respectCookie_ltsMatchInstaller()
@@ -76,14 +76,14 @@ class ProductActionTest extends TestCase
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_meta.json?version=$version");
+      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=$version");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller()
   {
       AppTester::assertThatGetWithCookie('http://localhost/market/portal', ['ivy-version' => '8.0.10'])
         ->ok()
-        ->bodyContains("http://localhost/_market/portal/_meta.json?version=8.0.10");
+        ->bodyContains("http://localhost/_market/portal/_product.json?version=8.0.10");
   }
   
   public function testInstallButton_respectCookie_bestMatchInstaller_ifNotExistUseLast()
@@ -100,14 +100,14 @@ class ProductActionTest extends TestCase
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/portal', ['ivy-version' => '8.0.99'])
       ->ok()
-      ->bodyContains("http://localhost/_market/portal/_meta.json?version=$version");
+      ->bodyContains("http://localhost/_market/portal/_product.json?version=$version");
   }
 
   public function testInstallButton_useSpecificVersion()
   {
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory/8.0.0', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_meta.json?version=8.0.0");
+      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=8.0.0");
   }
 
   public function testNotFoundWhenVersionDoesNotExistOfMavenBackedArtifact()
@@ -118,22 +118,22 @@ class ProductActionTest extends TestCase
 
   public function testNotFoundWhenVersionDoesNotExistOfNonMavenArtifact()
   {
-    AppTester::assertThatGet('/market/genderize')->ok();
-    AppTester::assertThatGet('/market/genderize/444')->notFound();
+    AppTester::assertThatGet('/market/genderize-io-connector')->ok();
+    AppTester::assertThatGet('/market/genderize-io-connector/444')->notFound();
   }
 
   public function testAPIBrowserButton_exists()
   {
-    AppTester::assertThatGet('market/genderize')
+    AppTester::assertThatGet('market/genderize-io-connector')
       ->ok()
-      ->bodyContains("/api-browser?url=/_market/genderize/openapi");
+      ->bodyContains("/api-browser?url=/_market/genderize-io-connector/openapi");
   }
 
   public function testAPIBrowserButton_existsExtern()
   {
     AppTester::assertThatGet('market/uipath')
       ->ok()
-      ->bodyContains("/api-browser?url=https%3A%2F%2Fplatform.uipath.com%2FAXONPRESALES%2FAXONPRESALES%2Fswagger%2Fv11.0%2Fswagger.json");
+      ->bodyContains("/api-browser?url=https%3A%2F%2Fcloud.uipath.com%2FAXONPRESALES%2FAXONPRESALES%2Fswagger%2Fv13.0%2Fswagger.json");
   }
 
   public function testAPIBrowserButton_existsNot()
@@ -166,15 +166,15 @@ class ProductActionTest extends TestCase
 
   public function testDontDisplaySnapshotInVersionDropdown() 
   {
-    AppTester::assertThatGet('market/demos')
+    AppTester::assertThatGet('market/doc-factory')
       ->ok()
       ->bodyDoesNotContain('-SNAPSHOT</option>');
   }
   
   public function testShowBuildStatusBadge() 
   {
-    AppTester::assertThatGet('market/demos')
+    AppTester::assertThatGet('market/excel-connector')
       ->ok()
-      ->bodyContains('<img src="https://github.com/axonivy-market/demo-projects/actions/workflows/ci.yml/badge.svg" />');
+      ->bodyContains('<img src="https://github.com/axonivy-market/excel-connector/actions/workflows/ci.yml/badge.svg" />');
   }  
 }

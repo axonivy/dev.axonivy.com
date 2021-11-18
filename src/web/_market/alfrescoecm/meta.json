@@ -1,0 +1,29 @@
+{
+	"id": "alfrescoecm",
+	"name": "Alfresco ECM",
+	"description": "Using Alfresco ECM it is easy to connect, manage and protect important company information.",
+	"type": "connector",
+	"vendor": "Axon Ivy AG",
+	"platformReview": "4.5",
+	"sourceUrl": "https://github.com/axonivy-market/alfresco-connector",    
+	"statusBadgeUrl": "https://github.com/axonivy-market/alfresco-connector/actions/workflows/ci.yml/badge.svg",
+	"language": "English",
+	"industry": "Cross-Industry",
+	"tags": ["ECM"],
+    "validate": false,
+    "mavenArtifacts": [
+        {
+            "repoUrl": "https://maven.axonivy.com",
+            "name": "Alfresco ECM",
+            "groupId": "com.axonivy.connector.alfresco",
+            "artifactId": "alfresco-connector",
+            "makesSenseAsMavenDependency": true
+        },
+        {
+            "repoUrl": "https://maven.axonivy.com",
+            "name": "Alfresco Demo",
+            "groupId": "com.axonivy.connector.alfresco",
+            "artifactId": "alfresco-connector-demo"
+        }
+    ]    
+}
