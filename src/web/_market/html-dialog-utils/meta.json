@@ -1,0 +1,29 @@
+{
+	"id": "html-dialog-utils",
+	"name": "HTML Dialog Utils",
+	"description": "Collection of useful utilities to help you by the HTML Dialog implementation process.",
+	"type": "util",
+	"vendor": "Axon Ivy AG",
+	"platformReview": "4",
+	"sourceUrl": "https://github.com/axonivy-market/html-dialog-utils",
+	"statusBadgeUrl": "https://github.com/axonivy-market/html-dialog-utils/actions/workflows/ci.yml/badge.svg",
+	"language": "English",
+	"industry": "Cross-Industry",
+	"tags": ["utils"],
+	"validate": false,
+	"mavenArtifacts": [
+		{
+			"repoUrl": "https://maven.axonivy.com",
+			"name": "HTML Dialog Utils",
+			"groupId": "com.axonivy.market.utils",
+			"artifactId": "html-dialog-utils",
+			"makesSenseAsMavenDependency": true
+		},
+		{
+			"repoUrl": "https://maven.axonivy.com",
+			"name": "HTML Dialog Utils Demo",
+			"groupId": "com.axonivy.market.utils",
+			"artifactId": "html-dialog-utils-demo"
+		}
+	]	
+}

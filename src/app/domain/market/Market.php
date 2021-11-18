@@ -45,7 +45,7 @@ class Market
     foreach ($products as $product) {
       if (StringUtil::containsIgnoreCase($product->getName(), $searchQuery)) {
         $listed[] = $product;
-      } else if (StringUtil::containsIgnoreCase($product->getDescription(), $searchQuery)) {
+      } else if (StringUtil::containsIgnoreCase($product->getShortDescription(), $searchQuery)) {
         $listed[] = $product;
       }
     }
@@ -80,21 +80,6 @@ class Market
           $listed[] = $product;
           break;
         }
-      }
-    }
-    return $listed;
-  }
-  
-  public static function searchByInstaller(array $products, string $searchInstaller): array
-  {
-    if (empty($searchInstaller)) {
-      return $products;
-    }
-    
-    $listed = [];
-    foreach ($products as $product) {
-        if ($product->hasInstaller($searchInstaller)) {
-        $listed[] = $product;
       }
     }
     return $listed;

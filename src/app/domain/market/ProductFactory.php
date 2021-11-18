@@ -28,11 +28,11 @@ class ProductFactory
     $statusBadgeUrl = $json->statusBadgeUrl ?? '';
     $language = $json->language ?? '';
     $industry = $json->industry ?? '';
-    $installable = isset($json->installers);
     $compatibility = $json->compatibility ?? '';
     $validate = $json->validate ?? true;
+    $contactUs = $json->contactUs ?? false;
     return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
-      $vendor, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $installable, $info, $validate);
+      $vendor, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $info, $validate, $contactUs);
   }
 
   private static function createMavenProductInfo($json): MavenProductInfo
@@ -55,6 +55,7 @@ class ProductFactory
         ->type($mavenArtifact->type ?? 'iar')
         ->makesSenseAsMavenDependency($mavenArtifact->makesSenseAsMavenDependency ?? false)
         ->doc($mavenArtifact->doc ?? false)
+        ->hide($mavenArtifact->hide ?? false)
         ->build();
     }
     return $mavenArtifacts;

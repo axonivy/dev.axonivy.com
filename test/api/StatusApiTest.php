@@ -16,6 +16,6 @@ class StatusApiTest extends TestCase
       ->bodyContains('leadingEdgeVersion')
       ->bodyContains('latestLtsVersion')
       ->bodyContains('market')
-      ->bodyContains('Doc Factory');
+      ->bodyContains('DocFactory');
   }
 }

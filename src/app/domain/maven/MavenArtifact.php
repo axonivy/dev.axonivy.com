@@ -24,8 +24,10 @@ class MavenArtifact
   private $makesSenseAsMavenDependency;
 
   private $isDocumentation;
+  
+  private $hide;
 
-  function __construct($key, $name, string $repoUrl, $groupId, $artifactId, $type, bool $makesSenseAsMavenDependency, bool $isDocumentation)
+  function __construct($key, $name, string $repoUrl, $groupId, $artifactId, $type, bool $makesSenseAsMavenDependency, bool $isDocumentation, bool $hide)
   {
     $this->key = $key;
     $this->name = $name;
@@ -35,6 +37,7 @@ class MavenArtifact
     $this->type = $type;
     $this->makesSenseAsMavenDependency = $makesSenseAsMavenDependency;
     $this->isDocumentation = $isDocumentation;
+    $this->hide = $hide;
   }
 
   public static function create(string $key): MavenArtifactBuilder
@@ -80,6 +83,11 @@ class MavenArtifact
   public function isDocumentation(): bool
   {
     return $this->isDocumentation;
+  }
+  
+  public function hide(): bool
+  {
+    return $this->hide;
   }
 
   public function getDocUrl($version)
@@ -235,6 +243,7 @@ class MavenArtifactBuilder
   private $type = 'iar';
   private $makesSenseAsMavenDependency = false;
   private $isDocumentation = false;
+  private $hide = false;
 
   public function __construct($key)
   {
@@ -274,6 +283,12 @@ class MavenArtifactBuilder
     $this->type = $type;
     return $this;
   }
+  
+  public function hide(bool $hide): MavenArtifactBuilder
+  {
+    $this->hide = $hide;
+    return $this;
+  }
 
   public function makesSenseAsMavenDependency(bool $makesSenseAsMavenDependency): MavenArtifactBuilder
   {
@@ -297,7 +312,8 @@ class MavenArtifactBuilder
       $this->artifactId,
       $this->type,
       $this->makesSenseAsMavenDependency,
-      $this->isDocumentation
+      $this->isDocumentation,
+      $this->hide
     );
   }
 }

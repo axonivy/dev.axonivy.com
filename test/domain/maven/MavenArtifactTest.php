@@ -107,6 +107,6 @@ class MavenArtifactTest extends TestCase
     Assert::assertEquals('Visual VM Plugin', $artifact->getName());
 
     $artifact = MavenArtifactRepository::getMavenArtifact('doc-factory-doc', 'zip');
-    Assert::assertEquals('Doc Factory Documentation', $artifact->getName());
+    Assert::assertEquals('DocFactory Documentation', $artifact->getName());
   }
 }

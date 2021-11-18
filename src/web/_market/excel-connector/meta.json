@@ -14,6 +14,14 @@
 	"mavenArtifacts": [
 		{
 			"repoUrl": "https://maven.axonivy.com",
+			"name": "Excel Connector Product",
+			"groupId": "com.axonivy.connector.excel",
+			"artifactId": "excel-connector-product",
+			"type": "zip",
+			"hide": true
+		},
+		{
+			"repoUrl": "https://maven.axonivy.com",
 			"name": "Excel Connector",
 			"groupId": "com.axonivy.connector.excel",
 			"artifactId": "excel-connector",

@@ -24,7 +24,7 @@ pipeline {
       steps {
         echo 'create distribution package'
         sh 'composer install --no-dev --no-progress'
-        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases --exclude=src/web/_market src vendor"
+        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases --exclude=src/web/_market --exclude=src/web/market-cache src vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
  
@@ -91,9 +91,9 @@ pipeline {
             sh "ssh $host ln -fns /home/axonivya/data/ivy-releases $targetFolder/src/web/releases/ivy"
             sh "ssh $host ln -fns /home/axonivya/data/doc-cache $targetFolder/src/web/documentation"
             sh "ssh $host ln -fns /home/axonivya/data/market $targetFolder/src/web/_market"
+            sh "ssh $host ln -fns /home/axonivya/data/market-cache $targetFolder/src/web/market-cache"
             sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
             sh "ssh $host ln -fns $targetFolder/src/app/DocCacher.php /home/axonivya/script/DocCacher.php"
-            
           }
         }
       }

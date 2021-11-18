@@ -10,7 +10,7 @@ class OpenApiJsonActionTest extends TestCase
 
   public function testServeOpenApiJson()
   {
-    AppTester::assertThatGet('/_market/genderize/openapi')
+    AppTester::assertThatGet('/_market/genderize-io-connector/openapi')
       ->ok()
       ->header('Content-Type', 'application/json')
       ->bodyContains('"title": "Genderize"');

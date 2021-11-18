@@ -14,7 +14,6 @@ class Config
   public const DOCKER_HUB_IMAGE_URL = 'https://hub.docker.com/r/axonivy/axonivy-engine';
   public const DOCKER_IMAGE_ENGINE = 'axonivy/axonivy-engine';
 
-  public const CLONE_DOC_SCRIPT = '/home/axonivya/script/clonedoc.sh';
   public const DOC_DIRECTORY_THIRDPARTY = '/home/axonivya/data/doc-cache';
 
   public static function isProductionEnvironment()
@@ -31,9 +30,23 @@ class Config
   {
     return self::isProductionEnvironment() ? '/home/axonivya/data/market' : __DIR__ . '/../../src/web/_market';
   }
-
+  
+  public static function marketCacheDirectory(): string
+  {
+      return self::isProductionEnvironment() ? '/home/axonivya/data/market-cache' : __DIR__ . '/../../src/web/market-cache';
+  }
+  
+  public static $MARKET_INSTALLAION_FILE = "";  
   public static function marketInstallationsFile(): string
   {
+    if (!empty(self::$MARKET_INSTALLAION_FILE)) {
+      return self::$MARKET_INSTALLAION_FILE;
+    }
     return self::isProductionEnvironment() ? '/home/axonivya/data/market-installations.json' : '/tmp/market-installations.json';
+  }
+  
+  public static function unzipper(): string
+  {
+    return __DIR__ . '/download-zip.sh';    
   }
 }

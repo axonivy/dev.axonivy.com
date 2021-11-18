@@ -45,25 +45,6 @@ class MarketActionTest extends TestCase
       ->bodyContains('id="main"');
   }
   
-  public function testMarketPage_querySearchInstaller()
-  {
-      AppTester::assertThatGet('/market?type=CONNECTOR&search=uipath&installer=rest-client')
-      ->ok()
-      ->bodyContains('uipath')
-      ->bodyContains('id="main"');
-      
-      AppTester::assertThatGet('/market?installer=maven-import')
-      ->ok()
-      ->bodyContains('doc-factory')
-      ->bodyContains('portal')
-      ->bodyDoesNotContain('uipath');
-      
-      AppTester::assertThatGet('/market?tags=document&installer=maven-import')
-      ->ok()
-      ->bodyContains('doc-factory')
-      ->bodyDoesNotContain('portal');
-  }
-  
   public function testMarketPage_querySearchOnly()
   {
     AppTester::assertThatGet('/market?resultsOnly&type=CONNECTOR&search=uipath') // stable URI since Designer 9.2!

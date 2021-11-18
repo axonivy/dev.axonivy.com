@@ -13,69 +13,17 @@
     "validate": false,
     "mavenArtifacts": [
         {
-	        "repoUrl": "https://maven.axonivy.com",
+            "repoUrl": "https://maven.axonivy.com",
             "name": "A-Trust",
             "groupId": "com.axonivy.connector.atrust",
             "artifactId": "a-trust-connector",
             "makesSenseAsMavenDependency": true
         },
         {
-			"repoUrl": "https://maven.axonivy.com",
+            "repoUrl": "https://maven.axonivy.com",
             "name": "A-Trust Demo",
             "groupId": "com.axonivy.connector.atrust",
             "artifactId": "a-trust-connector-demo"
         }
-    ],
-    "installers": [
-        {
-            "id": "maven-dependency",
-            "data": {
-                "dependencies": [
-                    {
-                        "groupId": "com.axonivy.connector.atrust",
-                        "artifactId": "a-trust-connector",
-                        "version": "${version}",
-                        "type": "iar"
-                    }
-                ],
-                "repositories": [
-                    {
-                        "id": "axonivy.public",
-                        "url": "https://repo.axonivy.rocks",
-                        "snapshots": {
-                            "enabled": "true"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "id": "maven-import",
-            "data": {
-                "projects": [
-                    {
-                        "groupId": "com.axonivy.connector.atrust",
-                        "artifactId": "a-trust-connector-demo",
-                        "version": "${version}",
-                        "type": "iar"
-                    }
-                ],
-                "repositories": [
-                    {
-                        "id": "axonivy.public",
-                        "url": "https://repo.axonivy.rocks"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "open-resource",
-            "data": {
-                "project": "a-trust-connector-demo",
-                "resources": [
-                    "processes/ATrustIntegration/ATrustDemo.mod"
-                ]
-            }
-        }
-    ]
+    ]    
 }
