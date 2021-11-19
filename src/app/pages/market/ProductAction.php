@@ -85,6 +85,11 @@ class ProductAction
       (new DocMavenArtifactDownloader())->download($docArtifact, $version);
     }
     
+    $productVersion = $version;
+    if (empty($productVersion)) {
+      $productVersion = $product->getVersion();
+    }
+    
     return $this->view->render($response, 'market/product.twig', [
       'product' => $product,
       'mavenProductInfo' => $mavenProductInfo,
@@ -96,6 +101,7 @@ class ProductAction
       'installButton' => $installButton,
       'getInTouchLink' => $getInTouchLink,
       'openApiJsonUrl' => $openApiJsonUrl,
+      'version' => $productVersion
     ]);
   }
 
