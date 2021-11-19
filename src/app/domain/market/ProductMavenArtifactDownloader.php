@@ -21,7 +21,7 @@ class ProductMavenArtifactDownloader
     self::downloadArtifact($product, $artifact, $version);
   }
 
-  public static function downloadArtifact(Product $product, MavenArtifact $artifact, string $version)
+  public static function downloadArtifact(Product $product, MavenArtifact $artifact, string $version): bool
   {
     $url = $artifact->getUrl($version);
     $targetDir = Config::marketCacheDirectory() . '/' . $product->getKey() . '/' . $artifact->getArtifactId() . '/' . $version;
@@ -29,5 +29,6 @@ class ProductMavenArtifactDownloader
       $cmd = Config::unzipper() . ' ' . $url . ' ' . $targetDir . ' 2>&1';
       shell_exec($cmd);
     }
+    return count(glob($targetDir . '/*')) > 0;
   }
 }

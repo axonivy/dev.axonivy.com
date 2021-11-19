@@ -150,13 +150,6 @@ class ProductActionTest extends TestCase
       ->bodyContains('a class="button special install" href="https://www.axonivy.com/marketplace/contact/?market_solutions=employee-onboarding');
   }
   
-  public function testGetInTouchLink_existsNot()
-  {
-    AppTester::assertThatGet('market/basic-workflow-ui')
-      ->ok()
-      ->bodyDoesNotContain('a class="button special install" href="https://www.axonivy.com/marketplace/contact');
-  }
-
   public function testDontShowInstallCountForUninstallableProducts() 
   {
     AppTester::assertThatGet('market/employee-onboarding')

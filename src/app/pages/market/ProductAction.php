@@ -61,8 +61,10 @@ class ProductAction
       
       $docArtifact = $mavenProductInfo->getFirstDocArtifact();
       if ($docArtifact != null) {
-       (new ProductMavenArtifactDownloader())->downloadArtifact($product, $artifact, $version);
-        $docUrl = $artifact->getDocUrl($product, $version);
+        $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+        if ($exists) {
+          $docUrl = $docArtifact->getDocUrl($product, $version);
+        }
       }
 
       $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
