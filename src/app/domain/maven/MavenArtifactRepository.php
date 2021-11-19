@@ -39,18 +39,6 @@ class MavenArtifactRepository
     return $all;
   }
 
-  public static function getDocs()
-  {
-    $all = self::getAll();
-    $docs = [];
-    foreach ($all as $a) {
-      if ($a->isDocumentation()) {
-        $docs[] = $a;
-      }
-    }
-    return $docs;
-  }
-
   private static function getProcessingValve(): MavenArtifact
   {
     return MavenArtifact::create('processing-valve')

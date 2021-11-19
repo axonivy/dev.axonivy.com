@@ -93,7 +93,6 @@ pipeline {
             sh "ssh $host ln -fns /home/axonivya/data/market $targetFolder/src/web/_market"
             sh "ssh $host ln -fns /home/axonivya/data/market-cache $targetFolder/src/web/market-cache"
             sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
-            sh "ssh $host ln -fns $targetFolder/src/app/DocCacher.php /home/axonivya/script/DocCacher.php"
           }
         }
       }
