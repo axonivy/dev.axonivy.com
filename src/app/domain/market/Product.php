@@ -199,6 +199,14 @@ class Product
   {
     return $this->tags;
   }
+  
+  public function getFirstTag(): string
+  {
+    if (empty($this->tags)) {
+      return '';
+    }
+    return $this->tags[0];
+  }
 
   public function assetBaseUrl()
   {
