@@ -218,10 +218,10 @@
 
         <div class="product-meta-spaceer"></div>
 
-        {% if docArtifacts is not empty %}
+        {% if docUrl is not empty %}
           <div class="product-meta-info">
             <span class="meta-type">Documentation</span>
-            <span class="meta-data"><a href="{{ docArtifacts|first.getDocUrl(selectedVersion) }}">External Link</a></span>
+            <span class="meta-data"><a href="{{ docUrl }}">External Link</a></span>
           </div>
         {% endif %}
         {% if openApiJsonUrl is not empty %}

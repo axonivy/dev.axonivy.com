@@ -19,8 +19,13 @@ class ProductMavenArtifactDownloader
       return;
     }
 
+    self::downloadArtifact($product, $artifact, $version);
+  }
+
+  public static function downloadArtifact(Product $product, MavenArtifact $artifact, string $version)
+  {
     $url = $artifact->getUrl($version);
-    $targetDir = Config::marketCacheDirectory() . '/' . $product->getKey() . '/' . $version;
+    $targetDir = Config::marketCacheDirectory() . '/' . $product->getKey() . '/' . $artifact->getArtifactId() . '/' . $version;
     if (!file_exists($targetDir)) {
       $cmd = Config::unzipper() . ' ' . $url . ' ' . $targetDir . ' 2>&1';
       shell_exec($cmd);

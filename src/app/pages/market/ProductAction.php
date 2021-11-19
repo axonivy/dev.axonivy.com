@@ -12,7 +12,6 @@ use app\domain\market\ProductDescription;
 use app\domain\market\ProductMavenArtifactDownloader;
 use app\domain\maven\MavenArtifact;
 use app\domain\market\OpenAPIProvider;
-use app\domain\market\DocMavenArtifactDownloader;
 
 class ProductAction
 {
@@ -36,7 +35,7 @@ class ProductAction
     $version = $args['version'] ?? '';
     $mavenArtifactsAsDependency = [];
     $mavenArtifacts = [];
-    $docArtifacts = [];
+    $docUrl = '';
 
     if ($mavenProductInfo == null && !empty($version)) {
       throw new HttpNotFoundException($request);
@@ -58,11 +57,11 @@ class ProductAction
           $mavenArtifactsAsDependency[] = $artifact;
         }
       }
-
-      foreach ($mavenArtifacts as $artifact) {
-        if ($artifact->isDocumentation()) {
-          $docArtifacts[] = $artifact;
-        }
+      
+      $docArtifact = $mavenProductInfo->getFirstDocArtifact();
+      if ($docArtifact != null) {
+       (new ProductMavenArtifactDownloader())->downloadArtifact($product, $artifact, $version);
+        $docUrl = $artifact->getDocUrl($product, $version);
       }
 
       $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->hide());
@@ -72,18 +71,13 @@ class ProductAction
     
     $getInTouchLink = 'https://www.axonivy.com/marketplace/contact/?market_solutions=' . $product->getKey();
 
-    if (!empty($version)) {
-      $downloader = new ProductMavenArtifactDownloader();
-      $downloader->download($product, $version);
+    if (!empty($version)) {      
+      (new ProductMavenArtifactDownloader())->download($product, $version);
     }
     $productDescription = ProductDescription::create($product, $version);
     
     $openApiProvider = new OpenAPIProvider($product);
     $openApiJsonUrl = $openApiProvider->getOpenApiJsonUrl($version);
-    
-    foreach ($docArtifacts as $docArtifact) {
-      (new DocMavenArtifactDownloader())->download($docArtifact, $version);
-    }
     
     $productVersion = $version;
     if (empty($productVersion)) {
@@ -96,12 +90,12 @@ class ProductAction
       'productDescription' => $productDescription,
       'mavenArtifacts' => $mavenArtifacts,
       'mavenArtifactsAsDependency' => $mavenArtifactsAsDependency,
-      'docArtifacts' => $docArtifacts,
       'selectedVersion' => $version,
       'installButton' => $installButton,
       'getInTouchLink' => $getInTouchLink,
       'openApiJsonUrl' => $openApiJsonUrl,
-      'version' => $productVersion
+      'version' => $productVersion,
+      'docUrl' => $docUrl
     ]);
   }
 

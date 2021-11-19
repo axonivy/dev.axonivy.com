@@ -4,6 +4,7 @@ namespace app\domain\maven;
 
 use app\domain\util\StringUtil;
 use app\Config;
+use app\domain\market\Product;
 
 class MavenArtifact
 {
@@ -90,21 +91,9 @@ class MavenArtifact
     return $this->hide;
   }
 
-  public function getDocUrl($version)
+  public function getDocUrl(Product $product, string $version)
   {
-    // this folder exists on server as ~/data/cache-doc and is symlinked to webroot in Jenkinsfile
-    // cache will be build with DocCacher.php
-    return '/documentation/' . $this->getDocSubFolder($version);
-  }
-
-  public function getDocSubFolder($version)
-  {
-    return $this->artifactId . '/' . $version;
-  }
-
-  public function docExists($version)
-  {
-    return file_exists(Config::docCacheDirectory() . '/' . $this->getDocSubFolder($version));
+    return '/market-cache/' . $product->getKey() . '/' . $this->artifactId . '/' . $version;
   }
 
   public function getDevUrl()
