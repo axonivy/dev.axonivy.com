@@ -95,6 +95,10 @@
           </div>
         {% endfor %}
       </div>
+      
+      <div class="12u 12u(small)" style="font-size:12px;text-align:center;margin-top:10px;">
+        Contribute to the community and build your own connector. <a href="https://dev.axonivy.com/link/market-contribute">How to?</a> 
+      </div>
     </div>
 
     <div class="row" style="margin-top:5px;">
@@ -157,9 +161,7 @@
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">
             <div class="product-type {{ product.type }}"></div>
             <div class="product-tags p-grid p-dir-rev">
-              {% for tag in product.tags %}
-                <span class="product-tag">{{ tag }}</span>
-              {% endfor %}
+              <span class="product-tag">{{ product.firstTag }}</span>
             </div>
             <center class="product-logo">
               <img src="{{ product.imgSrc }}" alt="{{ product.name }}" class="image"/>
@@ -176,11 +178,5 @@
     </div>    
   </div>
 </section>
-
-{% if hideSearch is not defined %}
-<div style="text-align:center;margin-top:20px;font-size:14px;margin-bottom:20px;">
-  Contribute to the community and build your own connector. <a href="https://dev.axonivy.com/link/market-contribute">How to?</a>
-</div>
-{% endif %}
 
 {% endblock %}
