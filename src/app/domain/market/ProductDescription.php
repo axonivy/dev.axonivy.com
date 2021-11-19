@@ -36,15 +36,18 @@ class ProductDescription
     }
     
     // load README from another version
-    $dir = Config::marketCacheDirectory() . "/" . $product->getKey() . "/*";
-    $dirs = array_filter(glob($dir), 'is_dir');
-    foreach ($dirs as $dir) {
-      $readme = $dir . '/README.md';
-      if (file_exists($readme)) {
-        $desc = self::createByFile($readme, '');
-        $desc->demo = '';
-        $desc->setup = '';
-        return $desc;
+    $artifactId = $product->getProductArtifactId();
+    if (!empty($artifactId)) {
+      $dir = Config::marketCacheDirectory() . "/" . $product->getKey() . "/$artifactId/*";
+      $dirs = array_filter(glob($dir), 'is_dir');
+      foreach ($dirs as $dir) {
+        $readme = $dir . '/README.md';
+        if (file_exists($readme)) {
+          $desc = self::createByFile($readme, '');
+          $desc->demo = '';
+          $desc->setup = '';
+          return $desc;
+        }
       }
     }
 

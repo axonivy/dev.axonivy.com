@@ -1,7 +1,6 @@
 <?php
 namespace app\domain\market;
 
-use app\domain\util\StringUtil;
 use app\domain\maven\MavenArtifact;
 use app\Config;
 
@@ -14,7 +13,7 @@ class ProductMavenArtifactDownloader
       return;
     }
 
-    $artifact = self::findArtifact($info);
+    $artifact = $info->getProductArtifact();
     if ($artifact == null) {
       return;
     }
@@ -30,15 +29,5 @@ class ProductMavenArtifactDownloader
       $cmd = Config::unzipper() . ' ' . $url . ' ' . $targetDir . ' 2>&1';
       shell_exec($cmd);
     }
-  }
-
-  private static function findArtifact(MavenProductInfo $info): ?MavenArtifact
-  {
-    foreach ($info->getMavenArtifacts() as $mavenArtifact) {
-      if (StringUtil::endsWith($mavenArtifact->getArtifactId(), '-product')) {
-        return $mavenArtifact;
-      }
-    }
-    return null;
   }
 }
