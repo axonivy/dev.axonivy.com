@@ -65,7 +65,7 @@ class MavenArtifact
   
   public function isProductArtifact(): bool
   {
-    return StringUtil::endsWith($a->getArtifactId(), '-product');
+    return StringUtil::endsWith($this->getArtifactId(), '-product');
   }
 
   public function getType(): string
