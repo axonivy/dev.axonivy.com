@@ -8,6 +8,9 @@ use app\domain\market\Market;
 use app\domain\util\Redirect;
 use app\domain\util\StringUtil;
 use app\domain\ReleaseType;
+use app\domain\market\Product;
+use app\domain\market\MavenProductInfo;
+use app\domain\market\ProductMavenArtifactDownloader;
 
 class PortalPermalinkAction
 {
@@ -20,7 +23,9 @@ class PortalPermalinkAction
       return Redirect::to($response, '/market/portal');
     }
 
-    $version = self::evaluatePortalVersion($version);
+    $product = Market::getProductByKey('portal');
+    $portal = $product->getMavenProductInfo();
+    $version = self::evaluatePortalVersion($version, $portal);
 
     $topic = $args['topic'] ?? '';
     if (empty($topic)) {
@@ -32,15 +37,20 @@ class PortalPermalinkAction
       if (!empty($path)) {
         $path = '/' . $path;
       }
-      return Redirect::to($response, '/documentation/portal-guide/' . $version . $path);
+
+      $docArtifact = $portal->getFirstDocArtifact();
+      if ($docArtifact == null) {
+        throw new HttpNotFoundException($request);
+      }
+      (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+      $docUrl = $docArtifact->getDocUrl($product, $version);
+      return Redirect::to($response, $docUrl . $path);
     }
     throw new HttpNotFoundException($request);
   }
 
-  private static function evaluatePortalVersion(String $version): String
+  private static function evaluatePortalVersion(String $version, MavenProductInfo $portal): String
   {
-    $portal = Market::getProductByKey('portal')->getMavenProductInfo();
-
     $releaseType = ReleaseType::byKey($version);
     if ($releaseType != null && $releaseType->isDevRelease()) {
       return $portal->getLatestVersion();

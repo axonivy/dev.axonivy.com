@@ -57,14 +57,13 @@ class ProductAction
           $mavenArtifactsAsDependency[] = $artifact;
         }
       }
-
-      foreach ($mavenArtifacts as $artifact) {
-        if ($artifact->isDocumentation()) {
-          (new ProductMavenArtifactDownloader())->downloadArtifact($product, $artifact, $version);
-          $docUrl = $artifact->getDocUrl($product, $version);
-          break;
-        }
+      
+      $docArtifact = $mavenProductInfo->getFirstDocArtifact();
+      if ($docArtifact != null) {
+       (new ProductMavenArtifactDownloader())->downloadArtifact($product, $artifact, $version);
+        $docUrl = $artifact->getDocUrl($product, $version);
       }
+
       $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->hide());
     }
 

@@ -34,6 +34,16 @@ class MavenProductInfo
     }
     return $artifacts;
   }
+  
+  public function getFirstDocArtifact(): ?MavenArtifact
+  {
+    foreach ($this->mavenArtifacts as $mavenArtifact) {
+      if ($mavenArtifact->isDocumentation()) {
+        return $mavenArtifact;
+      }
+    }
+    return null;
+  }
 
   public function getVersions(): array
   {
