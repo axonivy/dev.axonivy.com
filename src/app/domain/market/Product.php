@@ -234,9 +234,12 @@ class Product
 
   public function getInstallerJson(string $version): string
   {
-    $productFile = Config::marketCacheDirectory() . "/$this->key/$version/product.json";
-    if (file_exists($productFile)) {
-      return $this->assetBaseUrlReadme($version) . '/_product.json';
+    $artifactId = $this->getProductArtifactId();
+    if (!empty($artifactId)) {
+      $productFile = Config::marketCacheDirectory() . "/$this->key/$version/$artifactId/product.json";
+      if (file_exists($productFile)) {
+        return $this->assetBaseUrlReadme($version) . '/_product.json';
+      }
     }
     return $this->assetBaseUrl() . "/_product.json?version=$version";
   }
@@ -273,9 +276,12 @@ class Product
 
   public function assetBaseUrlReadme($version)
   {
-    $readme = Config::marketCacheDirectory() . "/$this->key/$version/README.md";
-    if (file_exists($readme)) {
-      return '/market-cache/' . $this->key . '/' . $version;
+    $artifactId = $this->getProductArtifactId();
+    if (!empty($artifactId)) {
+      $readme = Config::marketCacheDirectory() . "/$this->key/$version/$artifactId/README.md";
+      if (file_exists($readme)) {
+        return '/market-cache/' . $this->key . '/' . $version;
+      }
     }
     return $this->assetBaseUrl();
   }
@@ -287,11 +293,28 @@ class Product
 
   public function getProductFile(string $version, $file): string
   {
-    $productFile = Config::marketCacheDirectory() . "/$this->key/$version/" . $file;
-    if (file_exists($productFile)) {
-      return $productFile;
+    $artifactId = $this->getProductArtifactId();
+    if (!empty($artifactId)) {
+      $productFile = Config::marketCacheDirectory() . "/$this->key/$artifactId/$version/" . $file;
+      if (file_exists($productFile)) {
+        return $productFile;
+      }
     }
     return $this->getMarketFile($file);
+  }
+  
+  public function getProductArtifactId(): string {
+    $info = $this->getMavenProductInfo();
+    if ($info == null) {
+      return "";
+    }
+    
+    $artifact = $info->getProductArtifact();
+    if ($artifact == null) {
+      return "";
+    }
+    
+    return $artifact->getArtifactId();
   }
 
   public function getMavenProductInfo(): ?MavenProductInfo

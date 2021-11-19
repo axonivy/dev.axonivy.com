@@ -3,6 +3,7 @@
 namespace app\domain\market;
 
 use app\domain\maven\MavenArtifact;
+use app\domain\util\StringUtil;
 
 class MavenProductInfo
 {
@@ -39,6 +40,16 @@ class MavenProductInfo
   {
     foreach ($this->mavenArtifacts as $mavenArtifact) {
       if ($mavenArtifact->isDocumentation()) {
+        return $mavenArtifact;
+      }
+    }
+    return null;
+  }
+  
+  public function getProductArtifact(): ?MavenArtifact
+  {
+    foreach ($this->getMavenArtifacts() as $mavenArtifact) {
+      if (StringUtil::endsWith($mavenArtifact->getArtifactId(), '-product')) {
         return $mavenArtifact;
       }
     }
