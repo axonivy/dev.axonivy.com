@@ -42,7 +42,10 @@ class PortalPermalinkAction
       if ($docArtifact == null) {
         throw new HttpNotFoundException($request);
       }
-      (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+      $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+      if (!$exists) {
+        throw new HttpNotFoundException($request);
+      }
       $docUrl = $docArtifact->getDocUrl($product, $version);
       return Redirect::to($response, $docUrl . $path);
     }
