@@ -12,6 +12,7 @@ use app\domain\market\ProductDescription;
 use app\domain\market\ProductMavenArtifactDownloader;
 use app\domain\maven\MavenArtifact;
 use app\domain\market\OpenAPIProvider;
+use app\domain\util\StringUtil;
 
 class ProductAction
 {
@@ -64,7 +65,7 @@ class ProductAction
         $docUrl = $artifact->getDocUrl($product, $version);
       }
 
-      $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->hide());
+      $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
     }
 
     $installButton = self::createInstallButton($request, $product, $version);

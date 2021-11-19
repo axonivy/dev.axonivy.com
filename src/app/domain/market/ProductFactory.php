@@ -55,7 +55,6 @@ class ProductFactory
         ->type($mavenArtifact->type ?? 'iar')
         ->makesSenseAsMavenDependency($mavenArtifact->makesSenseAsMavenDependency ?? false)
         ->doc($mavenArtifact->doc ?? false)
-        ->hide($mavenArtifact->hide ?? false)
         ->build();
     }
     return $mavenArtifacts;
