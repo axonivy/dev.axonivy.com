@@ -49,7 +49,7 @@ class MavenProductInfo
   public function getProductArtifact(): ?MavenArtifact
   {
     foreach ($this->getMavenArtifacts() as $mavenArtifact) {
-      if (StringUtil::endsWith($mavenArtifact->getArtifactId(), '-product')) {
+      if ($mavenArtifact->isProductArtifact()) {
         return $mavenArtifact;
       }
     }
