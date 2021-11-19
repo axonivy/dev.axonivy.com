@@ -280,7 +280,7 @@ class Product
     if (!empty($artifactId)) {
       $readme = Config::marketCacheDirectory() . "/$this->key/$version/$artifactId/README.md";
       if (file_exists($readme)) {
-        return '/market-cache/' . $this->key . '/' . $version;
+        return '/market-cache/' . $this->key . "/$artifactId/" . $version;
       }
     }
     return $this->assetBaseUrl();
