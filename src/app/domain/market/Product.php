@@ -278,7 +278,7 @@ class Product
   {
     $artifactId = $this->getProductArtifactId();
     if (!empty($artifactId)) {
-      $readme = Config::marketCacheDirectory() . "/$this->key/$version/$artifactId/README.md";
+      $readme = Config::marketCacheDirectory() . "/$this->key/$artifactId/$version/README.md";
       if (file_exists($readme)) {
         return '/market-cache/' . $this->key . "/$artifactId/" . $version;
       }
