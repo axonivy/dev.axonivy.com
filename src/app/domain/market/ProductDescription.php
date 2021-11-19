@@ -43,7 +43,8 @@ class ProductDescription
       foreach ($dirs as $dir) {
         $readme = $dir . '/README.md';
         if (file_exists($readme)) {
-          $desc = self::createByFile($readme, '');
+          $assetBaseUrl = $product->assetBaseUrlReadme(basename($dir));
+          $desc = self::createByFile($readme, $assetBaseUrl);
           $desc->demo = '';
           $desc->setup = '';
           return $desc;
