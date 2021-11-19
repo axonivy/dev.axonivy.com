@@ -10,7 +10,19 @@ use app\domain\maven\MavenArtifactRepository;
 
 class MavenArtifactTest extends TestCase
 {
-
+  public function testFilterSnapshotsWhichAreRealesed()
+  {
+    $versions = [
+      '9.3.0', '9.2.0', '9.2.0-SNAPSHOT', '9.1.0'
+    ];
+    $result = MavenArtifact::filterSnapshotsWhichAreRealesed($versions);
+    
+    Assert::assertCount(3, $result);
+    Assert::assertEquals('9.3.0', $result[0]);
+    Assert::assertEquals('9.2.0', $result[1]);
+    Assert::assertEquals('9.1.0', $result[2]);
+  }
+  
   public function testGetMavenArtifact()
   {
     $artifact = MavenArtifactRepository::getMavenArtifact('workflow-demos', 'iar');

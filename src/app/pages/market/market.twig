@@ -155,7 +155,7 @@
     {% if products is empty %}
       Nothing found
     {% endif %}
-    <div class="row p-grid p-align-stretch">
+    <div class="row p-grid p-align-stretch" style="margin-bottom:30px;">
       {% for product in products %}
         <div class="p-col-fixed p-col-6 p-md-4 p-lg-3">
           <div class="product-card zoom" onclick="location.href='{{ product.url }}';">

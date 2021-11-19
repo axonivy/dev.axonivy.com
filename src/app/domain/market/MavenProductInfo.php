@@ -2,6 +2,8 @@
 
 namespace app\domain\market;
 
+use app\domain\maven\MavenArtifact;
+
 class MavenProductInfo
 {
   private array $mavenArtifacts;
@@ -39,6 +41,7 @@ class MavenProductInfo
     foreach ($this->mavenArtifacts as $mavenArtifact) {
       $versions = array_merge($mavenArtifact->getVersions(), $versions);
     }
+    $versions = MavenArtifact::filterSnapshotsWhichAreRealesed($versions);
     $versions = array_unique($versions);
     usort($versions, 'version_compare');
     $versions = array_reverse($versions);

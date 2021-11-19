@@ -170,10 +170,26 @@ class MavenArtifact
 
       usort($v, 'version_compare');
       $v = array_reverse($v);
-
+      $v = self::filterSnapshotsWhichAreRealesed($v);      
       $this->versionCache = $v;
     }
     return $this->versionCache;
+  }
+  
+  public static function filterSnapshotsWhichAreRealesed(array $versions): array
+  {
+    return array_values(array_filter($versions, fn($version) => self::filterReleasedSnapshots($versions, $version)));
+  }
+  
+  private static function filterReleasedSnapshots(array $versions, string $v): bool
+  {
+    if (StringUtil::endsWith($v, '-SNAPSHOT')) {
+      $relasedVersion = str_replace('-SNAPSHOT', '', $v);
+      if (in_array($relasedVersion, $versions)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public static function parseVersions($xml)
