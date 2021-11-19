@@ -43,8 +43,8 @@ class PortalPermalinkActionTest extends TestCase
 
   public function testPortalDoc()
   {
-    AppTester::assertThatGet('/portal/8.0.3/doc')->redirect('/documentation/portal-guide/8.0.3');
-    AppTester::assertThatGet('/portal/8.0/doc')->redirect('/documentation/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0'));
+    AppTester::assertThatGet('/portal/8.0.3/doc')->redirect('/market-cache/portal/portal-guide/8.0.3');
+    AppTester::assertThatGet('/portal/8.0/doc')->redirect('/market-cache/portal/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0'));
   }
 
   private static function latestVersionOfMinorVersionPortal($minorVersion)
@@ -60,20 +60,20 @@ class PortalPermalinkActionTest extends TestCase
 
   public function testPortalDocWithDocument()
   {
-    AppTester::assertThatGet('/portal/8.0.3/doc/test.html')->redirect('/documentation/portal-guide/8.0.3/test.html');
-    AppTester::assertThatGet('/portal/8.0/doc/test.html')->redirect('/documentation/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0') . '/test.html');
+    AppTester::assertThatGet('/portal/8.0.3/doc/test.html')->redirect('/market-cache/portal/portal-guide/8.0.3/test.html');
+    AppTester::assertThatGet('/portal/8.0/doc/test.html')->redirect('/market-cache/portal/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0') . '/test.html');
   }
 
   public function testPortalDocWithDocumentInSubfolder()
   {
-    AppTester::assertThatGet('/portal/8.0.3/doc/subfolder/test.html')->redirect('/documentation/portal-guide/8.0.3/subfolder/test.html');
-    AppTester::assertThatGet('/portal/8.0/doc/subfolder/test.html')->redirect('/documentation/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0') . '/subfolder/test.html');
+    AppTester::assertThatGet('/portal/8.0.3/doc/subfolder/test.html')->redirect('/market-cache/portal/portal-guide/8.0.3/subfolder/test.html');
+    AppTester::assertThatGet('/portal/8.0/doc/subfolder/test.html')->redirect('/market-cache/portal/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0') . '/subfolder/test.html');
   }
 
   public function testPortalBrokenLink()
   {
     AppTester::assertThatGet('/portal/8.0/doc/portal-developer-guide/introduction/index.html#new-and-noteworthy')
-      ->redirect('/documentation/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0') . '/portal-developer-guide/introduction/index.html');
+      ->redirect('/market-cache/portal/portal-guide/' . self::latestVersionOfMinorVersionPortal('8.0') . '/portal-developer-guide/introduction/index.html');
   }
 
   private function getLatestVersion($version)
