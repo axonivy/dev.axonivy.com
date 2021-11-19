@@ -1,6 +1,8 @@
 <?php
 namespace app\domain\market;
 
+use app\Config;
+
 class ProductDescription
 {
 
@@ -19,14 +21,36 @@ class ProductDescription
 
   public static function create(Product $product, string $version): ProductDescription
   {
-    $markdownFile = $product->getReadmeFile($version);
-    if (!file_exists($markdownFile)) {
-      return new ProductDescription('', '', '');
-    }
     $assetBaseUrl = $product->assetBaseUrlReadme($version);
-    return self::createByFile($markdownFile, $assetBaseUrl);    
-  }
+    
+    // load versionized README from product repo
+    $file = $product->getProductFile($version, 'README.md');
+    if (file_exists($file)) {
+      return self::createByFile($file, $assetBaseUrl); 
+    }
+    
+    // load README from market repo
+    $file = $product->getMarketFile('README.md');
+    if (file_exists($file)) {
+      return self::createByFile($file, $assetBaseUrl); 
+    }
+    
+    // load README from another version
+    $dir = Config::marketCacheDirectory() . "/" . $product->getKey() . "/*";
+    $dirs = array_filter(glob($dir), 'is_dir');
+    foreach ($dirs as $dir) {
+      $readme = $dir . '/README.md';
+      if (file_exists($readme)) {
+        $desc = self::createByFile($readme, '');
+        $desc->demo = '';
+        $desc->setup = '';
+        return $desc;
+      }
+    }
 
+    return new ProductDescription('', '', '');
+  }
+  
   public static function createByFile(string $markdownFile, string $assetBaseUrl): ProductDescription
   {
     $markdownContent = file_get_contents($markdownFile);

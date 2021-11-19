@@ -279,16 +279,7 @@ class Product
     }
     return $this->assetBaseUrl();
   }
-  
-  public function getReadmeFile(string $version): string
-  {
-    $file = $this->getProductFile($version, 'README.md');
-    if (file_exists($file)) {
-      return $file;
-    }
-    return $this->getMarketFile('README.md');   
-  }
-  
+
   public function getMarketFile(string $file)
   {
     return Config::marketDirectory() . "/$this->key/" . $file;

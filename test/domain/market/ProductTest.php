@@ -158,8 +158,6 @@ class ProductTest extends TestCase
 
   public function test_installationCount()
   {
-    $id = uniqid();
-    Config::$MARKET_INSTALLAION_FILE = "/tmp/$id.json";
     $product = Market::getProductByKey('ms-todo');
     $count = $product->getInstallationCount();
     Assert::assertIsInt($count);
@@ -171,6 +169,5 @@ class ProductTest extends TestCase
     //reload with incremented value
     $product = Market::getProductByKey('ms-todo');
     Assert::assertEquals($count + 1, $product->getInstallationCount());
-    Config::$MARKET_INSTALLAION_FILE = "";
   }
 }

@@ -104,7 +104,7 @@ class MavenArtifact
 
   public function docExists($version)
   {
-    return file_exists(Config::DOC_DIRECTORY_THIRDPARTY . '/' . $this->getDocSubFolder($version));
+    return file_exists(Config::docCacheDirectory() . '/' . $this->getDocSubFolder($version));
   }
 
   public function getDevUrl()

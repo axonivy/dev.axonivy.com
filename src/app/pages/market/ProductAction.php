@@ -12,6 +12,7 @@ use app\domain\market\ProductDescription;
 use app\domain\market\ProductMavenArtifactDownloader;
 use app\domain\maven\MavenArtifact;
 use app\domain\market\OpenAPIProvider;
+use app\domain\market\DocMavenArtifactDownloader;
 
 class ProductAction
 {
@@ -59,7 +60,7 @@ class ProductAction
       }
 
       foreach ($mavenArtifacts as $artifact) {
-        if ($artifact->isDocumentation() && $artifact->docExists($version)) {
+        if ($artifact->isDocumentation()) {
           $docArtifacts[] = $artifact;
         }
       }
@@ -80,6 +81,15 @@ class ProductAction
     $openApiProvider = new OpenAPIProvider($product);
     $openApiJsonUrl = $openApiProvider->getOpenApiJsonUrl($version);
     
+    foreach ($docArtifacts as $docArtifact) {
+      (new DocMavenArtifactDownloader())->download($docArtifact, $version);
+    }
+    
+    $productVersion = $version;
+    if (empty($productVersion)) {
+      $productVersion = $product->getVersion();
+    }
+    
     return $this->view->render($response, 'market/product.twig', [
       'product' => $product,
       'mavenProductInfo' => $mavenProductInfo,
@@ -91,6 +101,7 @@ class ProductAction
       'installButton' => $installButton,
       'getInTouchLink' => $getInTouchLink,
       'openApiJsonUrl' => $openApiJsonUrl,
+      'version' => $productVersion
     ]);
   }
 
