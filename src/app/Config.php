@@ -34,11 +34,6 @@ class Config
       return self::isProductionEnvironment() ? '/home/axonivya/data/market-cache' : __DIR__ . '/../../src/web/market-cache';
   }
   
-  public static function docCacheDirectory(): string
-  {
-    return self::isProductionEnvironment() ? '/home/axonivya/data/doc-cache' : __DIR__ . '/../../src/web/documentation';
-  }
-  
   public static function marketInstallationsFile(): string
   {
     return self::isProductionEnvironment() ? '/home/axonivya/data/market-installations.json' : '/tmp/market-installations.json';
