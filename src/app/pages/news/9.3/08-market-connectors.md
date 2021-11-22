@@ -1,6 +1,8 @@
 ## Market {#marketConnectors}
 
-more products ...
+- more products ...
+- easier contribution
+- spicy templates
 
 <div class="short-links">
 	<a href="${docBaseUrl}/market/index.html" target="_blank" rel="noopener noreferrer">
