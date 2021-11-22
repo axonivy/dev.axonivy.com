@@ -1,6 +1,6 @@
 ## Role based Welcome {#role93}
 
-The Designer welcome page assists you in settings up the workspace for your needs.
+The Designer welcome page assists you in settings up the workspace according to your role.
 
 - **Accessible**: simple and uncluttered featureset to onboard new users quickly into the first Process drawing experience.
 - **Advanced actions**: Testers and Developers don't loose any features, but gain quick access to advanced features.
