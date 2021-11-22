@@ -48,6 +48,7 @@
 }
 .team-member {
   margin-left: 6rem;
+  margin-right: 0;
   padding: 1em;
   height: 100%;
 }
