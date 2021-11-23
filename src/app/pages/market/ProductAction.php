@@ -12,7 +12,6 @@ use app\domain\market\ProductDescription;
 use app\domain\market\ProductMavenArtifactDownloader;
 use app\domain\maven\MavenArtifact;
 use app\domain\market\OpenAPIProvider;
-use app\domain\util\StringUtil;
 
 class ProductAction
 {
