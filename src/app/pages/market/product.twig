@@ -187,7 +187,7 @@
           <select name="installVersion" id="installVersion" onchange="updateInstallArtifact(this);">
           {% for version in mavenProductInfo.versionsToDisplay %}            
             <a href="#">
-              <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getInstallerJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
+              <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getProductJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version|replace({'-SNAPSHOT':''}) }}</option>
             </a>
           {% endfor %}
           </select>

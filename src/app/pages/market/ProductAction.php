@@ -153,7 +153,7 @@ class InstallButton
 
   public function getJavascriptCallback(): string
   {
-    return "install('" . $this->getInstallerJsonUrl($this->currentVersion) . "')";
+    return "install('" . $this->getProductJsonUrl($this->currentVersion) . "')";
   }
   
   public function getMultipleVersions(): bool
@@ -161,10 +161,10 @@ class InstallButton
     return $this->product->getMavenProductInfo() != null;
   }
 
-  public function getInstallerJsonUrl($version): string
+  public function getProductJsonUrl($version): string
   {
     $uri = $this->request->getUri();
     $baseUrl = $uri->getScheme() . '://' . $uri->getHost();
-    return $baseUrl . $this->product->getInstallerJson($version);
+    return $baseUrl . $this->product->getProductJsonUrl($version);
   }
 }
