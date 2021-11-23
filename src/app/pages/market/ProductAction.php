@@ -106,7 +106,7 @@ class ProductAction
   {
     $version = self::readIvyVersionCookie($request);
     $isDesigner = !empty($version);
-    $reason = $product->getReasonWhyNotInstallable($isDesigner, $version);
+    $reason = $product->getReasonWhyNotInstallable($isDesigner, $currentVersion);
     $isShow = $product->isInstallable($currentVersion);
     return new InstallButton($isDesigner, $reason, $product, $isShow, $request, $currentVersion);
   }
