@@ -21,7 +21,7 @@ class MetaJsonAction
 
     $version = $request->getQueryParams()['version'] ?? 'version-get-param-missing';
 
-    $content = $product->getMetaJson();
+    $content = $product->getProductJsonContent('');
     $content = str_replace('${version}', $version, $content);
 
     $json = json_decode($content);

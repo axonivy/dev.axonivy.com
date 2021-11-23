@@ -23,7 +23,7 @@ class ProductJsonAction
     }
 
     MarketInstallCounter::incrementInstallCount($key);
-    $content = $product->getProductJson($version);
+    $content = $product->getProductJsonContent($version);
     $content = str_replace('${version}', $version, $content);
     
     $json = json_decode($content);

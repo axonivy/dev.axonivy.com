@@ -20,10 +20,7 @@ class OpenAPIProvider
     if (filter_var($url, FILTER_VALIDATE_URL)) {
       return urlencode($url);
     } else if (! empty($url) && file_exists($this->product->getProductFile($version, $url))) {
-      if (empty($version)) {
-        return $this->product->assetBaseUrl() . "/openapi";
-      }
-      return $this->product->assetBaseUrl() . "/" . $version . "/openapi";
+      return $this->product->assetBaseUrl($version) . "/openapi";
     }
     return "";
   }

@@ -31,6 +31,7 @@ class Product
   private int $installationCount;
 
   private ?MavenProductInfo $mavenProductInfo;
+  private ProductFileResolver $fileResolver;
 
   public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
     string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $statusBadgeUrl, string $language, string $industry,
@@ -55,6 +56,7 @@ class Product
     $this->mavenProductInfo = $mavenProductInfo;
     $this->validate = $validate;
     $this->contactUs = $contactUs;
+    $this->fileResolver = new ProductFileResolver($this);
   }
 
   public function getKey(): string
@@ -100,11 +102,8 @@ class Product
 
   public function isInstallable(string $version): bool
   {
-    $productJson = $this->getProductJsonFile($version);
-    if (file_exists($productJson)) {
-      return true;
-    }
-    return file_exists($this->getMarketFile('product.json'));
+    $productJson = $this->fileResolver->file_productJson($version);
+    return file_exists($productJson);
   }
 
   public function getVendor(): string
@@ -200,16 +199,11 @@ class Product
     return $this->tags[0];
   }
 
-  public function assetBaseUrl()
-  {
-    return '/_market/' . $this->key;
-  }
-  
   public function getImgSrc()
   {
-    return $this->assetBaseUrl() . '/logo.png';
+    return $this->fileResolver->assetBaseUrl_unversionized() . '/logo.png';
   }
-
+  
   public function getUrl(): string
   {
     return '/market/' . $this->key;
@@ -217,82 +211,34 @@ class Product
 
   public function getInstallationCount(): int
   {
-    if (empty($this->installationCount))
-    {
+    if (empty($this->installationCount)) {
       $this->installationCount = MarketInstallCounter::getInstallCount($this->key);
     }
     return $this->installationCount;
   }
 
-  public function getInstallerJson(string $version): string
+  public function getProductJsonUrl(string $version): string
   {
-    $artifactId = $this->getProductArtifactId();
-    if (!empty($artifactId)) {
-      $productFile = Config::marketCacheDirectory() . "/$this->key/$version/$artifactId/product.json";
-      if (file_exists($productFile)) {
-        return $this->assetBaseUrlReadme($version) . '/_product.json';
-      }
-    }
-    return $this->assetBaseUrl() . "/_product.json?version=$version";
+    return $this->fileResolver->productJsonUrl($version);
   }
   
   public function getProductJsonContent(string $version): string
   {
-    $productJson = $this->getProductJsonFile($version);
-    if (file_exists($productJson)) {
-      return file_get_contents($productJson);
+    $path = $this->fileResolver->file_productJson($version);
+    if (file_exists($path)) {
+      return file_get_contents($path);
     }
-    
-    $productJson = $this->getMarketFile("product.json");
-    if (file_exists($productJson)) {
-      return file_get_contents($productJson);
-    }
-    
     return '';
   }
-
-  public function getMetaJson(): string
-  {
-    return file_get_contents($this->getMarketFile("product.json"));
-  }
   
-  public function getProductJson(string $version): string
+  public function assetBaseUrl($version)
   {
-    return file_get_contents($this->getProductJsonFile($version));
-  }
-  
-  private function getProductJsonFile(string $version): string
-  {
-    return $this->getProductFile($version, 'product.json');
+    return $this->fileResolver->assetBaseUrl($version);
   }
 
-  public function assetBaseUrlReadme($version)
+  public function getProductFile(string $version, string $file): string
   {
-    $artifactId = $this->getProductArtifactId();
-    if (!empty($artifactId)) {
-      $readme = Config::marketCacheDirectory() . "/$this->key/$artifactId/$version/README.md";
-      if (file_exists($readme)) {
-        return '/market-cache/' . $this->key . "/$artifactId/" . $version;
-      }
-    }
-    return $this->assetBaseUrl();
-  }
-
-  public function getMarketFile(string $file)
-  {
-    return Config::marketDirectory() . "/$this->key/" . $file;
-  }
-
-  public function getProductFile(string $version, $file): string
-  {
-    $artifactId = $this->getProductArtifactId();
-    if (!empty($artifactId)) {
-      $productFile = Config::marketCacheDirectory() . "/$this->key/$artifactId/$version/" . $file;
-      if (file_exists($productFile)) {
-        return $productFile;
-      }
-    }
-    return $this->getMarketFile($file);
+    return $this->fileResolver->productFilePath($version, $file);
   }
   
   public function getProductArtifactId(): string {
@@ -300,12 +246,10 @@ class Product
     if ($info == null) {
       return "";
     }
-    
     $artifact = $info->getProductArtifact();
     if ($artifact == null) {
       return "";
     }
-    
     return $artifact->getArtifactId();
   }
 
@@ -319,11 +263,83 @@ class Product
     if (!$isDesignerRequest) {
       return "You need to open then Axon Ivy Market in the Axon Ivy Designer.";
     }
-    
     if (!$this->isInstallable($version)) {
       return $this->getName() . " in version $version is not installable.";
     }
-
     return '';
+  }
+}
+
+class ProductFileResolver
+{
+  private Product $product;
+
+  public function __construct(Product $product)
+  {
+    $this->product = $product;
+  }
+  
+  public function productJsonUrl(string $version): string
+  {
+    if ($this->existsFile_versionized($version, "product.json")) {
+      return $this->assetBaseUrl_versionized($version) . '/_product.json';
+    }
+    return $this->assetBaseUrl_unversionized() . "/_product.json?version=$version";
+  }
+
+  public function assetBaseUrl(string $version): string
+  {
+    if ($this->existsFile_versionized($version, "README.md")) {
+      return $this->assetBaseUrl_versionized($version);
+    }
+    return $this->assetBaseUrl_unversionized();
+  }
+  
+  private function existsFile_versionized(string $version, string $file): bool
+  {
+    $artifactId = $this->product->getProductArtifactId();
+    if (empty($artifactId)) {
+      return false;
+    }
+    $versionizedFile = $this->folder_versionized($version) . "/$file";
+    return file_exists($versionizedFile);
+  }
+  
+  public function assetBaseUrl_unversionized(): string
+  {
+    return '/_market/' . $this->product->getKey();
+  }
+  
+  public function productFilePath(string $version, string $file): string
+  {
+    if ($this->existsFile_versionized($version, $file)) {
+      return $this->folder_versionized($version) . '/' . $file;
+    }
+    return $this->folder_unversionized() . '/' . $file;
+  }
+  
+  private function assetBaseUrl_versionized(string $version): string
+  {
+    $key = $this->product->getKey();
+    $artifactId = $this->product->getProductArtifactId();
+    return "/market-cache/$key/$artifactId/$version";
+  }
+  
+  public function file_productJson(string $version): string
+  {
+    return $this->productFilePath($version, 'product.json');
+  }
+  
+  private function folder_versionized(string $version): string
+  {
+    $key = $this->product->getKey();
+    $artifactId = $this->product->getProductArtifactId();
+    return Config::marketCacheDirectory() . "/$key/$artifactId/$version";
+  }
+  
+  public function folder_unversionized(): string
+  {
+    $key = $this->product->getKey();
+    return Config::marketDirectory() . "/$key";
   }
 }

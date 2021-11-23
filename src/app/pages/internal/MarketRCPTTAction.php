@@ -34,7 +34,7 @@ class MarketRCPTTAction
     foreach ($products as $product) {
         $mavenInfo = $product->getMavenProductInfo();
         $bestMatchingVersion = $mavenInfo->findBestMatchingVersion($designerVersion);
-        $urls[] = $baseUrl . $product->getInstallerJson($bestMatchingVersion);
+        $urls[] = $baseUrl . $product->getProductJsonUrl($bestMatchingVersion);
     }
 
     $response = $response->withHeader('Content-Type', 'text/plain');

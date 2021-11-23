@@ -35,22 +35,7 @@ class ProductTest extends TestCase
   public function test_metaUrl()
   {
     $product = Market::getProductByKey('visualvm-plugin');
-    Assert::assertEquals('/_market/visualvm-plugin/_product.json?version=9.1', $product->getInstallerJson('9.1'));
-  }
-
-  public function test_metaJson()
-  {
-    $product = Market::getProductByKey('doc-factory');
-    Assert::assertStringContainsString('"id": "maven-dependency"', $product->getMetaJson());
-  }
-  
-  public function test_metaJson_includes()
-  {
-    $product = Market::getProductByKey('msgraph');
-    Assert::assertStringContainsString('@main@demo/msGraphDemo/src_hd', $product->getMetaJson());
-    
-    $product = Market::getProductByKey('ms-todo');
-    Assert::assertStringContainsString('"tags": "me.todo"', $product->getMetaJson());
+    Assert::assertEquals('/_market/visualvm-plugin/_product.json?version=9.1', $product->getProductJsonUrl('9.1'));
   }
 
   public function test_installable()
@@ -144,7 +129,7 @@ class ProductTest extends TestCase
     $count = $product->getInstallationCount();
     Assert::assertIsInt($count);
     Assert::assertGreaterThanOrEqual(20, $count);
-    Assert::assertLessThanOrEqual(50, $count);
+    Assert::assertLessThanOrEqual(1000, $count);
     MarketInstallCounter::incrementInstallCount('ms-todo');
     //cached value
     Assert::assertEquals($count, $product->getInstallationCount());

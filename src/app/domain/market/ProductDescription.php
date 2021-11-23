@@ -21,20 +21,12 @@ class ProductDescription
 
   public static function create(Product $product, string $version): ProductDescription
   {
-    $assetBaseUrl = $product->assetBaseUrlReadme($version);
-    
-    // load versionized README from product repo
+    $assetBaseUrl = $product->assetBaseUrl($version);
     $file = $product->getProductFile($version, 'README.md');
     if (file_exists($file)) {
       return self::createByFile($file, $assetBaseUrl); 
     }
-    
-    // load README from market repo
-    $file = $product->getMarketFile('README.md');
-    if (file_exists($file)) {
-      return self::createByFile($file, $assetBaseUrl); 
-    }
-    
+
     // load README from another version
     $artifactId = $product->getProductArtifactId();
     if (!empty($artifactId)) {
@@ -43,7 +35,7 @@ class ProductDescription
       foreach ($dirs as $dir) {
         $readme = $dir . '/README.md';
         if (file_exists($readme)) {
-          $assetBaseUrl = $product->assetBaseUrlReadme(basename($dir));
+          $assetBaseUrl = $product->assetBaseUrl(basename($dir));
           $desc = self::createByFile($readme, $assetBaseUrl);
           $desc->demo = '';
           $desc->setup = '';
@@ -51,7 +43,6 @@ class ProductDescription
         }
       }
     }
-
     return new ProductDescription('', '', '');
   }
   
