@@ -10,7 +10,7 @@ class MetaJsonActionTest extends TestCase
 
   public function testServeMetaJson()
   {
-    AppTester::assertThatGet('/_market/doc-factory/_product.json?version=8.0.1')
+    AppTester::assertThatGet('/_market/portal/_product.json?version=8.0.1')
       ->ok()
       ->header('Content-Type', 'application/json')
       ->bodyContains('"version":"8.0.1"');
@@ -18,7 +18,7 @@ class MetaJsonActionTest extends TestCase
 
   public function testServeMetaJsonMissingVersion()
   {
-    AppTester::assertThatGet('/_market/doc-factory/_product.json')
+    AppTester::assertThatGet('/_market/portal/_product.json')
       ->ok()
       ->header('Content-Type', 'application/json')
       ->bodyContains('"version":"version-get-param-missing"');
@@ -26,8 +26,8 @@ class MetaJsonActionTest extends TestCase
   
   public function testServeMetaJson_stableForDesigner()
   {
-    AppTester::assertThatGet('/market/doc-factory/meta.json') // stable URI since Designer 9.2!
-      ->redirect('/_market/doc-factory/_meta.json'); 
+    AppTester::assertThatGet('/market/portal/meta.json') // stable URI since Designer 9.2!
+      ->redirect('/_market/portal/_meta.json'); 
       // link to real location: for resolving logo.png and other artifacts.
   }
 
