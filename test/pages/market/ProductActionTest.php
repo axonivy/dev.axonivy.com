@@ -45,13 +45,6 @@ class ProductActionTest extends TestCase
       ->bodyContains("'http://localhost/_market/genderize-io-connector/_product.json?version=");
   }
 
-  /*public function testInstallButton_displayInDesignerMarketShowWhyNotReason()
-  {
-    AppTester::assertThatGetWithCookie('/market/genderize-io-connector', ['ivy-version' => '9.1.0'])
-      ->ok()
-      ->bodyContains("Your Axon Ivy Designer is too old (9.1.0). You need version 9.2+.");
-  }*/
-
   public function testInstallButton_byDefaultWithCurrentVersion()
   {
     $product = Market::getProductByKey('doc-factory');
@@ -59,7 +52,7 @@ class ProductActionTest extends TestCase
 
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => $version])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=$version");
+      ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/$version/_product.json");
   }
   
   public function testInstallButton_respectCookie_ltsMatchInstaller()

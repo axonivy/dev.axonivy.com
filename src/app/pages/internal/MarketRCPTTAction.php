@@ -7,6 +7,7 @@ use app\domain\market\Product;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Exception\HttpNotFoundException;
+use app\domain\market\ProductMavenArtifactDownloader;
 
 class MarketRCPTTAction
 {
@@ -46,9 +47,16 @@ class MarketRCPTTAction
   private static function products(string $version): array {
     $products = Market::listed();
     $products = array_filter($products, fn (Product $product) => $product->getMavenProductInfo() != null);
-    $products = array_filter($products, fn (Product $product) => $product->isInstallable($version));
     $products = array_filter($products, fn (Product $product) => $product->toValidate());
+    $products = array_filter($products, fn (Product $product) => self::isInstallableForDesignerVersion($version, $product));
     return $products;
+  }
+  
+  private static function isInstallableForDesignerVersion(string $designerVersion, Product $product) {
+    $info = $product->getMavenProductInfo();
+    $bestMatchVersion = $info->findBestMatchingVersion($designerVersion);
+    (new ProductMavenArtifactDownloader())->download($product, $bestMatchVersion);
+    return $product->isInstallable($bestMatchVersion);
   }
 
   private static function baseUrl(): string {
