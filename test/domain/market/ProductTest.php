@@ -74,7 +74,7 @@ class ProductTest extends TestCase
   public function test_getReasonWhyNotInstallable()
   {
     $product = Market::getProductByKey('visualvm-plugin');
-    Assert::assertEquals('Product is not installable.', $product->getReasonWhyNotInstallable(true, '9.2.0'));
+    Assert::assertEquals('VisualVM Plugin in version 9.2.0 is not installable.', $product->getReasonWhyNotInstallable(true, '9.2.0'));
 
     $product = Market::getProductByKey('genderize-io-connector');
     Assert::assertEquals('', $product->getReasonWhyNotInstallable(true, '9.2.0'));

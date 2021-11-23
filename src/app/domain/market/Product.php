@@ -321,7 +321,7 @@ class Product
     }
     
     if (!$this->isInstallable($version)) {
-      return "Product in version $version is not installable.";
+      return $this->getName() . " in version $version is not installable.";
     }
 
     return '';
