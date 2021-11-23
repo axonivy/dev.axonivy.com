@@ -118,9 +118,11 @@
               <span>Install now</span>
             </a>
           {% endif %}
-          <a class="button special install" href="{{ getInTouchLink }}">
-            <span>Contact us</span>
-          </a>
+          {% if product.contactUs %}
+            <a class="button special install" href="{{ getInTouchLink }}">
+              <span>Contact us</span>
+            </a>
+          {% endif %}
         </header>
       </div>
     </div>
