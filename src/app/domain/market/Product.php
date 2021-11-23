@@ -172,19 +172,6 @@ class Product
     return $this->compatibility;
   }
 
-  public function isVersionSupported(string $version): bool
-  {
-    /*
-    $compatibility = $this->getCompatibility();
-    if (str_ends_with($compatibility, '+')) {
-      $minorVersion = substr($compatibility, 0, -1);
-      return version_compare($minorVersion, $version) <= 0;
-    }
-    return version_compare($compatibility, $version) == 0;
-    */
-    return true;
-  }
-
   public function getType(): string
   {
     return $this->type;
@@ -327,13 +314,16 @@ class Product
     return $this->mavenProductInfo;
   }
   
-  public function getReasonWhyNotInstallable(string $version): string
+  public function getReasonWhyNotInstallable(bool $isDesignerRequest, string $version): string
   {
-    if (!$this->isInstallable($version)) {
-      return 'Product is not installable.';
-    } elseif (!$this->isVersionSupported($version)) {
-      return 'Your Axon Ivy Designer is too old (' . $version . '). You need version ' . $this->getCompatibility() . '.';
+    if (!$isDesignerRequest) {
+      return "You need to open then Axon Ivy Market in the Axon Ivy Designer.";
     }
+    
+    if (!$this->isInstallable($version)) {
+      return "Product in version $version is not installable.";
+    }
+
     return '';
   }
 }
