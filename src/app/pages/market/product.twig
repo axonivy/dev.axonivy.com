@@ -194,7 +194,7 @@
         </span>
       {% endif %}
 
-      <a class="button special install artifact" href="javascript:void(0)" onclick="installInDesigner()">
+      <a class="button special install artifact {{ (installButton.isShow) ? '' : 'disabled' }}" href="javascript:void(0)" onclick="installInDesigner()">
         <span class="install-artifact-btn">Install</span>
       </a>
     </article>
