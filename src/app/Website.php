@@ -110,8 +110,9 @@ class Website
     $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
     $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
       $response = new Response();
+      $data = ['message' => $exception->getMessage()];
       return $container->get(Twig::class)
-        ->render($response, '_error/404.twig')
+        ->render($response, '_error/404.twig', $data)
         ->withStatus(404);
     });
 

@@ -26,7 +26,11 @@ class ProductJsonFromProductRepoActionTest extends TestCase
     $product = Market::getProductByKey('doc-factory');
     (new ProductMavenArtifactDownloader())->download($product, '9.2.0');
 
-    AppTester::assertThatGet('/market-cache/non-existing-product/doc-factory-product/9.2.0/_product.json')->notFound();
-    AppTester::assertThatGet('/market-cache/doc-factory/doc-factory-product/non-existing-version/_product.json')->notFound();
+    AppTester::assertThatGet('/market-cache/non-existing-product/doc-factory-product/9.2.0/_product.json')
+      ->notFound()
+      ->bodyContains("product does not exist");
+    AppTester::assertThatGet('/market-cache/doc-factory/doc-factory-product/non-existing-version/_product.json')
+      ->notFound()
+      ->bodyContains("version does not exist");
   }
 }
