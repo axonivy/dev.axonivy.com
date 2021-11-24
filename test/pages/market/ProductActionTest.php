@@ -69,7 +69,7 @@ class ProductActionTest extends TestCase
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=$version");
+      ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/$version/_product.json");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller()
