@@ -1,16 +1,22 @@
 ## Public API {#publicApi93}
 
-With twenty years of project experience we knew what customers expect from a powerful process automation platform.
-The newly added API makes process development even easier. 
+With twenty years of project experience, we knew what customers expect from a powerful process automation platform.
+The newly added API makes your life even easier. 
 
-- **ISecurity**: The new `ivy.security` and `Ivy.security()` API provide a lot of methods to manage users, roles, security members and sessions.
-- **IRoleMatcher**: The new `ivy.session.has().role("Manager")` API makes it easy to check if the current session user has a certain role. 
-  The same API is also available on a user `user.has().anyRoles("Manager", "Employee")`
-  Additional new API which take a role name instead of a role makes it much easier to use them.
-- **Sudo**: A new API to disable permission checking while executing some code `Sudo.call(() -> permissionCheckDisabledHere())`.
-- **IvyRuntime**: A new API that provides information about the runtime (Designer or Engine) `IvyRuntime.isDesigner()` and the current version `IvyRuntime.version()`.
-- **BooleanFieldOperation**: A new API to filter business data with boolean fields.
-- **IBusinessCase**: A new API `getStartedFrom()` to find out how a business case was started. Either from a process start or a case map start.
+- **<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/security/ISecurity.html" target="_blank" rel="noopener noreferrer">ISecurity</a>**: 
+  `ivy.security` and `Ivy.security()` provide a lot of methods to manage users, roles, security members and sessions.
+- **<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/security/IRoleMatcher.html" target="_blank" rel="noopener noreferrer">IRoleMatcher</a>**:
+  Makes it easy to check if the current session user has a certain role. 
+  The API is available on a session and a user. 
+  In addition, new API methods take a role name instead of a role instance.
+- **<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/security/exec/Sudo.html" target="_blank" rel="noopener noreferrer">Sudo</a>**: 
+  Disables permission checking while executing some code.
+- **<a href="${docBaseUrl}/public-api/ch/ch/ivyteam/ivy/runtime/IvyRuntime.html" target="_blank" rel="noopener noreferrer">IvyRuntime</a>**:
+ Provides information about the runtime (Designer or Engine) and the current version.
+- **<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/business/data/store/search/BooleanFieldOperation.html" target="_blank" rel="noopener noreferrer">BooleanFieldOperation</a>**:
+ Filters business data with boolean fields.
+- **<a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/workflow/businesscase/IBusinessCase.html#getStartedFrom()" target="_blank" rel="noopener noreferrer">IBusinessCase</a>**: 
+  A new method to find out how a business case was started. Either from a process start or a case map start.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/public-api"
