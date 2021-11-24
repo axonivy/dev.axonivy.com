@@ -11,6 +11,10 @@
       <p>
         We could not find this page. Contact us if you miss something.
       </p>
+      
+      {% if message is not empty %}
+        <p>Reason: {{ message }}</p>
+      {% endif %}
     </div>
   </section>
 {% endblock %}
