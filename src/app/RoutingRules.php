@@ -30,10 +30,9 @@ use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
 use app\permalink\LinkAction;
-use app\pages\market\MetaJsonAction;
-use app\pages\market\ProductJsonAction;
+use app\pages\market\ProductJsonFromMarketRepoAction;
+use app\pages\market\ProductJsonFromProductRepoAction;
 use app\pages\market\OpenApiJsonAction;
-use app\pages\market\MetaRedirectAction;
 use app\pages\internal\MarketRCPTTAction;
 use app\pages\market\MarketProductLogoRedirector;
 
@@ -74,11 +73,10 @@ class RoutingRules
     $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/market', MarketAction::class);
-    //$app->get('/market/{key}/meta.json', MetaRedirectAction::class);
     $app->get('/market/{key}[/{version}]', ProductAction::class);
-    $app->get('/_market/{key}/_product.json', MetaJsonAction::class);
+    $app->get('/_market/{key}/_product.json', ProductJsonFromMarketRepoAction::class);
     $app->get('/market-cache/{key}/{artifactId}/{version}/logo.png', MarketProductLogoRedirector::class);
-    $app->get('/market-cache/{key}/{artifactId}/{version}/_product.json', ProductJsonAction::class);
+    $app->get('/market-cache/{key}/{artifactId}/{version}/_product.json', ProductJsonFromProductRepoAction::class);
     $app->get('/_market/{key}/{version}/openapi', OpenApiJsonAction::class);
     $app->get('/_market/{key}/openapi', OpenApiJsonAction::class);
     $app->get('/internal/market-rcptt', MarketRCPTTAction::class);

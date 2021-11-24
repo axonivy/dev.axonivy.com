@@ -7,7 +7,7 @@ use app\domain\market\Market;
 use app\domain\market\MarketInstallCounter;
 use Slim\Psr7\Request;
 
-class ProductJsonAction
+class ProductJsonFromProductRepoAction
 {
   public function __invoke(Request $request, $response, $args)
   {
@@ -26,6 +26,9 @@ class ProductJsonAction
     $content = $product->getProductJsonContent($version);
     $content = str_replace('${version}', $version, $content);
     
+    if (empty($content)) {
+      $content = "{}";
+    }
     $json = json_decode($content);
     $json->name = $product->getName();
     $content = json_encode($json);
