@@ -74,7 +74,7 @@ class RoutingRules
     $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/market', MarketAction::class);
-    $app->get('/market/{key}/meta.json', MetaRedirectAction::class);
+    //$app->get('/market/{key}/meta.json', MetaRedirectAction::class);
     $app->get('/market/{key}[/{version}]', ProductAction::class);
     $app->get('/_market/{key}/_product.json', MetaJsonAction::class);
     $app->get('/market-cache/{key}/{artifactId}/{version}/logo.png', MarketProductLogoRedirector::class);
