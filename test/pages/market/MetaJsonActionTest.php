@@ -24,12 +24,12 @@ class MetaJsonActionTest extends TestCase
       ->bodyContains('"version":"version-get-param-missing"');
   }
   
-  public function testServeMetaJson_stableForDesigner()
+  /*public function testServeMetaJson_stableForDesigner()
   {
     AppTester::assertThatGet('/market/portal/meta.json') // stable URI since Designer 9.2!
       ->redirect('/_market/portal/_meta.json'); 
       // link to real location: for resolving logo.png and other artifacts.
-  }
+  }*/
 
   public function testNotFound()
   {
