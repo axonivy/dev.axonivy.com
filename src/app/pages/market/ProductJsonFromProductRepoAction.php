@@ -46,7 +46,7 @@ class ProductJsonFromProductRepoAction
     }
     $json = json_decode($content);
     $json->name = $product->getName();
-    $content = json_encode($json);
+    $content = json_encode($json, JSON_PRETTY_PRINT);
     
     $response->getBody()->write($content);
     $response = $response->withHeader('Content-Type', 'application/json');
