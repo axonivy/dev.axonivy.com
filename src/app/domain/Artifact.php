@@ -29,6 +29,7 @@ class Artifact
   private bool $isMavenPluginCompatible;
   private string $permalink;
   private string $downloadUrl;
+  private string $folderName;
 
   public function __construct(
     string $fileName,
@@ -39,7 +40,8 @@ class Artifact
     string $shortType,
     bool $isMavenPluginCompatible,
     string $permalink,
-    string $downloadUrl
+    string $downloadUrl,
+    string $folderName
   ) {
     $this->fileName = $fileName;
     $this->productName = $productName;
@@ -50,6 +52,7 @@ class Artifact
     $this->isMavenPluginCompatible = $isMavenPluginCompatible;
     $this->permalink = $permalink;
     $this->downloadUrl = $downloadUrl;
+    $this->folderName = $folderName;
   }
 
   public function getVersion(): Version
@@ -65,7 +68,7 @@ class Artifact
   public function getInstallationUrl(): string
   {
     $url = $this->getDownloadUrl();
-    return "/installation" . "?downloadUrl=$url" . "&version=$this->versionNumber" . "&product=$this->productName" . "&type=$this->type";
+    return "/installation" . "?downloadUrl=$url" . "&version=$this->folderName" . "&product=$this->productName" . "&type=$this->type";
   }
 
   public function getProductName(): string
