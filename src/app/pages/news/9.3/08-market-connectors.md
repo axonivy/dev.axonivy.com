@@ -1,6 +1,6 @@
 ## Updated Market {#marketConnectors93}
 
-The Axon.ivy Market is gaining momentum, becoming a powerful ecosystem for all digital transformation projects.
+The Axon Ivy Market is gaining momentum, becoming a powerful ecosystem for all digital transformation projects.
 
 - __Growing__ : more connectors are ready to be taken from the shelf. To name a few, the community partnered 
 with us to supply new connectors for SFTP, the Swiss Phone Directory and Amazon's Natural Language Processing services.
