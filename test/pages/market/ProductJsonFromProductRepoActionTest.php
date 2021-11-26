@@ -17,7 +17,7 @@ class ProductJsonFromProductRepoActionTest extends TestCase
     AppTester::assertThatGet('/market-cache/doc-factory/doc-factory-product/9.2.0/_product.json')
       ->ok()
       ->header('Content-Type', 'application/json')
-      ->bodyContains('"version":"9.2.0"')
+      ->bodyContains('"version": "9.2.0"')
       ->bodyContains('"name":"DocFactory"');
   }
 
