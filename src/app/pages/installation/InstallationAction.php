@@ -24,15 +24,12 @@ class InstallationAction
     $version = $request->getQueryParams()['version'] ?? ''; // e.g. '8.0.1', '9.0.1'
     $downloadUrl = $request->getQueryParams()['downloadUrl'] ?? ''; // e.g. https://download/... -> case of docker empty!
     $startDownload = $request->getQueryParams()['startDownload'] ?? 'true'; // e.g. wether to start the download or not
-    if ($startDownload == 'false')
-    {
+    if ($startDownload == 'false') {
       $startDownload = false;
-    }
-    else
-    {
+    } else {
       $startDownload = true;
     }
-    
+
     if (empty($product) || empty($version) || empty($type)) {
       return Redirect::to($response, '/download');
     }

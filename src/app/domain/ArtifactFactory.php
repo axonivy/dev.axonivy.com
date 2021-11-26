@@ -45,7 +45,8 @@ class ArtifactFactory
       '',
       false,
       '',
-      Config::DOCKER_HUB_IMAGE_URL
+      Config::DOCKER_HUB_IMAGE_URL,
+      $versionNumber
     );
   }
 
@@ -103,7 +104,8 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
       $shortType,
       $mavenPluginComp,
       $permalink,
-      $downloadUrl
+      $downloadUrl,
+      $folderName
     );
   }
 
@@ -155,7 +157,8 @@ class DebianArtifactFilenameParser implements ArtifactFilenameParser
       '',
       false,
       $permalink,
-      $downloadUrl
+      $downloadUrl,
+      $folderName
     );
   }
 }
