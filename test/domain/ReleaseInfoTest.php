@@ -59,7 +59,7 @@ class ReleaseInfoTest extends TestCase
     Assert::assertEquals('https://fakehost/permalink/8.0.1/axonivy-engine.deb', $artifact->getPermalink());
     Assert::assertEquals('axonivy-engine-8x_8.0.1.96047.deb', $artifact->getFileName());
     Assert::assertEquals('https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb', $artifact->getDownloadUrl());
-    Assert::assertEquals('/installation?downloadUrl=https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb&version=8.0.1.96047&product=engine&type=Debian', $artifact->getInstallationUrl());
+    Assert::assertEquals('/installation?downloadUrl=https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb&version=8.0.1&product=engine&type=Debian', $artifact->getInstallationUrl());
     Assert::assertFalse($artifact->isBeta());
     Assert::assertFalse($artifact->isMavenPluginCompatible());
   }
@@ -74,7 +74,7 @@ class ReleaseInfoTest extends TestCase
     Assert::assertEquals('https://fakehost/permalink/8.0.1/axonivy-designer-windows.zip', $artifact->getPermalink());
     Assert::assertEquals('AxonIvyDesigner8.0.1.96047_Windows_x64.zip', $artifact->getFileName());
     Assert::assertEquals('https://download.axonivy.com/8.0.1/AxonIvyDesigner8.0.1.96047_Windows_x64.zip', $artifact->getDownloadUrl());
-    Assert::assertEquals('/installation?downloadUrl=https://download.axonivy.com/8.0.1/AxonIvyDesigner8.0.1.96047_Windows_x64.zip&version=8.0.1.96047&product=designer&type=Windows', $artifact->getInstallationUrl());
+    Assert::assertEquals('/installation?downloadUrl=https://download.axonivy.com/8.0.1/AxonIvyDesigner8.0.1.96047_Windows_x64.zip&version=8.0.1&product=designer&type=Windows', $artifact->getInstallationUrl());
     Assert::assertFalse($artifact->isBeta());
     Assert::assertFalse($artifact->isMavenPluginCompatible());
   }
