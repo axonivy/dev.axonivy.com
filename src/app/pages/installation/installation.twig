@@ -23,6 +23,8 @@
     {% else %}
       {% if type == "MacOSX-BETA" or type =="macOS" %}
         {% include 'installation/_mac_designer.twig' %}
+      {% elseif type == "Linux" %}
+        {% include 'installation/_linux_designer.twig' %}
       {% else %}
         {% include 'installation/_designer.twig' %}
       {% endif %}
