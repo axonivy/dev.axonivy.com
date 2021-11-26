@@ -18,7 +18,7 @@ class ProductJsonFromProductRepoActionTest extends TestCase
       ->ok()
       ->header('Content-Type', 'application/json')
       ->bodyContains('"version": "9.2.0"')
-      ->bodyContains('"name":"DocFactory"');
+      ->bodyContains('"name": "DocFactory"');
   }
 
   public function testNotFound()

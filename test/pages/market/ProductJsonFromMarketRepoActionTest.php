@@ -13,7 +13,7 @@ class ProductJsonFromMarketRepoActionTest extends TestCase
       ->ok()
       ->header('Content-Type', 'application/json')
       ->bodyContains('"version": "8.0.1"')
-      ->bodyContains('"name":"Axon Ivy Portal"');
+      ->bodyContains('"name": "Axon Ivy Portal"');
   }
   
   public function testProductJsonMissingVersion()
