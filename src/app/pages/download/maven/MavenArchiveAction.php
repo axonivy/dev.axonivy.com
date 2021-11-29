@@ -5,6 +5,9 @@ namespace app\pages\download\maven;
 use Slim\Views\Twig;
 use app\Config;
 use app\domain\ReleaseInfoRepository;
+use app\domain\Version;
+use app\domain\ReleaseType;
+use app\domain\util\StringUtil;
 
 class MavenArchiveAction
 {
@@ -17,10 +20,9 @@ class MavenArchiveAction
 
   public function __invoke($request, $response, $args)
   {
-
     $releases = [];
     foreach (ReleaseInfoRepository::getAvailableReleaseInfos() as $releaseInfo) {
-      if (!$releaseInfo->getVersion()->isEqualOrGreaterThan(Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION)) {
+      if (!self::versionSupported($releaseInfo->getVersion())) {
         continue;
       }
 
@@ -36,6 +38,14 @@ class MavenArchiveAction
     }
     $releases = array_reverse($releases);
     return $this->view->render($response, 'download/maven/maven.twig', ['releases' => $releases]);
+  }
+
+  private static function versionSupported(Version $version): bool
+  {
+    if (StringUtil::startsWith($version->getVersionNumber(), ReleaseType::NIGHTLY()->key())) {
+      return true;
+    }
+    return $version->isEqualOrGreaterThan(Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
   }
 }
 
