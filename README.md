@@ -1,18 +1,16 @@
-# dev.axonivy.com
+# Axon Ivy Dev Website
 
 ## Setup
   
-  Run the script to start docker and update web compose using `./up.sh`
+Run `./up.sh` to start the website in docker
   
-  ... and later `docker-compose down` to stop the webserver.
+... and later `docker-compose down` to stop the containers.
 
 ## Execute tests
 
-```
-docker-compose exec web ./vendor/bin/phpunit
-```
+Run `./run-tests.sh` to execute tests.
 
-## Generate the issue list for the new and noteworthy (improvements/bugs)
+## Issue list for the news pages
 
 - Run https://jenkins.ivyteam.io/job/website-developer_issue-list-generator with the ivy version to release
 - Copy and paste the issues from the console log to the files in the news folder
@@ -25,14 +23,17 @@ docker-compose exec web ./vendor/bin/phpunit
 # Update a php library
 
 ```
+// Show outdated dependencies
 docker-compose exec web composer show --outdated
 
+// Upgrade dependencies
 docker-compose exec web composer require --update-with-dependencies slim/slim
 docker-compose exec web composer require --update-with-dependencies slim/twig-view
 docker-compose exec web composer require --update-with-dependencies slim/psr7
 docker-compose exec web composer require --update-with-dependencies php-di/php-di
 docker-compose exec web composer require --update-with-dependencies middlewares/trailing-slash
 
+// Upgrdae dev dependencies
 docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
 ```
 
