@@ -4,6 +4,7 @@ namespace app\domain\market;
 
 use app\Config;
 use app\domain\Version;
+use app\domain\util\StringUtil;
 
 class Product
 {
@@ -17,6 +18,8 @@ class Product
   private string $type;
   private array $tags;
   private string $vendor;
+  private string $vendorImage;
+  private string $vendorUrl;
   private string $platformReview;
   private string $cost;
   private string $sourceUrl;
@@ -34,7 +37,7 @@ class Product
   private ProductFileResolver $fileResolver;
 
   public function __construct(string $key, string $path, string $name, string $version, string $shortDesc, bool $listed, 
-    string $type, array $tags, string $vendor, string $platformReview, string $cost, string $sourceUrl, string $statusBadgeUrl, string $language, string $industry,
+    string $type, array $tags, string $vendor, string $vendorImage, string $vendorUrl, string $platformReview, string $cost, string $sourceUrl, string $statusBadgeUrl, string $language, string $industry,
     string $compatibility, ?MavenProductInfo $mavenProductInfo, bool $validate, bool $contactUs)
   {
     $this->key = $key;
@@ -46,6 +49,8 @@ class Product
     $this->type = $type;
     $this->tags = $tags;
     $this->vendor = $vendor;
+    $this->vendorImage = $vendorImage;
+    $this->vendorUrl = $vendorUrl;
     $this->platformReview = $platformReview;
     $this->cost = $cost;
     $this->sourceUrl = $sourceUrl;
@@ -109,6 +114,19 @@ class Product
   public function getVendor(): string
   {
     return $this->vendor;
+  }
+
+  public function getVendorImage(): string
+  {
+    if (StringUtil::startsWith($this->vendorImage, "/")) {
+      return $this->vendorImage;
+    }
+    return $this->fileResolver->assetBaseUrl_unversionized() . '/' . $this->vendorImage;
+  }
+
+  public function getVendorUrl(): string
+  {
+    return $this->vendorUrl;
   }
 
   public function getPlatformReview(): string

@@ -21,7 +21,11 @@ class ProductFactory
     $tags = $json->tags ?? [];
     $version = $json->version ?? '';
     $shortDesc = $json->description ?? '';
-    $vendor = $json->vendor ?? 'Unknown';
+    
+    $vendor = $json->vendor ?? 'Axon Ivy AG';
+    $vendorImage = $json->vendorImage ?? '/images/misc/axonivy-logo-black.svg';
+    $vendorUrl = $json->vendorUrl ?? 'https://www.axonivy.com';
+
     $platformReview = $json->platformReview ?? '4.0';
     $cost = $json->cost ?? 'Free';
     $sourceUrl = $json->sourceUrl ?? '';
@@ -30,9 +34,9 @@ class ProductFactory
     $industry = $json->industry ?? '';
     $compatibility = $json->compatibility ?? '';
     $validate = $json->validate ?? true;
-    $contactUs = $json->contactUs ?? false;
+    $contactUs = $json->contactUs ?? false;    
     return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
-      $vendor, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $info, $validate, $contactUs);
+      $vendor, $vendorImage, $vendorUrl, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $info, $validate, $contactUs);
   }
 
   private static function createMavenProductInfo($json): MavenProductInfo
