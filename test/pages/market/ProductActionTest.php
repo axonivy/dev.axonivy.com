@@ -162,5 +162,24 @@ class ProductActionTest extends TestCase
     AppTester::assertThatGet('market/excel-connector')
       ->ok()
       ->bodyContains('<img src="https://github.com/axonivy-market/excel-connector/actions/workflows/ci.yml/badge.svg" />');
-  }  
+  }
+
+  public function testExternalVendor() 
+  {
+    AppTester::assertThatGet('market/jira-connector')
+      ->ok()
+      ->bodyContains('src="/_market/jira-connector/frox.png"')
+      ->bodyContains('alt="FROX AG"')
+      ->bodyContains('href="https://www.frox.ch"');
+
+  }
+
+  public function testVendor() 
+  {
+    AppTester::assertThatGet('market/visualvm-plugin')
+      ->ok()
+      ->bodyContains('src="/images/misc/axonivy-logo-black.svg"')
+      ->bodyContains('alt="Axon Ivy AG"')      
+      ->bodyContains('href="https://www.axonivy.com"');
+  }
 }

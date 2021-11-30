@@ -32,6 +32,33 @@ class ProductTest extends TestCase
     Assert::assertEquals('/market/visualvm-plugin', $product->getUrl());
   }
 
+  public function test_vendor()
+  {
+    $product = Market::getProductByKey('visualvm-plugin');
+    Assert::assertEquals('Axon Ivy AG', $product->getVendor());
+
+    $product = Market::getProductByKey('jira-connector');
+    Assert::assertEquals('FROX AG', $product->getVendor());
+  }
+
+  public function test_vendorImage()
+  {
+    $product = Market::getProductByKey('visualvm-plugin');
+    Assert::assertEquals('/images/misc/axonivy-logo-black.svg', $product->getVendorImage());
+
+    $product = Market::getProductByKey('jira-connector');
+    Assert::assertEquals('/_market/jira-connector/frox.png', $product->getVendorImage());
+  }
+
+  public function test_vendorUrl()
+  {
+    $product = Market::getProductByKey('visualvm-plugin');
+    Assert::assertEquals('https://www.axonivy.com', $product->getVendorUrl());
+
+    $product = Market::getProductByKey('jira-connector');
+    Assert::assertEquals('https://www.frox.ch', $product->getVendorUrl());
+  }
+
   public function test_metaUrl()
   {
     $product = Market::getProductByKey('visualvm-plugin');

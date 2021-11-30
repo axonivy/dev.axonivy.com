@@ -173,10 +173,13 @@
       <div class="product-meta">
         <div class="product-meta-title">
           Information
-        </div> 
+        </div>
+        <a href="{{ product.vendorUrl }}">
+          <img class="image fit" src="{{ product.vendorImage }}" alt="{{ product.vendor }}" />
+        </a>
         <div class="product-meta-info">
           <span class="meta-type">Author/Support</span>
-          <span class="meta-data capitalize">{{ product.vendor }}</span>
+          <span class="meta-data">{{ product.vendor }}</span>
         </div>
         <div class="product-meta-info">
           <span class="meta-type">Version</span>
