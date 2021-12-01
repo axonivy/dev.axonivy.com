@@ -41,6 +41,10 @@
     height: 2em;
     margin-bottom: 1em;
   }
+  .product-meta-vendor {
+    display: block;
+    max-width: 16rem;
+  }
   .product-meta-info {
     font-size: 14px;
   }
@@ -174,7 +178,7 @@
         <div class="product-meta-title">
           Information
         </div>
-        <a href="{{ product.vendorUrl }}">
+        <a class="product-meta-vendor" href="{{ product.vendorUrl }}">
           <img class="image fit" src="{{ product.vendorImage }}" alt="{{ product.vendor }}" />
         </a>
         <div class="product-meta-info">
