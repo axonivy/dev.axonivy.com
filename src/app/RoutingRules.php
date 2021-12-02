@@ -12,6 +12,7 @@ use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
 use app\pages\doc\redirect\LegacyEngineGuideDocAction;
 use app\pages\doc\redirect\LegacyPublicAPIAction;
 use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
+use app\pages\doc\redirect\RedirectPortalGuide;
 use app\pages\download\DownloadAction;
 use app\pages\download\archive\ArchiveAction;
 use app\pages\download\maven\MavenArchiveAction;
@@ -60,6 +61,7 @@ class RoutingRules
 
     $app->get('/doc', DocOverviewAction::class);
 
+    $app->get('/doc/{version}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
     $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
     $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
@@ -67,7 +69,7 @@ class RoutingRules
     $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
-    
+
     $app->get('/link/{key}[/{branchVersion}]', LinkAction::class);
 
     $app->get('/api-browser', ApiBrowserAction::class);
