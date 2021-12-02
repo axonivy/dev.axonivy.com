@@ -34,28 +34,34 @@ class PortalPermalinkAction
 
     if ($topic == 'doc') {
       $path = $args['path'] ?? '';
-      if (!empty($path)) {
-        $path = '/' . $path;
-      }
-
-      $docArtifact = $portal->getFirstDocArtifact();
-      if ($docArtifact == null) {
-        throw new HttpNotFoundException($request);
-      }
-      $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
-      if (!$exists) {
-        throw new HttpNotFoundException($request);
-      }
-      $docUrl = $docArtifact->getDocUrl($product, $version);
-      return Redirect::to($response, $docUrl . $path);
+      return self::redirectToDoc($path, $version, $response, $request);
     }
     throw new HttpNotFoundException($request);
   }
 
-  private static function evaluatePortalVersion(String $version, MavenProductInfo $portal): String
+  public static function redirectToDoc(string $path, string $version, $response, $request) {
+    if (!empty($path)) {
+      $path = '/' . $path;
+    }
+
+    $product = Market::getProductByKey('portal');
+    $info = $product->getMavenProductInfo();
+    $docArtifact = $info->getFirstDocArtifact();
+    if ($docArtifact == null) {
+      throw new HttpNotFoundException($request, 'no doc artifact');
+    }
+    $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+    If (!$exists) {        
+      throw new HttpNotFoundException($request, "doc artifact does not exist for version $version");
+    }
+    $docUrl = $docArtifact->getDocUrl($product, $version);
+    return Redirect::to($response, $docUrl . $path);
+  }
+
+  public static function evaluatePortalVersion(String $version, MavenProductInfo $portal): String
   {
-    $releaseType = ReleaseType::byKey($version);
-    if ($releaseType != null && $releaseType->isDevRelease()) {
+    $releaseType = ReleaseType::byKey($version);    
+    if ($releaseType != null && $releaseType->isDevRelease()) {      
       return $portal->getLatestVersion();
     }
 
