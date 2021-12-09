@@ -1,0 +1,62 @@
+{% extends "_parts/base.twig" %}
+
+{% block title %}Deprecation{{ parent() }}{% endblock %}
+
+{% block content %}
+
+<section id="main">
+  <div class="inner-small">
+    <header>
+      <h1>Deprecation and Removal</h1>
+    </header>
+  </div>
+</section>
+
+<section id="main" >
+  <div class="inner">
+    <p>You should avoid using deprecated Public API and features. When migrating to a new version check for <a href="/doc/latest/public-api/deprecated-list.html">deprecated Public API</a> and features and replace them with the successor API or feature.</p> 
+    <p>We deprecate and remove Features as follows:
+      <ul>
+        <li>We document feature that we will remove in future versions on this page.</li>
+        <li>We document Public API that we will remove in future versions in the source code as <code>@Deprecated(forRemoval=true)</code>. See <a href="/doc/latest/public-api/deprecated-list.html">Deprecated Public API</a></li>
+        <li>We document features that we will remove in future on the Designer's UI and in the Problem View as Warnings.</li>
+      </ul>
+    </p>
+    
+      
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">Feature</th>
+          <th rowspan="2">Successor</th>
+          <th colspan="9">Version</th>
+        </tr>
+        <tr>
+          {% for version in versions %}
+            <th>{{ version }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for feature in features %}
+          <tr>
+            <td><a href="{{ feature.nameHref }}">{{ feature.name}}<a/></td>
+            <td><a href="{{ feature.successorHref }}">{{ feature.successor }}</a></td>
+          {% set cls = "" %}
+          {% for version in versions %}
+            <td><span class="{{ feature.cssClassForVersions[version] }}"></span></td>
+          {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>    
+    <h4>Legend</h4>
+    <p>
+      <span class="deprecation-released"></span> The feature was introduced in this release.<br>
+      <span class="deprecation-ok"></span> &nbsp;The feature can be used in this release.<br>
+      <span class="deprecation-deprecated"></span> &nbsp;The feature was deprecated in this release. You should no longer use it but it still works.<br>
+      <span class="deprecation-removed"></span> The feature was removed in this release. It cannot be used anymore.<br>
+    </p>
+  <div>
+</section>
+{% endblock %}

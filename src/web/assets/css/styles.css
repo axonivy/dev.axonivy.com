@@ -34,6 +34,27 @@
   background-image: url('/images/icons/close.svg');
 }
 
+/* Deprecation page */
+.deprecation-released::after {
+  content: "\02B50";
+}
+
+.deprecation-ok::after {
+  content: "\02714";
+  font-size: 1.3em;
+  color: green;
+}
+
+.deprecation-deprecated::after {
+  content: "\026A0";
+  font-size: 1.3em;
+  color: #FFC83D;
+}
+
+.deprecation-removed::after {
+  content: "\0274C";
+}
+
 /* Team page */
 .team-card {
   height: 250px;
