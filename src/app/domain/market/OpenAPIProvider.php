@@ -42,7 +42,7 @@ class OpenAPIProvider
   {
     // auto detect openapi.json
     $defaultFile = 'openapi.json';
-    $openApiJson = $this->getProductFile($version, $defaultFile);
+    $openApiJson = $this->product->getProductFile($version, $defaultFile);
     if (file_exists($openApiJson)) {
       return $defaultFile;
     }
