@@ -2,10 +2,9 @@
 namespace app\pages\doc\redirect;
 
 use Slim\Psr7\Response;
-use Slim\Views\Twig;
-use app\domain\util\Redirect;
 use app\domain\market\Market;
 use app\permalink\PortalPermalinkAction;
+use Slim\Exception\HttpNotFoundException;
 
 class RedirectPortalGuide
 {
