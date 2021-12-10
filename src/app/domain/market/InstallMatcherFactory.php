@@ -27,7 +27,8 @@ class BestMatchFirstInstallMatcher implements InstallMatcher
   {
     $versions = $info->getVersionsToDisplay();
     foreach ($versions as $v) {
-      if (version_compare($v, $version) <= 0) {
+      $bugfixVersion = (new Version($v))->getBugfixVersion();
+      if (version_compare($bugfixVersion, $version) <= 0) {
         return $v;
       }
     }
