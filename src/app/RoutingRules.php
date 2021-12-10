@@ -27,6 +27,7 @@ use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
 use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
+use app\pages\deprecation\DeprecationAction;
 use app\permalink\PortalPermalinkAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LibraryPermalinkAction;
@@ -86,6 +87,7 @@ class RoutingRules
     $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
 
     $app->get('/installation', InstallationAction::class);
+    $app->get('/features/deprecation', DeprecationAction::class);
 
     $app->get('/api/currentRelease', ApiCurrentRelease::class);
     $app->get('/api/status', StatusApi::class);

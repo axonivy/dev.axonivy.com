@@ -1,0 +1,45 @@
+[
+  {
+    "name": "CMS Page", 
+    "nameHref": "/doc/8.0/designer-guide/user-interface/web-page/html-content-in-the-cms.html",
+    "successor": "Html Dialog", 
+    "successorHref": "/doc/9.3/designer-guide/user-interface/user-dialogs/html-dialogs.html",
+    "released": "3",
+    "deprecated": "8",
+    "removed": "9.3"
+  }, 
+  {
+    "name": "Macros in RTF documents", 
+    "nameHref": "/doc/8.0/designer-guide/user-interface/web-page/index.html",
+    "successor": "Doc Factory", 
+    "successorHref": "/market/doc-factory",
+    "released": "3",
+    "deprecated": "8",
+    "removed": "9.3"
+  },
+  {
+    "name": "Import Ivy 3.9 Project", 
+    "nameHref": "/doc/7.0/DesignerGuideHtml/ivy.processmodeling.html#ivy-project-convert39",
+    "released": "5",
+    "deprecated": "8",
+    "removed": "8"
+  }, 
+  {
+    "name": "RIA / Rich Dialog", 
+    "nameHref": "/doc/7.0/DesignerGuideHtml/ivy.userinterface.html#ivy-richdialogs",
+    "successor": "Html Dialog", 
+    "successorHref": "/doc/9.3/designer-guide/user-interface/user-dialogs/html-dialogs.html",
+    "released": "4",
+    "deprecated": "7",
+    "removed": "8"
+  },
+  {
+    "name": "WebService Axis 1 & 2", 
+    "nameHref": "doc/8.0/designer-guide/configuration/webservice-clients.html",
+    "successor": "WebService CXF", 
+    "successorHref": "/doc/9.3/designer-guide/configuration/webservice-clients.html",
+    "released": "3",
+    "deprecated": "8",
+    "removed": "9.3"
+  }
+]
