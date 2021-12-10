@@ -3,7 +3,6 @@
 namespace app\domain\market;
 
 use app\domain\maven\MavenArtifact;
-use app\domain\util\StringUtil;
 
 class MavenProductInfo
 {
