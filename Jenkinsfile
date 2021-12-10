@@ -2,7 +2,7 @@ pipeline {
   agent any
   
   triggers {
-    cron '@midnight'
+    cron 'H 22 * * *'
   }
   
   options {
