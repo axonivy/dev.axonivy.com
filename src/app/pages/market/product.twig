@@ -245,6 +245,10 @@
   if (window.location.hash === '#install') {
     $('.product-install').show();
   }
+  {% if installNow %}
+    $('.product-install').show();
+    installInDesigner();
+  {% endif %}
 </script>
 
 {% include 'market/_product-data.twig' %}

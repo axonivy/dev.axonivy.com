@@ -31,6 +31,7 @@ class ProductAction
       throw new HttpNotFoundException($request);
     }
 
+    $installNow = isset($request->getQueryParams()['installNow']);
     $mavenProductInfo = $product->getMavenProductInfo();
     $version = $args['version'] ?? '';
     $mavenArtifactsAsDependency = [];
@@ -97,7 +98,8 @@ class ProductAction
       'getInTouchLink' => $getInTouchLink,
       'openApiJsonUrl' => $openApiJsonUrl,
       'version' => $productVersion,
-      'docUrl' => $docUrl
+      'docUrl' => $docUrl,
+      'installNow' => $installNow
     ]);
   }
 
