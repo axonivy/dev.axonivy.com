@@ -31,15 +31,13 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
   {
     $versionsToDisplay = [];
 
-    $latestDevRelease = true;
-
+    $latestDevRelease = '';
     $allVersions = $info->getVersions();
     $highesSprintReleases = [];
     foreach ($allVersions as $v) {
       if (StringUtil::contains($v, '-m')) { // hide sprint releases (maven milestone releases)
-        if ($latestDevRelease) {
-          $versionsToDisplay[] = $v;
-          $latestDevRelease = false;
+        if (empty($latestDevRelease)) {
+          $latestDevRelease = $v;
         }
         continue;
       }
@@ -67,6 +65,38 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
     foreach ($highesSprintReleases as $key => $value) {
       $versionsToDisplay[] = $key . '.' . $value;
     }
+    
+    $versionsToDisplay = self::addDevReleaseIfNoOfficialReleaseIsAvailable($latestDevRelease, $versionsToDisplay);
+    
+    return self::sortByNewest($versionsToDisplay);
+  }
+  
+  private static function addDevReleaseIfNoOfficialReleaseIsAvailable(string $latestDevRelease, array $versionsToDisplay): array
+  {
+    $addDevRelease = true;
+    if (!empty($latestDevRelease)) {
+      foreach ($versionsToDisplay as $v) {
+        $splittedVersion = explode('.', $v);
+        if (count($splittedVersion) == 4) {
+          $v = $splittedVersion[0] . '.' . $splittedVersion[1] . '.' . $splittedVersion[2];
+        }
+        if (StringUtil::startsWith($latestDevRelease, $v)) {
+          $addDevRelease = false;
+          break;
+        }
+      }
+    }
+    if ($addDevRelease) {
+      $versionsToDisplay[] = $latestDevRelease;
+    }
     return $versionsToDisplay;
+  }
+  
+  private static function sortByNewest(array $versions)
+  {
+    usort($versions, function (string $v1, string $v2) {
+      return version_compare($v2, $v1);
+    });
+    return $versions;
   }
 }
