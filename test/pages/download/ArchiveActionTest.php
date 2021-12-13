@@ -61,4 +61,24 @@ class ArchiveActionTest extends TestCase
       ->bodyContains('nightly-8')
       ->bodyContains('nightly-7');
   }
+
+  public function testArchive80_unsafe()
+  {
+    AppTester::assertThatGet('/download/archive/8.0')->ok()
+      ->bodyContains('CVE-2021-44228')
+      ->bodyContains('https://community.axonivy.com/d/231-cve-2021-44228-log4j2-jndildap-vulnerability')
+      ->bodyContains('another issue');
+  }
+
+  public function testArchive70_unsafe()
+  {
+    AppTester::assertThatGet('/download/archive/7.0')->ok()
+      ->bodyContains('Security issue');
+  }
+
+  public function testArchive60_unsafe()
+  {
+    AppTester::assertThatGet('/download/archive/6.0')->ok()
+      ->bodyContains('Security issue');
+  }
 }
