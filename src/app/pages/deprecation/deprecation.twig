@@ -5,33 +5,31 @@
 {% block content %}
 
 <section id="main">
-  <div class="inner-small">
+  <div class="inner">
     <header>
       <h1>Deprecation and Removal</h1>
     </header>
+    <p>You should avoid using deprecated Public API and features. When migrating to a new version check for <a href="/doc/latest/public-api/deprecated-list.html">deprecated Public API</a> and features and replace them with the successor API or feature.</p> 
   </div>
 </section>
 
-<section id="main" >
+<section style="padding: 2em 0;">
   <div class="inner">
-    <p>You should avoid using deprecated Public API and features. When migrating to a new version check for <a href="/doc/latest/public-api/deprecated-list.html">deprecated Public API</a> and features and replace them with the successor API or feature.</p> 
-    <p>We deprecate and remove Features as follows:
-      <ul>
-        <li>We document feature that we will remove in future versions on this page.</li>
-        <li>We document Public API that we will remove in future versions in the source code as <code>@Deprecated(forRemoval=true)</code>. See <a href="/doc/latest/public-api/deprecated-list.html">Deprecated Public API</a></li>
-        <li>We document features that we will remove in future on the Designer's UI and in the Problem View as Warnings.</li>
-      </ul>
-    </p>
-    
-      
+    <p style="margin-bottom: 1em">We deprecate and remove Features as follows:</p>
+    <ul>
+      <li>We document feature that we will remove in future versions on this page.</li>
+      <li>We document <a href="/doc/latest/public-api/deprecated-list.html">Public API</a> that we will remove in future versions in the source code as <code>@Deprecated(forRemoval=true)</code></li>
+      <li>We document features that we will remove in future on the Designer's UI and in the Problem View as Warnings.</li>
+    </ul>
+
     <table>
       <thead>
         <tr>
           <th rowspan="2">Feature</th>
           <th rowspan="2">Successor</th>
-          <th colspan="9">Version</th>
+          <th colspan="{{ versions|length }}">Version</th>
         </tr>
-        <tr>
+        <tr class="versions">
           {% for version in versions %}
             <th>{{ version }}</th>
           {% endfor %}
@@ -44,7 +42,7 @@
             <td><a href="{{ feature.successorHref }}">{{ feature.successor }}</a></td>
           {% set cls = "" %}
           {% for version in versions %}
-            <td><span class="{{ feature.cssClassForVersions[version] }}"></span></td>
+            <td class="deprecation-icon"><span class="{{ feature.cssClassForVersions[version] }}"></span></td>
           {% endfor %}
           </tr>
         {% endfor %}

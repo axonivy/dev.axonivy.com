@@ -35,24 +35,24 @@
 }
 
 /* Deprecation page */
+.versions th {
+  font-weight: normal;
+  text-align: center;
+}
+.deprecation-icon {
+  text-align: center;
+}
 .deprecation-released::after {
-  content: "\02B50";
+  content: "⭐";
 }
-
 .deprecation-ok::after {
-  content: "\02714";
-  font-size: 1.3em;
-  color: green;
+  content: "✔️";
 }
-
 .deprecation-deprecated::after {
-  content: "\026A0";
-  font-size: 1.3em;
-  color: #FFC83D;
+  content: "⚠️";
 }
-
 .deprecation-removed::after {
-  content: "\0274C";
+  content: "❌";
 }
 
 /* Team page */
