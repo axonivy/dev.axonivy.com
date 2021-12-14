@@ -52,7 +52,19 @@ class ReleaseInfo
 
   public function isUnsafeVersion(): bool
   {
-    return file_exists($this->getPath() . '/unsafe.version');
+    return file_exists($this->getUnsafeVersionPath());
+  }
+  
+  public function getUnsafeReasons(): array
+  {
+    $unsaveContent = file_get_contents($this->getUnsafeVersionPath());
+    $issues = json_decode($unsaveContent, true);
+    return (isset($issues) && is_array($issues)) ? $issues : array();
+  }
+
+  private function getUnsafeVersionPath(): string
+  {
+    return $this->getPath() . '/unsafe.version';
   }
 
   public function getDocProvider(): DocProvider

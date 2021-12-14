@@ -77,13 +77,6 @@
               <div style="font-size: 13px;">{{ releaseInfo.ReleaseDate }}</div>
             </td>
             <td>
-            {% if releaseInfo.UnsafeVersion %}
-              <span style="color:red;">
-                We have identified a security issue in this version. We highly recommend updating to the latest update version.
-              </span>
-              <br /><br />
-            {% endif %}
-
             {% for artifact in releaseInfo.artifacts %}
               <a href="{{ artifact.DownloadUrl }}"><i class="si si-download"> </i></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a>
               {% if artifact.Type == "Slim All" %}
@@ -98,11 +91,21 @@
 
             <td style="min-width:200px;">
             {% if releaseInfo.DocProvider.hasDocuments %}
-              <a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><i class="si si-file"> </i></a>&nbsp;<a href="{{ releaseInfo.DocProvider.OverviewUrl }}">Documentation</a><br />
+              <a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><i class="si si-file"></i> Documentation</a><br />
             {% endif %}
             {% if releaseInfo.hasHotfix %}
               <a href="{{ releaseInfo.HotfixFileUrl }}"><i class="si si-download"> </i></a>&nbsp;Hotfix<br />
               <a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><i class="si si-file"> </i></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
+            {% endif %}
+            {% if releaseInfo.UnsafeVersion %}
+              {% if releaseInfo.getUnsafeReasons is empty %}
+                <i class="si si-warning" style="background-color: red;"></i> Security issue<br />
+              {% endif %}
+              {% for reason in releaseInfo.getUnsafeReasons %}
+                <a href="{{ reason.url }}">
+                  <i class="si si-warning" style="background-color: red;"></i> {{ reason.issue }}
+                </a><br />
+              {% endfor %}
             {% endif %}
             </td>
           </tr>

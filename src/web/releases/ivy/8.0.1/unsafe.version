@@ -1,0 +1,10 @@
+[
+  {
+    "issue": "CVE-2021-44228",
+    "url": "https://community.axonivy.com/d/231-cve-2021-44228-log4j2-jndildap-vulnerability"
+  },
+  {
+    "issue": "another issue",
+    "url": "www.example.com"
+  }
+]
