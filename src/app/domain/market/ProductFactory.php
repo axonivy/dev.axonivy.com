@@ -33,7 +33,7 @@ class ProductFactory
     $language = $json->language ?? '';
     $industry = $json->industry ?? '';
     $compatibility = $json->compatibility ?? '';
-    $validate = $json->validate ?? true;
+    $validate = $json->validate ?? false;
     $contactUs = $json->contactUs ?? false;    
     return new Product($key, $path, $json->name, $version, $shortDesc, $listed, $type, $tags, 
       $vendor, $vendorImage, $vendorUrl, $platformReview, $cost, $sourceUrl, $statusBadgeUrl, $language, $industry, $compatibility, $info, $validate, $contactUs);
