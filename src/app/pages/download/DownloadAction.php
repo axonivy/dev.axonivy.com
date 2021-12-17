@@ -29,6 +29,13 @@ class DownloadAction
     }
 
     $loader = $this->createLoader($releaseType);
+    
+    $leadingEdgeVersion = "";
+    $leadingEdge = ReleaseType::LE();
+    if ($leadingEdge != null) {
+      $leadingEdgeVersion = $leadingEdge->releaseInfo()->getVersion()->getMinorVersion();
+    }
+    
 
     return $this->view->render($response, 'download/download.twig', [
       'designerArtifacts' => $loader->designerArtifacts(),
@@ -44,7 +51,9 @@ class DownloadAction
       'archiveLink' => $loader->archiveLink(),
       'versionShort' => $loader->versionShort(),
 
-      'releaseDate' => $loader->releaseDate()
+      'releaseDate' => $loader->releaseDate(),
+      
+      'leadingEdgeVersion' => $leadingEdgeVersion
     ]);
   }
 
