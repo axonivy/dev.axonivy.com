@@ -7,6 +7,7 @@ use Slim\Views\Twig;
 use app\domain\Version;
 use app\domain\util\Redirect;
 use app\domain\Artifact;
+use app\domain\ReleaseInfoRepository;
 
 class DeprecationAction
 {
@@ -27,17 +28,24 @@ class DeprecationAction
   
   private static function getVersions(): array
   {
-    return ["3", "4", "5", "6", "7", "8", "9.1", "9.2", "9.3"];
+    $versions = [];
+    foreach(ReleaseInfoRepository::getAllEverLongTermSupportVersions() as $lts) {
+      $versions[] = $lts->majorVersion();
+    }
+    foreach(ReleaseInfoRepository::getLeadingEdgesSinceLastLongTermVersion() as $le) {
+      $versions[] = $le->minorVersion();
+    }
+    return $versions;
   }
   
   private static function getFeatures(): array
   {
     $jsonFile = __DIR__ . DIRECTORY_SEPARATOR . 'deprecation.json';
     $features = json_decode(file_get_contents($jsonFile));
-    foreach ($features as &$feature) {
+    foreach ($features as $feature) {
       $cssClassForVersions = array();
       $versions = DeprecationAction::getVersions();
-      foreach ($versions as &$v) {
+      foreach ($versions as $v) {
         $cssClassForVersions[$v] = DeprecationAction::cssClassForVersion($feature, $versions, $v);
       }
       $feature->cssClassForVersions = $cssClassForVersions;
