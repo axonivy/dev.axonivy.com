@@ -14,6 +14,36 @@ class ReleaseInfoRepositoryTest extends TestCase
     Assert::assertNotNull(ReleaseInfoRepository::getLatestLongTermSupport());
   }
 
+  public function test_getLongTermSupportVersions()
+  {
+      $lts = ReleaseInfoRepository::getLongTermSupportVersions();
+      Assert::assertNotNull($lts);
+      Assert::assertCount(2, $lts);
+      foreach($lts as $version) {
+          Assert::assertNotNull($version);
+      }
+  }
+
+  public function test_getAllEverLongTermSupportVersions() 
+  {
+    $lts = ReleaseInfoRepository::getAllEverLongTermSupportVersions();
+    Assert::assertNotNull($lts);
+    Assert::assertNotEmpty($lts);
+    foreach($lts as $version) {
+      Assert::assertNotNull($version);
+    }
+  }
+
+  public function test_getLeadingEdgesSinceLastLongTermVersion()
+  {
+    $le = ReleaseInfoRepository::getLeadingEdgesSinceLastLongTermVersion();
+    Assert::assertNotNull($le);
+    Assert::assertNotEmpty($le);
+    foreach($le as $version) {
+      Assert::assertNotNull($version);
+    }
+  }
+
   public function test_getBestMatchingVersion()
   {
     Assert::assertEquals('8.0.0', self::bestMatchingVersion('8.0.0'));

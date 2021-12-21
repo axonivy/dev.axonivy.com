@@ -5,6 +5,7 @@ namespace app\domain;
 use app\domain\util\ArrayUtil;
 use app\domain\util\StringUtil;
 use app\Config;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class ReleaseInfoRepository
 {
@@ -33,6 +34,19 @@ class ReleaseInfoRepository
     return null;
   }
 
+  public static function getLeadingEdgesSinceLastLongTermVersion(): array
+  {
+    $le = self::getLeadingEdge();
+    if ($le == null) {
+      return [];
+    }
+    $leadingEdges = [];
+    for ($minor = 1; $minor <= $le->getVersion()->getMinorNumber(); $minor++) {
+      $leadingEdges[] = self::getBestMatchingVersion($le->majorVersion() . '.' . $minor);
+    }
+    return $leadingEdges;
+  }
+
   /**
    * lts with highest version
    */
@@ -47,27 +61,27 @@ class ReleaseInfoRepository
    */
   public static function getLongTermSupportVersions(): array
   {
+    $ltsMajorVersions = self::getAllEverLongTermSupportVersions();
+    $lts = array_slice($ltsMajorVersions, -Config::NUMBER_LTS, Config::NUMBER_LTS);
+    return $lts;
+  }
+
+  /**
+   * All lts releases ever (not only the current ones) 
+   */
+  public static function getAllEverLongTermSupportVersions(): array
+  {
     $releaseInfos = self::getAvailableReleaseInfos();
 
     $majorVersions = array_map(fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->getMajorVersion(), $releaseInfos);
-    $uniqueMajorVersions = array_reverse(array_unique($majorVersions));
+    $uniqueMajorVersions = array_unique($majorVersions);
 
     $ltsMajorVersions = [];
     foreach ($uniqueMajorVersions as $majorVersion) {
-      if ($majorVersion % 2 == 0) {
+      if (self::isOrWasLts($majorVersion)) {
         $ltsMajorVersions[] = $majorVersion;
-      }
-
-      if ($majorVersion == 7) { // when LTS 10.0 has been released, remove this
-        $ltsMajorVersions[] = $majorVersion;
-      }
-
-      if (count($ltsMajorVersions) == Config::NUMBER_LTS) {
-        break;
       }
     }
-
-    $ltsMajorVersions = array_reverse($ltsMajorVersions);
     return array_filter(array_map(fn (string $ltsMajorVersion) => self::findNewestLTSVersion($ltsMajorVersion), $ltsMajorVersions));
   }
 
@@ -168,5 +182,20 @@ class ReleaseInfoRepository
       return version_compare($r2->getVersion()->getVersionNumber(), $r1->getVersion()->getVersionNumber());
     });
     return $releaseInfos;
+  }
+
+  private static function isOrWasLts(string $majorVersion): bool
+  {
+    $major = intval($majorVersion);
+    if ($major == 0) { // nightly-8, etc.
+      return false;
+    }
+    if ($major % 2 == 0) {
+      return true;
+    }
+    if ($major <= 7) { // before 8 also uneven numbers where LTS
+      return true;  
+    }
+    return false;
   }
 }
