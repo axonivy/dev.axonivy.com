@@ -14,7 +14,7 @@ class DocProvider
    * <li> 7.0.0
    * @var $versionNumber
    */
-  private $versionNumber;
+  private string $versionNumber;
 
   public function __construct(string $versionNumber)
   {
@@ -28,7 +28,7 @@ class DocProvider
 
   public function hasDocuments(): bool
   {
-    return !empty(self::findAllDocuments());
+    return !empty($this->findAllDocuments());
   }
 
   private function getDocDir()
@@ -55,7 +55,7 @@ class DocProvider
 
   public function getBooks(): array
   {
-    return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) {
+    return array_filter($this->findAllDocuments(), function (AbstractDocument $doc) {
       return $doc instanceof Book;
     });
   }
@@ -73,26 +73,26 @@ class DocProvider
 
   public function getImportantBooks(): array
   {
-    return array_filter(self::getBooks(), fn (Book $book) => !StringUtil::startsWith(strtolower($book->getName()), "portal"));
+    return array_filter($this->getBooks(), fn (Book $book) => !StringUtil::startsWith(strtolower($book->getName()), "portal"));
   }
 
   public function getNotImportantBooks(): array
   {
-    return array_filter(self::getBooks(), function (Book $book) {
+    return array_filter($this->getBooks(), function (Book $book) {
       return StringUtil::startsWith(strtolower($book->getName()), "portal");
     });
   }
 
   public function getExternalBooks(): array
   {
-    return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) {
+    return array_filter($this->findAllDocuments(), function (AbstractDocument $doc) {
       return $doc instanceof ExternalBook;
     });
   }
 
   public function getReleaseDocuments(): array
   {
-    return array_filter(self::findAllDocuments(), function (AbstractDocument $doc) {
+    return array_filter($this->findAllDocuments(), function (AbstractDocument $doc) {
       return $doc instanceof ReleaseDocument;
     });
   }
@@ -100,25 +100,25 @@ class DocProvider
   private function findAllDocuments(): array
   {
     $documents = [
-      self::createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'), // legacy engine guide prior to 8.0
-      self::createBook('Designer Guide', 'designer-guide', ''), // new guide since 8.0
+      $this->createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'), // legacy engine guide prior to 8.0
+      $this->createBook('Designer Guide', 'designer-guide', ''), // new guide since 8.0
 
-      self::getServerGuide(),
-      self::createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
-      self::createBook('Engine Guide', 'engine-guide', ''), // new engine guide since 7.4
+      $this->getServerGuide(),
+      $this->createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
+      $this->createBook('Engine Guide', 'engine-guide', ''), // new engine guide since 7.4
 
-      self::createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),  // legacy
-      self::createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'), // legacy
+      $this->createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),  // legacy
+      $this->createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'), // legacy
 
-      self::createExternalBook('Public API', 'PublicAPI'),  // legacy public api url
-      self::createExternalBook('Public API', 'public-api'),  // new url since 8.0
+      $this->createExternalBook('Public API', 'PublicAPI'),  // legacy public api url
+      $this->createExternalBook('Public API', 'public-api'),  // new url since 8.0
 
-      self::getNewAndNoteworthy(), // since 9.1 not available
-      self::getReleaseNotes(), // since 9.1 part of product documentation
-      self::createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes'), // since 9.1 part of product documentation
-      self::createReleaseDocument('ReadMe', 'ReadMe.html', 'readme'), // since 9.1 not available
-      self::createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'), // legacy
-      self::createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')  // legacy
+      $this->getNewAndNoteworthy(), // since 9.1 not available
+      $this->getReleaseNotes(), // since 9.1 part of product documentation
+      $this->getMigrationNotes(), // since 9.1 part of product documentation
+      $this->createReleaseDocument('ReadMe', 'ReadMe.html', 'readme'), // since 9.1 not available
+      $this->createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'), // legacy
+      $this->createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')  // legacy
     ];
     return array_filter($documents, function (AbstractDocument $doc) {
       return $doc->exists();
@@ -164,7 +164,7 @@ class DocProvider
     return '/releases/ivy/' . $this->versionNumber . '/documents';
   }
 
-  private function getReleaseNotes(): ReleaseDocument
+  public function getReleaseNotes(): ReleaseDocument
   {
     $version = new Version($this->versionNumber);
     $fileName = 'ReleaseNotes.txt';
@@ -174,12 +174,17 @@ class DocProvider
     return $this->createReleaseDocument('Release Notes', $fileName, 'release-notes');
   }
 
+  private function getMigrationNotes(): ReleaseDocument
+  {
+    return $this->createReleaseDocument('Migration Notes', 'MigrationNotes.html', 'migration-notes');
+  }
+
   public function getOverviewDocument(): ?AbstractDocument
   {
     $docs = [
-      self::getNewAndNoteworthy(),
-      self::getServerGuide(),
-      self::getReleaseNotes()
+      $this->getNewAndNoteworthy(),
+      $this->getServerGuide(),
+      $this->getReleaseNotes()
     ];
     foreach ($docs as $doc) {
       if ($doc->exists()) {
@@ -189,19 +194,32 @@ class DocProvider
     return null;
   }
 
+  public function getQuickDocuments(): array
+  {
+    $docs = [
+      $this->getNewAndNoteworthy(),
+      $this->getReleaseNotes(),
+      $this->getMigrationNotes()
+    ];
+    return $docs;
+  }
+
   public function getServerGuide(): Book
   {
-    return self::createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'); // ancient engine guide
+    return $this->createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'); // ancient engine guide
   }
 
   public function getNewAndNoteworthy(): ReleaseDocument
   {
-    return self::createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
+    if (version_compare($this->versionNumber, 9) >= 0) {
+      return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
+    }
+    return $this->createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
   }
 
   public function getOverviewUrl(): string
   {
-    return self::createBaseUrl();
+    return $this->createBaseUrl();
   }
 
   public function getMinorUrl(): string
@@ -226,12 +244,12 @@ class DocProvider
   {
     $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
 
-    $path = self::createHotFixFilePath($filename);
+    $path = $this->createHotFixFilePath($filename);
     if (!file_exists($path)) {
       $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
     }
 
-    $path = self::createHotFixFilePath($filename);
+    $path = $this->createHotFixFilePath($filename);
     $url = '/releases/ivy/' . $this->versionNumber . '/hotfix/' . $filename;
     return new SimpleDocument('How to install Hotfix', $path, $url);
   }

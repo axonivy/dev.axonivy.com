@@ -11,40 +11,9 @@
     max-width:600px;
   }
 
-  .dropbtn {
-    font-size: 14px;
-    cursor: pointer;
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    float: right;
-    width: auto;
-    min-width: auto;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
+  .doc-dropdown-content {
     right: 0;
-    background-color: #f9f9f9;
     min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .dropdown-content a:hover {background-color: #f1f1f1;}
-
-  .dropdown:hover .dropdown-content {
-    display: block;
   }
 </style>
     
@@ -59,9 +28,9 @@
       {% endfor %}
           
       {% if docProvider.notImportantBooks is not empty or docProvider.existingBook is not empty %}
-        <div class="dropdown">
-          <a class="button dropbtn"><i class="si si-book"></i> Further Docs</a>
-          <div class="dropdown-content">
+        <div class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
+          <a class="button doc-dropbtn"><i class="si si-book"></i> Further Docs</a>
+          <div class="doc-dropdown-content">
             {% if docProvider.notImportantBooks is not empty %}
               <span style="font-size:12px;padding-left:15px; color: #1b1b1b;">Docs</span>
               {% for doc in docProvider.notImportantBooks %}

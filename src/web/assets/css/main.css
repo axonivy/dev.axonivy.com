@@ -2176,6 +2176,10 @@ button.special,
   background-color: hsl(195, 100%, 29%);
   color: #ffffff;
 }
+.button.special > a {
+  color: #fff;
+  text-decoration: none;
+}
 
 input[type="submit"].special:hover,
 input[type="reset"].special:hover,

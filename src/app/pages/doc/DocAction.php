@@ -9,6 +9,7 @@ use app\domain\ReleaseInfoRepository;
 use app\domain\doc\DocProvider;
 use app\domain\util\Redirect;
 use app\domain\ReleaseType;
+use app\domain\Version;
 use DI\NotFoundException;
 use app\domain\util\StringUtil;
 
@@ -45,7 +46,7 @@ class DocAction
     }
 
     if ($this->documentationBasedOnReadTheDocs($version)) {
-      $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document'] ?? '');
+      $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document'] ?? '', new Version($version));
       if (empty($newDocUrl)) {
         throw new HttpNotFoundException($request);
       } else {
@@ -98,7 +99,7 @@ class DocAction
     return false;
   }
 
-  private function resolveNewDocUrl($baseUrl, $document): string
+  private function resolveNewDocUrl($baseUrl, $document, $version): string
   {
     if (empty($document)) {
       return "$baseUrl/index.html";
@@ -110,7 +111,7 @@ class DocAction
       return "$baseUrl/axonivy/release-notes/index.html";
     }
     if ($document == 'new-and-noteworthy') {
-      return '/news';
+      return '/news/' . $version->getMinorVersion();
     }
     return '';
   }

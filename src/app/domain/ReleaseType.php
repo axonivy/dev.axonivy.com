@@ -18,7 +18,7 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLatestLongTermSupport();
     $type->allReleaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLongTermSupportVersions();
     $type->isDevRelease = false;
-    $type->headline = '<p>Get the latest stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> version of the Axon Ivy Platform. Download the leading edge version <a href="/download/leading-edge">here</a>';
+    $type->headline = '<p>Get the latest stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> version of the Axon Ivy Platform. Or download the <a href="/download/leading-edge">Leading Edge</a> version.';
     $type->banner = '';
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->minorVersion();
     $type->promotedDevVersion = false;
