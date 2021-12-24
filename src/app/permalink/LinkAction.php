@@ -59,6 +59,7 @@ class LinkAction
         'build-examples-web-test-base' => $buildExampleBlobPrefix . 'crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestRegistrationFormIT.java#L22-L39',
         'build-examples-web-test-select' => $buildExampleBlobPrefix . 'crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L114-L156',
         'build-examples-web-test-condition' => $buildExampleBlobPrefix . 'crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L164-L181',
+        'build-examples-docker' => $buildExamplePrefix . 'tree/' . $branchVersion . '/docker',
     ];
 
     $newPage = $redirects[$linkKey] ?? '';
