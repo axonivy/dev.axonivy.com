@@ -17,8 +17,16 @@ Run `./run-tests.sh` to execute tests.
 
 # IDE Setup
 
-- Use Eclipse PHP
+### VSCode
+
+- Install extensions PHP Intelphense and follow the Quickstart guide
+- Install extension Twig
+
+### Eclipse
+
+- Download Eclipse PHP
 - Install Twig Plugin from Eclipse Marketplace
+- Configure PHP Formatter PSR7
 
 # Update a php library
 
