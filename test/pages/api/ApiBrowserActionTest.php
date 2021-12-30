@@ -1,6 +1,6 @@
 <?php
 
-namespace test\pages\doc;
+namespace test\pages\api;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;

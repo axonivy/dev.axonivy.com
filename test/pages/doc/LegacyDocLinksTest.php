@@ -5,7 +5,7 @@ namespace test\pages\doc;
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
 
-class LegacyDocLinkTets extends TestCase
+class LegacyDocLinksTest extends TestCase
 {
   public function testRedirectEngineGuide()
   {

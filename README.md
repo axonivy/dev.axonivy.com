@@ -17,8 +17,16 @@ Run `./run-tests.sh` to execute tests.
 
 # IDE Setup
 
-- Use Eclipse PHP
+### VSCode (recommended)
+
+- Install extension **PHP Intelphense** and follow the Quickstart guide
+- Install extension **Twig**
+
+### Eclipse
+
+- Download Eclipse PHP
 - Install Twig Plugin from Eclipse Marketplace
+- Configure PHP Formatter PSR7
 
 # Update a php library
 
@@ -27,14 +35,7 @@ Run `./run-tests.sh` to execute tests.
 docker-compose exec web composer show --outdated
 
 // Upgrade dependencies
-docker-compose exec web composer require --update-with-dependencies slim/slim
-docker-compose exec web composer require --update-with-dependencies slim/twig-view
-docker-compose exec web composer require --update-with-dependencies slim/psr7
-docker-compose exec web composer require --update-with-dependencies php-di/php-di
-docker-compose exec web composer require --update-with-dependencies middlewares/trailing-slash
-
-// Upgrdae dev dependencies
-docker-compose exec web composer require --dev --update-with-dependencies phpunit/phpunit
+docker-compose exec web composer update --prefer-dist -a --with-all-dependencies
 ```
 
 ## Ressources

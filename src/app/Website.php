@@ -13,6 +13,7 @@ use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseType;
+use DI\ContainerBuilder;
 use Throwable;
 
 class Website
@@ -21,13 +22,22 @@ class Website
 
   function __construct()
   {
-    $container = new Container();
+    $container = $this->createDiContainer();
     $this->app = AppFactory::createFromContainer($container);
     $view = $this->configureTemplateEngine();
     $this->installTrailingSlashRedirect();
     $this->installRoutes();
     $this->installErrorHandling();
     $this->installViewerMiddleware($view);
+  }
+
+  private function createDiContainer(): Container
+  {
+    $builder = new ContainerBuilder();
+    $builder->addDefinitions([
+      Twig::class => Twig::create(__DIR__ . '/../app/pages')
+    ]);
+    return $builder->build();
   }
 
   public function getApp(): App
@@ -43,11 +53,6 @@ class Website
   private function configureTemplateEngine(): Twig
   {
     $container = $this->app->getContainer();
-
-    $this->app->getContainer()->set(Twig::class, function (ContainerInterface $container) {
-      return Twig::create(__DIR__ . '/../app/pages');
-    });
-
     $view = $container->get(Twig::class);
 
     $releaseTypeLTS = ReleaseType::LTS();
@@ -74,10 +79,11 @@ class Website
     return $view;
   }
 
-  private function baseUrl(){
-    if (isset($_SERVER['HTTPS'])){
+  private function baseUrl()
+  {
+    if (isset($_SERVER['HTTPS'])) {
       $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-    } else{
+    } else {
       $protocol = 'http';
     }
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';

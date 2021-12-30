@@ -1,6 +1,6 @@
 <?php
 
-namespace test\pages\github;
+namespace test\pages\internal;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
