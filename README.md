@@ -17,10 +17,10 @@ Run `./run-tests.sh` to execute tests.
 
 # IDE Setup
 
-### VSCode
+### VSCode (recommended)
 
-- Install extensions PHP Intelphense and follow the Quickstart guide
-- Install extension Twig
+- Install extension **PHP Intelphense** and follow the Quickstart guide
+- Install extension **Twig**
 
 ### Eclipse
 
