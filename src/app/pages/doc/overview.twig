@@ -13,7 +13,6 @@
   </div>
 </section>
 
-
 {% if docLinksLE is not empty %}
   <section id="three">
   {% else %}
@@ -29,9 +28,20 @@
           <ul class="actions">
           {% for docLink in docLinksLTS %}
             <li>
-              <a href="{{ docLink.url }}" class="button special min-width">
-                <i class="si si-book"></i> {{ docLink.displayText }}
-              </a>
+              <span class="button special min-width">
+                <a href="{{ docLink.url }}">
+                  <i class="si si-book"></i> {{ docLink.displayText }}
+                </a>
+                <span class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
+                  <i class="si si-arrow-down doc-dropbtn"></i>
+                  <span class="doc-dropdown-content">
+                    <span>More</span>
+                    {% for doc in docLink.releaseDocuments %}
+                      <a href="{{ doc.Url }}" target="_blank"><i class="si si-{{ doc.Name == 'News' ? 'news' : 'book'}}"></i> {{ doc.Name }}</a>
+                    {% endfor %}
+                  </span>
+                </span>
+              </span>
             </li>
           {% endfor %}
         </ul>
@@ -46,9 +56,20 @@
             <ul class="actions">
               {% for docLink in docLinksLE %}
                 <li>
-                  <a href="{{ docLink.url }}" class="button special min-width">
-                    <i class="si si-book"></i> {{ docLink.displayText }}
-                  </a>
+                  <span class="button special min-width">
+                    <a href="{{ docLink.url }}">
+                      <i class="si si-book"></i> {{ docLink.displayText }}
+                    </a>
+                    <span class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
+                      <i class="si si-arrow-down doc-dropbtn"></i>
+                      <span class="doc-dropdown-content">
+                        <span>More</span>
+                        {% for doc in docLink.releaseDocuments %}
+                          <a href="{{ doc.Url }}" target="_blank"><i class="si si-{{ doc.Name == 'News' ? 'news' : 'book'}}"></i> {{ doc.Name }}</a>
+                        {% endfor %}
+                      </span>
+                    </span>
+                  </span>
                 </li>
               {% endfor %}
             </ul>

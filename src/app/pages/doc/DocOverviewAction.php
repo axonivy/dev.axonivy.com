@@ -36,12 +36,7 @@ class DocOverviewAction
 
   private function docLinks(array $releaseInfos): array
   {
-    return array_map(fn (ReleaseInfo $releaseInfo) => $this->docLink($releaseInfo), $releaseInfos);
-  }
-
-  private function docLink(ReleaseInfo $releaseInfo): DocLink
-  {
-    return new DocLink($releaseInfo->getDocProvider()->getMinorUrl(), $releaseInfo->minorVersion());
+    return array_map(fn (ReleaseInfo $releaseInfo) => new DocLink($releaseInfo), $releaseInfos);
   }
 }
 
@@ -49,10 +44,12 @@ class DocLink
 {
   public string $url;
   public string $displayText;
+  public array $releaseDocuments;
 
-  public function __construct(string $url, string $displayText)
+  public function __construct(ReleaseInfo $releaseInfo)
   {
-    $this->url = $url;
-    $this->displayText = $displayText;
+    $this->url = $releaseInfo->getDocProvider()->getMinorUrl();
+    $this->displayText = $releaseInfo->minorVersion();
+    $this->releaseDocuments = $releaseInfo->getDocProvider()->getQuickDocuments();
   }
 }

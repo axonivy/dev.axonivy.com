@@ -35,7 +35,6 @@ class DownloadAction
     if ($leadingEdge != null) {
       $leadingEdgeVersion = $leadingEdge->releaseInfo()->getVersion()->getMinorVersion();
     }
-    
 
     return $this->view->render($response, 'download/download.twig', [
       'designerArtifacts' => $loader->designerArtifacts(),
@@ -53,7 +52,9 @@ class DownloadAction
 
       'releaseDate' => $loader->releaseDate(),
       
-      'leadingEdgeVersion' => $leadingEdgeVersion
+      'leadingEdgeVersion' => $leadingEdgeVersion,
+
+      'releaseNotesLink' => $loader->releaseNotesLink()
     ]);
   }
 
@@ -119,6 +120,8 @@ interface Loader
 
   function archiveLink(): string;
 
+  function releaseNotesLink(): string;
+
   function releaseDate(): string;
 }
 
@@ -155,6 +158,11 @@ class ReleaseTypeNotAvailableLoader implements Loader
   public function archiveLink(): string
   {
     return '/download/archive';
+  }
+
+  public function releaseNotesLink(): string
+  {
+    return '';
   }
 
   public function releaseDate(): string
@@ -235,6 +243,11 @@ class ReleaseInfoLoader implements Loader
   public function archiveLink(): string
   {
     return $this->releaseType->archiveLink($this->releaseInfo);
+  }
+
+  public function releaseNotesLink(): string
+  {
+    return $this->releaseInfo->getDocProvider()->getReleaseNotes()->getUrl();
   }
 
   public function releaseDate(): string
