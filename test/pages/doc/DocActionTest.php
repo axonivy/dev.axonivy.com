@@ -95,7 +95,7 @@ class DocActionTest extends TestCase
   public function testRedirectNewAndNoteworthySinceVersion9()
   {
     AppTester::assertThatGet('/doc/7.5.0/new-and-noteworthy')->ok();
-    AppTester::assertThatGet('/doc/9.1.0/new-and-noteworthy')->redirect('/news');
+    AppTester::assertThatGet('/doc/9.1.0/new-and-noteworthy')->redirect('/news/9.1');
     AppTester::assertThatGet('/doc/dev/new-and-noteworthy')->redirect('/news');
     AppTester::assertThatGet('/doc/sprint/new-and-noteworthy')->redirect('/news');
     AppTester::assertThatGet('/doc/nightly/new-and-noteworthy')->redirect('/news');

@@ -111,7 +111,12 @@ class DocAction
       return "$baseUrl/axonivy/release-notes/index.html";
     }
     if ($document == 'new-and-noteworthy') {
-      return '/news/' . $version->getMinorVersion();
+      $newsLink = '/news';
+      if ($version->isMinor() || $version->isBugfix())
+      {
+        $newsLink .= '/' . $version->getMinorVersion();
+      }
+      return $newsLink;
     }
     return '';
   }
