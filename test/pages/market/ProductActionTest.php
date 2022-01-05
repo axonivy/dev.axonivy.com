@@ -129,6 +129,13 @@ class ProductActionTest extends TestCase
       ->bodyContains("/api-browser?url=https%3A%2F%2Fcloud.uipath.com%2FAXONPRESALES%2FAXONPRESALES%2Fswagger%2Fv13.0%2Fswagger.json");
   }
 
+  public function testAPIBrowserButton_existsForYaml()
+  {
+    AppTester::assertThatGet('market/amazon-lex')
+      ->ok()
+      ->bodyContains("/api-browser?url=/market-cache/amazon-lex/amazon-lex-connector-product");
+  }
+
   public function testAPIBrowserButton_existsNot()
   {
     AppTester::assertThatGet('market/basic-workflow-ui')
