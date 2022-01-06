@@ -10,41 +10,41 @@ class OpenAPIProvider
     $this->product = $product;
   }
   
-  public function getOpenApiJsonUrl(string $version): string
+  public function getOpenApiUrl(string $version): string
   {
-    $url = $this->openApiUrl($version);
+    $url = $this->getOpenApiFile($version);
     if (empty($url)) {
       return '';
     }
 
     if (filter_var($url, FILTER_VALIDATE_URL)) {
       return urlencode($url);
-    } else if (!empty($url) && file_exists($this->product->getProductFile($version, $url))) {
-      return $this->product->assetBaseUrl($version) . "/$url";
+    } else if (!empty($url) && file_exists($url)) {
+      $fileName = substr($url, strrpos($url, '/') + 1);
+      return $this->product->assetBaseUrl($version) . "/$fileName";
     }
     return "";
   }
   
-  public function getOpenApiJson(string $version): string
+  public function getOpenApiContent(string $version): string
   {
-    $url = $this->openApiUrl($version);
-    if (empty($url)) {
+    $file = $this->getOpenApiFile($version);
+    if (empty($file)) {
       return '';
     }
-    $file = $this->product->getProductFile($version, $url);
     if (file_exists($file)) {
       return file_get_contents($file);
     }
     return "";
   }
   
-  private function openApiUrl(string $version): string
+  public function getOpenApiFile(string $version): string
   {
-    // auto detect openapi.json
-    $defaultFile = 'openapi.json';
-    $openApiJson = $this->product->getProductFile($version, $defaultFile);
-    if (file_exists($openApiJson)) {
-      return $defaultFile;
+    // auto detect openapi.*
+    $defaultFile = 'openapi.*';
+    $openApiFile = glob($this->product->getProductFile($version, $defaultFile));
+    if (!empty($openApiFile) && file_exists($openApiFile[0])) {
+      return $openApiFile[0];
     }
 
     // read from product.json

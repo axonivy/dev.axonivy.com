@@ -34,7 +34,7 @@ use app\permalink\LibraryPermalinkAction;
 use app\permalink\LinkAction;
 use app\pages\market\ProductJsonFromMarketRepoAction;
 use app\pages\market\ProductJsonFromProductRepoAction;
-use app\pages\market\OpenApiJsonAction;
+use app\pages\market\OpenApiAction;
 use app\pages\internal\MarketRCPTTAction;
 use app\pages\market\MarketProductLogoRedirector;
 
@@ -80,8 +80,8 @@ class RoutingRules
     $app->get('/_market/{key}/_product.json', ProductJsonFromMarketRepoAction::class);
     $app->get('/market-cache/{key}/{artifactId}/{version}/logo.png', MarketProductLogoRedirector::class);
     $app->get('/market-cache/{key}/{artifactId}/{version}/_product.json', ProductJsonFromProductRepoAction::class);
-    $app->get('/_market/{key}/{version}/openapi', OpenApiJsonAction::class);
-    $app->get('/_market/{key}/openapi', OpenApiJsonAction::class);
+    $app->get('/_market/{key}/{version}/openapi', OpenApiAction::class);
+    $app->get('/_market/{key}/openapi', OpenApiAction::class);
     $app->get('/internal/market-rcptt', MarketRCPTTAction::class);
 
     $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);

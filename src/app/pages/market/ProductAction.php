@@ -80,7 +80,7 @@ class ProductAction
     $productDescription = ProductDescription::create($product, $version);
     
     $openApiProvider = new OpenAPIProvider($product);
-    $openApiJsonUrl = $openApiProvider->getOpenApiJsonUrl($version);
+    $openApiUrl = $openApiProvider->getOpenApiUrl($version);
     
     $productVersion = $version;
     if (empty($productVersion)) {
@@ -96,7 +96,7 @@ class ProductAction
       'selectedVersion' => $version,
       'installButton' => $installButton,
       'getInTouchLink' => $getInTouchLink,
-      'openApiJsonUrl' => $openApiJsonUrl,
+      'openApiUrl' => $openApiUrl,
       'version' => $productVersion,
       'docUrl' => $docUrl,
       'installNow' => $installNow

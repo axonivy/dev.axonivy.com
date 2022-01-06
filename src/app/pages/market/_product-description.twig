@@ -231,10 +231,10 @@
             <span class="meta-data"><a href="{{ docUrl }}">External Link</a></span>
           </div>
         {% endif %}
-        {% if openApiJsonUrl is not empty %}
+        {% if openApiUrl is not empty %}
           <div class="product-meta-info">
             <span class="meta-type">Public API</span>
-            <span class="meta-data"><a href="/api-browser?url={{ openApiJsonUrl }}">Browse API</a></span>
+            <span class="meta-data"><a href="/api-browser?url={{ openApiUrl }}">Browse API</a></span>
           </div>
         {% endif %}
         {% if product.sourceUrl is not empty %}
