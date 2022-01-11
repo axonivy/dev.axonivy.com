@@ -31,7 +31,7 @@ class Config
   
   public static function marketCacheDirectory(): string
   {
-      return self::isProductionEnvironment() ? '/home/axonivya/data/market-cache' : __DIR__ . '/../../src/web/market-cache';
+    return self::isProductionEnvironment() ? '/home/axonivya/data/market-cache' : __DIR__ . '/../../src/web/market-cache';
   }
   
   public static function marketInstallationsFile(): string
