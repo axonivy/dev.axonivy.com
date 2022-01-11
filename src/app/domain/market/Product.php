@@ -320,7 +320,7 @@ class ProductFileResolver
       return false;
     }
     $versionizedFile = $this->folder_versionized($version) . "/$file";
-    return file_exists($versionizedFile);
+    return !empty(glob($versionizedFile));
   }
   
   public function assetBaseUrl_unversionized(): string
