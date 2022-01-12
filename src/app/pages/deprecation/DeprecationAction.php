@@ -63,7 +63,8 @@ class DeprecationAction
       if ($v == $feature->deprecated) {
         $cls = "deprecation-deprecated";
       }
-      if ($v == $feature->removed) {
+      $removed = $feature->removed ?? '';
+      if ($v == $removed) {
         $cls = "deprecation-removed";
       }
       if ($v == $version) {

@@ -41,5 +41,37 @@
     "released": "3",
     "deprecated": "8",
     "removed": "9.3"
+  },
+  {
+    "name": "Java Library - Guava", 
+    "nameHref": "https://github.com/google/guava",
+    "successor": "JDK",
+    "successorHref": "https://docs.oracle.com/en/java/javase/11/",
+    "released": "3",
+    "deprecated": "9.4"
+  },
+  {
+    "name": "Java Library - Apache Commons Lang 2", 
+    "nameHref": "https://commons.apache.org/proper/commons-lang/",
+    "successor": "Apache Commons Lang 3",
+    "successorHref": "https://commons.apache.org/proper/commons-lang/",
+    "released": "3",
+    "deprecated": "9.4"
+  },
+  {
+    "name": "Java Library - Apache Commons Collection 3", 
+    "nameHref": "https://commons.apache.org/proper/commons-collections/release_3_2_2.html",
+    "successor": "Apache Commons Collection 4", 
+    "successorHref": "https://commons.apache.org/proper/commons-collections/release_4_4.html",
+    "released": "3",
+    "deprecated": "9.4"
+  },
+  {
+    "name": "Java Library - Apache Http Client", 
+    "nameHref": "https://hc.apache.org/index.html",
+    "successor": "JDK HTTP Client", 
+    "successorHref": "https://openjdk.java.net/groups/net/httpclient/intro.html",
+    "released": "3",
+    "deprecated": "9.4"
   }
 ]
