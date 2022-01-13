@@ -6,8 +6,9 @@
     "successorHref": "/doc/9.3/designer-guide/user-interface/user-dialogs/html-dialogs.html",
     "released": "3",
     "deprecated": "8",
-    "removed": "9.3"
-  }, 
+    "removed": "9.3",
+    "description": "The cms page feature has been removed. Use html dialog to implement user interfaces."
+  },
   {
     "name": "Macros in RTF documents", 
     "nameHref": "/doc/8.0/designer-guide/user-interface/web-page/index.html",
@@ -15,14 +16,16 @@
     "successorHref": "/market/doc-factory",
     "released": "3",
     "deprecated": "8",
-    "removed": "9.3"
+    "removed": "9.3",
+    "description": "Macro expansion in RTF documents has been removed. Use the doc factory to generate documents."
   },
   {
     "name": "Import Ivy 3.9 Project", 
     "nameHref": "/doc/7.0/DesignerGuideHtml/ivy.processmodeling.html#ivy-project-convert39",
     "released": "5",
     "deprecated": "8",
-    "removed": "8"
+    "removed": "8",
+    "description": "The 3.9 project importer has been removed. Import 3.9 projects in older Axon Ivy Designer versions."
   }, 
   {
     "name": "RIA / Rich Dialog", 
@@ -31,7 +34,8 @@
     "successorHref": "/doc/9.3/designer-guide/user-interface/user-dialogs/html-dialogs.html",
     "released": "4",
     "deprecated": "7",
-    "removed": "8"
+    "removed": "8",
+    "description": "The rich dialog technology stack has been removed. Use html dialog to implement user interaces."
   },
   {
     "name": "WebService Axis 1 & 2", 
@@ -40,7 +44,8 @@
     "successorHref": "/doc/9.3/designer-guide/configuration/webservice-clients.html",
     "released": "3",
     "deprecated": "8",
-    "removed": "9.3"
+    "removed": "9.3",
+    "description": "The web service client Axis technolgy stack has been removed. Use the brand new CXF web service client stack."
   },
   {
     "name": "Java Library - Guava", 
@@ -48,7 +53,8 @@
     "successor": "JDK",
     "successorHref": "https://docs.oracle.com/en/java/javase/11/",
     "released": "3",
-    "deprecated": "9.4"
+    "deprecated": "9.4",
+    "description": "The Java library Guava is provided on the ivy project classpath and will be removed. Use the utilities from the JDK."
   },
   {
     "name": "Java Library - Apache Commons Lang 2", 
@@ -56,7 +62,8 @@
     "successor": "Apache Commons Lang 3",
     "successorHref": "https://commons.apache.org/proper/commons-lang/",
     "released": "3",
-    "deprecated": "9.4"
+    "deprecated": "9.4",
+    "description": "The Java library Apache Commons Lang 2 is provided on the ivy project classpath and will be removed. Use Apache Commons Lang 3 which is provided on the ivy project classpath."
   },
   {
     "name": "Java Library - Apache Commons Collection 3", 
@@ -64,14 +71,16 @@
     "successor": "Apache Commons Collection 4", 
     "successorHref": "https://commons.apache.org/proper/commons-collections/release_4_4.html",
     "released": "3",
-    "deprecated": "9.4"
+    "deprecated": "9.4",
+    "description": "The Java library Apache Commons Collection 3 is provided on the ivy project classpath and will be removed. Use Apache Commons Collection 4 which is provided on the ivy project classpath."
   },
   {
-    "name": "Java Library - Apache Http Client", 
+    "name": "Java Library - Apache HTTP Client", 
     "nameHref": "https://hc.apache.org/index.html",
     "successor": "JDK HTTP Client", 
     "successorHref": "https://openjdk.java.net/groups/net/httpclient/intro.html",
     "released": "3",
-    "deprecated": "9.4"
+    "deprecated": "9.4",
+    "description": "The Java library Apache Http Client is provided on the ivy project classpath and will be removed. Use the HTTP Client from the JDK."
   }
 ]
