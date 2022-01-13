@@ -131,6 +131,9 @@
 .deprecation-removed::after {
   content: "❌";
 }
+.deprecation-info::after {
+  content: "ⓘ";
+}
 
 /* Team page */
 .team-card {

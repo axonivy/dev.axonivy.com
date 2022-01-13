@@ -37,8 +37,13 @@
       </thead>
       <tbody>
         {% for feature in features %}
-          <tr>
-            <td><a href="{{ feature.nameHref }}">{{ feature.name}}</a></td>
+          <tr>            
+            <td>
+              <a href="{{ feature.nameHref }}">{{ feature.name}}</a> 
+              {% if feature.description is not empty %}
+              <span title="{{ feature.description }}" class="deprecation-info"></span>
+              {% endif %}
+            </td>
             <td><a href="{{ feature.successorHref }}">{{ feature.successor }}</a></td>
           {% set cls = "" %}
           {% for version in versions %}
