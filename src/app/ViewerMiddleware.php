@@ -26,6 +26,7 @@ class ViewerMiddleware implements MiddlewareInterface
       $env = $this->view->getEnvironment();
       $env->addGlobal('hideHeader', true);
       $env->addGlobal('hideFooter', true);
+      $env->addGlobal('toogleInstallByDefault', true);
     }
     return $handler->handle($request);
   }

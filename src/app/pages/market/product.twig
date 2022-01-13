@@ -113,7 +113,7 @@
               <span>Download</span>
             </a>
           {% endif %}
-          {% if installButton.isShow %}
+          {% if not (toogleInstallByDefault and installButton.isShow and installButton.multipleVersions) %}
             <a class="button special install" href="javascript:void(0)" onclick="{{ (installButton.enabled) ? (installButton.multipleVersions ? 'toggleInstallPanelForMultipleVersions();' : installButton.javascriptCallback|raw) : '$(\'.product-install-open-market\').slideToggle();' }}">
               <span>Install now</span>
             </a>
@@ -248,6 +248,9 @@
   {% if installNow %}
     $('.product-install').show();
     installInDesigner();
+  {% endif %}
+  {% if toogleInstallByDefault and installButton.isShow and installButton.multipleVersions %}
+    toggleInstallPanelForMultipleVersions();
   {% endif %}
 </script>
 
