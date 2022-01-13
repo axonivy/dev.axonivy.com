@@ -34,7 +34,14 @@ class DeprecationActionTest extends TestCase
             <td class="deprecation-icon"><span class=""></span></td>
           </tr>');
     }
-    
+
+    public function testRender_featureDeprecation()
+    {
+        AppTester::assertThatGet('/features/deprecation')
+          ->ok()
+          ->bodyContainsIgnoreWhitespaces('<span title="The Java library Guava is provided on the ivy project classpath and will be removed. Use the utilities from the JDK." class="deprecation-info"></span>');
+    }
+
     public function testRender_Versions()
     {
         AppTester::assertThatGet('/features/deprecation')
