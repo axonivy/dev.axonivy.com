@@ -11,6 +11,8 @@ use app\domain\ReleaseInfoRepository;
 
 class DeprecationAction
 {
+  private static array $versions;
+
   private Twig $view;
 
   public function __construct(Twig $view)
@@ -20,8 +22,9 @@ class DeprecationAction
 
   public function __invoke(Request $request, $response, $args)
   {
+    self::$versions = self::getVersions();
     return $this->view->render($response, 'deprecation/deprecation.twig', [
-      'versions' => self::getVersions(),
+      'versions' => self::$versions,
       'features' => self::getFeatures()
     ]);
   }
@@ -35,6 +38,7 @@ class DeprecationAction
     foreach(ReleaseInfoRepository::getLeadingEdgesSinceLastLongTermVersion() as $le) {
       $versions[] = $le->minorVersion();
     }
+    $versions[] = '>';
     return $versions;
   }
   
@@ -44,9 +48,9 @@ class DeprecationAction
     $features = json_decode(file_get_contents($jsonFile));
     foreach ($features as $feature) {
       $cssClassForVersions = array();
-      $versions = DeprecationAction::getVersions();
+      $versions = self::$versions;
       foreach ($versions as $v) {
-        $cssClassForVersions[$v] = DeprecationAction::cssClassForVersion($feature, $versions, $v);
+        $cssClassForVersions[$v] = self::cssClassForVersion($feature, $versions, $v);
       }
       $feature->cssClassForVersions = $cssClassForVersions;
     }
