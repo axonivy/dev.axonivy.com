@@ -34,6 +34,9 @@ class DownloadAction
         throw new HttpNotFoundException($request);
       }
       $releaseType = $this->releaseTypeOfVersion($version);
+      if ($releaseType == null) {
+        throw new HttpNotFoundException($request);
+      }
       $loader = new ReleaseInfoLoader($releaseType, $strictVersion);
     }
     
