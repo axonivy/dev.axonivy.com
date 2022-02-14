@@ -184,6 +184,11 @@ class ReleaseInfoRepository
     return $releaseInfos;
   }
 
+  public static function isOrWasLtsVersion(Version $version): bool 
+  {
+    return ReleaseInfoRepository::isOrWasLts($version->getMajorVersion());
+  }
+  
   private static function isOrWasLts(string $majorVersion): bool
   {
     $major = intval($majorVersion);

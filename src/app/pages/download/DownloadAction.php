@@ -8,6 +8,8 @@ use app\domain\ReleaseInfo;
 use Slim\Exception\HttpNotFoundException;
 use app\domain\ReleaseType;
 use app\domain\Artifact;
+use app\domain\ReleaseInfoRepository;
+use app\domain\Version;
 
 class DownloadAction
 {
@@ -24,11 +26,16 @@ class DownloadAction
     $version = $args['version'] ?? '';
 
     $releaseType = $this->releaseType($version);
-    if ($releaseType == null) {
-      throw new HttpNotFoundException($request);
+    if ($releaseType != null) {
+      $loader = $this->createLoader($releaseType);
+    } else {
+      $strictVersion=ReleaseInfoRepository::getBestMatchingVersion($version);
+      if ($strictVersion == null) {
+        throw new HttpNotFoundException($request);
+      }
+      $releaseType = $this->releaseTypeOfVersion($version);
+      $loader = new ReleaseInfoLoader($releaseType, $strictVersion);
     }
-
-    $loader = $this->createLoader($releaseType);
     
     $leadingEdgeVersion = "";
     $leadingEdge = ReleaseType::LE();
@@ -73,6 +80,17 @@ class DownloadAction
       return ReleaseType::LTS();
     }
     return ReleaseType::byKey($version);
+  }
+  
+  private function releaseTypeOfVersion(string $version): ?ReleaseType
+  {
+    if (!Version::isValidVersionNumber($version)) {
+      return null;
+    }
+    if (ReleaseInfoRepository::isOrWasLtsVersion(new Version($version))) {
+      return ReleaseType::LTS();
+    }
+    return ReleaseType::LE();
   }
 
   private function createLoader(ReleaseType $releaseType)
