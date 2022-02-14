@@ -97,6 +97,21 @@ class ReleaseType
   {
     return ReleaseInfoRepository::getBestMatchingVersion($key);
   }
+  
+  public static function VERSION(string $version): ?ReleaseType
+  {
+    if (!Version::isValidVersionNumber($version)) {
+      return null;
+    }
+    
+    if (ReleaseInfoRepository::isOrWasLtsVersion(new Version($version))) {
+      $type = ReleaseType::LTS();
+    } else {
+      $type = ReleaseType::LE();
+    }
+    $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getBestMatchingVersion($version);
+    return $type;
+  }
 
   public static function isLTS(ReleaseType $releaseType): bool
   {

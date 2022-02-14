@@ -2,14 +2,12 @@
 
 namespace app\pages\download;
 
+use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
-use app\domain\ReleaseInfo;
-use Slim\Exception\HttpNotFoundException;
-use app\domain\ReleaseType;
 use app\domain\Artifact;
-use app\domain\ReleaseInfoRepository;
-use app\domain\Version;
+use app\domain\ReleaseInfo;
+use app\domain\ReleaseType;
 
 class DownloadAction
 {
@@ -26,19 +24,10 @@ class DownloadAction
     $version = $args['version'] ?? '';
 
     $releaseType = $this->releaseType($version);
-    if ($releaseType != null) {
-      $loader = $this->createLoader($releaseType);
-    } else {
-      $strictVersion=ReleaseInfoRepository::getBestMatchingVersion($version);
-      if ($strictVersion == null) {
-        throw new HttpNotFoundException($request);
-      }
-      $releaseType = $this->releaseTypeOfVersion($version);
-      if ($releaseType == null) {
-        throw new HttpNotFoundException($request);
-      }
-      $loader = new ReleaseInfoLoader($releaseType, $strictVersion);
+    if ($releaseType == null) {
+      throw new HttpNotFoundException($request);
     }
+    $loader = $this->createLoader($releaseType);
     
     $leadingEdgeVersion = "";
     $leadingEdge = ReleaseType::LE();
@@ -82,18 +71,11 @@ class DownloadAction
     if (empty($version)) {
       return ReleaseType::LTS();
     }
-    return ReleaseType::byKey($version);
-  }
-  
-  private function releaseTypeOfVersion(string $version): ?ReleaseType
-  {
-    if (!Version::isValidVersionNumber($version)) {
-      return null;
+    $rt = ReleaseType::byKey($version);
+    if ($rt != null) {
+      return $rt;
     }
-    if (ReleaseInfoRepository::isOrWasLtsVersion(new Version($version))) {
-      return ReleaseType::LTS();
-    }
-    return ReleaseType::LE();
+    return ReleaseType::VERSION($version);
   }
 
   private function createLoader(ReleaseType $releaseType)

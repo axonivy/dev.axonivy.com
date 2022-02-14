@@ -67,7 +67,8 @@ class DownloadActionTest extends TestCase
   
   public function testStrictVersion_NotExisting()
   {
-    AppTester::assertThatGet('/download/7.9.59')->notFound();
+    AppTester::assertThatGet('/download/7.9.59')->ok()
+      ->bodyContains('currently not available');
   }
 
   public function testLeadingEdge()
