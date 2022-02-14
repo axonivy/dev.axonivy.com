@@ -2,12 +2,12 @@
 
 namespace app\pages\download;
 
+use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
-use app\domain\ReleaseInfo;
-use Slim\Exception\HttpNotFoundException;
-use app\domain\ReleaseType;
 use app\domain\Artifact;
+use app\domain\ReleaseInfo;
+use app\domain\ReleaseType;
 
 class DownloadAction
 {
@@ -27,7 +27,6 @@ class DownloadAction
     if ($releaseType == null) {
       throw new HttpNotFoundException($request);
     }
-
     $loader = $this->createLoader($releaseType);
     
     $leadingEdgeVersion = "";
@@ -72,7 +71,11 @@ class DownloadAction
     if (empty($version)) {
       return ReleaseType::LTS();
     }
-    return ReleaseType::byKey($version);
+    $rt = ReleaseType::byKey($version);
+    if ($rt != null) {
+      return $rt;
+    }
+    return ReleaseType::VERSION($version);
   }
 
   private function createLoader(ReleaseType $releaseType)
