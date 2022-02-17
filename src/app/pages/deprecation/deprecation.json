@@ -7,7 +7,7 @@
     "released": "3",
     "deprecated": "8",
     "removed": "9.3",
-    "description": "The cms page feature has been removed. Use html dialog to implement user interfaces."
+    "description": "The cms page (also Smart Table) feature has been removed. Use html dialog to implement user interfaces."
   },
   {
     "name": "Macros in RTF documents", 
