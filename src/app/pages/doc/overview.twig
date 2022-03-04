@@ -13,6 +13,40 @@
   </div>
 </section>
 
+<style>
+#three .button.special.special-dropdown {
+  padding: 0;
+  border: none;
+  line-height: 3.5em;
+}
+.button.special.special-dropdown > a {
+  padding-left: 2rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.button.special.special-dropdown > .doc-dropdown {
+  padding: 0 1rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.button.special.special-dropdown:hover {
+  background-color: hsl(195, 100%, 29%);
+}
+.button.special.special-dropdown > a:hover {
+  background-color: hsl(195, 100%, 34%);
+}
+.button.special.special-dropdown > .doc-dropdown:hover {
+  background-color: hsl(195, 100%, 34%);
+}
+a.min-width {
+  min-width: 9em;
+  display: inline-block;
+}
+.doc-dropdown-content {
+  right: 1px;
+}
+</style>
+
 {% if docLinksLE is not empty %}
   <section id="three">
   {% else %}
@@ -28,8 +62,8 @@
           <ul class="actions">
           {% for docLink in docLinksLTS %}
             <li>
-              <span class="button special min-width">
-                <a href="{{ docLink.url }}">
+              <span class="button special special-dropdown">
+                <a class="min-width" href="{{ docLink.url }}">
                   <i class="si si-book"></i> {{ docLink.displayText }}
                 </a>
                 <span class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
@@ -56,8 +90,8 @@
             <ul class="actions">
               {% for docLink in docLinksLE %}
                 <li>
-                  <span class="button special min-width">
-                    <a href="{{ docLink.url }}">
+                  <span class="button special special-dropdown">
+                    <a class="min-width" href="{{ docLink.url }}">
                       <i class="si si-book"></i> {{ docLink.displayText }}
                     </a>
                     <span class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
