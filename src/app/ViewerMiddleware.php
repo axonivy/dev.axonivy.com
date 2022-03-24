@@ -2,6 +2,7 @@
 
 namespace app;
 
+use app\domain\util\CookieUtil;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -21,7 +22,8 @@ class ViewerMiddleware implements MiddlewareInterface
   public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
   {
     $cookies = $request->getCookieParams();
-    $viewer = $cookies['ivy-viewer'] ?? '';
+    CookieUtil::setCookieOfQueryParam($request, 'ivy-version');
+    $viewer = $cookies['ivy-viewer'] ?? CookieUtil::setCookieOfQueryParam($request, 'ivy-viewer');
     if ($viewer == 'designer-market') {
       $env = $this->view->getEnvironment();
       $env->addGlobal('hideHeader', true);
