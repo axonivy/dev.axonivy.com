@@ -4,6 +4,7 @@ namespace app\pages\market;
 
 use Slim\Exception\HttpNotFoundException;
 use Slim\Views\Twig;
+use app\domain\util\CookieUtil;
 use app\domain\market\Market;
 use app\domain\market\Product;
 use Slim\Psr7\Request;
@@ -115,7 +116,7 @@ class ProductAction
   private static function readIvyVersionCookie(Request $request)
   {
     $cookies = $request->getCookieParams();
-    return $cookies['ivy-version'] ?? '';
+    return $cookies['ivy-version'] ?? CookieUtil::setCookieOfQueryParam($request, 'ivy-version');
   }
   
   private static function findBestMatchingVersionFromCookie(Request $request, MavenProductInfo $mavenProductInfo)
