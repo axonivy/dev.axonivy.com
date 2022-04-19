@@ -127,5 +127,13 @@
     "deprecated": "7",
     "removed": ">",
     "description": "There was a .meta file for each CMS entry. This file is completely removed in favor of a modern CMS structure."
+  },
+  {
+    "name": "Call & Wait element", 
+    "nameHref": "/releases/ivy/8.0/documents/designer-guide/process-modeling/process-elements/call-and-wait.html",
+    "released": "4",
+    "deprecated": ">",
+    "removed": ">",
+    "description": "The Call & Wait intermediate process element."
   }
 ]
