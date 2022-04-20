@@ -146,6 +146,8 @@
   border-bottom-left-radius: 8px;
   float: left;
   height: 250px;
+  aspect-ratio: 3 / 5;
+  object-fit: cover;
 }
 .team-member {
   margin-left: 6rem;
