@@ -54,5 +54,12 @@
     "education": "M.Sc. Computer Science",
     "function": "Core Developer",
     "slogan": ""
+  },
+  {
+    "name": "Peter Hochstrasser",
+    "imgSrc": "images/team/peter.jpg",
+    "education": "M. Sc. Computer Science",
+    "function": "Support, documentation, MfA",
+    "slogan": "Infrastructure is key"
   }
 ]
