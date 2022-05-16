@@ -17,18 +17,18 @@ class LibraryPermalinkActionTest extends TestCase
     $concretVersion = $artifact->getConcreteVersion($version);
 
     AppTester::assertThatGet('/permalink/lib/dev/demos.zip')
-      ->redirect("https://repo.axonivy.rocks/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
+      ->redirect("https://maven.axonivy.com/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
   }
 
   public function testPermalink_specificVersion()
   {
     $artifact = self::demosApp();
 
-    $version = '9.1.0-SNAPSHOT';
+    $version = '9.4.0-SNAPSHOT';
     $concretVersion = $artifact->getConcreteVersion($version);
 
-    AppTester::assertThatGet('/permalink/lib/9.1.0-SNAPSHOT/demos.zip')
-      ->redirect("https://repo.axonivy.rocks/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
+    AppTester::assertThatGet('/permalink/lib/9.4.0-SNAPSHOT/demos.zip')
+      ->redirect("https://maven.axonivy.com/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
   }
 
   public function testPermalink_minorVersion()
@@ -39,7 +39,7 @@ class LibraryPermalinkActionTest extends TestCase
     $concretVersion = $artifact->getConcreteVersion($version);
 
     AppTester::assertThatGet('/permalink/lib/8.0/demos.zip')
-      ->redirect("https://repo.axonivy.rocks/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
+      ->redirect("https://maven.axonivy.com/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
   }
 
   private static function demosApp(): MavenArtifact
