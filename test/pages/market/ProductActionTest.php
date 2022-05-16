@@ -100,7 +100,7 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory/8.0.8', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=8.0.8");
+      ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/8.0.8/_product.json");
   }
 
   public function testNotFoundWhenVersionDoesNotExistOfMavenBackedArtifact()
