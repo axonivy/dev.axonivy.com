@@ -62,12 +62,12 @@ class ProductActionTest extends TestCase
     $version = '';    
     foreach ($product->getMavenProductInfo()->getVersionsToDisplay() as $v)
     {
-        if (StringUtil::startsWith($v, '9.2')) {
+        if (StringUtil::startsWith($v, '9.4')) {
            $version = $v;
            break;
         }
     }
-    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.2.0'])
+    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.0'])
       ->ok()
       ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/$version/_product.json");
   }
@@ -98,9 +98,9 @@ class ProductActionTest extends TestCase
 
   public function testInstallButton_useSpecificVersion()
   {
-    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory/8.0.0', ['ivy-version' => '9.2.0'])
+    AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory/8.0.8', ['ivy-version' => '9.2.0'])
       ->ok()
-      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=8.0.0");
+      ->bodyContains("http://localhost/_market/doc-factory/_product.json?version=8.0.8");
   }
 
   public function testNotFoundWhenVersionDoesNotExistOfMavenBackedArtifact()

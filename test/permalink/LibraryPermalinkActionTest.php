@@ -24,10 +24,10 @@ class LibraryPermalinkActionTest extends TestCase
   {
     $artifact = self::demosApp();
 
-    $version = '9.1.0-SNAPSHOT';
+    $version = '9.4.0-SNAPSHOT';
     $concretVersion = $artifact->getConcreteVersion($version);
 
-    AppTester::assertThatGet('/permalink/lib/9.1.0-SNAPSHOT/demos.zip')
+    AppTester::assertThatGet('/permalink/lib/9.4.0-SNAPSHOT/demos.zip')
       ->redirect("https://maven.axonivy.com/ch/ivyteam/demo/ivy-demos-app/$version/ivy-demos-app-$concretVersion.zip");
   }
 
