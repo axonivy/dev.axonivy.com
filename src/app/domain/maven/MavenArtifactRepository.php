@@ -43,7 +43,7 @@ class MavenArtifactRepository
   {
     return MavenArtifact::create('processing-valve')
       ->name('Processing Valve Demo')
-      ->groupId('com.axonivy.extensions.demo')
+      ->groupId('com.axonivy.demo.extensions')
       ->artifactId('processing-valve')
       ->type('jar')
       ->build();
