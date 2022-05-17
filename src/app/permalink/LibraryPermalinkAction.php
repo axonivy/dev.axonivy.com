@@ -28,11 +28,11 @@ class LibraryPermalinkAction
       throw new HttpNotFoundException($request);
     }
 
-    $url = self::getUrl($mavenArtifact, $version);
+    $url = self::getUrl($mavenArtifact, $version, $request);
     return Redirect::to($response, $url);
   }
 
-  private static function getUrl(MavenArtifact $mavenArtifact, string $version)
+  private static function getUrl(MavenArtifact $mavenArtifact, string $version, $request)
   {
     if ($version == 'dev') {
       return $mavenArtifact->getDevUrl();
@@ -43,6 +43,6 @@ class LibraryPermalinkAction
         }
       }
     }
-    throw new HttpNotFoundException($request);
+    throw new HttpNotFoundException($request, "Version $version not found");
   }
 }
