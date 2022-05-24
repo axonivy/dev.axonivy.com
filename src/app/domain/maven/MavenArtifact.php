@@ -199,7 +199,8 @@ class HttpRequester
     $url = str_replace("https://maven.axonivy.com/", "https://nexus-mirror.axonivy.com/repository/maven/", $url);
     if (!isset(self::$cache[$url])) {
       $client = new Client();
-      $res = $client->request('GET', $url);
+      $options = ['http_errors' => false];
+      $res = $client->request('GET', $url, $options);
       $content = '';
       if ('200' == $res->getStatusCode()) {
         $content = $res->getBody();
