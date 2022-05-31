@@ -79,7 +79,7 @@ class LinkActionTest extends TestCase
       
       AppTester::assertThatGet('/link/build-examples')->redirect($prefixBuildExamples . 'tree/master');
       AppTester::assertThatGet('/link/build-examples/master')->redirect($prefixBuildExamples . 'tree/master');
-      AppTester::assertThatGet('/link/build-examples/8.0')->redirect($prefixBuildExamples . 'tree/8.0');
+      AppTester::assertThatGet('/link/build-examples/8.0')->redirect($prefixBuildExamples . 'tree/release/8.0');
 
       AppTester::assertThatGet('/link/build-examples-web-test-pom/master')->redirect($prefixBuildExamples . 'blob/master/compile-test/pom.xml');
       AppTester::assertThatGet('/link/build-examples-unit-tests/master')->redirect($prefixBuildExamples . 'blob/master/compile-test/crmTests/src_test/ch/ivyteam/test');
@@ -88,11 +88,11 @@ class LinkActionTest extends TestCase
       AppTester::assertThatGet('/link/build-examples-web-test-select/master')->redirect($prefixBuildExamples . 'blob/master/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L114-L156');
       AppTester::assertThatGet('/link/build-examples-web-test-condition/master')->redirect($prefixBuildExamples . 'blob/master/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L164-L181');
 
-      AppTester::assertThatGet('/link/build-examples-web-test-pom/8.0')->redirect($prefixBuildExamples . 'blob/8.0/compile-test/pom.xml');
-      AppTester::assertThatGet('/link/build-examples-unit-tests/8.0')->redirect($prefixBuildExamples . 'blob/8.0/compile-test/crmTests/src_test/ch/ivyteam/test');
-      AppTester::assertThatGet('/link/build-examples-web-test/8.0')->redirect($prefixBuildExamples . 'blob/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java');
-      AppTester::assertThatGet('/link/build-examples-web-test-base/8.0')->redirect($prefixBuildExamples . 'blob/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestRegistrationFormIT.java#L22-L39');
-      AppTester::assertThatGet('/link/build-examples-web-test-select/8.0')->redirect($prefixBuildExamples . 'blob/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L114-L156');
-      AppTester::assertThatGet('/link/build-examples-web-test-condition/8.0')->redirect($prefixBuildExamples . 'blob/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L164-L181');
+      AppTester::assertThatGet('/link/build-examples-web-test-pom/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/pom.xml');
+      AppTester::assertThatGet('/link/build-examples-unit-tests/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmTests/src_test/ch/ivyteam/test');
+      AppTester::assertThatGet('/link/build-examples-web-test/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java');
+      AppTester::assertThatGet('/link/build-examples-web-test-base/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestRegistrationFormIT.java#L22-L39');
+      AppTester::assertThatGet('/link/build-examples-web-test-select/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L114-L156');
+      AppTester::assertThatGet('/link/build-examples-web-test-condition/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L164-L181');
   }
 }
