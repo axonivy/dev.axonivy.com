@@ -16,8 +16,11 @@ class LinkAction
     return Redirect::to($response, $redirectUrl);
   }
 
-  private function getRedirectUrl($request, $linkKey, $branchVersion)
-  {
+  private function getRedirectUrl($request, $linkKey, $branchVersion) {
+    if (is_numeric(substr($branchVersion, 0, 1))) {
+      $branchVersion = "release/$branchVersion";
+    }
+
     $demosPrefix = 'https://github.com/axonivy-market/demo-projects/';
     $demosBlobPrefix = $demosPrefix . 'blob/master/';
     
