@@ -33,6 +33,8 @@ class LinkAction
     $redirects = [
         'docker-image' => 'https://github.com/axonivy/docker-image/',
         
+		'kubernetes-samples' => 'https://github.com/axonivy/kubernetes-samples/',
+		
         'docker-samples' => $samplesPrefix,
         'docker-elasticsearch-cluster' => $samplesTreePrefix . 'ivy-elasticsearch-cluster',
         'docker-elasticsearch' => $samplesTreePrefix . 'ivy-elasticsearch',
