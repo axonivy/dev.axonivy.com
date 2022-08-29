@@ -1,16 +1,15 @@
 ## CMS {#cms}
 
-User experience is a top priority in process automation projects. 
-That is why the Axon Ivy Portal has been massively enhanced.
+We have renovated the content management system (CMS for short) completely. We changed the internal concept radically resulting in a smart CMS with many new features.
 
-- __Customizable Dashboard__: End-users can choose between different layouts, enable and disable default columns and even add custom columns at will.
-- __Default Widgets__: Axon Ivy Portal supports a sophisticated concept featuring default widgets for Process Starts, Task Lists, and Case Lists.
-- __Custom Widgets__: Individuality is king. End-users can easily create custom widgets in the dashboard.
-- __Adjustable Look for Process List__: Switch between an image, grid, and compact mode to display available processes.
+- __Small and Smart__: Fewer files lead to better performance in day-to-day development as well as at runtime in the Axon Ivy Engine.
+- __Standard__: The CMS now does not consist of a properitary format. Files and folders reflect 1:1 the structure of the CMS.
+- __cms.yaml__: All texts are now in one file the cms.yaml. Single-line texts as well as multi-line texts are no longer distinguished.
+- __Any files__: We now support all file types.
+- __Change at runtime__: With the Application CMS, the CMS can now be customized at runtime.
 
 <div class="short-links">
-	<a href="/portal/9.3/doc/portal-developer-guide/introduction/index.html#new-noteworthy-9-3"
-		target="_blank" rel="noopener noreferrer">
-		<i class="si si-book"></i> Portal New & Noteworthy
+	<a href="https://dev.axonivy.com/doc/9.4/designer-guide/cms/index.html" target="_blank" rel="noopener noreferrer">
+		<i class="si si-book"></i> Designer Guide
 	</a>
 </div>
