@@ -1,11 +1,11 @@
 ## CMS {#cms}
 
-The content management system (CMS for short) was completely renovated. The internal concept was radically changed resulting in a smart CMS with many new features.
+The content management system (CMS for short) has been renovated completely. The internal concept has been changed radically resulting in a smart CMS with many new features.
 
 - __Small and Smart__: Fewer files lead to better performance in day-to-day development as well as at runtime in the Axon Ivy Engine.
 - __Standard__: The CMS now does not consist of a properitary format. Files and folders reflect 1:1 the structure of the CMS.
 - __cms.yaml__: All texts are now in one file the cms.yaml. Single-line texts as well as multi-line texts are no longer distinguished.
-- __Any files__: We now support all possible file types.
+- __Any files__: We now support all file types.
 - __Change at runtime__: With the Application CMS, the CMS can now be customized at runtime.
 
 <div class="short-links">
