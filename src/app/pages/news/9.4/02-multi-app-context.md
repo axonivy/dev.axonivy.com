@@ -1,20 +1,23 @@
 ## Multi applications per security context {#multiApp}
 
-The entire configuration in Axon Ivy projects has been revised and consolidated.
-This will make the daily life for all developers much easier.
+Axon Ivy applications no longer impose hard boundaries on each other. Applications are part of a security system in which users and roles live. This enables independent feature-driven development.
 
-- __GIT/SCM__: The new file formats are lightweight text formats, less prone to errors than XML files.
-- __Streamlining__: Ready to customize by coping into `app.yaml` on the Axon Ivy Engine. The configuration of rest clients, web service clients, databases and variables now looks exactly the same in your Axon Ivy project as on the Axon Ivy Engine.
-- __Well-known file extensions__: All configuration files now have standard file extensions which gives you code highlighting in all other tools and also when sending a pull request to a friend.
-- __Project Tree__: All configuration files in the Axon Ivy project are located under the `Config` folder both in Axon Ivy Designer and physically on the file system - full transparency.
+- __Feature Driven Development__: It is no longer necessary to pack everything into one application and have a risk of clumping. Different sub-applications can be developed in independent applications and still have the same user base.
+
+- __Independent release cycles__: By splitting your application into multiple applications, you can develop each application independently and maintain an independent release cycle.
+
+- __Standalone Portal__: The portal no longer needs to be part of your application. Run the portal in its own application and integrate your business processes using the iFrame approach and keep the portal up-2-date and leave all migration pain 
+behind you.
+
+- __Multi Tenancy__: For multi-tenancy, we strongly recommend to run a separate Axon Ivy Engine per tenant and to orchestrate this in a container platform. If you want to run multi-tenancy on one engine, then we recommend the path of one or more applications per tenant with independent security systems.
 
 
 <div class="short-links">
-	<a href="${docBaseUrl}/designer-guide/configuration/index.html" target="_blank" rel="noopener noreferrer">
-	  <i class="si si-check"></i> Project Config
+	<a href="${docBaseUrl}/concepts/application-lifecycle/index.html" target="_blank" rel="noopener noreferrer">
+	  <i class="si si-check"></i> Application Lifecycle
 	</a>
-	
-	<a href="${docBaseUrl}/engine-guide/configuration/files/app-yaml.html" target="_blank" rel="noopener noreferrer">
-	  <i class="si si-check"></i> app.yaml
+
+	<a href="${docBaseUrl}/concepts/multi-tenancy/index.html" target="_blank" rel="noopener noreferrer">
+	  <i class="si si-check"></i> Multi Tenancy
 	</a>
 </div>
