@@ -1,7 +1,7 @@
 ## UI Revisions {#ui-revision}
 
 We refurbished our general look and feel with a new PrimeFaces version, a new
-default Theme and a complete new way to brand an Axon Ivy Engine according to
+default Theme and a completely new way to brand an Axon Ivy Engine for
 your company.
 
 - __PrimeFaces 11__: We updated from PrimeFaces 7 to 11, which means a lot of
@@ -9,12 +9,12 @@ your company.
   Migration-Guide](${docBaseUrl}/axonivy/migration/migration-notes-94.html#primefaces-11).
 - __Freya Theme__: We also provide the [Freya
   Theme](https://www.primefaces.org/layouts/freya) as new default theme for your
-  HTML Dialogs. The refreshed look of it also supports dark mode and of course
-  we updated the `Dev-Workflow-UI` and the `Engine Cockpit` also to this new
+  HTML Dialogs. Its fresh look also supports dark mode and of course
+  we updated the `Dev-Workflow-UI` and the `Engine Cockpit` to use this new
   theme.
-- __Branding__: There is a complete new way to
+- __Branding__: There is a completely new way to
   [brand](${docBaseUrl}/designer-guide/user-interface/branding/index.html) an Axon
-  Ivy Engine according to your company colors and logo, without the need to
+  Ivy Engine with the colors and logo of your company, without the need to
   change the `Axon Ivy Portal` or something else.
 
 <div class="short-links">
