@@ -9,7 +9,7 @@ Axon Ivy applications no longer impose hard boundaries on each other. Applicatio
 - __Standalone Portal__: The portal no longer needs to be part of your application. Run the portal in its own application and integrate your business processes using the iFrame approach and keep the portal up-2-date and leave all migration pain 
 behind.
 
-- __Multi Tenancy__: For multi-tenancy, we strongly recommend to run a separate Axon Ivy Engine per tenant and to orchestrate this in a container platform. If you want to run multi-tenancy on one engine, then we recommend one security system per tenant and run them in independent applications.
+- __Multi Tenancy__: For multi-tenancy, we strongly recommend to run a separate Axon Ivy Engine per tenant and to orchestrate this in a container platform. If you want to run multi-tenancy on one engine, then we recommend to set up one security system per tenant and run the tenant's applications in this security system.
 
 
 <div class="short-links">
