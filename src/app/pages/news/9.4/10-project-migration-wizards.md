@@ -1,16 +1,24 @@
-## Project Migration Wizard {#migration}
+## Convert Project Wizard {#migration}
 
-User experience is a top priority in process automation projects. 
-That is why the Axon Ivy Portal has been massively enhanced.
+Converting an Axon Ivy project to the latest version and technologies has never been easier. 
 
-- __Customizable Dashboard__: End-users can choose between different layouts, enable and disable default columns and even add custom columns at will.
-- __Default Widgets__: Axon Ivy Portal supports a sophisticated concept featuring default widgets for Process Starts, Task Lists, and Case Lists.
-- __Custom Widgets__: Individuality is king. End-users can easily create custom widgets in the dashboard.
-- __Adjustable Look for Process List__: Switch between an image, grid, and compact mode to display available processes.
+- __Convert Project Wizard__: The revised Convert Project Wizard converts Axon Ivy Projects 
+to the latest version. But now, it also helps to convert from Primefaces 7 to 11 and
+web service clients from Axis to CXF.
+- __Auto Conversion__: The Axon Ivy Engine auto converts all deployed projects automatically
+to the latest version.
 
 <div class="short-links">
-	<a href="/portal/9.3/doc/portal-developer-guide/introduction/index.html#new-noteworthy-9-3"
+	<a href="${docBaseUrl}/designer-guide/process-modeling/projects/converting.html#converting-projects"
 		target="_blank" rel="noopener noreferrer">
-		<i class="si si-book"></i> Portal New & Noteworthy
+		<i class="si si-book"></i> Converting Projects
 	</a>
+  <a href="${docBaseUrl}/axonivy/migration/migration-notes-pf11.html#primefaces-11-migration"
+    target="_blank" rel="noopener noreferrer">
+    <i class="si si-book"></i> Primefaces 11 Migration
+  </a>
+  <a href="${docBaseUrl}/axonivy/migration/migration-notes-93.html#migrate-93-axis"
+    target="_blank" rel="noopener noreferrer">
+    <i class="si si-book"></i> Drop Axis
+  </a>
 </div>
