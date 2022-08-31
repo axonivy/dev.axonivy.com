@@ -7,7 +7,7 @@ faster.
 - __Browser compatible__: The new Process Editor runs on native Web
   technologies.
 - __Element Palette__: The Element Palette is now split into the different
-  categories, to makes it easier for you to find the wanted element.
+  categories, to make it easier for you to find the wanted element.
 - __Quick Actions__: Besides the new look and feel of the editor view, there is a new
   way to interact with process elements. The Quick-Action-Bar gives you a range
   of actions which can be triggered (e.g. open the inscription mask or append a
