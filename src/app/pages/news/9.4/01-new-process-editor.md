@@ -1,28 +1,24 @@
 ## New Process Editor {#processEditor}
 
-Scale your Axon Ivy Engine as your business does.
+We worked hard to replace the old (AWT based) Process Editor with a new one (Web
+compatible). This gives us the power to implement new features and improvements
+faster.
 
-- __Cloud native__: Use the cloud provider of your choice to scale Axon Ivy Engine horizontally. 
-  Start new instances on demand to match the current load of your clients.
-- __Cluster Nodes__: View the state of your Axon Ivy Engine cluster nodes in the Engine Cockpit.
-- __Project Image__: Put your projects together with the Axon Ivy Engine into a project container image. 
-  Then, build your own Kubernetes deployment by bundling it with all surrounding services.
-- __Continues Deployment__: Rollout new release frequently and early to a selected user group. 
-  Apply mature deployment scenarios such as Blue Green Deployments, A/B Testing, Canary releases. 
+- __Browser compatible__: The new Process Editor runs on native Web
+  technologies.
+- __Element Palette__: The Element Palette is now split into the different
+  categories, to makes it easier for you to find the wanted element.
+- __Quick Actions__: Besides the new look and feel of the editor view, there is a new
+  way to interact with process elements. The Quick-Action-Bar gives you a range
+  of actions which can be triggered (e.g. open the inscription mask or append a
+  new element).
+- __Process viewer on engine__: The `Dev-Workflow-UI` and the `Axon Ivy Portal` now
+  provide a process viewer.
 
 <div class="short-links">
-	<a href="${docBaseUrl}/engine-guide/engine-guide/integration/cluster/index.html"
+	<a href="${docBaseUrl}/designer-guide/process-modeling/process-modeling/process-editor.html"
 		target="_blank" rel="noopener noreferrer">
-		<i class="si si-book"></i> Engine Guide
+		<i class="si si-book"></i> Designer Guide
 	</a>
-	<a href="https://github.com/axonivy/docker-samples/tree/master/ivy-scaling-haproxy"
-		target="_blank" rel="noopener noreferrer">
-		<i class="si si-movie"></i> HAProxy Scaling Example
-	</a>
-	<a href="https://github.com/axonivy/docker-samples/tree/master/ivy-scaling-nginx"
-		target="_blank" rel="noopener noreferrer">
-		<i class="si si-movie"></i> Nginx Scaling Example
-	</a>
-
 </div>
 
