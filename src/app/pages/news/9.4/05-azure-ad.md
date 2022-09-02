@@ -6,7 +6,7 @@ With Azure Active Directory, Axon Ivy is now able to support its first cloud-bas
 
 - __User credentials__: Employees do not have to worry about additional user credentials. Access is simple and secure via the Microsoft login.
 
-- __OAuth 2.0__: With Microsoft login, the industry-standard OAuth 2.0 protocol is used for authorization. Consequently, Axon Ivy is no longer aware of these users' passwords and secure delegated access is granted.
+- __OAuth 2.0__: With Microsoft login, the industry-standard OAuth 2.0 protocol is used for authentication. Consequently, Axon Ivy is no longer aware of these users' passwords and secure delegated access is granted.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/integration/identity-provider/azure-ad/index.html"
