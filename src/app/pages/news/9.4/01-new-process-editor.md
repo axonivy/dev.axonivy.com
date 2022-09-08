@@ -1,16 +1,15 @@
 ## New Process Editor {#processEditor}
 
-We worked hard to replace the old (AWT based) Process Editor with a new one (Web
-compatible). This gives us the power to implement new features and improvements
-faster.
+Version 9.4 replaces the old AWT-based *Process Editor* with a new, fully web-based alternative. 
+The new editor allows you to implement business processes even faster.
 
-- __Browser compatible__: The new Process Editor runs on native Web
+- __Browser compatible__: The new process editor runs on native web
   technologies.
-- __Element Palette__: The Element Palette is now split into the different
-  categories, to make it easier for you to find the wanted element.
+- __Element palette__: The element palette is now divided into different categories
+  to facilitate your search for the desired element.
 - __Quick Actions__: Besides the new look and feel of the editor view, there is a new
-  way to interact with process elements. The Quick-Action-Bar gives you a range
-  of actions which can be triggered (e.g. open the inscription mask or append a
+  way to interact with process elements. The *Quick Action Bar* gives you a range
+  of actions which can be triggered (e.g. open an inscription mask or append a
   new element).
 - __Process viewer on engine__: The `Dev-Workflow-UI` and the `Axon Ivy Portal` now
   provide a process viewer.
