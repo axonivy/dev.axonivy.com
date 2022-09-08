@@ -5,7 +5,7 @@ The new editor allows you to implement business processes even faster.
 
 - __Browser compatible__: The new process editor runs on native web
   technologies.
-- __Element palette__: TThe element palette is now divided into different categories
+- __Element palette__: The element palette is now divided into different categories
   to facilitate your search for the desired element.
 - __Quick Actions__: Besides the new look and feel of the editor view, there is a new
   way to interact with process elements. The Quick-Action-Bar gives you a range
