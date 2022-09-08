@@ -2,8 +2,8 @@
 
 Converting an Axon Ivy project to the latest version and technologies has never been easier. 
 
-- __Convert Project Wizard__: The revised Convert Project Wizard converts Axon Ivy Projects 
-to the latest version. But now, it also helps to convert from Primefaces 7 to 11 and
+- __Convert Project wizard__: The revised "Convert Project" wizard converts Axon Ivy projects 
+to the latest version. But now, it also helps to convert from PrimeFaces 7 to 11 and
 web service clients from Axis to CXF.
 - __Auto Conversion__: The Axon Ivy Engine auto-converts all deployed projects automatically
 to the latest version.

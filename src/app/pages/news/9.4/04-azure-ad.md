@@ -1,6 +1,6 @@
 ## Azure Active Directory {#azure}
 
-With Azure Active Directory, Axon Ivy is now able to support its first cloud-based Identity Provider. This means that your employees can simply use the well-known Microsoft login in order to access the Axon Ivy Platform.
+With Azure Active Directory, Axon Ivy is now able to support its first cloud-based identity provider. This means that your employees can simply use the well-known Microsoft login in order to access the Axon Ivy platform.
 
 - __Simple user management__: Maintain your users in one place, namely Azure Active Directory. Easily synchronize these users with Axon Ivy and make your business processes instantly accessible to the entire organization.
 
