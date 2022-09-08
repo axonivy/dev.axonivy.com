@@ -1,7 +1,7 @@
 ## Slow Requests and Traffic Graph {#tracing}
 
 It is key for an orchestration platform like Axon Ivy to provide tools to analyze problems. 
-The new **Slow Requests** and **Traffic Graph** views in the Engine Cockpit provide you with all 
+The new *Slow Requests* and *Traffic Graph* views in the Engine Cockpit provide you with all 
 the information you need to find the sources of trouble in your orchestrated solution.
 
 - __Slow Requests__: Have a look at the slowest requests. Dive into a request and 
