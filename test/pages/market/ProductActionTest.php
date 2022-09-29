@@ -157,11 +157,11 @@ class ProductActionTest extends TestCase
       ->bodyDoesNotContain('Installations');
   }
 
-  public function testDontDisplaySnapshotInVersionDropdown() 
+  public function testDisplaySnapshotInVersionDropdown() 
   {
     AppTester::assertThatGet('market/doc-factory')
       ->ok()
-      ->bodyDoesNotContain('-SNAPSHOT</option>');
+      ->bodyContains('-SNAPSHOT<testDontDisplaySnapshotInVersionDropdown/option>');
   }
   
   public function testShowBuildStatusBadge() 
