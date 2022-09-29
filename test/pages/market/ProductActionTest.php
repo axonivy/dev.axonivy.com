@@ -161,7 +161,7 @@ class ProductActionTest extends TestCase
   {
     AppTester::assertThatGet('market/doc-factory')
       ->ok()
-      ->bodyContains('-SNAPSHOT<testDontDisplaySnapshotInVersionDropdown/option>');
+      ->bodyContains('-SNAPSHOT</option>');
   }
   
   public function testShowBuildStatusBadge() 
