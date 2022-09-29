@@ -4,6 +4,7 @@ namespace app\pages\market;
 
 use Slim\Exception\HttpNotFoundException;
 use Slim\Views\Twig;
+use Slim\App;
 use app\domain\util\CookieUtil;
 use app\domain\market\Market;
 use app\domain\market\Product;
@@ -38,6 +39,23 @@ class ProductAction
     $mavenArtifactsAsDependency = [];
     $mavenArtifacts = [];
     $docUrl = '';
+    $versionsToDisplay = null;
+
+    $showDevVersionCookie = $request->getCookieParams()['showDevVersions'] ?? 'false';
+    $showDevVersions = filter_var($showDevVersionCookie, FILTER_VALIDATE_BOOLEAN) ?? false;
+    if (isset($request->getQueryParams()['hideDevVersions'])) {
+      setcookie('showDevVersions', "false", -1, "/");
+      $showDevVersions = false;
+    }
+    if (isset($request->getQueryParams()['showDevVersions'])) {
+      setcookie('showDevVersions', "true", time()+60*60*24*30 , "/");
+      $showDevVersions = true;
+    }
+
+    $showDevVersionsLink = "?showDevVersions=true#download";
+    if ($showDevVersions) {
+      $showDevVersionsLink = "?hideDevVersions=true#download";
+    }
 
     if ($mavenProductInfo == null && !empty($version)) {
       throw new HttpNotFoundException($request);
@@ -52,23 +70,28 @@ class ProductAction
       } else if (!$mavenProductInfo->hasVersion($version)) {
         throw new HttpNotFoundException($request);
       }
-
-      $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
-      foreach ($mavenArtifacts as $artifact) {
-        if ($artifact->getMakesSenseAsMavenDependency()) {
-          $mavenArtifactsAsDependency[] = $artifact;
-        }
+      if (empty($version)) {
+        $version = '';
       }
-      
-      $docArtifact = $mavenProductInfo->getFirstDocArtifact();
-      if ($docArtifact != null) {
-        $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
-        if ($exists) {
-          $docUrl = $docArtifact->getDocUrl($product, $version);
+      if (!empty($version)) {
+        $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
+        foreach ($mavenArtifacts as $artifact) {
+          if ($artifact->getMakesSenseAsMavenDependency()) {
+            $mavenArtifactsAsDependency[] = $artifact;
+          }
         }
-      }
+        
+        $docArtifact = $mavenProductInfo->getFirstDocArtifact();
+        if ($docArtifact != null) {
+          $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+          if ($exists) {
+            $docUrl = $docArtifact->getDocUrl($product, $version);
+          }
+        }
 
-      $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
+        $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
+        $versionsToDisplay = $mavenProductInfo->getVersionsToDisplay($showDevVersions);
+      }
     }
 
     $installButton = self::createInstallButton($request, $product, $version);
@@ -100,7 +123,10 @@ class ProductAction
       'openApiUrl' => $openApiUrl,
       'version' => $productVersion,
       'docUrl' => $docUrl,
-      'installNow' => $installNow
+      'installNow' => $installNow,
+      'versionsToDisplay' => $versionsToDisplay,
+      'switchVersion' => $showDevVersions ? "hide dev versions" : "show dev versions",
+      'showDevVersionsLink' => $showDevVersionsLink
     ]);
   }
 

@@ -158,16 +158,17 @@
           </select>
         </span>
       {% endif %}
-      {% if mavenProductInfo != null %}
+      {% if versionsToDisplay != null %}
        <span class="dropdown">
           <label>Choose target platform</label>
           <select name="version" id="version" onchange="updateDownloadArtifact(this);">
-          {% for version in mavenProductInfo.versionsToDisplay %}            
+          {% for version in versionsToDisplay %}            
             <a href="#">
               <option value="{{ product.url }}/{{ version }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version }}</option>
             </a>
           {% endfor %}
           </select>
+          <a style="font-size:12px;position:absolute;left:5px;" href="{{ showDevVersionsLink }}">{{ switchVersion }}</a>
         </span>
       {% endif %}
 
@@ -181,11 +182,11 @@
 <section class="product-install">
   <div class="inner product-meta">
     <article class="alt p-grid p-justify-end p-align-center">
-      {% if mavenProductInfo != null %}
+      {% if versionsToDisplay != null %}
        <span class="dropdown">
           <label>Version</label>
           <select name="installVersion" id="installVersion" onchange="updateInstallArtifact(this);">
-          {% for version in mavenProductInfo.versionsToDisplay %}            
+          {% for version in versionsToDisplay %}            
             <a href="#">
               <option value="{{ product.url }}/{{ version }}" data-meta-json-url="{{ installButton.getProductJsonUrl(version)|raw }}" {{ (version == selectedVersion) ? 'selected' : '' }}>Version {{ version }}</option>
             </a>
