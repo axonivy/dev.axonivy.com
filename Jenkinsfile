@@ -23,7 +23,7 @@ pipeline {
       steps {
         echo 'create distribution package'
         sh 'composer install --no-dev --no-progress'
-        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases --exclude=src/web/_market --exclude=src/web/market-cache src vendor"
+        sh "tar -cf ${env.DIST_FILE} src vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
  
