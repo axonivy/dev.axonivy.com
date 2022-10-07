@@ -17,20 +17,22 @@ pipeline {
     stage('build') {
       agent {
         dockerfile {
-          dir 'docker/apache'    
+          dir 'docker/dev'    
         }
       }
       steps {
-        echo 'create distribution package'
-        sh 'composer install --no-dev --no-progress'
-        sh "tar -cf ${env.DIST_FILE} src vendor"
-        archiveArtifacts env.DIST_FILE
-        stash name: 'website-tar', includes: env.DIST_FILE
- 
-        echo 'test'
-        sh 'composer install --no-progress'
-        sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-        junit 'phpunit-junit.xml'
+        script {
+          sh 'composer install --no-dev --no-progress'
+          def image = docker.build("engine-listing-service:latest", "-f docker/prod/Dockerfile .")
+          if (env.BRANCH_NAME == 'master') {
+            docker.withRegistry('https://docker-registry.ivyteam.io', 'docker-registry.ivyteam.io') {
+              image.push()
+            }
+          }
+        }
+        //sh 'composer install --no-progress'
+        //sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
+        //junit 'phpunit-junit.xml'
       } 
     }
 
