@@ -10,7 +10,7 @@ pipeline {
   }
   
   environment {
-    DIST_FILE = "ivy-website-developer.tar"
+    DIST_FILE = "app.tar"
   }
   
   stages {
