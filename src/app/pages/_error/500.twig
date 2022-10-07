@@ -1,19 +1,10 @@
-{% extends '_parts/base.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block title %}
-  Error{{ parent() }}
-{% endblock %}
+  <title>500 Internal server error</title>
 
-{% block content %}
-  <section id="one">
-    <div class="inner">
-      <h1 class="text-center"><i class="si si-500"></i> This process has an error...</h1>
-      <p>
-        <strong>Details</strong>
-      </p>
-      <p>
-        <samp>{{ message }}</samp>
-      </p>
-    </div>
-  </section>
-{% endblock %}
+  <body>{{ message }}</body>
+</html>

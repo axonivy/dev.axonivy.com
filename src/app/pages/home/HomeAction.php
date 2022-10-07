@@ -1,0 +1,23 @@
+<?php
+
+namespace app\pages\home;
+
+use Slim\Views\Twig;
+
+class HomeAction
+{
+
+  private Twig $view;
+
+  public function __construct(Twig $view)
+  {
+    $this->view = $view;
+  }
+
+  public function __invoke($request, $response, $args)
+  {
+    return $this->view->render($response, 'home/home.twig', [
+     
+    ]);
+  }
+}
