@@ -7,9 +7,6 @@ Allow from all
 
 RewriteEngine On
 
-RewriteRule ^download/([^/]+)/(.+)$ /releases/ivy/$1/downloads/$2 [L]
-RewriteRule ^doc/([^/]+)/(.+)$ /releases/ivy/$1/documents/$2 [L]
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]

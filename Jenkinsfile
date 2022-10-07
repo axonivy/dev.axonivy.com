@@ -7,7 +7,6 @@ pipeline {
   
   options {
     buildDiscarder(logRotator(numToKeepStr: '120', artifactNumToKeepStr: '3'))
-    skipStagesAfterUnstable()
   }
   
   environment {
@@ -35,63 +34,11 @@ pipeline {
       } 
     }
 
-    stage('sonar') {
-      when {
-        branch 'master'
-      }
-      agent {
-        docker {
-          image 'sonarsource/sonar-scanner-cli'
-          args '-e SONAR_HOST_URL=https://sonar.ivyteam.io'
-        }
-      }
-      steps {
-        sh 'sonar-scanner'
-      }
-    }
-
     stage('check editorconfig') {
       steps {
         script {
           docker.image('mstruebing/editorconfig-checker').inside {
             sh 'ec -no-color'
-          }
-        }
-      }
-    }
-
-    stage('deploy') {
-      when {
-        branch 'master'
-      }
-      agent {
-        docker {
-          image 'axonivy/build-container:ssh-client-1'
-        }
-      }
-      steps {
-        sshagent(['zugprojenkins-ssh']) {
-          script {
-            unstash 'website-tar'
-
-            def targetFolder = "/home/axonivya/deployment/ivy-website-developer-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
-            def targetFile =  targetFolder + ".tar"
-            def host = 'axonivya@217.26.51.247'
-
-            // copy
-            sh "scp ${env.DIST_FILE} $host:$targetFile"
-
-            // untar
-            sh "ssh $host mkdir $targetFolder"
-            sh "ssh $host tar -xf $targetFile -C $targetFolder"
-            sh "ssh $host rm -f $targetFile"
-
-            // symlink
-            sh "ssh $host mkdir $targetFolder/src/web/releases"
-            sh "ssh $host ln -fns /home/axonivya/data/ivy-releases $targetFolder/src/web/releases/ivy"
-            sh "ssh $host ln -fns /home/axonivya/data/market $targetFolder/src/web/_market"
-            sh "ssh $host ln -fns /home/axonivya/data/market-cache $targetFolder/src/web/market-cache"
-            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
           }
         }
       }
