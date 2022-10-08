@@ -2,7 +2,6 @@
 namespace test\domain\listing;
 
 use PHPUnit\Framework\TestCase;
-use test\AppTester;
 use app\domain\listing\BuildJobUrlCrawler;
 use DOMDocument;
 
