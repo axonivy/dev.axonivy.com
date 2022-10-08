@@ -20,21 +20,10 @@ class AppTester
 
   public static function assertThatGet(string $url): AppTester
   {
-    return new AppTester(self::get($url, []));
-  }
-
-  public static function assertThatGetWithCookie(string $url, array $cookies): AppTester
-  {
-    return new AppTester(self::get($url, $cookies));
-  }
-
-  private static function get(string $url, array $cookies): Response
-  {
-    $app = (new Website())->getApp();
-    $request = (new RequestFactory())
-      ->createRequest('GET', $url)
-      ->withCookieParams($cookies);
-    return $app->handle($request);
+    $app = (new Website())->app();
+    $request = (new RequestFactory())->createRequest('GET', $url);
+    $response = $app->handle($request);
+    return new AppTester($response);
   }
 
   public function bodyDoesNotContain(string $stringNotContain): AppTester

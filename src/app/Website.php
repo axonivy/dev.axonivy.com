@@ -11,6 +11,7 @@ use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use DI\ContainerBuilder;
 use app\pages\home\HomeAction;
+use Slim\App;
 use Throwable;
 
 class Website
@@ -33,6 +34,11 @@ class Website
       Twig::class => Twig::create(__DIR__ . '/../app/pages')
     ]);
     return $builder->build();
+  }
+
+  public function app(): App
+  {
+    return $this->app;
   }
 
   public function start()
