@@ -11,14 +11,12 @@ pipeline {
 
   stages {
     stage('build') {
-      agent {
-        dockerfile {
-          dir 'docker/dev'    
-        }
-      }
       steps {
         script {
-          sh 'composer install --no-dev --no-progress'
+          docker.build("engine-listing-service:dev", "-f docker/dev/Dockerfile docker/dev").inside {
+            sh 'composer install --no-dev --no-progress'
+          }
+
           def image = docker.build("engine-listing-service:latest", "-f docker/prod/Dockerfile .")
           if (env.BRANCH_NAME == 'master') {
             docker.withRegistry('https://docker-registry.ivyteam.io', 'docker-registry.ivyteam.io') {
