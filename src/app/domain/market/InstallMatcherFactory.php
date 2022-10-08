@@ -25,7 +25,7 @@ class BestMatchFirstInstallMatcher implements InstallMatcher
 {
   public function match(MavenProductInfo $info, string $version): string
   {
-    $versions = $info->getVersionsToDisplay();
+    $versions = $info->getVersionsToDisplay(true, null);
     foreach ($versions as $v) {
       $bugfixVersion = (new Version($v))->getBugfixVersion();
       if (version_compare($bugfixVersion, $version) <= 0) {
@@ -47,7 +47,7 @@ class LtsTrainInstallMatcher implements InstallMatcher
   public function match(MavenProductInfo $info, string $version): string
   {
     $minorVersion = (new Version($version))->getMinorVersion();
-    $versions = $info->getVersionsToDisplay();
+    $versions = $info->getVersionsToDisplay(true, null);
     foreach ($versions as $v) {
       $minorV = (new Version($v))->getMinorVersion();      
       if (version_compare($minorV, $minorVersion) <= 0) {

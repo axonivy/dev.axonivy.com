@@ -70,7 +70,7 @@ class PortalPermalinkAction
     }
 
     if (self::isMinorVersion($version)) {
-      $portalVersions = $portal->getVersionsToDisplay();
+      $portalVersions = $portal->getVersionsToDisplay(true, null);
       foreach ($portalVersions as $v) {
         if (StringUtil::startsWith($v, $version)) {
           return $v;

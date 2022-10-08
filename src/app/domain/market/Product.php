@@ -94,7 +94,6 @@ class Product
     if (empty($this->version)) {
       if ($this->mavenProductInfo != null) {
         $this->version = $this->mavenProductInfo->getLatestVersion() ?? '';
-        $this->version = str_replace('-SNAPSHOT', '', $this->version);
       }
     }
     return $this->version;

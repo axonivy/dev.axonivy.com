@@ -50,7 +50,7 @@ class PortalPermalinkActionTest extends TestCase
   private static function latestVersionOfMinorVersionPortal($minorVersion)
   {
     $portal = Market::getProductByKey('portal');
-    $portalVersions = $portal->getMavenProductInfo()->getVersionsToDisplay();
+    $portalVersions = $portal->getMavenProductInfo()->getVersionsToDisplay(true, null);
     foreach ($portalVersions as $v) {
       if (StringUtil::startsWith($v, $minorVersion)) {
         return $v;
@@ -78,7 +78,7 @@ class PortalPermalinkActionTest extends TestCase
 
   private function getLatestVersion($version)
   {
-    $portalVersions = Market::getProductByKey('portal')->getMavenProductInfo()->getVersionsToDisplay();
+    $portalVersions = Market::getProductByKey('portal')->getMavenProductInfo()->getVersionsToDisplay(true, null);
     foreach ($portalVersions as $v) {
       if (StringUtil::startsWith($v, $version)) {
         return $v;
