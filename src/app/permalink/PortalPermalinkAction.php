@@ -66,7 +66,7 @@ class PortalPermalinkAction
     }
 
     if ($version == 'latest') {
-      return $portal->getLatestVersionToDisplay();
+      return $portal->getLatestVersionToDisplay(true, null);
     }
 
     if (self::isMinorVersion($version)) {

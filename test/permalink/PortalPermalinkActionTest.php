@@ -38,7 +38,7 @@ class PortalPermalinkActionTest extends TestCase
 
   public function testPortalLatest()
   {
-    AppTester::assertThatGet('/portal/latest')->redirect('/market/portal/' . Market::getProductByKey('portal')->getMavenProductInfo()->getLatestVersionToDisplay());
+    AppTester::assertThatGet('/portal/latest')->redirect('/market/portal/' . Market::getProductByKey('portal')->getMavenProductInfo()->getLatestVersionToDisplay(true, null));
   }
 
   public function testPortalDoc()

@@ -64,10 +64,11 @@ class ProductAction
     }
 
     if ($mavenProductInfo != null) {
+      $requestVersion = self::readIvyVersionCookie($request);
       if (empty($version)) {
         $version = self::findBestMatchingVersionFromCookie($request, $mavenProductInfo);
         if (empty($version)) {
-          $version = $mavenProductInfo->getLatestVersionToDisplay();
+          $version = $mavenProductInfo->getLatestVersionToDisplay($showDevVersions, $requestVersion);
         }
       } else if (!$mavenProductInfo->hasVersion($version)) {
         throw new HttpNotFoundException($request);
@@ -85,12 +86,10 @@ class ProductAction
         
         
         $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
-        $requestVersion = self::readIvyVersionCookie($request);
         $versionsToDisplay = $mavenProductInfo->getVersionsToDisplay($showDevVersions, $requestVersion);
         if (empty($initVersion) && !empty($versionsToDisplay)) {
           $version = $versionsToDisplay[0];
         }
-        
         $docArtifact = $mavenProductInfo->getFirstDocArtifact();
         if ($docArtifact != null) {
           $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);

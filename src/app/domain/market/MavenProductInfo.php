@@ -101,9 +101,9 @@ class MavenProductInfo
     return $versions[count($versions) - 1];
   }
 
-  public function getLatestVersionToDisplay(): ?string
+  public function getLatestVersionToDisplay(bool $showDevVersion, ?String $requestedVersion): ?string
   {
-    $versions = $this->getVersionsToDisplay(false, null);
+    $versions = $this->getVersionsToDisplay($showDevVersion, $requestedVersion);
     if (empty($versions)) {
       return null;
     }

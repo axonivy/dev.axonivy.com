@@ -48,7 +48,7 @@ class ProductActionTest extends TestCase
   public function testInstallButton_byDefaultWithCurrentVersion()
   {
     $product = Market::getProductByKey('doc-factory');
-    $version = $product->getMavenProductInfo()->getLatestVersionToDisplay();
+    $version = $product->getMavenProductInfo()->getLatestVersionToDisplay(false, null);
 
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => $version])
       ->ok()
