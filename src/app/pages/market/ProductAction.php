@@ -47,7 +47,7 @@ class ProductAction
     if (isset($request->getQueryParams()['showDevVersions'])) {
       if ($request->getQueryParams()['showDevVersions'] == "true") {
         $showDevVersions = true;
-        setcookie('showDevVersions', "true", time()+60*60*24*30 , "/");
+        setcookie('showDevVersions', "true", time()+60*60*24*30*12, "/");
       } else {
         $showDevVersions = false;
         setcookie('showDevVersions', "false", -1, "/");
