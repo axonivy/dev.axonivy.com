@@ -44,11 +44,13 @@ class NewsRepository
     $news = [];
     $dirs = glob(__DIR__ . '/*', GLOB_ONLYDIR);
     foreach ($dirs as $dir) {
-      $new = self::find(basename($dir));
+      $dirName = basename($dir);
+      $new = self::find($dirName);
       if ($new->isReleased()) {
-        $news[] = $new;
+        $news[$dirName] = $new;
       }
     }
+    ksort($news);
     return array_reverse($news);
   }
 

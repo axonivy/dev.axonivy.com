@@ -102,6 +102,25 @@
     mask: url('/images/icons/computer-bug-1.svg') no-repeat center;
     -webkit-mask: url('/images/icons/computer-bug-1.svg') no-repeat center;
   }
+
+  .news-title {
+    gap: 1rem;
+  }
+  .news-title img {
+    height: 100px;
+    aspect-ratio: 1 / 1; 
+  }
+  .news-title h1 {
+    margin: 0;
+  }
+  .news-title .news-title-slogan {
+    margin-bottom: 0px;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .news-title .news-title-release-date {
+    font-size: 18px;
+  }
 </style>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.2/css/lightbox.min.css" rel="stylesheet" />
@@ -110,16 +129,16 @@
 <section id="main">
   <div class="inner">
     <div>
-      <header>
+      <header class="news-title p-d-flex p-ai-center">
+        <img src="{{ news.meta.logo }}" alt="Axon Ivy release" />
         <h1>
-          <img src="{{ news.meta.logo }}" style="width:100px;float:left;margin-right:1rem;" alt="Axon Ivy release" />
           {{ news.meta.title }}
-          <div  title="Latest Release Date" style="float: right; font-size: 18px;">{{ news.meta.date }}</div>
+          <p class="news-title-slogan">
+            {{ news.meta.slogan }}
+          </p>
         </h1>
+        <div class="news-title-release-date p-ml-auto" title="Latest Release Date">{{ news.meta.date }}</div>
       </header>
-      <p style="margin-bottom:0px;font-size:28px;font-weight:bold;">
-        {{ news.meta.slogan }}
-      </p>
     </div>
   </div>
 </section>
