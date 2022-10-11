@@ -63,10 +63,14 @@
       
       {{ new.abstract |raw }}
       
+      {% if new.meta.hasReleasePage %}
+        <a href="https://release.axonivy.com" class="button special fixed-margin">
+          <i class="si si-megaphone"></i> Release
+        </a>
+      {% endif %}
       <a href="{{ new.link }}" class="button special fixed-margin">
         <i class="si si-news"></i> Read more
       </a>
-      
       <a href="{{ new.linkDoc }}" class="button fixed-margin">
         <i class="si si-book"></i> Documentation
       </a>
