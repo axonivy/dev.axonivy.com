@@ -58,18 +58,9 @@ class ProductActionTest extends TestCase
   public function testInstallButton_byDefaulNoSnapshotVersions()
   {
     $product = Market::getProductByKey('doc-factory');
-    // grab latest minor version of doc factory
-    $version = '';    
-    foreach ($product->getMavenProductInfo()->getVersionsToDisplay(false, '9.4.0') as $v)
-    {
-        if (StringUtil::startsWith($v, '9.4')) {
-           $version = $v;
-           break;
-        }
-    }
     AppTester::assertThatGet('http://localhost/market/doc-factory')
       ->ok()
-      ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/$version/_product.json")
+      ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.0/_product.json")
       ->bodyDoesNotContain("SNAPSHOT");
   }
 
@@ -104,12 +95,19 @@ class ProductActionTest extends TestCase
         ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.1-SNAPSHOT/_product.json");
   }
 
+  public function testInstallButton_respectCookie_bestMatchInstaller_showSnapshotIfNoMatch_bugFixReleaseAware()
+  {
+      AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.2'])
+        ->ok()
+        ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.1-SNAPSHOT/_product.json");
+  }
+
   public function testInstallButton_respectCookie_bestMatchInstaller_dontShowSnapshotIfNoNeeded()
   {
       AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.0'])
         ->ok()
         ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.0/_product.json")
-        ->bodyDoesNotContain("9.4.1-SNAPSHOT");
+        ->bodyDoesNotContain("9.3.1-SNAPSHOT");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller_ifNotExistUseLast()

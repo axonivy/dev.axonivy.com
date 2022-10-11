@@ -3,6 +3,7 @@
 namespace app\domain\market;
 
 use app\domain\maven\MavenArtifact;
+use app\domain\Version;
 
 class MavenProductInfo
 {
@@ -75,6 +76,9 @@ class MavenProductInfo
       if (empty($requestVersion)) {
         $versions = array_filter($versions, fn(string $v) => !str_contains($v, '-SNAPSHOT'));
       } else {
+        if (Version::isValidVersionNumber($requestVersion)) {
+          $requestVersion = (new Version($requestVersion))->getMinorVersion();
+        }
         $versions = array_filter($versions, fn(string $v) => str_starts_with($v, $requestVersion) || !str_contains($v, '-SNAPSHOT'));  
       }
 
