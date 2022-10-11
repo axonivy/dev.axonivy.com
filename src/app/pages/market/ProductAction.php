@@ -131,7 +131,7 @@ class ProductAction
       'docUrl' => $docUrl,
       'installNow' => $installNow,
       'versionsToDisplay' => $versionsToDisplay,
-      'switchVersion' => $showDevVersions ? "hide dev versions" : "show dev versions",
+      'switchVersion' => $showDevVersions ? "hide development versions" : "show development versions",
       'showDevVersionsLink' => $showDevVersionsLink
     ]);
   }
