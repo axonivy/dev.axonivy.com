@@ -3,5 +3,6 @@
   "title": "Axon Ivy 10.0",
   "slogan": "All new user experience",
   "date": "October 14th, 2022",
-  "lts": true
+  "lts": true,
+  "hasReleasePage": true
 }

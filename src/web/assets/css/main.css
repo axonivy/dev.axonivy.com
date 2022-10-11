@@ -3228,7 +3228,7 @@ body {
   text-align: right;
   top: 0;
   width: 100%;
-  z-index: 10001;
+  z-index: 9990;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
     0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
   -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
