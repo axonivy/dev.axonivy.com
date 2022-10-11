@@ -68,9 +68,19 @@ class MavenProductInfo
     return $versions;
   }
 
-  public function getVersionsToDisplay(): array
+  public function getVersionsToDisplay(bool $showDevVersions, ?String $requestVersion): array
   {
-    return $this->versionDisplayFilter->versionsToDisplay($this);
+    $versions = $this->versionDisplayFilter->versionsToDisplay($this);
+    if (!$showDevVersions) {
+      if (empty($requestVersion)) {
+        $versions = array_filter($versions, fn(string $v) => !str_contains($v, '-SNAPSHOT'));
+      } else {
+        $versions = array_filter($versions, fn(string $v) => str_starts_with($v, $requestVersion) || !str_contains($v, '-SNAPSHOT'));  
+      }
+
+      $versions = array_values($versions);
+    }
+    return $versions;
   }
 
   public function getLatestVersion(): ?string
@@ -91,9 +101,9 @@ class MavenProductInfo
     return $versions[count($versions) - 1];
   }
 
-  public function getLatestVersionToDisplay(): ?string
+  public function getLatestVersionToDisplay(bool $showDevVersion, ?String $requestedVersion): ?string
   {
-    $versions = $this->getVersionsToDisplay();
+    $versions = $this->getVersionsToDisplay($showDevVersion, $requestedVersion);
     if (empty($versions)) {
       return null;
     }

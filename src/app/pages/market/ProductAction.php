@@ -4,6 +4,7 @@ namespace app\pages\market;
 
 use Slim\Exception\HttpNotFoundException;
 use Slim\Views\Twig;
+use Slim\App;
 use app\domain\util\CookieUtil;
 use app\domain\market\Market;
 use app\domain\market\Product;
@@ -35,40 +36,68 @@ class ProductAction
     $installNow = isset($request->getQueryParams()['installNow']);
     $mavenProductInfo = $product->getMavenProductInfo();
     $version = $args['version'] ?? '';
+    $initVersion = $args['version'] ?? '';
     $mavenArtifactsAsDependency = [];
     $mavenArtifacts = [];
     $docUrl = '';
+    $versionsToDisplay = null;
+
+    $showDevVersionCookie = $request->getCookieParams()['showDevVersions'] ?? 'false';
+    $showDevVersions = filter_var($showDevVersionCookie, FILTER_VALIDATE_BOOLEAN) ?? false;
+    if (isset($request->getQueryParams()['showDevVersions'])) {
+      if ($request->getQueryParams()['showDevVersions'] == "true") {
+        $showDevVersions = true;
+        setcookie('showDevVersions', "true", time()+60*60*24*30*12, "/");
+      } else {
+        $showDevVersions = false;
+        setcookie('showDevVersions', "false", -1, "/");
+      }
+    }
+
+    $showDevVersionsLink = "/market/$key?showDevVersions=true#download";
+    if ($showDevVersions) {
+      $showDevVersionsLink = "/market/$key?showDevVersions=false#download";
+    }
 
     if ($mavenProductInfo == null && !empty($version)) {
       throw new HttpNotFoundException($request);
     }
 
     if ($mavenProductInfo != null) {
+      $requestVersion = self::readIvyVersionCookie($request);
       if (empty($version)) {
         $version = self::findBestMatchingVersionFromCookie($request, $mavenProductInfo);
         if (empty($version)) {
-          $version = $mavenProductInfo->getLatestVersionToDisplay();
+          $version = $mavenProductInfo->getLatestVersionToDisplay($showDevVersions, $requestVersion);
         }
       } else if (!$mavenProductInfo->hasVersion($version)) {
         throw new HttpNotFoundException($request);
       }
-
-      $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
-      foreach ($mavenArtifacts as $artifact) {
-        if ($artifact->getMakesSenseAsMavenDependency()) {
-          $mavenArtifactsAsDependency[] = $artifact;
+      if (empty($version)) {
+        $version = '';
+      }
+      if (!empty($version)) {
+        $mavenArtifacts = $mavenProductInfo->getMavenArtifactsForVersion($version);
+        foreach ($mavenArtifacts as $artifact) {
+          if ($artifact->getMakesSenseAsMavenDependency()) {
+            $mavenArtifactsAsDependency[] = $artifact;
+          }
+        }
+        
+        
+        $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
+        $versionsToDisplay = $mavenProductInfo->getVersionsToDisplay($showDevVersions, $requestVersion);
+        if (empty($initVersion) && !empty($versionsToDisplay)) {
+          $version = $versionsToDisplay[0];
+        }
+        $docArtifact = $mavenProductInfo->getFirstDocArtifact();
+        if ($docArtifact != null) {
+          $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
+          if ($exists) {
+            $docUrl = $docArtifact->getDocUrl($product, $version);
+          }
         }
       }
-      
-      $docArtifact = $mavenProductInfo->getFirstDocArtifact();
-      if ($docArtifact != null) {
-        $exists = (new ProductMavenArtifactDownloader())->downloadArtifact($product, $docArtifact, $version);
-        if ($exists) {
-          $docUrl = $docArtifact->getDocUrl($product, $version);
-        }
-      }
-
-      $mavenArtifacts = array_filter($mavenArtifacts, fn(MavenArtifact $a) => !$a->isProductArtifact());
     }
 
     $installButton = self::createInstallButton($request, $product, $version);
@@ -100,7 +129,10 @@ class ProductAction
       'openApiUrl' => $openApiUrl,
       'version' => $productVersion,
       'docUrl' => $docUrl,
-      'installNow' => $installNow
+      'installNow' => $installNow,
+      'versionsToDisplay' => $versionsToDisplay,
+      'switchVersion' => $showDevVersions ? "hide dev versions" : "show dev versions",
+      'showDevVersionsLink' => $showDevVersionsLink
     ]);
   }
 

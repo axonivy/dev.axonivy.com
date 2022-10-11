@@ -71,7 +71,7 @@ class StatusApi
         $latestVersionToDisplay = 'unavailable';
         $latestVersionAvailable = 'unavailable';
         try {
-          $latestVersionToDisplay = $mavenProductInfo->getLatestVersionToDisplay();
+          $latestVersionToDisplay = $mavenProductInfo->getLatestVersionToDisplay(false, null);
           $latestVersionAvailable = $mavenProductInfo->getLatestVersion();
         } catch (\Exception $ex) { }
         $p['latest-version-to-display'] = $latestVersionToDisplay;
