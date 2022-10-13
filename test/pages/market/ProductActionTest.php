@@ -78,7 +78,7 @@ class ProductActionTest extends TestCase
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.0'])
       ->ok()
-      ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/$version/_product.json");
+      ->bodyContains("$v");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller()
@@ -92,21 +92,21 @@ class ProductActionTest extends TestCase
   {
       AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.1'])
         ->ok()
-        ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.1-SNAPSHOT/_product.json");
+        ->bodyContains("9.4.1-SNAPSHOT");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller_showSnapshotIfNoMatch_bugFixReleaseAware()
   {
       AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.2'])
         ->ok()
-        ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.1-SNAPSHOT/_product.json");
+        ->bodyContains("9.4.1-SNAPSHOT");
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller_dontShowSnapshotIfNoNeeded()
   {
       AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.0'])
         ->ok()
-        ->bodyContains("http://localhost/market-cache/doc-factory/doc-factory-product/9.4.0/_product.json")
+        ->bodyContains("9.4.0")
         ->bodyDoesNotContain("9.3.1-SNAPSHOT");
   }
 
