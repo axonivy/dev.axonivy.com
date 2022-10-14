@@ -102,8 +102,8 @@ class ReleaseInfoTest extends TestCase
     $artifact = self::loadDockerArtifact('nightly');
     Assert::assertEquals('axonivy/axonivy-engine:nightly', $artifact->getFileName());
 
-    $artifact = self::loadDockerArtifact('nightly-8');
-    Assert::assertEquals('axonivy/axonivy-engine:nightly-8', $artifact->getFileName());
+    $artifact = self::loadDockerArtifact('nightly-8.0');
+    Assert::assertEquals('axonivy/axonivy-engine:nightly-8.0', $artifact->getFileName());
 
     $artifact = self::loadDockerArtifact('nightly-7');
     Assert::assertNull($artifact);

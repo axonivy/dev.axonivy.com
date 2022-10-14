@@ -86,7 +86,7 @@ class DocAction
 
   private function documentationBasedOnReadTheDocs(string $version): bool
   {
-    if ($version == 'nightly-7') {
+    if ($version == 'nightly-7.0') {
       return false;
     }
     if (version_compare($version, 9) >= 0) {

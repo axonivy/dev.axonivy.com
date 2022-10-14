@@ -52,7 +52,7 @@ class ArtifactFactory
 
   private static function isDockerAvailableForVersion(string $versionNumber): bool
   {
-    if ($versionNumber == 'nightly-7') {
+    if ($versionNumber == 'nightly-7.0') {
       return false;
     }
     if (version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) {

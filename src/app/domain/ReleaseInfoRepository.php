@@ -5,7 +5,6 @@ namespace app\domain;
 use app\domain\util\ArrayUtil;
 use app\domain\util\StringUtil;
 use app\Config;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class ReleaseInfoRepository
 {
@@ -142,7 +141,7 @@ class ReleaseInfoRepository
   {
     $releaseInfos = self::getMatchingVersions($version);
 
-    // prefer perfect match for alphanumeric versions (e.g. nightly instead nightly-8 for nightly)
+    // prefer perfect match for alphanumeric versions (e.g. nightly instead nightly-8.0 for nightly)
     if (!is_numeric($version)) {
       foreach ($releaseInfos as $releaseInfo) {
         if ($releaseInfo->getVersion()->getVersionNumber() == $version) {

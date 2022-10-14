@@ -47,8 +47,8 @@ class MavenArchiveActionTest extends TestCase
     AppTester::assertThatGet('/download/maven.html')
       ->ok()
       ->bodyContains('nightly')
-      ->bodyContains('nightly-8')
-      ->bodyContains('nightly-7');
+      ->bodyContains('nightly-8.0')
+      ->bodyContains('nightly-7.0');
   }
 
   public function testDoesNotVersionLowerThan6()
