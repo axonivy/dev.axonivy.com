@@ -16,11 +16,11 @@ class DownloadActionTest extends TestCase
       ->bodyContains('https://download.axonivy.com/nightly/AxonIvyDesigner7.0.1.56047_Linux_x64.zip');
   }
 
-  public function testNightly8()
+  public function testNightly7()
   {
-    AppTester::assertThatGet('/download/nightly-7')->ok()
-      ->bodyContains('Nightly Build 7')
-      ->bodyContains('https://download.axonivy.com/nightly-7/AxonIvyEngine7.5.0.56047_Windows_x64.zip');
+    AppTester::assertThatGet('/download/nightly-7.0')->ok()
+      ->bodyContains('Nightly Build 7.0')
+      ->bodyContains('https://download.axonivy.com/nightly-7.0/AxonIvyEngine7.5.0.56047_Windows_x64.zip');
   }
 
   public function testNightlyNonExisting()

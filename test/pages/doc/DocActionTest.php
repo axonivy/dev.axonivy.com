@@ -59,7 +59,7 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/latest')->redirect('/doc/8.0');
     AppTester::assertThatGet('/doc/2.0.0')->notFound();
     AppTester::assertThatGet('/doc/notexisting')->notFound();
-    AppTester::assertThatGet('/doc/nightly-7')->ok();
+    AppTester::assertThatGet('/doc/nightly-7.0')->ok();
   }
 
   public function testRedirectMigrationNotesSinceVersion9()
@@ -74,7 +74,7 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/latest/migration-notes')->redirect('/doc/8.0/migration-notes');
     AppTester::assertThatGet('/doc/2.0.0/migration-notes')->notFound();
     AppTester::assertThatGet('/doc/notexisting/migration-notes')->notFound();
-    AppTester::assertThatGet('/doc/nightly-7/migration-notes')->ok();
+    AppTester::assertThatGet('/doc/nightly-7.0/migration-notes')->ok();
   }
 
   public function testRedirectReleaseNotesSinceVersion9()
@@ -89,7 +89,7 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/latest/release-notes')->redirect('/doc/8.0/release-notes');
     AppTester::assertThatGet('/doc/2.0.0/release-notes')->notFound();
     AppTester::assertThatGet('/doc/notexisting/release-notes')->notFound();
-    AppTester::assertThatGet('/doc/nightly-7/release-notes')->ok();
+    AppTester::assertThatGet('/doc/nightly-7.0/release-notes')->ok();
   }
 
   public function testRedirectNewAndNoteworthySinceVersion9()

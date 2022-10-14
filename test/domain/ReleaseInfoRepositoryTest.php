@@ -55,7 +55,6 @@ class ReleaseInfoRepositoryTest extends TestCase
     Assert::assertEquals('dev', self::bestMatchingVersion('dev'));
     Assert::assertEquals('sprint', self::bestMatchingVersion('sprint'));
     Assert::assertEquals('nightly', self::bestMatchingVersion('nightly'));
-    Assert::assertEquals('nightly-8', self::bestMatchingVersion('nightly-8'));
     Assert::assertEquals('nightly-8.0', self::bestMatchingVersion('nightly-8.0'));
 
     Assert::assertNull(ReleaseInfoRepository::getBestMatchingVersion('2.0.0'));
