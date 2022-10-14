@@ -39,7 +39,7 @@ class ReleaseTypeTest extends TestCase
 
   public function test_byArchiveKey()
   {
-    Assert::assertEquals(5, count(ReleaseType::byArchiveKey('unstable')));
+    Assert::assertEquals(7, count(ReleaseType::byArchiveKey('unstable')));
     Assert::assertEquals(1, count(ReleaseType::byArchiveKey('lts')));
   }
 }

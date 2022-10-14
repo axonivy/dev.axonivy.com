@@ -30,9 +30,9 @@ class DownloadAction
     $loader = $this->createLoader($releaseType);
     
     $leadingEdgeVersion = "";
-    $leadingEdge = ReleaseType::LE();
+    $leadingEdge = ReleaseType::LE()->releaseInfo();
     if ($leadingEdge != null) {
-      $leadingEdgeVersion = $leadingEdge->releaseInfo()->getVersion()->getMinorVersion();
+      $leadingEdgeVersion = $leadingEdge->getVersion()->getMinorVersion();
     }
 
     return $this->view->render($response, 'download/download.twig', [

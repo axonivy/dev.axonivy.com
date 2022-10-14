@@ -38,4 +38,11 @@ class VersionTest extends TestCase
     Assert::assertTrue((new Version('11.0'))->isMinor());
     Assert::assertTrue((new Version('7.19'))->isMinor());
   }
+
+  public function test_getNightlyMinorVersion()
+  {
+    Assert::assertEquals('7.0', (new Version('nightly-7.0'))->getNightlyMinorVersion());
+    Assert::assertEquals('8.0', (new Version('nightly-8.0'))->getNightlyMinorVersion());
+    Assert::assertEquals('', (new Version('nightly'))->getNightlyMinorVersion());
+  }
 }

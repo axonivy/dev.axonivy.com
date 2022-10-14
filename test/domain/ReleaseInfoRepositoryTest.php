@@ -44,6 +44,17 @@ class ReleaseInfoRepositoryTest extends TestCase
     }
   }
 
+  public function test_getNightlyMinorReleaseInfos()
+  {
+    $infos = ReleaseInfoRepository::getNightlyMinorReleaseInfos();
+    Assert::assertNotNull($infos);
+    Assert::assertNotEmpty($infos);
+    foreach($infos as $info) {
+      Assert::assertNotNull($info);
+      Assert::assertStringStartsWith("nightly-", $info->getVersion()->getVersionNumber());
+    }
+  }
+
   public function test_getBestMatchingVersion()
   {
     Assert::assertEquals('8.0.0', self::bestMatchingVersion('8.0.0'));
