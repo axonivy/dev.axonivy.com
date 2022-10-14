@@ -115,4 +115,12 @@ class Version
     }
     return $this->getBugfixVersion();
   }
+
+  public function getNightlyMinorVersion(): string {
+    if (str_contains($this->versionNumber, "-")) {
+      $split = explode("-", $this->versionNumber);
+      return $split[1];
+    }
+    return "";
+  }
 }

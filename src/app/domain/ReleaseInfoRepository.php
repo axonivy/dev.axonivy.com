@@ -123,6 +123,12 @@ class ReleaseInfoRepository
     return $releaseInfos;
   }
 
+  public static function getNightlyMinorReleaseInfos(): array
+  {
+    $all = self::getAvailableReleaseInfos();
+    return array_filter($all, fn(ReleaseInfo $info) => str_starts_with($info->getVersion()->getVersionNumber(), "nightly-"));
+  }
+
   /**
    * 8.0
    * 8.0.3

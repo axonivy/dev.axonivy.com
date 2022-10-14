@@ -71,13 +71,13 @@ class ReleaseType
     return $type;
   }
 
-  public static function LTS_NIGHTLY($minorVersion): ReleaseType
+  public static function MINOR_NIGHTLY(string $minorVersion, bool $promoted): ReleaseType
   {
     $type = self::createDevReleaseType();
     $type->key = 'nightly-' . $minorVersion;
     $type->name = 'Nightly Build ' . $minorVersion;
     $type->shortName = 'Nightly ' . $minorVersion;
-    $type->promotedDevVersion = true;
+    $type->promotedDevVersion = $promoted;
     return $type;
   }
 
@@ -124,12 +124,27 @@ class ReleaseType
       return self::$typeCache;
     }
 
-    $nightlyLtsReleases = [];
-    foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $releaseInfo) {
-      $nightlyLtsRelease = self::LTS_NIGHTLY($releaseInfo->getVersion()->getMinorVersion());
-      if ($nightlyLtsRelease->releaseInfo() != null) {
-        $nightlyLtsReleases[] = $nightlyLtsRelease;
+    $nightlyReleases = [];
+    foreach (ReleaseInfoRepository::getNightlyMinorReleaseInfos() as $releaseInfo) {
+      $v = $releaseInfo->getVersion()->getNightlyMinorVersion();
+      
+      $promoted = false;
+      foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $info) {
+        $minorVersion = $info->getVersion()->getMinorVersion();
+        if (str_ends_with($v, $minorVersion)) {
+          $promoted = true;
+        }
       }
+      if (!$promoted) {
+        $le = ReleaseInfoRepository::getLeadingEdge();
+        if ($le != null) {
+          $minorVersion = $le->getVersion()->getMinorVersion();
+          if (str_ends_with($v, $minorVersion)) {
+            $promoted = true;
+          } 
+        }
+      }
+      $nightlyReleases[] = self::MINOR_NIGHTLY($v, $promoted);
     }
 
     self::$typeCache = array_merge(
@@ -140,7 +155,7 @@ class ReleaseType
         self::NIGHTLY(),
         self::DEV(),
       ],
-      $nightlyLtsReleases
+      $nightlyReleases
     );
 
     return self::$typeCache;
