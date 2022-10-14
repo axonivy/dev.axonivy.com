@@ -44,7 +44,7 @@ class ProductPermalinkActionTest extends TestCase
 
   public function testPermalink_nightly8()
   {
-    AppTester::assertThatGet('/permalink/nightly-8/axonivy-engine-slim.zip')->redirect('https://download.axonivy.com/nightly-8/AxonIvyEngine8.0.1.96047_Slim_All_x64.zip');
+    AppTester::assertThatGet('/permalink/nightly-8.0/axonivy-engine-slim.zip')->redirect('https://download.axonivy.com/nightly-8.0/AxonIvyEngine8.0.1.96047_Slim_All_x64.zip');
   }
 
   public function testPermalink_nightly_notexisting()

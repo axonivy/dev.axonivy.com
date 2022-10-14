@@ -86,7 +86,7 @@ class DocAction
 
   private function documentationBasedOnReadTheDocs(string $version): bool
   {
-    if ($version == 'nightly-7') {
+    if ($version == 'nightly-7.0') {
       return false;
     }
     if (version_compare($version, 9) >= 0) {
@@ -99,7 +99,7 @@ class DocAction
     return false;
   }
 
-  private function resolveNewDocUrl($baseUrl, $document, $version): string
+  private function resolveNewDocUrl($baseUrl, $document, Version $version): string
   {
     if (empty($document)) {
       return "$baseUrl/index.html";
@@ -112,9 +112,10 @@ class DocAction
     }
     if ($document == 'new-and-noteworthy') {
       $newsLink = '/news';
-      if ($version->isMinor() || $version->isBugfix())
-      {
-        $newsLink .= '/' . $version->getMinorVersion();
+      if (!str_contains($version->getVersionNumber(), "nightly")) {
+        if ($version->isMinor() || $version->isBugfix()) {
+          $newsLink .= '/' . $version->getMinorVersion();
+        }
       }
       return $newsLink;
     }

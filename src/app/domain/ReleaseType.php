@@ -71,12 +71,12 @@ class ReleaseType
     return $type;
   }
 
-  public static function LTS_NIGHTLY($majorVersion): ReleaseType
+  public static function LTS_NIGHTLY($minorVersion): ReleaseType
   {
     $type = self::createDevReleaseType();
-    $type->key = 'nightly-' . $majorVersion;
-    $type->name = 'Nightly Build ' . $majorVersion;
-    $type->shortName = 'Nightly ' . $majorVersion;
+    $type->key = 'nightly-' . $minorVersion;
+    $type->name = 'Nightly Build ' . $minorVersion;
+    $type->shortName = 'Nightly ' . $minorVersion;
     $type->promotedDevVersion = true;
     return $type;
   }
@@ -126,7 +126,7 @@ class ReleaseType
 
     $nightlyLtsReleases = [];
     foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $releaseInfo) {
-      $nightlyLtsRelease = self::LTS_NIGHTLY($releaseInfo->getVersion()->getMajorVersion());
+      $nightlyLtsRelease = self::LTS_NIGHTLY($releaseInfo->getVersion()->getMinorVersion());
       if ($nightlyLtsRelease->releaseInfo() != null) {
         $nightlyLtsReleases[] = $nightlyLtsRelease;
       }

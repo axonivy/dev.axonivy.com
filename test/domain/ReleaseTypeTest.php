@@ -27,8 +27,8 @@ class ReleaseTypeTest extends TestCase
     Assert::assertEquals('nightly', ReleaseType::NIGHTLY()->releaseInfo()->getVersion()->getVersionNumber());
     Assert::assertEquals('sprint', ReleaseType::SPRINT()->releaseInfo()->getVersion()->getVersionNumber());
 
-    Assert::assertEquals('nightly-8', ReleaseType::byKey('nightly-8')->key());
-    Assert::assertEquals('nightly-7', ReleaseType::byKey('nightly-7')->key());
+    Assert::assertEquals('nightly-8.0', ReleaseType::byKey('nightly-8.0')->key());
+    Assert::assertEquals('nightly-7.0', ReleaseType::byKey('nightly-7.0')->key());
   }
 
   public function test_allReleaseInfos()

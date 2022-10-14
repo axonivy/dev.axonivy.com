@@ -58,8 +58,8 @@ class ArchiveActionTest extends TestCase
       ->bodyContains('dev')
       ->bodyContains('sprint')
       ->bodyContains('nightly')
-      ->bodyContains('nightly-8')
-      ->bodyContains('nightly-7');
+      ->bodyContains('nightly-8.0')
+      ->bodyContains('nightly-7.0');
   }
 
   public function testArchive80_unsafe()
