@@ -2,8 +2,6 @@
 
 namespace app\domain\market;
 
-use app\domain\util\StringUtil;
-
 class VersionDisplayFilterFactory
 {
   public static function create($key): VersionDisplayFilter
@@ -35,7 +33,7 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
     $allVersions = $info->getVersions();
     $highesSprintReleases = [];
     foreach ($allVersions as $v) {
-      if (StringUtil::contains($v, '-m')) { // hide sprint releases (maven milestone releases)
+      if (str_contains($v, '-m')) { // hide sprint releases (maven milestone releases)
         if (empty($latestDevRelease)) {
           $latestDevRelease = $v;
         }
@@ -80,7 +78,7 @@ class VersionDisplayFilterHidePortalSprintReleases implements VersionDisplayFilt
         if (count($splittedVersion) == 4) {
           $v = $splittedVersion[0] . '.' . $splittedVersion[1] . '.' . $splittedVersion[2];
         }
-        if (StringUtil::startsWith($latestDevRelease, $v)) {
+        if (str_starts_with($latestDevRelease, $v)) {
           $addDevRelease = false;
           break;
         }

@@ -4,7 +4,6 @@ namespace app\domain\market;
 
 use app\Config;
 use app\domain\Version;
-use app\domain\util\StringUtil;
 
 class Product
 {
@@ -117,7 +116,7 @@ class Product
 
   public function getVendorImage(): string
   {
-    if (StringUtil::startsWith($this->vendorImage, "/")) {
+    if (str_starts_with($this->vendorImage, "/")) {
       return $this->vendorImage;
     }
     return $this->fileResolver->assetBaseUrl_unversionized() . '/' . $this->vendorImage;

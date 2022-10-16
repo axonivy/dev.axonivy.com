@@ -7,7 +7,6 @@ use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
-use app\domain\util\StringUtil;
 
 class SitemapAction
 {
@@ -43,7 +42,7 @@ class SitemapAction
   {
     $minorVersion = $releaseInfo->getVersion()->getMinorVersion();
     foreach (self::getHtmlFiles($releaseInfo->getPath() . '/documents/') as $html) {
-      if (!StringUtil::startsWith($html, '/')) {
+      if (!str_starts_with($html, '/')) {
         $html = '/' . $html;
       }
       $sites[] = self::createSite($baseUrl, "/doc/$minorVersion$html", 0.8);
@@ -58,7 +57,7 @@ class SitemapAction
       return substr($path, strlen($directory));
     }, $files);
     return array_filter($files, function ($html) {
-      return !StringUtil::startsWith($html, 'index') && StringUtil::endsWith($html, '.html');
+      return !str_starts_with($html, 'index') && str_ends_with($html, '.html');
     });
   }
 

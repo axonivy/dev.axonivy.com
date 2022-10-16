@@ -1,8 +1,6 @@
 <?php
-
 namespace app\domain\doc;
 
-use app\domain\util\StringUtil;
 use app\domain\Version;
 use app\Config;
 
@@ -73,13 +71,13 @@ class DocProvider
 
   public function getImportantBooks(): array
   {
-    return array_filter($this->getBooks(), fn (Book $book) => !StringUtil::startsWith(strtolower($book->getName()), "portal"));
+    return array_filter($this->getBooks(), fn (Book $book) => !str_starts_with(strtolower($book->getName()), "portal"));
   }
 
   public function getNotImportantBooks(): array
   {
     return array_filter($this->getBooks(), function (Book $book) {
-      return StringUtil::startsWith(strtolower($book->getName()), "portal");
+      return str_starts_with(strtolower($book->getName()), "portal");
     });
   }
 

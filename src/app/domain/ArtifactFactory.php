@@ -2,7 +2,6 @@
 
 namespace app\domain;
 
-use app\domain\util\StringUtil;
 use app\Config;
 
 class ArtifactFactory
@@ -27,7 +26,7 @@ class ArtifactFactory
 
   private static function createParser($filename): ArtifactFilenameParser
   {
-    if (StringUtil::endsWith($filename, 'deb')) {
+    if (str_ends_with($filename, 'deb')) {
       return new DebianArtifactFilenameParser();
     } else {
       return new DefaultArtifactFilenameParser();
@@ -120,11 +119,11 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
   private static function calculateProductName(string $fullName): string
   {
     $fullNameLower = strtolower($fullName);
-    if (StringUtil::contains($fullNameLower, 'engine')) {
+    if (str_contains($fullNameLower, 'engine')) {
       return Artifact::PRODUCT_NAME_ENGINE;
     }
 
-    if (StringUtil::contains($fullNameLower, 'designer')) {
+    if (str_contains($fullNameLower, 'designer')) {
       return Artifact::PRODUCT_NAME_DESIGNER;
     }
 

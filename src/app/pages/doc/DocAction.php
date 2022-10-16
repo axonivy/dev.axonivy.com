@@ -11,7 +11,6 @@ use app\domain\util\Redirect;
 use app\domain\ReleaseType;
 use app\domain\Version;
 use DI\NotFoundException;
-use app\domain\util\StringUtil;
 
 class DocAction
 {
@@ -28,7 +27,7 @@ class DocAction
     $version = $args['version'];
 
     // special treatment when using a major version e.g. 8/9/10
-    if (!StringUtil::contains($version, '.') && is_numeric($version)) {
+    if (!str_contains($version, '.') && is_numeric($version)) {
       $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
       if ($releaseInfo == null) {
         throw new NotFoundException();

@@ -5,7 +5,6 @@ namespace app\pages\download\archive;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
-use app\domain\util\StringUtil;
 use app\domain\ReleaseType;
 use app\domain\ReleaseInfo;
 
@@ -62,7 +61,7 @@ class ArchiveAction
 
     // remove lts versions from leading edge list (e.g. 7.x => 7.0)
     $filterLTS = false;
-    if (StringUtil::endsWith($version, 'x')) {
+    if (str_ends_with($version, 'x')) {
       $version = substr($version, 0, -1);
       $filterLTS = true;
     }
@@ -71,7 +70,7 @@ class ArchiveAction
 
     if ($filterLTS) {
       $minorVersion = $version . '0';
-      $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => !StringUtil::startsWith($releaseInfo->versionNumber(), $minorVersion));
+      $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => !str_starts_with($releaseInfo->versionNumber(), $minorVersion));
     }
     return self::filterVirtualVersions($releaseInfos);
   }
