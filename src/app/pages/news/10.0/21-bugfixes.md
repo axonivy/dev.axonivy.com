@@ -58,7 +58,7 @@
 * [XIVY-9608](https://axonivy.atlassian.net/browse/XIVY-9608) Stop Threads of the process editor on closing 
 * [XIVY-9610](https://axonivy.atlassian.net/browse/XIVY-9610) Wrap to subprocess: Ugly gate/waypoint positions 
 * [XIVY-9612](https://axonivy.atlassian.net/browse/XIVY-9612) Primefaces attribute renaming during project conversion may not work if tag contains spaces before > 
-* [XIVY-9624](https://axonivy.atlassian.net/browse/XIVY-9624) Engine Cockpit: Deployment running spinner 
+* [XIVY-9624](https://axonivy.atlassian.net/browse/XIVY-9624) Engine Cockpit: Show running spinner while deployment 
 * [XIVY-9626](https://axonivy.atlassian.net/browse/XIVY-9626) project-build-plugin must not automatically migrate projects during build 
 * [XIVY-9627](https://axonivy.atlassian.net/browse/XIVY-9627) Freya Theme: Scrollbars in Chrome/Edge are always light 
 * [XIVY-9628](https://axonivy.atlassian.net/browse/XIVY-9628) New process editor: copy to negative area is possible 

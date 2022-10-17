@@ -8,8 +8,8 @@ This new [LTS](/release-cycle) release includes all latest 9.x LE features.
   OpenAPI power and Axon Ivy Market
 - <a href="/news/9.3">__9.3__</a>:
   Grow with your business and simplified configuration files
-- <a href="/news/9.4">__9.4__</a>: New
-  New Process Editor and multiple application context
+- <a href="/news/9.4">__9.4__</a>: New Process Editor and multiple application
+  context
 
 <div class="short-links">
   <a href="https://release.axonivy.com" target="_blank" rel="noopener noreferrer">
