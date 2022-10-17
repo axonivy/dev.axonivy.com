@@ -4,7 +4,6 @@ namespace app\api;
 
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
-use app\domain\market\Market;
 
 class StatusApi
 {
@@ -27,8 +26,7 @@ class StatusApi
         'latestLtsVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLatestLongTermSupport()),
         'leadingEdgeVersion' => $this->getVersionNumber(ReleaseInfoRepository::getLeadingEdge()),
         'longTermSupportVersions' => $this->getVersionNumbers(ReleaseInfoRepository::getLongTermSupportVersions()),
-        'versions' => $this->getVersions(),
-        'market' => $this->getMarketProducts()
+        'versions' => $this->getVersions()
       ]
     ];
   }
@@ -54,31 +52,5 @@ class StatusApi
       $versions[] = $releaseInfo->getVersion()->getVersionNumber();
     }
     return $versions;
-  }
-
-  private function getMarketProducts(): array
-  {
-    $products = [];
-    foreach (Market::all() as $product) {
-      $p = [
-        'key' => $product->getKey(),
-        'name' => $product->getName(),
-        'url' => $product->getUrl()
-      ];
-      $mavenProductInfo = $product->getMavenProductInfo();
-      if ($mavenProductInfo != null) {
-        
-        $latestVersionToDisplay = 'unavailable';
-        $latestVersionAvailable = 'unavailable';
-        try {
-          $latestVersionToDisplay = $mavenProductInfo->getLatestVersionToDisplay(false, null);
-          $latestVersionAvailable = $mavenProductInfo->getLatestVersion();
-        } catch (\Exception $ex) { }
-        $p['latest-version-to-display'] = $latestVersionToDisplay;
-        $p['latest-version-available'] = $latestVersionAvailable;
-      }
-      $products[] = $p;
-    }
-    return $products;
   }
 }

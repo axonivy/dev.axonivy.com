@@ -5,6 +5,4 @@ composer.phar
 .phpunit.result.cache
 .sonar
 .scannerwork
-market-installations.json
-/src/web/market-cache
 /src/web/documentation
