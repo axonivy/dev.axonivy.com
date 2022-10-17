@@ -5,7 +5,6 @@ namespace test\pages\market;
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
 use app\domain\market\Market;
-use app\domain\util\StringUtil;
 
 class ProductActionTest extends TestCase
 {
@@ -71,14 +70,14 @@ class ProductActionTest extends TestCase
     $version = '';    
     foreach ($product->getMavenProductInfo()->getVersionsToDisplay(false, '9.4.0') as $v)
     {
-        if (StringUtil::startsWith($v, '9.4')) {
+        if (str_starts_with($v, '9.4')) {
            $version = $v;
            break;
         }
     }
     AppTester::assertThatGetWithCookie('http://localhost/market/doc-factory', ['ivy-version' => '9.4.0'])
       ->ok()
-      ->bodyContains("$v");
+      ->bodyContains($version);
   }
 
   public function testInstallButton_respectCookie_bestMatchInstaller()
@@ -117,7 +116,7 @@ class ProductActionTest extends TestCase
     // grab latest minor version of doc factory
     foreach ($product->getMavenProductInfo()->getVersionsToDisplay(true, null) as $v)
     {
-        if (StringUtil::startsWith($v, '8.0')) {
+        if (str_starts_with($v, '8.0')) {
             $version = $v;
             break;
         }

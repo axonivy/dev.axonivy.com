@@ -6,9 +6,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use app\domain\market\Market;
 use app\domain\util\Redirect;
-use app\domain\util\StringUtil;
 use app\domain\ReleaseType;
-use app\domain\market\Product;
 use app\domain\market\MavenProductInfo;
 use app\domain\market\ProductMavenArtifactDownloader;
 
@@ -72,7 +70,7 @@ class PortalPermalinkAction
     if (self::isMinorVersion($version)) {
       $portalVersions = $portal->getVersionsToDisplay(true, null);
       foreach ($portalVersions as $v) {
-        if (StringUtil::startsWith($v, $version)) {
+        if (str_starts_with($v, $version)) {
           return $v;
         }
       }

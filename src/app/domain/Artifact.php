@@ -2,8 +2,6 @@
 
 namespace app\domain;
 
-use app\domain\util\StringUtil;
-
 class Artifact
 {
   public const PRODUCT_NAME_ENGINE = 'engine';
@@ -94,7 +92,7 @@ class Artifact
   public function isBeta(): bool
   {
     $filename = strtolower($this->fileName);
-    return StringUtil::contains($filename, 'beta');
+    return str_contains($filename, 'beta');
   }
 
   public function getPermalink(): string

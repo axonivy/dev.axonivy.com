@@ -3,7 +3,6 @@
 namespace app\domain;
 
 use app\domain\util\ArrayUtil;
-use app\domain\util\StringUtil;
 use app\Config;
 
 class ReleaseInfoRepository
@@ -98,7 +97,7 @@ class ReleaseInfoRepository
       if ($releaseInfo->getVersion()->isMinor()) {
         continue;
       }
-      if (StringUtil::startsWith($releaseInfo->getVersion()->getVersionNumber(), $version)) {
+      if (str_starts_with($releaseInfo->getVersion()->getVersionNumber(), $version)) {
         return $releaseInfo;
       }
     }
@@ -166,7 +165,7 @@ class ReleaseInfoRepository
     $infos = [];
     foreach ($releaseInfos as $info) {
       $versionNumber = $info->getVersion()->getVersionNumber();
-      if (StringUtil::startsWith($versionNumber, $version)) {
+      if (str_starts_with($versionNumber, $version)) {
         $infos[] = $info;
       }
     }

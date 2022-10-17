@@ -4,7 +4,6 @@ namespace test\permalink;
 
 use PHPUnit\Framework\TestCase;
 use app\domain\market\Market;
-use app\domain\util\StringUtil;
 use test\AppTester;
 use PHPUnit\Framework\Assert;
 
@@ -52,7 +51,7 @@ class PortalPermalinkActionTest extends TestCase
     $portal = Market::getProductByKey('portal');
     $portalVersions = $portal->getMavenProductInfo()->getVersionsToDisplay(true, null);
     foreach ($portalVersions as $v) {
-      if (StringUtil::startsWith($v, $minorVersion)) {
+      if (str_starts_with($v, $minorVersion)) {
         return $v;
       }
     }
@@ -80,7 +79,7 @@ class PortalPermalinkActionTest extends TestCase
   {
     $portalVersions = Market::getProductByKey('portal')->getMavenProductInfo()->getVersionsToDisplay(true, null);
     foreach ($portalVersions as $v) {
-      if (StringUtil::startsWith($v, $version)) {
+      if (str_starts_with($v, $version)) {
         return $v;
       }
     }

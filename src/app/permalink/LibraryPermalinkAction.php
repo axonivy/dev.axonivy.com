@@ -6,7 +6,6 @@ use Slim\Exception\HttpNotFoundException;
 use app\domain\util\Redirect;
 use app\domain\maven\MavenArtifactRepository;
 use app\domain\maven\MavenArtifact;
-use app\domain\util\StringUtil;
 
 class LibraryPermalinkAction
 {
@@ -38,7 +37,7 @@ class LibraryPermalinkAction
       return $mavenArtifact->getDevUrl();
     } else {
       foreach ($mavenArtifact->getVersions() as $v) {
-        if (StringUtil::startsWith($v, $version)) {
+        if (str_starts_with($v, $version)) {
           return $mavenArtifact->getUrl($v);
         }
       }

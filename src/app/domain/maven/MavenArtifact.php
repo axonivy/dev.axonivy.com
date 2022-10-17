@@ -2,7 +2,6 @@
 
 namespace app\domain\maven;
 
-use app\domain\util\StringUtil;
 use app\Config;
 use app\domain\market\Product;
 use GuzzleHttp\Client;
@@ -66,7 +65,7 @@ class MavenArtifact
   
   public function isProductArtifact(): bool
   {
-    return StringUtil::endsWith($this->getArtifactId(), '-product');
+    return str_ends_with($this->getArtifactId(), '-product');
   }
 
   public function getType(): string
@@ -112,7 +111,7 @@ class MavenArtifact
 
   public function getConcreteVersion($version)
   {
-    if (StringUtil::contains($version, 'SNAPSHOT')) {
+    if (str_contains($version, 'SNAPSHOT')) {
       $baseUrl = $this->getBaseUrl();
       $xml = HttpRequester::request("$baseUrl/$version/maven-metadata.xml");
       if (empty($xml)) {
@@ -170,7 +169,7 @@ class MavenArtifact
   
   private static function filterReleasedSnapshots(array $versions, string $v): bool
   {
-    if (StringUtil::endsWith($v, '-SNAPSHOT')) {
+    if (str_ends_with($v, '-SNAPSHOT')) {
       $relasedVersion = str_replace('-SNAPSHOT', '', $v);
       if (in_array($relasedVersion, $versions)) {
         return false;
@@ -229,7 +228,7 @@ class MavenArtifactBuilder
   
   public function repoUrl(string $repoUrl): MavenArtifactBuilder
   {
-    if (!StringUtil::endsWith($repoUrl, '/'))
+    if (!str_ends_with($repoUrl, '/'))
     {
       $repoUrl = $repoUrl . '/';
     }

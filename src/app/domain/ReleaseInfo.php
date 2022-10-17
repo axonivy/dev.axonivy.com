@@ -3,7 +3,6 @@
 namespace app\domain;
 
 use app\domain\doc\DocProvider;
-use app\domain\util\StringUtil;
 use app\Config;
 
 class ReleaseInfo
@@ -113,7 +112,7 @@ class ReleaseInfo
   public function findArtifactByPermalinkFile(string $permalinkFile): ?Artifact
   {
     foreach ($this->artifacts as $artifact) {
-      if (StringUtil::endsWith($artifact->getPermalink(), $permalinkFile)) {
+      if (str_ends_with($artifact->getPermalink(), $permalinkFile)) {
         return $artifact;
       }
     }

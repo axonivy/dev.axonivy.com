@@ -7,7 +7,6 @@ use app\Config;
 use app\domain\ReleaseInfoRepository;
 use app\domain\Version;
 use app\domain\ReleaseType;
-use app\domain\util\StringUtil;
 
 class MavenArchiveAction
 {
@@ -42,7 +41,7 @@ class MavenArchiveAction
 
   private static function versionSupported(Version $version): bool
   {
-    if (StringUtil::startsWith($version->getVersionNumber(), ReleaseType::NIGHTLY()->key())) {
+    if (str_starts_with($version->getVersionNumber(), ReleaseType::NIGHTLY()->key())) {
       return true;
     }
     return $version->isEqualOrGreaterThan(Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
