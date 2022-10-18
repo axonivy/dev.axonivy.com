@@ -35,8 +35,6 @@ class RoutingRules
 {
   public static function installRoutes($app)
   {
-    $app->redirect('/download/sprint-release', '/download/sprint', 301);
-
     $app->get('/', HomeAction::class);
     $app->get('/team', TeamAction::class);
     $app->get('/support', SupportAction::class);
