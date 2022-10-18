@@ -70,37 +70,24 @@
 </head>
 
 <body>
-  {% if hideHeader is not defined %}
-    <header id="header">
-      <div class="inner">
-        <a href="/" class="logo"> <img src="/images/misc/axonivy-logo.svg" style="width: 200px; height: 3rem; margin-top: 1rem; vertical-align: initial;" alt="Axon Ivy"> </a>
-        <nav id="nav">
-          <a class="button special download" href="/download">Download {{ CURRENT_VERSION_DOWNLOAD }}</a>
-          <a href="/news"><i class="si si-news sidebar-only"></i>News</a>
-          <a href="/doc"><i class="si si-book sidebar-only"></i>Doc</a>
-          <a href="/tutorial"><i class="si si-tutorial sidebar-only"></i>Tutorial</a>
-          <a href="https://community.axonivy.com/" target="_blank" rel="noreferrer"><i class="si si-answers sidebar-only"></i>Community</a>
-          <a href="/team"><i class="si si-team sidebar-only"></i>Team</a>
-          <a href="https://market.axonivy.com"><i class="si si-shop sidebar-only"></i>Market</a>
-          <a href="/search"><i class="si si-search"></i><span class="sidebar-only">Search</span></a>
-        </nav>
-      </div>
-    </header>
+  <header id="header">
+    <div class="inner">
+      <a href="/" class="logo"> <img src="/images/misc/axonivy-logo.svg" style="width: 200px; height: 3rem; margin-top: 1rem; vertical-align: initial;" alt="Axon Ivy"> </a>
+      <nav id="nav">
+        <a class="button special download" href="/download">Download {{ CURRENT_VERSION_DOWNLOAD }}</a>
+        <a href="/news"><i class="si si-news sidebar-only"></i>News</a>
+        <a href="/doc"><i class="si si-book sidebar-only"></i>Doc</a>
+        <a href="/tutorial"><i class="si si-tutorial sidebar-only"></i>Tutorial</a>
+        <a href="https://community.axonivy.com/" target="_blank" rel="noreferrer"><i class="si si-answers sidebar-only"></i>Community</a>
+        <a href="/team"><i class="si si-team sidebar-only"></i>Team</a>
+        <a href="https://market.axonivy.com"><i class="si si-shop sidebar-only"></i>Market</a>
+        <a href="/search"><i class="si si-search"></i><span class="sidebar-only">Search</span></a>
+      </nav>
+    </div>
+  </header>
 
-    <a href="#menu" class="navPanelToggle"><span class="si si-menu"></span></a>
-  {% else %}
-    <style>
-      body {
-        padding: 0em;
-      }
-      #main {
-        padding: 1em;
-      }
-      ul {
-        margin: 0em;
-      }
-    </style>
-  {% endif %}
+  <a href="#menu" class="navPanelToggle"><span class="si si-menu"></span></a>
+ 
 
   <div class="sticky-footer-wrapper">
     {% block global %}{% endblock %}
