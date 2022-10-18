@@ -26,14 +26,16 @@ use app\pages\support\SupportAction;
 use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
+use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\LegacyLibraryPermalinkAction;
 use app\permalink\LegacyPortalPermalinkAction;
 use app\permalink\LinkAction;
+use Slim\App;
 
 class RoutingRules
 {
-  public static function installRoutes($app)
+  public static function installRoutes(App $app)
   {
     $app->get('/', HomeAction::class);
     $app->get('/team', TeamAction::class);
@@ -77,5 +79,7 @@ class RoutingRules
     $app->get('/sitemap.xml', SitemapAction::class);
 
     $app->get('/news[/{version}]', NewsAction::class);
+
+    $app->get('/market[/{path:.*}]', LegacyMarketRedirectAction::class);
   }
 }
