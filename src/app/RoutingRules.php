@@ -28,7 +28,6 @@ use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
 use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
-use app\permalink\LegacyLibraryPermalinkAction;
 use app\permalink\LegacyPortalPermalinkAction;
 use app\permalink\LinkAction;
 use Slim\App;
@@ -51,7 +50,6 @@ class RoutingRules
     $app->get('/release-cycle', ReleaseCycleAction::class);
 
     $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
-    $app->get('/permalink/lib/{version}/{name}', LegacyLibraryPermalinkAction::class);
 
     $app->get('/doc', DocOverviewAction::class);
 
