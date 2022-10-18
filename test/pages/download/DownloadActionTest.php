@@ -36,11 +36,6 @@ class DownloadActionTest extends TestCase
       ->bodyContains('https://download.axonivy.com/sprint/AxonIvyEngine7.0.1.56047.S8_Windows_x64.zip');
   }
 
-  public function testLegacySprintRedirect()
-  {
-    AppTester::assertThatGet('/download/sprint-release')->permanentRedirect('/download/sprint');
-  }
-
   public function testLTS()
   {
     AppTester::assertThatGet('/download')->ok()
