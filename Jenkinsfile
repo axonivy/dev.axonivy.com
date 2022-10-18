@@ -22,13 +22,11 @@ pipeline {
         }
       }
       steps {
-        echo 'create distribution package'
         sh 'composer install --no-dev --no-progress'
-        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases --exclude=src/web/_market --exclude=src/web/market-cache src vendor"
+        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases src vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
  
-        echo 'test'
         sh 'composer install --no-progress'
         sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
         junit 'phpunit-junit.xml'
@@ -89,8 +87,6 @@ pipeline {
             // symlink
             sh "ssh $host mkdir $targetFolder/src/web/releases"
             sh "ssh $host ln -fns /home/axonivya/data/ivy-releases $targetFolder/src/web/releases/ivy"
-            sh "ssh $host ln -fns /home/axonivya/data/market $targetFolder/src/web/_market"
-            sh "ssh $host ln -fns /home/axonivya/data/market-cache $targetFolder/src/web/market-cache"
             sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
           }
         }

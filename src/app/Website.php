@@ -4,7 +4,6 @@ namespace app;
 
 use DI\Container;
 use Middlewares\TrailingSlash;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 use Slim\Exception\HttpNotFoundException;
@@ -24,11 +23,10 @@ class Website
   {
     $container = $this->createDiContainer();
     $this->app = AppFactory::createFromContainer($container);
-    $view = $this->configureTemplateEngine();
+    $this->configureTemplateEngine();
     $this->installTrailingSlashRedirect();
     $this->installRoutes();
     $this->installErrorHandling();
-    $this->installViewerMiddleware($view);
   }
 
   private function createDiContainer(): Container
@@ -98,11 +96,6 @@ class Website
   private function installTrailingSlashRedirect()
   {
     $this->app->add((new TrailingSlash(false))->redirect());
-  }
-
-  private function installViewerMiddleware(Twig $view)
-  {
-    $this->app->add(new ViewerMiddleware($view));
   }
 
   private function installRoutes()

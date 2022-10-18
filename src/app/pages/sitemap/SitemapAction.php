@@ -25,7 +25,6 @@ class SitemapAction
       self::createSite($baseUrl, '/download', 1),
       self::createSite($baseUrl, '/doc', 1),
       self::createSite($baseUrl, '/tutorial', 1),
-      self::createSite($baseUrl, '/market', 1),
       self::createSite($baseUrl, '/support', 1),
       self::createSite($baseUrl, '/team', 1),
     ];

@@ -18,8 +18,6 @@ use app\pages\download\archive\ArchiveAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\home\HomeAction;
 use app\pages\installation\InstallationAction;
-use app\pages\market\MarketAction;
-use app\pages\market\ProductAction;
 use app\pages\news\NewsAction;
 use app\pages\release\ReleaseCycleAction;
 use app\pages\search\SearchAction;
@@ -28,22 +26,17 @@ use app\pages\support\SupportAction;
 use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
-use app\permalink\PortalPermalinkAction;
+use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
-use app\permalink\LibraryPermalinkAction;
+use app\permalink\LegacyLibraryPermalinkAction;
+use app\permalink\LegacyPortalPermalinkAction;
 use app\permalink\LinkAction;
-use app\pages\market\ProductJsonFromMarketRepoAction;
-use app\pages\market\ProductJsonFromProductRepoAction;
-use app\pages\market\OpenApiAction;
-use app\pages\internal\MarketRCPTTAction;
-use app\pages\market\MarketProductLogoRedirector;
+use Slim\App;
 
 class RoutingRules
 {
-  public static function installRoutes($app)
+  public static function installRoutes(App $app)
   {
-    $app->redirect('/download/sprint-release', '/download/sprint', 301);
-
     $app->get('/', HomeAction::class);
     $app->get('/team', TeamAction::class);
     $app->get('/support', SupportAction::class);
@@ -58,7 +51,7 @@ class RoutingRules
     $app->get('/release-cycle', ReleaseCycleAction::class);
 
     $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
-    $app->get('/permalink/lib/{version}/{name}', LibraryPermalinkAction::class);
+    $app->get('/permalink/lib/{version}/{name}', LegacyLibraryPermalinkAction::class);
 
     $app->get('/doc', DocOverviewAction::class);
 
@@ -75,16 +68,7 @@ class RoutingRules
 
     $app->get('/api-browser', ApiBrowserAction::class);
 
-    $app->get('/market', MarketAction::class);
-    $app->get('/market/{key}[/{version}]', ProductAction::class);
-    $app->get('/_market/{key}/_product.json', ProductJsonFromMarketRepoAction::class);
-    $app->get('/market-cache/{key}/{artifactId}/{version}/logo.png', MarketProductLogoRedirector::class);
-    $app->get('/market-cache/{key}/{artifactId}/{version}/_product.json', ProductJsonFromProductRepoAction::class);
-    $app->get('/_market/{key}/{version}/openapi', OpenApiAction::class);
-    $app->get('/_market/{key}/openapi', OpenApiAction::class);
-    $app->get('/internal/market-rcptt', MarketRCPTTAction::class);
-
-    $app->get('/portal[/{version}[/{topic}[/{path:.*}]]]', PortalPermalinkAction::class);
+    $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
     $app->get('/installation', InstallationAction::class);
     $app->get('/features/deprecation', DeprecationAction::class);
@@ -95,5 +79,7 @@ class RoutingRules
     $app->get('/sitemap.xml', SitemapAction::class);
 
     $app->get('/news[/{version}]', NewsAction::class);
+
+    $app->get('/market[/{path:.*}]', LegacyMarketRedirectAction::class);
   }
 }
