@@ -5,7 +5,6 @@ namespace app;
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
 use app\pages\github\GitHubAction;
-use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
 use app\pages\doc\DocOverviewAction;
 use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
