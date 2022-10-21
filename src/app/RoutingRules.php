@@ -64,8 +64,6 @@ class RoutingRules
 
     $app->get('/link/{key}[/{branchVersion}]', LinkAction::class);
 
-    $app->get('/api-browser', ApiBrowserAction::class);
-
     $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
     $app->get('/installation', InstallationAction::class);
