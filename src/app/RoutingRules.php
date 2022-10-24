@@ -5,6 +5,7 @@ namespace app;
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
 use app\pages\github\GitHubAction;
+use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
 use app\pages\doc\DocOverviewAction;
 use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
@@ -62,6 +63,8 @@ class RoutingRules
     $app->get('/doc/{version}', DocAction::class);
 
     $app->get('/link/{key}[/{branchVersion}]', LinkAction::class);
+
+    $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
