@@ -1,4 +1,4 @@
-@import url("https://use.fontawesome.com/releases/v5.2.0/css/all.css");
+@import url("https://use.fontawesome.com/releases/v6.2.0/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700|Roboto");
 
 /*
@@ -3333,6 +3333,7 @@ body {
   width: 4em;
   display: none;
   z-index: 10002;
+  cursor: pointer;
 }
 
 .navPanelToggle span {
@@ -3476,13 +3477,13 @@ body {
   color: #f2a3a5;
   padding: 8em 0 6em 0;
   background-color: #0c0c0c;
-  background-image: url("/images/misc/swiss-mountains.png");
+  background-image: url("/images/misc/swiss-mountains.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   text-align: left;
   position: relative;
-  z-index: 9999;
+  z-index: 9980;
 }
 
 #banner input,

@@ -28,7 +28,7 @@
       {% endfor %}
           
       {% if docProvider.notImportantBooks is not empty or docProvider.existingBook is not empty %}
-        <div class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
+        <div class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
           <a class="button doc-dropbtn"><i class="si si-book"></i> Further Docs</a>
           <div class="doc-dropdown-content">
             {% if docProvider.notImportantBooks is not empty %}

@@ -190,10 +190,10 @@ class ReleaseInfoLoader implements Loader
   public function designerArtifacts(): array
   {
     $artifacts = [
-      $this->createDownloadArtifact('Windows', 'fab fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
-      $this->createDownloadArtifact('Linux', 'fab fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
-      $this->createDownloadArtifact('macOS', 'fab fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC),
-      $this->createDownloadArtifact('macOS', 'fab fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA)
+      $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
+      $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
+      $this->createDownloadArtifact('macOS', 'fa-brands fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC),
+      $this->createDownloadArtifact('macOS', 'fa-brands fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA)
     ];
     return array_filter($artifacts);
   }
@@ -201,10 +201,10 @@ class ReleaseInfoLoader implements Loader
   public function engineArtifacts(): array
   {
     $artifacts = [
-      $this->createDownloadArtifact('Windows', 'fab fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
-      $this->createDownloadArtifact('Docker', 'fab fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),
-      $this->createDownloadArtifact('Debian', 'fas fa-cube', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DEBIAN),
-      $this->createDownloadArtifact('Linux', 'fab fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
+      $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
+      $this->createDownloadArtifact('Docker', 'fa-brands fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),
+      $this->createDownloadArtifact('Debian', 'fa-solid fa-cube', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DEBIAN),
+      $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
     ];
     return array_filter($artifacts);
   }
