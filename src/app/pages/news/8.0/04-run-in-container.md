@@ -14,7 +14,7 @@ This means that the barriers between Docker, Kubernetes, OpenShift and all other
 	  <i class="si si-book"></i> Getting started
 	</a>
 	<a href="https://hub.docker.com/r/axonivy/axonivy-engine/" target="_blank" rel="noopener noreferrer">
-	  <i class="fab fa-docker"></i> Axon.ivy Engine Docker Image
+	  <i class="fa-brands fa-docker"></i> Axon.ivy Engine Docker Image
 	</a>
 	<a href="https://github.com/axonivy/docker-samples" target="_blank" rel="noopener noreferrer">
 	  <i class="si si-lab-flask"></i> Docker Examples

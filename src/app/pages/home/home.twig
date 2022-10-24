@@ -112,13 +112,13 @@
   <div class="fixed-news-image">
     <span class="close-button" onclick="hideAnnouncment()"></span>
     <a href="/team">
-      <img src="/images/misc/hiring.png" />
+      <img src="/images/misc/hiring.png" alt="Join our team" />
     </a>
   </div>
 
   <script>
     function hideAnnouncment() {
-      $('.fixed-news-image').hide();
+      document.querySelector('.fixed-news-image').style.display = 'none';
       let expiryDate = new Date();
       expiryDate.setMonth(expiryDate.getMonth() + 3)
       document.cookie = `announcment=false; expires=${expiryDate}`;

@@ -12,6 +12,7 @@
 }
 .fixed-news-image img {
   width: 15rem;
+  height: 10rem;
 }
 .fixed-news-image .close-button {
   width: 30px;
