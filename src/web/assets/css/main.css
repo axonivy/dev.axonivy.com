@@ -3333,6 +3333,7 @@ body {
   width: 4em;
   display: none;
   z-index: 10002;
+  cursor: pointer;
 }
 
 .navPanelToggle span {

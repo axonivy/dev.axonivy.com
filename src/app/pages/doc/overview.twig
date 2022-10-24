@@ -67,7 +67,7 @@ a.min-width {
                 <a class="min-width" href="{{ docLink.url }}">
                   <i class="si si-book"></i> {{ docLink.displayText }}
                 </a>
-                <span class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
+                <span class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
                   <i class="si si-arrow-down doc-dropbtn"></i>
                   <span class="doc-dropdown-content">
                     <span>More</span>
@@ -95,7 +95,7 @@ a.min-width {
                     <a class="min-width" href="{{ docLink.url }}">
                       <i class="si si-book"></i> {{ docLink.displayText }}
                     </a>
-                    <span class="doc-dropdown" ontouchstart="$(this).toggleClass('active-dropdown');">
+                    <span class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
                       <i class="si si-arrow-down doc-dropbtn"></i>
                       <span class="doc-dropdown-content">
                         <span>More</span>
