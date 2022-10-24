@@ -4,6 +4,12 @@ namespace app\pages\api;
 
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
+
+/**
+ * Used in:
+ * - core documentation
+ * - market.axonivy.com
+ */
 class ApiBrowserAction
 {
 
