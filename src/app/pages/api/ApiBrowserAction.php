@@ -8,7 +8,6 @@ use Slim\Views\Twig;
 /**
  * Used in:
  * - core documentation
- * - market.axonivy.com
  */
 class ApiBrowserAction
 {
@@ -22,7 +21,6 @@ class ApiBrowserAction
 
   public function __invoke($request, Response $response, $args)
   {
-    $response = $response->withHeader('Access-Control-Allow-Origin', 'https://market.axonivy.com'); // so that swagger can open urls from market
     return $this->view->render($response, 'api/api.twig');
   }
 }
