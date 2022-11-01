@@ -95,4 +95,10 @@ class LinkActionTest extends TestCase
       AppTester::assertThatGet('/link/build-examples-web-test-select/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L114-L156');
       AppTester::assertThatGet('/link/build-examples-web-test-condition/8.0')->redirect($prefixBuildExamples . 'blob/release/8.0/compile-test/crmIntegrationTests/src_test/ch/ivyteam/integrationtest/WebTestOrderFormIT.java#L164-L181');
   }
+
+  public function testRedirectPortal()
+  {
+    AppTester::assertThatGet('/link/market-install-portal')->redirect("https://market.axonivy.com/portal?ivy-viewer=designer-market&installNow");
+    AppTester::assertThatGet('/link/market-install-portal/10.0')->redirect("https://market.axonivy.com/portal?ivy-viewer=designer-market&ivy-version=10.0&installNow");
+  }
 }
