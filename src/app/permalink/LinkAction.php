@@ -5,19 +5,21 @@ namespace app\permalink;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Response;
 use app\domain\util\Redirect;
+use Slim\Psr7\Request;
 
 class LinkAction
 {
   public function __invoke($request, Response $response, $args)
   {
     $linkKey = $args['key'];
-    $branchVersion = $args['branchVersion'] ?? 'master';
-    $redirectUrl = $this->getRedirectUrl($request, $linkKey, $branchVersion);
+    $version = $args['version'] ?? '';
+    $redirectUrl = $this->getRedirectUrl($request, $linkKey, $version);
     return Redirect::to($response, $redirectUrl);
   }
 
-  private function getRedirectUrl($request, $linkKey, $branchVersion) {
-    if (is_numeric(substr($branchVersion, 0, 1))) {
+  private function getRedirectUrl(Request $request, $linkKey, $version) {
+    $branchVersion = empty($version) ? 'master' : $version;
+    if (is_numeric(substr($version, 0, 1))) {
       $branchVersion = "release/$branchVersion";
     }
 
@@ -54,7 +56,7 @@ class LinkAction
         'webtester' => 'https://github.com/axonivy/web-tester/',
 
         'market-contribute' => 'https://github.com/axonivy/market/wiki/c0-Contribute',
-        'market-install-portal' => 'https://market.axonivy.com/portal?ivy-viewer=designer-market&installNow',
+        'market-install-portal' => self::installPortal($version),
         
         'build-examples' => $buildExamplePrefix . 'tree/' . $branchVersion,
         'build-examples-test-project' => $buildExampleBlobPrefix,
@@ -69,8 +71,15 @@ class LinkAction
 
     $newPage = $redirects[$linkKey] ?? '';
     if (empty($newPage)) {
-        throw new HttpNotFoundException($request);
+      throw new HttpNotFoundException($request);
     }
     return $newPage;
+  }
+
+  private static function installPortal($version) {
+    if (empty($version)) {
+      return "https://market.axonivy.com/portal?ivy-viewer=designer-market&installNow";
+    }
+    return "https://market.axonivy.com/portal?ivy-viewer=designer-market&ivy-version=$version&installNow";
   }
 }
