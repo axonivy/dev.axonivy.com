@@ -6,7 +6,7 @@
     "successorHref": "/doc/9.3/designer-guide/user-interface/user-dialogs/html-dialogs.html",
     "released": "3",
     "deprecated": "8",
-    "removed": "9.3",
+    "removed": "10",
     "description": "The cms page (also Smart Table) feature has been removed. Use html dialog to implement user interfaces."
   },
   {
@@ -16,7 +16,7 @@
     "successorHref": "/market/doc-factory",
     "released": "3",
     "deprecated": "8",
-    "removed": "9.3",
+    "removed": "10",
     "description": "Macro expansion in RTF documents has been removed. Use the doc factory to generate documents."
   },
   {
@@ -44,7 +44,7 @@
     "successorHref": "/doc/9.3/designer-guide/configuration/webservice-clients.html",
     "released": "3",
     "deprecated": "8",
-    "removed": "9.3",
+    "removed": "10",
     "description": "The Axis web service client technology stack has been removed. Use the brand new CXF web service client stack."
   },
   {
@@ -53,7 +53,7 @@
     "successor": "JDK",
     "successorHref": "https://docs.oracle.com/en/java/javase/11/",
     "released": "3",
-    "deprecated": ">",
+    "deprecated": "10",
     "description": "The Java library Guava is provided currently on the ivy project classpath. It will be removed in future. Use the utilities from the JDK."
   },
   {
@@ -62,7 +62,7 @@
     "successor": "Apache Commons Lang 3",
     "successorHref": "https://commons.apache.org/proper/commons-lang/",
     "released": "3",
-    "deprecated": ">",
+    "deprecated": "10",
     "description": "The Java library Apache Commons Lang 2 is provided currently on the ivy project classpath. It will be removed in future. Use Apache Commons Lang 3 which is provided on the ivy project classpath."
   },
   {
@@ -71,7 +71,7 @@
     "successor": "Apache Commons Collection 4", 
     "successorHref": "https://commons.apache.org/proper/commons-collections/release_4_4.html",
     "released": "3",
-    "deprecated": ">",
+    "deprecated": "10",
     "description": "The Java library Apache Commons Collection 3 is provided currently on the ivy project classpath. It will be removed in future. Use Apache Commons Collection 4 which is provided on the ivy project classpath."
   },
   {
@@ -80,7 +80,7 @@
     "successor": "JDK HTTP Client", 
     "successorHref": "https://openjdk.java.net/groups/net/httpclient/intro.html",
     "released": "3",
-    "deprecated": ">",
+    "deprecated": "10",
     "description": "The Java library Apache Http Client is provided currently on the ivy project classpath. It will be removed in future. Use the HTTP Client from the JDK."
   },
   {
@@ -89,7 +89,7 @@
     "successor": "Containers / Configuration", 
     "successorHref": "https://community.axonivy.com/d/142-environments-will-disappear-in-the-long-term",
     "released": "4",
-    "deprecated": "9.3",
+    "deprecated": "10",
     "description": "Environments are deprecated and we won't invest in new features. Please use containers or correct configurations instead."
   },
   {
@@ -97,7 +97,7 @@
     "nameHref": "/doc/8.0/market/extension/reporting.html",
     "released": "4",
     "deprecated": "8",
-    "removed": "9.1",
+    "removed": "10",
     "description": "The Process Reporting extension tool BIRT is removed."
   },
   {
@@ -106,7 +106,7 @@
     "successor": "HTTP/S Protocol",
     "successorHref": "/doc/9.2/engine-guide/integration/index.html",
     "released": "4",
-    "deprecated": "9.2",
+    "deprecated": "10",
     "description": "The AJP Protocol is deprecated. Please use the HTTP or HTTPS Protocol instead."
   },
   {
@@ -125,15 +125,14 @@
     "successorHref": "https://community.axonivy.com/d/245-modern-cms",
     "released": "3",
     "deprecated": "7",
-    "removed": ">",
+    "removed": "10",
     "description": "There was a .meta file for each CMS entry. This file is completely removed in favor of a modern CMS structure."
   },
   {
     "name": "Call & Wait element", 
     "nameHref": "/releases/ivy/8.0/documents/designer-guide/process-modeling/process-elements/call-and-wait.html",
     "released": "4",
-    "deprecated": ">",
-    "removed": ">",
+    "deprecated": "10",
     "description": "The Call & Wait intermediate process element."
   }
 ]
