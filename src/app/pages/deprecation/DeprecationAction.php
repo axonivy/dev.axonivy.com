@@ -31,15 +31,7 @@ class DeprecationAction
   
   private static function getVersions(): array
   {
-    $versions = [];
-    foreach(ReleaseInfoRepository::getAllEverLongTermSupportVersions() as $lts) {
-      $versions[] = $lts->majorVersion();
-    }
-    foreach(ReleaseInfoRepository::getLeadingEdgesSinceLastLongTermVersion() as $le) {
-      $versions[] = $le->minorVersion();
-    }
-    $versions[] = '>';
-    return $versions;
+    return ["3", "4", "5", "6", "7", "8", "10"];
   }
   
   private static function getFeatures(): array
@@ -49,39 +41,54 @@ class DeprecationAction
     foreach ($features as $feature) {
       $cssClassForVersions = array();
       $versions = self::$versions;
-      foreach ($versions as $v) {
-        $cssClassForVersions[$v] = self::cssClassForVersion($feature, $versions, $v);
+      foreach ($versions as $version) {
+        $cssClassForVersions[$version] = self::cssClassForVersion($feature, $version);
       }
       $feature->cssClassForVersions = $cssClassForVersions;
     }
     return $features;
   }
 
-  private static function cssClassForVersion($feature, array $versions, String $version) 
+  private static function cssClassForVersion($feature, String $version) 
   {
-    $cls = "";
-    foreach ($versions as &$v) {
-      if ($v == $feature->released) {
-        $cls = "deprecation-released";
-      }
-      if ($v == $feature->deprecated) {
-        $cls = "deprecation-deprecated";
-      }
-      $removed = $feature->removed ?? '';
-      if ($v == $removed) {
-        $cls = "deprecation-removed";
-      }
-      if ($v == $version) {
-        return $cls;
-      }
-      if ($cls == "deprecation-removed") {
-        $cls = "";  
-      }
-      if ($cls == "deprecation-released") {
-        $cls = "deprecation-ok";
-      }
+    if (self::isPreRelease($feature, $version)) {
+      return "";
     }
-    return $cls;
+    if (self::isReleased($feature, $version)) {
+      return "deprecation-released";
+    }
+    if (self::isAvailable($feature, $version)) {
+      return "deprecation-ok";
+    }
+    if (self::isRemoved($feature, $version)) {
+      return "deprecation-removed";
+    }
+    if (self::isDeprecated($feature, $version)) {
+      return "deprecation-deprecated";
+    }
+  }
+
+  private static function isPreRelease($feature, $version): bool {
+    return version_compare($version, $feature->released) == -1;
+  }
+
+  private static function isReleased($feature, $version): bool {
+    return version_compare($version, $feature->released) == 0;
+  }
+
+  private static function isAvailable($feature, $version): bool {
+    return version_compare($version, $feature->deprecated) == -1;
+  }
+
+  private static function isDeprecated($feature, $version): bool {
+    return version_compare($version, $feature->deprecated) == 0 || !isset($feature->removed) || version_compare($version, $feature->removed) == -1;
+  }
+
+  private static function isRemoved($feature, $version): bool {
+    if (!isset($feature->removed)) {
+      return false;
+    }
+    return version_compare($version, $feature->removed) == 0;
   }
 }
 
