@@ -7,6 +7,7 @@ use Slim\Psr7\Request;
 use Slim\Views\Twig;
 use app\domain\Artifact;
 use app\domain\ReleaseInfo;
+use app\domain\ReleaseInfoRepository;
 use app\domain\ReleaseType;
 
 class DownloadAction
@@ -41,7 +42,7 @@ class DownloadAction
 
       'headerTitle' => $loader->headerTitle(),
       'headerSubTitle' => $releaseType->headline(),
-      'banner' => $releaseType->banner(),
+      'banner' => $this->getBanner($version, $releaseType),
 
       'showOtherVersions' => ReleaseType::isLTS($releaseType),
       'devReleases' => $this->devReleases(),
@@ -55,6 +56,23 @@ class DownloadAction
 
       'releaseNotesLink' => $loader->releaseNotesLink()
     ]);
+  }
+
+  private function getBanner(string $version, ReleaseType $rt): string
+  {
+    echo "<script>console.log('Debug Objects: " . $version . "' );</script>";
+    if (empty($version) || is_null($rt)) {
+      return '';
+    }
+    if ($rt->name() != ReleaseType::LTS()->name()) {
+      return $rt->banner();
+    }
+    foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $ltsVersion) {
+      if ($ltsVersion->getVersion()->getMinorVersion() == $version) {
+        return $rt->banner();
+      }
+    }
+    return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This LTS version is no longer supported.</b>';
   }
 
   private function devReleases(): array
