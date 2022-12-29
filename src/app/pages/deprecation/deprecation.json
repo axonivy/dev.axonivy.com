@@ -90,6 +90,7 @@
     "successorHref": "https://community.axonivy.com/d/142-environments-will-disappear-in-the-long-term",
     "released": "4",
     "deprecated": "10",
+    "removed": "11.1",
     "description": "Environments are deprecated and we won't invest in new features. Please use containers or correct configurations instead."
   },
   {
