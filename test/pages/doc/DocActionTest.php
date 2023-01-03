@@ -47,6 +47,12 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/notexisting')->notFound();
   }
 
+  public function testRedirectoMinorIfBugfixDoesNotExist()
+  {
+    AppTester::assertThatGet('/doc/9.1.0')->redirect('/doc/9.1.0/index.html');;
+    AppTester::assertThatGet('/doc/9.1.99')->redirect('/doc/9.1/index.html');
+  }
+
   public function testRedirectToNewDocSinceVersion9()
   {
     AppTester::assertThatGet('/doc/7.5.0')->ok();
