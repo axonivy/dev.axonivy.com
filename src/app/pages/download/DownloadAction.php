@@ -41,7 +41,7 @@ class DownloadAction
 
       'headerTitle' => $loader->headerTitle(),
       'headerSubTitle' => $releaseType->headline(),
-      'banner' => $releaseType->banner(),
+      'banner' => $releaseType->banner($version),
 
       'showOtherVersions' => ReleaseType::isLTS($releaseType),
       'devReleases' => $this->devReleases(),

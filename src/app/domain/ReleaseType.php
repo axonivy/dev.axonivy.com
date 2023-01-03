@@ -19,7 +19,7 @@ class ReleaseType
     $type->allReleaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLongTermSupportVersions();
     $type->isDevRelease = false;
     $type->headline = '<p>Get the latest stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> version of the Axon Ivy Platform. Or download the <a href="/download/leading-edge">Leading Edge</a> version.';
-    $type->banner = '';
+    $type->bannerSupplier = fn (string $version) => $this->getLtsBanner($version);
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->minorVersion();
     $type->promotedDevVersion = false;
     return $type;
@@ -35,7 +35,7 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLeadingEdge();
     $type->isDevRelease = false;
     $type->headline = '<p>Become an early adopter and take the <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Leading Edge</a> road with newest features but frequent migrations.</p>';
-    $type->banner = '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
+    $type->bannerSupplier = fn (string $version) => '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->majorVersion();
     $type->promotedDevVersion = false;
     return $type;
@@ -88,9 +88,22 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => self::devReleaseInfoSupplier($key);
     $type->isDevRelease = true;
     $type->headline = '<p>Our development releases are very unstable and only available for testing purposes.</p>';
-    $type->banner = '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">These artifacts are for testing purposes only. Never use them on a productive system!</b>';
+    $type->bannerSupplier = fn (string $version) => '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">These artifacts are for testing purposes only. Never use them on a productive system!</b>';
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/unstable';
     return $type;
+  }
+
+  private function getLtsBanner($version) {
+    foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $ltsVersion) {
+      if (str_starts_with($ltsVersion->getVersion()->getBugfixVersion(), $version)) {
+        $latest_lts = ReleaseInfoRepository::getLatestLongTermSupport()->getVersion()->getBugfixVersion();
+        if (str_starts_with($latest_lts, $version)) {
+          return '';
+        }
+        return '<b>There is a <a href="/download">newer LTS version</a> available for download</b>';
+      }
+    }
+    return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Long Term Support release is no longer supported!</b>';
   }
 
   private static function devReleaseInfoSupplier(string $key): ?ReleaseInfo
@@ -193,7 +206,7 @@ class ReleaseType
 
   private string $headline;
 
-  private string $banner;
+  private $bannerSupplier;
 
   private $archiveLinkSupplier;
 
@@ -239,9 +252,9 @@ class ReleaseType
     return $this->isDevRelease;
   }
 
-  public function banner(): string
+  public function banner(string $version): string
   {
-    return $this->banner;
+    return $this->bannerSupplier->call($this, $version);
   }
 
   public function headline(): string
