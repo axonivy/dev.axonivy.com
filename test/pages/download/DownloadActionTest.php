@@ -77,6 +77,18 @@ class DownloadActionTest extends TestCase
     }
   }
 
+  public function testOutdatedLtsBanner()
+  {
+    AppTester::assertThatGet('/download/6.0')->ok()
+      ->bodyContains('This Long Term Support release is no longer supported');
+  }
+
+  public function testOutdatedLeBanner()
+  {
+    AppTester::assertThatGet('/download/9.2')->ok()
+      ->bodyContains('This Leading Edge release is no longer supported');
+  }
+
   public function testNotExisting()
   {
     AppTester::assertThatGet('/download/does-not-exist')->notFound();

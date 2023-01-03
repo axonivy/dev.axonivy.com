@@ -35,7 +35,7 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLeadingEdge();
     $type->isDevRelease = false;
     $type->headline = '<p>Become an early adopter and take the <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Leading Edge</a> road with newest features but frequent migrations.</p>';
-    $type->bannerSupplier = fn (string $version) => '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
+    $type->bannerSupplier = fn (string $version) => $this->getLeBanner($version);
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->majorVersion();
     $type->promotedDevVersion = false;
     return $type;
@@ -103,7 +103,15 @@ class ReleaseType
         return '<b>There is a <a href="/download">newer LTS version</a> available for download</b>';
       }
     }
-    return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Long Term Support release is no longer supported!</b>';
+    return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Long Term Support release is no longer supported! Please update to the latest LTS version.</b>';
+  }
+
+  private function getLeBanner($version) {
+    $leVersion = ReleaseInfoRepository::getLeadingEdge();
+    if ($leVersion == null || !str_starts_with($leVersion->getVersion()->getBugfixVersion(), $version)) {
+      return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Leading Edge release is no longer supported! Please update to LTS or latest LE version.</b>';
+    }
+    return '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
   }
 
   private static function devReleaseInfoSupplier(string $key): ?ReleaseInfo
