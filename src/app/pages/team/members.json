@@ -57,9 +57,16 @@
   },
   {
     "name": "Peter Hochstrasser",
-    "imgSrc": "images/team/peter.jpg",
+    "imgSrc": "/images/team/peter.jpg",
     "education": "M. Sc. Computer Science",
     "function": "Support, documentation, MfA",
     "slogan": "Infrastructure is key"
+  },
+    {
+    "name": "Tobias Gretler",
+    "imgSrc": "/images/team/tobias.jpg",
+    "education": "EFZ Information Technology",
+    "function": "Core Developer",
+    "slogan": "Learning Software development 🖥️"
   }
 ]
