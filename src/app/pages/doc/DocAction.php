@@ -41,7 +41,15 @@ class DocAction
 
     $docProvider = new DocProvider($version);
     if (!$docProvider->exists()) {
-      throw new HttpNotFoundException($request);
+      // try minor version if bugfix does not exist
+      $v = new Version($version);
+      if ($v->isBugfix()) {
+        $version = $v->getMinorVersion();
+        $docProvider = new DocProvider($version);
+        if (!$docProvider->exists()) {
+          throw new HttpNotFoundException($request);
+        }
+      }
     }
 
     if ($this->documentationBasedOnReadTheDocs($version)) {
