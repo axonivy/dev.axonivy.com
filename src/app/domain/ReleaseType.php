@@ -94,6 +94,9 @@ class ReleaseType
   }
 
   private function getLtsBanner($version) {
+    if ($version == $this->key()) {
+      return '';
+    }
     foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $ltsVersion) {
       if (str_starts_with($ltsVersion->getVersion()->getBugfixVersion(), $version)) {
         $latest_lts = ReleaseInfoRepository::getLatestLongTermSupport()->getVersion()->getBugfixVersion();
@@ -107,11 +110,15 @@ class ReleaseType
   }
 
   private function getLeBanner($version) {
+    $defaultBanner = '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
+    if ($version == $this->key()) {
+      return $defaultBanner;
+    }
     $leVersion = ReleaseInfoRepository::getLeadingEdge();
     if ($leVersion == null || !str_starts_with($leVersion->getVersion()->getBugfixVersion(), $version)) {
       return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Leading Edge release is no longer supported! Please update to LTS or latest LE version.</b>';
     }
-    return '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
+    return $defaultBanner;
   }
 
   private static function devReleaseInfoSupplier(string $key): ?ReleaseInfo

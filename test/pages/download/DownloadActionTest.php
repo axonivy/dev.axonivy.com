@@ -73,7 +73,8 @@ class DownloadActionTest extends TestCase
     $le = ReleaseInfoRepository::getLeadingEdge();
     if ($le != null)
     {
-      $responseAssert->bodyContains("axonivy/axonivy-engine:" . $le->getVersion()->getBugfixVersion());
+      $responseAssert->bodyContains("axonivy/axonivy-engine:" . $le->getVersion()->getBugfixVersion())
+        ->bodyDoesNotContain('This Leading Edge release is no longer supported');
     }
   }
 
