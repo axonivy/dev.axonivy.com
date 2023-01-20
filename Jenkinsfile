@@ -23,7 +23,7 @@ pipeline {
       }
       steps {
         sh 'composer install --no-dev --no-progress'
-        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases src vendor"
+        sh "tar -cf ${env.DIST_FILE} --exclude=src/web/releases --exclude=src/web/docs src vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
  
