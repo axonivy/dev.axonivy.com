@@ -7,9 +7,7 @@ use app\Config;
 class DocProvider
 {
   /**
-   * For example:
-   * <li> sprint
-   * <li> 7.0.0
+   * Minor version number
    * @var $versionNumber
    */
   private string $versionNumber;
@@ -31,7 +29,7 @@ class DocProvider
 
   private function getDocDir()
   {
-    return Config::releaseDirectory() . DIRECTORY_SEPARATOR . $this->versionNumber;
+    return Config::docDirectory() . "/" . $this->versionNumber;
   }
 
   public function findDocumentByNiceUrlPath(string $niceUrlPath): ?AbstractDocument
@@ -56,6 +54,11 @@ class DocProvider
     return array_filter($this->findAllDocuments(), function (AbstractDocument $doc) {
       return $doc instanceof Book;
     });
+  }
+
+  public static function getNewestDocUrl(): string
+  {
+    return "/doc/9.1";
   }
 
   public function getExistingBooks(): array
@@ -149,7 +152,7 @@ class DocProvider
 
   private function createRootPath(): string
   {
-    return Config::releaseDirectory() . '/' . $this->versionNumber . '/documents';
+    return Config::docDirectory() . '/' . $this->versionNumber;
   }
 
   private function createBaseUrl(): string
@@ -159,7 +162,7 @@ class DocProvider
 
   private function createBaseRessourceUrl(): string
   {
-    return '/releases/ivy/' . $this->versionNumber . '/documents';
+    return '/docs/' . $this->versionNumber;
   }
 
   public function getReleaseNotes(): ReleaseDocument
@@ -223,16 +226,9 @@ class DocProvider
   public function getMinorUrl(): string
   {
     if (Version::isValidVersionNumber($this->versionNumber)) {
-      return '/doc/' . (new Version($this->versionNumber))->getMinorVersion();
-    }
-    return '/doc/' . $this->versionNumber;
-  }
-
-  public function getMinorUrlOrBugfixUrl(): string
-  {
-    if (Version::isValidVersionNumber($this->versionNumber)) {
-      if ((new DocProvider((new Version($this->versionNumber))->getMinorVersion()))->exists()) {
-        return $this->getMinorUrl();
+      $v = (new Version($this->versionNumber))->getMinorVersion();
+      if ((new DocProvider($v))->exists()) {
+        return '/doc/' . $v;
       }
     }
     return $this->getOverviewUrl();

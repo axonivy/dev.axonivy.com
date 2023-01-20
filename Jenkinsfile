@@ -87,6 +87,7 @@ pipeline {
             // symlink
             sh "ssh $host mkdir $targetFolder/src/web/releases"
             sh "ssh $host ln -fns /home/axonivya/data/ivy-releases $targetFolder/src/web/releases/ivy"
+            sh "ssh $host ln -fns /home/axonivya/data/doc $targetFolder/src/web/docs"
             sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
           }
         }

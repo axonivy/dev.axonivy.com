@@ -23,4 +23,9 @@ class Config
   {
     return self::isProductionEnvironment() ? '/home/axonivya/data/ivy-releases' : __DIR__ . '/../../src/web/releases/ivy';
   }
+
+  public static function docDirectory(): string
+  {
+    return self::isProductionEnvironment() ? '/home/axonivya/data/ivy-docs' : __DIR__ . '/../../src/web/docs';
+  }
 }

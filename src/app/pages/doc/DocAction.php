@@ -36,20 +36,53 @@ class DocAction
       if (!empty($doc)) {
         $doc = '/' . $doc;
       }
-      return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrlOrBugfixUrl() . $doc);
+      return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);
     }
 
+    // special treatement for dev, sprint, nightly
+    if ($version == "dev" || $version == "sprint" || $version == "nightly") {
+      $url = DocProvider::getNewestDocUrl();
+      $doc = $args['document'] ?? '';
+      if (!empty($doc)) {
+        $doc = '/' . $doc;
+      }
+      return Redirect::to($response, $url . $doc);
+    }
+
+    // nightly-8.0
+    if (str_starts_with($version, "nightly-")) {
+      $v = str_replace("nightly-", "", $version);
+      $v = new Version($v);
+      $v = $v->getMinorVersion();
+      $docProvider = new DocProvider($v);
+      if (!$docProvider->exists()) {
+        throw new HttpNotFoundException($request);      
+      }
+      $doc = $args['document'] ?? '';
+      if (!empty($doc)) {
+        $doc = '/' . $doc;
+      }
+      return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
+    }
+
+    // special treatement for latest
+    if ($version == "latest") {
+      $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();
+      if ($releaseInfo == null) {
+        throw new NotFoundException();
+      }
+      $doc = $args['document'] ?? '';
+      if (!empty($doc)) {
+        $doc = '/' . $doc;
+      }
+      return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);
+    }
+
+    $v = new Version($version);
+    $version = $v->getMinorVersion();
     $docProvider = new DocProvider($version);
     if (!$docProvider->exists()) {
-      // try minor version if bugfix does not exist
-      $v = new Version($version);
-      if ($v->isBugfix()) {
-        $version = $v->getMinorVersion();
-        $docProvider = new DocProvider($version);
-        if (!$docProvider->exists()) {
-          throw new HttpNotFoundException($request);
-        }
-      }
+      throw new HttpNotFoundException($request);      
     }
 
     if ($this->documentationBasedOnReadTheDocs($version)) {
@@ -59,6 +92,15 @@ class DocAction
       } else {
         return Redirect::to($response, $newDocUrl);
       }
+    }
+
+    // redirect to minor version if access is not via minor version
+    if ($args['version'] != $version) {
+      $doc = $args['document'] ?? '';
+      if (!empty($doc)) {
+        $doc = '/' . $doc;
+      }
+      return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
     }
 
     // legacy, before 9
