@@ -26,6 +26,6 @@ class Config
 
   public static function docDirectory(): string
   {
-    return self::isProductionEnvironment() ? '/home/axonivya/data/ivy-docs' : __DIR__ . '/../../src/web/docs';
+    return self::isProductionEnvironment() ? '/home/axonivya/data/doc' : __DIR__ . '/../../src/web/docs';
   }
 }
