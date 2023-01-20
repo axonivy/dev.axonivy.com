@@ -57,7 +57,7 @@ class DocProvider
     });
   }
 
-  public static function getNewestDocUrl(): string
+  public static function getNewestDocProvider(): DocProvider
   {
     $versions = [];
     $directories = array_filter(glob(Config::docDirectory() . '/*'), 'is_dir');
@@ -67,7 +67,7 @@ class DocProvider
     usort($versions, function (string $v1, string $v2) {
       return version_compare($v2, $v1);
     });
-    return '/doc/' . $versions[0];
+    return new DocProvider($versions[0]);
   }
 
   public function getExistingBooks(): array

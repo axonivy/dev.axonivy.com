@@ -42,7 +42,7 @@ class DocAction
 
     // special treatement for dev, sprint, nightly
     if ($version == "dev" || $version == "sprint" || $version == "nightly") {
-      $url = DocProvider::getNewestDocUrl();      
+      $url = DocProvider::getNewestDocProvider()->getMinorUrl();      
       return Redirect::to($response, $url . $doc);
     }
 
