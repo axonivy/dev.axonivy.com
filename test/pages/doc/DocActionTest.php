@@ -63,9 +63,9 @@ class DocActionTest extends TestCase
   {
     AppTester::assertThatGet('/doc/7.5.0')->redirect("/doc/7.5");
     AppTester::assertThatGet('/doc/9.1.0')->redirect('/doc/9.1/index.html');
-    AppTester::assertThatGet('/doc/dev')->redirect('/doc/9.1');
-    AppTester::assertThatGet('/doc/sprint')->redirect('/doc/9.1');
-    AppTester::assertThatGet('/doc/nightly')->redirect('/doc/9.1');
+    AppTester::assertThatGet('/doc/dev')->redirect('/doc/9.4');
+    AppTester::assertThatGet('/doc/sprint')->redirect('/doc/9.4');
+    AppTester::assertThatGet('/doc/nightly')->redirect('/doc/9.4');
     AppTester::assertThatGet('/doc/nightly-8.0')->redirect('/doc/8.0');
 
     AppTester::assertThatGet('/doc/latest')->redirect('/doc/8.0');
@@ -78,9 +78,9 @@ class DocActionTest extends TestCase
   {
     AppTester::assertThatGet('/doc/7.5.0/migration-notes')->redirect("/doc/7.5/migration-notes");
     AppTester::assertThatGet('/doc/9.1.0/migration-notes')->redirect('/doc/9.1/axonivy/migration/index.html');
-    AppTester::assertThatGet('/doc/dev/migration-notes')->redirect('/doc/9.1/migration-notes');
-    AppTester::assertThatGet('/doc/sprint/migration-notes')->redirect('/doc/9.1/migration-notes');
-    AppTester::assertThatGet('/doc/nightly/migration-notes')->redirect('/doc/9.1/migration-notes');
+    AppTester::assertThatGet('/doc/dev/migration-notes')->redirect('/doc/9.4/migration-notes');
+    AppTester::assertThatGet('/doc/sprint/migration-notes')->redirect('/doc/9.4/migration-notes');
+    AppTester::assertThatGet('/doc/nightly/migration-notes')->redirect('/doc/9.4/migration-notes');
     AppTester::assertThatGet('/doc/nightly-8.0/migration-notes')->redirect('/doc/8.0/migration-notes');
 
     AppTester::assertThatGet('/doc/latest/migration-notes')->redirect('/doc/8.0/migration-notes');
@@ -93,9 +93,9 @@ class DocActionTest extends TestCase
   {
     AppTester::assertThatGet('/doc/7.5.0/release-notes')->redirect("/doc/7.5/release-notes");
     AppTester::assertThatGet('/doc/9.1.0/release-notes')->redirect('/doc/9.1/axonivy/release-notes/index.html');
-    AppTester::assertThatGet('/doc/dev/release-notes')->redirect('/doc/9.1/release-notes');
-    AppTester::assertThatGet('/doc/sprint/release-notes')->redirect('/doc/9.1/release-notes');
-    AppTester::assertThatGet('/doc/nightly/release-notes')->redirect('/doc/9.1/release-notes');
+    AppTester::assertThatGet('/doc/dev/release-notes')->redirect('/doc/9.4/release-notes');
+    AppTester::assertThatGet('/doc/sprint/release-notes')->redirect('/doc/9.4/release-notes');
+    AppTester::assertThatGet('/doc/nightly/release-notes')->redirect('/doc/9.4/release-notes');
     AppTester::assertThatGet('/doc/nightly-8.0/release-notes')->redirect('/doc/8.0/release-notes');
 
     AppTester::assertThatGet('/doc/latest/release-notes')->redirect('/doc/8.0/release-notes');
@@ -109,9 +109,9 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/7.5.0/new-and-noteworthy')->redirect("/doc/7.5/new-and-noteworthy");
     AppTester::assertThatGet('/doc/9.1.0/new-and-noteworthy')->redirect('/news/9.1');
     AppTester::assertThatGet('/doc/9.1/new-and-noteworthy')->redirect('/news/9.1');
-    AppTester::assertThatGet('/doc/dev/new-and-noteworthy')->redirect('/doc/9.1/new-and-noteworthy');
-    AppTester::assertThatGet('/doc/sprint/new-and-noteworthy')->redirect('/doc/9.1/new-and-noteworthy');
-    AppTester::assertThatGet('/doc/nightly/new-and-noteworthy')->redirect('/doc/9.1/new-and-noteworthy');
+    AppTester::assertThatGet('/doc/dev/new-and-noteworthy')->redirect('/doc/9.4/new-and-noteworthy');
+    AppTester::assertThatGet('/doc/sprint/new-and-noteworthy')->redirect('/doc/9.4/new-and-noteworthy');
+    AppTester::assertThatGet('/doc/nightly/new-and-noteworthy')->redirect('/doc/9.4/new-and-noteworthy');
     AppTester::assertThatGet('/doc/nightly-8.0/new-and-noteworthy')->redirect('/doc/8.0/new-and-noteworthy');
 
     AppTester::assertThatGet('/doc/latest/new-and-noteworthy')->redirect('/doc/8.0/new-and-noteworthy');
