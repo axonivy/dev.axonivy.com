@@ -110,7 +110,36 @@ a.min-width {
             </ul>
           </div>
         </article>
-      {% endif %}    
+      {% endif %}
+      {% if docLinksDev is not empty %}
+        <article>
+          <div class="content">
+            <header>
+              <h3><i class="si si-lab-flask"></i> Development Build</h3>
+            </header>
+            <ul class="actions">
+              {% for docLink in docLinksDev %}
+                <li>
+                  <span class="button special special-dropdown">
+                    <a class="min-width" href="{{ docLink.url }}">
+                      <i class="si si-book"></i> {{ docLink.displayText }}
+                    </a>
+                    <span class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
+                      <i class="si si-arrow-down doc-dropbtn"></i>
+                      <span class="doc-dropdown-content">
+                        <span>More</span>
+                        {% for doc in docLink.releaseDocuments %}
+                          <a href="{{ doc.Url }}" target="_blank"><i class="si si-{{ doc.Name == 'News' ? 'news' : 'book'}}"></i> {{ doc.Name }}</a>
+                        {% endfor %}
+                      </span>
+                    </span>
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      {% endif %}
     </div>
   </section>
 {% endblock %}

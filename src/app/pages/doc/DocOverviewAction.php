@@ -2,6 +2,7 @@
 
 namespace app\pages\doc;
 
+use app\domain\doc\DocProvider;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\domain\ReleaseType;
@@ -20,15 +21,17 @@ class DocOverviewAction
   {
     $ltsVersions = ReleaseType::LTS()->allReleaseInfos();
     $leadingEdgeVersions = ReleaseType::LE()->allReleaseInfos();
+
     return $this->view->render($response, 'doc/overview.twig', [
       'docLinksLTS' => $this->docLinks($ltsVersions),
-      'docLinksLE' => $this->docLinks($leadingEdgeVersions)
+      'docLinksLE' => $this->docLinks($leadingEdgeVersions),
+      'docLinksDev' => [new DocLink(DocProvider::getNewestDocProvider())]
     ]);
   }
 
   private function docLinks(array $releaseInfos): array
   {
-    return array_map(fn (ReleaseInfo $releaseInfo) => new DocLink($releaseInfo), $releaseInfos);
+    return array_map(fn (ReleaseInfo $releaseInfo) => new DocLink($releaseInfo->getDocProvider()), $releaseInfos);
   }
 }
 
@@ -38,10 +41,10 @@ class DocLink
   public string $displayText;
   public array $releaseDocuments;
 
-  public function __construct(ReleaseInfo $releaseInfo)
+  public function __construct(DocProvider $docProvider)
   {
-    $this->url = $releaseInfo->getDocProvider()->getMinorUrl();
-    $this->displayText = $releaseInfo->minorVersion();
-    $this->releaseDocuments = $releaseInfo->getDocProvider()->getQuickDocuments();
+    $this->url = $docProvider->getMinorUrl();
+    $this->displayText = basename($this->url);
+    $this->releaseDocuments = $docProvider->getQuickDocuments();
   }
 }
