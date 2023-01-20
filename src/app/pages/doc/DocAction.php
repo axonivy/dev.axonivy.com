@@ -26,26 +26,23 @@ class DocAction
   {
     $version = $args['version'];
 
+    $doc = $args['document'] ?? '';
+    if (!empty($doc)) {
+      $doc = '/' . $doc;
+    }
+
     // special treatment when using a major version e.g. 8/9/10
     if (!str_contains($version, '.') && is_numeric($version)) {
       $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
       if ($releaseInfo == null) {
         throw new NotFoundException();
-      }
-      $doc = $args['document'] ?? '';
-      if (!empty($doc)) {
-        $doc = '/' . $doc;
-      }
+      }      
       return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);
     }
 
     // special treatement for dev, sprint, nightly
     if ($version == "dev" || $version == "sprint" || $version == "nightly") {
-      $url = DocProvider::getNewestDocUrl();
-      $doc = $args['document'] ?? '';
-      if (!empty($doc)) {
-        $doc = '/' . $doc;
-      }
+      $url = DocProvider::getNewestDocUrl();      
       return Redirect::to($response, $url . $doc);
     }
 
@@ -58,10 +55,6 @@ class DocAction
       if (!$docProvider->exists()) {
         throw new HttpNotFoundException($request);      
       }
-      $doc = $args['document'] ?? '';
-      if (!empty($doc)) {
-        $doc = '/' . $doc;
-      }
       return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
     }
 
@@ -70,10 +63,6 @@ class DocAction
       $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();
       if ($releaseInfo == null) {
         throw new NotFoundException();
-      }
-      $doc = $args['document'] ?? '';
-      if (!empty($doc)) {
-        $doc = '/' . $doc;
       }
       return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);
     }
@@ -96,10 +85,6 @@ class DocAction
 
     // redirect to minor version if access is not via minor version
     if ($args['version'] != $version) {
-      $doc = $args['document'] ?? '';
-      if (!empty($doc)) {
-        $doc = '/' . $doc;
-      }
       return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
     }
 
