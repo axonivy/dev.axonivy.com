@@ -20,18 +20,10 @@ class DocOverviewAction
   {
     $ltsVersions = ReleaseType::LTS()->allReleaseInfos();
     $leadingEdgeVersions = ReleaseType::LE()->allReleaseInfos();
-    $devVersions = $this->devVersions();
-
     return $this->view->render($response, 'doc/overview.twig', [
       'docLinksLTS' => $this->docLinks($ltsVersions),
-      'docLinksLE' => $this->docLinks($leadingEdgeVersions),
-      'docLinksDEV' => $this->docLinks($devVersions)
+      'docLinksLE' => $this->docLinks($leadingEdgeVersions)
     ]);
-  }
-
-  private function devVersions(): array
-  {
-    return array_map(fn (ReleaseType $releaseType) => $releaseType->releaseInfo(), ReleaseType::PROMOTED_DEV_TYPES());
   }
 
   private function docLinks(array $releaseInfos): array

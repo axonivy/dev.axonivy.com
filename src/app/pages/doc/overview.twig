@@ -110,23 +110,7 @@ a.min-width {
             </ul>
           </div>
         </article>
-      {% endif %}
-      <article>
-        <div class="content">
-          <header>
-            <h3><i class="si si-lab-flask"></i> Dev Releases</h3>
-          </header>
-          <ul class="actions">
-            {% for docLink in docLinksDEV %}
-              <li>
-                <a href="{{ docLink.url }}" class="button min-width">
-                  <i class="si si-book"></i> {{ docLink.displayText }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </article>
+      {% endif %}    
     </div>
   </section>
 {% endblock %}

@@ -1,6 +1,6 @@
 Options -Indexes +FollowSymLinks
 
-DirectoryIndex index.php index.html 
+DirectoryIndex index.php index.html
 
 Order allow,deny
 Allow from all
@@ -8,7 +8,12 @@ Allow from all
 RewriteEngine On
 
 RewriteRule ^download/([^/]+)/(.+)$ /releases/ivy/$1/downloads/$2 [L]
-RewriteRule ^doc/([^/]+)/(.+)$ /releases/ivy/$1/documents/$2 [L]
+RewriteRule ^doc/([^/]+)/(.+)$ /docs/$1/$2 [L]
+
+#RewriteRule ^doc$ /any-thing-to-redirect-to-php [L]
+#RewriteRule ^doc/$ /docu [L]
+#RewriteRule ^doc/([^/]+)$ /doc/$1/index.html [L]
+#DirectorySlash off
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
