@@ -3,6 +3,7 @@ namespace app\domain\doc;
 
 use app\domain\Version;
 use app\Config;
+use app\domain\ReleaseInfoRepository;
 
 class DocProvider
 {
@@ -58,7 +59,15 @@ class DocProvider
 
   public static function getNewestDocUrl(): string
   {
-    return "/doc/9.1";
+    $versions = [];
+    $directories = array_filter(glob(Config::docDirectory() . '/*'), 'is_dir');
+    foreach ($directories as $directory) {
+      $versions[] = basename($directory);      
+    }
+    usort($versions, function (string $v1, string $v2) {
+      return version_compare($v2, $v1);
+    });
+    return '/doc/' . $versions[0];
   }
 
   public function getExistingBooks(): array
