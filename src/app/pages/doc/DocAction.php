@@ -74,6 +74,11 @@ class DocAction
       throw new HttpNotFoundException($request);      
     }
 
+    // redirect to minor version if access is not via minor version
+    if ($args['version'] != $version) {
+      return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
+    }
+
     if ($this->documentationBasedOnReadTheDocs($version)) {
       $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document'] ?? '', new Version($version));
       if (empty($newDocUrl)) {
@@ -81,11 +86,6 @@ class DocAction
       } else {
         return Redirect::to($response, $newDocUrl);
       }
-    }
-
-    // redirect to minor version if access is not via minor version
-    if ($args['version'] != $version) {
-      return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
     }
 
     // legacy, before 9
