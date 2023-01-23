@@ -3,7 +3,7 @@ namespace app\domain\doc;
 
 use app\domain\Version;
 use app\Config;
-use app\domain\ReleaseInfoRepository;
+use app\pages\news\NewsAction;
 
 class DocProvider
 {
@@ -206,11 +206,13 @@ class DocProvider
 
   public function getQuickDocuments(): array
   {
-    $docs = [
-      $this->getNewAndNoteworthy(),
-      $this->getReleaseNotes(),
-      $this->getMigrationNotes()
-    ];
+    $news = $this->getNewAndNoteworthy();
+    $docs = [];
+    if ($news != null) {
+      $docs[] = $news;
+    }
+    $docs[] = $this->getReleaseNotes();
+    $docs[] = $this->getMigrationNotes();
     return $docs;
   }
 
@@ -219,10 +221,13 @@ class DocProvider
     return $this->createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'); // ancient engine guide
   }
 
-  public function getNewAndNoteworthy(): ReleaseDocument
+  public function getNewAndNoteworthy(): ?ReleaseDocument
   {
-    if (version_compare($this->versionNumber, 9) >= 0) {
-      return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
+    if (version_compare($this->versionNumber, 8) >= 0) {      
+      if (NewsAction::exists($this->versionNumber)) {
+        return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
+      }
+      return null;
     }
     return $this->createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
   }
