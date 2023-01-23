@@ -53,93 +53,10 @@ a.min-width {
   {% else %}
   <section id="two">
   {% endif %}
-
     <div class="inner">
-      <article>
-        <div class="content">
-          <header>
-            <h3><i class="si si-lts"></i> Long Term Support (LTS)</h3>
-          </header>
-          <ul class="actions">
-          {% for docLink in docLinksLTS %}
-            <li>
-              <span class="button special special-dropdown">
-                <a class="min-width" href="{{ docLink.url }}">
-                  <i class="si si-book"></i> {{ docLink.displayText }}
-                </a>
-                <span class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
-                  <i class="si si-arrow-down doc-dropbtn"></i>
-                  <span class="doc-dropdown-content">
-                    <span>More</span>
-                    {% for doc in docLink.releaseDocuments %}
-                      <a href="{{ doc.Url }}" target="_blank"><i class="si si-{{ doc.Name == 'News' ? 'news' : 'book'}}"></i> {{ doc.Name }}</a>
-                    {% endfor %}
-                  </span>
-                </span>
-              </span>
-            </li>
-          {% endfor %}
-        </ul>
-        </div>
-      </article>
-      {% if docLinksLE is not empty %}
-        <article>
-          <div class="content">
-            <header>
-              <h3><i class="si si-star"></i> Leading Edge (LE)</h3>
-            </header>
-            <ul class="actions">
-              {% for docLink in docLinksLE %}
-                <li>
-                  <span class="button special special-dropdown">
-                    <a class="min-width" href="{{ docLink.url }}">
-                      <i class="si si-book"></i> {{ docLink.displayText }}
-                    </a>
-                    <span class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
-                      <i class="si si-arrow-down doc-dropbtn"></i>
-                      <span class="doc-dropdown-content">
-                        <span>More</span>
-                        {% for doc in docLink.releaseDocuments %}
-                          <a href="{{ doc.Url }}" target="_blank"><i class="si si-{{ doc.Name == 'News' ? 'news' : 'book'}}"></i> {{ doc.Name }}</a>
-                        {% endfor %}
-                      </span>
-                    </span>
-                  </span>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </article>
-      {% endif %}
-      {% if docLinksDev is not empty %}
-        <article>
-          <div class="content">
-            <header>
-              <h3><i class="si si-lab-flask"></i> Development Build</h3>
-            </header>
-            <ul class="actions">
-              {% for docLink in docLinksDev %}
-                <li>
-                  <span class="button special special-dropdown">
-                    <a class="min-width" href="{{ docLink.url }}">
-                      <i class="si si-book"></i> {{ docLink.displayText }}
-                    </a>
-                    <span class="doc-dropdown" ontouchstart="this.classList.toggle('active-dropdown');">
-                      <i class="si si-arrow-down doc-dropbtn"></i>
-                      <span class="doc-dropdown-content">
-                        <span>More</span>
-                        {% for doc in docLink.releaseDocuments %}
-                          <a href="{{ doc.Url }}" target="_blank"><i class="si si-{{ doc.Name == 'News' ? 'news' : 'book'}}"></i> {{ doc.Name }}</a>
-                        {% endfor %}
-                      </span>
-                    </span>
-                  </span>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </article>
-      {% endif %}
+      {% include 'doc/_link.twig' with {'title': 'Long Term Support (LTS)', 'docLinks': docLinksLTS} only %}        
+      {% include 'doc/_link.twig' with {'title': 'Leading Edge (LE)', 'docLinks': docLinksLE} only %}        
+      {% include 'doc/_link.twig' with {'title': 'Development Build', 'docLinks': docLinksDev} only %}     
     </div>
   </section>
 {% endblock %}
