@@ -35,6 +35,10 @@ class NewsAction
       'news' => $news
     ]);
   }
+
+  public static function exists(string $version) {
+    return NewsRepository::find($version) != null;
+  }
 }
 
 class NewsRepository
