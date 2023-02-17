@@ -11,7 +11,7 @@
       <id>nexus.ivyteam.io</id>
       <url>https://nexus.ivyteam.io/repository/maven/</url>
       <snapshots>
-        <updatePolicy>always</updatePolicy>
+        <enabled>false</enabled>
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
@@ -20,8 +20,8 @@
     <plugins>
       <plugin>
         <groupId>ch.ivyteam.maven</groupId>
-        <artifactId>changelog-generator-plugin</artifactId>
-        <version>9.3.0-SNAPSHOT</version>
+        <artifactId>jira-plugin</artifactId>
+        <version>10.0.0</version>
         <executions>
           <execution>
             <id>replace-changelog-tokens</id>
