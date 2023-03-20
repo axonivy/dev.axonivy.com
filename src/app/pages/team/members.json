@@ -1,70 +1,70 @@
 [
   {
     "name": "Alexander Suter",
-    "imgSrc": "/images/team/alex.jpg",
+    "imgSrc": "/images/team/als.jpg",
     "education": "B.Sc. Computer Science",
     "function": "Core Developer",
     "slogan": "Whale whisperer 🐋"
   },
   {
     "name": "Bruno Bütler",
-    "imgSrc": "/images/team/bruno.jpg",
+    "imgSrc": "/images/team/bb.jpg",
     "education": "Inf. Ing. HTL",
     "function": "Product Owner & Team Leader",
     "slogan": "Primal rock 🗿"
   },
   {
     "name": "Christian Strebel",
-    "imgSrc": "/images/team/christian.jpg",
+    "imgSrc": "/images/team/cst.jpg",
     "education": "Inf. Ing. FH",
     "function": "Core Developer",
     "slogan": "Infrastructure fundament 🏗️"
   },
   {
     "name": "Jacek Lajdecki",
-    "imgSrc": "/images/team/jacek.jpg",
+    "imgSrc": "/images/team/jla.jpg",
     "education": "EFZ Information Technology",
     "function": "Core Developer",
     "slogan": "Young talent 🎯"
   },
   {
     "name": "Lukas Lieb",
-    "imgSrc": "/images/team/lukas.jpg",
+    "imgSrc": "/images/team/lli.jpg",
     "education": "B.Sc. Computer Science",
     "function": "Core Developer",
     "slogan": "Pixel mover 🌄"
   },
   {
     "name": "Reguel Wermelinger",
-    "imgSrc": "/images/team/reguel.jpg",
+    "imgSrc": "/images/team/rew.jpg",
     "education": "B.Sc. Computer Science",
     "function": "Core Developer",
     "slogan": "Swiss knife ⌨️"
   },
   {
     "name": "Reto Weiss",
-    "imgSrc": "/images/team/reto.jpg",
+    "imgSrc": "/images/team/rwei.jpg",
     "education": "El. Ing. HTL",
     "function": "Product Owner & Core Developer",
     "slogan": "Universal tool 🛠️"
   },
   {
     "name": "Louis Müller",
-    "imgSrc": "/images/team/louis.jpg",
+    "imgSrc": "/images/team/placeholder.jpg",
     "education": "M.Sc. Computer Science",
     "function": "Core Developer",
     "slogan": ""
   },
   {
     "name": "Peter Hochstrasser",
-    "imgSrc": "/images/team/peter.jpg",
+    "imgSrc": "/images/team/pho.jpg",
     "education": "M. Sc. Computer Science",
     "function": "Support, documentation, MfA",
     "slogan": "Infrastructure is key"
   },
     {
     "name": "Tobias Gretler",
-    "imgSrc": "/images/team/tobias.jpg",
+    "imgSrc": "/images/team/placeholder.jpg",
     "education": "EFZ Information Technology",
     "function": "Core Developer",
     "slogan": "Learning Software development 🖥️"
