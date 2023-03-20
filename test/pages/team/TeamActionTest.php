@@ -20,7 +20,7 @@ class TeamActionTest extends TestCase
     AppTester::assertThatGet('/team')
       ->statusCode(200)
       ->bodyContains('Bruno Bütler')
-      ->bodyContains('/images/team/bruno.jpg')
+      ->bodyContains('/images/team/bb.jpg')
       ->bodyContains('Inf. Ing. HTL')
       ->bodyContains('Product Owner &amp; Team Leader');
   }
