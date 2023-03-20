@@ -4,7 +4,7 @@
     "imgSrc": "/images/team/als.jpg",
     "education": "B.Sc. Computer Science",
     "function": "Core Developer",
-    "slogan": "Whale whisperer 🐋"
+    "slogan": "Dock worker 👷"
   },
   {
     "name": "Bruno Bütler",
@@ -25,7 +25,7 @@
     "imgSrc": "/images/team/jla.jpg",
     "education": "EFZ Information Technology",
     "function": "Core Developer",
-    "slogan": "Young talent 🎯"
+    "slogan": "Keeper of the SystemDB 💾"
   },
   {
     "name": "Lukas Lieb",
@@ -46,21 +46,21 @@
     "imgSrc": "/images/team/rwei.jpg",
     "education": "El. Ing. HTL",
     "function": "Product Owner & Core Developer",
-    "slogan": "Universal tool 🛠️"
+    "slogan": "Universal Tool 🛠️"
   },
   {
     "name": "Louis Müller",
     "imgSrc": "/images/team/placeholder.jpg",
     "education": "M.Sc. Computer Science",
     "function": "Core Developer",
-    "slogan": ""
+    "slogan": "IvyScript Expert 🌱"
   },
   {
     "name": "Peter Hochstrasser",
     "imgSrc": "/images/team/pho.jpg",
     "education": "M. Sc. Computer Science",
     "function": "Support, documentation, MfA",
-    "slogan": "Infrastructure is key"
+    "slogan": "Infrastructure is key 🏗️"
   },
     {
     "name": "Tobias Gretler",
