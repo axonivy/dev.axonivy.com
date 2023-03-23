@@ -39,7 +39,7 @@
   },
   {
     "name": "WebService Axis 1 & 2", 
-    "nameHref": "doc/8.0/designer-guide/configuration/webservice-clients.html",
+    "nameHref": "/doc/8.0/designer-guide/configuration/webservice-clients.html",
     "successor": "WebService CXF", 
     "successorHref": "/doc/9.3/designer-guide/configuration/webservice-clients.html",
     "released": "3",
@@ -121,7 +121,7 @@
   },
   {
     "name": "CMS Meta Data", 
-    "nameHref": "/releases/ivy/8.0/documents/public-api/ch/ivyteam/ivy/cm/IContentObject.html",
+    "nameHref": "/doc/8.0/public-api/ch/ivyteam/ivy/cm/IContentObject.html",
     "successor": "Modern CMS",
     "successorHref": "https://community.axonivy.com/d/245-modern-cms",
     "released": "3",
@@ -131,9 +131,16 @@
   },
   {
     "name": "Call & Wait element", 
-    "nameHref": "/releases/ivy/8.0/documents/designer-guide/process-modeling/process-elements/call-and-wait.html",
+    "nameHref": "/doc/8.0/designer-guide/designer-guide/process-modeling/process-elements/call-and-wait.html",
     "released": "4",
     "deprecated": "10",
     "description": "The Call & Wait intermediate process element."
+  },
+  {
+    "name": "Dynamic HTML Dialog id", 
+    "nameHref": "/doc/10.0/designer-guide/process-modeling/process-elements/user-dialog.html#call-tab",
+    "released": "4",
+    "deprecated": "10",
+    "description": "Dynamic HTML Dialog id from a data class attribute."
   }
 ]
