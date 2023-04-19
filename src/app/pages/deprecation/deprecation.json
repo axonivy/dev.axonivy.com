@@ -90,7 +90,7 @@
     "successorHref": "https://community.axonivy.com/d/142-environments-will-disappear-in-the-long-term",
     "released": "4",
     "deprecated": "10",
-    "removed": "11.1",
+    "removed": "11",
     "description": "Environments are deprecated and we won't invest in new features. Please use containers or correct configurations instead."
   },
   {
@@ -108,6 +108,7 @@
     "successorHref": "/doc/9.2/engine-guide/integration/index.html",
     "released": "4",
     "deprecated": "10",
+    "removed": "11",
     "description": "The AJP Protocol is deprecated. Please use the HTTP or HTTPS Protocol instead."
   },
   {
