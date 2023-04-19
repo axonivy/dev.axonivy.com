@@ -57,7 +57,7 @@ class DeprecationActionTest extends TestCase
               <th>7</th>
               <th>8</th>
               <th>10</th>
-              <th>11</th>
+              <th>11.1</th>
             </tr>');
     }
 }
