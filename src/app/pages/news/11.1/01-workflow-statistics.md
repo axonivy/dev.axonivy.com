@@ -1,4 +1,4 @@
-## Workflow Statistic API {#workflowStatisticAPI}
+## Workflow Statistic API {#workflowStatistic}
 
 tbd
 

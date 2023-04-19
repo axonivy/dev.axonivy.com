@@ -1,7 +1,6 @@
 ## Axon Ivy Portal {#portal}
 
-More power for the end user.
-The Axon Ivy Portal appears in a new look and is completely customizable.
+tbd
 
 - **tbd**: tbd
 
