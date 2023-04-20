@@ -108,6 +108,7 @@
     "successorHref": "/doc/9.2/engine-guide/integration/index.html",
     "released": "4",
     "deprecated": "10",
+    "removed": "11.1",
     "description": "The AJP Protocol is deprecated. Please use the HTTP or HTTPS Protocol instead."
   },
   {
