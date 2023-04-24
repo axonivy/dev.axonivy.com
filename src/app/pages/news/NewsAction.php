@@ -77,20 +77,10 @@ class NewsRepository
 
     $isReleased = ReleaseInfoRepository::isReleased($version);
 
-// Define your configuration, if needed
-$config = [
-  //'html_input' => 'strip',
-  //'allow_unsafe_links' => false
-];
-
-// Configure the Environment with all the CommonMark parsers/renderers
-$environment = new Environment($config);
-$environment->addExtension(new CommonMarkCoreExtension());
-
-// Add this extension
-$environment->addExtension(new AttributesExtension());
-
-
+    $config = [];
+    $environment = new Environment($config);
+    $environment->addExtension(new CommonMarkCoreExtension());
+    $environment->addExtension(new AttributesExtension());
     $converter = new MarkdownConverter($environment);
 
     $sections = [];
