@@ -10,10 +10,8 @@ Add more meta information to your process elements to ease finding or calling th
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-book"></i> Tags
 	</a>
-  
-	<a href="${docBaseUrl}/designer-guide/process-modeling/process-elements/common-tabs.html#start-tab
+  	<a href="${docBaseUrl}/designer-guide/process-modeling/process-elements/common-tabs.html#start-tab
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-book"></i> Start Tab
 	</a>
-
 </div>

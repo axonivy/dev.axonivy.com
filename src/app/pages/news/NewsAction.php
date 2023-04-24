@@ -5,6 +5,10 @@ namespace app\pages\news;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\Attributes\AttributesExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
 
 class NewsAction
 {
@@ -73,12 +77,28 @@ class NewsRepository
 
     $isReleased = ReleaseInfoRepository::isReleased($version);
 
+// Define your configuration, if needed
+$config = [
+  //'html_input' => 'strip',
+  //'allow_unsafe_links' => false
+];
+
+// Configure the Environment with all the CommonMark parsers/renderers
+$environment = new Environment($config);
+$environment->addExtension(new CommonMarkCoreExtension());
+
+// Add this extension
+$environment->addExtension(new AttributesExtension());
+
+
+    $converter = new MarkdownConverter($environment);
+
     $sections = [];
     foreach (glob("$directory/*.md") as $markdownFile) {
       $markdown = file_get_contents($markdownFile);
       $docBaseUrl = $isReleased ? "/doc/$version" : '/doc/dev';
       $markdown = str_replace('${docBaseUrl}', $docBaseUrl, $markdown);
-      $html = \ParsedownExtra::instance()->text($markdown);
+      $html = $converter->convert($markdown);
 
       $images = self::loadImages($version, $markdownFile);
       $sections[] = new NewsDetailSection($html, $images);
