@@ -12,20 +12,16 @@ The Engine Cockpit comes with built-in tooling to battle performance issues.
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-book"></i> Performance Statistic
 	</a>
-  
-  <a href="${docBaseUrl}/engine-guide/monitoring/logging.html#request-tracing-tools"
+    <a href="${docBaseUrl}/engine-guide/monitoring/logging.html#request-tracing-tools"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-book"></i> Tracing Tools
 	</a>
-  
- 	<a href="https://github.com/axonivy/docker-samples/tree/master/ivy-tracing-jaeger"
+   	<a href="https://github.com/axonivy/docker-samples/tree/master/ivy-tracing-jaeger"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-movie"></i> Jaeger Tracing Example
 	</a>
-  
-  <a href="${docBaseUrl}/engine-guide/tool-reference/engine-cockpit/monitor.html#cache"
+    <a href="${docBaseUrl}/engine-guide/tool-reference/engine-cockpit/monitor.html#cache"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-book"></i> Cache View
 	</a>
-
 </div>

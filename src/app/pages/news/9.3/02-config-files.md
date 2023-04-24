@@ -12,8 +12,7 @@ This will make the daily life for all developers much easier.
 <div class="short-links">
 	<a href="${docBaseUrl}/designer-guide/configuration/index.html" target="_blank" rel="noopener noreferrer">
 	  <i class="si si-check"></i> Project Config
-	</a>
-	
+	</a>	
 	<a href="${docBaseUrl}/engine-guide/configuration/files/app-yaml.html" target="_blank" rel="noopener noreferrer">
 	  <i class="si si-check"></i> app.yaml
 	</a>

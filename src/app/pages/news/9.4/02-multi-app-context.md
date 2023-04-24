@@ -16,7 +16,6 @@ behind.
 	<a href="${docBaseUrl}/concepts/application-lifecycle/index.html" target="_blank" rel="noopener noreferrer">
 	  <i class="si si-check"></i> Application Lifecycle
 	</a>
-
 	<a href="${docBaseUrl}/concepts/multi-tenancy/index.html" target="_blank" rel="noopener noreferrer">
 	  <i class="si si-check"></i> Multi Tenancy
 	</a>
