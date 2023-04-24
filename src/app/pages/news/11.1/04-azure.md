@@ -2,9 +2,9 @@
 
 Azure AD gets even more support. Now you can also synchronize user properties
 from Azure Active Directory with Axon Ivy user properties, let's say the
-phone number or the departement where you user is working.
+phone number or the departement where your user is working.
 
-Furthemore, you also can now inspect all role mappings in the configuration
+Furthermore, you also can now inspect all role mappings in the configuration
 view of Azure Active Directory.
 
 <div class="short-links">

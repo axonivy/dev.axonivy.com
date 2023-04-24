@@ -1,7 +1,7 @@
 ## Workflow Statistic API {#workflowStatistic}
 
 A new, blazing fast REST API provides valuable workflow statistics around your business processes.
-Complex aggregations with buckets and metrics are pssobile over cases and tasks.
+Complex aggregations with buckets and metrics are possible over cases and tasks.
 
 - __REST API__: Call it from everywhere you need it. API is described as OPEN API specification.
 - __FAST__: The statistics are made up out of Elasticsearch which can aggregate data in milliseconds.
