@@ -1,10 +1,17 @@
 ## Engine Cockpit {#engineCockpit}
 
-Three new views in the Engine Cockpit help you to analyze problems with the Search Engine, Sessions, and Threads.
+Unlock the full potential of your engine with our latest update! 
+Introducing three brand new views in the Engine Cockpit, designed to help you analyze and troubleshoot any
+issues with your search engine, sessions, and threads. 
+With these powerful new tools, you can take control of your engine and optimize its performance like never before. 
+Try it out today and see the difference for yourself!
 
-- __Search Engine__: Use this view to browse the indexed documents. It shows configuration options and lets you reindex an index.
-- __Threads__: Use this view to create thread dumps. It shows detected deadlocks, current locks, and stack traces.
-- __Sessions__: Use this view to manage sessions. It provides information on how the session was created and how the user was authenticated. 
+- __Search Engine__: Easily browse indexed documents and configure options with our intuitive view. 
+  Plus, enjoy the added convenience of reindexing your index in one place.
+- __Threads__: Create thread dumps like a pro with our easy-to-use view. 
+  Discover detected deadlocks, current locks, and stack traces all in one place.
+- __Sessions__: Take control of your sessions with our powerful management view. 
+  Get all the necessary information, including session creation and user authentication details.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/reference/engine-cockpit"
