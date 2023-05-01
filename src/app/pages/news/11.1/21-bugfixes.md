@@ -139,6 +139,11 @@
 * [XIVY-11254](https://1ivy.atlassian.net/browse/XIVY-11254) Project-build-plugin does deploy dependent packages in wrong order for IvyTest and IvyProcessTest 
 * [XIVY-11259](https://1ivy.atlassian.net/browse/XIVY-11259) Custom mail processes don't work if the web.xml session cookie secure flag is true 
 * [XIVY-11266](https://1ivy.atlassian.net/browse/XIVY-11266) User and role workflow counts are always 0 in Engine Cockpit  
+* [XIVY-11310](https://1ivy.atlassian.net/browse/XIVY-11310) User Synchronisation with Azure Active Directory fails if userPrincipal has special characters like # in it 
+* [IVYPORTAL-14497](https://1ivy.atlassian.net/browse/IVYPORTAL-14497) Cannot change language in My Profile (like de_AT, de_CH) 
+* [IVYPORTAL-14509](https://1ivy.atlassian.net/browse/IVYPORTAL-14509) Dashboard permissions autocomplete works incorrectly after unselecting all permissions 
+* [IVYPORTAL-14637](https://1ivy.atlassian.net/browse/IVYPORTAL-14637) Fix broken links in documentation 
 * [IVYPORTAL-14645](https://1ivy.atlassian.net/browse/IVYPORTAL-14645) Portal Permissions are granted automatically after restarting engine 
+* [IVYPORTAL-14655](https://1ivy.atlassian.net/browse/IVYPORTAL-14655) Fix Process Image cannot load image when separated Portal app 
 * [IVYPORTAL-14712](https://1ivy.atlassian.net/browse/IVYPORTAL-14712) Changing language to Japanese causes NPE in Portal 10.0.1 
-* [IVYPORTAL-14851](https://1ivy.atlassian.net/browse/IVYPORTAL-14851) Login does not work https://axonivyengine/{myapp}/login 
+* [IVYPORTAL-14851](https://1ivy.atlassian.net/browse/IVYPORTAL-14851) Login does not work https://axonivyengine/{myapp}/login

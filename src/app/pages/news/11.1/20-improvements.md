@@ -1,5 +1,6 @@
 ## Improvements {#improvements}
 
+* [XIVY-11251](https://1ivy.atlassian.net/browse/XIVY-11251) Update DocFactory to Aspose version 23.3
 * [XIVY-11187](https://1ivy.atlassian.net/browse/XIVY-11187) Provide a validation warning for empty variables in variables.yaml as they are ignored at runtime 
 * [XIVY-11171](https://1ivy.atlassian.net/browse/XIVY-11171) Add filter method isIn(...) to case, task, user, ... queries 
 * [XIVY-11088](https://1ivy.atlassian.net/browse/XIVY-11088) Show Elasticsearch watermark configuration in Engine Cockpit 
@@ -45,5 +46,14 @@
 * [XIVY-3529](https://1ivy.atlassian.net/browse/XIVY-3529) Introduce business-relevant states for tasks and cases that are understood by end users 
 * [XIVY-3166](https://1ivy.atlassian.net/browse/XIVY-3166) Delete tasks and case instead of setting them to ZOMBIE state 
 * [XIVY-2923](https://1ivy.atlassian.net/browse/XIVY-2923) Support In-Queries in Business Repository Query API 
-* [XIVY-2813](https://1ivy.atlassian.net/browse/XIVY-2813) Use utf8mb4 instead of utf8 for MySQL Database as charset
- 
+* [XIVY-2813](https://1ivy.atlassian.net/browse/XIVY-2813) Use utf8mb4 instead of utf8 for MySQL Database as charset 
+* [IVYPORTAL-14897](https://1ivy.atlassian.net/browse/IVYPORTAL-14897) Improve Dashboard Widget Order and Spacing / Responsiveness 
+* [IVYPORTAL-14874](https://1ivy.atlassian.net/browse/IVYPORTAL-14874) HTML in Task & Case Description 
+* [IVYPORTAL-14783](https://1ivy.atlassian.net/browse/IVYPORTAL-14783) Process start in Dashboard, Name and Icon clickable 
+* [IVYPORTAL-14705](https://1ivy.atlassian.net/browse/IVYPORTAL-14705) Add Portal modules to install in Designer 
+* [IVYPORTAL-14700](https://1ivy.atlassian.net/browse/IVYPORTAL-14700) Optimize performance of Processes Page and "Processes Widget" 
+* [IVYPORTAL-14599](https://1ivy.atlassian.net/browse/IVYPORTAL-14599) Support TaskName Overwrite in IFrame Task Template 
+* [IVYPORTAL-14587](https://1ivy.atlassian.net/browse/IVYPORTAL-14587) Introduce a Version Number into the Portal JSONS 
+* [IVYPORTAL-14579](https://1ivy.atlassian.net/browse/IVYPORTAL-14579) Add Portal Converter to Documentation  
+* [IVYPORTAL-14572](https://1ivy.atlassian.net/browse/IVYPORTAL-14572) Introduce new Cardframe option to Portal iFrame Dialog Templates 
+* [IVYPORTAL-14388](https://1ivy.atlassian.net/browse/IVYPORTAL-14388) Welcome Widget: Allow html code in the text, enhance positioning of image 
