@@ -142,6 +142,7 @@
     "nameHref": "/doc/10.0/designer-guide/process-modeling/process-elements/user-dialog.html#call-tab",
     "released": "4",
     "deprecated": "10",
+    "removed": "11.1",
     "description": "Dynamic HTML Dialog id from a data class attribute."
   }
 ]
