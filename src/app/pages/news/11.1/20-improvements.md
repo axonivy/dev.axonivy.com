@@ -1,6 +1,6 @@
 ## Improvements {#improvements}
 
-* [XIVY-11251](https://1ivy.atlassian.net/browse/XIVY-11251) Update DocFactory to Aspose version 23.3
+* [XIVY-11241](https://1ivy.atlassian.net/browse/XIVY-11241) Update DocFactory to Aspose version 23.3 
 * [XIVY-11187](https://1ivy.atlassian.net/browse/XIVY-11187) Provide a validation warning for empty variables in variables.yaml as they are ignored at runtime 
 * [XIVY-11171](https://1ivy.atlassian.net/browse/XIVY-11171) Add filter method isIn(...) to case, task, user, ... queries 
 * [XIVY-11088](https://1ivy.atlassian.net/browse/XIVY-11088) Show Elasticsearch watermark configuration in Engine Cockpit 
@@ -56,4 +56,4 @@
 * [IVYPORTAL-14587](https://1ivy.atlassian.net/browse/IVYPORTAL-14587) Introduce a Version Number into the Portal JSONS 
 * [IVYPORTAL-14579](https://1ivy.atlassian.net/browse/IVYPORTAL-14579) Add Portal Converter to Documentation  
 * [IVYPORTAL-14572](https://1ivy.atlassian.net/browse/IVYPORTAL-14572) Introduce new Cardframe option to Portal iFrame Dialog Templates 
-* [IVYPORTAL-14388](https://1ivy.atlassian.net/browse/IVYPORTAL-14388) Welcome Widget: Allow html code in the text, enhance positioning of image 
+* [IVYPORTAL-14388](https://1ivy.atlassian.net/browse/IVYPORTAL-14388) Welcome Widget: Allow html code in the text, enhance positioning of image
