@@ -7,6 +7,7 @@
 * [XIVY-8621](https://1ivy.atlassian.net/browse/XIVY-8621) Bad performance of user detail view in Engine Cockpit if user has 1000+ roles (permission tree lazy loading) <span class="badge badge-pill badge-success badge-performance">performance</span>
 * [XIVY-8698](https://1ivy.atlassian.net/browse/XIVY-8698) Bad performance of Applications Page in Engine Cockpit  <span class="badge badge-pill badge-success badge-performance">performance</span>
 * [XIVY-9205](https://1ivy.atlassian.net/browse/XIVY-9205) Maven (M2E) workspace resolution for JAR attachments in IAR is broken 
+* [XIVY-9365](https://1ivy.atlassian.net/browse/XIVY-9365) Can not create PDF_A documents with DocFactory 
 * [XIVY-9435](https://1ivy.atlassian.net/browse/XIVY-9435) Log Log4J configuration problems to ivy.log 
 * [XIVY-9543](https://1ivy.atlassian.net/browse/XIVY-9543) ClassLoading error on HD with primefaces objects on method-signature 
 * [XIVY-9566](https://1ivy.atlassian.net/browse/XIVY-9566) CMS resources cached from browser in previous language 
@@ -109,7 +110,7 @@
 * [XIVY-10813](https://1ivy.atlassian.net/browse/XIVY-10813) Exception during system database cache invalidation if entity is read from cache while invalidating 
 * [XIVY-10831](https://1ivy.atlassian.net/browse/XIVY-10831) Bad performance of system database association cache invalidation <span class="badge badge-pill badge-success badge-performance">performance</span>
 * [XIVY-10845](https://1ivy.atlassian.net/browse/XIVY-10845) 'any' sql statements are only validated on UI but not by process validation 
-* [XIVY-10855](https://1ivy.atlassian.net/browse/XIVY-10855) Windows standby disconnects the process editor 
+* [XIVY-10855](https://1ivy.atlassian.net/browse/XIVY-10855) Windows standby (hibernation) disconnects the process editor 
 * [XIVY-10857](https://1ivy.atlassian.net/browse/XIVY-10857) Bad default namespace in the New Axon Ivy Project wizard  
 * [XIVY-10859](https://1ivy.atlassian.net/browse/XIVY-10859) Do not allow same qualified name for Data Class and User Dialog 
 * [XIVY-10860](https://1ivy.atlassian.net/browse/XIVY-10860) The Designer should enforce to use lower case data attribute names 
@@ -139,7 +140,14 @@
 * [XIVY-11254](https://1ivy.atlassian.net/browse/XIVY-11254) Project-build-plugin does deploy dependent packages in wrong order for IvyTest and IvyProcessTest 
 * [XIVY-11259](https://1ivy.atlassian.net/browse/XIVY-11259) Custom mail processes don't work if the web.xml session cookie secure flag is true 
 * [XIVY-11266](https://1ivy.atlassian.net/browse/XIVY-11266) User and role workflow counts are always 0 in Engine Cockpit  
-* [XIVY-11310](https://1ivy.atlassian.net/browse/XIVY-11310) User Synchronisation with Azure Active Directory fails if userPrincipal has special characters like # in it 
+* [XIVY-11309](https://1ivy.atlassian.net/browse/XIVY-11309) Import of test-project from the Market throws exception 
+* [XIVY-11310](https://1ivy.atlassian.net/browse/XIVY-11310) User synchronisation with Azure Active Directory fails if userPrincipal has special characters like # in it 
+* [XIVY-11319](https://1ivy.atlassian.net/browse/XIVY-11319) Ivy persistence can not persist new objects if database table already exists 
+* [XIVY-11325](https://1ivy.atlassian.net/browse/XIVY-11325) Debugging 'jump into' action does not work for embedded sub process element 
+* [XIVY-11332](https://1ivy.atlassian.net/browse/XIVY-11332) Engine migration-wizard broken with Debian package 
+* [XIVY-11334](https://1ivy.atlassian.net/browse/XIVY-11334) Engine fails to update symlinked configuration directory 
+* [XIVY-11340](https://1ivy.atlassian.net/browse/XIVY-11340) IndexOutOfBoundsException on Engine Cockpit users/roles view if no app is defined 
+* [XIVY-11344](https://1ivy.atlassian.net/browse/XIVY-11344) IIS installation scripts fails when configuring the termination of HTTPS 
 * [IVYPORTAL-14497](https://1ivy.atlassian.net/browse/IVYPORTAL-14497) Cannot change language in My Profile (like de_AT, de_CH) 
 * [IVYPORTAL-14509](https://1ivy.atlassian.net/browse/IVYPORTAL-14509) Dashboard permissions autocomplete works incorrectly after unselecting all permissions 
 * [IVYPORTAL-14637](https://1ivy.atlassian.net/browse/IVYPORTAL-14637) Fix broken links in documentation 
