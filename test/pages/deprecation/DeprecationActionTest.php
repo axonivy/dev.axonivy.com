@@ -25,13 +25,14 @@ class DeprecationActionTest extends TestCase
               <a href="/doc/7.0/DesignerGuideHtml/ivy.userinterface.html#ivy-richdialogs">RIA / Rich Dialog</a> 
               <span title="The rich dialog technology stack has been removed. Use html dialog to implement user interfaces." class="deprecation-info"></span>
             </td>
-            <td><a href="/doc/9.3/designer-guide/user-interface/user-dialogs/html-dialogs.html">Html Dialog</a></td>
+            <td><a href="/doc/10.0/designer-guide/user-interface/user-dialogs/html-dialogs.html">Html Dialog</a></td>
             <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class="deprecation-released"></span></td>
             <td class="deprecation-icon"><span class="deprecation-ok"></span></td>
             <td class="deprecation-icon"><span class="deprecation-ok"></span></td>
             <td class="deprecation-icon"><span class="deprecation-deprecated"></span></td>
             <td class="deprecation-icon"><span class="deprecation-removed"></span></td>
+            <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
           </tr>');
@@ -58,6 +59,7 @@ class DeprecationActionTest extends TestCase
               <th>8</th>
               <th>10</th>
               <th>11.1</th>
+              <th>11.2</th>
             </tr>');
     }
 }
