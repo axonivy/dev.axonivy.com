@@ -70,8 +70,6 @@ class Website
 
     $view->getEnvironment()->addGlobal('PRODUCTIVE_SYSTEM', Config::isProductionEnvironment());
 
-    $view->getEnvironment()->addGlobal('ANNOUNCMENT_SHOW', !isset($_COOKIE["announcment"]));
-
     $view->getEnvironment()->addGlobal('BASE_URL', $this->baseUrl());
 
     return $view;
