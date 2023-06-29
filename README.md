@@ -4,7 +4,7 @@
   
 Run `./up.sh` to start the website in docker
   
-... and later `docker-compose down` to stop the containers.
+... and later `docker compose down` to stop the containers.
 
 ## Execute tests
 
@@ -24,10 +24,10 @@ Run `./run-tests.sh` to execute tests.
 
 ```
 // Show outdated dependencies
-docker-compose exec web composer show --outdated
+docKer compose exec web composer show --outdated
 
 // Upgrade dependencies
-docker-compose exec web composer update --prefer-dist -a --with-all-dependencies
+docker compose exec web composer update --prefer-dist -a --with-all-dependencies
 ```
 
 ## Resources
