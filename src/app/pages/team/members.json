@@ -68,5 +68,12 @@
     "education": "EFZ Information Technology",
     "function": "Core Developer",
     "slogan": "Learning Software development 🖥️"
+  },
+  {
+    "name": "Hugo",
+    "imgSrc": "/images/team/hugo.jpg",
+    "education": "",
+    "function": "Office dog",
+    "slogan": "Hugo Boss 🐶"
   }
 ]
