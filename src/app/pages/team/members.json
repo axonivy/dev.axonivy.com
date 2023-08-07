@@ -82,5 +82,12 @@
     "education": "",
     "function": "Office dog",
     "slogan": "Hugo Boss 🐶"
+  },
+  {
+    "name": "Lukas Giger",
+    "imgSrc": "/images/team/lgi.jpg",
+    "education": "EFZ Information Technology",
+    "function": "Core Developer",
+    "slogan": "Living Algorithm 🧮"
   }
 ]
