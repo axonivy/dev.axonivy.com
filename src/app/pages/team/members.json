@@ -70,6 +70,13 @@
     "slogan": "Learning Software development 🖥️"
   },
   {
+    "name": "Elio Di Puma",
+    "imgSrc": "/images/team/edp.jpg",
+    "education": "B.Sc. Computer Science",
+    "function": "Core Developer",
+    "slogan": "Frontend Flair, Design Spark ✨"
+  },
+  {
     "name": "Hugo",
     "imgSrc": "/images/team/hugo.jpg",
     "education": "",
