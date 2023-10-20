@@ -82,5 +82,12 @@
     "education": "EFZ Information Technology",
     "function": "Core Developer",
     "slogan": "Living Algorithm 🧮"
+  },  
+  {
+    "name": "Fabian Heuberger",
+    "imgSrc": "/images/team/placeholder.jpg",
+    "education": "EFZ Information Technology",
+    "function": "Core Developer",
+    "slogan": "Just starting out 🐣"
   }
 ]
