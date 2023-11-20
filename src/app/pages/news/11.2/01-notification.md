@@ -1,8 +1,8 @@
 ## Notification {#notification}
 
 User notifications have been completely redesigned to provide a holistic user experience. 
-Not only end-users get a transparent notification journey, but system administrators also get
-a simplified management experience.
+Not only end-users get a transparent notification journey, but also system administrators
+benefit from a simplified management experience.
 
 - **Channels**: With the Web, Mail, and Microsoft Teams channels, Axon Ivy Engine comes with three built-in channels.
 - **Templating**: The content of the user notifications can be changed via a standardized templating mechanism.
