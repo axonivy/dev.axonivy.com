@@ -1,6 +1,6 @@
 ## Axon Ivy Portal {#portal}
 
-Introducing Axon Ivy Portal v11.2! Packed with new features like notifications, enhancements to the Portal Dashboards, and multiple improvements for a smoother and more efficient user experience. 
+Introducing Axon Ivy Portal {#portal}! Packed with new features like notifications, enhancements to the Portal Dashboards, and multiple improvements for a smoother and more efficient user experience. 
 
 - __Notifications__:
 The portal seamlessly integrates the redesined notifications provider of the Axon Ivy engine. These notifications are prominently displayed within the portal interface, offering users the ability to filter them, mark notifications as read, and efficiently manage their preferences. Users can easily subscribe or unsubscribe to various notification channels, ensuring a tailored and personalized notification experience.
@@ -27,7 +27,7 @@ And much more:
 
 
 <div class="short-links">
-	<a href="/portal/11.1/doc"
+	<a href="/portal/11.2/doc"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-book"></i> Portal
 	</a>
