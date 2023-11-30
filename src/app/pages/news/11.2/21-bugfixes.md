@@ -80,6 +80,8 @@
 * [XIVY-12827](https://1ivy.atlassian.net/browse/XIVY-12827) ClassCastException if one tries to grant or deny certain Portal permission in Engine Cockpit 
 * [XIVY-12845](https://1ivy.atlassian.net/browse/XIVY-12845) ViewExpiredException if one refreshes the process viewer in Portal 
 * [XIVY-12887](https://1ivy.atlassian.net/browse/XIVY-12887) JSON Inscription view and History view do not show initial selection 
+* [XIVY-12929](https://1ivy.atlassian.net/browse/XIVY-12929) Designer can freeze while adding a new Data Class 
+* [XIVY-12941](https://1ivy.atlassian.net/browse/XIVY-12941) Inserting EmbeddSub creates multiple outputs on previous element 
 * [XIVY-12964](https://1ivy.atlassian.net/browse/XIVY-12964) Deployment of all REST services of all applications on an Engine fails if there is a problem with class scanning in one single project 
 * [XIVY-12965](https://1ivy.atlassian.net/browse/XIVY-12965) Sometimes a ResourceException is thrown during the Export of a project into an IAR file from the Designer 
 * [XIVY-12970](https://1ivy.atlassian.net/browse/XIVY-12970) REST Client connection tester in Engine Cockpit should not report error on error code 400 (BAD REQUEST) 
