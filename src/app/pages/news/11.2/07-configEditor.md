@@ -4,10 +4,10 @@ Reviewing and editing engine configuration files is simple and powerful with the
 
 While editing our prominent YAML files, you have a rich set of authoring features at hand:
 
-- **Validation**: keys used within the YAML files are validated against the official schema. So invalid values are being blamed with a warning marker.
-- **Completion**: by pressing `CTRL+Space` the context completor helps you to identify and select valid configuration values or keys.
-- **Help**: by hovering over keys you get context-specific documentation right where you are editing.
-- **Formatting**: YAML content has strict formatting rules, and the editor takes care that whitespace indents are correct and in effect.
+- **Validation**: Keys used within the YAML files are validated against the official schema. So, invalid values are being blamed with a warning marker.
+- **Completion**: By pressing `CTRL` + `Space`, the context completion helps you identify and select valid configuration values or keys.
+- **Help**: Hovering over keys lets you get context-specific documentation right where you are editing.
+- **Formatting**: YAML content has strict formatting rules, and the editor ensures whitespace indents are correct and in effect.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/reference/engine-cockpit/system.html#engine-cockpit-config-editor"
