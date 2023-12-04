@@ -85,6 +85,7 @@
 * [XIVY-12964](https://1ivy.atlassian.net/browse/XIVY-12964) Deployment of all REST services of all applications on an Engine fails if there is a problem with class scanning in one single project 
 * [XIVY-12965](https://1ivy.atlassian.net/browse/XIVY-12965) Sometimes a ResourceException is thrown during the Export of a project into an IAR file from the Designer 
 * [XIVY-12970](https://1ivy.atlassian.net/browse/XIVY-12970) REST Client connection tester in Engine Cockpit should not report error on error code 400 (BAD REQUEST) 
+* [XIVY-12987](https://1ivy.atlassian.net/browse/XIVY-12987) Can not log in to a second security system if there are multiple security systems with same Entra ID (Azure AD) configuration <span class="badge badge-pill badge-success badge-security">security</span>
 * [IVYPORTAL-14989](https://1ivy.atlassian.net/browse/IVYPORTAL-14989) Security vulnerability in portal functional processes <span class="badge badge-pill badge-success badge-security">security</span>
 * [IVYPORTAL-15011](https://1ivy.atlassian.net/browse/IVYPORTAL-15011) Exception when load filter set has filter condition of custom column 
 * [IVYPORTAL-15046](https://1ivy.atlassian.net/browse/IVYPORTAL-15046) Browser refresh starts again a new process instead of refreshing the current user dialog 
