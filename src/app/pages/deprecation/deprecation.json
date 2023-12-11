@@ -155,5 +155,15 @@
     "deprecated": "10",
     "removed": "11.1",
     "description": "Dynamic HTML Dialog id from a data class attribute."
+  },
+  {
+    "name": "Eclipse DRL Editor", 
+    "nameHref": "/doc/10.0/designer-guide/how-to/rule-engine.html",
+    "successor": "VS Code DRL Editor", 
+    "successorHref": "https://community.axonivy.com/d/560-drl-editor-will-be-removed-with-axon-ivy-113",
+    "released": "7",
+    "deprecated": "11.3",
+    "removed": "11.3",
+    "description": "Syntax Highlighting for DRL files."
   }
 ]
