@@ -5,4 +5,10 @@ services:
       - ./:/var/www/html
       - ./docker/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
     ports:
-       - 80:80
+      - 80:80
+  container:
+    image: mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
+    volumes:
+      - ..:/workspaces:cached
+    depends_on:
+      - web

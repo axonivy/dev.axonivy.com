@@ -1,0 +1,6 @@
+{
+	"name": "PHP",
+    "dockerComposeFile": "../compose.yaml",
+    "service": "container",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+}
