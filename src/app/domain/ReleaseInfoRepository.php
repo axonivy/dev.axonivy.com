@@ -126,6 +126,11 @@ class ReleaseInfoRepository
     return self::$ALL_RELEASE_INFOS;
   }
 
+  public static function invalidate(): void
+  {
+    self::$ALL_RELEASE_INFOS = null;
+  }
+
   public static function getNightlyMinorReleaseInfos(): array
   {
     $all = self::getAvailableReleaseInfos();

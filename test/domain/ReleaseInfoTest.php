@@ -15,6 +15,7 @@ class ReleaseInfoTest extends TestCase
 
   protected function setUp(): void
   {
+    ReleaseInfoRepository::invalidate();
     $_SERVER['HTTPS'] = 'https';
     $_SERVER['HTTP_HOST'] = 'fakehost';
 
