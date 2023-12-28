@@ -104,22 +104,26 @@ class ReleaseInfoRepository
     return null;
   }
 
+  private static $ALL_RELEASE_INFOS = null;
+
   public static function getAvailableReleaseInfos(): array
   {
-    $releaseInfos = [];
-    $directories = array_filter(glob(Config::releaseDirectory() . '/*'), 'is_dir');
-    foreach ($directories as $directory) {
-      $releaseReadyFile = $directory . '/release.ready';
-      if (!file_exists($releaseReadyFile)) {
-        continue;
+    if (self::$ALL_RELEASE_INFOS != null) {
+      $releaseInfos = [];
+      $directories = array_filter(glob(Config::releaseDirectory() . '/*'), 'is_dir');
+      foreach ($directories as $directory) {
+        $releaseReadyFile = $directory . '/release.ready';
+        if (!file_exists($releaseReadyFile)) {
+          continue;
+        }
+  
+        $versionNumber = basename($directory);
+        $artifacts = ArtifactFactory::create($directory);
+        $releaseInfos[] = new ReleaseInfo(new Version($versionNumber), $artifacts, $releaseReadyFile);
       }
-
-      $versionNumber = basename($directory);
-      $artifacts = ArtifactFactory::create($directory);
-      $releaseInfos[] = new ReleaseInfo(new Version($versionNumber), $artifacts, $releaseReadyFile);
+      self::$ALL_RELEASE_INFOS = self::sortReleaseInfosByVersionOldestFirst($releaseInfos);
     }
-    $releaseInfos = self::sortReleaseInfosByVersionOldestFirst($releaseInfos);
-    return $releaseInfos;
+    return self::$ALL_RELEASE_INFOS;
   }
 
   public static function getNightlyMinorReleaseInfos(): array
