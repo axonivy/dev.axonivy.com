@@ -108,7 +108,7 @@ class ReleaseInfoRepository
 
   public static function getAvailableReleaseInfos(): array
   {
-    if (self::$ALL_RELEASE_INFOS != null) {
+    if (self::$ALL_RELEASE_INFOS == null) {
       $releaseInfos = [];
       $directories = array_filter(glob(Config::releaseDirectory() . '/*'), 'is_dir');
       foreach ($directories as $directory) {
