@@ -165,5 +165,13 @@
     "deprecated": "11.3",
     "removed": "11.3",
     "description": "Syntax Highlighting for DRL files."
+  },
+  {
+    "name": "Process Editor: Classic mode", 
+    "successor": "Process Editor: BPMN mode", 
+    "released": "3",
+    "deprecated": "8",
+    "removed": "10",
+    "description": "Processes drawn vertically (labels outside of activities, vertical swimlanes)"
   }
 ]
