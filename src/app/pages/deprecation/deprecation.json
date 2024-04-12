@@ -178,7 +178,7 @@
     "name": "HTML Dialog: Primefaces Serenity Theme", 
     "nameHref": "/doc/10.0/designer-guide/user-interface/user-dialogs/html-dialog-themes.html#serenity-themes-deprecated",
     "successor": "Primefaces Freya Theme", 
-    "successorHref": "designer-guide/user-interface/user-dialogs/html-dialog-themes.html#freya-themes",
+    "successorHref": "/doc/10.0/designer-guide/user-interface/user-dialogs/html-dialog-themes.html#freya-themes",
     "released": "8",
     "deprecated": "10",
     "description": "Primefaces no longer supports Serenity Theme. Consider switching to Freya Theme"
