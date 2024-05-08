@@ -10,7 +10,7 @@ The Axon Ivy Marketplace is rapidly expanding, continually enriching its collect
 <div class="short-links">
 	<a href="https://market.axonivy.com/"
 		target="_blank" rel="noopener noreferrer">
-		<i class="si si-cart"></i> Axon Ivy Market
+		<i class="si si-check"></i> Axon Ivy Market
 	</a>
 </div>
 
