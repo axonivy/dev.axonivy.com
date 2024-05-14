@@ -1,8 +1,8 @@
-## Axon Mobile App {#mobileApp}
+## Mobile App {#mobileApp}
 
-Streamline Your Workflow On the Go - Axon Ivy has released a new Version of the Axon Ivy Mobile App. 
+Streamline Your Workflow On the Go - Axon Ivy has released a new version of the Axon Ivy Mobile App. 
 
-New Code, New Design, lots of functionalites!
+New Code, New Design, lots of functionalities!
 
 - **Native iOS & Android App**: Experience smooth performance and tailored design on both major mobile platforms. The app's compatibility with iOS and Android ensures seamless integration and user-friendly operation.
 - **Work Beyond the Office**: The app is perfect for mobile use cases like construction sites, elevator maintenance, and other on-the-go scenarios. You can work on your tasks in any environment, giving you the freedom to work from wherever your business takes you.
