@@ -1,6 +1,6 @@
 ## Axon Ivy Portal {#portal}
 
-Meet Axon Ivy Portal 11.3 – your key to boosted productivity and seamless workflow! With an enhanced complex filter, lightning-fast search, customizable statistic charts, and real-time notifications, managing tasks and cases is effortless. Plus, now that the portal is now open source!
+Axon Ivy Portal 11.3 – your key to boosted productivity and seamless workflow! With an enhanced complex filter, lightning-fast search, customizable statistic charts, and real-time notifications, managing tasks and cases is effortless. Plus, now that the portal is now open source!
 
 - **Improved Complex Filter**: With the reinvented complex filter you can refine your task and caselist searches with ease. The new filter can combine an endless number of filter conditions. Various new filters for custom fields have been added, and even moving timeframes are now possible. So say goodbye to endless scrolling and hello to targeted results within the task and case widget of the portal dashboard.
 
