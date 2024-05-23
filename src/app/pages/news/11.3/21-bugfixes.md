@@ -79,3 +79,21 @@
 * [XIVY-14061](https://1ivy.atlassian.net/browse/XIVY-14061) NPE in Engine Cockpit in rest client detail view if rest client is only defined in app.yaml but not in the project 
 * [XIVY-14082](https://1ivy.atlassian.net/browse/XIVY-14082) Dev-WF-UI leaks all cases if you use a filter <span class="badge badge-pill badge-success badge-security">security</span>
 * [XIVY-14140](https://1ivy.atlassian.net/browse/XIVY-14140) Error Icon for error processes 
+* [IVYPORTAL-15916](https://1ivy.atlassian.net/browse/IVYPORTAL-15916) Session expires despite user interaction on the UI 
+* [IVYPORTAL-16225](https://1ivy.atlassian.net/browse/IVYPORTAL-16225) Welcome widget get Javascript exception 
+* [IVYPORTAL-16226](https://1ivy.atlassian.net/browse/IVYPORTAL-16226) Cannot load process in combined mode 
+* [IVYPORTAL-16227](https://1ivy.atlassian.net/browse/IVYPORTAL-16227) Dashboard process widget does not show image for External Link type 
+* [IVYPORTAL-16233](https://1ivy.atlassian.net/browse/IVYPORTAL-16233) Portal Permissions not set to role Everybody when deploying the portal 
+* [IVYPORTAL-16307](https://1ivy.atlassian.net/browse/IVYPORTAL-16307) Error on display Widget information of Task/Case widget 
+* [IVYPORTAL-16428](https://1ivy.atlassian.net/browse/IVYPORTAL-16428) XSS Vulnerabilty in Portal <span class="badge badge-pill badge-success badge-security">security</span>
+* [IVYPORTAL-16476](https://1ivy.atlassian.net/browse/IVYPORTAL-16476) Process Steps do not render correctly 
+* [IVYPORTAL-16551](https://1ivy.atlassian.net/browse/IVYPORTAL-16551) Queries of task and case widgets have unnecessary extended parts 
+* [IVYPORTAL-16560](https://1ivy.atlassian.net/browse/IVYPORTAL-16560) Process doesn't work in the custom process widget 
+* [IVYPORTAL-16564](https://1ivy.atlassian.net/browse/IVYPORTAL-16564) Process Labels cutoff 
+* [IVYPORTAL-16579](https://1ivy.atlassian.net/browse/IVYPORTAL-16579) Incorrect alignment header of Case/Task widgets when has vertical scrollbar 
+* [IVYPORTAL-16739](https://1ivy.atlassian.net/browse/IVYPORTAL-16739) Screen reloaded if TaskTemplateIFrame has 'taskUrl=blank' 
+* [IVYPORTAL-16809](https://1ivy.atlassian.net/browse/IVYPORTAL-16809) Edit Permission Doesn't Show Predefine Permission 
+* [IVYPORTAL-16825](https://1ivy.atlassian.net/browse/IVYPORTAL-16825) Too many external Links lead to bad performance 
+* [IVYPORTAL-16872](https://1ivy.atlassian.net/browse/IVYPORTAL-16872) AJAX indicator block the error dialog 
+* [IVYPORTAL-16910](https://1ivy.atlassian.net/browse/IVYPORTAL-16910) Error when leaving a task due to ITask.getCase() throws exception 
+* [IVYPORTAL-16924](https://1ivy.atlassian.net/browse/IVYPORTAL-16924) Process chain is missing after migrating to Portal 10 

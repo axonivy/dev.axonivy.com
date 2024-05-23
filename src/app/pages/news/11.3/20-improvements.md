@@ -35,3 +35,10 @@
 * [XIVY-10166](https://1ivy.atlassian.net/browse/XIVY-10166) Entra ID OAUTH Login for REST-Endpoints provided by the AxonIvy Engine 
 * [XIVY-8505](https://1ivy.atlassian.net/browse/XIVY-8505) Show helper lines when moving or inserting a process element in the process editor 
 * [XIVY-5559](https://1ivy.atlassian.net/browse/XIVY-5559) System database migration should be executed by the engine migration wizard  
+* [IVYPORTAL-16765](https://1ivy.atlassian.net/browse/IVYPORTAL-16765) Upgrade to Primefaces 13 
+* [IVYPORTAL-16655](https://1ivy.atlassian.net/browse/IVYPORTAL-16655) Quick Search in Dashboard Case & Task List LE Impl., GUI Test & Documentation 
+* [IVYPORTAL-16309](https://1ivy.atlassian.net/browse/IVYPORTAL-16309) Grant "edit external link"-permission to Portal Admin by default 
+* [IVYPORTAL-16089](https://1ivy.atlassian.net/browse/IVYPORTAL-16089) QR-Code for Axon Ivy Mobile App 
+* [IVYPORTAL-15964](https://1ivy.atlassian.net/browse/IVYPORTAL-15964) Correct navigation inside the Case Information dialog 
+* [IVYPORTAL-15448](https://1ivy.atlassian.net/browse/IVYPORTAL-15448) Statistics - Standard Chart Set 
+* [IVYPORTAL-14996](https://1ivy.atlassian.net/browse/IVYPORTAL-14996) Permissions documentation improved 
