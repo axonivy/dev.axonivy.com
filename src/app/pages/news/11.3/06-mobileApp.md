@@ -15,14 +15,14 @@ New Code, New Design, lots of functionalites!
 **Install the App for iOS and Android now:**
 
 <div class="short-links">
-	<a href="https://play.google.com/store/apps?hl=en"
+	<a href="https://play.google.com/store/apps/details?id=com.axonivy"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-check"></i> Android App
 	</a>
 </div>
 
 <div class="short-links">
-	<a href="https://www.apple.com/app-store/"
+	<a href="https://apps.apple.com/bh/app/axon-ivy/id6474303078"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-check"></i> iOS App
 	</a>
