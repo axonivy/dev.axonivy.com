@@ -55,7 +55,7 @@ class LinkAction
         
         'webtester' => 'https://github.com/axonivy/web-tester/',
 
-        'market-contribute' => 'https://github.com/axonivy/market/wiki/c0-Contribute',
+        'market-contribute' => 'https://github.com/axonivy-market/market/wiki',
         'market-install-portal' => self::installPortal($version),
         
         'build-examples' => $buildExamplePrefix . 'tree/' . $branchVersion,
