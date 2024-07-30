@@ -37,6 +37,8 @@ class InstallationAction
     $minorVersion = (new Version($version))->getMinorVersion();
     $bugfixVersion = (new Version($version))->getBugfixVersion();
 
+    $moreInfoLink = "";
+
     // TODO we should move this to artifact
     $title = 'Install Axon Ivy Designer ';
     if ($product == Artifact::PRODUCT_NAME_ENGINE) {
@@ -44,10 +46,20 @@ class InstallationAction
       if ($type == Artifact::TYPE_DEBIAN) {
         $title .= ' for Debian';
         $startDownload = false;
+        if (version_compare($minorVersion, "9.2") < 0) {
+          $moreInfoLink = "/doc/$minorVersion/engine-guide/getting-started/debian.html";
+        } else {
+          $moreInfoLink = "/doc/$minorVersion/engine-guide/getting-started/debian/index.html";
+        }
       }
       if ($type == Artifact::TYPE_DOCKER) {
         $title .= ' for Docker';
         $startDownload = false;
+        if (version_compare($minorVersion, "9.2") < 0) {
+          $moreInfoLink = "/doc/$minorVersion/engine-guide/getting-started/docker.html";
+        } else {
+          $moreInfoLink = "/doc/$minorVersion/engine-guide/getting-started/docker/index.html";
+        }
       }
     }
 
@@ -68,7 +80,8 @@ class InstallationAction
       'type' => $type,
       'product' => $product,
       'bugfixVersion' => $bugfixVersion,
-      'startDownload' => $startDownload
+      'startDownload' => $startDownload,
+      'moreInfoLink' => $moreInfoLink,
     ]);
   }
 }
