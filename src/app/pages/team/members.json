@@ -77,6 +77,13 @@
     "slogan": "Hugo Boss 🐶"
   },
   {
+    "name": "Jens Hartmann",
+    "imgSrc": "/images/team/placeholder.jpg",
+    "education": "Dipl. Techniker HF",
+    "function": "Core Developer",
+    "slogan": "Process Drawer 🖌️"
+  },
+  {
     "name": "Lukas Giger",
     "imgSrc": "/images/team/lgi.jpg",
     "education": "EFZ Information Technology",
