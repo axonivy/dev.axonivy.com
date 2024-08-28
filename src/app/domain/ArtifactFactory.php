@@ -26,11 +26,7 @@ class ArtifactFactory
 
   private static function createParser($filename): ArtifactFilenameParser
   {
-    if (str_ends_with($filename, 'deb')) {
-      return new DebianArtifactFilenameParser();
-    } else {
-      return new DefaultArtifactFilenameParser();
-    }
+    return new DefaultArtifactFilenameParser();    
   }
 
   private static function createDockerArtifact($versionNumber): Artifact
@@ -131,34 +127,6 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
     $productName = str_replace('XpertIvy', '', $productName);
     $productName = str_replace('Server', 'Engine', $productName);
     return $productName;
-  }
-}
-
-class DebianArtifactFilenameParser implements ArtifactFilenameParser
-{
-  /**
-   * $originalFilename: e.g. axonivy-engine-7x_7.2.0.60027.deb
-   */
-  public function toArtifact(string $folderName, string $originalFilename): Artifact
-  {
-    $filename = pathinfo($originalFilename, PATHINFO_FILENAME); // e.g. axonivy-engine-7x_7.2.0.60027
-    $fileNameArray = explode('_', $filename); // e.g ['axonivy-engine-7x', '7.2.0.60027']
-    $versionNumber = end($fileNameArray); // e.g. '7.2.0.60027'
-    $permalink = ArtifactLinkFactory::permalink("$folderName/axonivy-engine.deb");
-    $downloadUrl = ArtifactLinkFactory::cdn("$folderName/" . basename($originalFilename));
-
-    return new Artifact(
-      basename($originalFilename),
-      Artifact::PRODUCT_NAME_ENGINE,
-      $versionNumber,
-      Artifact::TYPE_DEBIAN,
-      Artifact::ARCHITECTURE_X64,
-      '',
-      false,
-      $permalink,
-      $downloadUrl,
-      $folderName
-    );
   }
 }
 

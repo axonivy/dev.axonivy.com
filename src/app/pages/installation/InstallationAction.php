@@ -20,7 +20,7 @@ class InstallationAction
   public function __invoke(Request $request, $response, $args)
   {
     $product = $request->getQueryParams()['product'] ?? ''; // e.g. 'engine', 'designer'
-    $type = $request->getQueryParams()['type'] ?? ''; // e.g. 'docker', 'debian'
+    $type = $request->getQueryParams()['type'] ?? ''; // e.g. 'docker'
     $version = $request->getQueryParams()['version'] ?? ''; // e.g. '8.0.1', '9.0.1'
     $downloadUrl = $request->getQueryParams()['downloadUrl'] ?? ''; // e.g. https://download/... -> case of docker empty!
     $startDownload = $request->getQueryParams()['startDownload'] ?? 'true'; // e.g. wether to start the download or not
@@ -42,16 +42,7 @@ class InstallationAction
     // TODO we should move this to artifact
     $title = 'Install Axon Ivy Designer ';
     if ($product == Artifact::PRODUCT_NAME_ENGINE) {
-      $title = 'Install Axon Ivy Engine ';
-      if ($type == Artifact::TYPE_DEBIAN) {
-        $title .= ' for Debian';
-        $startDownload = false;
-        if (version_compare($minorVersion, "9.2") < 0) {
-          $moreInfoLink = "/doc/$minorVersion/engine-guide/getting-started/debian.html";
-        } else {
-          $moreInfoLink = "/doc/$minorVersion/engine-guide/getting-started/debian/index.html";
-        }
-      }
+      $title = 'Install Axon Ivy Engine ';      
       if ($type == Artifact::TYPE_DOCKER) {
         $title .= ' for Docker';
         $startDownload = false;

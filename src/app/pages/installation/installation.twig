@@ -13,10 +13,8 @@
 </section>
 
 <section id="main" >
-  <div class="inner-small" style="">
-    {% if type == "Debian" %}
-      {% include 'installation/_debian.twig' %}
-    {% elseif type == "docker" %}
+  <div class="inner-small" style="">    
+    {% eif type == "docker" %}
       {% include 'installation/_docker.twig' %}
     {% elseif product == "engine" %}
       {% include 'installation/_engine.twig' %}
