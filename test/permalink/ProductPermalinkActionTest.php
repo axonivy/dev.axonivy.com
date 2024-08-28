@@ -9,17 +9,17 @@ class ProductPermalinkActionTest extends TestCase
 {
   public function testPermalink_801()
   {
-    AppTester::assertThatGet('/permalink/8.0.1/axonivy-engine.deb')->redirect('https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb');
+    AppTester::assertThatGet('/permalink/8.0.1/axonivy-engine.zip')->redirect('https://download.axonivy.com/8.0.1/AxonIvyEngine8.0.1.96047_All_x64.zip');
   }
 
   public function testPermalink_80()
   {
-    AppTester::assertThatGet('/permalink/8.0/axonivy-engine.deb')->redirect('https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb');
+    AppTester::assertThatGet('/permalink/8.0/axonivy-engine.zip')->redirect('https://download.axonivy.com/8.0.1/AxonIvyEngine8.0.1.96047_All_x64.zip');
   }
 
   public function testPermalink_8()
   {
-    AppTester::assertThatGet('/permalink/8/axonivy-engine.deb')->redirect('https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb');
+    AppTester::assertThatGet('/permalink/8/axonivy-engine.zip')->redirect('https://download.axonivy.com/8.0.1/AxonIvyEngine8.0.1.96047_All_x64.zip');
   }
 
   public function testPermalink_7()

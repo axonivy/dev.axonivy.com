@@ -9,7 +9,6 @@ class Artifact
 
   public const TYPE_WINDOWS = 'Windows';
   public const TYPE_LINUX = 'Linux';
-  public const TYPE_DEBIAN = 'Debian';
   public const TYPE_MAC = 'macOS';
   public const TYPE_MAC_BETA = 'MacOSX-BETA';
   public const TYPE_ALL = 'All'; // All platforms

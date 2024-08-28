@@ -50,21 +50,6 @@ class ReleaseInfoTest extends TestCase
     Assert::assertFalse($artifact->isMavenPluginCompatible());
   }
 
-  public function test_artifactEngineDebian()
-  {
-    $artifact = $this->testee->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DEBIAN);
-
-    Assert::assertEquals(Artifact::PRODUCT_NAME_ENGINE, $artifact->getProductName());
-    Assert::assertEquals(Artifact::TYPE_DEBIAN, $artifact->getType());
-    Assert::assertEquals('8.0.1.96047', $artifact->getVersion()->getVersionNumber());
-    Assert::assertEquals('https://fakehost/permalink/8.0.1/axonivy-engine.deb', $artifact->getPermalink());
-    Assert::assertEquals('axonivy-engine-8x_8.0.1.96047.deb', $artifact->getFileName());
-    Assert::assertEquals('https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb', $artifact->getDownloadUrl());
-    Assert::assertEquals('/installation?downloadUrl=https://download.axonivy.com/8.0.1/axonivy-engine-8x_8.0.1.96047.deb&version=8.0.1&product=engine&type=Debian', $artifact->getInstallationUrl());
-    Assert::assertFalse($artifact->isBeta());
-    Assert::assertFalse($artifact->isMavenPluginCompatible());
-  }
-
   public function test_artifactDesignerWindows()
   {
     $artifact = $this->testee->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS);
