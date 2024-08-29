@@ -14,7 +14,7 @@
 
 <section id="main" >
   <div class="inner-small" style="">    
-    {% eif type == "docker" %}
+    {% if type == "docker" %}
       {% include 'installation/_docker.twig' %}
     {% elseif product == "engine" %}
       {% include 'installation/_engine.twig' %}
