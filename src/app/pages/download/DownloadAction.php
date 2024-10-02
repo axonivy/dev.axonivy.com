@@ -193,7 +193,8 @@ class ReleaseInfoLoader implements Loader
       $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
       $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
       $this->createDownloadArtifact('macOS', 'fa-brands fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC),
-      $this->createDownloadArtifact('macOS', 'fa-brands fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA)
+      $this->createDownloadArtifact('macOS', 'fa-brands fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA),
+      $this->createDownloadArtifact('macOS', 'fa-brands fa-apple', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA_NEW)
     ];
     return array_filter($artifacts);
   }
