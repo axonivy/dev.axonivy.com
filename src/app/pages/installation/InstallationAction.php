@@ -60,7 +60,7 @@ class InstallationAction
     if ($type == Artifact::TYPE_LINUX || $type == Artifact::TYPE_ALL) {
       $title .= ' for Linux';
     }
-    if ($type == Artifact::TYPE_MAC || $type == Artifact::TYPE_MAC_BETA ) {
+    if ($type == Artifact::TYPE_MAC || $type == Artifact::TYPE_MAC_BETA || $type == Artifact::TYPE_MAC_BETA_NEW) {
       $title .= ' for Mac';
     }
 
