@@ -37,9 +37,8 @@ class MavenPermalinkAction
     $artifact = new MavenArtifact($groupId, $artifactId, $type);
     $v = (new MavenVersionResolver($artifact))->resolve($version);
     $realVersion = $artifact->getConcreteVersion($v);
-
-    echo $artifact->getUrl($v, $realVersion);
-    return $response;
+    $url = $artifact->getUrl($v, $realVersion);
+    return Redirect::to($response, $url);
   }
 }
 
