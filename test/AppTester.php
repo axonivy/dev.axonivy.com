@@ -78,6 +78,13 @@ class AppTester
     return $this;
   }
 
+  private function headerStartsWith($name, $value): AppTester
+  {
+    $actual = $this->response->getHeader($name)[0];
+    Assert::assertStringStartsWith($value, $actual);
+    return $this;
+  }
+
   public function statusCode(int $expectedStatusCode): AppTester
   {
     Assert::assertEquals($expectedStatusCode, $this->response->getStatusCode());
@@ -100,6 +107,13 @@ class AppTester
   {
     self::statusCode(302);
     self::header('Location', $url);
+    return $this;
+  }
+
+  public function redirectStartsWith(string $url): AppTester
+  {
+    self::statusCode(302);
+    self::headerStartsWith('Location', $url);
     return $this;
   }
 
