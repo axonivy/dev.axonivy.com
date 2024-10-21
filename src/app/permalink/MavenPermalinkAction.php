@@ -36,7 +36,12 @@ class MavenPermalinkAction
 
     $artifact = new MavenArtifact($groupId, $artifactId, $type);
     $v = (new MavenVersionResolver($artifact))->resolve($version);
+    if (empty($v)) {
+      throw new HttpNotFoundException($request);
+    }
+
     $realVersion = $artifact->getConcreteVersion($v);
+
     $url = $artifact->getUrl($v, $realVersion);
     return Redirect::to($response, $url);
   }
@@ -113,12 +118,10 @@ class MavenArtifact
   private function loadVersions(): array
   {
     $baseUrl = $this->getBaseUrl();
-    $v = null;
+    $v = [];
     $xml = HttpRequester::request("$baseUrl/maven-metadata.xml");
     if (!empty($xml)) {
       $v = self::parseVersions($xml);
-      usort($v, 'version_compare');
-      $v = array_reverse($v);
       $v = array_values($v);
       $v = array_unique($v);
       usort($v, 'version_compare');
