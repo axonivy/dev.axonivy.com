@@ -5,7 +5,8 @@
     "slim/psr7": "*",
     "php-di/php-di": "*",
     "middlewares/trailing-slash": "*",
-    "league/commonmark": "*"
+    "league/commonmark": "*",
+    "guzzlehttp/guzzle": "^7.9"
   },
   "require-dev": {
     "phpunit/phpunit": "*"

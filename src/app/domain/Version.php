@@ -123,4 +123,49 @@ class Version
     }
     return "";
   }
+
+
+
+
+
+
+
+
+  public function isMajor(): bool
+  {
+    return substr_count($this->getNumbersOnly(), '.') == 0 && $this->isOffical();
+  }
+
+  /*public function isMinor(): bool
+  {
+    return substr_count($this->getNumbersOnly(), '.') == 1 && $this->isOffical();
+  }
+
+  public function isBugfix(): bool
+  {
+    return substr_count($this->getNumbersOnly(), '.') == 2 && $this->isOffical();
+  }*/
+
+  public function isSnapshot(): bool
+  {
+    return str_ends_with($this->versionNumber, '-SNAPSHOT');
+  }
+
+  public function isSprint(): bool
+  {
+    return str_contains($this->versionNumber, '-m');
+  }
+
+  public function isOffical(): bool
+  {
+    return !$this->isSnapshot() && !$this->isSprint();
+  }
+
+  public function getNumbersOnly(): string
+  {
+    if (str_contains($this->versionNumber, '-')) {
+      return substr($this->versionNumber, 0, strpos($this->versionNumber, '-'));
+    }
+    return $this->versionNumber;
+  }
 }
