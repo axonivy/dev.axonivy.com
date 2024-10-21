@@ -124,27 +124,10 @@ class Version
     return "";
   }
 
-
-
-
-
-
-
-
   public function isMajor(): bool
   {
     return substr_count($this->getNumbersOnly(), '.') == 0 && $this->isOffical();
   }
-
-  /*public function isMinor(): bool
-  {
-    return substr_count($this->getNumbersOnly(), '.') == 1 && $this->isOffical();
-  }
-
-  public function isBugfix(): bool
-  {
-    return substr_count($this->getNumbersOnly(), '.') == 2 && $this->isOffical();
-  }*/
 
   public function isSnapshot(): bool
   {
@@ -161,7 +144,7 @@ class Version
     return !$this->isSnapshot() && !$this->isSprint();
   }
 
-  public function getNumbersOnly(): string
+  private function getNumbersOnly(): string
   {
     if (str_contains($this->versionNumber, '-')) {
       return substr($this->versionNumber, 0, strpos($this->versionNumber, '-'));
