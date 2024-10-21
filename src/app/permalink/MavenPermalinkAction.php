@@ -204,7 +204,7 @@ class MavenVersionResolver
         }
       }
 
-      $versions = $this->getVersions();
+      $versions = $this->artifact->getVersions();
       foreach ($versions as $ver) {
         if (str_starts_with($ver, $requestedVersion)) {
           return $ver;
