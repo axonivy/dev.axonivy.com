@@ -15,8 +15,6 @@ We can now visualize the usage of your processes, making it easier for you to id
 - **Custom Filter**: You can filter the data 
 - **Export**: You can analyze the data according to custom filters for each specific process, such as filtering by Legal Entities, Department, or similar criteria—depending on what is available for the respective process.
 
-### Axon Ivy IDP
-
 <div class="short-links">
 	<a href="${docBaseUrl}/market/index.html"
 		target="_blank" rel="noopener noreferrer">
