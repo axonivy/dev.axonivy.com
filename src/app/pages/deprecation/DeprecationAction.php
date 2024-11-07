@@ -31,7 +31,7 @@ class DeprecationAction
   
   private static function getVersions(): array
   {
-    return ["3", "4", "5", "6", "7", "8", "10", "11.1", "11.2"];
+    return ["3", "4", "5", "6", "7", "8", "10", "12"];
   }
   
   private static function getFeatures(): array
