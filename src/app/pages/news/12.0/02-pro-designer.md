@@ -6,6 +6,7 @@ The PRO Designer is the tool for professional developers. It is the successor of
 - **Form Editor**: All new editor to design your HTML Dialogs. The form definition is stored in a future proof UI technology independent way. Currently, we auto-generate the JSF technology-based UI out of the form definition.
 - **Data Class Editor**: The new data class comes with a lot of new feature like switching between normal data classes, business data classes and persistency entity data classes. Add any annotation to your data class or field.
 - **Variable Editor**: Instead of having to navigate a YAML document that can get pretty big, you can now edit your variables with a handy user interface.
+- **Eclipse 2024/09**: Use the greatest and latest features of the new Eclipse Platform 2024/09.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/designer-guide/index.html"
