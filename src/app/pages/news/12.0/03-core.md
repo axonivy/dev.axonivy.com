@@ -5,7 +5,7 @@ The Axon Ivy Core also has some great new features:
 - **Notification**: Task and business notifications can now be delivered across multiple channels, including the Portal, email, or Microsoft Teams. A new API has been introduced for sending custom business notifications, and users can configure which notifications they want to receive and through which channel.
 - **CRON**: Periodic jobs, start, and intermediate events can now be scheduled using CRON expressions. This allows for flexible configurations, ranging from once a minute to daily, weekly, monthly, or yearly schedules, providing more control over automated tasks.
 - **Developer Workflow UI**: Improved developer workflow UI with new features like task and case notes, simple statistics, notifications, and enhanced task, case, and process start lists to make the developer experience more efficient.
-- **S3 Document Storage**:Workflow documents can now be stored in S3-compatible storage systems, offering many advantages over traditional local storage.
+- **S3 Document Storage**: Workflow documents can now be stored in S3-compatible storage systems, offering many advantages over traditional local storage.
 - **Java 21**: Use the latest Java 21 language features in your projects and take advantage of all the new Java 21 performance optimizations when running your engine.
 
 <div class="short-links">
