@@ -8,7 +8,7 @@ The engine cockpit has been updated with new features designed to simplify opera
 - **Monitoring**: The monitoring capabilities now include eleven new views, such as System Database Info, Class Histogram, Threads, Flight Recorder, Notifications, Session, Jobs, Health, Documents, Start Events, and Intermediate Events, for better operational insights.
 - **Security Export**: Users, roles, user-role assignments, and permissions can now be exported to Excel files to facilitate audits or documentation.
 - **Properties and Features**: The properties and features of REST clients or SOAP web services can be edited directly from the cockpit.
-- **More Improvements**: Enhanced Active Directory and Entra ID browsers, improved configuration file editor, updated search engine view, user substitute and absence management, and options for merging or modifying application security.
+- **More Improvements**: Enhanced Active Directory and Entra ID browsers, improved configuration file editor, updated search engine view, user substitute and absence management, and options for merging and changing the security system of an application.
 
 <div class="short-links">
 	<a href="${docBaseUrl}/engine-guide/reference/engine-cockpit/index.html"
