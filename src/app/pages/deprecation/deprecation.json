@@ -90,7 +90,7 @@
     "successorHref": "https://community.axonivy.com/d/142-environments-will-disappear-in-the-long-term",
     "released": "4",
     "deprecated": "10",
-    "removed": "11.1",
+    "removed": "12",
     "description": "Environments are deprecated and we won't invest in new features. Please use containers or correct configurations instead."
   },
   {
@@ -108,7 +108,7 @@
     "successorHref": "/doc/10.0/engine-guide/integration/index.html",
     "released": "4",
     "deprecated": "10",
-    "removed": "11.1",
+    "removed": "12",
     "description": "The AJP Protocol is deprecated. Please use the HTTP or HTTPS Protocol instead."
   },
   {
@@ -145,7 +145,7 @@
     "successorHref": "/doc/10.0/designer-guide/user-interface/user-dialogs/html-dialogs.html",
     "released": "4",
     "deprecated": "8",
-    "removed": "11.2",
+    "removed": "12",
     "description": "The WebPage activity process element."
   },
   {
@@ -153,7 +153,7 @@
     "nameHref": "/doc/10.0/designer-guide/process-modeling/process-elements/user-dialog.html#call-tab",
     "released": "4",
     "deprecated": "10",
-    "removed": "11.1",
+    "removed": "12",
     "description": "Dynamic HTML Dialog id from a data class attribute."
   },
   {
@@ -162,8 +162,8 @@
     "successor": "VS Code DRL Editor", 
     "successorHref": "https://community.axonivy.com/d/560-drl-editor-will-be-removed-with-axon-ivy-113",
     "released": "7",
-    "deprecated": "11.3",
-    "removed": "11.3",
+    "deprecated": "10",
+    "removed": "12",
     "description": "Syntax Highlighting for DRL files."
   },
   {
