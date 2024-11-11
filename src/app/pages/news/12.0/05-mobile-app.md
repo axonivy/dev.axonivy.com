@@ -6,7 +6,7 @@ New Code, New Design, More Functionality!
 
 - **Native iOS & Android App**: Smooth performance and an optimized design are provided across both major mobile platforms. Support for iOS and Android ensures a consistent, user-friendly experience on any device.
 - **Work Beyond the Office**: Ideal for mobile scenarios such as construction sites, elevator maintenance, and other field operations. Tasks can be managed from anywhere, providing the flexibility to work wherever needed.
-- **Native Access to Camera and Other Mobile Functions**: The app uses integrated device capabilities like the camera, GPS, and other tools to enhance functionality. Images can be captured, documents scanned, and these features used directly to improve workflow efficiency.
+- **Native Access to Camera and Other Mobile Functions**: The app uses integrated device capabilities such as the camera and GPS to enhance functionality and enable the use of mobile tools within the app to improve workflow efficiency.
 - **Offline Tasks Capability**: Productivity is maintained even without an internet connection. Offline task capabilities ensure tasks, projects, and processes can continue without interruption, regardless of connectivity.
 - **Demo Mode**: All app capabilities can be explored in demo mode, allowing for firsthand testing to evaluate potential process improvements.
 
