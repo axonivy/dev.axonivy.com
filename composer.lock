@@ -713,20 +713,20 @@
         },
         {
             "name": "middlewares/trailing-slash",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/middlewares/trailing-slash.git",
-                "reference": "1bedcedbc89be78595c5a7a86776fe5ed003e819"
+                "reference": "9939f5b6111b21a9551164d6765e60940da78a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/trailing-slash/zipball/1bedcedbc89be78595c5a7a86776fe5ed003e819",
-                "reference": "1bedcedbc89be78595c5a7a86776fe5ed003e819",
+                "url": "https://api.github.com/repos/middlewares/trailing-slash/zipball/9939f5b6111b21a9551164d6765e60940da78a78",
+                "reference": "9939f5b6111b21a9551164d6765e60940da78a78",
                 "shasum": ""
             },
             "require": {
-                "middlewares/utils": "^3.0",
+                "middlewares/utils": "^3.0 || ^4.0",
                 "php": "^7.2 || ^8.0",
                 "psr/http-server-middleware": "^1.0"
             },
@@ -761,45 +761,42 @@
             ],
             "support": {
                 "issues": "https://github.com/middlewares/trailing-slash/issues",
-                "source": "https://github.com/middlewares/trailing-slash/tree/v2.0.1"
+                "source": "https://github.com/middlewares/trailing-slash/tree/v2.0.2"
             },
-            "time": "2020-12-02T00:06:55+00:00"
+            "time": "2024-11-13T14:22:23+00:00"
         },
         {
             "name": "middlewares/utils",
-            "version": "v3.3.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/middlewares/utils.git",
-                "reference": "670b135ce0dbd040eadb025a9388f9bd617cc010"
+                "reference": "c789be3ce5465928cedc8d1492172ac36918ede4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/middlewares/utils/zipball/670b135ce0dbd040eadb025a9388f9bd617cc010",
-                "reference": "670b135ce0dbd040eadb025a9388f9bd617cc010",
+                "url": "https://api.github.com/repos/middlewares/utils/zipball/c789be3ce5465928cedc8d1492172ac36918ede4",
+                "reference": "c789be3ce5465928cedc8d1492172ac36918ede4",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
+                "php": ">=8.1",
                 "psr/container": "^1.0 || ^2.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0",
                 "psr/http-server-middleware": "^1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v2.16",
-                "guzzlehttp/psr7": "^2.0",
-                "laminas/laminas-diactoros": "^2.4",
-                "nyholm/psr7": "^1.0",
-                "oscarotero/php-cs-fixer-config": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpunit/phpunit": "^8|^9",
-                "slim/psr7": "^1.4",
-                "squizlabs/php_codesniffer": "^3.5",
-                "sunrise/http-message": "^1.0",
-                "sunrise/http-server-request": "^1.0",
-                "sunrise/stream": "^1.0.15",
-                "sunrise/uri": "^1.0.15"
+                "friendsofphp/php-cs-fixer": "^3.41",
+                "guzzlehttp/psr7": "^2.6",
+                "laminas/laminas-diactoros": "^3.3",
+                "nyholm/psr7": "^1.8",
+                "oscarotero/php-cs-fixer-config": "^2.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.5",
+                "slim/psr7": "^1.6",
+                "squizlabs/php_codesniffer": "^3.8",
+                "sunrise/http-message": "^3.0"
             },
             "type": "library",
             "autoload": {
@@ -823,9 +820,9 @@
             ],
             "support": {
                 "issues": "https://github.com/middlewares/utils/issues",
-                "source": "https://github.com/middlewares/utils/tree/v3.3.0"
+                "source": "https://github.com/middlewares/utils/tree/v4.0.0"
             },
-            "time": "2021-07-04T17:56:23+00:00"
+            "time": "2023-12-17T12:41:36+00:00"
         },
         {
             "name": "nette/schema",
@@ -1365,16 +1362,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.1",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "shasum": ""
             },
             "require": {
@@ -1383,7 +1380,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -1398,7 +1395,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -1412,9 +1409,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/1.1"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "time": "2023-04-04T09:50:52+00:00"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/http-server-handler",
@@ -4484,10 +4481,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
