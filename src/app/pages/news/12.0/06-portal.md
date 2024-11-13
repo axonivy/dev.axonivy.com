@@ -10,23 +10,11 @@ LTS 12 builds upon the innovations and optimizations introduced in previous vers
 - **[Axon Ivy Portal 11.2](https://developer.axonivy.com/news/11.2#portal)**: Notifications, lazy loading for task and case lists, AI translations, import and export functions for dashboards, and enhanced accessibility.
 - **[Axon Ivy Portal 11.3](https://developer.axonivy.com/news/11.3#portal)**: Enhanced complex filters, new statistic charts, quick search, and the full open-sourcing of the portal.
 
-### Meet Your New AI Assistant
-
-With LTS 12, the portal experience reaches new heights with the introduction of the AI Assistant, acting as your virtual partner. The AI Assistant dynamically supports a range of tasks, from document searches to task and process management.
-
-- **Portal Support**: The AI Assistant has knowledge of the Axon Ivy documentation and allows you to add custom documentation.
-- **Task and Process Management**: The AI Assistant can start tasks and processes.
-- **Search and Filter**: It can search and filter tasks and cases.
-- **Multilingual Support**: Assistance in multiple languages.
-- **Customizable Assistants**: Create theme-based and personalized assistants.
-- **Model-Based AI**: Assistants are created and managed using custom models.
-- **Custom Ivy AI Flows**: Build custom AI logic that adds value within the Axon Ivy environment.
-
 ### Further Improvements
 
 Beyond the well-known features from versions 11.1 to 11.3, LTS 12 brings additional enhancements:
 
--**Optimized Navigation and Interface**: The user interface has been modernized for efficiency. Customizable top-level navigation allows direct access to personalized dashboards.
+- **Optimized Navigation and Interface**: The user interface has been modernized for efficiency. Customizable top-level navigation allows direct access to personalized dashboards.
 - **Advanced Widget Functionality**: Real-time notifications, interactive widgets, and an expanded statistics system facilitate seamless task and case management in a structured environment.
 - **Accessibility Upgrades**: Improvements in contrast, layouts, and keyboard navigation increase usability for users of all abilities.
 - **Expanded Statistics Widgets**: LTS 12 includes a variety of new statistics widgets, offering insights into tasks, priorities, case categories, and more, powered by Elasticsearch.
