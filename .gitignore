@@ -6,3 +6,4 @@ composer.phar
 .sonar
 .scannerwork
 /src/web/documentation
+bom.json
