@@ -9,7 +9,8 @@
     "guzzlehttp/guzzle": "^7.9"
   },
   "require-dev": {
-    "phpunit/phpunit": "*"
+    "phpunit/phpunit": "*",
+    "cyclonedx/cyclonedx-php-composer": "^5.2"
   },
   "autoload": {
     "psr-4": {
@@ -19,6 +20,11 @@
   "autoload-dev": {
     "psr-4": {
       "test\\": "test/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "cyclonedx/cyclonedx-php-composer": true
     }
   }
 }
