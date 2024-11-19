@@ -36,7 +36,7 @@ pipeline {
             sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
             sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
             withCredentials([string(credentialsId: 'dependency-track', variable: 'API_KEY')]) {
-              sh 'curl -X POST -v https://api.dependency-track.ivyteam.io/api/v1/bom \
+              sh 'curl -v --fail -X POST https://api.dependency-track.ivyteam.io/api/v1/bom \
                       -H "Content-Type: multipart/form-data" \
                       -H "X-API-Key: ' + API_KEY + '" \
                       -F "autoCreate=true" \
