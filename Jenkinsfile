@@ -39,7 +39,9 @@ pipeline {
               sh 'curl -X POST -v https://api.dependency-track.ivyteam.io/api/v1/bom \
                       -H "Content-Type: multipart/form-data" \
                       -H "X-API-Key: ' + API_KEY + '" \
-                      -F "project=6a84925b-4ce2-4dcb-8d83-d1e418c84b5a" \
+                      -F "autoCreate=true" \
+                      -F "projectName=dev.axonivy.com" \
+                      -F "projectVersion=master" \
                       -F "bom=@bom.json"'
             }
           }
