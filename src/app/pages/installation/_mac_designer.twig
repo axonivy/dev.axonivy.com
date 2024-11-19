@@ -38,7 +38,7 @@ However, the Designer might not work as well as on the x64 architecture.
 
 <img src="/images/installation/mac_copy_to_applications.png" />
 <br /><br />
-{% if minorVersion < 9.2 %}
+{% if minorVersion < 9.2 or minorVersion starts with 'nightly' or minorVersion == 'dev' %}
 <p>
   4. Open a new terminal at the Axon Ivy Designer folder 
 </p>
