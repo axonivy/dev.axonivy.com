@@ -19,9 +19,9 @@
     {% elseif product == "engine" %}
       {% include 'installation/_engine.twig' %}
     {% else %}
-      {% if type == "MacOSX-BETA" or type == "macOS-BETA" or type =="macOS" %}
+      {% if isMac %}
         {% include 'installation/_mac_designer.twig' %}
-      {% elseif type == "Linux" %}
+      {% elseif isLinux %}
         {% include 'installation/_linux_designer.twig' %}
       {% else %}
         {% include 'installation/_designer.twig' %}
