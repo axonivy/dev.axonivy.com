@@ -32,7 +32,7 @@
             <configuration>
             <jiraServerId>axonivy.jira</jiraServerId>
               <console>true</console>
-              <filterBy>project in (XIVY,IVYPORTAL) AND fixVersion = ${version}</filterBy>
+              <filterBy>project in (XIVY) AND fixVersion = ${version}</filterBy>
               <orderBy>project,"Epic Link" ASC,fixVersion DESC,key</orderBy>
               <whitelistJiraLabels>security,performance</whitelistJiraLabels>
             </configuration>
