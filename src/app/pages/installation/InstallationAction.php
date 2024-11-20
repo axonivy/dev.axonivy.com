@@ -54,14 +54,23 @@ class InstallationAction
       }
     }
 
-    if ($type == Artifact::TYPE_WINDOWS) {
+    $isWindows = $type == Artifact::TYPE_WINDOWS;
+    $isLinux = $type == Artifact::TYPE_LINUX || $type == Artifact::TYPE_ALL;
+    $isMac = $type == Artifact::TYPE_MAC || $type == Artifact::TYPE_MAC_BETA || $type == Artifact::TYPE_MAC_BETA_NEW;
+
+    if ($isWindows) {
       $title .= ' for Windows';
     }
-    if ($type == Artifact::TYPE_LINUX || $type == Artifact::TYPE_ALL) {
+    if ($isLinux) {
       $title .= ' for Linux';
     }
-    if ($type == Artifact::TYPE_MAC || $type == Artifact::TYPE_MAC_BETA || $type == Artifact::TYPE_MAC_BETA_NEW) {
+    if ($isMac) {
       $title .= ' for Mac';
+    }
+
+    $isNotarized = true;
+    if ($minorVersion < 9.2 || str_starts_with($minorVersion, 'nightly') || $minorVersion == 'dev') {
+      $isNotarized = false;
     }
 
     return $this->view->render($response, 'installation/installation.twig', [
@@ -73,6 +82,10 @@ class InstallationAction
       'bugfixVersion' => $bugfixVersion,
       'startDownload' => $startDownload,
       'moreInfoLink' => $moreInfoLink,
+      'isNotarized' => $isNotarized,
+      'isWindows' => $isWindows,
+      'isLinux' => $isLinux,
+      'isMac' => $isMac
     ]);
   }
 }

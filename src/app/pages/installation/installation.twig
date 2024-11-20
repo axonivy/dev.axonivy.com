@@ -13,15 +13,15 @@
 </section>
 
 <section id="main" >
-  <div class="inner-small" style="">    
+  <div class="inner-small" style="">
     {% if type == "docker" %}
       {% include 'installation/_docker.twig' %}
     {% elseif product == "engine" %}
       {% include 'installation/_engine.twig' %}
     {% else %}
-      {% if type == "MacOSX-BETA" or type =="macOS" %}
+      {% if isMac %}
         {% include 'installation/_mac_designer.twig' %}
-      {% elseif type == "Linux" %}
+      {% elseif isLinux %}
         {% include 'installation/_linux_designer.twig' %}
       {% else %}
         {% include 'installation/_designer.twig' %}
