@@ -6,11 +6,11 @@
     "php-di/php-di": "*",
     "middlewares/trailing-slash": "*",
     "league/commonmark": "*",
-    "guzzlehttp/guzzle": "^7.9"
+    "guzzlehttp/guzzle": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
-    "cyclonedx/cyclonedx-php-composer": "^5.2"
+    "cyclonedx/cyclonedx-php-composer": "*"
   },
   "autoload": {
     "psr-4": {
