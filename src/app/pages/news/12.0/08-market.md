@@ -7,11 +7,11 @@ The marketplace has been revamped with a fresh design and a variety of new featu
 - **New connectors**: Many new connectors and utilities have been created, let us introduce some exciting new features:
   - **[Vertexai-google](https://market.axonivy.com/vertexai-google)**: This connector is focusing on the Gemini model, specifically designed for advanced multimodal tasks involving visual and textual inputs.
 
-  - **[Skribble-connector](https://market.axonivy.com/skribble-connector)**: Skribble is a modern digital signature platform that provides legally binding electronic signatures compliant with European laws.
+  - **[Skribble-connector](https://market.axonivy.com/skribble-connector)**: Skribble is a modern digital signature platform that provides legally binding electronic signatures that are compliant with European laws.
 
-  - **[Process-inspector](https://market.axonivy.com/process-inspector)**: Axon Ivy’s Process Inspector tool helps you to calculate duration to finish a workflow case.
+  - **[Process-inspector](https://market.axonivy.com/process-inspector)**: Axon Ivy’s Process Inspector tool helps you to calculate the duration to finish a workflow case.
 
-You can find these and many other supporting tools at the Axon Ivy Market website.
+You can find these and many other supporting tools on the Axon Ivy Market website.
 <div class="short-links">
 	<a href="https://market.axonivy.com/"
 		target="_blank" rel="noopener noreferrer">
