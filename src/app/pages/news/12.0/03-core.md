@@ -6,6 +6,7 @@ The Axon Ivy Core also has some great new features:
 - **CRON**: Periodic jobs, start, and intermediate events can now be scheduled using CRON expressions. This allows for flexible configurations, ranging from once a minute to daily, weekly, monthly, or yearly schedules, providing more control over automated tasks.
 - **Developer Workflow UI**: Improved developer workflow UI with new features like task and case notes, simple statistics, notifications, and enhanced task, case, and process start lists to make the developer experience more efficient.
 - **S3 Document Storage**: Workflow documents can now be stored in S3-compatible storage systems, offering many advantages over traditional local storage.
+- **Keycloak Identity Provider**: Users and roles can now be managed in Keycloak, a popular open-source identity and access management system. With Keycloak you can integrate the security features of your choice like multi-factor authentication.
 - **Java 21**: Use the latest Java 21 language features in your projects and take advantage of all the new Java 21 performance optimizations when running your engine.
 
 <div class="short-links">
@@ -38,6 +39,13 @@ The Axon Ivy Core also has some great new features:
 	<a href="${docBaseUrl}/engine-guide/configuration/document/s3.html"
 		target="_blank" rel="noopener noreferrer">
 		<i class="si si-file"></i> S3 Document Storage
+	</a>
+</div>
+
+<div class="short-links">
+	<a href="${docBaseUrl}/engine-guide/integration/identity-provider/keycloak/index.html"
+		target="_blank" rel="noopener noreferrer">
+		<i class="si si-file"></i> Keycloak
 	</a>
 </div>
 
