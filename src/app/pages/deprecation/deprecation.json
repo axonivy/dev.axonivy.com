@@ -118,6 +118,7 @@
     "successorHref": "/doc/8.0/designer-guide/how-to/overrides.html#strict-overriding",
     "released": "5",
     "deprecated": "8",
+    "removed": "13",
     "description": "The Case Scope Overriding is deprecated in favor of Strict Overriding."
   },
   {
