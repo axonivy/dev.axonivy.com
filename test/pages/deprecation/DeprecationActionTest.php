@@ -34,6 +34,7 @@ class DeprecationActionTest extends TestCase
             <td class="deprecation-icon"><span class="deprecation-removed"></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
+            <td class="deprecation-icon"><span class=""></span></td>
           </tr>');
     }
 
@@ -58,6 +59,7 @@ class DeprecationActionTest extends TestCase
               <th>8</th>
               <th>10</th>
               <th>12</th>
+              <th>13</th>
             </tr>');
     }
 }
