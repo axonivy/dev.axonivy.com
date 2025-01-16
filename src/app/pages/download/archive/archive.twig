@@ -82,7 +82,13 @@
               {% if artifact.Type == "Slim All" %}
                 <span class="tooltip">
                   <i class="si si-info"></i>
-                  <span class="tooltiptext">This version is similar to the 'All' product, but without the 'Axis' extension and 'demo-portal'.</span>
+                  <span class="tooltiptext">
+                    {% if currentMajorVersion <= 9 %}
+                      This version is similar to the 'All' product, but without the 'Axis' extension and 'demo-portal'.
+                    {% else %}
+                      This version is similar to the 'All' product, but without the 'demo-portal'.
+                    {% endif %}
+                  </span>
                 </span>
               {% endif %}
               <br />
