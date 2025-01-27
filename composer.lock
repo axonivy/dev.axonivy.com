@@ -2056,8 +2056,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2429,16 +2429,16 @@
         },
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v3.5.0",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "0539a4a910ec729ed550b1ee7901438a8ede90ff"
+                "reference": "267414a34d3ac26f75cce6f341414ed6215d6bc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/0539a4a910ec729ed550b1ee7901438a8ede90ff",
-                "reference": "0539a4a910ec729ed550b1ee7901438a8ede90ff",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/267414a34d3ac26f75cce6f341414ed6215d6bc6",
+                "reference": "267414a34d3ac26f75cce6f341414ed6215d6bc6",
                 "shasum": ""
             },
             "require": {
@@ -2513,20 +2513,20 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-11-18T08:50:57+00:00"
+            "time": "2025-01-27T10:06:06+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-composer.git",
-                "reference": "f3a3cdc1a9e34bf1d5748e4279a24569cbf31fed"
+                "reference": "3d950d4d360cbfe9498f7b90c53766e572d6a951"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-composer/zipball/f3a3cdc1a9e34bf1d5748e4279a24569cbf31fed",
-                "reference": "f3a3cdc1a9e34bf1d5748e4279a24569cbf31fed",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-composer/zipball/3d950d4d360cbfe9498f7b90c53766e572d6a951",
+                "reference": "3d950d4d360cbfe9498f7b90c53766e572d6a951",
                 "shasum": ""
             },
             "require": {
@@ -2541,10 +2541,10 @@
             },
             "type": "composer-plugin",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "4.x-dev"
-                },
                 "class": "CycloneDX\\Composer\\Plugin",
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                },
                 "composer-normalize": {
                     "indent-size": 4,
                     "indent-style": "space"
@@ -2589,7 +2589,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-04-30T10:47:47+00:00"
+            "time": "2025-01-27T10:05:43+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2711,16 +2711,16 @@
         },
         {
             "name": "opis/json-schema",
-            "version": "2.3.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/json-schema.git",
-                "reference": "c48df6d7089a45f01e1c82432348f2d5976f9bfb"
+                "reference": "712827751c62b465daae6e725bf0cf5ffbf965e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/json-schema/zipball/c48df6d7089a45f01e1c82432348f2d5976f9bfb",
-                "reference": "c48df6d7089a45f01e1c82432348f2d5976f9bfb",
+                "url": "https://api.github.com/repos/opis/json-schema/zipball/712827751c62b465daae6e725bf0cf5ffbf965e1",
+                "reference": "712827751c62b465daae6e725bf0cf5ffbf965e1",
                 "shasum": ""
             },
             "require": {
@@ -2770,22 +2770,22 @@
             ],
             "support": {
                 "issues": "https://github.com/opis/json-schema/issues",
-                "source": "https://github.com/opis/json-schema/tree/2.3.0"
+                "source": "https://github.com/opis/json-schema/tree/2.4.1"
             },
-            "time": "2022-01-08T20:38:03+00:00"
+            "time": "2024-12-30T20:20:21+00:00"
         },
         {
             "name": "opis/string",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/string.git",
-                "reference": "9ebf1a1f873f502f6859d11210b25a4bf5d141e7"
+                "reference": "ba0b9607b9809462b0e28a11e4881a8d77431feb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/string/zipball/9ebf1a1f873f502f6859d11210b25a4bf5d141e7",
-                "reference": "9ebf1a1f873f502f6859d11210b25a4bf5d141e7",
+                "url": "https://api.github.com/repos/opis/string/zipball/ba0b9607b9809462b0e28a11e4881a8d77431feb",
+                "reference": "ba0b9607b9809462b0e28a11e4881a8d77431feb",
                 "shasum": ""
             },
             "require": {
@@ -2832,9 +2832,9 @@
             ],
             "support": {
                 "issues": "https://github.com/opis/string/issues",
-                "source": "https://github.com/opis/string/tree/2.0.1"
+                "source": "https://github.com/opis/string/tree/2.0.2"
             },
-            "time": "2022-01-14T15:42:23+00:00"
+            "time": "2024-12-30T21:43:22+00:00"
         },
         {
             "name": "opis/uri",
