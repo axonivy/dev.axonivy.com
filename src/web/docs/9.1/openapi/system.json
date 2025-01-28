@@ -1,0 +1,76 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Axon Ivy"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:{port}/system/api",
+            "variables": {
+                "port": {
+                    "default": "8080"
+                }
+            }
+        }
+    ],
+    "security": [
+        {
+            "basicAuth": [],
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/apps/{applicationName}/configs/{configKey}": {
+            "get": {
+                "tags": [
+                    "engine"
+                ],
+                "description": "Returns the value of the config with the given name.",
+                "operationId": "getConfig",
+                "parameters": [
+                    {
+                        "name": "applicationName",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "configKey",
+                        "in": "path",
+                        "description": "key of config",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request: response contains config value"
+                    },
+                    "401": {
+                        "description": "authorization error"
+                    },
+                    "404": {
+                        "description": "request failed: app or config not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

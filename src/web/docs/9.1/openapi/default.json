@@ -1,0 +1,87 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Axon Ivy"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:{port}/api",
+            "variables": {
+                "port": {
+                    "default": "8080"
+                }
+            }
+        }
+    ],
+    "security": [
+        {
+            "basicAuth": [],
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/notifications": {
+            "get": {
+                "tags": [
+                    "notification"
+                ],
+                "description": "Returns web notifications for the current user.",
+                "operationId": "paged",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number 1..n",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Page size 1..n. Number of web notifications per page",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "link": {
+                                "description": "Links to the first, last, prev, and next page",
+                                "style": "simple"
+                            },
+                            "total-size": {
+                                "description": "The total number of web notifications",
+                                "style": "simple"
+                            },
+                            "unread-size": {
+                                "description": "The total number of unread web notifications",
+                                "style": "simple"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "If page or pageSize contains invalid values"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
