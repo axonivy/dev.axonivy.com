@@ -38,10 +38,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{ SWAGGER_VERSION }}/swagger-ui-standalone-preset.js" 
       integrity="{{ PRESET_INTEGRITY }}" crossorigin="anonymous"></script>
     <script>
+
+    let params = new URL(window.location.href).searchParams;
+    let configUrl = params.get('configUrl');
+    let relative = new URL(document.baseURI).origin === new URL(configUrl, document.baseURI).origin;
+    if (!relative) {
+      console.log("blocking "+configUrl);
+      configUrl = "null";
+    }
+
     window.onload = function() {
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         dom_id: '#swagger-ui',
+        configUrl: configUrl,
         deepLinking: true,
         presets: [
           SwaggerUIBundle.presets.apis,
