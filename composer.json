@@ -6,7 +6,8 @@
     "php-di/php-di": "*",
     "middlewares/trailing-slash": "*",
     "league/commonmark": "*",
-    "guzzlehttp/guzzle": "*"
+    "guzzlehttp/guzzle": "*",
+    "swagger-api/swagger-ui": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
@@ -26,5 +27,13 @@
     "allow-plugins": {
       "cyclonedx/cyclonedx-php-composer": true
     }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "php copy-swagger.php"
+    ],
+    "post-update-cmd": [
+      "php copy-swagger.php"
+    ]
   }
 }

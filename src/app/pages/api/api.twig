@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Swagger UI | DEV Axon Ivy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.38.0/swagger-ui.css" integrity="sha512-tKlTmmIcJ/LXt94SNEbo3ZXMHhaa9quOeqk+sfMKYvTadSD2xSzmN95EOeITw7rmAQOuHStvbqA1W7fCU6RQZQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/swagger/swagger-ui.css" crossorigin="anonymous">
     <link rel="icon" href="/images/favicon.png">
     <style>
       html
@@ -32,13 +32,23 @@
   <body>
     <div id="swagger-ui"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.38.0/swagger-ui-bundle.js" integrity="sha512-A1jSvGBkNnmx0I/cKKLnvH8V1zGyFYs+c9u3T8nffnFHr0vrZyNnlE6ccVjBavHw2gy5l7SV/2rvKfEn6YJYfg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.38.0/swagger-ui-standalone-preset.js" integrity="sha512-b5yUDXs5Sk+CgugAy139bm4gy3NOrotOZNx+iuS96rRc6ApxahhIuj7NHERt0b1BN7fjyS6/GeYX1Nu2cSYJig==" crossorigin="anonymous"></script>
+    <script src="/swagger/swagger-ui-bundle.js" crossorigin="anonymous"></script>
+    <script src="/swagger/swagger-ui-standalone-preset.js" crossorigin="anonymous"></script>
     <script>
+
+    let params = new URL(window.location.href).searchParams;
+    let configUrl = params.get('configUrl');
+    let relative = new URL(document.baseURI).origin === new URL(configUrl, document.baseURI).origin;
+    if (!relative) {
+      console.log("blocking "+configUrl);
+      configUrl = "null";
+    }
+
     window.onload = function() {
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         dom_id: '#swagger-ui',
+        configUrl: configUrl,
         deepLinking: true,
         presets: [
           SwaggerUIBundle.presets.apis,

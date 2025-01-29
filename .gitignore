@@ -6,4 +6,5 @@ composer.phar
 .sonar
 .scannerwork
 /src/web/documentation
+/src/web/swagger
 bom.json
