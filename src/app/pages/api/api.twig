@@ -4,8 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Swagger UI | DEV Axon Ivy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{ SWAGGER_VERSION }}/swagger-ui.css" 
-      integrity="{{ CSS_INTEGRITY }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="/swagger/swagger-ui.css" crossorigin="anonymous">
     <link rel="icon" href="/images/favicon.png">
     <style>
       html
@@ -33,10 +32,8 @@
   <body>
     <div id="swagger-ui"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{ SWAGGER_VERSION }}/swagger-ui-bundle.js" 
-      integrity="{{ BUNDLE_INTEGRITY }}" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{ SWAGGER_VERSION }}/swagger-ui-standalone-preset.js" 
-      integrity="{{ PRESET_INTEGRITY }}" crossorigin="anonymous"></script>
+    <script src="/swagger/swagger-ui-bundle.js" crossorigin="anonymous"></script>
+    <script src="/swagger/swagger-ui-standalone-preset.js" crossorigin="anonymous"></script>
     <script>
 
     let params = new URL(window.location.href).searchParams;
