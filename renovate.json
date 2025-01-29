@@ -6,7 +6,15 @@
   "packageRules": [
     {
       "automerge": true,
-      "matchDepTypes": ["require-dev"]
+      "matchDepTypes": [
+        "require-dev"
+      ]
+    },
+    {
+      "packageNames": [
+        "ch.ivyteam.maven:jira-plugin"
+      ],
+      "enabled": false
     }
   ]
 }
