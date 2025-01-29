@@ -11,7 +11,7 @@
       ]
     },
     {
-      "packageNames": [
+      "matchPackageNames": [
         "ch.ivyteam.maven:jira-plugin"
       ],
       "enabled": false
