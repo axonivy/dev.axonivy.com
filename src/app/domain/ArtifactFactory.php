@@ -21,12 +21,7 @@ class ArtifactFactory
 
   private static function fromFilename(string $folderName, string $filename): Artifact
   {
-    return self::createParser($filename)->toArtifact($folderName, $filename);
-  }
-
-  private static function createParser($filename): ArtifactFilenameParser
-  {
-    return new DefaultArtifactFilenameParser();    
+    return ArtifactFilenameParser::toArtifact($folderName, $filename);
   }
 
   private static function createDockerArtifact($versionNumber): Artifact
@@ -61,14 +56,9 @@ class ArtifactFactory
   }
 }
 
-interface ArtifactFilenameParser
+class ArtifactFilenameParser
 {
-  public function toArtifact(string $folderName, string $originalFilename): Artifact;
-}
-
-class DefaultArtifactFilenameParser implements ArtifactFilenameParser
-{
-  public function toArtifact(string $folderName, string $originalFilename): Artifact
+  public static function toArtifact(string $folderName, string $originalFilename): Artifact
   {
     $filename = pathinfo($originalFilename, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86
     $fileNameArray = explode('_', $filename);
