@@ -79,6 +79,10 @@
             <td>
             {% for artifact in releaseInfo.artifacts %}
               <a href="{{ artifact.DownloadUrl }}"><i class="si si-download"> </i></a> &nbsp;<a href="{{ artifact.DownloadUrl }}" title="{{ artifact.FileName }}">{{ artifact.FileName }}</a>
+              {% if artifact.hasBom %}
+                 <a href="{{ artifact.DownloadBomUrl }}" title="Download Software Bill of Materials"><i class="si si-menu"></i></a>
+              {% endif %}
+
               {% if artifact.Type == "Slim All" %}
                 <span class="tooltip">
                   <i class="si si-info"></i>

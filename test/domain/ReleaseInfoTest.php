@@ -5,6 +5,7 @@ namespace test\domain;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use app\domain\ReleaseInfoRepository;
+use app\domain\ReleaseType;
 use app\domain\ReleaseInfo;
 use app\domain\Artifact;
 use app\Config;
@@ -48,6 +49,25 @@ class ReleaseInfoTest extends TestCase
     Assert::assertEquals('/installation?downloadUrl=https://hub.docker.com/r/axonivy/axonivy-engine&version=8.0.1&product=engine&type=docker', $artifact->getInstallationUrl());
     Assert::assertFalse($artifact->isBeta());
     Assert::assertFalse($artifact->isMavenPluginCompatible());
+  }
+
+  public function test_artifactWithBomJson()
+  {
+    $this->testee = ReleaseType::DEV()->releaseInfo();
+    $artifact = $this->testee->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX);
+    Assert::assertEquals(Artifact::PRODUCT_NAME_DESIGNER, $artifact->getProductName());
+    Assert::assertEquals(Artifact::TYPE_LINUX, $artifact->getType());
+    Assert::assertTrue($artifact->hasBom());
+    Assert::assertEquals('https://download.axonivy.com/dev/AxonIvyDesigner9.1.0.2002051600_Linux_x64.zip.bom.json', $artifact->getDownloadBomUrl());
+  }
+
+  public function test_artifactWithoutBomJson()
+  {
+    $artifact = $this->testee->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX);
+    Assert::assertEquals(Artifact::PRODUCT_NAME_DESIGNER, $artifact->getProductName());
+    Assert::assertEquals(Artifact::TYPE_LINUX, $artifact->getType());
+    Assert::assertFalse($artifact->hasBom());
+    Assert::assertEquals('', $artifact->getDownloadBomUrl());
   }
 
   public function test_artifactDesignerWindows()
