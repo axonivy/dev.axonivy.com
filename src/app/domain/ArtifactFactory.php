@@ -11,22 +11,12 @@ class ArtifactFactory
     $versionNumber = basename($folder);
     $fileNames = glob($folder . '/downloads/*.{zip,deb}', GLOB_BRACE);
 
-    $artifacts = array_map(fn (string $filename) => ArtifactFactory::fromFilename($versionNumber, $filename), $fileNames);
+    $artifacts = array_map(fn (string $filename) => ArtifactFilenameParser::toArtifact($versionNumber, $filename), $fileNames);
 
     if (self::isDockerAvailableForVersion($versionNumber)) {
       $artifacts[] = self::createDockerArtifact($versionNumber);
     }
     return $artifacts;
-  }
-
-  private static function fromFilename(string $folderName, string $filename): Artifact
-  {
-    return self::createParser($filename)->toArtifact($folderName, $filename);
-  }
-
-  private static function createParser($filename): ArtifactFilenameParser
-  {
-    return new DefaultArtifactFilenameParser();    
   }
 
   private static function createDockerArtifact($versionNumber): Artifact
@@ -41,7 +31,8 @@ class ArtifactFactory
       false,
       '',
       Config::DOCKER_HUB_IMAGE_URL,
-      $versionNumber
+      $versionNumber,
+      ''
     );
   }
 
@@ -61,14 +52,9 @@ class ArtifactFactory
   }
 }
 
-interface ArtifactFilenameParser
+class ArtifactFilenameParser
 {
-  public function toArtifact(string $folderName, string $originalFilename): Artifact;
-}
-
-class DefaultArtifactFilenameParser implements ArtifactFilenameParser
-{
-  public function toArtifact(string $folderName, string $originalFilename): Artifact
+  public static function toArtifact(string $folderName, string $originalFilename): Artifact
   {
     $filename = pathinfo($originalFilename, PATHINFO_FILENAME); // AxonIvyDesigner6.4.0.52683_Windows_x86 or AxonIvyDesigner6.4.0.52683_Osgi_All_x86
     $fileNameArray = explode('_', $filename);
@@ -90,6 +76,13 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
     $permalink = ArtifactLinkFactory::permalink("$folderName/$permalinkName");
     $downloadUrl = ArtifactLinkFactory::cdn("$folderName/" . basename($originalFilename));
 
+
+    $downloadBomUrl = "";
+    $bomFile = $originalFilename . ".bom.json";
+    if (file_exists($bomFile)) {
+      $downloadBomUrl = ArtifactLinkFactory::cdn("$folderName/" . basename($bomFile));
+    }
+
     return new Artifact(
       basename($originalFilename),
       $productName,
@@ -100,7 +93,8 @@ class DefaultArtifactFilenameParser implements ArtifactFilenameParser
       $mavenPluginComp,
       $permalink,
       $downloadUrl,
-      $folderName
+      $folderName,
+      $downloadBomUrl
     );
   }
 

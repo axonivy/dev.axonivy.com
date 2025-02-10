@@ -28,6 +28,7 @@ class Artifact
   private string $permalink;
   private string $downloadUrl;
   private string $folderName;
+  private string $downloadBomUrl;
 
   public function __construct(
     string $fileName,
@@ -39,7 +40,8 @@ class Artifact
     bool $isMavenPluginCompatible,
     string $permalink,
     string $downloadUrl,
-    string $folderName
+    string $folderName,
+    string $downloadBomUrl
   ) {
     $this->fileName = $fileName;
     $this->productName = $productName;
@@ -51,6 +53,7 @@ class Artifact
     $this->permalink = $permalink;
     $this->downloadUrl = $downloadUrl;
     $this->folderName = $folderName;
+    $this->downloadBomUrl = $downloadBomUrl;
   }
 
   public function getVersion(): Version
@@ -61,6 +64,11 @@ class Artifact
   public function getDownloadUrl(): string
   {
     return $this->downloadUrl;
+  }
+
+  public function getDownloadBomUrl(): string
+  {
+    return $this->downloadBomUrl;
   }
 
   public function getInstallationUrl(): string
@@ -98,5 +106,9 @@ class Artifact
   public function getPermalink(): string
   {
     return $this->permalink;
+  }
+
+  public function hasBom(): bool {
+    return !empty($this->downloadBomUrl);
   }
 }
