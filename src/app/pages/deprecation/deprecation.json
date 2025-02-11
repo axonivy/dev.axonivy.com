@@ -182,6 +182,7 @@
     "successorHref": "/doc/10.0/designer-guide/user-interface/user-dialogs/html-dialog-themes.html#freya-themes",
     "released": "8",
     "deprecated": "10",
+    "removed": "13",
     "description": "Primefaces no longer supports Serenity Theme. Consider switching to Freya Theme"
   }
 ]
