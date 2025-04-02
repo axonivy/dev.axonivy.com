@@ -39,7 +39,10 @@
     let params = new URL(window.location.href).searchParams;
     let configUrl = params.get('configUrl');
     let relative = new URL(document.baseURI).origin === new URL(configUrl, document.baseURI).origin;
-    if (!relative) {
+    let whitelisted = 
+      new URL(configUrl).origin === "https://json-schema.ivyteam.ch" || 
+      new URL(configUrl).origin === "https://json-schema.axonivy.com";
+    if (!relative && !whitelisted) {
       console.log("blocking "+configUrl);
       configUrl = "null";
     }
