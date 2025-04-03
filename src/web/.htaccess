@@ -7,6 +7,9 @@ Allow from all
 
 RewriteEngine On
 
+# route openapi resource links from doc; from 13.1 onwards
+RewriteRule ^doc/((1[3-9]|[2-9]\d)[^/]+)/openapi/(.+)$ /openapi/$1/$3 [L,R=302]
+
 RewriteRule ^download/([^/]+)/(.+)$ /releases/ivy/$1/downloads/$2 [L]
 RewriteRule ^doc/([^/]+)/(.+)$ /docs/$1/$2 [L]
 
