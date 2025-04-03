@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_Application
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_Application
+    </h1>
+    <p>
+       Applications
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ApplicationId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          ApplicationId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the application.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Name
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          40
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Oracle_Name">
+            Oracle
+          </a>
+        </td>
+        <td class="odd">
+           Name of the application.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="State">
+          </a>
+          false
+        </td>
+        <td class="even">
+          State
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The state of the web application. The states are defined in the java enumeration ch.ivyteam.ivy.application.ActivityState 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SecuritySystemId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the security system this application belongs to.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          UNIQUE
+        </td>
+        <td class="odd">
+          <a name="IWA_Application_NameIndex">
+          </a>
+          IWA_Application_NameIndex
+        </td>
+        <td class="odd">
+                    <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Application_SecuritySystemIdIndex">
+          </a>
+          IWA_Application_SecuritySystemIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_ProcessModel.html">
+            IWA_ProcessModel
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_ProcessModel.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+           References the application this process model belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Library.html">
+            IWA_Library
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Library.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+           References the application this library belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_CaseMap.html">
+            IWA_CaseMap
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_CaseMap.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+           Reference the application the case map belongs to
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Case.html">
+            IWA_Case
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+           References the application this case belongs to. This is redundant with ProcessModelId -> IWA_ProcessModel.ApplicationId and is introduced for performance reason.   
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+           References the application this task belongs to. This is redundant with CaseId->IWA_Case.ApplicationId and is introduced for performance reasons only.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_WorkflowEvent.html">
+            IWA_WorkflowEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_WorkflowEvent.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+           References the  application this workflow event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_IntermediateEvent.html">
+            IWA_IntermediateEvent
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_IntermediateEvent.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+           References the application that this intermediate event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_SignalEvent.html">
+            IWA_SignalEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_SignalEvent.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Blob.html">
+            IWA_Blob
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Blob.html#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+           References to application to which this blob belongs to (deprecated, use SecuritySystemId)
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          SecondaryKeys
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_IWA_Application">
+          </a>
+          <a href="#IWA_Application">
+            IWA_Application
+          </a>
+        </td>
+        <td class="odd">
+          SecuritySystemId
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_Application">
+          </a>
+          <a href="#IWA_Application">
+            IWA_Application
+          </a>
+        </td>
+        <td class="odd">
+          ALL
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          ConvertEmptyStringToNull
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Oracle_Name">
+          </a>
+          <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_NotificationDelivery
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_NotificationDelivery
+    </h1>
+    <p>
+       Notification Delivery
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="NotificationDeliveryId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          NotificationDeliveryId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          36
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Unique id of this notification transmission
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="NotificationId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          NotificationId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          36
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Notification.html#NotificationId">
+            IWA_Notification(NotificationId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#MsSqlServer_NotificationId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           Id of the notification
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Channel">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Channel
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          100
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Channel e.g. 'web' or 'mail'
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ReceiverId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ReceiverId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Receiver of the notification transmission
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="DeliveredAt">
+          </a>
+          false
+        </td>
+        <td class="even">
+          DeliveredAt
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Timestamp when this notification has been delivered 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ReadAt">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ReadAt
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Timestamp when the user has read the notification
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Hide">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Hide
+        </td>
+        <td class="even">
+          BIT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Whether the notification should be shown or not
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="DeliveryState">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          DeliveryState
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_DeliveryState">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Delivery state (PENDING, ERROR, DELIVERED)
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Error">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Error
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          255
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Error">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           Error message in case of error
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ErrorTimeoutTimestamp">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ErrorTimeoutTimestamp
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Time when the notification delivery timeouts and the state is set back from ERROR to PENDING to retry the delivery  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="NumberOfErrors">
+          </a>
+          false
+        </td>
+        <td class="even">
+          NumberOfErrors
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Number of time the delivery failed with an error so far  
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_NotificationDelivery_NotificationIdIndex">
+          </a>
+          IWA_NotificationDelivery_NotificationIdIndex
+        </td>
+        <td class="even">
+                    <a href="#NotificationId">
+            NotificationId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_NotificationDelivery_ChannelIndex">
+          </a>
+          IWA_NotificationDelivery_ChannelIndex
+        </td>
+        <td class="odd">
+                    <a href="#Channel">
+            Channel
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_NotificationDelivery_ReceiverIdIndex">
+          </a>
+          IWA_NotificationDelivery_ReceiverIdIndex
+        </td>
+        <td class="even">
+                    <a href="#ReceiverId">
+            ReceiverId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_NotificationDelivery_DeliveredAtIndex">
+          </a>
+          IWA_NotificationDelivery_DeliveredAtIndex
+        </td>
+        <td class="odd">
+                    <a href="#DeliveredAt">
+            DeliveredAt
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_NotificationDelivery_ReadAtIndex">
+          </a>
+          IWA_NotificationDelivery_ReadAtIndex
+        </td>
+        <td class="even">
+                    <a href="#ReadAt">
+            ReadAt
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_NotificationDelivery_HideIndex">
+          </a>
+          IWA_NotificationDelivery_HideIndex
+        </td>
+        <td class="odd">
+                    <a href="#Hide">
+            Hide
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_NotificationDelivery_DeliveryStateIndex">
+          </a>
+          IWA_NotificationDelivery_DeliveryStateIndex
+        </td>
+        <td class="even">
+                    <a href="#DeliveryState">
+            DeliveryState
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          BusinessClass
+        </th>
+        <th>
+          DbDataClass
+        </th>
+        <th>
+          Enum
+        </th>
+        <th>
+          QueryExecutorProviderClass
+        </th>
+        <th>
+          Truncate
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_IWA_NotificationDelivery">
+          </a>
+          <a href="#IWA_NotificationDelivery">
+            IWA_NotificationDelivery
+          </a>
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.notification.delivery.NotificationDelivery
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.notification.internal.db.DbNotificationDeliveryData
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.notification.delivery.query.impl.NotificationDeliveryQueryExecutorProvider
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_DeliveryState">
+          </a>
+          <a href="#DeliveryState">
+            DeliveryState
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.notification.delivery.DeliveryState
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Error">
+          </a>
+          <a href="#Error">
+            Error
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_NotificationDelivery">
+          </a>
+          <a href="#IWA_NotificationDelivery">
+            IWA_NotificationDelivery
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_NotificationId">
+          </a>
+          <a href="#NotificationId">
+            NotificationId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

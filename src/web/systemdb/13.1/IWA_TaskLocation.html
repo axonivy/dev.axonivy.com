@@ -1,0 +1,642 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskLocation
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskLocation
+    </h1>
+    <p>
+       Location informations of tasks
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskLocationId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskLocationId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_TaskId">
+            Java
+          </a>
+          , 
+          <a href="#MsSqlServer_TaskId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           Identifies the task, the note belongs to. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Type">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Type
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Note">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Note
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          2000
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Name
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Address">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Address
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Latitude">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Latitude
+        </td>
+        <td class="even">
+          DECIMAL
+        </td>
+        <td class="even">
+          10
+        </td>
+        <td class="even">
+          8
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Latitude in degrees (+/- 90) (e.g. 47.1983), the eight decimal place is worth up to 1.1 mm 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Longitude">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Longitude
+        </td>
+        <td class="odd">
+          DECIMAL
+        </td>
+        <td class="odd">
+          11
+        </td>
+        <td class="odd">
+          8
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Longitude in degrees (+/- 180) (e.g. 8.5289)
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Altitude">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Altitude
+        </td>
+        <td class="even">
+          DECIMAL
+        </td>
+        <td class="even">
+          8
+        </td>
+        <td class="even">
+          3
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           altitude if available, in meters above the WGS 84 reference ellipsoid
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="AccuracyHorizontal">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          AccuracyHorizontal
+        </td>
+        <td class="odd">
+          DECIMAL
+        </td>
+        <td class="odd">
+          8
+        </td>
+        <td class="odd">
+          3
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           estimated horizontal accuracy of this location, in meters
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="AccuracyVertical">
+          </a>
+          false
+        </td>
+        <td class="even">
+          AccuracyVertical
+        </td>
+        <td class="even">
+          DECIMAL
+        </td>
+        <td class="even">
+          8
+        </td>
+        <td class="even">
+          3
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           estimated vertical accuracy of this location, in meters
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Speed">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Speed
+        </td>
+        <td class="odd">
+          DECIMAL
+        </td>
+        <td class="odd">
+          8
+        </td>
+        <td class="odd">
+          3
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           speed if it is available, in meters/second over ground.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Bearing">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Bearing
+        </td>
+        <td class="even">
+          DECIMAL
+        </td>
+        <td class="even">
+          6
+        </td>
+        <td class="even">
+          3
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Bearing in degrees
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="LocationTimestamp">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          LocationTimestamp
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskLocation_TaskId">
+          </a>
+          IWA_TaskLocation_TaskId
+        </td>
+        <td class="odd">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_TaskLocation">
+          </a>
+          <a href="#IWA_TaskLocation">
+            IWA_TaskLocation
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_TaskId">
+          </a>
+          <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_TaskId">
+          </a>
+          <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

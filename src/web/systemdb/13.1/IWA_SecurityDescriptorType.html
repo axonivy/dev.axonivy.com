@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_SecurityDescriptorType
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_SecurityDescriptorType
+    </h1>
+    <p>
+       Security Descriptor Types
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SecurityDescriptorTypeId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          SecurityDescriptorTypeId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the security descriptor type.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="RootPermissionGroupId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          RootPermissionGroupId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_PermissionGroup.html#PermissionGroupId">
+            IWA_PermissionGroup(PermissionGroupId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#MsSqlServer_RootPermissionGroupId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           References the root permission group of the security descriptor type. A security descriptor of this type can administrate all permissions that are referenced through this permission group
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Name
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Name of the security descriptor type
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_SecurityDescriptorType_NameIndex">
+          </a>
+          IWA_SecurityDescriptorType_NameIndex
+        </td>
+        <td class="even">
+                    <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_SecurityDescriptorType_RootPermissionGroupId">
+          </a>
+          IWA_SecurityDescriptorType_RootPermissionGroupId
+        </td>
+        <td class="even">
+                    <a href="#RootPermissionGroupId">
+            RootPermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_SecurityDescriptor.html">
+            IWA_SecurityDescriptor
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_SecurityDescriptor.html#SecurityDescriptorTypeId">
+            SecurityDescriptorTypeId
+          </a>
+        </td>
+        <td class="even">
+           References the security descriptor type that this security descriptor belongs to.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_SecurityDescriptorType">
+          </a>
+          <a href="#IWA_SecurityDescriptorType">
+            IWA_SecurityDescriptorType
+          </a>
+        </td>
+        <td class="even">
+          ALL
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_RootPermissionGroupId">
+          </a>
+          <a href="#RootPermissionGroupId">
+            RootPermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

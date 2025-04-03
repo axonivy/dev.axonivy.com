@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_ProcessModel
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_ProcessModel
+    </h1>
+    <p>
+       Process Models
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ProcessModelId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          ProcessModelId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the process model.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Name
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          40
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Oracle_Name">
+            Oracle
+          </a>
+        </td>
+        <td class="odd">
+           Name of the process model. Identifies the process within a application. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="State">
+          </a>
+          false
+        </td>
+        <td class="even">
+          State
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The state of the process. The values of the state are defined by the java class ch.ivyteam.ivy.application.ActivityState
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ApplicationId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ApplicationId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Application.html#ApplicationId">
+            IWA_Application(ApplicationId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_ApplicationId">
+            Java
+          </a>
+          , 
+          <a href="#MsSqlServer_ApplicationId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           References the application this process model belongs to.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          UNIQUE
+        </td>
+        <td class="odd">
+          <a name="IWA_ProcessModel_AppIdNameIndex">
+          </a>
+          IWA_ProcessModel_AppIdNameIndex
+        </td>
+        <td class="odd">
+                    <a href="#ApplicationId">
+            ApplicationId
+          </a>
+,           <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_ProcessModel_ApplicationIdIndex">
+          </a>
+          IWA_ProcessModel_ApplicationIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_ProcessModelVersion.html">
+            IWA_ProcessModelVersion
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_ProcessModelVersion.html#ProcessModelId">
+            ProcessModelId
+          </a>
+        </td>
+        <td class="odd">
+           Identifies the process model this process model version belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Case.html">
+            IWA_Case
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#ProcessModelId">
+            ProcessModelId
+          </a>
+        </td>
+        <td class="even">
+           References the process model this case belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#ProcessModelId">
+            ProcessModelId
+          </a>
+        </td>
+        <td class="odd">
+           References the process model this task belongs to. This is redundant with CaseId -> IWA_Case.ProcessModelId and is introduced for performance reasons only.   
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_ProcessModel">
+          </a>
+          <a href="#IWA_ProcessModel">
+            IWA_ProcessModel
+          </a>
+        </td>
+        <td class="odd">
+          ALL
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          ConvertEmptyStringToNull
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Oracle_Name">
+          </a>
+          <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_ApplicationId">
+          </a>
+          <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_ApplicationId">
+          </a>
+          <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

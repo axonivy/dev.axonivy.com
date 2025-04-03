@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskSwitchEvent
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskSwitchEvent
+    </h1>
+    <p>
+       Task switch events. A task switch event is created if a task element creates and / or ends tasks.
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskSwitchEventId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskSwitchEventId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the task switch event.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskElementId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskElementId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskElement.html#TaskElementId">
+            IWA_TaskElement(TaskElementId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the task element this task switch event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CaseId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          CaseId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#CaseId">
+            IWA_Case(CaseId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the case this task switch event belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ExecutionTimestamp">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ExecutionTimestamp
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Timestamp when the event happend. 
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskSwitchEvent_TaskElementIdIndex">
+          </a>
+          IWA_TaskSwitchEvent_TaskElementIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#TaskElementId">
+            TaskElementId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskSwitchEvent_CaseIdIndex">
+          </a>
+          IWA_TaskSwitchEvent_CaseIdIndex
+        </td>
+        <td class="even">
+                    <a href="#CaseId">
+            CaseId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Task.html#StartTaskSwitchEventId">
+            StartTaskSwitchEventId
+          </a>
+        </td>
+        <td class="even">
+           References the task switch event that causes this task to start. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#EndTaskSwitchEventId">
+            EndTaskSwitchEventId
+          </a>
+        </td>
+        <td class="odd">
+           References the task switch event that causes this task to end. Maybe null if task is not yet finished.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_StartTaskData.html">
+            IWA_StartTaskData
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_StartTaskData.html#TaskSwitchEventId">
+            TaskSwitchEventId
+          </a>
+        </td>
+        <td class="even">
+           Identifies the start task data. References the task element event that this start task data belongs to 
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          DeleteTriggerName
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_IWA_TaskSwitchEvent">
+          </a>
+          <a href="#IWA_TaskSwitchEvent">
+            IWA_TaskSwitchEvent
+          </a>
+        </td>
+        <td class="even">
+          IWA_TaskSwitchDeleteTrigger
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_TaskSwitchEvent">
+          </a>
+          <a href="#IWA_TaskSwitchEvent">
+            IWA_TaskSwitchEvent
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

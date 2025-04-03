@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_LibraryVersionSpec
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_LibraryVersionSpec
+    </h1>
+    <p>
+       Library Version Spec
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="LibraryVersionSpecId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          LibraryVersionSpecId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the library version specification. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="LibrarySpecificationId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          LibrarySpecificationId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_LibrarySpecification.html#LibrarySpecificationId">
+            IWA_LibrarySpecification(LibrarySpecificationId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the library specification this library version specification belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Version">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Version
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          50
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The specified version .
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Inclusive">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Inclusive
+        </td>
+        <td class="odd">
+          BIT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Is the version range inclusive specified version or not.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Minimum">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Minimum
+        </td>
+        <td class="even">
+          BIT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Is this the minimum or maximum version of the specified version range
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_LibraryVersionSpec_LibSpecIdMinimumIndex">
+          </a>
+          IWA_LibraryVersionSpec_LibSpecIdMinimumIndex
+        </td>
+        <td class="even">
+                    <a href="#LibrarySpecificationId">
+            LibrarySpecificationId
+          </a>
+,           <a href="#Minimum">
+            Minimum
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_LibraryVersionSpec_LibrarySpecificationIdIndex">
+          </a>
+          IWA_LibraryVersionSpec_LibrarySpecificationIdIndex
+        </td>
+        <td class="even">
+                    <a href="#LibrarySpecificationId">
+            LibrarySpecificationId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_LibraryVersionSpec">
+          </a>
+          <a href="#IWA_LibraryVersionSpec">
+            IWA_LibraryVersionSpec
+          </a>
+        </td>
+        <td class="even">
+          ALL
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_UserSubstitute
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_UserSubstitute
+    </h1>
+    <p>
+       Substitutes of users. A user can have a substitute for itself and /or for each of its roles.
+ The substitute owns the rights of the user during the time the user is absent (see table IWA_UserAbsence).
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="UserSubstituteId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          UserSubstituteId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies this substitute.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SecurityMemberId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SecurityMemberId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_User.html#SecurityMemberId">
+            IWA_User(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_SecurityMemberId">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           References the user this substitute belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SubstituteUserSecurityMemberId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          SubstituteUserSecurityMemberId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          210
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_User.html#SecurityMemberId">
+            IWA_User(SecurityMemberId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_SubstituteUserSecurityMemberId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="even">
+           References the user which substitutes the user references by UserId in the case he is absent.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SubstituteRoleSecurityMemberId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SubstituteRoleSecurityMemberId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Role.html#SecurityMemberId">
+            IWA_Role(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the role for which the substitute user substitutes the user referenced by UserId in case he is absent.
+ This field may be null. In this case the user references by SubstituteUserSecurityMemberId substitutes the user referenced by UserId for the tasks the user is responsible for. Which means he can see and work on the tasks the user he substitutes is responsible for because the user is the activator of the tasks.
+ If the field is not null. The user references by SubstituteUserSecurityMemberId substitutes the user referenced by UserId for the tasks the user is responsible for because he owns the role referenced by SubstituteForRoleSecurityMemberId. Which means he can see and work on the tasks the user he substitutes is responsible for because a role the user owns is the activator of the tasks.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Description">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Description
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Description">
+            Java
+          </a>
+          , 
+          <a href="#Oracle_Description">
+            Oracle
+          </a>
+        </td>
+        <td class="even">
+           Description of the user substitute. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SubstitutionType">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SubstitutionType
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+          0
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_SubstitutionType">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Is user permanent substitute. See java enumeration ch.ivyteam.ivy.security.SubstitutionType for possible values.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          UNIQUE
+        </td>
+        <td class="odd">
+          <a name="IWA_UserSubstitute_SecMemberId_SubstituteSecMemberUser_SubstituteSecMemberRoleIndex">
+          </a>
+          IWA_UserSubstitute_SecMemberId_SubstituteSecMemberUser_SubstituteSecMemberRoleIndex
+        </td>
+        <td class="odd">
+                    <a href="#SecurityMemberId">
+            SecurityMemberId
+          </a>
+,           <a href="#SubstituteUserSecurityMemberId">
+            SubstituteUserSecurityMemberId
+          </a>
+,           <a href="#SubstituteRoleSecurityMemberId">
+            SubstituteRoleSecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_UserSubstitute_SecurityMemberIdIndex">
+          </a>
+          IWA_UserSubstitute_SecurityMemberIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#SecurityMemberId">
+            SecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_UserSbs_SbsUserScrtMmbrIdIdx">
+          </a>
+          IWA_UserSbs_SbsUserScrtMmbrIdIdx
+        </td>
+        <td class="even">
+                    <a href="#SubstituteUserSecurityMemberId">
+            SubstituteUserSecurityMemberId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_UserSbs_SbsRoleScrtMmbrIdIdx">
+          </a>
+          IWA_UserSbs_SbsRoleScrtMmbrIdIdx
+        </td>
+        <td class="odd">
+                    <a href="#SubstituteRoleSecurityMemberId">
+            SubstituteRoleSecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_UserSubstitute">
+          </a>
+          <a href="#IWA_UserSubstitute">
+            IWA_UserSubstitute
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          Enum
+        </th>
+        <th>
+          Truncate
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_SecurityMemberId">
+          </a>
+          <a href="#SecurityMemberId">
+            SecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Description">
+          </a>
+          <a href="#Description">
+            Description
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_SubstitutionType">
+          </a>
+          <a href="#SubstitutionType">
+            SubstitutionType
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.security.SubstitutionType
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_SubstituteUserSecurityMemberId">
+          </a>
+          <a href="#SubstituteUserSecurityMemberId">
+            SubstituteUserSecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          ConvertEmptyStringToNull
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Oracle_Description">
+          </a>
+          <a href="#Description">
+            Description
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

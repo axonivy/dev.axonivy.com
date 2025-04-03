@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskSignalEventReceiver
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskSignalEventReceiver
+    </h1>
+    <p>
+       Tasks that are or have been waiting for a signal event as well as the tasks that were triggered by such an event
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskSignalEventId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskSignalEventId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="WaitingTaskId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          WaitingTaskId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_WaitingTaskId">
+            Java
+          </a>
+          , 
+          <a href="#MsSqlServer_WaitingTaskId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           Identifies the task, the entity belongs to. This task will be destroyed if a signal is received that matches the pattern.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SignalCodePattern">
+          </a>
+          false
+        </td>
+        <td class="even">
+          SignalCodePattern
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Oracle_SignalCodePattern">
+            Oracle
+          </a>
+        </td>
+        <td class="even">
+           The pattern the task is waiting for
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SignaledTaskTaskStartId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SignaledTaskTaskStartId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskStart.html#TaskStartId">
+            IWA_TaskStart(TaskStartId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Task start on which the signaled task has to be started if the signal is received.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="StartedSignaledTaskId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          StartedSignaledTaskId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SignaledTask.html#SignaledTaskId">
+            IWA_SignaledTask(SignaledTaskId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_StartedSignaledTaskId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="even">
+           Id of the signaled task that has been started after the signal was received
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TskSigEvntRcvr_WtingTaskId">
+          </a>
+          IWA_TskSigEvntRcvr_WtingTaskId
+        </td>
+        <td class="even">
+                    <a href="#WaitingTaskId">
+            WaitingTaskId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TskSigEvntRcvr_SgTskTskId">
+          </a>
+          IWA_TskSigEvntRcvr_SgTskTskId
+        </td>
+        <td class="odd">
+                    <a href="#SignaledTaskTaskStartId">
+            SignaledTaskTaskStartId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TskSigEvntRcvr_StrtSgTskId">
+          </a>
+          IWA_TskSigEvntRcvr_StrtSgTskId
+        </td>
+        <td class="even">
+                    <a href="#StartedSignaledTaskId">
+            StartedSignaledTaskId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          BusinessClass
+        </th>
+        <th>
+          ClassName
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_IWA_TaskSignalEventReceiver">
+          </a>
+          <a href="#IWA_TaskSignalEventReceiver">
+            IWA_TaskSignalEventReceiver
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.signal.ITaskBoundarySignalEventReceiver
+        </td>
+        <td class="even">
+          TaskBoundarySignalEventReceiver
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_WaitingTaskId">
+          </a>
+          <a href="#WaitingTaskId">
+            WaitingTaskId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_TaskSignalEventReceiver">
+          </a>
+          <a href="#IWA_TaskSignalEventReceiver">
+            IWA_TaskSignalEventReceiver
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_WaitingTaskId">
+          </a>
+          <a href="#WaitingTaskId">
+            WaitingTaskId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_StartedSignaledTaskId">
+          </a>
+          <a href="#StartedSignaledTaskId">
+            StartedSignaledTaskId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          ConvertEmptyStringToNull
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Oracle_SignalCodePattern">
+          </a>
+          <a href="#SignalCodePattern">
+            SignalCodePattern
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

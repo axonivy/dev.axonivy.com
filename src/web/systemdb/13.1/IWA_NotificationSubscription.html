@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_NotificationSubscription
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_NotificationSubscription
+    </h1>
+    <p>
+       Notification Subscription
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="NotificationSubscriptionId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          NotificationSubscriptionId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Unique id of this notification subscription
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Channel">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Channel
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          100
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Channel e.g. 'web' or 'mail'
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Kind">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Kind
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          100
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Notification kind e.g. 'new-task'
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SubscriberId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SubscriberId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Subscriber of the notification
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Subscribed">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Subscribed
+        </td>
+        <td class="even">
+          BIT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Whether the notification is subscribed or not
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_NotificationSubscription_ChannelKindSubscriberIdIndex">
+          </a>
+          IWA_NotificationSubscription_ChannelKindSubscriberIdIndex
+        </td>
+        <td class="even">
+                    <a href="#SubscriberId">
+            SubscriberId
+          </a>
+,           <a href="#Kind">
+            Kind
+          </a>
+,           <a href="#Channel">
+            Channel
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_NotificationSubscription_ChannelIndex">
+          </a>
+          IWA_NotificationSubscription_ChannelIndex
+        </td>
+        <td class="even">
+                    <a href="#Channel">
+            Channel
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_NotificationSubscription_KindIndex">
+          </a>
+          IWA_NotificationSubscription_KindIndex
+        </td>
+        <td class="odd">
+                    <a href="#Kind">
+            Kind
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_NotificationSubscription_SubscriberIdIndex">
+          </a>
+          IWA_NotificationSubscription_SubscriberIdIndex
+        </td>
+        <td class="even">
+                    <a href="#SubscriberId">
+            SubscriberId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_NotificationSubscription">
+          </a>
+          <a href="#IWA_NotificationSubscription">
+            IWA_NotificationSubscription
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

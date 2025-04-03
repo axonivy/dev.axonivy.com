@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_Notification
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_Notification
+    </h1>
+    <p>
+       Notification
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="NotificationId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          NotificationId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          36
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Unique id of this notification
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Kind">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Kind
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          100
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Notification kind e.g. 'new-task'
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Payload">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Payload
+        </td>
+        <td class="even">
+          CLOB
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Payload">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           JSON formatted payload
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SecuritySystemId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Security System ID
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ProcessModelVersionId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ProcessModelVersionId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_ProcessModelVersion.html#ProcessModelVersionId">
+            IWA_ProcessModelVersion(ProcessModelVersionId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the Process Model Version that is used to resolve notification templates. Can be null if no context is provided.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Template">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Template
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          255
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Path of the template in the project
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CreatedAt">
+          </a>
+          false
+        </td>
+        <td class="even">
+          CreatedAt
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Timestamp when this notification has been created 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IsUshered">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          IsUshered
+        </td>
+        <td class="odd">
+          BIT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Are the notification deliveries already ushered (created) or not
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Notification_KindIndex">
+          </a>
+          IWA_Notification_KindIndex
+        </td>
+        <td class="odd">
+                    <a href="#Kind">
+            Kind
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Notification_SecuritySystemIdIndex">
+          </a>
+          IWA_Notification_SecuritySystemIdIndex
+        </td>
+        <td class="even">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Notification_ProcessModelVersionIdIndex">
+          </a>
+          IWA_Notification_ProcessModelVersionIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#ProcessModelVersionId">
+            ProcessModelVersionId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Notification_CreatedAtIndex">
+          </a>
+          IWA_Notification_CreatedAtIndex
+        </td>
+        <td class="even">
+                    <a href="#CreatedAt">
+            CreatedAt
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_NotificationReceiver.html">
+            IWA_NotificationReceiver
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_NotificationReceiver.html#NotificationId">
+            NotificationId
+          </a>
+        </td>
+        <td class="even">
+           Id of the notification
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_NotificationDelivery.html">
+            IWA_NotificationDelivery
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_NotificationDelivery.html#NotificationId">
+            NotificationId
+          </a>
+        </td>
+        <td class="odd">
+           Id of the notification
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          BusinessClass
+        </th>
+        <th>
+          DataType
+        </th>
+        <th>
+          DbDataClass
+        </th>
+        <th>
+          QueryExecutorProviderClass
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_IWA_Notification">
+          </a>
+          <a href="#IWA_Notification">
+            IWA_Notification
+          </a>
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.notification.Notification
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.notification.internal.db.DbNotificationData
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.notification.query.impl.NotificationQueryExecutorProvider
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Payload">
+          </a>
+          <a href="#Payload">
+            Payload
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          String
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_Notification">
+          </a>
+          <a href="#IWA_Notification">
+            IWA_Notification
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

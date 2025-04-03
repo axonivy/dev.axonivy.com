@@ -1,0 +1,1267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_WorkflowEvent
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_WorkflowEvent
+    </h1>
+    <p>
+       Workflow Events occurs if the state of a task or a case changes and can be used
+ to build a history of task or case.
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="WorkflowEventId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          WorkflowEventId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+            Identifies the workflow event  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SecuritySystemId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the security system that this intermediate event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ApplicationId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ApplicationId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Application.html#ApplicationId">
+            IWA_Application(ApplicationId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_ApplicationId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="even">
+           References the  application this workflow event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="CaseId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          CaseId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Case.html#CaseId">
+            IWA_Case(CaseId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_CaseId">
+            Java
+          </a>
+          , 
+          <a href="#MsSqlServer_CaseId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+            References the case this workflow event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          TaskId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_TaskId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="even">
+           References the task this workflow event belongs to. If it is null the workflow event belong only to the case.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="EventTimestamp">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          EventTimestamp
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Timestamp when the event happend.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="UserId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          UserId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          210
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the user that has driven the task or case which has triggered this event. Maybe null if event was triggered by an anonymous user.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="EventKind">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          EventKind
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Kind of the event. The values of the kind are defined by the java enumeration ch.ivyteam.ivy.workflow.WorkflowEventKind  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="AdditionalInfo1">
+          </a>
+          false
+        </td>
+        <td class="even">
+          AdditionalInfo1
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_AdditionalInfo1">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           Addional information (1-5) about the event. This data depends on the kind of the event.   
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="AdditionalInfo2">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          AdditionalInfo2
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_AdditionalInfo2">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Addional information (1-5) about the event. This data depends on the kind of the event.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="AdditionalInfo3">
+          </a>
+          false
+        </td>
+        <td class="even">
+          AdditionalInfo3
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_AdditionalInfo3">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           Addional information (1-5) about the event. This data depends on the kind of the event.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="AdditionalInfo4">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          AdditionalInfo4
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_AdditionalInfo4">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Addional information (1-5) about the event. This data depends on the kind of the event.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="AdditionalInfo5">
+          </a>
+          false
+        </td>
+        <td class="even">
+          AdditionalInfo5
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_AdditionalInfo5">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           Addional information (1-5) about the event. This data depends on the kind of the event.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="CaseState">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          CaseState
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_CaseState">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           State of the case at the time the event was logged. If the state was changed by the event the state after the event is logged.    
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskState">
+          </a>
+          false
+        </td>
+        <td class="even">
+          TaskState
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_TaskState">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           State of the task at the time the event was logged. If the state was changed by the event the state after the event is logged. Maybe null if this is an case event.   
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_WorkflowEvent_SecSystemIdIdx">
+          </a>
+          IWA_WorkflowEvent_SecSystemIdIdx
+        </td>
+        <td class="even">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_WorkflowEvent_AppIdIdx">
+          </a>
+          IWA_WorkflowEvent_AppIdIdx
+        </td>
+        <td class="odd">
+                    <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+          <a href="#MsSqlServer_IWA_WorkflowEvent_AppIdIdx">
+            MsSqlServer
+          </a>
+          , 
+          <a href="#MySql_IWA_WorkflowEvent_AppIdIdx">
+            MySql
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_WorkflowEvent_CaseIdIndex">
+          </a>
+          IWA_WorkflowEvent_CaseIdIndex
+        </td>
+        <td class="even">
+                    <a href="#CaseId">
+            CaseId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_WorkflowEvent_TaskIdIndex">
+          </a>
+          IWA_WorkflowEvent_TaskIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_WrkflwEvnt_EvntTmstmpIdx">
+          </a>
+          IWA_WrkflwEvnt_EvntTmstmpIdx
+        </td>
+        <td class="even">
+                    <a href="#EventTimestamp">
+            EventTimestamp
+          </a>
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_IWA_WrkflwEvnt_EvntTmstmpIdx">
+            MsSqlServer
+          </a>
+          , 
+          <a href="#MySql_IWA_WrkflwEvnt_EvntTmstmpIdx">
+            MySql
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_WorkflowEvent_UserIdIndex">
+          </a>
+          IWA_WorkflowEvent_UserIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#UserId">
+            UserId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_WorkflowEvent_EventKindIdx">
+          </a>
+          IWA_WorkflowEvent_EventKindIdx
+        </td>
+        <td class="even">
+                    <a href="#EventKind">
+            EventKind
+          </a>
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_IWA_WorkflowEvent_EventKindIdx">
+            MsSqlServer
+          </a>
+          , 
+          <a href="#MySql_IWA_WorkflowEvent_EventKindIdx">
+            MySql
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          BusinessClass
+        </th>
+        <th>
+          DbDataClass
+        </th>
+        <th>
+          Enum
+        </th>
+        <th>
+          QueryClassPublicAPI
+        </th>
+        <th>
+          QueryExecutorProviderClass
+        </th>
+        <th>
+          Truncate
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_IWA_WorkflowEvent">
+          </a>
+          <a href="#IWA_WorkflowEvent">
+            IWA_WorkflowEvent
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.IWorkflowEvent
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.internal.db.DbWorkflowEventData
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.internal.query.WorkflowEventQueryExecutorProvider
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_CaseId">
+          </a>
+          <a href="#CaseId">
+            CaseId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_AdditionalInfo1">
+          </a>
+          <a href="#AdditionalInfo1">
+            AdditionalInfo1
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_AdditionalInfo2">
+          </a>
+          <a href="#AdditionalInfo2">
+            AdditionalInfo2
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_AdditionalInfo3">
+          </a>
+          <a href="#AdditionalInfo3">
+            AdditionalInfo3
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_AdditionalInfo4">
+          </a>
+          <a href="#AdditionalInfo4">
+            AdditionalInfo4
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_AdditionalInfo5">
+          </a>
+          <a href="#AdditionalInfo5">
+            AdditionalInfo5
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_CaseState">
+          </a>
+          <a href="#CaseState">
+            CaseState
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.workflow.CaseState
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_TaskState">
+          </a>
+          <a href="#TaskState">
+            TaskState
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.TaskState
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_WorkflowEvent">
+          </a>
+          <a href="#IWA_WorkflowEvent">
+            IWA_WorkflowEvent
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          IndexName
+        </th>
+        <th>
+          NoReference
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_ApplicationId">
+          </a>
+          <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_CaseId">
+          </a>
+          <a href="#CaseId">
+            CaseId
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_TaskId">
+          </a>
+          <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_IWA_WorkflowEvent_AppIdIdx">
+          </a>
+          <a href="#IWA_WorkflowEvent_AppIdIdx">
+            IWA_WorkflowEvent_AppIdIdx
+          </a>
+        </td>
+        <td class="odd">
+          IWA_WorkflowEvent_ApplicationIdIndex
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_IWA_WrkflwEvnt_EvntTmstmpIdx">
+          </a>
+          <a href="#IWA_WrkflwEvnt_EvntTmstmpIdx">
+            IWA_WrkflwEvnt_EvntTmstmpIdx
+          </a>
+        </td>
+        <td class="even">
+          IWA_WorkflowEvent_EventTimestampIndex
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_IWA_WorkflowEvent_EventKindIdx">
+          </a>
+          <a href="#IWA_WorkflowEvent_EventKindIdx">
+            IWA_WorkflowEvent_EventKindIdx
+          </a>
+        </td>
+        <td class="odd">
+          IWA_WorkflowEvent_EventKindIndex
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MySql
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          IndexName
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MySql_IWA_WorkflowEvent_AppIdIdx">
+          </a>
+          <a href="#IWA_WorkflowEvent_AppIdIdx">
+            IWA_WorkflowEvent_AppIdIdx
+          </a>
+        </td>
+        <td class="odd">
+          IWA_WorkflowEvent_ApplicationIdIndex
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MySql_IWA_WrkflwEvnt_EvntTmstmpIdx">
+          </a>
+          <a href="#IWA_WrkflwEvnt_EvntTmstmpIdx">
+            IWA_WrkflwEvnt_EvntTmstmpIdx
+          </a>
+        </td>
+        <td class="even">
+          IWA_WorkflowEvent_EventTimestampIndex
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MySql_IWA_WorkflowEvent_EventKindIdx">
+          </a>
+          <a href="#IWA_WorkflowEvent_EventKindIdx">
+            IWA_WorkflowEvent_EventKindIdx
+          </a>
+        </td>
+        <td class="odd">
+          IWA_WorkflowEvent_EventKindIndex
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

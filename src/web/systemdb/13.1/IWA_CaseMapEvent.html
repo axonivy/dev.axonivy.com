@@ -1,0 +1,754 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_CaseMapEvent
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_CaseMapEvent
+    </h1>
+    <p>
+       Case map events happens happens during the execution of a case map
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CaseMapEventId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          CaseMapEventId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Primary key
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="BusinessCaseId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          BusinessCaseId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_CaseMapBusinessCase.html#BusinessCaseId">
+            IWA_CaseMapBusinessCase(BusinessCaseId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_BusinessCaseId">
+            Java
+          </a>
+          , 
+          <a href="#MsSqlServer_BusinessCaseId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           Business case id this event belongs ot
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Timestamp">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Timestamp
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Timestamp the event occurred  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Kind">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Kind
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_Kind">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           BusinessCaseStarted, BusinessCaseEnded, BusinessCaseDestroyed, StageChanged, ProcessStarted, ProcessEnded, ProcessDestroyed, MilestoneReached, MilestoneRevoked
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Stage">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Stage
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Stage of the business case at the time the event occurred  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Process">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Process
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Process id of the started, ended or destroyed process 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ProcessCaseId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ProcessCaseId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#CaseId">
+            IWA_Case(CaseId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_ProcessCaseId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="even">
+           Case id of the started, ended or destroyed process
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Milestone">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Milestone
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           The Milestone that was reached or revoked 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Reason">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Reason
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Reason why this event happen. Also include evaluated pre-conditions and executed post-actions 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ProcessingState">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ProcessingState
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_ProcessingState">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           0 not processes, 1 processed, 2 error
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ProcessingErrorMessage">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ProcessingErrorMessage
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          750
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_ProcessingErrorMessage">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           Message of the last error occurred while processing of the event by the case map engine
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ProcessingErrorCount">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ProcessingErrorCount
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Number of times the processing of the event failed on the case map engine 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ProcessingRetryTimestamp">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ProcessingRetryTimestamp
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Next time the event is retried to process on the case map engine
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_CaseMapEvent_BcId">
+          </a>
+          IWA_CaseMapEvent_BcId
+        </td>
+        <td class="even">
+                    <a href="#BusinessCaseId">
+            BusinessCaseId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_CaseMapEvent_PrcRtryTstmp">
+          </a>
+          IWA_CaseMapEvent_PrcRtryTstmp
+        </td>
+        <td class="odd">
+                    <a href="#ProcessingRetryTimestamp">
+            ProcessingRetryTimestamp
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_CaseMapEvent_PrcState">
+          </a>
+          IWA_CaseMapEvent_PrcState
+        </td>
+        <td class="even">
+                    <a href="#ProcessingState">
+            ProcessingState
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_CaseMapEvent_ProcessCaseIdIndex">
+          </a>
+          IWA_CaseMapEvent_ProcessCaseIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#ProcessCaseId">
+            ProcessCaseId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_CaseMapEvent">
+          </a>
+          <a href="#IWA_CaseMapEvent">
+            IWA_CaseMapEvent
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          Enum
+        </th>
+        <th>
+          Truncate
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_BusinessCaseId">
+          </a>
+          <a href="#BusinessCaseId">
+            BusinessCaseId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Kind">
+          </a>
+          <a href="#Kind">
+            Kind
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.casemap.runtime.repo.restricted.CaseMapEventKind
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_ProcessingState">
+          </a>
+          <a href="#ProcessingState">
+            ProcessingState
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.casemap.runtime.repo.restricted.ProcessingState
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_ProcessingErrorMessage">
+          </a>
+          <a href="#ProcessingErrorMessage">
+            ProcessingErrorMessage
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_BusinessCaseId">
+          </a>
+          <a href="#BusinessCaseId">
+            BusinessCaseId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_ProcessCaseId">
+          </a>
+          <a href="#ProcessCaseId">
+            ProcessCaseId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
