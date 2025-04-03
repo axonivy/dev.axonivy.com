@@ -103,7 +103,7 @@ pipeline {
             sh "ssh $host ln -fns /home/axonivya/data/doc $targetFolder/src/web/docs"
             sh "ssh $host ln -fns /home/axonivya/data/openapi $targetFolder/src/web/openapi"
             sh "ssh $host ln -fns /home/axonivya/data/systemdb $targetFolder/src/web/systemdb"
-            sh "ssh $host ln -fns /home/axonivya/data/javadoc $targetFolder/src/web/public-api"
+            sh "ssh $host ln -fns /home/axonivya/data/public-api $targetFolder/src/web/public-api"
             sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
           }
         }
