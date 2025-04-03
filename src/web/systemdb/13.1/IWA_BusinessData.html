@@ -1,0 +1,714 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_BusinessData
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_BusinessData
+    </h1>
+    <p>
+       Business Data Objects as json
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="BusinessDataId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          BusinessDataId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          100
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Version">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Version
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_Version">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Version is increased every time the ObjectValue is updated. It is used for optimistic locking.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="FormatVersion">
+          </a>
+          false
+        </td>
+        <td class="even">
+          FormatVersion
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+          63000
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Version of the format in which the ObjectValue is written. Needed to use the correct deserializer version to read back the ObjectValue.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ObjectType">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ObjectType
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          255
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Full class name of the object that was serialized into ObjectValue
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ObjectValue">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ObjectValue
+        </td>
+        <td class="even">
+          CLOB
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_ObjectValue">
+            Java
+          </a>
+          , 
+          <a href="#MySql_ObjectValue">
+            MySql
+          </a>
+        </td>
+        <td class="even">
+           Serialized JSON formatted value of the business data object
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SecuritySystemId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the security system this business data belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CreatedAt">
+          </a>
+          false
+        </td>
+        <td class="even">
+          CreatedAt
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="CreatedByUserName">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          CreatedByUserName
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CreatedByAppId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          CreatedByAppId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ModifiedAt">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ModifiedAt
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ModifiedByUserName">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ModifiedByUserName
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ModifiedByAppId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ModifiedByAppId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_BusinessData_TypeIdx">
+          </a>
+          IWA_BusinessData_TypeIdx
+        </td>
+        <td class="odd">
+                    <a href="#ObjectType">
+            ObjectType
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_BusinessData_SecSysIdx">
+          </a>
+          IWA_BusinessData_SecSysIdx
+        </td>
+        <td class="even">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_BusinessData_CrtdAtIdx">
+          </a>
+          IWA_BusinessData_CrtdAtIdx
+        </td>
+        <td class="odd">
+                    <a href="#CreatedAt">
+            CreatedAt
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_BusinessData_CrtdByUserIdx">
+          </a>
+          IWA_BusinessData_CrtdByUserIdx
+        </td>
+        <td class="even">
+                    <a href="#CreatedByUserName">
+            CreatedByUserName
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_BusinessData_CrtdByAppIdx">
+          </a>
+          IWA_BusinessData_CrtdByAppIdx
+        </td>
+        <td class="odd">
+                    <a href="#CreatedByAppId">
+            CreatedByAppId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_BusinessData_ModAtIdx">
+          </a>
+          IWA_BusinessData_ModAtIdx
+        </td>
+        <td class="even">
+                    <a href="#ModifiedAt">
+            ModifiedAt
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_BusinessData_ModByUserIdx">
+          </a>
+          IWA_BusinessData_ModByUserIdx
+        </td>
+        <td class="odd">
+                    <a href="#ModifiedByUserName">
+            ModifiedByUserName
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_BusinessData_ModByAppIdx">
+          </a>
+          IWA_BusinessData_ModByAppIdx
+        </td>
+        <td class="even">
+                    <a href="#ModifiedByAppId">
+            ModifiedByAppId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_BusinessData_TypeIdxSecSysIdx">
+          </a>
+          IWA_BusinessData_TypeIdxSecSysIdx
+        </td>
+        <td class="odd">
+                    <a href="#ObjectType">
+            ObjectType
+          </a>
+,           <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          DataType
+        </th>
+        <th>
+          FieldForOptimisticLocking
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_Version">
+          </a>
+          <a href="#Version">
+            Version
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_ObjectValue">
+          </a>
+          <a href="#ObjectValue">
+            ObjectValue
+          </a>
+        </td>
+        <td class="even">
+          String
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MySql
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          DataType
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MySql_ObjectValue">
+          </a>
+          <a href="#ObjectValue">
+            ObjectValue
+          </a>
+        </td>
+        <td class="even">
+          MEDIUMTEXT
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_PermissionGroup
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_PermissionGroup
+    </h1>
+    <p>
+       Permission group can have permission groups or permissions as its children
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="PermissionGroupId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          PermissionGroupId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the permission group
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ParentPermissionGroupId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ParentPermissionGroupId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_PermissionGroup.html#PermissionGroupId">
+            IWA_PermissionGroup(PermissionGroupId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_ParentPermissionGroupId">
+            Java
+          </a>
+          , 
+          <a href="#MsSqlServer_ParentPermissionGroupId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           References the parent permission group of this permission group.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Name
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Name of the permission group
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="UQ_Name">
+          </a>
+          UQ_Name
+        </td>
+        <td class="even">
+                    <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_UQ_Name">
+            MsSqlServer
+          </a>
+          , 
+          <a href="#MySql_UQ_Name">
+            MySql
+          </a>
+          , 
+          <a href="#Oracle_UQ_Name">
+            Oracle
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_PermissionGroup_ParentPermissionGroupId">
+          </a>
+          IWA_PermissionGroup_ParentPermissionGroupId
+        </td>
+        <td class="even">
+                    <a href="#ParentPermissionGroupId">
+            ParentPermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_PermissionGroup.html">
+            IWA_PermissionGroup
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_PermissionGroup.html#ParentPermissionGroupId">
+            ParentPermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+           References the parent permission group of this permission group.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_SecurityDescriptorType.html">
+            IWA_SecurityDescriptorType
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_SecurityDescriptorType.html#RootPermissionGroupId">
+            RootPermissionGroupId
+          </a>
+        </td>
+        <td class="odd">
+           References the root permission group of the security descriptor type. A security descriptor of this type can administrate all permissions that are referenced through this permission group
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_PermissionGroupPermission.html">
+            IWA_PermissionGroupPermission
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_PermissionGroupPermission.html#PermissionGroupId">
+            PermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+           References the permission group
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_PermissionGroup">
+          </a>
+          <a href="#IWA_PermissionGroup">
+            IWA_PermissionGroup
+          </a>
+        </td>
+        <td class="even">
+          ALL
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_ParentPermissionGroupId">
+          </a>
+          <a href="#ParentPermissionGroupId">
+            ParentPermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+        <th>
+          NoUnique
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_ParentPermissionGroupId">
+          </a>
+          <a href="#ParentPermissionGroupId">
+            ParentPermissionGroupId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_UQ_Name">
+          </a>
+          <a href="#UQ_Name">
+            UQ_Name
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MySql
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoUnique
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MySql_UQ_Name">
+          </a>
+          <a href="#UQ_Name">
+            UQ_Name
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoUnique
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Oracle_UQ_Name">
+          </a>
+          <a href="#UQ_Name">
+            UQ_Name
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

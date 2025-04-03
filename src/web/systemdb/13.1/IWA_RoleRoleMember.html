@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_RoleRoleMember
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_RoleRoleMember
+    </h1>
+    <p>
+       Relation between roles
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="RoleSecurityMemberId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          RoleSecurityMemberId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          210
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Role.html#SecurityMemberId">
+            IWA_Role(SecurityMemberId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+          <a href="#MsSqlServer_RoleSecurityMemberId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="even">
+           References a role which has a relation with the role referenced by RoleMemberId. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="RoleMemberSecurityMemberId">
+          </a>
+          true
+        </td>
+        <td class="odd">
+          RoleMemberSecurityMemberId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Role.html#SecurityMemberId">
+            IWA_Role(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#MsSqlServer_RoleMemberSecurityMemberId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           References a role which has a member relation with the role reference by RoleId.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_RoleRoleMember_RoleSecurityMemberIdIndex">
+          </a>
+          IWA_RoleRoleMember_RoleSecurityMemberIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#RoleSecurityMemberId">
+            RoleSecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_RoleRoleMember_RoleMemberSecurityMemberIdIndex">
+          </a>
+          IWA_RoleRoleMember_RoleMemberSecurityMemberIdIndex
+        </td>
+        <td class="even">
+                    <a href="#RoleMemberSecurityMemberId">
+            RoleMemberSecurityMemberId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsAssociation
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_IWA_RoleRoleMember">
+          </a>
+          <a href="#IWA_RoleRoleMember">
+            IWA_RoleRoleMember
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          NoReferenceUseTrigger
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_RoleSecurityMemberId">
+          </a>
+          <a href="#RoleSecurityMemberId">
+            RoleSecurityMemberId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_RoleMemberSecurityMemberId">
+          </a>
+          <a href="#RoleMemberSecurityMemberId">
+            RoleMemberSecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

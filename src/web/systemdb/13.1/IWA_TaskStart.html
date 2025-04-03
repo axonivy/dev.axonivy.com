@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskStart
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskStart
+    </h1>
+    <p>
+       Elements or part of elements where tasks can be started
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskStartId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskStartId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the task start.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskElementId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskElementId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskElement.html#TaskElementId">
+            IWA_TaskElement(TaskElementId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the task element this task start belongs to. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="StartRequestPath">
+          </a>
+          false
+        </td>
+        <td class="even">
+          StartRequestPath
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Request path to start the process of the task.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="TaskStart_TaskElementIdStartRequestPathIndex">
+          </a>
+          TaskStart_TaskElementIdStartRequestPathIndex
+        </td>
+        <td class="even">
+                    <a href="#TaskElementId">
+            TaskElementId
+          </a>
+,           <a href="#StartRequestPath">
+            StartRequestPath
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskStart_TaskElementIdIndex">
+          </a>
+          IWA_TaskStart_TaskElementIdIndex
+        </td>
+        <td class="even">
+                    <a href="#TaskElementId">
+            TaskElementId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Case.html">
+            IWA_Case
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#TaskStartId">
+            TaskStartId
+          </a>
+        </td>
+        <td class="even">
+           References the task start from which the case was started  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TaskStartId">
+            TaskStartId
+          </a>
+        </td>
+        <td class="odd">
+           References the task start where the process of this task can be started. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_IntermediateEvent.html">
+            IWA_IntermediateEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_IntermediateEvent.html#TaskStartId">
+            TaskStartId
+          </a>
+        </td>
+        <td class="even">
+           References the intermediate event element that this intermediate event belongs to.   
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_TaskSignalEventReceiver.html">
+            IWA_TaskSignalEventReceiver
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskSignalEventReceiver.html#SignaledTaskTaskStartId">
+            SignaledTaskTaskStartId
+          </a>
+        </td>
+        <td class="odd">
+           Task start on which the signaled task has to be started if the signal is received.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_TaskStart">
+          </a>
+          <a href="#IWA_TaskStart">
+            IWA_TaskStart
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

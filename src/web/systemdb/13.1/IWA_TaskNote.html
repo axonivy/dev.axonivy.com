@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskNote
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskNote
+    </h1>
+    <p>
+       Task Notes
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskNoteId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskNoteId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the note.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_TaskId">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Identifies the task, the note belongs to. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Content">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Content
+        </td>
+        <td class="even">
+          CLOB
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Content">
+            Java
+          </a>
+          , 
+          <a href="#MySql_Content">
+            MySql
+          </a>
+        </td>
+        <td class="even">
+           The content of the note.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="AuthorId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          AuthorId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the user, which has created this note.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CreatedAt">
+          </a>
+          false
+        </td>
+        <td class="even">
+          CreatedAt
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The timestamp the note was created.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskNote_TaskIdIndex">
+          </a>
+          IWA_TaskNote_TaskIdIndex
+        </td>
+        <td class="even">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskNote_AuthorIdIndex">
+          </a>
+          IWA_TaskNote_AuthorIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#AuthorId">
+            AuthorId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_TaskNote">
+          </a>
+          <a href="#IWA_TaskNote">
+            IWA_TaskNote
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          DataType
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_TaskId">
+          </a>
+          <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Content">
+          </a>
+          <a href="#Content">
+            Content
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          String
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MySql
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          DataType
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MySql_Content">
+          </a>
+          <a href="#Content">
+            Content
+          </a>
+        </td>
+        <td class="even">
+          MEDIUMTEXT
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

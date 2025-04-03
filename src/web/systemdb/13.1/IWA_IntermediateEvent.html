@@ -1,0 +1,903 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_IntermediateEvent
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_IntermediateEvent
+    </h1>
+    <p>
+       Intermediate events
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IntermediateEventId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          IntermediateEventId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the intermediate event. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskStartId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskStartId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskStart.html#TaskStartId">
+            IWA_TaskStart(TaskStartId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the intermediate event element that this intermediate event belongs to.   
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          SecuritySystemId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the security system that this intermediate event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ApplicationId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ApplicationId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Application.html#ApplicationId">
+            IWA_Application(ApplicationId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#MsSqlServer_ApplicationId">
+            MsSqlServer
+          </a>
+        </td>
+        <td class="odd">
+           References the application that this intermediate event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          TaskId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the task that is waiting for the intermediate event. Maybe null if no task is waiting for the event.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="EventId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          EventId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           The event identifier. This identifier is used to identify the event over multiple systems.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="State">
+          </a>
+          false
+        </td>
+        <td class="even">
+          State
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The state of the intermediate event. See java enumeration ch.ivyteam.ivy.workflow.IntermediateEventState for possible values.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="EventTimestamp">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          EventTimestamp
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           The timestamp when the event was fired. Null if event was not yet fired. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TimeoutTimestamp">
+          </a>
+          false
+        </td>
+        <td class="even">
+          TimeoutTimestamp
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The timestamp when the event timeouts. Null if event does not timeout  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TimeoutTaskStartElementId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TimeoutTaskStartElementId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           The identifier of the task start element where to start a timeout task. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TimeoutAction">
+          </a>
+          false
+        </td>
+        <td class="even">
+          TimeoutAction
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The action in case the event timeouts. See java enumeration ch.ivyteam.ivy.workflow.IntermediateEventTimeoutAction  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="AdditionalInformation">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          AdditionalInformation
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          2000
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Additional information provided by the intermediate event bean 
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          UNIQUE
+        </td>
+        <td class="odd">
+          <a name="IWA_IntermediateEvent_TaskStartIdEventIdIndex">
+          </a>
+          IWA_IntermediateEvent_TaskStartIdEventIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#TaskStartId">
+            TaskStartId
+          </a>
+,           <a href="#EventId">
+            EventId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_IntermediateEvent_SecSystemId">
+          </a>
+          IWA_IntermediateEvent_SecSystemId
+        </td>
+        <td class="odd">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_IntermediateEvent_ApplicationId">
+          </a>
+          IWA_IntermediateEvent_ApplicationId
+        </td>
+        <td class="even">
+                    <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_IntermediateEvent_TaskStartId">
+          </a>
+          IWA_IntermediateEvent_TaskStartId
+        </td>
+        <td class="odd">
+                    <a href="#TaskStartId">
+            TaskStartId
+          </a>
+        </td>
+        <td class="odd">
+          <a href="#MsSqlServer_IWA_IntermediateEvent_TaskStartId">
+            MsSqlServer
+          </a>
+          , 
+          <a href="#MySql_IWA_IntermediateEvent_TaskStartId">
+            MySql
+          </a>
+          , 
+          <a href="#Oracle_IWA_IntermediateEvent_TaskStartId">
+            Oracle
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_IntermediateEvent_TaskId">
+          </a>
+          IWA_IntermediateEvent_TaskId
+        </td>
+        <td class="even">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_IntermediateEvent_EventId">
+          </a>
+          IWA_IntermediateEvent_EventId
+        </td>
+        <td class="odd">
+                    <a href="#EventId">
+            EventId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_IntermediateEvent_State">
+          </a>
+          IWA_IntermediateEvent_State
+        </td>
+        <td class="even">
+                    <a href="#State">
+            State
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_IntrmdtEvnt_TimeoutTmstmp">
+          </a>
+          IWA_IntrmdtEvnt_TimeoutTmstmp
+        </td>
+        <td class="odd">
+                    <a href="#TimeoutTimestamp">
+            TimeoutTimestamp
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TimeoutedCreatorIntrmdtEventId">
+            TimeoutedCreatorIntrmdtEventId
+          </a>
+        </td>
+        <td class="odd">
+           References the intermediate event that causes this task to start because the intermediate event has timeouted.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_IntermediateEventData.html">
+            IWA_IntermediateEventData
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_IntermediateEventData.html#IntermediateEventId">
+            IntermediateEventId
+          </a>
+        </td>
+        <td class="even">
+           Identifies the intermediate event data. References the intermediate event that this intermediate event data belongs to.  
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          BusinessClass
+        </th>
+        <th>
+          DbDataClass
+        </th>
+        <th>
+          QueryClassPublicAPI
+        </th>
+        <th>
+          QueryExecutorProviderClass
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_IWA_IntermediateEvent">
+          </a>
+          <a href="#IWA_IntermediateEvent">
+            IWA_IntermediateEvent
+          </a>
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.IIntermediateEvent
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.internal.db.DbIntermediateEventData
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.internal.query.IntermediateEventQueryExecutorProvider
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MsSqlServer
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          DeleteTriggerName
+        </th>
+        <th>
+          IndexName
+        </th>
+        <th>
+          NoReference
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_IWA_IntermediateEvent">
+          </a>
+          <a href="#IWA_IntermediateEvent">
+            IWA_IntermediateEvent
+          </a>
+        </td>
+        <td class="even">
+          IWA_IntermediateEventTrigger
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="MsSqlServer_ApplicationId">
+          </a>
+          <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MsSqlServer_IWA_IntermediateEvent_TaskStartId">
+          </a>
+          <a href="#IWA_IntermediateEvent_TaskStartId">
+            IWA_IntermediateEvent_TaskStartId
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          IWA_IntrmdtEvnt_TaskStartId
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_IntermediateEvent">
+          </a>
+          <a href="#IWA_IntermediateEvent">
+            IWA_IntermediateEvent
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      MySql
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          IndexName
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MySql_IWA_IntermediateEvent_TaskStartId">
+          </a>
+          <a href="#IWA_IntermediateEvent_TaskStartId">
+            IWA_IntermediateEvent_TaskStartId
+          </a>
+        </td>
+        <td class="even">
+          IWA_IntrmdtEvnt_TaskStartId
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          IndexName
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Oracle_IWA_IntermediateEvent_TaskStartId">
+          </a>
+          <a href="#IWA_IntermediateEvent_TaskStartId">
+            IWA_IntermediateEvent_TaskStartId
+          </a>
+        </td>
+        <td class="even">
+          IWA_IntrmdtEvnt_TaskStartId
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

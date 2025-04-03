@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskElement
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskElement
+    </h1>
+    <p>
+       Process elements that are relevant to task operations
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskElementId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskElementId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the task element.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ProcessModelVersionId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ProcessModelVersionId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_ProcessModelVersion.html#ProcessModelVersionId">
+            IWA_ProcessModelVersion(ProcessModelVersionId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References the process model version this process element belongs to. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ProcessElementId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ProcessElementId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          200
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the process element within the Xpert.ivy project. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="JoinPathes">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          JoinPathes
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           The number of input pathes that are joined on this task element.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Kind">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Kind
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           The process element kind. See java enumeration ch.ivyteam.ivy.workflow.TaskElementKind for possible values.
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_TaskElement_ProcessModelVersionIdProcessElementIdKind">
+          </a>
+          IWA_TaskElement_ProcessModelVersionIdProcessElementIdKind
+        </td>
+        <td class="even">
+                    <a href="#ProcessModelVersionId">
+            ProcessModelVersionId
+          </a>
+,           <a href="#ProcessElementId">
+            ProcessElementId
+          </a>
+,           <a href="#Kind">
+            Kind
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskElement_ProcessModelVersionIdIndex">
+          </a>
+          IWA_TaskElement_ProcessModelVersionIdIndex
+        </td>
+        <td class="even">
+                    <a href="#ProcessModelVersionId">
+            ProcessModelVersionId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_TaskStart.html">
+            IWA_TaskStart
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_TaskStart.html#TaskElementId">
+            TaskElementId
+          </a>
+        </td>
+        <td class="even">
+           References the task element this task start belongs to. 
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_TaskEnd.html">
+            IWA_TaskEnd
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskEnd.html#TaskElementId">
+            TaskElementId
+          </a>
+        </td>
+        <td class="odd">
+           References the task element this task end belongs to. 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_TaskSwitchEvent.html">
+            IWA_TaskSwitchEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_TaskSwitchEvent.html#TaskElementId">
+            TaskElementId
+          </a>
+        </td>
+        <td class="even">
+           References the task element this task switch event belongs to.  
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_TaskElement">
+          </a>
+          <a href="#IWA_TaskElement">
+            IWA_TaskElement
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

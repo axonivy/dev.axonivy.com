@@ -1,0 +1,852 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_Blob
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_Blob
+    </h1>
+    <p>
+       Blob Metadata
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="BlobId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          BlobId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Incremental ID (deprecated, use UUID)
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="UUID">
+          </a>
+          true
+        </td>
+        <td class="odd">
+          UUID
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          36
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Unique identifier
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ApplicationId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ApplicationId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Application.html#ApplicationId">
+            IWA_Application(ApplicationId)
+          </a>
+        </td>
+        <td class="even">
+          ON DELETE SET NULL
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References to application to which this blob belongs to (deprecated, use SecuritySystemId)
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          SecuritySystemId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           References to security system to which this blob belongs to
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="FileName">
+          </a>
+          false
+        </td>
+        <td class="even">
+          FileName
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          255
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Only the filename of this blob
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="FilePath">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          FilePath
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          750
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Relative file path of this blob (deprecated, use Path)
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Path">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Path
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          750
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Path of this document
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="CreatorId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          CreatorId
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          210
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Creator of this blob
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="CreatedAt">
+          </a>
+          false
+        </td>
+        <td class="even">
+          CreatedAt
+        </td>
+        <td class="even">
+          DATETIME
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Creation timestamp
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Size">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Size
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Size in Bytes
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ModifierId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ModifierId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          210
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Last user who has modified the blob
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="ModifiedAt">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          ModifiedAt
+        </td>
+        <td class="odd">
+          DATETIME
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Last modification timestamp
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Description">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Description
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          1024
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Description">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           User defined description
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_Blob_BlobId">
+          </a>
+          IWA_Blob_BlobId
+        </td>
+        <td class="even">
+                    <a href="#BlobId">
+            BlobId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          UNIQUE
+        </td>
+        <td class="odd">
+          <a name="IWA_Blob_SecuritySystemPath">
+          </a>
+          IWA_Blob_SecuritySystemPath
+        </td>
+        <td class="odd">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+,           <a href="#Path">
+            Path
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_Blob_ApplicationFilePath">
+          </a>
+          IWA_Blob_ApplicationFilePath
+        </td>
+        <td class="even">
+                    <a href="#ApplicationId">
+            ApplicationId
+          </a>
+,           <a href="#FilePath">
+            FilePath
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Blob_FilePath">
+          </a>
+          IWA_Blob_FilePath
+        </td>
+        <td class="even">
+                    <a href="#FilePath">
+            FilePath
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Blob_Path">
+          </a>
+          IWA_Blob_Path
+        </td>
+        <td class="odd">
+                    <a href="#Path">
+            Path
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Blob_CreatorId">
+          </a>
+          IWA_Blob_CreatorId
+        </td>
+        <td class="even">
+                    <a href="#CreatorId">
+            CreatorId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Blob_ModifierId">
+          </a>
+          IWA_Blob_ModifierId
+        </td>
+        <td class="odd">
+                    <a href="#ModifierId">
+            ModifierId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Blob_CreatedAt">
+          </a>
+          IWA_Blob_CreatedAt
+        </td>
+        <td class="even">
+                    <a href="#CreatedAt">
+            CreatedAt
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Blob_FileName">
+          </a>
+          IWA_Blob_FileName
+        </td>
+        <td class="odd">
+                    <a href="#FileName">
+            FileName
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Blob_ModifiedAt">
+          </a>
+          IWA_Blob_ModifiedAt
+        </td>
+        <td class="even">
+                    <a href="#ModifiedAt">
+            ModifiedAt
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_Blob_SecuritySystemId">
+          </a>
+          IWA_Blob_SecuritySystemId
+        </td>
+        <td class="odd">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_Blob_ApplicationId">
+          </a>
+          IWA_Blob_ApplicationId
+        </td>
+        <td class="even">
+                    <a href="#ApplicationId">
+            ApplicationId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          BusinessClass
+        </th>
+        <th>
+          DbDataClass
+        </th>
+        <th>
+          QueryExecutorProviderClass
+        </th>
+        <th>
+          Truncate
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_IWA_Blob">
+          </a>
+          <a href="#IWA_Blob">
+            IWA_Blob
+          </a>
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.blob.storage.core.Blob
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.blob.storage.core.db.DbBlobData
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.blob.storage.core.impl.BlobQueryExecutorProvider
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_Description">
+          </a>
+          <a href="#Description">
+            Description
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_Blob">
+          </a>
+          <a href="#IWA_Blob">
+            IWA_Blob
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

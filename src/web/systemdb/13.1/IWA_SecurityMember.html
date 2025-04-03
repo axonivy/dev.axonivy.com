@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_SecurityMember
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_SecurityMember
+    </h1>
+    <p>
+       Security members can be user or roles
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SecurityMemberId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          SecurityMemberId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          210
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the security member.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Name
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Name of the security member.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="MemberName">
+          </a>
+          false
+        </td>
+        <td class="even">
+          MemberName
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          201
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Member Name of the security member. This is the Name and a '#' as prefix if the member is a user.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="DisplayName">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          DisplayName
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Display name of the security member.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SecuritySystemId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          SecuritySystemId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SecuritySystem.html#SecuritySystemId">
+            IWA_SecuritySystem(SecuritySystemId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the security system this security member belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Enabled">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Enabled
+        </td>
+        <td class="odd">
+          BIT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+          0
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Security member enabled (1) or disabled (0).
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Type">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Type
+        </td>
+        <td class="even">
+          INTEGER
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Type">
+            Java
+          </a>
+        </td>
+        <td class="even">
+           Member type: role (0) or user (1)
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_SecurityMemberNameIdx">
+          </a>
+          IWA_SecurityMemberNameIdx
+        </td>
+        <td class="even">
+                    <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_SecurityMemberMemberNameIdx">
+          </a>
+          IWA_SecurityMemberMemberNameIdx
+        </td>
+        <td class="odd">
+                    <a href="#MemberName">
+            MemberName
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_SecurityMemberDisplayNameIdx">
+          </a>
+          IWA_SecurityMemberDisplayNameIdx
+        </td>
+        <td class="even">
+                    <a href="#DisplayName">
+            DisplayName
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_SecurityMemberEnabledIdx">
+          </a>
+          IWA_SecurityMemberEnabledIdx
+        </td>
+        <td class="odd">
+                    <a href="#Enabled">
+            Enabled
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_SecurityMemberTypeIdx">
+          </a>
+          IWA_SecurityMemberTypeIdx
+        </td>
+        <td class="even">
+                    <a href="#Type">
+            Type
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_SecurityMember_SecuritySystemIdIndex">
+          </a>
+          IWA_SecurityMember_SecuritySystemIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Role.html">
+            IWA_Role
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Role.html#SecurityMemberId">
+            SecurityMemberId
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_User.html">
+            IWA_User
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_User.html#SecurityMemberId">
+            SecurityMemberId
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Case.html">
+            IWA_Case
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Case.html#ActivatorId">
+            ActivatorId
+          </a>
+        </td>
+        <td class="odd">
+           References the security member who was set as start activator (user or role).
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Case.html">
+            IWA_Case
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#CreatorId">
+            CreatorId
+          </a>
+        </td>
+        <td class="even">
+           References the security member which has created this case. Maybe null if the user who created this case was an unknown user.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_CaseOwner.html">
+            IWA_CaseOwner
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_CaseOwner.html#OwnerId">
+            OwnerId
+          </a>
+        </td>
+        <td class="odd">
+           Identifies the owner.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Task.html#WorkerId">
+            WorkerId
+          </a>
+        </td>
+        <td class="even">
+           References the security member that is working or has worked on this task.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_TaskResponsible.html">
+            IWA_TaskResponsible
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskResponsible.html#ResponsibleId">
+            ResponsibleId
+          </a>
+        </td>
+        <td class="odd">
+           References the security member which identifies the responsible
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_WorkflowEvent.html">
+            IWA_WorkflowEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_WorkflowEvent.html#UserId">
+            UserId
+          </a>
+        </td>
+        <td class="even">
+           References the user that has driven the task or case which has triggered this event. Maybe null if event was triggered by an anonymous user.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_TaskNote.html">
+            IWA_TaskNote
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_TaskNote.html#AuthorId">
+            AuthorId
+          </a>
+        </td>
+        <td class="odd">
+           References the user, which has created this note.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_CaseNote.html">
+            IWA_CaseNote
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_CaseNote.html#AuthorId">
+            AuthorId
+          </a>
+        </td>
+        <td class="even">
+           References the user, which has created this note.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_SignalEvent.html">
+            IWA_SignalEvent
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_SignalEvent.html#SentById">
+            SentById
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_AccessControl.html">
+            IWA_AccessControl
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_AccessControl.html#SecurityMemberId">
+            SecurityMemberId
+          </a>
+        </td>
+        <td class="even">
+           References the user that this access control grants or denies the permission to. Must be null if RoleId is not null.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Blob.html">
+            IWA_Blob
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Blob.html#CreatorId">
+            CreatorId
+          </a>
+        </td>
+        <td class="odd">
+           Creator of this blob
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Blob.html">
+            IWA_Blob
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Blob.html#ModifierId">
+            ModifierId
+          </a>
+        </td>
+        <td class="even">
+           Last user who has modified the blob
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_NotificationReceiver.html">
+            IWA_NotificationReceiver
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_NotificationReceiver.html#ReceiverId">
+            ReceiverId
+          </a>
+        </td>
+        <td class="odd">
+           Id of the receiver of the notification
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_NotificationDelivery.html">
+            IWA_NotificationDelivery
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_NotificationDelivery.html#ReceiverId">
+            ReceiverId
+          </a>
+        </td>
+        <td class="even">
+           Receiver of the notification transmission
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_NotificationSubscription.html">
+            IWA_NotificationSubscription
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_NotificationSubscription.html#SubscriberId">
+            SubscriberId
+          </a>
+        </td>
+        <td class="odd">
+           Subscriber of the notification
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_SecurityMember">
+          </a>
+          <a href="#IWA_SecurityMember">
+            IWA_SecurityMember
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Enum
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_Type">
+          </a>
+          <a href="#Type">
+            Type
+          </a>
+        </td>
+        <td class="odd">
+          ch.ivyteam.ivy.security.internal.securitymember.SecurityMemberType
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

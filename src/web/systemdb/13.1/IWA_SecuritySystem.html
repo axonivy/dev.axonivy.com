@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_SecuritySystem
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_SecuritySystem
+    </h1>
+    <p>
+       Security system
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SecuritySystemId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          SecuritySystemId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies the security system.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Name
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+           Name of the security system.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="SecurityDescriptorId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          SecurityDescriptorId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SecurityDescriptor.html#SecurityDescriptorId">
+            IWA_SecurityDescriptor(SecurityDescriptorId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Security descriptor. 
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="UQ_Name">
+          </a>
+          UQ_Name
+        </td>
+        <td class="even">
+                    <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_SecuritySystem_SecurityDescriptorId">
+          </a>
+          IWA_SecuritySystem_SecurityDescriptorId
+        </td>
+        <td class="even">
+                    <a href="#SecurityDescriptorId">
+            SecurityDescriptorId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Referenced By
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Foreign Table
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Application.html">
+            IWA_Application
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Application.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+           References the security system this application belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_SecurityMember.html">
+            IWA_SecurityMember
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_SecurityMember.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+           References the security system this security member belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Role.html">
+            IWA_Role
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Role.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+           References the security system this role belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_User.html">
+            IWA_User
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_User.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+           References the application this user belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Case.html">
+            IWA_Case
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Case.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+           References the security system this case belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Task.html">
+            IWA_Task
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+           References the security system this task belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_WorkflowEvent.html">
+            IWA_WorkflowEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_WorkflowEvent.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+           References the security system that this intermediate event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_IntermediateEvent.html">
+            IWA_IntermediateEvent
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_IntermediateEvent.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+           References the security system that this intermediate event belongs to.  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_SignalEvent.html">
+            IWA_SignalEvent
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_SignalEvent.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_Language.html">
+            IWA_Language
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_Language.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Blob.html">
+            IWA_Blob
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Blob.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+           References to security system to which this blob belongs to
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a href="IWA_BusinessData.html">
+            IWA_BusinessData
+          </a>
+        </td>
+        <td class="odd">
+          <a href="IWA_BusinessData.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="odd">
+           References the security system this business data belongs to.
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a href="IWA_Notification.html">
+            IWA_Notification
+          </a>
+        </td>
+        <td class="even">
+          <a href="IWA_Notification.html#SecuritySystemId">
+            SecuritySystemId
+          </a>
+        </td>
+        <td class="even">
+           Security System ID
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_SecuritySystem">
+          </a>
+          <a href="#IWA_SecuritySystem">
+            IWA_SecuritySystem
+          </a>
+        </td>
+        <td class="even">
+          ALL
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskResponsible
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskResponsible
+    </h1>
+    <p>
+       Task responsibles
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskResponsibleId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskResponsibleId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           Identifies this task responsible
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_TaskId">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           References the task this responsible belongs to 
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="ResponsibleId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          ResponsibleId
+        </td>
+        <td class="even">
+          VARCHAR
+        </td>
+        <td class="even">
+          210
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_SecurityMember.html#SecurityMemberId">
+            IWA_SecurityMember(SecurityMemberId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the security member which identifies the responsible
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Kind">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Kind
+        </td>
+        <td class="odd">
+          INTEGER
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_Kind">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           Kind of this activator
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          UNIQUE
+        </td>
+        <td class="odd">
+          <a name="IWA_TaskResponsibleUnique">
+          </a>
+          IWA_TaskResponsibleUnique
+        </td>
+        <td class="odd">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+,           <a href="#ResponsibleId">
+            ResponsibleId
+          </a>
+,           <a href="#Kind">
+            Kind
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskResponsible_ResponsibleIdKindTaskId">
+          </a>
+          IWA_TaskResponsible_ResponsibleIdKindTaskId
+        </td>
+        <td class="odd">
+                    <a href="#ResponsibleId">
+            ResponsibleId
+          </a>
+,           <a href="#Kind">
+            Kind
+          </a>
+,           <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Cache_IWA_TaskResponsible">
+          </a>
+          <a href="#IWA_TaskResponsible">
+            IWA_TaskResponsible
+          </a>
+        </td>
+        <td class="odd">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          Enum
+        </th>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_TaskId">
+          </a>
+          <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+          true
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Kind">
+          </a>
+          <a href="#Kind">
+            Kind
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          ch.ivyteam.ivy.workflow.task.responsible.impl.ResponsibleKind
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

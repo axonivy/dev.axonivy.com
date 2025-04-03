@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="ISO-8859-1"/>
+    <link rel="STYLESHEET" type="text/css" href="style.css"/>
+    <title>
+      Table IWA_TaskLocalized
+    </title>
+  </head>
+  <body>
+    <h1>
+      Table IWA_TaskLocalized
+    </h1>
+    <p>
+       Localized data of tasks. E.g., name and description
+    </p>
+    <h2>
+      Columns
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Primary Key
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Type
+        </th>
+        <th>
+          Length
+        </th>
+        <th>
+          Precision
+        </th>
+        <th>
+          Can Be Null
+        </th>
+        <th>
+          Default
+        </th>
+        <th>
+          References
+        </th>
+        <th>
+          Action
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="TaskLocalizedId">
+          </a>
+          true
+        </td>
+        <td class="even">
+          TaskLocalizedId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="TaskId">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          TaskId
+        </td>
+        <td class="odd">
+          BIGINT
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="IWA_Task.html#TaskId">
+            IWA_Task(TaskId)
+          </a>
+        </td>
+        <td class="odd">
+          ON DELETE SET NULL
+        </td>
+        <td class="odd">
+          <a href="#Java_TaskId">
+            Java
+          </a>
+        </td>
+        <td class="odd">
+           References the task this name and description belongs to  
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="LanguageId">
+          </a>
+          false
+        </td>
+        <td class="even">
+          LanguageId
+        </td>
+        <td class="even">
+          BIGINT
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="IWA_Language.html#LanguageId">
+            IWA_Language(LanguageId)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+           References the language this name and description are in  
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Name">
+          </a>
+          false
+        </td>
+        <td class="odd">
+          Name
+        </td>
+        <td class="odd">
+          VARCHAR
+        </td>
+        <td class="odd">
+          200
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          false
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          <a href="#Java_Name">
+            Java
+          </a>
+          , 
+          <a href="#Oracle_Name">
+            Oracle
+          </a>
+        </td>
+        <td class="odd">
+            The name of a task
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Description">
+          </a>
+          false
+        </td>
+        <td class="even">
+          Description
+        </td>
+        <td class="even">
+          CLOB
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          false
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          <a href="#Java_Description">
+            Java
+          </a>
+        </td>
+        <td class="even">
+            The description of the task.  
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Constraints
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Constraint
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          UNIQUE
+        </td>
+        <td class="even">
+          <a name="IWA_TaskLocalized_TaskLanguageUniqueIndex">
+          </a>
+          IWA_TaskLocalized_TaskLanguageUniqueIndex
+        </td>
+        <td class="even">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+,           <a href="#LanguageId">
+            LanguageId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Indexes
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Columns
+        </th>
+        <th>
+          Hints
+        </th>
+        <th>
+          Comment
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskLocalized_NameIndex">
+          </a>
+          IWA_TaskLocalized_NameIndex
+        </td>
+        <td class="even">
+                    <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskLocalized_TaskIdLanguageIdNameIndex">
+          </a>
+          IWA_TaskLocalized_TaskIdLanguageIdNameIndex
+        </td>
+        <td class="odd">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+,           <a href="#LanguageId">
+            LanguageId
+          </a>
+,           <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskLocalized_TaskIdLanguageIdLowerNameIndex">
+          </a>
+          IWA_TaskLocalized_TaskIdLanguageIdLowerNameIndex
+        </td>
+        <td class="even">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+,           <a href="#LanguageId">
+            LanguageId
+          </a>
+,           <a href="#lower(Name)">
+            lower(Name)
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskLocalized_LanguageIdNameTaskIdIndex">
+          </a>
+          IWA_TaskLocalized_LanguageIdNameTaskIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#LanguageId">
+            LanguageId
+          </a>
+,           <a href="#Name">
+            Name
+          </a>
+,           <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskLocalized_LanguageIdLowerNameTaskIdIndex">
+          </a>
+          IWA_TaskLocalized_LanguageIdLowerNameTaskIdIndex
+        </td>
+        <td class="even">
+                    <a href="#LanguageId">
+            LanguageId
+          </a>
+,           <a href="#lower(Name)">
+            lower(Name)
+          </a>
+,           <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="IWA_TaskLocalized_TaskIdIndex">
+          </a>
+          IWA_TaskLocalized_TaskIdIndex
+        </td>
+        <td class="odd">
+                    <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="odd">
+        </td>
+        <td class="odd">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="IWA_TaskLocalized_LanguageIdIndex">
+          </a>
+          IWA_TaskLocalized_LanguageIdIndex
+        </td>
+        <td class="even">
+                    <a href="#LanguageId">
+            LanguageId
+          </a>
+        </td>
+        <td class="even">
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Cache
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          Strategy
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Cache_IWA_TaskLocalized">
+          </a>
+          <a href="#IWA_TaskLocalized">
+            IWA_TaskLocalized
+          </a>
+        </td>
+        <td class="even">
+          ALL_REMOVE_UNUSED
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Java
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          AsParent
+        </th>
+        <th>
+          DataType
+        </th>
+        <th>
+          Truncate
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_TaskId">
+          </a>
+          <a href="#TaskId">
+            TaskId
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="odd">
+          <a name="Java_Name">
+          </a>
+          <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          
+        </td>
+        <td class="odd">
+          true
+        </td>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Java_Description">
+          </a>
+          <a href="#Description">
+            Description
+          </a>
+        </td>
+        <td class="even">
+          
+        </td>
+        <td class="even">
+          String
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Oracle
+    </h2>
+    <table>
+      <tr>
+        <th>
+          Object
+        </th>
+        <th>
+          ConvertEmptyStringToNull
+        </th>
+      </tr>
+      <tr>
+        <td class="even">
+          <a name="Oracle_Name">
+          </a>
+          <a href="#Name">
+            Name
+          </a>
+        </td>
+        <td class="even">
+          true
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
