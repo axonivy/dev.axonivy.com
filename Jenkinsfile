@@ -22,6 +22,7 @@ pipeline {
         }
       }
       steps {
+        echo 'can I get a build run from a fork?'
         sh 'composer install --no-dev --no-progress'
         sh "tar -cf ${env.DIST_FILE}\
           --exclude=src/web/releases\
