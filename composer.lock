@@ -1886,16 +1886,16 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v5.20.5",
+            "version": "v5.20.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "b9ed7e95da40275fb5df073b8978761c83ee556f"
+                "reference": "784d62c950ef4c20e6e3baba41ed55885b5b3fb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/b9ed7e95da40275fb5df073b8978761c83ee556f",
-                "reference": "b9ed7e95da40275fb5df073b8978761c83ee556f",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/784d62c950ef4c20e6e3baba41ed55885b5b3fb2",
+                "reference": "784d62c950ef4c20e6e3baba41ed55885b5b3fb2",
                 "shasum": ""
             },
             "type": "library",
@@ -1941,9 +1941,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
-                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.20.5"
+                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.20.6"
             },
-            "time": "2025-04-03T10:47:52+00:00"
+            "time": "2025-04-04T13:51:24+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
