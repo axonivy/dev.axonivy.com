@@ -101,10 +101,10 @@ pipeline {
             sh "ssh $host mkdir $targetFolder/src/web/releases"
             sh "ssh $host ln -fns /home/axonivya/data/ivy-releases $targetFolder/src/web/releases/ivy"
             sh "ssh $host ln -fns /home/axonivya/data/doc $targetFolder/src/web/docs"
-            sh "ssh $host ln -fns /home/axonivya/data/openapi $targetFolder/src/web/openapi"
-            sh "ssh $host ln -fns /home/axonivya/data/systemdb $targetFolder/src/web/systemdb"
-            sh "ssh $host ln -fns /home/axonivya/data/public-api $targetFolder/src/web/public-api"
-            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
+            sh "ssh $host ln -fs /home/axonivya/data/openapi/ $targetFolder/src/web/openapi"
+            sh "ssh $host ln -fs /home/axonivya/data/systemdb/ $targetFolder/src/web/systemdb"
+            sh "ssh $host ln -fs /home/axonivya/data/public-api/ $targetFolder/src/web/public-api"
+            sh "ssh $host ln -fs $targetFolder/src/web/ /home/axonivya/www/developer.axonivy.com/linktoweb"
           }
         }
       }
