@@ -26,6 +26,9 @@ pipeline {
         sh "tar -cf ${env.DIST_FILE}\
           --exclude=src/web/releases\
           --exclude=src/web/docs\
+          --exclude=src/web/openapi\
+          --exclude=src/web/public-api\
+          --exclude=src/web/systemdb\
           --exclude=vendor/swagger-api\
           src\
           vendor"
