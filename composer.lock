@@ -2579,16 +2579,16 @@
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
-            "version": "v5.2.2",
+            "version": "v5.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-composer.git",
-                "reference": "a8d672b032bd2abae15da6aeb47e4d87479014ee"
+                "reference": "ca283f9823c937d629180b51ab63e18af117916e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-composer/zipball/a8d672b032bd2abae15da6aeb47e4d87479014ee",
-                "reference": "a8d672b032bd2abae15da6aeb47e4d87479014ee",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-composer/zipball/ca283f9823c937d629180b51ab63e18af117916e",
+                "reference": "ca283f9823c937d629180b51ab63e18af117916e",
                 "shasum": ""
             },
             "require": {
@@ -2651,7 +2651,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-02-19T08:07:23+00:00"
+            "time": "2025-05-12T12:08:44+00:00"
         },
         {
             "name": "myclabs/deep-copy",
