@@ -14,6 +14,7 @@ use app\pages\doc\redirect\LegacyPublicAPIAction;
 use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
 use app\pages\doc\redirect\RedirectPortalGuide;
 use app\pages\download\DownloadAction;
+use app\pages\download\DownloadRobotsAction;
 use app\pages\download\archive\ArchiveAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\home\HomeAction;
@@ -46,6 +47,7 @@ class RoutingRules
 
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/archive[/{version}]', ArchiveAction::class);
+    $app->get('/download/robots.txt', DownloadRobotsAction::class);
     $app->get('/download[/{version}]', DownloadAction::class); // leading-edge/sprint/nightly/dev
 
     $app->get('/release-cycle', ReleaseCycleAction::class);
