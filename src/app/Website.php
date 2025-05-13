@@ -108,8 +108,10 @@ class Website
     $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
       $response = new Response();
       $data = ['message' => $exception->getMessage()];
+      $useragent = $request->getHeaderLine('User-Agent');
+      $fileName = str_contains($useragent, 'CloudFront') ? '_error/404-empty.twig' : '_error/404.twig';
       return $container->get(Twig::class)
-        ->render($response, '_error/404.twig', $data)
+        ->render($response, $fileName, $data)
         ->withStatus(404);
     });
 

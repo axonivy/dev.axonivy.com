@@ -11,8 +11,6 @@ class AppTester
 {
   private Response $response;
 
-  private array $cookies;
-
   private function __construct(Response $response)
   {
     $this->response = $response;
@@ -20,20 +18,20 @@ class AppTester
 
   public static function assertThatGet(string $url): AppTester
   {
-    return new AppTester(self::get($url, []));
+    return new AppTester(self::get($url, 'AppTester'));
   }
 
-  public static function assertThatGetWithCookie(string $url, array $cookies): AppTester
+  public static function assertThatGetWithUserAgent(string $url, string $userAgent): AppTester
   {
-    return new AppTester(self::get($url, $cookies));
+    return new AppTester(self::get($url, $userAgent));
   }
 
-  private static function get(string $url, array $cookies): Response
+  private static function get(string $url, string $userAgent): Response
   {
     $app = (new Website())->getApp();
     $request = (new RequestFactory())
       ->createRequest('GET', $url)
-      ->withCookieParams($cookies);
+      ->withHeader('User-Agent', $userAgent);
     return $app->handle($request);
   }
 
