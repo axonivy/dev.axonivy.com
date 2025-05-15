@@ -3,5 +3,5 @@
   "title": "Axon Ivy 13.1",
   "slogan": "Improved Editors and views, smarter task assignments, multilingual tooling and a fully previewable UI experience",
   "date": "June 2nd, 2025",
-  "lts": true
+  "lts": false
 }
