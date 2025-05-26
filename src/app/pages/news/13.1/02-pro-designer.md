@@ -1,18 +1,18 @@
 ## PRO Designer {#proDesigner}
 
-The PRO Designer continues to evolve as the primary environment for professional developers. In version 13.1, several enhancements improve usability, promote reuse, and support the development of more robust and maintainable applications.
+The PRO Designer continues to evolve as the primary environment for professional developers, with version 13.1 introducing enhancements for the development of more robust and maintainable applications.
 
-- **Dialog Preview**: The Dialog Preview feature has been reintroduced with a more stable implementation. User dialogs (forms and XHTML) can now be previewed again within the PRO Designer. Changes are reflected in real time, and users can jump from preview elements back to the source definition, enabling quick navigation and improving feedback during UI development.
+- **Dialog Preview**: Reintroduced with a more stable implementation, the preview enables live rendering of forms and XHTML dialogs with direct navigation to element definitions.
 
-- **Form Editor Enhancements**: The Form Editor now supports editable Data Tables and the reuse of form components. Developers can extract not only layouts but also panels and fieldsets into standalone components. Enhancements include better button alignment, drag-and-drop reordering of static options, streamlined icons, and additional button styles (e.g. flat, link, outline) and variants (help, info, etc.). Attribute validation and full keyboard support enhance the modeling experience.
+- **Form Editor Enhancements**: Editable Data Tables, reusable form components (including fieldsets and panels), and visual improvements like better alignment, drag-and-drop, and new button styles enhance design flexibility. Attribute validation and keyboard support improve accuracy and speed.
 
-- **Process Editor**: Upgraded to GLSP v2.3.0, the Process Editor offers improved rendering and interaction. Expanded keyboard shortcuts enable faster navigation, diagram editing, and zoom control.
+- **Process Editor**: Now powered by GLSP v2.3.0, the editor delivers smoother interaction and rendering. Expanded keyboard shortcuts streamline navigation and editing.
 
-- **Inscription View**: The Inscription Editor now includes IvyScript signature hints, an extended Function Browser, and an integrated Condition Builder. Bug fixes have improved stability, especially during tab switching and editor focus.
+- **Inscription View**: IvyScript hints, a better Function Browser, and an embedded Condition Builder improve scripting and configuration. Improved stability, especially during tab switching and editor focus.
 
-- **Data Class Editor**: The editor supports validation of annotations and improved configuration of entity associations. Badges now visually indicate key field properties such as "transient" or "key," and full keyboard accessibility is included.
+- **Data Class Editor**: Improved annotation validation and relationship configuration. Field badges and keyboard accessibility increase clarity and efficiency.
 
-- **Variable Editor**: Enhanced performance and better support for large variable sets make managing project variables more efficient. Inline validation and keyboard navigation are also now available.
+- **Variable Editor**: Now faster and easier to use with large sets of variables. Inline validation and full keyboard control are supported.
 
 All new features introduced in the PRO Designer are also available in the NEO Designer.
 
