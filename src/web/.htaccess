@@ -10,6 +10,7 @@ RewriteEngine On
 # route doc resource links from; from 13.1 onwards
 RewriteRule ^doc/((1[3-9]|[2-9]\d|\d\d\d)[^/]+)/openapi/(.+)$ /openapi/$1/$3 [L,R=302]
 RewriteRule ^doc/((1[3-9]|[2-9]\d|\d\d\d)[^/]+)/public-api/(.+)$ /public-api/$1/$3 [L,R=302]
+RewriteRule ^doc/((1[3-9]|[2-9]\d|\d\d\d)[^/]+)/engine-guide/reference/engine-cli/manpages/(.+)$ /manpages/$1/$3 [L,R=302]
 RewriteRule ^doc/((1[3-9]|[2-9]\d|\d\d\d)[^/]+)/engine-guide/reference/systemdb-schema/(.+)$ /systemdb/$1/$3 [L,R=302]
 
 RewriteRule ^download/([^/]+)/(.+)$ /releases/ivy/$1/downloads/$2 [L]
