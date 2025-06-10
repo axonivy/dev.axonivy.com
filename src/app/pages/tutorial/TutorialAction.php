@@ -3,6 +3,7 @@
 namespace app\pages\tutorial;
 
 use Slim\Views\Twig;
+use app\domain\util\Redirect;
 
 class TutorialAction
 {
@@ -16,13 +17,6 @@ class TutorialAction
 
   public function __invoke($request, $response, $args)
   {
-    return $this->view->render($response, 'tutorial/tutorial.twig', [
-      'tutorials' => self::getTutorials()
-    ]);
-  }
-
-  private static function getTutorials(): array
-  {
-    return json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'tutorials.json'));
+    return Redirect::to($response, "https://www.axonivy.com/tutorials");
   }
 }
