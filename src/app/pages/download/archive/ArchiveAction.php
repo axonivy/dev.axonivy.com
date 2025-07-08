@@ -33,7 +33,7 @@ class ArchiveAction
     $releaseInfos = $this->findReleaseInfos($archiveVersion);
     return $this->view->render($response, 'download/archive/archive.twig', [
       'releaseInfos' => $releaseInfos,
-      'versionLinks' => $this->createLinks(),
+      'categorizedVersions' => $this->createCategorizedVersions(),
       'currentMajorVersion' => $archiveVersion
     ]);
   }
@@ -75,13 +75,26 @@ class ArchiveAction
     return self::filterVirtualVersions($releaseInfos);
   }
 
-  private function createLinks(): array
+  private function createCategorizedVersions(): array
   {
-    $links = [];
+    $categorizedVersions = [
+      ReleaseType::LE()->name() => [],
+      ReleaseType::LTS()->name() => [],
+      'UNSUPPORTED' => []
+    ];
+
     foreach ($this->versions as $version => $description) {
-      $links[] = new VersionLink($version, $description);
+      $versionLink = new VersionLink($version, $description);
+      $type = $description;
+      
+      if (isset($categorizedVersions[$type])) {
+        $categorizedVersions[$type][] = $versionLink;
+      } else {
+        $categorizedVersions['UNSUPPORTED'][] = $versionLink;
+      }
     }
-    return $links;
+
+    return array_filter($categorizedVersions, fn($category) => !empty($category));
   }
 
   private static function filterVirtualVersions(array $releaseInfos): array

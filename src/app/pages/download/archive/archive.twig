@@ -53,8 +53,14 @@
     <div class="table-wrapper">
       <div class="select-wrapper">
         <select name="version" id="version" onchange="location = this.value;">
-          {% for versionLink in versionLinks %}
-            <a href="#"><option value="{{ versionLink.url }}" {{ (versionLink.id == currentMajorVersion) ? 'selected' : '' }}>{{ versionLink.displayText }}</option></a>
+          {% for categoryName, versions in categorizedVersions %}
+            <optgroup label="{{ categoryName == 'UNSUPPORTED' ? 'Unsupported' : categoryName }}">
+              {% for versionLink in versions %}
+                <option value="{{ versionLink.url }}" {{ (versionLink.id == currentMajorVersion) ? 'selected' : '' }}>
+                  {{ versionLink.id }}
+                </option>
+              {% endfor %}
+            </optgroup>
           {% endfor %}
         </select>
       </div>
