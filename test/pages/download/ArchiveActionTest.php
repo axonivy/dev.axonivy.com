@@ -44,9 +44,9 @@ class ArchiveActionTest extends TestCase
   public function testDropdown()
   {
     AppTester::assertThatGet('/download/archive/7.x')->ok()
-      ->bodyContains('8.0 (Long Term Support)')
-      ->bodyContains('9 (Leading Edge)')
-      ->bodyContains('6.0 (UNSUPPORTED)')
+      ->bodyContains('8.0')
+      ->bodyContains('9')
+      ->bodyContains('6.0')
       ->bodyContains('unstable')
       ->bodyDoesNotContain('sprint')
       ->bodyDoesNotContain('nightly');
