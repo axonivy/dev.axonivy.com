@@ -28,6 +28,7 @@ pipeline {
           --exclude=src/web/docs\
           --exclude=src/web/openapi\
           --exclude=src/web/public-api\
+          --exclude=src/web/manpages\
           --exclude=src/web/systemdb\
           --exclude=vendor/swagger-api\
           src\
