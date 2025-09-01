@@ -113,6 +113,7 @@
               <a href="{{ releaseInfo.HotfixFileUrl }}"><i class="si si-download"> </i></a>&nbsp;Hotfix<br />
               <a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><i class="si si-file"> </i></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
             {% endif %}
+            <a href="{{ releaseInfo.ChecksumsUrl }}"><i class="si si-download"></i> Checksums</a><br />
             {% if releaseInfo.UnsafeVersion %}
               {% if releaseInfo.getUnsafeReasons is empty %}
                 <i class="si si-warning" style="background-color: red;"></i> Security issue<br />

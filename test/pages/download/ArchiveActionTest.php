@@ -33,6 +33,13 @@ class ArchiveActionTest extends TestCase
       ->bodyDoesNotContain('3.9.9');
   }
 
+
+  public function test_checksumsUrl()
+  {
+    AppTester::assertThatGet('/download/archive/8.0')->ok()
+      ->bodyContains('https://download.axonivy.com/8.0.1/checksums.sha256');
+  }
+
   public function testArchive7x()
   {
     AppTester::assertThatGet('/download/archive/7.x')->ok()
