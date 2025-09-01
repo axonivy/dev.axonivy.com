@@ -30,6 +30,11 @@ class ReleaseInfoTest extends TestCase
     Assert::assertEquals('8.0', $this->testee->minorVersion());
   }
 
+  public function test_checksumsUrl()
+  {
+    Assert::assertEquals('https://download.axonivy.com/8.0.1/checksums.sha256', $this->testee->getChecksumsUrl());
+  }
+
   public function test_artifacts()
   {
     $artifacts = $this->testee->getArtifacts();

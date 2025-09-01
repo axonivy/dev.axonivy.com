@@ -87,6 +87,11 @@ class ReleaseInfo
     return '/releases/ivy/' . $this->versionNumber() . '/hotfix/' . $fileName;
   }
 
+  public function getChecksumsUrl(): string
+  {
+    return Config::CDN_URL . "/" . $this->versionNumber() . "/checksums.sha256";
+  }
+
   private function getHotFixPath(): string
   {
     return $this->getPath() . '/hotfix';
