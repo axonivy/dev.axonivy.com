@@ -25,11 +25,6 @@ class SimpleDocument
     return $this->url;
   }
 
-  private function getPath()
-  {
-    return $this->path;
-  }
-
   private function exists(): bool
   {
     return file_exists($this->path);

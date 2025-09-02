@@ -5,6 +5,7 @@ namespace app\pages\doc\redirect;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\domain\util\Redirect;
+use app\domain\doc\DocProvider;
 
 class LegacyEngineGuideDocAction
 {
@@ -20,11 +21,11 @@ class LegacyEngineGuideDocAction
     $doc = $args['htmlDocument'] ?? '';
 
     if (empty($doc)) {
-      return Redirect::to($response, 'engine-guide/');
+      return Redirect::to($response, DocProvider::DEFAULT_LANGUAGE . '/' . 'engine-guide/');
     }
 
     $redirectUrl = $this->getRedirectUrl($doc);
-    return $this->view->render($response, 'doc/redirect/redirect-engine-guide.twig', ['redirectUrl' => $redirectUrl]);
+    return $this->view->render($response, 'doc/redirect/redirect-engine-guide.twig', ['redirectUrl' => $redirectUrl, 'lang' => DocProvider::DEFAULT_LANGUAGE]);
   }
 
   private function getRedirectUrl($doc)
@@ -44,6 +45,6 @@ class LegacyEngineGuideDocAction
       'troubleshooting.html' => 'troubleshooting/'
     ];
     $newPage = $redirects[$htmlDocument] ?? '';
-    return '../engine-guide/' . $newPage;
+    return '../' . DocProvider::DEFAULT_LANGUAGE . '/engine-guide/' . $newPage;
   }
 }

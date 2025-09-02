@@ -26,24 +26,25 @@ class DocAction
   {
     $version = $args['version'];
 
-    $doc = $args['document'] ?? '';
-    if (!empty($doc)) {
-      $doc = '/' . $doc;
-    }
+    $docName = $args['document'] ?? '';
 
+    $lang = $this->evaluateLanguage($docName);
+    $docName = $this->evaluateDocName($docName, $lang);
+    $docPath = $this->evaluateDocPath($docName);
+    
     // special treatment when using a major version e.g. 8/9/10
     if (!str_contains($version, '.') && is_numeric($version)) {
       $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
       if ($releaseInfo == null) {
         throw new NotFoundException();
       }      
-      return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);
+      return Redirect::to($response, $releaseInfo->getDocProvider()->getLanguageMinorUrl($lang) . $docPath);
     }
 
     // special treatement for dev, sprint, nightly
     if ($version == "dev" || $version == "sprint" || $version == "nightly") {
-      $url = DocProvider::getNewestDocProvider()->getMinorUrl();      
-      return Redirect::to($response, $url . $doc);
+      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);      
+      return Redirect::to($response, $url . $docPath);
     }
 
     // nightly-8.0
@@ -55,7 +56,7 @@ class DocAction
       if (!$docProvider->exists()) {
         throw new HttpNotFoundException($request);      
       }
-      return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
+      return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
 
     // special treatement for latest
@@ -64,7 +65,7 @@ class DocAction
       if ($releaseInfo == null) {
         throw new NotFoundException();
       }
-      return Redirect::to($response, $releaseInfo->getDocProvider()->getMinorUrl() . $doc);
+      return Redirect::to($response, $releaseInfo->getDocProvider()->getLanguageMinorUrl($lang) . $docPath);
     }
 
     $v = new Version($version);
@@ -76,11 +77,11 @@ class DocAction
 
     // redirect to minor version if access is not via minor version
     if ($args['version'] != $version) {
-      return Redirect::to($response, $docProvider->getMinorUrl() . $doc);
+      return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
 
     if ($this->documentationBasedOnReadTheDocs($version)) {
-      $newDocUrl = $this->resolveNewDocUrl($docProvider->getOverviewUrl(), $args['document'] ?? '', new Version($version));
+      $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version));
       if (empty($newDocUrl)) {
         throw new HttpNotFoundException($request);
       } else {
@@ -89,19 +90,17 @@ class DocAction
     }
 
     // legacy, before 9
-    $doc = null;
-    $document = '';
-    if (isset($args['document'])) {
-      $document = $args['document'];
-      if ($document == 'ReleaseNotes.html') {
+    $document = null;
+    if (!empty($docName)) {
+      if ($docName == 'ReleaseNotes.html') {
         return Redirect::to($response, 'release-notes');
       }
-      $doc = $docProvider->findDocumentByNiceUrlPath($document);
-    } else {
-      $doc = $docProvider->getOverviewDocument();
+      $document = $docProvider->findDocumentByNiceUrlPath($docName);
+    } else {      
+      $document = $docProvider->getOverviewDocument();
     }
 
-    if ($doc == null) {
+    if ($document == null) {
       throw new HttpNotFoundException($request);
     }
 
@@ -112,10 +111,49 @@ class DocAction
     return $this->view->render($response, 'doc/doc.twig', [
       'version' => $version,
       'docProvider' => $docProvider,
-      'documentUrl' => $doc->getRessourceUrl() . '?v=' . time(),
-      'currentNiceUrlPath' => $document,
+      'documentUrl' => $document->getLanguageResourceUrl($lang) . '?v=' . time(),
+      'currentNiceUrlPath' => $docPath,
       'portalLink' => $portalLink
     ]);
+  }
+
+  private function evaluateLanguage(string $docName) : string 
+  {
+    if (empty($docName)) 
+    {
+      return DocProvider::DEFAULT_LANGUAGE;
+    }
+    $path = explode('/', $docName);
+    $lang = $path[0];
+    if (strlen($lang) != 2) 
+    {
+      return DocProvider::DEFAULT_LANGUAGE;
+    }
+    return $lang;
+  }
+
+  private function evaluateDocName(string $docName, string $lang) : string 
+  {
+    $prefix = $lang;
+    if ($docName === $prefix) 
+    {
+      return "";
+    }
+    $prefix = $prefix . '/';
+    if (substr($docName, 0, strlen($prefix)) == $prefix) 
+    {
+      return substr($docName, strlen($prefix));
+    }
+    return $docName;
+  }
+
+  private function evaluateDocPath(string $docName) : string 
+  {
+    if (empty($docName)) 
+    {
+      return "";
+    }
+    return '/' . $docName;
   }
 
   private function documentationBasedOnReadTheDocs(string $version): bool

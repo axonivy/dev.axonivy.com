@@ -12,6 +12,7 @@ class DocProvider
    * @var $versionNumber
    */
   private string $versionNumber;
+  const DEFAULT_LANGUAGE = "en";
 
   public function __construct(string $versionNumber)
   {
@@ -20,7 +21,7 @@ class DocProvider
 
   public function exists(): bool
   {
-    return file_exists($this->getDocDir());
+    return file_exists($this->getDefaultLanguageDocDir());
   }
 
   public function hasDocuments(): bool
@@ -31,6 +32,11 @@ class DocProvider
   private function getDocDir()
   {
     return Config::docDirectory() . "/" . $this->versionNumber;
+  }
+
+  private function getDefaultLanguageDocDir()
+  {
+    return $this->getDocDir() . "/" . self::DEFAULT_LANGUAGE;
   }
 
   public function findDocumentByNiceUrlPath(string $niceUrlPath): ?AbstractDocument
@@ -47,7 +53,8 @@ class DocProvider
   {
     $docs = $this->findAllDocuments();
     $docs = array_filter($docs, $function);
-    return array_shift(array_values($docs));
+    $values = array_values($docs);
+    return array_shift($values);
   }
 
   public function getBooks(): array
@@ -70,6 +77,7 @@ class DocProvider
     return new DocProvider($versions[0]);
   }
 
+  
   public function getExistingBooks(): array
   {
     $existingBooks = [];
@@ -137,31 +145,26 @@ class DocProvider
 
   private function createBook($name, $path, $pdfFile): Book
   {
-    $rootPath = $this->createRootPath();
+    $rootPath = $this->getDocDir();
     $baseUrl = $this->createBaseUrl();
-    $baseRessourceUrl = $this->createBaseRessourceUrl();
-    return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/', $pdfFile);
+    $baseRessourceUrl = $this->createBaseResourceUrl();
+    return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/', $pdfFile, self::DEFAULT_LANGUAGE);
   }
 
   private function createExternalBook($name, $path): ExternalBook
   {
-    $rootPath = $this->createRootPath();
+    $rootPath = $this->getDocDir();
     $baseUrl = $this->createBaseUrl();
-    $baseRessourceUrl = $this->createBaseRessourceUrl();
-    return new ExternalBook($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/');
+    $baseRessourceUrl = $this->createBaseResourceUrl();
+    return new ExternalBook($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/', self::DEFAULT_LANGUAGE);
   }
 
   private function createReleaseDocument($name, $path, $niceUrlPath): ReleaseDocument
   {
-    $rootPath = $this->createRootPath();
+    $rootPath = $this->getDocDir();
     $baseUrl = $this->createBaseUrl();
-    $baseRessourceUrl = $this->createBaseRessourceUrl();
-    return new ReleaseDocument($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, $niceUrlPath);
-  }
-
-  private function createRootPath(): string
-  {
-    return Config::docDirectory() . '/' . $this->versionNumber;
+    $baseRessourceUrl = $this->createBaseResourceUrl();
+    return new ReleaseDocument($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, self::DEFAULT_LANGUAGE, $niceUrlPath);
   }
 
   private function createBaseUrl(): string
@@ -169,7 +172,7 @@ class DocProvider
     return '/doc/' . $this->versionNumber;
   }
 
-  private function createBaseRessourceUrl(): string
+  private function createBaseResourceUrl(): string
   {
     return '/docs/' . $this->versionNumber;
   }
@@ -237,6 +240,11 @@ class DocProvider
     return $this->createBaseUrl();
   }
 
+  public function getLanguageOverviewUrl(string $lang): string
+  {
+    return $this->getOverviewUrl() . '/' . $lang;
+  }
+
   public function getMinorUrl(): string
   {
     if (Version::isValidVersionNumber($this->versionNumber)) {
@@ -248,22 +256,13 @@ class DocProvider
     return $this->getOverviewUrl();
   }
 
-  public function getHotfixHowToDocument(): SimpleDocument
+  public function getLanguageMinorUrl(string $lang): string 
   {
-    $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
-
-    $path = $this->createHotFixFilePath($filename);
-    if (!file_exists($path)) {
-      $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
-    }
-
-    $path = $this->createHotFixFilePath($filename);
-    $url = '/releases/ivy/' . $this->versionNumber . '/hotfix/' . $filename;
-    return new SimpleDocument('How to install Hotfix', $path, $url);
+    return $this->getMinorUrl() . '/' . $lang;
   }
 
-  private function createHotFixFilePath(string $filename): string
+  public function getDefaultLanguageMinorUrl(): string
   {
-    return Config::releaseDirectory() . '/' . $this->versionNumber . '/hotfix/' . $filename;
+    return $this->getLanguageMinorUrl(self::DEFAULT_LANGUAGE);
   }
 }

@@ -6,9 +6,9 @@ class ReleaseDocument extends AbstractDocument
 {
   private $niceUrlPath;
 
-  public function __construct(string $name, string $rootPath, string $baseUrl, string $baseRessourceUrl, string $path, string $niceUrlPath)
+  public function __construct(string $name, string $rootPath, string $baseUrl, string $baseRessourceUrl, string $path, string $lang, string $niceUrlPath)
   {
-    parent::__construct($name, $rootPath, $baseUrl, $baseRessourceUrl, $path);
+    parent::__construct($name, $rootPath, $baseUrl, $baseRessourceUrl, $path, $lang);
     $this->niceUrlPath = $niceUrlPath;
   }
 
@@ -19,6 +19,6 @@ class ReleaseDocument extends AbstractDocument
 
   public function getUrl(): string
   {
-    return $this->getBaseUrl() . '/' . $this->getNiceUrlPath();
+    return $this->getBaseUrl() . '/' . $this->getLanguage() . '/' . $this->getNiceUrlPath();
   }
 }

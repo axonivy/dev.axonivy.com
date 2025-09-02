@@ -173,7 +173,7 @@
     if (redirects.hasOwnProperty(from)) {
       var to = redirects[from];
       console.log("redirect " + from + " to " + to);
-      targetPage = "../engine-guide/" + to
+      targetPage = "../" + "{{lang}}" + "/engine-guide/" + to
 
       var link = document.getElementById("redirectPage");
       link.href = targetPage;

@@ -5,6 +5,7 @@ namespace app\pages\doc\redirect;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use app\domain\util\Redirect;
+use app\domain\doc\DocProvider;
 
 class LegacyDesignerGuideDocAction
 {
@@ -20,11 +21,11 @@ class LegacyDesignerGuideDocAction
     $doc = $args['htmlDocument'] ?? '';
 
     if (empty($doc)) {
-      return Redirect::to($response, 'designer-guide/');
+      return Redirect::to($response, DocProvider::DEFAULT_LANGUAGE . '/' . 'designer-guide/');
     }
 
     $redirectUrl = $this->getRedirectUrl($doc);
-    return $this->view->render($response, 'doc/redirect/redirect-designer-guide.twig', ['redirectUrl' => $redirectUrl]);
+    return $this->view->render($response, 'doc/redirect/redirect-designer-guide.twig', ['redirectUrl' => $redirectUrl, 'lang' => DocProvider::DEFAULT_LANGUAGE]);
   }
 
   private function getRedirectUrl($doc)
@@ -45,6 +46,6 @@ class LegacyDesignerGuideDocAction
       'ivy.references.html' => 'reference/'
     ];
     $newPage = $redirects[$htmlDocument] ?? '';
-    return '../designer-guide/' . $newPage;
+    return '../' . DocProvider::DEFAULT_LANGUAGE . '/designer-guide/' . $newPage;
   }
 }
