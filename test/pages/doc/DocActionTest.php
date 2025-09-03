@@ -171,4 +171,11 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/notexisting/new-and-noteworthy')->notFound();
     AppTester::assertThatGet('/doc/notexisting/en/new-and-noteworthy')->notFound();
   }
+
+  public function testRedirectAnyDocToLanguage() 
+  {
+    AppTester::assertThatGet('/doc/9.4/index.html')->redirect('/doc/9.4/en/index.html');
+    AppTester::assertThatGet('/doc/9.4/gugus.html')->redirect('/doc/9.4/en/gugus.html');
+    AppTester::assertThatGet('/doc/9.4/en/gugus.html')->notFound();
+  }
 }

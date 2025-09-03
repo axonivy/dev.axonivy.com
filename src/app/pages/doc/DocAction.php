@@ -25,13 +25,13 @@ class DocAction
   public function __invoke($request, Response $response, $args)
   {
     $version = $args['version'];
-
     $docName = $args['document'] ?? '';
 
     $lang = $this->evaluateLanguage($docName);
+    $hasLang = $this->hasLanguage($docName);
     $docName = $this->evaluateDocName($docName, $lang);
     $docPath = $this->evaluateDocPath($docName);
-    
+
     // special treatment when using a major version e.g. 8/9/10
     if (!str_contains($version, '.') && is_numeric($version)) {
       $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
@@ -80,8 +80,9 @@ class DocAction
       return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
 
-    if ($this->documentationBasedOnReadTheDocs($version)) {
-      $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version));
+    if ($this->documentationBasedOnReadTheDocs($version))
+    {
+      $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version), $hasLang);
       if (empty($newDocUrl)) {
         throw new HttpNotFoundException($request);
       } else {
@@ -132,6 +133,18 @@ class DocAction
     return $lang;
   }
 
+  private function hasLanguage(string $docName) : bool 
+  {
+    if (empty($docName)) 
+    {
+      return false;
+    }
+    $path = explode('/', $docName);
+    $lang = $path[0];
+    return strlen($lang) == 2;
+  }
+
+
   private function evaluateDocName(string $docName, string $lang) : string 
   {
     $prefix = $lang;
@@ -171,7 +184,7 @@ class DocAction
     return false;
   }
 
-  private function resolveNewDocUrl($baseUrl, $document, Version $version): string
+  private function resolveNewDocUrl($baseUrl, $document, Version $version, bool $hasLang): string
   {
     if (empty($document)) {
       return "$baseUrl/index.html";
@@ -191,6 +204,9 @@ class DocAction
       }
       return $newsLink;
     }
-    return '';
+    if ($hasLang) {
+      return '';
+    }
+    return "$baseUrl/$document";
   }
 }
