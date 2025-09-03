@@ -299,7 +299,7 @@
     if (redirects.hasOwnProperty(from)) {
       var to = redirects[from];
       console.log("redirect " + from + " to " + to);
-      targetPage = "../designer-guide/" + to
+      targetPage = "../" + "{{lang}}" + "/designer-guide/" + to
 
       var link = document.getElementById("redirectPage");
       link.href = targetPage;

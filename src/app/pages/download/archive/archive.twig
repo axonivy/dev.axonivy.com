@@ -107,7 +107,7 @@
 
             <td style="min-width:200px;">
             {% if releaseInfo.DocProvider.hasDocuments %}
-              <a href="{{ releaseInfo.DocProvider.OverviewUrl }}"><i class="si si-file"></i> Documentation</a><br />
+              <a href="{{ releaseInfo.DocProvider.DefaultLanguageOverviewUrl }}"><i class="si si-file"></i> Documentation</a><br />
             {% endif %}
             {% if releaseInfo.hasHotfix %}
               <a href="{{ releaseInfo.HotfixFileUrl }}"><i class="si si-download"> </i></a>&nbsp;Hotfix<br />

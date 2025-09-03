@@ -9,8 +9,10 @@ use Slim\Exception\HttpNotFoundException;
 
 /**
  * Redirects
- *  /doc/latest to /doc/8.0        -> latest LTS 
- *  /doc/8.0.latest to /doc/8.0    -> latest update release
+ *  /doc/latest to /doc/8.0/en        -> latest LTS english
+ *  /doc/latest/en to /doc/8.0/en     -> latest LTS english
+ *  /doc/8.0.latest to /doc/8.0/en    -> latest update release english
+ *  /doc/8.0.latest/en to /doc/8.0/en -> latest update release english
  *
  * This is only for legacy links. Do not publish such links.
  */
@@ -20,6 +22,7 @@ class LegacyRedirectLatestDocVersion
   {
     $version = $args['version'] ?? '';
     $path = $args['path'] ?? '';
+    $hasLang = $this->evaluateHasLanguage($path);
     if (!empty($path)) {
       $path = '/' . $path;
     }
@@ -29,10 +32,23 @@ class LegacyRedirectLatestDocVersion
       if ($lts == null) {
         throw new HttpNotFoundException($request);
       }
-      return Redirect::to($response, $lts->getDocProvider()->getMinorUrl() . $path);
+      $baseUrl = $hasLang ? $lts->getDocProvider()->getMinorUrl() : $lts->getDocProvider()->getDefaultLanguageMinorUrl();
+      return Redirect::to($response, $baseUrl . $path);
     }
 
     $version = substr($version, 0, 3);
     return Redirect::to($response, "/doc/$version" . $path);
   }
+
+  private function evaluateHasLanguage(string $docName) : bool
+  {
+    if (empty($docName)) 
+    {
+      return false;
+    }
+    $path = explode('/', $docName);
+    $lang = $path[0];
+    return strlen($lang) == 2;
+  }
+
 }

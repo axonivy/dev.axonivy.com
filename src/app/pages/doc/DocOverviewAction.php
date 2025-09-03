@@ -43,8 +43,8 @@ class DocLink
 
   public function __construct(DocProvider $docProvider)
   {
-    $this->url = $docProvider->getMinorUrl();
-    $this->displayText = basename($this->url);
+    $this->url = $docProvider->getDefaultLanguageMinorUrl();
+    $this->displayText = basename($docProvider->getMinorUrl());
     $this->releaseDocuments = $docProvider->getQuickDocuments();
   }
 }
