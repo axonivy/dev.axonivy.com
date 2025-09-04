@@ -11,6 +11,6 @@ class DocProviderTest extends TestCase
 
   public function test_getNewestDocProvider()
   {
-    Assert::assertEquals('/doc/9.4', DocProvider::getNewestDocProvider()->getMinorUrl());
+    Assert::assertEquals('/doc/9.5', DocProvider::getNewestDocProvider()->getMinorUrl());
   }
 }
