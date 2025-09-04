@@ -144,7 +144,6 @@ class DocAction
     return strlen($lang) == 2;
   }
 
-
   private function evaluateDocName(string $docName, string $lang) : string 
   {
     $prefix = $lang;

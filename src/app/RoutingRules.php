@@ -58,6 +58,7 @@ class RoutingRules
     $app->get('/doc', DocOverviewAction::class);
 
     $app->get('/doc/{version}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
+    $app->get('/doc/{version}/{lang:[a-z][a-z]}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
     $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
     $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
