@@ -179,9 +179,8 @@ class DocProvider
 
   public function getReleaseNotes(): ReleaseDocument
   {
-    $version = new Version($this->versionNumber);
     $fileName = 'ReleaseNotes.txt';
-    if ($version->getMinorVersion() == '3.9') {
+    if ($this->getMinorVersion() == '3.9') {
       $fileName = 'ReadMe.html';
     }
     return $this->createReleaseDocument('Release Notes', $fileName, 'release-notes');
@@ -248,12 +247,17 @@ class DocProvider
   public function getMinorUrl(): string
   {
     if (Version::isValidVersionNumber($this->versionNumber)) {
-      $v = (new Version($this->versionNumber))->getMinorVersion();
+      $v = $this->getMinorVersion();
       if ((new DocProvider($v))->exists()) {
         return '/doc/' . $v;
       }
     }
     return $this->getOverviewUrl();
+  }
+
+  public function getMinorVersion(): string 
+  {
+    return (new Version($this->versionNumber))->getMinorVersion();
   }
 
   public function getLanguageMinorUrl(string $lang): string 
@@ -264,5 +268,18 @@ class DocProvider
   public function getDefaultLanguageMinorUrl(): string
   {
     return $this->getLanguageMinorUrl(self::DEFAULT_LANGUAGE);
+  }
+
+  public function getLanguages(): array
+  {
+    $languages = [];
+    $docDir = $this->getDocDir();
+    $files = scandir($docDir);
+    foreach ($files as $file) {
+      if (is_dir($docDir . '/' . $file) && strlen($file) == 2 && $file != "..") {
+        $languages[] = $file;
+      }
+    }
+    return $languages;
   }
 }
