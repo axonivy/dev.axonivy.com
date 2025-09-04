@@ -17,7 +17,7 @@ class Docs
     $product = $args["product"];
     $version = $args["version"];
     $language = $args["language"];
-    $versionInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
+    $versionInfo = $this->findVersionInfo($version);
     $docProvider = $this->findDocProvider($versionInfo, $version);
 
     $data = [
@@ -29,10 +29,18 @@ class Docs
     return $response;
   }
 
+  private function findVersionInfo(string $version) {
+    $versionInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
+    if ($versionInfo != null && $versionInfo->minorVersion() == "dev") {
+      return null;
+    }
+    return $versionInfo;
+  }
+
   private function findDocProvider(?ReleaseInfo $versionInfo, string $version) {
     if ($versionInfo == null) {
       $newestDoc = DocProvider::getNewestDocProvider();
-      if ($newestDoc->getMinorVersion() == $version) {
+      if ($newestDoc->getMinorVersion() == $version || $version == "dev") {
         return $newestDoc;
       }
       return null;
@@ -46,15 +54,15 @@ class Docs
     $leadingEdgeVersions = ReleaseType::LE()->allReleaseInfos();
     $ltsVersions = ReleaseType::LTS()->allReleaseInfos();
     foreach ($ltsVersions as $releaseInfo) {
-      $versions[] = $this->createVersion($request, $releaseInfo->getDocProvider(), $version, $language);
+      $versions[] = $this->createVersion($request, $releaseInfo->getDocProvider(), $releaseInfo->minorVersion(), $language);
     }
     foreach ($leadingEdgeVersions as $releaseInfo) {
-      $versions[] = $this->createVersion($request, $releaseInfo->getDocProvider(), $version, $language);
+      $versions[] = $this->createVersion($request, $releaseInfo->getDocProvider(), $releaseInfo->minorVersion(), $language);
     }
     if ($versionInfo == null) {
       $versions[] = $this->createVersion($request, $docProvider, $version, $language);
     } else if (!in_array($versionInfo, $leadingEdgeVersions) && !in_array($versionInfo, $ltsVersions)) {
-      $versions[] = $this->createVersion($request, $versionInfo->getDocProvider(), $version, $language);
+      $versions[] = $this->createVersion($request, $versionInfo->getDocProvider(), $releaseInfo->minorVersion(), $language);
     }
     return $versions;
   }
@@ -70,8 +78,7 @@ class Docs
       $path = $docProvider->getDefaultLanguageMinorUrl();
     }
     $url = $request->getUri()->withPath($path);
-    $versionNr = $docProvider->getMinorVersion();
-    return ["version" =>  $versionNr, "url" => (string)$url];
+    return ["version" =>  $version, "url" => (string)$url];
   }
 
   private function getLanguages(Request $request, ?DocProvider $docProvider, string $language): array
