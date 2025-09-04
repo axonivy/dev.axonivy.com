@@ -37,6 +37,16 @@ class DocsTest extends TestCase
       ->bodyContains('"versions":[{"version":"7.0","url":"\/doc\/7.0\/en"},{"version":"8.0","url":"\/doc\/8.0\/en"},{"version":"9.4","url":"\/doc\/9.4\/en"}]');
   }
 
+  public function testVersionLatestDoc() 
+  {
+    AppTester::assertThatGet('/api/docs/AxonIvy/9.5/en')
+      ->ok()
+      ->bodyContains('"versions":[{"version":"7.0","url":"\/doc\/7.0\/en"},{"version":"8.0","url":"\/doc\/8.0\/en"},{"version":"9.4","url":"\/doc\/9.4\/en"},{"version":"9.5","url":"\/doc\/9.5\/en"}]');
+    AppTester::assertThatGet('/api/docs/AxonIvy/9.5/ja')
+      ->ok()
+      ->bodyContains('"versions":[{"version":"7.0","url":"\/doc\/7.0\/en"},{"version":"8.0","url":"\/doc\/8.0\/en"},{"version":"9.4","url":"\/doc\/9.4\/ja"},{"version":"9.5","url":"\/doc\/9.5\/ja"}]');
+  }
+
   public function testLanguages()
   {
     AppTester::assertThatGet('/api/docs/AxonIvy/8.0/en')
@@ -65,5 +75,16 @@ class DocsTest extends TestCase
     AppTester::assertThatGet('/api/docs/AxonIvy/7.0/ch')
       ->ok()
       ->bodyContains('"languages":[{"language":"en","url":"\/doc\/7.0\/en"},{"language":"ch","url":"\/doc\/7.0\/ch"}]');
+  }
+
+  public function testLanguageLatestDoc()
+  {
+    AppTester::assertThatGet('/api/docs/AxonIvy/9.5/en')
+      ->ok()
+      ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.5\/en"},{"language":"ja","url":"\/doc\/9.5\/ja"}]');
+
+    AppTester::assertThatGet('/api/docs/AxonIvy/9.5/ja')
+      ->ok()
+      ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.5\/en"},{"language":"ja","url":"\/doc\/9.5\/ja"}]');
   }
 }
