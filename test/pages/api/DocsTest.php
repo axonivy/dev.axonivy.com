@@ -47,6 +47,16 @@ class DocsTest extends TestCase
       ->bodyContains('"versions":[{"version":"7.0","url":"\/doc\/7.0\/en"},{"version":"8.0","url":"\/doc\/8.0\/en"},{"version":"9.4","url":"\/doc\/9.4\/ja"},{"version":"9.5","url":"\/doc\/9.5\/ja"}]');
   }
 
+  public function testVersionDevDoc() 
+  {
+    AppTester::assertThatGet('/api/docs/AxonIvy/dev/en')
+      ->ok()
+      ->bodyContains('"versions":[{"version":"7.0","url":"\/doc\/7.0\/en"},{"version":"8.0","url":"\/doc\/8.0\/en"},{"version":"9.4","url":"\/doc\/9.4\/en"},{"version":"dev","url":"\/doc\/9.5\/en"}]');
+    AppTester::assertThatGet('/api/docs/AxonIvy/dev/ja')
+      ->ok()
+      ->bodyContains('"versions":[{"version":"7.0","url":"\/doc\/7.0\/en"},{"version":"8.0","url":"\/doc\/8.0\/en"},{"version":"9.4","url":"\/doc\/9.4\/ja"},{"version":"dev","url":"\/doc\/9.5\/ja"}]');
+  }
+
   public function testLanguages()
   {
     AppTester::assertThatGet('/api/docs/AxonIvy/8.0/en')
@@ -84,6 +94,17 @@ class DocsTest extends TestCase
       ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.5\/en"},{"language":"ja","url":"\/doc\/9.5\/ja"}]');
 
     AppTester::assertThatGet('/api/docs/AxonIvy/9.5/ja')
+      ->ok()
+      ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.5\/en"},{"language":"ja","url":"\/doc\/9.5\/ja"}]');
+  }
+
+  public function testLanguageDevDoc()
+  {
+    AppTester::assertThatGet('/api/docs/AxonIvy/dev/en')
+      ->ok()
+      ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.5\/en"},{"language":"ja","url":"\/doc\/9.5\/ja"}]');
+
+    AppTester::assertThatGet('/api/docs/AxonIvy/dev/ja')
       ->ok()
       ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.5\/en"},{"language":"ja","url":"\/doc\/9.5\/ja"}]');
   }
