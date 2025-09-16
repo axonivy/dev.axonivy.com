@@ -110,8 +110,8 @@
               <a href="{{ releaseInfo.DocProvider.DefaultLanguageOverviewUrl }}"><i class="si si-file"></i> Documentation</a><br />
             {% endif %}
             {% if releaseInfo.hasHotfix %}
-              <a href="{{ releaseInfo.HotfixFileUrl }}"><i class="si si-download"> </i></a>&nbsp;Hotfix<br />
-              <a href="{{ releaseInfo.DocProvider.HotfixHowToDocument.Url }}"><i class="si si-file"> </i></a>&nbsp;{{ releaseInfo.DocProvider.HotfixHowToDocument.Name }}<br />
+              <a href="{{ releaseInfo.HotfixFileUrl }}"><i class="si si-download"> </i>&nbsp;Hotfix</a><br />
+              <a href="{{ releaseInfo.HotfixHowToDocument.Url }}"><i class="si si-file"> </i>&nbsp;{{ releaseInfo.HotfixHowToDocument.Name }}</a><br />
             {% endif %}
             <a href="{{ releaseInfo.ChecksumsUrl }}"><i class="si si-download"></i> Checksums</a><br />
             {% if releaseInfo.UnsafeVersion %}

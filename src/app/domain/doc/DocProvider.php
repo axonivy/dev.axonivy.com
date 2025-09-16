@@ -275,20 +275,6 @@ class DocProvider
     return $this->getLanguageMinorUrl(self::DEFAULT_LANGUAGE);
   }
 
-  public function getHotfixHowToDocument(): SimpleDocument
-  {
-    $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
-
-    $path = $this->createHotFixFilePath($filename);
-    if (!file_exists($path)) {
-      $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
-    }
-
-    $path = $this->createHotFixFilePath($filename);
-    $url = '/releases/ivy/' . $this->versionNumber . '/hotfix/' . $filename;
-    return new SimpleDocument('How to install Hotfix', $path, $url);
-  }
-
   public function getLanguages(): array
   {
     $languages = [];

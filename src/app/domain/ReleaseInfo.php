@@ -4,6 +4,7 @@ namespace app\domain;
 
 use app\domain\doc\DocProvider;
 use app\Config;
+use app\domain\doc\SimpleDocument;
 
 class ReleaseInfo
 {
@@ -85,6 +86,25 @@ class ReleaseInfo
     $fileName = basename($fileNames[0]);
 
     return '/releases/ivy/' . $this->versionNumber() . '/hotfix/' . $fileName;
+  }
+
+  public function getHotfixHowToDocument(): SimpleDocument
+  {
+    $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
+
+    $path = $this->createHotFixFilePath($filename);
+    if (!file_exists($path)) {
+      $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
+    }
+
+    $path = $this->createHotFixFilePath($filename);
+    $url = '/releases/ivy/' . $this->versionNumber() . '/hotfix/' . $filename;
+    return new SimpleDocument('How to install Hotfix', $path, $url);
+  }
+
+  private function createHotFixFilePath(string $filename): string
+  {
+    return Config::releaseDirectory() . '/' . $this->versionNumber() . '/hotfix/' . $filename;
   }
 
   public function getChecksumsUrl(): string
