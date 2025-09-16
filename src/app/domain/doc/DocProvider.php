@@ -239,6 +239,11 @@ class DocProvider
     return $this->createBaseUrl();
   }
 
+  public function getDefaultLanguageOverviewUrl(): string
+  {
+    return $this->getLanguageOverviewUrl(self::DEFAULT_LANGUAGE);
+  }
+
   public function getLanguageOverviewUrl(string $lang): string
   {
     return $this->getOverviewUrl() . '/' . $lang;
@@ -268,6 +273,20 @@ class DocProvider
   public function getDefaultLanguageMinorUrl(): string
   {
     return $this->getLanguageMinorUrl(self::DEFAULT_LANGUAGE);
+  }
+
+  public function getHotfixHowToDocument(): SimpleDocument
+  {
+    $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
+
+    $path = $this->createHotFixFilePath($filename);
+    if (!file_exists($path)) {
+      $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
+    }
+
+    $path = $this->createHotFixFilePath($filename);
+    $url = '/releases/ivy/' . $this->versionNumber . '/hotfix/' . $filename;
+    return new SimpleDocument('How to install Hotfix', $path, $url);
   }
 
   public function getLanguages(): array
