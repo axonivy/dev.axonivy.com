@@ -1,0 +1,39 @@
+ENGINE HOTFIX INSTALLATION
+-----------------------------
+
+IMPORTANT:
+==========
+
+This hotfix will install the latest update release of Axon.ivy 6.0.
+The hotfix has to be applied to Axon.ivy version 6.0.0 or later.
+
+HOW TO INSTALL:
+===============
+
+1. Stop the Engine, if still running.
+
+2. Make a backup of your system database.
+
+3. Make a backup of your Engine directory (%Engine_INSTALL_DIRECTORY%).
+   a) if you customized the default Portal style: backup the directory 
+      %Engine_INSTALL_DIRECTORY%/applications/Portal/PortalStyle
+   b) if you changed settings in web.xml: backup
+      %Engine_INSTALL_DIRECTORY%/webapps/ivy/WEB-INF/web.xml
+
+4. Delete the following folders if they exist
+     - %Engine_INSTALL_DIRECTORY%/lib/ivy 
+     - %Engine_INSTALL_DIRECTORY%/lib/classes 
+     - %Engine_INSTALL_DIRECTORY%/clientlib/signed
+     - %Engine_INSTALL_DIRECTORY%/applications
+   
+5. On Windows and Linux Intel Platforms:
+   Delete the folder %Engine_INSTALL_DIRECTORY%/lib/patch
+
+6. Unzip the zip file to the %Engine_INSTALL_DIRECTORY%. 
+   Overwrite files that exist.
+   a) if you customized the default Portal style: re-apply your styles into
+      %Engine_INSTALL_DIRECTORY%/applications/Portal/PortalStyle
+   b) if you changed settings in web.xml: copy web.xml into 
+      %Engine_INSTALL_DIRECTORY%/webapps/ivy/WEB-INF
+	  
+7. Start the Engine.
