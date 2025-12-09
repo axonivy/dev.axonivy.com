@@ -8,7 +8,7 @@ New Features in the Visual Studio Code Extension:
 
 - **IAR Support**: Full handling of Ivy Archive (*.iar) files, including import and dependency management.
 
-- **Integrated Test Execution**: Run @IvyTest, @IvyProcessTest, and @IvyWebTest directly in VS Code with noticeably faster execution and tighter workflow integration.
+- **Integrated Test Execution**: Run `@IvyTest`, `@IvyProcessTest`, and `@IvyWebTest` directly in VS Code with noticeably faster execution and tighter workflow integration.
 
 - **Engine Download & Maven Build Simplification**: The extension can now download and manage the Axon Ivy Engine automatically, while Maven builds use the standard `maven-compiler-plugin` by default for a lighter and more CI-friendly build process.
 
