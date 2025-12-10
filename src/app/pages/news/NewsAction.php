@@ -88,10 +88,11 @@ class NewsRepository
       $markdown = file_get_contents($markdownFile);
       $docBaseUrl = $isReleased ? "/doc/$version" : '/doc/dev';
       $markdown = str_replace('${docBaseUrl}', $docBaseUrl, $markdown);
+      $firstLine = strtok($markdown, "\n");
       $html = $converter->convert($markdown);
 
       $images = self::loadImages($version, $markdownFile);
-      $sections[] = new NewsDetailSection($html, $images);
+      $sections[] = new NewsDetailSection($firstLine, $html, $images);
     }
 
     $meta = json_decode(file_get_contents(__DIR__ . "/$version/meta.json"));
@@ -177,11 +178,16 @@ class NewsDetailSection
 {
   private $html;
   private $images;
+  private $title;
+  private $anchor;
 
-  public function __construct(String $html, array $images)
+  public function __construct(String $firstLine, String $html, array $images)
   {
     $this->html = $html;
     $this->images = $images;
+    preg_match('/##\s*(.+?)\s*\{(#[^}]+)\}/', $firstLine, $matches);
+    $this->title = $matches[1] ?? "";
+    $this->anchor = $matches[2] ?? "";
   }
 
   public function getHtml(): String
@@ -192,5 +198,15 @@ class NewsDetailSection
   public function getImages(): array
   {
     return $this->images;
+  }
+
+  public function getAnchor(): ?String
+  {
+    return $this->anchor;
+  }
+
+  public function getTitle(): ?String
+  {
+    return $this->title;
   }
 }

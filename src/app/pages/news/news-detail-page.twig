@@ -94,6 +94,9 @@
     left: -1em;
     top: 6px;
   }
+  .button.fixed-margin {
+    margin: 0 1em 0.5em 0;
+  }
   #improvements~ul li:before {
     mask: url('/images/icons/startup-launch.svg') no-repeat center;
     -webkit-mask: url('/images/icons/startup-launch.svg') no-repeat center;
@@ -143,6 +146,13 @@
   </div>
 </section>
 
+<section id="content">
+  <div class="inner news-entry">
+    {% for newsDetailSection in news.newsDetailSections %}
+      <a href="{{newsDetailSection.anchor}}" class="button special fixed-margin">{{newsDetailSection.title}}</a>  
+    {% endfor %}
+  </div>
+</section>
 {% for newsDetailSection in news.newsDetailSections %}
   {% set sectionIndex = loop.index %}
   <section style="padding: 2em 0;">

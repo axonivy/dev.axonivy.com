@@ -1,4 +1,4 @@
-## All 9.x LE features
+## All 9.x LE features {#all}
 
 This new [LTS](/release-cycle) release includes all latest 9.x LE features.
 
