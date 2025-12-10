@@ -1,27 +1,27 @@
 ## Designers {#designers}
 
-Axon Ivy 13.2 delivers major improvements to the overall design experience across both of our design environments:
+The latest updates deliver significant improvements to the overall design experience across both environments:
 
 - **NEO Designer**: the web-based, intuitive tool for business technologists
-- **PRO Designer (VS Code Extension)**: the professional development environment for experienced developers
+- **PRO Designer (VS Code Extension)**: development environment for experienced developers
 
-All new features listed below are available in **both** NEO and the VS Code PRO Designer, ensuring a unified and consistent design experience for every role.
+All new features are available in both tools, ensuring a consistent experience for all roles.
 
-- **CMS Editor Enhancements**: A smoother multilingual editing workflow, now with integrated translation capabilities.
+- **CMS Editor Enhancements**: Improved multilingual editing with integrated translation.
 
-- **Form Editor Enhancements**: Support for lazy data models, listener properties, component conversion with preserved properties, and unified dialog framework enables richer, more responsive UI development. Column widths can also be controlled and previewed directly in the editor.
+- **Form Editor Enhancements**: Support for lazy data models, listener properties, component conversion with preserved settings, a unified dialog framework, and direct control of column widths for richer, more responsive UIs.
 
-- **New XHTML Editor**: Smart code completion, validation, and contextual hover information make XHTML for HTML Dialog editing faster and more reliable.
+- **New XHTML Editor**: Smart code completion, validation, and contextual hover information improve speed and reliability.
 
-- **Generate from Data**: Entity Form generation from databases accelerates the generation of UIs for master data editing and ensures visual consistency without manual boilerplate.
+- **Generate from Data**: Automatic entity form generation from databases accelerates UI creation and ensures visual consistency.
 
-- **Improved Configuration & Inscription Experience**: A unified improvement that streamlines configuration tasks, organizes related settings into tabs, and provides better defaults and more intuitive configuration elements.
+- **Improved Configuration & Inscription Experience**: Streamlined configuration with better defaults, tab-based settings, and more intuitive controls.
 
-- **Process Modeling Refinements**: Enhanced copy/paste (including text and images), more intuitive insert actions, and improved undo/redo make modeling smoother and more efficient.
+- **Process Modeling Refinements**: Enhanced copy/paste, smoother insert actions, and improved undo/redo for more efficient modeling.
 
-- **BPMN-2 Import Improvements**: Importing BPMN-2 diagrams has been improved, making migration from BPMN modeling tools more reliable and preserving semantic fidelity. Standard BPMN icons can now also be applied directly in the model.
+- **BPMN-2 Import Improvements**: More reliable BPMN-2 imports with better semantic accuracy and support for standard BPMN icons.
 
-- **NEO Designer Updates**: NEO receives usability refinements and an integrated Runtime Log View for quicker diagnostics while designing and testing processes.
+- **NEO Designer Updates**: Usability improvements and a new integrated Runtime Log View for faster diagnostics during design and testing.
 
 <div class="short-links">
     <a href="${docBaseUrl}/neo-designer/index.html"

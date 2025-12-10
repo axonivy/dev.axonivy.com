@@ -2,11 +2,11 @@
 
 Release 13.2 reinforces the platform foundation with stronger cloud capabilities, improved integration options, and future-oriented technology updates:
 
-- **Internationalization**: Expanded multi-language support across the Developer Workflow UI, Engine Cockpit, notifications, and error messages improves global readiness.
+- **Internationalization**: Expanded multi-language support across the Developer Workflow UI, Engine Cockpit, notifications, and error messages.
 
 - **Cluster Deployment & Observability**: Improved deployment options, identity provider (IdP) support for administrators and more Docker and Kubernetes examples enhance cloud readiness and enterprise integration.
 
-- **Developer Workflow UI**: Improved Developer Workflow UI and new filtering capabilities help teams navigate large projects more easily.
+- **Developer Workflow UI**: Improved navigation and new filtering for handling large projects.
 
 - **Public API & Maven Artifacts**: Maven artifacts for Public APIs allow broader Maven availability, simplify integration, automation, and extension development.
 
