@@ -1,5 +1,15 @@
 [
   {
+    "name": "Eclipse-based PRO Designer", 
+    "nameHref": "https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer",
+    "successor": "VS Code PRO Designer Extension", 
+    "successorHref": "https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13",
+    "released": "4",
+    "deprecated": "13",
+    "removed": "14",
+    "description": "The Eclipse-based PRO Designer will be replaced by the VS Code PRO Designer Extension."
+  },
+  {
     "name": "CMS Page", 
     "nameHref": "/doc/8.0/designer-guide/user-interface/web-page/html-content-in-the-cms.html",
     "successor": "Html Dialog", 
