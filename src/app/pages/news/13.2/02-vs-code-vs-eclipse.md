@@ -17,16 +17,10 @@ New Features in the VS Code Extension:
         target="_blank" rel="noopener noreferrer">
         <i class="si si-download"></i> Axon Ivy PRO Designer 13 Extension for Visual Studio Code
     </a>
-</div>
-
-<div class="short-links">
     <a href="https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-megaphone"></i> Deprecation of the Eclipse-based PRO Designer
     </a>
-</div>
-
-<div class="short-links">
     <a href="https://axonivy.github.io/project-build-plugin/release/13.2/index.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Axon Ivy Maven Project Build Plugin
