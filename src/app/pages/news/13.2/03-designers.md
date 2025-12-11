@@ -28,30 +28,18 @@ All new features are available in both tools, ensuring a consistent experience f
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> NEO Designer
     </a>
-</div>
-
-<div class="short-links">
     <a href="${docBaseUrl}/designer-guide/index.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> PRO Designer (Deprecated)
     </a>
-</div>
-
-<div class="short-links">
     <a href="https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-download"></i> PRO Designer (VS Code Extension)
     </a>
-</div>
-
-<div class="short-links">
     <a href="${docBaseUrl}/designer-guide/cms/cms-editor.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> CMS Editor
     </a>
-</div>
-
-<div class="short-links">
     <a href="${docBaseUrl}/designer-guide/user-interface/user-dialogs/form-editor.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Form Editor

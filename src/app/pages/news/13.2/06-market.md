@@ -22,56 +22,38 @@
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Case Process Viewer
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/captcha-utils?version=12.0.7#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Captcha Utils
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/axonivy-cells?version=13.1.1#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Axon Ivy Cells
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/axonivy-words?version=13.1.1#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Axon Ivy Words
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/process-analyser?version=13.1.2#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Process Analyser
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/case-mail-component-connector?version=12.0.4#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Case Mail Component
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/azure-servicebus-connector?version=13.1.1#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> Azure Service Bus
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/ibm-db2-luw?version=13.1.0#description"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-shopping-cart"></i> IBM DB2 LUW
     </a>
-</div>
-<div class="short-links">
     <a href="https://github.com/axonivy-market/market/wiki"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-check"></i> Contributing to the Axon Ivy Market
     </a>
-</div>
-<div class="short-links">
     <a href="https://market.axonivy.com/monitoring"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-team"></i> Market Monitoring

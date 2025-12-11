@@ -21,27 +21,18 @@ The platform foundation is strengthened with improved cloud capabilities, better
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Cluster Deployment
     </a>
-</div>
-<div class="short-links">
     <a href="${docBaseUrl}/axonivy/migration/migration-notes-131-132.html#persistence-api-hibernate"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Jakarta Migration
     </a>
-</div>
-<div class="short-links">
     <a href="${docBaseUrl}/engine-guide/reference/engine-cockpit/system.html#ssl-settings"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Engine Cockpit - SSL Settings
     </a>
-</div>
-<div class="short-links">
     <a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/mail/package-summary.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-java"></i> Mail API
     </a>
-</div>
-
-<div class="short-links">
     <a href="https://github.com/axonivy-market/iis-proxy"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-github"></i> IIS Script

@@ -29,23 +29,14 @@ Portal 13.2 introduces faster navigation, stronger analytics and more flexible p
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Statistic Chart
     </a>
-</div>
-
-<div class="short-links">
     <a href="https://market.axonivy.com/market-cache/portal/portal-guide/13.2.0-m284/doc/en/portal-user-guide/accessibility/index.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Accessibility
     </a>
-</div>
-
-<div class="short-links">
     <a href="https://market.axonivy.com/market-cache/portal/portal-guide/13.2.0-m284/doc/en/portal-developer-guide/static-page/index.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Static Pages
     </a>
-</div>
-
-<div class="short-links">
     <a href="${docBaseUrl}/portal-guide/index.html"
         target="_blank" rel="noopener noreferrer">
         <i class="si si-book"></i> Portal
