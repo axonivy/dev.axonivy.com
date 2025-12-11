@@ -1,49 +1,49 @@
 ## Core {#core}
 
-Release 13.2 reinforces the platform foundation with stronger cloud capabilities, improved integration options, and future-oriented technology updates:
+The platform foundation is strengthened with improved cloud capabilities, better integration, and future-ready technology updates:
 
 - **Internationalization**: Expanded multi-language support across the Developer Workflow UI, Engine Cockpit, notifications, and error messages.
 
-- **Cluster Deployment & Observability**: Improved deployment options, identity provider (IdP) support for administrators and more Docker and Kubernetes examples enhance cloud readiness and enterprise integration.
+- **Cluster Deployment & Observability**: Enhanced deployment options, improved IdP support for administrators, and expanded Docker and Kubernetes examples improve cloud and enterprise readiness.
 
-- **Developer Workflow UI**: Improved navigation and new filtering for handling large projects.
+- **Developer Workflow UI**: Improved navigation and new filtering simplify handling large projects.
 
-- **Public API & Maven Artifacts**: Maven artifacts for Public APIs allow broader Maven availability, simplify integration, automation, and extension development.
+- **Public API & Maven Artifacts**: Public APIs are now available as Maven artifacts, simplifying integration, automation, and extension development.
 
-- **Database, Runtime & Jakarta**: Support for Microsoft SQL Server 2025, Microsoft Windows Server 2025, runtime improvements, and the first modernization step toward Jakarta EE compatibility ensure long-term alignment with evolving Java standards.
+- **Database, Runtime & Jakarta**: Support for SQL Server 2025, Windows Server 2025, runtime improvements, and the first step toward Jakarta EE ensure long-term Java compatibility.
 
-- **Engine Cockpit**: SSL Key Import makes secure configuration easier and reduces manual server-side setup.
+- **Engine Cockpit**: SSL key import simplifies secure configuration and reduces manual setup.
 
-- **Mail API & IIS Script**: A new flexible Mail API and an updated IIS deployment script streamline communication features and Windows-based installations.
+- **Mail API & IIS Script**: A new Mail API and updated IIS deployment script streamline communication and Windows installations.
 
 <div class="short-links">
     <a href="${docBaseUrl}/engine-guide/integration/cluster/deployment/index.html"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-megaphone"></i> Cluster Deployment
+        <i class="si si-book"></i> Cluster Deployment
     </a>
 </div>
 <div class="short-links">
     <a href="${docBaseUrl}/axonivy/migration/migration-notes-131-132.html#persistence-api-hibernate"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-megaphone"></i> Jakarta Migration
+        <i class="si si-book"></i> Jakarta Migration
     </a>
 </div>
 <div class="short-links">
     <a href="${docBaseUrl}/engine-guide/reference/engine-cockpit/system.html#ssl-settings"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-megaphone"></i> Engine Cockpit - SSL Settings
+        <i class="si si-book"></i> Engine Cockpit - SSL Settings
     </a>
 </div>
 <div class="short-links">
     <a href="${docBaseUrl}/public-api/ch/ivyteam/ivy/mail/package-summary.html"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-megaphone"></i> Mail API
+        <i class="si si-java"></i> Mail API
     </a>
 </div>
 
 <div class="short-links">
     <a href="https://github.com/axonivy-market/iis-proxy"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-megaphone"></i> IIS Script
+        <i class="si si-github"></i> IIS Script
     </a>
 </div>
