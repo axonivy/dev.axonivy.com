@@ -1,22 +1,28 @@
 ## Portal {#portal}
 
-Discover the next evolution of Portal and unlock deeper insights, smoother navigation, and smarter process handling. Portal 13.2 brings powerful analytics, enhanced accessibility and more flexible processes, all designed to help you work faster, clearer and more confidently.
+Portal 13.2 introduces faster navigation, stronger analytics and more flexible process handling. Improved accessibility, new statistics features and Side Step Processes make daily work smoother, clearer and more efficient.
 
 - **Statistics**: With the Portal Statistics Widget Configurator, you can create meaningful insights into your process and business data in just a few clicks.
+  - Condition-based coloring for instant KPI visibility
+  - KPI-based charts using custom fields for tailored analysis
+  - Drill-down from charts directly to tasks and cases
+  - Preconfigured sample dashboards for fast setup
 
-- **Accessibility**: Portal 13.2 delivers a significantly more accessible experience across the entire application.  Improved focus order, smoother keyboard navigation, refined ARIA landmarks and stronger screen reader compatibility ensure that every user can navigate and operate Portal effortlessly.
+- **Accessibility**: Improved focus order, enhanced keyboard navigation, optimized ARIA landmarks and better screen reader compatibility. Stronger contrasts, consistent labels and complete alt-text support ensure a modern, WCAG-aligned experience.
 
-- **Static Pages**: Static Pages allow teams to add their own custom information pages directly into the Portal navigation. Whether it is a help page, a simple info screen or internal documentation, developers can create fully styled pages that blend seamlessly into the Portal layout.  
+- **Side Step Process**: Pause or branch from an active workflow without interrupting the main case. Perfect for clarifications, additional information requests or parallel sub-processes. Fully multilingual and ready for global teams.
+
+- **Static Pages**: Add custom info or help pages directly into the Portal navigation. Fully styled, localizable, permission-controlled and seamlessly integrated into the Portal layout.
 
 **And more**
 
-- Improved stability for statistics when browser tabs are inactive.
-- Fixes for multilingual inconsistencies across widgets and lists.
-- Better handling of shortcuts when focusing info widgets.
-- More robust user menu and filter behavior.
-- Enhanced loading performance for larger UI elements.
-- Resolved issues with case detail visibility for destroyed cases.
-- Safer handling of streamed content and file deletion workflows.
+- Improved stability for inactive browser tabs
+- Fixes for multilingual inconsistencies
+- Better shortcut handling in info widgets
+- More robust user menu and filters
+- Faster loading for large UI elements
+- Improved case detail handling
+- Safer streamed content and file deletion workflows
 
 <div class="short-links">
     <a href="https://market.axonivy.com/market-cache/portal/portal-guide/13.2.0-m284/doc/en/portal-user-guide/statistic-chart/index.html"

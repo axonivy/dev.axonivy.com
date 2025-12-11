@@ -40,7 +40,7 @@ All new features are available in both tools, ensuring a consistent experience f
 <div class="short-links">
     <a href="https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-book"></i> PRO Designer (VS Code Extension)
+        <i class="si si-download"></i> PRO Designer (VS Code Extension)
     </a>
 </div>
 

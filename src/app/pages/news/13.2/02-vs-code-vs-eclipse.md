@@ -15,14 +15,14 @@ New Features in the VS Code Extension:
 <div class="short-links">
     <a href="https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-book"></i> Axon Ivy PRO Designer 13 Extension for Visual Studio Code
+        <i class="si si-download"></i> Axon Ivy PRO Designer 13 Extension for Visual Studio Code
     </a>
 </div>
 
 <div class="short-links">
-    <a href="../../deprecation/eclipse"
+    <a href="https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer"
         target="_blank" rel="noopener noreferrer">
-        <i class="si si-book"></i> Deprecation of the Eclipse-based PRO Designer
+        <i class="si si-megaphone"></i> Deprecation of the Eclipse-based PRO Designer
     </a>
 </div>
 
