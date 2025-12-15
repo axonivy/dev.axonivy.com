@@ -94,9 +94,6 @@
     left: -1em;
     top: 6px;
   }
-  .button.fixed-margin {
-    margin: 0 1em 0.5em 0;
-  }
   #improvements~ul li:before {
     mask: url('/images/icons/startup-launch.svg') no-repeat center;
     -webkit-mask: url('/images/icons/startup-launch.svg') no-repeat center;
@@ -147,9 +144,9 @@
 </section>
 
 <section id="content">
-  <div class="inner news-entry">
+  <div class="inner news-entry" style="display: flex; flex-wrap: wrap; align-items: center; gap: 1em;">
     {% for newsDetailSection in news.newsDetailSections %}
-      <a href="{{newsDetailSection.anchor}}" class="button special fixed-margin">{{newsDetailSection.title}}</a>  
+      <a href="{{newsDetailSection.anchor}}" class="button small">{{newsDetailSection.title}}</a>  
     {% endfor %}
   </div>
 </section>

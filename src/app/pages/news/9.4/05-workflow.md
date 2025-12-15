@@ -1,4 +1,4 @@
-## Workflow
+## Workflow {#azure}
 
 Finally, workflow cases and tasks can have multilingual names and descriptions.
 
