@@ -30,7 +30,8 @@
               <goal>generate-changelog</goal>
             </goals>
             <configuration>
-            <jiraServerId>axonivy.jira</jiraServerId>
+              <jiraServerId>axonivy.jira</jiraServerId>
+              <jiraServerUri>https://axon-ivy.atlassian.net</jiraServerUri>
               <console>true</console>
               <filterBy>project in (XIVY) AND fixVersion = ${version}</filterBy>
               <orderBy>project,"Epic Link" ASC,fixVersion DESC,key</orderBy>
