@@ -49,21 +49,6 @@ pipeline {
       }
     }
 
-    stage('sonar') {
-      when {
-        branch 'master'
-      }
-      agent {
-        docker {
-          image 'sonarsource/sonar-scanner-cli'
-          args '-e SONAR_HOST_URL=https://sonar.ivyteam.io'
-        }
-      }
-      steps {
-        sh 'sonar-scanner'
-      }
-    }
-
     stage('check editorconfig') {
       steps {
         script {
