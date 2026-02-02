@@ -194,5 +194,21 @@
     "deprecated": "8",
     "removed": "8",
     "description": "The 3.9 project importer has been removed. Import 3.9 with e.g. Axon Ivy Designer 5.0 and then use the latest Designer to migrate to the latest version."
+  },
+  {
+    "name": "Font Awesome Icons",
+    "successor": "Tabler Icons",
+    "released": "5",
+    "deprecated": "14",
+    "removed": "16",
+    "description": "The included font awesome icons have been deprecated and will no longer be shipped by default in the future. Use the tabler icons available in the platform."
+  },
+  {
+    "name": "Streamline Icons",
+    "successor": "Tabler Icons",
+    "released": "10",
+    "deprecated": "14",
+    "removed": "16",
+    "description": "The included streamline icons have been deprecated and will no longer be shipped by default in the future. Use the tabler icons available in the platform."
   }
 ]
