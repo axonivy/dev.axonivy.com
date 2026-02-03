@@ -66,6 +66,16 @@
     "description": "The Case Scope Overriding is deprecated in favor of Strict Overriding."
   },
   {
+    "name": "Rule Engine based on Drools",
+    "nameHref": "/doc/12.0/designer-guide/how-to/rule-engine.html",
+    "successor": "",
+    "successorHref": "",
+    "released": "7",
+    "deprecated": "12",
+    "removed": "14",
+    "description": "The Rule Engine Process Element and the Rules Public API based on Drools. Rules could be written using either DRL or Excel files."
+  },
+  {
     "name": "Eclipse DRL Editor",
     "nameHref": "/doc/10.0/designer-guide/how-to/rule-engine.html",
     "successor": "VS Code DRL Editor",
