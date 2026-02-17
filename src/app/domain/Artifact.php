@@ -6,6 +6,7 @@ class Artifact
 {
   public const PRODUCT_NAME_ENGINE = 'engine';
   public const PRODUCT_NAME_DESIGNER = 'designer';
+  public const PRODUCT_NAME_VSCODE_EXTENSION = 'vscode-extension';
 
   public const TYPE_WINDOWS = 'Windows';
   public const TYPE_LINUX = 'Linux';
@@ -14,6 +15,7 @@ class Artifact
   public const TYPE_MAC_BETA_NEW = 'macOS-BETA';
   public const TYPE_ALL = 'All'; // All platforms
   public const TYPE_DOCKER = 'docker'; // no download artifacts available
+  public const TYPE_VSCODE = 'VSCode'; // no download artifacts available
 
   public const ARCHITECTURE_X64 = 'x64';
   public const ARCHITECTURE_X86 = 'x86';

@@ -28,18 +28,22 @@
   .permalinks li {
     padding: 0;
   }
+  .row.justify-content-center {
+    display: flex;
+    justify-content: center;
+  }
+  .download-card.single {
+    width: auto;
+  }
 </style>
 
-<div class="row">
+<div class="row {% if artifacts|length == 1 %}justify-content-center{% endif %}">
   {% if artifacts is empty %}
     <b>This is currently not available. Come back soon!</b>
   {% endif %}
-
   {% for artifact in artifacts %}
-
-    {% set column = 12 / artifacts|length %}
-
-    <div class="{{ column }}u 12u$(xsmall) download-card">
+    {% set column = artifacts|length == 1 ? '' : 12 / artifacts|length %}
+    <div class="{% if column %}{{ column }}u 12u$(xsmall){% endif %} download-card {% if artifacts|length == 1 %}single{% endif %}">
       <i class="{{ artifact.icon }}" style="font-size:65px;"></i>
       <br /><br />
       <a href="{{ artifact.url }}" title="{{ artifact.filename }}" class="button special download-link">
@@ -48,7 +52,6 @@
         <span class="download-description">{{ artifact.description }}</span>
       </a>
     </div>
-
   {% endfor %}
 </div>
 
@@ -56,8 +59,12 @@
 
 {% if artifacts is not empty %}
   <div>
-    <p style="float:left;"><i class="si si-hyperlink"></i> <a href="javascript:void(0);" onclick="javascript:showPermalinks();">Permalink</a></p>
-    <p style="float:right;"><i class="si si-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
+    {% if artifacts[0].name == 'VS Code Extension' %}
+      <p style="float:left;"><i class="si si-hyperlink"></i> <a href="https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer">More information</a></p>
+    {% else %}
+      <p style="float:left;"><i class="si si-hyperlink"></i> <a href="javascript:void(0);" onclick="javascript:showPermalinks();">Permalink</a></p>
+      <p style="float:right;"><i class="si si-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
+    {% endif %}
   </div>
   <div style="clear: both;"></div>
   <ul class="permalinks">

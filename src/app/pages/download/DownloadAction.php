@@ -5,9 +5,11 @@ namespace app\pages\download;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
+use app\Config;
 use app\domain\Artifact;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseType;
+use app\domain\Version;
 
 class DownloadAction
 {
@@ -28,7 +30,7 @@ class DownloadAction
       throw new HttpNotFoundException($request);
     }
     $loader = $this->createLoader($releaseType);
-    
+
     $leadingEdgeVersion = "";
     $leadingEdge = ReleaseType::LE()->releaseInfo();
     if ($leadingEdge != null) {
@@ -38,6 +40,8 @@ class DownloadAction
     return $this->view->render($response, 'download/download.twig', [
       'designerArtifacts' => $loader->designerArtifacts(),
       'engineArtifacts' => $loader->engineArtifacts(),
+
+      'vscodeExtensionLink' => $loader->vscodeExtensionLink(),
 
       'headerTitle' => $loader->headerTitle(),
       'headerSubTitle' => $releaseType->headline(),
@@ -50,7 +54,7 @@ class DownloadAction
       'versionShort' => $loader->versionShort(),
 
       'releaseDate' => $loader->releaseDate(),
-      
+
       'leadingEdgeVersion' => $leadingEdgeVersion,
 
       'releaseNotesLink' => $loader->releaseNotesLink()
@@ -117,6 +121,8 @@ interface Loader
 
   function engineArtifacts(): array;
 
+  function vscodeExtensionLink(): string;
+
   function headerTitle(): string;
 
   function versionShort(): string;
@@ -146,6 +152,11 @@ class ReleaseTypeNotAvailableLoader implements Loader
   public function engineArtifacts(): array
   {
     return [];
+  }
+
+  public function vscodeExtensionLink(): string
+  {
+    return '';
   }
 
   public function headerTitle(): string
@@ -187,8 +198,23 @@ class ReleaseInfoLoader implements Loader
     $this->releaseInfo = $releaseInfo;
   }
 
+  public function vscodeGetMajorVersion(): bool
+  {
+    if ($this->releaseType->isDevRelease()) {
+     return version_compare($this->getDevVersion()->getMinorVersion(), Config::VSCODE_EXTENSION_SINCE_VERSION, '>=');
+    } 
+    return version_compare($this->releaseInfo->getVersion()->getVersionNumber(), Config::VSCODE_EXTENSION_SINCE_VERSION, '>=');
+  }
+
   public function designerArtifacts(): array
   {
+    if ($this->vscodeGetMajorVersion()) {
+      $artifacts = [
+        $this->createDownloadArtifact('VS Code Extension', 'fa-solid fa-code', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
+      ];
+      return array_filter($artifacts);
+    }
+
     $artifacts = [
       $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
       $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
@@ -203,14 +229,42 @@ class ReleaseInfoLoader implements Loader
   {
     $artifacts = [
       $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
-      $this->createDownloadArtifact('Docker', 'fa-brands fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),      
+      $this->createDownloadArtifact('Docker', 'fa-brands fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),
       $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
     ];
     return array_filter($artifacts);
   }
 
+  public function vscodeExtensionLink(): string
+  {
+    if ($this->vscodeGetMajorVersion()) {
+      $version = $this->releaseInfo->getVersion()->getMajorVersion();
+      if ($this->releaseType->isDevRelease()) {
+        return Config::VSCODE_MARKETPLACE_URL . "-". $this->getDevVersion()->getMajorVersion();
+      }
+      return Config::VSCODE_MARKETPLACE_URL . "-" . $version;
+    }
+    return '';
+  }
+
   private function createDownloadArtifact($name, $icon, $productName, $type): ?DownloadArtifact
   {
+    if ($productName === Artifact::PRODUCT_NAME_VSCODE_EXTENSION) {
+      $vscodeMarketplaceUrl = $this->vscodeExtensionLink();
+      $version = $this->releaseInfo->getVersion();
+      $description = $this->releaseType->isDevRelease()
+        ? $version->getVersionNumber()
+        : $version->getBugfixVersion() . ' ' . $this->releaseType->shortName();
+      return new DownloadArtifact(
+        $name,
+        $description,
+        $vscodeMarketplaceUrl,
+        'VS Code Marketplace',
+        $icon,
+        $vscodeMarketplaceUrl
+      );
+    } 
+
     $artifact = $this->releaseInfo->getArtifactByProductNameAndType($productName, $type);
     if ($artifact == null) {
       return null;
@@ -236,6 +290,18 @@ class ReleaseInfoLoader implements Loader
   public function versionShort(): string
   {
     return $this->releaseType->shortName() . $this->minorVersion();
+  }
+
+  public function getDevVersion(): Version
+  {
+    if ($this->releaseType->isDevRelease()) {
+      $artifacts = $this->releaseInfo->getArtifacts();
+      if (!empty($artifacts)) {
+        $firstArtifact = $artifacts[0];
+        return $firstArtifact->getVersion();
+      }
+    }
+    return $this->releaseInfo->getVersion();
   }
 
   private function minorVersion(): string

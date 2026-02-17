@@ -13,7 +13,7 @@ class DownloadActionTest extends TestCase
   {
     AppTester::assertThatGet('/download/nightly')->ok()
       ->bodyContains('Nightly Build')
-      ->bodyContains('https://download.axonivy.com/nightly/AxonIvyDesigner7.0.1.56047_Linux_x64.zip');
+      ->bodyContains('https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14');
   }
 
   public function testNightly7()
