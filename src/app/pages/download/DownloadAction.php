@@ -28,7 +28,7 @@ class DownloadAction
       throw new HttpNotFoundException($request);
     }
     $loader = $this->createLoader($releaseType);
-    
+
     $leadingEdgeVersion = "";
     $leadingEdge = ReleaseType::LE()->releaseInfo();
     if ($leadingEdge != null) {
@@ -38,6 +38,8 @@ class DownloadAction
     return $this->view->render($response, 'download/download.twig', [
       'designerArtifacts' => $loader->designerArtifacts(),
       'engineArtifacts' => $loader->engineArtifacts(),
+
+      'vscodeExtensionLink' => $loader->vscodeExtensionLink(),
 
       'headerTitle' => $loader->headerTitle(),
       'headerSubTitle' => $releaseType->headline(),
@@ -50,7 +52,7 @@ class DownloadAction
       'versionShort' => $loader->versionShort(),
 
       'releaseDate' => $loader->releaseDate(),
-      
+
       'leadingEdgeVersion' => $leadingEdgeVersion,
 
       'releaseNotesLink' => $loader->releaseNotesLink()
@@ -117,6 +119,8 @@ interface Loader
 
   function engineArtifacts(): array;
 
+  function vscodeExtensionLink(): string;
+
   function headerTitle(): string;
 
   function versionShort(): string;
@@ -146,6 +150,11 @@ class ReleaseTypeNotAvailableLoader implements Loader
   public function engineArtifacts(): array
   {
     return [];
+  }
+
+  public function vscodeExtensionLink(): string
+  {
+    return '';
   }
 
   public function headerTitle(): string
@@ -189,6 +198,13 @@ class ReleaseInfoLoader implements Loader
 
   public function designerArtifacts(): array
   {
+    if ($this->releaseInfo->getVersion()->getMajorVersion() >= 13) {
+      $artifacts = [
+        $this->createDownloadArtifact('VS Code Extension', 'fa-solid fa-code', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
+      ];
+      return array_filter($artifacts);
+    }
+
     $artifacts = [
       $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
       $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
@@ -203,14 +219,41 @@ class ReleaseInfoLoader implements Loader
   {
     $artifacts = [
       $this->createDownloadArtifact('Windows', 'fa-brands fa-windows', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_WINDOWS),
-      $this->createDownloadArtifact('Docker', 'fa-brands fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),      
+      $this->createDownloadArtifact('Docker', 'fa-brands fa-docker', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_DOCKER),
       $this->createDownloadArtifact('Linux', 'fa-brands fa-linux', Artifact::PRODUCT_NAME_ENGINE, Artifact::TYPE_ALL)
     ];
     return array_filter($artifacts);
   }
 
+  public function vscodeExtensionLink(): string
+  {
+    $majorVersion = $this->releaseInfo->getVersion()->getMajorVersion();
+    if ($majorVersion >= 14) {
+      return 'https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14';
+    }
+    if ($majorVersion >= 13) {
+      return 'https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13';
+    }
+    return '';
+  }
+
   private function createDownloadArtifact($name, $icon, $productName, $type): ?DownloadArtifact
   {
+    if ($productName === Artifact::PRODUCT_NAME_VSCODE_EXTENSION) {
+      $majorVersion = $this->releaseInfo->getVersion()->getMajorVersion();
+      if ($majorVersion >= 13) {
+        $vscodeMarketplaceUrl = $this->vscodeExtensionLink();
+        return new DownloadArtifact(
+          $name,
+          $majorVersion,
+          $vscodeMarketplaceUrl,
+          'VS Code Marketplace',
+          $icon,
+          $vscodeMarketplaceUrl
+        );
+      }
+    }
+
     $artifact = $this->releaseInfo->getArtifactByProductNameAndType($productName, $type);
     if ($artifact == null) {
       return null;

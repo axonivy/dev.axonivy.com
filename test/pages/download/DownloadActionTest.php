@@ -13,7 +13,8 @@ class DownloadActionTest extends TestCase
   {
     AppTester::assertThatGet('/download/nightly')->ok()
       ->bodyContains('Nightly Build')
-      ->bodyContains('https://download.axonivy.com/nightly/AxonIvyDesigner7.0.1.56047_Linux_x64.zip');
+      ->bodyContains('VS Code Extension')
+      ->bodyContains('https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14');
   }
 
   public function testNightly7()
@@ -21,6 +22,14 @@ class DownloadActionTest extends TestCase
     AppTester::assertThatGet('/download/nightly-7.0')->ok()
       ->bodyContains('Nightly Build 7.0')
       ->bodyContains('https://download.axonivy.com/nightly-7.0/AxonIvyEngine7.5.0.56047_Windows_x64.zip');
+  }
+
+  public function testNightly13()
+  {
+    AppTester::assertThatGet('/download/nightly-13.2')->ok()
+      ->bodyContains('Nightly Build 13.2')
+      ->bodyContains('VS Code Extension')
+      ->bodyContains('https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13');
   }
 
   public function testNightlyNonExisting()
