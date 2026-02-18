@@ -5,6 +5,7 @@ namespace app\pages\download;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Slim\Views\Twig;
+use app\Config;
 use app\domain\Artifact;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseType;
@@ -198,7 +199,7 @@ class ReleaseInfoLoader implements Loader
 
   public function designerArtifacts(): array
   {
-    if ($this->releaseInfo->getVersion()->getMajorVersion() >= 14) {
+    if ($this->releaseInfo->getVersion()->getMajorVersion() >= Config::VSCODE_EXTENSION_SINCE_VERSION) {
       $artifacts = [
         $this->createDownloadArtifact('VS Code Extension', 'fa-solid fa-code', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
       ];
@@ -228,7 +229,7 @@ class ReleaseInfoLoader implements Loader
   public function vscodeExtensionLink(): string
   {
     if ($this->releaseInfo->getVersion()->getMajorVersion() >= 14) {
-      return 'https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14';
+      return Config::VSCODE_MARKETPLACE_URL;
     }
     return '';
   }

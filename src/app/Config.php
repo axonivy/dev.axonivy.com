@@ -13,6 +13,8 @@ class Config
   public const CDN_URL = 'https://download.axonivy.com';
   public const DOCKER_HUB_IMAGE_URL = 'https://hub.docker.com/r/axonivy/axonivy-engine';
   public const DOCKER_IMAGE_ENGINE = 'axonivy/axonivy-engine';
+  public const VSCODE_EXTENSION_SINCE_VERSION = '14.0.0';
+  public const VSCODE_MARKETPLACE_URL = 'https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14';
 
   public static function isProductionEnvironment()
   {
