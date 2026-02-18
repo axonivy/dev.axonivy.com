@@ -24,14 +24,6 @@ class DownloadActionTest extends TestCase
       ->bodyContains('https://download.axonivy.com/nightly-7.0/AxonIvyEngine7.5.0.56047_Windows_x64.zip');
   }
 
-  public function testNightly13()
-  {
-    AppTester::assertThatGet('/download/nightly-13.2')->ok()
-      ->bodyContains('Nightly Build 13.2')
-      ->bodyContains('VS Code Extension')
-      ->bodyContains('https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13');
-  }
-
   public function testNightlyNonExisting()
   {
     AppTester::assertThatGet('/download/nightly-5')->notFound();

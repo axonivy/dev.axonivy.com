@@ -198,7 +198,7 @@ class ReleaseInfoLoader implements Loader
 
   public function designerArtifacts(): array
   {
-    if ($this->releaseInfo->getVersion()->getMajorVersion() >= 13) {
+    if ($this->releaseInfo->getVersion()->getMajorVersion() >= 14) {
       $artifacts = [
         $this->createDownloadArtifact('VS Code Extension', 'fa-solid fa-code', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
       ];
@@ -227,12 +227,8 @@ class ReleaseInfoLoader implements Loader
 
   public function vscodeExtensionLink(): string
   {
-    $majorVersion = $this->releaseInfo->getVersion()->getMajorVersion();
-    if ($majorVersion >= 14) {
+    if ($this->releaseInfo->getVersion()->getMajorVersion() >= 14) {
       return 'https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14';
-    }
-    if ($majorVersion >= 13) {
-      return 'https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13';
     }
     return '';
   }
@@ -240,19 +236,16 @@ class ReleaseInfoLoader implements Loader
   private function createDownloadArtifact($name, $icon, $productName, $type): ?DownloadArtifact
   {
     if ($productName === Artifact::PRODUCT_NAME_VSCODE_EXTENSION) {
-      $majorVersion = $this->releaseInfo->getVersion()->getMajorVersion();
-      if ($majorVersion >= 13) {
-        $vscodeMarketplaceUrl = $this->vscodeExtensionLink();
-        return new DownloadArtifact(
-          $name,
-          $majorVersion,
-          $vscodeMarketplaceUrl,
-          'VS Code Marketplace',
-          $icon,
-          $vscodeMarketplaceUrl
-        );
-      }
-    }
+      $vscodeMarketplaceUrl = $this->vscodeExtensionLink();
+      return new DownloadArtifact(
+        $name,
+        $this->releaseInfo->getVersion()->getMajorVersion(),
+        $vscodeMarketplaceUrl,
+        'VS Code Marketplace',
+        $icon,
+        $vscodeMarketplaceUrl
+      );
+    } 
 
     $artifact = $this->releaseInfo->getArtifactByProductNameAndType($productName, $type);
     if ($artifact == null) {

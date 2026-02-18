@@ -54,11 +54,11 @@
 
 {% if artifacts is not empty %}
   <div>
-      {% if artifacts[0].name == 'VS Code Extension' %}
-    <p style="float:left;"><i class="si si-hyperlink"></i> <a href="https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer">More information</a></p>
-      {% else %}
+    {% if artifacts[0].name == 'VS Code Extension' %}
+      <p style="float:left;"><i class="si si-hyperlink"></i> <a href="https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer">More information</a></p>
+    {% else %}
       <p style="float:left;"><i class="si si-hyperlink"></i> <a href="javascript:void(0);" onclick="javascript:showPermalinks();">Permalink</a></p>
-    <p style="float:right;"><i class="si si-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
+      <p style="float:right;"><i class="si si-archive"></i> <a href="{{ archiveLink }}">other version and platforms</a></p>
     {% endif %}
   </div>
   <div style="clear: both;"></div>
