@@ -54,6 +54,20 @@
         </p>
 
         {% include 'download/_artifacts.twig' with {'artifacts': designerArtifacts} %}
+
+        {% if vscodeExtensionLink is not empty %}
+          <p style="font-size: medium; margin-bottom: 0.5em;">
+            The <b>Eclipse-based PRO Designer</b> has entered maintenance mode 
+            and now is only available as Visual Studio Code extension. 
+          </p>
+        {% endif %}
+
+        {% if versionShort == 'LE 13.2' %}
+          <p style="font-size: medium; margin-bottom: 0.5em;">
+            The Axon Ivy 13.2 is the last release of the <b>Eclipse-based PRO Designer</b>.
+          </p>
+          <p style="float:left;"><i class="si si-hyperlink"></i> <a href="https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer">More information</a></p>
+        {% endif %}
       </div>
     </article>
 
