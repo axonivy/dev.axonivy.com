@@ -210,7 +210,7 @@ class ReleaseInfoLoader implements Loader
   {
     if ($this->vscodeGetMajorVersion()) {
       $artifacts = [
-        $this->createDownloadArtifact('VS Code Extension', 'fa-solid fa-code', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
+        $this->createDownloadArtifact('VS Code Extension', '/images/icons/vscode.svg', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
       ];
       return array_filter($artifacts);
     }

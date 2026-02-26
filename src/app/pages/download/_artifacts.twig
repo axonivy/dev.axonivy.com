@@ -44,7 +44,11 @@
   {% for artifact in artifacts %}
     {% set column = artifacts|length == 1 ? '' : 12 / artifacts|length %}
     <div class="{% if column %}{{ column }}u 12u$(xsmall){% endif %} download-card {% if artifacts|length == 1 %}single{% endif %}">
-      <i class="{{ artifact.icon }}" style="font-size:65px;"></i>
+      {% if artifact.icon ends with '.svg' %}
+        <img src="{{ artifact.icon }}" alt="{{ artifact.name }}" style="height:55px;" />
+      {% else %}
+        <i class="{{ artifact.icon }}" style="font-size:65px;"></i>
+      {% endif %}
       <br /><br />
       <a href="{{ artifact.url }}" title="{{ artifact.filename }}" class="button special download-link">
         {{ artifact.name }}
