@@ -73,6 +73,17 @@ class InstallationAction
       $isNotarized = false;
     }
 
+    // sanitize downloadUrl to prevent XSS
+    if (!filter_var($downloadUrl, FILTER_VALIDATE_URL)) {
+      $downloadUrl = '/';
+    }
+    $allowed = ['http', 'https'];
+    $scheme = parse_url($downloadUrl, PHP_URL_SCHEME);
+    if (!in_array($scheme, $allowed)) {
+      $downloadUrl = '/';
+    }
+    // sanitize downloadUrl to prevent XSS
+
     return $this->view->render($response, 'installation/installation.twig', [
       'downloadUrl' => $downloadUrl,
       'minorVersion' => $minorVersion,
