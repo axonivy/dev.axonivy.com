@@ -33,7 +33,7 @@
 {% if PRODUCTIVE_SYSTEM and startDownload %}
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      window.location.href = '{{ downloadUrl }}';
+      window.location.href = '{{ downloadUrl | escape('url') }}';
     });
   </script>
 {% endif %}
