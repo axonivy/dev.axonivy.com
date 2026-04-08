@@ -31,10 +31,10 @@
 </section>
 
 {% if PRODUCTIVE_SYSTEM and startDownload %}
-  <div id="downloadRediret" data-url="{{ downloadUrl|e('html_attr') }}"></div>
+  <div id="downloadRedirect" data-url="{{ downloadUrl|e('html_attr') }}"></div>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const url = document.getElementById("downloadRediret").dataset.url;
+      const url = document.getElementById("downloadRedirect").dataset.url;
       window.location.href = url;
     });
   </script>
