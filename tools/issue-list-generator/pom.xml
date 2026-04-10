@@ -21,7 +21,7 @@
       <plugin>
         <groupId>ch.ivyteam.maven</groupId>
         <artifactId>jira-plugin</artifactId>
-        <version>13.2.0</version>
+        <version>14.0.0</version>
         <executions>
           <execution>
             <id>replace-changelog-tokens</id>
@@ -31,7 +31,6 @@
             </goals>
             <configuration>
               <jiraServerId>axonivy.jira</jiraServerId>
-              <jiraServerUri>https://axon-ivy.atlassian.net</jiraServerUri>
               <console>true</console>
               <filterBy>project in (XIVY) AND fixVersion = ${version}</filterBy>
               <orderBy>project,"Epic Link" ASC,fixVersion DESC,key</orderBy>
