@@ -22,6 +22,7 @@
   {
     "name": "Font Awesome Icons",
     "successor": "Tabler Icons",
+    "nameHref": "https://community.axonivy.com/d/1225-icon-library-update-in-axon-ivy-lts-14",
     "released": "5",
     "deprecated": "14",
     "removed": "16",
@@ -30,6 +31,7 @@
   {
     "name": "Streamline Icons",
     "successor": "Tabler Icons",
+    "nameHref": "https://community.axonivy.com/d/1225-icon-library-update-in-axon-ivy-lts-14",
     "released": "10",
     "deprecated": "14",
     "removed": "16",
