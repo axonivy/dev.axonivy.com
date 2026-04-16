@@ -22,16 +22,17 @@ class DeprecationActionTest extends TestCase
         ->bodyContainsIgnoreWhitespaces(
           '<tr>
             <td>
-              <a href="/doc/7.0/DesignerGuideHtml/ivy.userinterface.html#ivy-richdialogs">RIA / Rich Dialog</a> 
+              <a href="/doc/7.0/en/DesignerGuideHtml/ivy.userinterface.html#ivy-richdialogs">RIA / Rich Dialog</a> 
               <span title="The rich dialog technology stack has been removed. Use html dialog to implement user interfaces." class="deprecation-info"></span>
             </td>
-            <td><a href="/doc/10.0/designer-guide/user-interface/user-dialogs/html-dialogs.html">Html Dialog</a></td>
+            <td><a href="/doc/10.0/en/designer-guide/user-interface/user-dialogs/html-dialogs.html">Html Dialog</a></td>
             <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class="deprecation-released"></span></td>
             <td class="deprecation-icon"><span class="deprecation-ok"></span></td>
             <td class="deprecation-icon"><span class="deprecation-ok"></span></td>
             <td class="deprecation-icon"><span class="deprecation-deprecated"></span></td>
             <td class="deprecation-icon"><span class="deprecation-removed"></span></td>
+            <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
             <td class="deprecation-icon"><span class=""></span></td>
@@ -60,6 +61,7 @@ class DeprecationActionTest extends TestCase
               <th>10</th>
               <th>12</th>
               <th>13</th>
+              <th>14</th>
             </tr>');
     }
 }
