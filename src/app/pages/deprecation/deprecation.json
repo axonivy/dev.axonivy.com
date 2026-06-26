@@ -1,5 +1,15 @@
 [
   {
+    "name": "NTLM Authentication for REST and SOAP WebService Clients", 
+    "nameHref": "https://community.axonivy.com/d/1257-usage-of-ntlm-authentication-for-rest-and-soap-services",
+    "successor": "Microsoft recommends to use more modern and more secure authentication methods",
+    "successorHref": "https://community.axonivy.com/d/1257-usage-of-ntlm-authentication-for-rest-and-soap-services",
+    "released": "5",
+    "deprecated": "12",
+    "removed": "14",
+    "description": "Support for NTLM has been deprecated with Apache HTTP Client 5 library that is used by the REST and SOAP WebService client implementations. Also Microsoft recommends to use more modern and more secure authentication methods."
+  },
+  {
     "name": "Eclipse-based PRO Designer", 
     "nameHref": "https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer",
     "successor": "VS Code PRO Designer Extension",
