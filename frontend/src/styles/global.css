@@ -37,6 +37,9 @@
   --purple-bg: #e2d6fd;
   --yellow: #866d09;
   --yellow-bg: #fef5d0;
+  --page-bg: #f5f7fb;
+  --page-glow-a: #f0f5ff;
+  --page-glow-b: #eff9ff;
 
   /* Sizing and spacing */
   --s1: 0.25rem;
@@ -96,6 +99,9 @@
   --purple-bg: #493a69;
   --yellow: #ffd83d;
   --yellow-bg: #6a5c25;
+  --page-bg: #1f2229;
+  --page-glow-a: #28344a;
+  --page-glow-b: #2f3b52;
 
   --border-basic: 1px solid var(--n200);
   --border-active: 1px solid var(--p300);
@@ -115,11 +121,23 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 20% 0%, #f0f5ff 0%, #f5f7fb 35%),
-    radial-gradient(circle at 95% 15%, #eff9ff 0%, transparent 40%),
+    radial-gradient(circle at 20% 0%, var(--page-glow-a) 0%, var(--page-bg) 35%),
+    radial-gradient(circle at 95% 15%, var(--page-glow-b) 0%, transparent 40%),
     var(--page-bg);
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+.theme-logo-dark {
+  display: none;
+}
+
+.dark .theme-logo-light {
+  display: none;
+}
+
+.dark .theme-logo-dark {
+  display: block;
 }

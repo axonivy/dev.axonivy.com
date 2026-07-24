@@ -11,32 +11,48 @@ const internalLinks = [
 ---
 
 <header
-  class="sticky top-0 z-50 bg-(--background) py-(--s5) border-b border-(--n200)"
+  class="sticky top-0 z-50 bg-(--background) p-(--s5) border-b border-(--n200)"
 >
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-5">
     <a href="/" class="inline-flex items-center" aria-label="Axon Ivy Home">
       <img
-        src="https://www.axonivy.com/hubfs/core/brand/axonivy-logo-black.svg"
+        src="/logo/axonivy-logo-black.svg"
         alt="Axon Ivy Logo."
         loading="lazy"
         width="208"
         height="48"
-        class="h-auto max-w-full"
+        class="theme-logo-light h-auto max-w-full"
+      />
+      <img
+        src="/logo/axonivy-logo.svg"
+        alt="Axon Ivy Logo"
+        loading="lazy"
+        width="208"
+        height="48"
+        class="theme-logo-dark h-auto max-w-full"
       />
     </a>
 
     <nav class="hidden items-center gap-8 lg:flex">
       {
         internalLinks.map((link) => {
+          const active = path === link.href;
           return (
-            <a href={link.href} class="text-base font-400">
+            <a
+              href={link.href}
+              class:list={[
+                "text-base font-400 transition-colors hover:text-(--body)",
+                active ? "text-(--body)" : undefined,
+              ]}
+              aria-current={active ? "page" : undefined}
+            >
               {link.label}
             </a>
           );
         })
       }
     </nav>
-    <div class="flex gap-2">
+    <div class="flex items-center gap-2">
       <a
         href="/news"
         class="bg-(--p50) text-(--p300) px-4 py-2 rounded-(--r3) hover:bg-(--p75) transition"
@@ -47,6 +63,98 @@ const internalLinks = [
         class="inline-flex items-center bg-(--p300) px-4 py-2 text-(--background) rounded-(--r3) hover:bg-(--p500) transition"
         >Download</a
       >
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Switch to dark mode"
+        aria-pressed="false"
+        class="inline-flex h-10 w-10 items-center justify-center"
+      >
+        <span
+          id="theme-icon-sun"
+          class="inline-flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--body)"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+            <path
+              d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"
+            ></path>
+          </svg>
+        </span>
+        <span id="theme-icon-moon" class="hidden items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--body)"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"
+            ></path>
+          </svg>
+        </span>
+      </button>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const button = document.getElementById("theme-toggle");
+    const sunIcon = document.getElementById("theme-icon-sun");
+    const moonIcon = document.getElementById("theme-icon-moon");
+
+    if (!button || !sunIcon || !moonIcon) {
+      return;
+    }
+
+    const applyTheme = (theme) => {
+      const dark = theme === "dark";
+      root.classList.toggle("dark", dark);
+      root.style.colorScheme = theme;
+
+      button.setAttribute("aria-pressed", dark ? "true" : "false");
+      button.setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode",
+      );
+
+      sunIcon.style.display = dark ? "none" : "inline-flex";
+      moonIcon.style.display = dark ? "inline-flex" : "none";
+    };
+
+    const saved = localStorage.getItem("theme");
+    const initial =
+      saved === "dark" || saved === "light"
+        ? saved
+        : root.classList.contains("dark")
+          ? "dark"
+          : "light";
+
+    applyTheme(initial);
+
+    button.addEventListener("click", () => {
+      const next = root.classList.contains("dark") ? "light" : "dark";
+      localStorage.setItem("theme", next);
+      applyTheme(next);
+    });
+  })();
+</script>
