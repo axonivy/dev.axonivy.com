@@ -6,6 +6,33 @@ Run `./up.sh` to start the website in docker
   
 ... and later `docker compose down` to stop the containers.
 
+## Frontend scaffold
+
+The repository now also contains a Node-based frontend scaffold in `frontend/` for an Astro migration.
+
+- Install dependencies with `pnpm install`
+- Start the Astro dev server locally with `pnpm dev`
+- Build the frontend with `pnpm build`
+- Run the Astro type check with `pnpm check`
+
+The frontend scaffold uses Node `>=24.11` and pnpm `11.0.6` at the repository root.
+
+## Local PHP + Astro setup
+
+Run the backend in Docker:
+
+`./up.sh`
+
+Run the frontend locally in a second terminal:
+
+`pnpm dev`
+
+With this setup:
+
+- PHP/Slim backend is available on `http://localhost:8080`
+- Astro frontend is available on `http://localhost:4321`
+- Astro dev server proxies `/api/*` requests to the PHP backend
+
 ## Execute tests
 
 Run `./run-tests.sh` to execute tests.

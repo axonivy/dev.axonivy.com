@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  /* Core colors */
+  --body: #1b1b1b;
+  --background: #ffffff;
+  --n25: #fafafa;
+  --n50: #f8f8f8;
+  --n75: #f3f3f3;
+  --n100: #ebebeb;
+  --n200: #e7e7e7;
+  --n300: #dfdfdf;
+  --n400: #bfbfbf;
+  --n500: #b0b0b0;
+  --n600: #a3a3a3;
+  --n700: #858585;
+  --n800: #757575;
+  --n900: #4a4a4a;
+  --p50: #e6f1f5;
+  --p75: #97c4d4;
+  --p300: #007095;
+  --p500: #004e69;
+  --error: #e5151c;
+  --warning: #ff7300;
+  --success: #47c46b;
+  --orange: #a84600;
+  --orange-bg: #fedcc5;
+  --green: #16694e;
+  --green-bg: #c3eddf;
+  --blue: #1c59ba;
+  --blue-bg: #cee0fd;
+  --red: #9d1b1b;
+  --red-bg: #fac7c7;
+  --pink: #a72063;
+  --pink-bg: #fbdaeb;
+  --purple: #6c40d4;
+  --purple-bg: #e2d6fd;
+  --yellow: #866d09;
+  --yellow-bg: #fef5d0;
+
+  /* Sizing and spacing */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.125rem;
+  --padding-input: 10px;
+
+  /* Border radius */
+  --r1: 3px;
+  --r2: 5px;
+  --r3: 10px;
+
+  /* Border system */
+  --border-basic: 1px solid var(--n200);
+  --border-active: 1px solid var(--p300);
+  --border-dashed: 1px dashed var(--n400);
+  --border-warning: 1px solid var(--warning);
+  --border-error: 1px solid var(--error);
+  --border-input: var(--border-basic);
+}
+
+.dark {
+  --body: #ffffff;
+  --background: #2c2c2c;
+  --n25: #333333;
+  --n50: #202020;
+  --n75: #202020;
+  --n100: #4a4a4a;
+  --n200: #4f4f4f;
+  --n300: #606060;
+  --n400: #b0b0b0;
+  --n500: #757575;
+  --n600: #a3a3a3;
+  --n700: #858585;
+  --n800: #a3a3a3;
+  --n900: #a3a3a3;
+  --p50: #272727;
+  --p75: #7e7e7e;
+  --p300: #fafafa;
+  --p500: #004e69;
+  --error: #e5151c;
+  --warning: #ff7300;
+  --success: #47c46b;
+  --orange: #ffa96b;
+  --orange-bg: #6a4125;
+  --green: #55d3a9;
+  --green-bg: #314f45;
+  --blue: #95bbf9;
+  --blue-bg: #314669;
+  --red: #fd9b9b;
+  --red-bg: #673333;
+  --pink: #ff99cc;
+  --pink-bg: #66344d;
+  --purple: #bb9eff;
+  --purple-bg: #493a69;
+  --yellow: #ffd83d;
+  --yellow-bg: #6a5c25;
+
+  --border-basic: 1px solid var(--n200);
+  --border-active: 1px solid var(--p300);
+  --border-dashed: 1px dashed var(--n400);
+  --border-warning: 1px solid var(--warning);
+  --border-error: 1px solid var(--error);
+  --border-input: var(--border-basic);
+
+  --shadow-focus: 0 0 0 1px var(--body);
+}
+
+html {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: var(--n800);
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 20% 0%, #f0f5ff 0%, #f5f7fb 35%),
+    radial-gradient(circle at 95% 15%, #eff9ff 0%, transparent 40%),
+    var(--page-bg);
+}
+
+.text-balance {
+  text-wrap: balance;
+}

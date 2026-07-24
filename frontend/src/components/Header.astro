@@ -1,0 +1,52 @@
+---
+const path = Astro.url.pathname;
+
+const internalLinks = [
+  { href: "/doc", label: "Documentation" },
+  { href: "https://market.axonivy.com/", label: "Market" },
+  { href: "https://community.axonivy.com/", label: "Community" },
+  { href: "https://developer.axonivy.com/tutorial/", label: "Tutorial" },
+  { href: "/team", label: "Team" },
+];
+---
+
+<header
+  class="sticky top-0 z-50 bg-(--background) py-(--s5) border-b border-(--n200)"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-5">
+    <a href="/" class="inline-flex items-center" aria-label="Axon Ivy Home">
+      <img
+        src="https://www.axonivy.com/hubfs/core/brand/axonivy-logo-black.svg"
+        alt="Axon Ivy Logo."
+        loading="lazy"
+        width="208"
+        height="48"
+        class="h-auto max-w-full"
+      />
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex">
+      {
+        internalLinks.map((link) => {
+          return (
+            <a href={link.href} class="text-base font-400">
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+    <div class="flex gap-2">
+      <a
+        href="/news"
+        class="bg-(--p50) text-(--p300) px-4 py-2 rounded-(--r3) hover:bg-(--p75) transition"
+        >News</a
+      >
+      <a
+        href="/download"
+        class="inline-flex items-center bg-(--p300) px-4 py-2 text-(--background) rounded-(--r3) hover:bg-(--p500) transition"
+        >Download</a
+      >
+    </div>
+  </div>
+</header>

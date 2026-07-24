@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "@axonivy/dev-website-root",
+  "packageManager": "pnpm@11.0.6",
+  "engines": {
+    "node": ">=24.11",
+    "pnpm": ">=11.0.6"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "pnpm --filter @axonivy/dev-website-frontend dev",
+    "build": "pnpm --filter @axonivy/dev-website-frontend build",
+    "preview": "pnpm --filter @axonivy/dev-website-frontend preview",
+    "check": "pnpm --filter @axonivy/dev-website-frontend check",
+    "clean": "rimraf node_modules frontend/node_modules frontend/dist frontend/.astro"
+  },
+  "devDependencies": {
+    "only-allow": "^1.2.1",
+    "rimraf": "^6.1.3"
+  }
+}
