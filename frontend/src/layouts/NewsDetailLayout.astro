@@ -1,0 +1,32 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import NewsScrollspy from "../components/news/NewsScrollspy.tsx";
+
+interface Section {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  sections: Section[];
+}
+
+const { title, description, sections } = Astro.props;
+---
+
+<BaseLayout {title} {description}>
+  <div class="w-full bg-(--background)">
+    <div class="mx-auto flex w-full max-w-6xl gap-10 px-6 py-12">
+      <aside class="hidden w-56 shrink-0 lg:block">
+        <div class="sticky top-24">
+          <NewsScrollspy sections={sections} client:idle />
+        </div>
+      </aside>
+      <article class="min-w-0 flex-1 prose max-w-none">
+        <slot />
+      </article>
+    </div>
+  </div>
+</BaseLayout>

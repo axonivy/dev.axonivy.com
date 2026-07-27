@@ -1,0 +1,54 @@
+---
+import Badge from '../Badge.astro';
+
+interface Props {
+  version: string;
+  title: string;
+  tagline: string;
+  releaseDate: string;
+  lts: boolean;
+  highlights: string[];
+  slug: string;
+}
+
+const { version, title, tagline, releaseDate, lts, highlights, slug } = Astro.props;
+---
+
+<div class="rounded-2xl border border-(--n200) bg-(--background) shadow-[0_16px_40px_rgba(58,83,116,0.08)] overflow-hidden">
+  <div class="flex flex-col gap-6 p-8 md:flex-row md:items-start md:justify-between">
+    <!-- Left column -->
+    <div class="flex flex-col gap-3 flex-1">
+      <div class="flex items-center gap-2">
+        <Badge label="Latest Release" variant="latest" />
+        {lts && <Badge label="LTS" variant="lts" />}
+      </div>
+      <h2 class="text-2xl font-bold text-(--body) md:text-3xl">{title}</h2>
+      <p class="text-sm font-medium uppercase tracking-widest text-(--n600)">{tagline}</p>
+      <p class="text-sm text-(--n700)">Released: {releaseDate}</p>
+      <div class="flex flex-wrap gap-3 mt-2">
+        <a href={`/news/${slug}`} class="btn-primary text-sm">Read more →</a>
+        <a
+          href={`https://dev.axonivy.com/news/${version}`}
+          target="_blank"
+          rel="noreferrer noopener"
+          class="btn-secondary text-sm"
+        >
+          View migration guide ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Right column: highlights -->
+    <div class="flex flex-col gap-2 md:w-80 shrink-0">
+      <p class="text-sm font-semibold text-(--body)">What's new in {version}</p>
+      <ul class="flex flex-col gap-2">
+        {highlights.map((h) => (
+          <li class="flex items-start gap-2 text-sm text-(--n800)">
+            <span class="mt-0.5 h-4 w-4 shrink-0 text-(--success)">✓</span>
+            {h}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>

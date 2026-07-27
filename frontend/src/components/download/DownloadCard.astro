@@ -1,0 +1,143 @@
+---
+import Badge from "../Badge.astro";
+import type { DownloadArtifact } from "../../types/index.ts";
+
+interface Props {
+  product: "designer" | "engine";
+  versionLabel: string;
+  version: string;
+  releaseDate?: string;
+  releaseType: "lts" | "le";
+  artifacts: DownloadArtifact[];
+  vsCodeUrl?: string;
+  docsUrl?: string;
+  releaseNotesUrl?: string;
+}
+
+const {
+  product,
+  versionLabel,
+  version,
+  releaseDate,
+  releaseType,
+  artifacts,
+  vsCodeUrl,
+  docsUrl,
+  releaseNotesUrl,
+} = Astro.props;
+
+const isDesigner = product === "designer";
+
+const osIcons: Record<string, string> = {
+  windows: "/icons/brand-windows.svg",
+  linux: "/icons/brand-linux.svg",
+  macos: "/icons/brand-apple.svg",
+  docker: "/icons/brand-docker.svg",
+};
+---
+
+<div
+  class="flex flex-col rounded-2xl border border-(--n200) bg-(--background) p-6 gap-5 shadow-sm"
+>
+  <div class="flex flex-row items-center justify-between gap-4">
+    <div
+      class="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-(--blue-bg)"
+    >
+      <div
+        aria-hidden="true"
+        class="h-6 w-6 block"
+        style={`background-color: var(--blue); mask: url('/icons/book-close-2.svg') no-repeat center / contain; -webkit-mask: url('/icons/book-close-2.svg') no-repeat center / contain;`}
+      >
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-xs uppercase tracking-widest text-(--n600)"
+        >{releaseType === "lts" ? "Long Term Support" : "Leading Edge"}</span
+      >
+      <Badge
+        label={isDesigner ? "Design" : "Execute"}
+        variant={isDesigner ? "design" : "execute"}
+      />
+    </div>
+  </div>
+  <div class="flex items-start justify-between gap-4">
+    <div class="flex flex-col gap-1">
+      <h3 class="text-xl font-bold text-(--body)">
+        Axon Ivy {isDesigner ? "Designer" : "Engine"}
+        {releaseType === "lts" ? "LTS" : "LE"}
+        {versionLabel}
+      </h3>
+      <p class="text-sm text-(--n700)">
+        {
+          isDesigner
+            ? "Model, design and test your business application locally."
+            : "Deploy and run your application in a server environment."
+        }
+      </p>
+    </div>
+  </div>
+  {
+    isDesigner ? (
+      <a
+        href={
+          vsCodeUrl ??
+          "https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer"
+        }
+        target="_blank"
+        rel="noreferrer noopener"
+        class="btn-primary justify-center"
+      >
+        <span aria-hidden="true">⬡</span> View on Visual Studio Code
+      </a>
+    ) : (
+      <div class="flex flex-wrap gap-2">
+        {artifacts.map((a) => (
+          <a
+            href={a.url}
+            target={a.os === "docker" ? "_blank" : undefined}
+            rel={a.os === "docker" ? "noreferrer noopener" : undefined}
+            class:list={[
+              "inline-flex items-center gap-2 rounded-(--r3) border border-(--n200) px-4 py-2 text-sm font-medium transition hover:bg-(--n50)",
+              a.os === "windows"
+                ? "bg-(--p50) text-(--p300) border-(--p300)"
+                : "",
+            ]}
+          >
+            <span
+              aria-hidden="true"
+              class="h-4 w-4 block"
+              style={`background-color: var(--body); mask: url('${osIcons[a.os]}') no-repeat center / contain; -webkit-mask: url('${osIcons[a.os]}') no-repeat center / contain;`}
+            />
+            {a.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+  <div
+    class="flex flex-wrap items-center gap-4 text-xs text-(--n600) justify-between"
+  >
+    {version && <span>Version {version}</span>}
+    {releaseDate && <span>Released {releaseDate}</span>}
+    {
+      docsUrl && (
+        <a
+          href={docsUrl}
+          class="inline-flex items-center gap-1 text-(--p300) hover:underline"
+        >
+          Documentation →
+        </a>
+      )
+    }
+    {
+      releaseNotesUrl && (
+        <a
+          href={releaseNotesUrl}
+          class="inline-flex items-center gap-1 hover:underline"
+        >
+          View release notes →
+        </a>
+      )
+    }
+  </div>
+</div>

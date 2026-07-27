@@ -1,0 +1,45 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import HowWeDeprecateTile from "../components/deprecation/HowWeDeprecateTile.astro";
+import DeprecationTable from "../components/deprecation/DeprecationTable.astro";
+import { getCurrentDeprecations, getRemovedDeprecations } from "../lib/api.ts";
+
+const currentDeprecated = getCurrentDeprecations();
+const removed = getRemovedDeprecations();
+---
+
+<PageLayout
+  title="Deprecation & Removal | Axon Ivy"
+  pageTitle="Deprecation & Removal"
+  pageDescription="Features we deprecate and remove in future releases"
+  glowColor="--orange-bg"
+>
+  <!-- How we deprecate -->
+  <div class="mb-16">
+    <h2 class="mb-6 text-2xl font-bold text-(--body)">
+      We deprecate and remove Features as follows:
+    </h2>
+    <HowWeDeprecateTile />
+  </div>
+
+  <!-- Currently deprecated -->
+  <div class="mb-16">
+    <DeprecationTable
+      entries={currentDeprecated}
+      title="Currently Deprecated"
+    />
+  </div>
+
+  <!-- Recently removed -->
+  {
+    removed.length > 0 && (
+      <div>
+        <DeprecationTable
+          entries={removed}
+          title="Recently Removed"
+          showRemoved={true}
+        />
+      </div>
+    )
+  }
+</PageLayout>

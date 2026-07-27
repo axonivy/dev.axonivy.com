@@ -1,0 +1,30 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+
+interface Props {
+  title: string;
+  pageTitle: string;
+  description?: string;
+  pageDescription?: string;
+  glowColor?: string;
+}
+
+const { title, pageTitle, description, pageDescription, glowColor } =
+  Astro.props;
+---
+
+<BaseLayout {title} {description}>
+  <div class="relative w-full">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none fixed left-1/2 top-0 -z-10 h-96 w-96 -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+      style={`background-color: var(${glowColor || "--blue-bg"})`}
+    >
+    </div>
+    <PageHero title={pageTitle} description={pageDescription} />
+    <div class="mx-auto max-w-6xl px-6 pb-20">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

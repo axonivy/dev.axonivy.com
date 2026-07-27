@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  iconUrl: string;
+  iconColor: string;
+  iconBg: string;
+  external?: boolean;
+}
+const {
+  title,
+  description,
+  href,
+  iconUrl,
+  iconColor,
+  iconBg,
+  external = false,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noreferrer noopener" : undefined}
+  class="group rounded-3xl bg-(--background) p-6 shadow-[0_16px_40px_rgba(58,83,116,0.1)] transition hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(58,83,116,0.18)] flex flex-row lg:flex-col items-start lg:items-start sm:items-center gap-5 lg:gap-4"
+>
+  <div
+    class="flex flex-row lg:flex-col items-start lg:items-start sm:items-center gap-5 lg:gap-4 flex-1"
+  >
+    <div
+      class:list={[
+        "inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl",
+        iconBg,
+      ]}
+    >
+      <span
+        aria-hidden="true"
+        class="h-9 w-9 block"
+        style={`background-color: ${iconColor}; mask: url('${iconUrl}') no-repeat center / contain; -webkit-mask: url('${iconUrl}') no-repeat center / contain;`}
+      ></span>
+    </div>
+    <div class="flex-1 sm:flex-1 lg:flex-none">
+      <h2
+        class="text-[25px] sm:text-lg lg:text-[25px] font-bold leading-none tracking-tight text-(--body)"
+      >
+        {title}
+      </h2>
+      <p
+        class="mt-3 sm:mt-1 lg:mt-3 text-base sm:text-sm lg:text-base leading-relaxed text-(--n800) sm:max-w-none lg:max-w-40"
+      >
+        {description}
+      </p>
+    </div>
+  </div>
+  <div class="sm:hidden lg:block text-3xl font-semibold text-(--body) shrink-0">
+    →
+  </div>
+  <div
+    class="hidden sm:block lg:hidden text-2xl font-semibold text-(--body) shrink-0 ml-auto"
+  >
+    →
+  </div>
+</a>

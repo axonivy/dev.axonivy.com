@@ -1,0 +1,33 @@
+---
+interface Props {
+  icon?: string;
+  title: string;
+  description?: string;
+  href: string;
+  external?: boolean;
+}
+
+const { icon, title, description, href, external = false } = Astro.props;
+---
+
+<a
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noreferrer noopener' : undefined}
+  class="group rounded-2xl border border-(--n200) bg-(--background) p-6 shadow-sm transition hover:shadow-[0_16px_40px_rgba(58,83,116,0.1)] hover:-translate-y-1"
+>
+  {icon && (
+    <div
+      aria-hidden="true"
+      class="mb-4 h-8 w-8 block"
+      style={`background-color: var(--p300); mask: url('${icon}') no-repeat center / contain; -webkit-mask: url('${icon}') no-repeat center / contain;`}
+    />
+  )}
+  <h3 class="text-lg font-bold text-(--body) group-hover:text-(--p300) transition">
+    {title}
+    <span class="ml-1" aria-hidden="true">→</span>
+  </h3>
+  {description && (
+    <p class="mt-2 text-sm text-(--n800) group-hover:text-(--n700)">{description}</p>
+  )}
+</a>

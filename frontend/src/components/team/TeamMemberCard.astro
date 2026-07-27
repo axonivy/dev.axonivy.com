@@ -1,0 +1,35 @@
+---
+interface Props {
+  name: string;
+  imgSrc: string;
+  education: string;
+  function: string;
+  slogan: string;
+}
+
+const { name, imgSrc, education, function: role, slogan } = Astro.props;
+---
+
+<div
+  class="grid grid-cols-3 rounded-3xl overflow-hidden bg-(--background) border border-(--n200) transition hover:shadow-[0_16px_40px_rgba(58,83,116,0.1)]"
+>
+  <div class="p-1.5 flex items-center justify-center bg-(--background)">
+    <div class="relative bg-black overflow-hidden rounded-2xl w-full h-full">
+      <img
+        src={imgSrc}
+        alt={name}
+        class="h-full w-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <div class="col-span-2 flex flex-col justify-start gap-3 p-6">
+    <h3 class="text-2xl font-bold text-(--body) leading-tight">{name}</h3>
+    <div class="flex flex-col gap-1">
+      <span class="text-sm text-(--n700)">{role}</span>
+      <span class="text-sm text-(--n700)">{education}</span>
+    </div>
+    <p class="text-sm text-(--n700)">{slogan}</p>
+  </div>
+</div>

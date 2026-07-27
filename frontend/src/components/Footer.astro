@@ -1,0 +1,106 @@
+---
+const year = new Date().getFullYear();
+
+const footerLinks = [
+  { href: '/news', label: 'News' },
+  { href: '/doc', label: 'Doc' },
+  { href: 'https://market.axonivy.com/', label: 'Market', external: true },
+  { href: 'https://community.axonivy.com/', label: 'Community', external: true },
+  { href: 'https://developer.axonivy.com/tutorial/', label: 'Tutorial', external: true },
+  { href: '/team', label: 'Team' },
+];
+---
+
+<footer class="mt-auto border-t border-(--n200) bg-(--background)">
+  <!-- Main footer row -->
+  <div class="mx-auto max-w-6xl px-6 py-10">
+    <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+      <!-- Left: logo + tagline -->
+      <div class="flex flex-col gap-4">
+        <a href="https://www.axonivy.com" target="_blank" rel="noreferrer noopener" aria-label="Axon Ivy website">
+          <img
+            src="/logo/axonivy-logo-black.svg"
+            alt="Axon Ivy"
+            loading="lazy"
+            width="150"
+            class="theme-logo-light h-auto max-w-full"
+          />
+          <img
+            src="/logo/axonivy-logo.svg"
+            alt="Axon Ivy"
+            loading="lazy"
+            width="150"
+            class="theme-logo-dark h-auto max-w-full"
+          />
+        </a>
+        <p class="max-w-xs text-sm text-(--n800)">
+          Get the latest stable{' '}
+          <a href="/download" class="underline">Long Term Support</a>{' '}
+          version of the Axon Ivy Platform — or download the{' '}
+          <a href="/download/leading-edge" class="underline">Leading Edge</a>{' '}
+          version.
+        </p>
+        <a href="/download" class="btn-primary w-fit text-sm">Download</a>
+      </div>
+
+      <!-- Right: nav + external -->
+      <nav class="flex flex-col gap-2" aria-label="Footer navigation">
+        {footerLinks.map((link) => (
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noreferrer noopener' : undefined}
+            class="text-sm text-(--n800) hover:text-(--body) transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="https://www.axonivy.com"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="mt-2 text-sm font-medium text-(--p300)"
+        >
+          www.axonivy.com
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-(--n200)">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-4 sm:flex-row">
+      <div class="flex flex-wrap items-center gap-4 text-xs text-(--n700)">
+        <span>© {year} Axon Ivy Inc.</span>
+        <a href="https://www.axonivy.com/privacy-policy" target="_blank" rel="noreferrer noopener" class="hover:underline">
+          Privacy Policy
+        </a>
+        <a href="https://www.axonivy.com/legal-notice" target="_blank" rel="noreferrer noopener" class="hover:underline">
+          Terms of Service
+        </a>
+      </div>
+
+      <!-- Social icons -->
+      <div class="flex items-center gap-1">
+        <a href="https://www.linkedin.com/company/axonivy/" target="_blank" rel="noreferrer noopener"
+           aria-label="LinkedIn" class="inline-flex h-9 w-9 items-center justify-center rounded hover:bg-(--n100)">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 fill-(--n700)" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6A2.5 2.5 0 0 1 0 3.5 2.5 2.5 0 0 1 2.48 1 2.5 2.5 0 0 1 4.98 3.5ZM.5 8h4v15h-4V8Zm7 0h3.83v2.05h.06c.53-1 1.84-2.05 3.79-2.05C19.2 8 21 10.13 21 14.06V23h-4v-7.82c0-1.87-.03-4.27-2.6-4.27-2.6 0-3 2.03-3 4.14V23h-4V8Z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/axonivy" target="_blank" rel="noreferrer noopener"
+           aria-label="GitHub" class="inline-flex h-9 w-9 items-center justify-center rounded hover:bg-(--n100)">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 fill-(--n700)" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/>
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/c/AxonIvy" target="_blank" rel="noreferrer noopener"
+           aria-label="YouTube" class="inline-flex h-9 w-9 items-center justify-center rounded hover:bg-(--n100)">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 fill-(--n700)" aria-hidden="true">
+            <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.19C0 8.07 0 12 0 12s0 3.93.502 5.81a3.02 3.02 0 0 0 2.121 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.121-2.136C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

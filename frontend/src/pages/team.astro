@@ -1,15 +1,26 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import TeamMemberCard from '../components/team/TeamMemberCard.astro';
+import { getTeamMembers } from '../lib/api.ts';
+
+const members = getTeamMembers();
 ---
 
-<BaseLayout title="Team | Axon Ivy">
-  <section class="rounded-[30px] border border-[#e7edf5] bg-white p-8 shadow-[0_24px_80px_rgba(58,83,116,0.12)] lg:p-14">
-    <h1 class="text-5xl font-extrabold tracking-tight text-[#202531]">Team</h1>
-    <p class="mt-5 max-w-3xl text-2xl leading-relaxed text-[#677180]">
-      Placeholder page. Team information and contact points will be published here.
-    </p>
-    <div class="mt-8 rounded-2xl border border-dashed border-[#ccd6e2] bg-[#f8fbff] p-6 text-lg text-[#7a8492]">
-      Coming soon: contributor profiles and responsibilities.
-    </div>
-  </section>
-</BaseLayout>
+<PageLayout
+  title="Team | Axon Ivy"
+  pageTitle="IvyTeam"
+  pageDescription="The core development team of the Axon Ivy Platform"
+  glowColor="--purple-bg"
+>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {members.map((member) => (
+      <TeamMemberCard
+        name={member.name}
+        imgSrc={member.imgSrc}
+        education={member.education}
+        function={member.function}
+        slogan={member.slogan}
+      />
+    ))}
+  </div>
+</PageLayout>

@@ -118,10 +118,154 @@ html {
   color: var(--n800);
 }
 
+/* ─── Base typography ───────────────────────────────────────────────────────── */
+@layer base {
+  body {
+    color: var(--body);
+    background-color: var(--background);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--body);
+  }
+  a {
+    color: var(--p300);
+  }
+
+  /* Theme-sensitive logo visibility */
+  .theme-logo-dark {
+    display: none;
+  }
+  .dark .theme-logo-light {
+    display: none;
+  }
+  .dark .theme-logo-dark {
+    display: block;
+  }
+}
+
+/* ─── Reusable component classes ────────────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--r3);
+    background-color: var(--p300);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--background);
+    transition: background-color 0.2s;
+  }
+  .btn-primary:hover {
+    background-color: var(--p500);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--r3);
+    background-color: var(--p50);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--p300);
+    transition: background-color 0.2s;
+  }
+  .btn-secondary:hover {
+    background-color: var(--p75);
+  }
+
+  .card {
+    border-radius: var(--r3);
+    border: var(--border-basic);
+    background-color: var(--background);
+    padding: 1.5rem;
+  }
+
+  /* Prose styles for rendered news markdown */
+  .prose h2 {
+    scroll-margin-top: 80px;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--body);
+  }
+  .prose h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--body);
+  }
+  .prose p {
+    margin-bottom: 1rem;
+    line-height: 1.625;
+    color: var(--n800);
+  }
+  .prose ul {
+    margin-bottom: 1rem;
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    color: var(--n800);
+  }
+  .prose ol {
+    margin-bottom: 1rem;
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    color: var(--n800);
+  }
+  .prose li {
+    margin-bottom: 0.25rem;
+  }
+  .prose a {
+    color: var(--p300);
+    text-decoration: underline;
+  }
+  .prose strong {
+    font-weight: 600;
+    color: var(--body);
+  }
+  .prose code {
+    border-radius: 0.25rem;
+    background-color: var(--n75);
+    padding: 0.125rem 0.25rem;
+    font-size: 0.875rem;
+    font-family: monospace;
+  }
+  .prose pre {
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    border-radius: var(--r2);
+    background-color: var(--n75);
+    padding: 1rem;
+  }
+  .prose pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  .prose img {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--r3);
+  }
+}
+
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 20% 0%, var(--page-glow-a) 0%, var(--page-bg) 35%),
+    radial-gradient(
+      circle at 20% 0%,
+      var(--page-glow-a) 0%,
+      var(--page-bg) 35%
+    ),
     radial-gradient(circle at 95% 15%, var(--page-glow-b) 0%, transparent 40%),
     var(--page-bg);
 }

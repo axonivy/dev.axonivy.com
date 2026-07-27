@@ -1,0 +1,24 @@
+---
+interface Props {
+  label: string;
+  variant: "lts" | "le" | "release" | "latest" | "design" | "execute";
+}
+const { label, variant } = Astro.props;
+const styles: Record<string, string> = {
+  lts: "bg-(--blue-bg) text-(--blue)",
+  le: "bg-(--yellow-bg) text-(--yellow)",
+  release: "bg-(--green-bg) text-(--green)",
+  latest: "bg-(--p50) text-(--p300)",
+  design: "bg-(--green-bg) text-(--green)",
+  execute: "bg-(--blue-bg) text-(--blue)",
+};
+---
+
+<span
+  class:list={[
+    "inline-flex items-center rounded-full px-3 py-0.5 text-xs uppercase ",
+    styles[variant],
+  ]}
+>
+  {label}
+</span>

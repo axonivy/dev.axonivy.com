@@ -1,0 +1,94 @@
+---
+import Badge from "../Badge.astro";
+
+interface Props {
+  version: string;
+  title: string;
+  tagline: string;
+  releaseDate: string;
+  lts: boolean;
+  highlights: string[];
+  slug: string;
+}
+
+const { title, tagline, releaseDate, lts, highlights, slug } = Astro.props;
+
+function formatDateShort(dateStr: string): string {
+  try {
+    // Handle format like "May 3th, 2023" or "October 17th, 2022"
+    const match = dateStr.match(/^(\w+)\s+(\d+)(?:st|nd|rd|th),\s+(\d{4})$/);
+    if (match) {
+      const [, monthName, , year] = match;
+      // Get 3-letter month abbreviation
+      const date = new Date(`${monthName} 1, ${year}`);
+      const month = date.toLocaleDateString("en-US", { month: "short" });
+      return `${month} ${year}`;
+    }
+    // Fallback for other date formats
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+      return dateStr;
+    }
+    const month = date.toLocaleDateString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    return `${month} ${year}`;
+  } catch {
+    return dateStr;
+  }
+}
+
+const formattedDate = formatDateShort(releaseDate);
+---
+
+<div class="flex gap-4">
+  <div class="w-20 shrink-0 text-right">
+    <div class="w-px h-10"></div>
+    <span class="text-sm text-(--n800)">{formattedDate}</span>
+  </div>
+  <div class="flex flex-col items-center">
+    <div class="w-px h-11 bg-(--n200)"></div>
+    <div
+      class="h-4 w-4 shrink-0 rounded-full border-2 border-(--p300) bg-(--p200)"
+    >
+    </div>
+    <div class="w-px flex-1 bg-(--n200)"></div>
+  </div>
+
+  <div class="flex-1 flex items-start justify-between gap-4 min-h-fit pt-5">
+    <div
+      class="flex-1 border border-(--n200) rounded-xl p-4 bg-(--background) flex gap-4"
+    >
+      <div class="flex-1">
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <h3 class="text-m font-bold text-(--body)">{title}</h3>
+          {lts && <Badge label="LTS" variant="lts" />}
+          <Badge label="Release" variant="release" />
+        </div>
+        <p class="text-xs text-(--n700)">{tagline}</p>
+      </div>
+
+      <!-- Middle: Highlights -->
+      <div class="flex-1">
+        <ul class="flex flex-col gap-1">
+          {
+            highlights.map((h) => (
+              <li class="flex items-start gap-2 text-xs text-(--n800)">
+                <span class="mt-0.5 text-(--success)">✓</span>
+                {h}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="flex flex-col justify-end">
+        <a
+          href={`/news/${slug}`}
+          class="text-xs text-(--p300) hover:underline whitespace-nowrap"
+        >
+          View details →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

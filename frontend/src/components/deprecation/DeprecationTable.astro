@@ -1,0 +1,60 @@
+---
+import type { DeprecationEntry } from '../../types/index.ts';
+
+interface Props {
+  entries: DeprecationEntry[];
+  title: 'Currently Deprecated' | 'Recently Removed';
+  showRemoved?: boolean;
+}
+
+const { entries, title, showRemoved = false } = Astro.props;
+---
+
+<section>
+  <h2 class="mb-4 text-xl font-bold text-(--body)">{title}</h2>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-(--n200) text-left text-(--n600)">
+          <th class="pb-3 pr-4 font-semibold">Feature</th>
+          <th class="pb-3 pr-4 font-semibold">Introduced in</th>
+          <th class="pb-3 pr-4 font-semibold">Deprecated in</th>
+          {!showRemoved && <th class="pb-3 pr-4 font-semibold">Removal in</th>}
+          {showRemoved && <th class="pb-3 pr-4 font-semibold">Removed in</th>}
+          <th class="pb-3 pr-4 font-semibold">Successor</th>
+          <th class="pb-3 font-semibold">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {entries.map((entry) => (
+          <tr class="border-b border-(--n200) hover:bg-(--n25) transition">
+            <td class="py-3 pr-4">
+              {entry.nameHref ? (
+                <a href={entry.nameHref} target="_blank" rel="noreferrer noopener" class="text-(--p300) hover:underline font-medium">
+                  {entry.name} ↗
+                </a>
+              ) : (
+                <span class="font-medium text-(--body)">{entry.name}</span>
+              )}
+            </td>
+            <td class="py-3 pr-4 text-(--n800)">{entry.released}</td>
+            <td class="py-3 pr-4 text-(--n800)">{entry.deprecated}</td>
+            <td class="py-3 pr-4 text-(--n800)">
+              {showRemoved ? entry.removed : entry.removed}
+            </td>
+            <td class="py-3 pr-4">
+              {entry.successorHref ? (
+                <a href={entry.successorHref} target="_blank" rel="noreferrer noopener" class="text-(--p300) hover:underline text-xs">
+                  {entry.successor} ↗
+                </a>
+              ) : (
+                <span class="text-xs text-(--n700)">{entry.successor ?? '—'}</span>
+              )}
+            </td>
+            <td class="py-3 max-w-xs text-xs text-(--n800)">{entry.description}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

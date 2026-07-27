@@ -1,0 +1,60 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import NewsFeatureCard from "../../components/news/NewsFeatureCard.astro";
+import NewsTimelineEntry from "../../components/news/NewsTimelineEntry.astro";
+import { getNewsList } from "../../lib/api.ts";
+
+const newsList = getNewsList();
+const featured = newsList[0];
+const timeline = newsList.slice(1);
+
+// Placeholder highlights until real data is provided
+const highlights = [
+  "Agentic Orchestration & AI Process Generation",
+  "VS Code Extension enhancements",
+  "Statistics and analytics improvements",
+];
+---
+
+<PageLayout
+  title="News | Axon Ivy"
+  pageTitle="What's new?"
+  pageDescription="Explore the latest features and improvements of the Axon Ivy platform"
+  glowColor="--yellow-bg"
+>
+  {
+    featured && (
+      <div class="mb-16">
+        <NewsFeatureCard
+          version={featured.version}
+          title={featured.meta.title}
+          tagline={featured.meta.slogan}
+          releaseDate={featured.meta.date}
+          lts={featured.meta.lts}
+          highlights={highlights}
+          slug={featured.version}
+        />
+      </div>
+    )
+  }
+
+  {
+    timeline.length > 0 && (
+      <div>
+        <h2 class="mb-8 text-2xl font-bold text-(--body)">Browse more news</h2>
+
+        {timeline.map((news) => (
+          <NewsTimelineEntry
+            version={news.version}
+            title={news.meta.title}
+            tagline={news.meta.slogan}
+            releaseDate={news.meta.date}
+            lts={news.meta.lts}
+            highlights={highlights}
+            slug={news.version}
+          />
+        ))}
+      </div>
+    )
+  }
+</PageLayout>

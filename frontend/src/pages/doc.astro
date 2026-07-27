@@ -1,15 +1,77 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from "../layouts/PageLayout.astro";
+import DocVersionCard from "../components/doc/DocVersionCard.tsx";
+import { getDocVersions } from "../lib/api.ts";
+
+const docVersions = await getDocVersions();
 ---
 
-<BaseLayout title="Documentation | Axon Ivy">
-  <section class="rounded-[30px] border border-[#e7edf5] bg-white p-8 shadow-[0_24px_80px_rgba(58,83,116,0.12)] lg:p-14">
-    <h1 class="text-5xl font-extrabold tracking-tight text-[#202531]">Documentation</h1>
-    <p class="mt-5 max-w-3xl text-2xl leading-relaxed text-[#677180]">
-      Placeholder page. Guides, API reference, and tutorials will be available here.
-    </p>
-    <div class="mt-8 rounded-2xl border border-dashed border-[#ccd6e2] bg-[#f8fbff] p-6 text-lg text-[#7a8492]">
-      Coming soon: comprehensive documentation for Axon Ivy.
+<PageLayout
+  title="Documentation | Axon Ivy"
+  pageTitle="Documentation"
+  pageDescription="Find all information about the Axon Ivy Platform in our documents."
+  glowColor="--red-bg"
+>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 auto-rows-fr mb-10">
+    <div class="lg:col-span-2 h-full">
+      <DocVersionCard
+        client:load
+        title="LTS - Long Term Support"
+        description="Stable versions with long-term support."
+        versions={docVersions.lts}
+        main={true}
+      />
     </div>
-  </section>
-</BaseLayout>
+
+    <div class="h-full">
+      <DocVersionCard
+        client:load
+        title="LE - Leading Edge"
+        description="Latest features with leading edge release."
+        versions={docVersions.le}
+      />
+    </div>
+
+    <div class="h-full">
+      <DocVersionCard
+        client:load
+        title="Development Build"
+        description="Latest development version."
+        versions={docVersions.dev}
+        showNews={false}
+      />
+    </div>
+  </div>
+
+  <div
+    class="rounded-2xl bg-(--n25) border border-(--n200) p-6 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6"
+  >
+    <div class="flex gap-4 items-center">
+      <div
+        class="shrink-0 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-(--blue-bg)"
+      >
+        <div
+          aria-hidden="true"
+          class="h-8 w-8 block"
+          style={`background-color: var(--blue); mask: url('/icons/book-close-2.svg') no-repeat center / contain; -webkit-mask: url('/icons/book-close-2.svg') no-repeat center / contain;`}
+        >
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-(--body)">
+          Want to see which features have been removed?
+        </h3>
+        <p class="text-sm text-(--n800)">
+          Learn more about the features and products that have been deprecated
+          or removed recently.
+        </p>
+      </div>
+    </div>
+    <a
+      href="/deprecation"
+      class="inline-flex items-center gap-2 text-(--body) border border-(--n200) rounded-lg px-4 py-2 text-sm whitespace-nowrap hover:bg-(--n50) transition"
+    >
+      View deprecation page <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</PageLayout>

@@ -1,0 +1,47 @@
+---
+import { getNewsList, getNewsDetail } from "../../lib/api.ts";
+import NewsDetailLayout from "../../layouts/NewsDetailLayout.astro";
+
+export async function getStaticPaths() {
+  const versions = getNewsList();
+  return versions.map(({ version }) => ({
+    params: { slug: version },
+  }));
+}
+
+const { slug } = Astro.params;
+const news = slug ? getNewsDetail(slug) : null;
+
+if (!news) {
+  return new Response("Not found", { status: 404 });
+}
+
+const sections = news.sections.map((s) => ({
+  id: s.id,
+  title: s.title,
+}));
+---
+
+<NewsDetailLayout
+  title={news.meta.title}
+  description={news.meta.slogan}
+  sections={sections}
+>
+  <header class="mb-8">
+    <p class="text-sm font-medium uppercase tracking-widest text-(--n600)">
+      {news.meta.date}
+    </p>
+    <h1 class="mt-2 text-4xl font-bold text-(--body)">{news.meta.title}</h1>
+    <p class="mt-4 text-lg text-(--n800)">{news.meta.slogan}</p>
+  </header>
+
+  <div set:html={news.abstract} class="mb-10 prose max-w-none" />
+
+  {
+    news.sections.map((section) => (
+      <section class="mb-10">
+        <div set:html={section.html} class="prose max-w-none" />
+      </section>
+    ))
+  }
+</NewsDetailLayout>
