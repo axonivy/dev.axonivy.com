@@ -12,7 +12,7 @@ class ReleaseTypeTest extends TestCase
   public function test_byKey()
   {
     Assert::assertEquals('dev', ReleaseType::byKey('dev')->key());
-    Assert::assertEquals('sprint', ReleaseType::byKey('sprint')->key());
+    Assert::assertEquals('milestone', ReleaseType::byKey('milestone')->key());
     Assert::assertEquals('nightly', ReleaseType::byKey('nightly')->key());
     Assert::assertEquals('lts', ReleaseType::byKey('lts')->key());
     Assert::assertEquals('leading-edge', ReleaseType::byKey('leading-edge')->key());
@@ -25,7 +25,7 @@ class ReleaseTypeTest extends TestCase
   {
     Assert::assertEquals('dev', ReleaseType::DEV()->releaseInfo()->getVersion()->getVersionNumber());
     Assert::assertEquals('nightly', ReleaseType::NIGHTLY()->releaseInfo()->getVersion()->getVersionNumber());
-    Assert::assertEquals('sprint', ReleaseType::SPRINT()->releaseInfo()->getVersion()->getVersionNumber());
+    Assert::assertEquals('milestone', ReleaseType::MILESTONE()->releaseInfo()->getVersion()->getVersionNumber());
 
     Assert::assertEquals('nightly-8.0', ReleaseType::byKey('nightly-8.0')->key());
     Assert::assertEquals('nightly-7.0', ReleaseType::byKey('nightly-7.0')->key());

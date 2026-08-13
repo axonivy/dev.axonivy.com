@@ -41,8 +41,8 @@ class DocAction
       return Redirect::to($response, $releaseInfo->getDocProvider()->getLanguageMinorUrl($lang) . $docPath);
     }
 
-    // special treatement for dev, sprint, nightly
-    if ($version == "dev" || $version == "sprint" || $version == "nightly") {
+    // special treatment for dev, milestone, nightly
+    if ($version == "dev" || $version == "milestone" || $version == "nightly") {
       $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);      
       return Redirect::to($response, $url . $docPath);
     }

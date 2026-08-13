@@ -78,6 +78,7 @@ class ArchiveAction
   private function createCategorizedVersions(): array
   {
     $categorizedVersions = [
+      ReleaseType::MILESTONE()->archiveKey() => [],
       ReleaseType::LE()->name() => [],
       ReleaseType::LTS()->name() => [],
       'UNSUPPORTED' => []
@@ -106,6 +107,8 @@ class ArchiveAction
 class DownloadArchive
 {
 
+  private const RELEASE_TRAIN_MILESTONE_PATTERN = '/^\d+\.\d+\.\d+-m\d+$/i';
+
   private static function toVersion(ReleaseInfo $releaseInfo): string
   {
     $v = $releaseInfo->versionNumber();
@@ -114,6 +117,10 @@ class DownloadArchive
     $releaseType = ReleaseType::byKey($v);
     if ($releaseType != null) {
       return $releaseType->archiveKey();
+    }
+
+    if (preg_match(self::RELEASE_TRAIN_MILESTONE_PATTERN, $v) === 1) {
+      return ReleaseType::MILESTONE()->archiveKey();
     }
 
     if (version_compare($v, 6) <= 0) {
@@ -142,8 +149,19 @@ class DownloadArchive
     $versions = array_reverse($versions);
     $versions = array_flip($versions);
     $versions = array_fill_keys(array_keys($versions), 'UNSUPPORTED');
+    $versions = self::markUnstableMilestones($versions);
     $versions = self::markReleaseType(ReleaseType::LE(), $versions);
     $versions = self::markReleaseType(ReleaseType::LTS(), $versions);
+    return $versions;
+  }
+
+  private static function markUnstableMilestones(array $versions): array
+  {
+    foreach (array_keys($versions) as $version) {
+      if ($version === ReleaseType::MILESTONE()->archiveKey() || preg_match(self::RELEASE_TRAIN_MILESTONE_PATTERN, $version) === 1) {
+        $versions[$version] = ReleaseType::MILESTONE()->archiveKey();
+      }
+    }
     return $versions;
   }
 

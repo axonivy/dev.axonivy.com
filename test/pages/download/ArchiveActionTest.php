@@ -55,7 +55,8 @@ class ArchiveActionTest extends TestCase
       ->bodyContains('9')
       ->bodyContains('6.0')
       ->bodyContains('unstable')
-      ->bodyDoesNotContain('sprint')
+      ->bodyDoesNotContain('milestone')
+      ->bodyDoesNotContain('14.0.0-m8')
       ->bodyDoesNotContain('nightly');
   }
 
@@ -63,7 +64,8 @@ class ArchiveActionTest extends TestCase
   {
     AppTester::assertThatGet('/download/archive/unstable')->ok()
       ->bodyContains('dev')
-      ->bodyContains('sprint')
+      ->bodyContains('unstable')
+      ->bodyContains('14.0.0-m8')
       ->bodyContains('nightly')
       ->bodyContains('nightly-8.0')
       ->bodyContains('nightly-7.0');

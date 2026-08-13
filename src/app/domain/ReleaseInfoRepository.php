@@ -14,6 +14,7 @@ class ReleaseInfoRepository
   public static function getLatest(): ?ReleaseInfo
   {
     $releaseInfos = self::getAvailableReleaseInfos();
+    $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isOffical());
     return ArrayUtil::getLastElementOrNull($releaseInfos);
   }
 
@@ -70,6 +71,7 @@ class ReleaseInfoRepository
   public static function getAllEverLongTermSupportVersions(): array
   {
     $releaseInfos = self::getAvailableReleaseInfos();
+    $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isOffical());
 
     $majorVersions = array_map(fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->getMajorVersion(), $releaseInfos);
     $uniqueMajorVersions = array_unique($majorVersions);
@@ -94,7 +96,7 @@ class ReleaseInfoRepository
 
     $releaseInfos = array_reverse(self::getAvailableReleaseInfos());
     foreach ($releaseInfos as $releaseInfo) {
-      if ($releaseInfo->getVersion()->isMinor()) {
+      if ($releaseInfo->getVersion()->isMinor() || !$releaseInfo->getVersion()->isOffical()) {
         continue;
       }
       if (str_starts_with($releaseInfo->getVersion()->getVersionNumber(), $version)) {
@@ -137,6 +139,12 @@ class ReleaseInfoRepository
     return array_filter($all, fn(ReleaseInfo $info) => str_starts_with($info->getVersion()->getVersionNumber(), "nightly-"));
   }
 
+  public static function getQualifiedMilestoneReleaseInfos(): array
+  {
+    $all = self::getAvailableReleaseInfos();
+    return array_filter($all, fn(ReleaseInfo $info) => $info->getVersion()->isSprint());
+  }
+
   /**
    * 8.0
    * 8.0.3
@@ -169,6 +177,11 @@ class ReleaseInfoRepository
   }
 
   public static function getMatchingVersions(string $version): array
+  {
+    return self::findMatchingVersionsByPrefix($version);
+  }
+
+  private static function findMatchingVersionsByPrefix(string $version): array
   {
     $releaseInfos = self::sortReleaseInfosByVersionNewestFirst(self::getAvailableReleaseInfos());
     $infos = [];

@@ -41,12 +41,13 @@ class ReleaseType
     return $type;
   }
 
-  public static function SPRINT(): ReleaseType
+  public static function MILESTONE(): ReleaseType
   {
     $type = self::createDevReleaseType();
-    $type->key = 'sprint';
-    $type->name = 'Sprint Release';
-    $type->shortName = 'Sprint';
+    $type->key = 'milestone';
+    $type->name = 'Milestone Release';
+    $type->shortName = 'Milestone';
+    $type->allReleaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getQualifiedMilestoneReleaseInfos();
     $type->promotedDevVersion = true;
     return $type;
   }
@@ -80,7 +81,6 @@ class ReleaseType
     $type->promotedDevVersion = $promoted;
     return $type;
   }
-
   private static function createDevReleaseType(): ReleaseType
   {
     $type = new ReleaseType();
@@ -179,7 +179,7 @@ class ReleaseType
       [
         self::LTS(),
         self::LE(),
-        self::SPRINT(),
+        self::MILESTONE(),
         self::NIGHTLY(),
         self::DEV(),
       ],
