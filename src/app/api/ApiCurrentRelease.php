@@ -37,7 +37,11 @@ class ApiCurrentRelease
       $minorVersion = $version->getMinorVersion();
 
       $releaesInfos = ReleaseInfoRepository::getAvailableReleaseInfos();
-      $releaseInfos = array_filter($releaesInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->getMinorVersion() == $minorVersion);
+      $releaseInfos = array_filter(
+        $releaesInfos,
+        fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->getMinorVersion() == $minorVersion
+          && $releaseInfo->getVersion()->isOffical()
+      );
       $releaseInfo = ArrayUtil::getLastElementOrNull($releaseInfos);
     }
 
