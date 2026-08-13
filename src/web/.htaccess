@@ -1,6 +1,6 @@
 Options -Indexes +FollowSymLinks
 
-DirectoryIndex index.php index.html
+DirectoryIndex index.html index.php
 
 Order allow,deny
 Allow from all
