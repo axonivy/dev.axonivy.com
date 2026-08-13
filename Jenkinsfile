@@ -23,6 +23,8 @@ pipeline {
       }
       steps {
         sh 'composer install --no-dev --no-progress'
+        sh 'pnpm --dir frontend install --frozen-lockfile'
+        sh 'pnpm --dir frontend build'
         sh "tar -cf ${env.DIST_FILE}\
           --exclude=src/web/releases\
           --exclude=src/web/docs\
