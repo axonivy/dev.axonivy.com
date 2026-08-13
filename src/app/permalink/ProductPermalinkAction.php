@@ -14,8 +14,12 @@ class ProductPermalinkAction
 
   public function __invoke(Request $request, Response $response, array $args)
   {
-    $version = $args['version']; // nightly, sprint, dev, latest, 8.0, 8, 8.0.1
+    $version = $args['version']; // nightly, milestone, dev, latest, 8.0, 8, 8.0.1
     $file = $args['file']; // axonivy-engine-slim.zip
+
+    if ($version == 'sprint') {
+      return Redirect::to($response, '/permalink/milestone/' . $file);
+    }
 
     $releaseInfo = $this->findReleaseInfo($version);
     if ($releaseInfo == null) {

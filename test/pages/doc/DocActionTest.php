@@ -80,8 +80,8 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/9.1.0/en')->redirect('/doc/9.1/en');
     AppTester::assertThatGet('/doc/dev')->redirect('/doc/9.5/en');
     AppTester::assertThatGet('/doc/dev/en')->redirect('/doc/9.5/en');
-    AppTester::assertThatGet('/doc/sprint')->redirect('/doc/9.5/en');
-    AppTester::assertThatGet('/doc/sprint/en')->redirect('/doc/9.5/en');
+    AppTester::assertThatGet('/doc/milestone')->redirect('/doc/9.5/en');
+    AppTester::assertThatGet('/doc/milestone/en')->redirect('/doc/9.5/en');
     AppTester::assertThatGet('/doc/nightly')->redirect('/doc/9.5/en');
     AppTester::assertThatGet('/doc/nightly/en')->redirect('/doc/9.5/en');
     AppTester::assertThatGet('/doc/nightly-8.0')->redirect('/doc/8.0/en');
@@ -105,8 +105,8 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/9.1.0/en/migration-notes')->redirect('/doc/9.1/en/migration-notes');
     AppTester::assertThatGet('/doc/dev/migration-notes')->redirect('/doc/9.5/en/migration-notes');
     AppTester::assertThatGet('/doc/dev/en/migration-notes')->redirect('/doc/9.5/en/migration-notes');
-    AppTester::assertThatGet('/doc/sprint/migration-notes')->redirect('/doc/9.5/en/migration-notes');
-    AppTester::assertThatGet('/doc/sprint/en/migration-notes')->redirect('/doc/9.5/en/migration-notes');
+    AppTester::assertThatGet('/doc/milestone/migration-notes')->redirect('/doc/9.5/en/migration-notes');
+    AppTester::assertThatGet('/doc/milestone/en/migration-notes')->redirect('/doc/9.5/en/migration-notes');
     AppTester::assertThatGet('/doc/nightly/migration-notes')->redirect('/doc/9.5/en/migration-notes');
     AppTester::assertThatGet('/doc/nightly/en/migration-notes')->redirect('/doc/9.5/en/migration-notes');
     AppTester::assertThatGet('/doc/nightly-8.0/migration-notes')->redirect('/doc/8.0/en/migration-notes');
@@ -130,8 +130,8 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/9.1.0/en/release-notes')->redirect('/doc/9.1/en/release-notes');
     AppTester::assertThatGet('/doc/dev/release-notes')->redirect('/doc/9.5/en/release-notes');
     AppTester::assertThatGet('/doc/dev/en/release-notes')->redirect('/doc/9.5/en/release-notes');
-    AppTester::assertThatGet('/doc/sprint/release-notes')->redirect('/doc/9.5/en/release-notes');
-    AppTester::assertThatGet('/doc/sprint/en/release-notes')->redirect('/doc/9.5/en/release-notes');
+    AppTester::assertThatGet('/doc/milestone/release-notes')->redirect('/doc/9.5/en/release-notes');
+    AppTester::assertThatGet('/doc/milestone/en/release-notes')->redirect('/doc/9.5/en/release-notes');
     AppTester::assertThatGet('/doc/nightly/release-notes')->redirect('/doc/9.5/en/release-notes');
     AppTester::assertThatGet('/doc/nightly/en/release-notes')->redirect('/doc/9.5/en/release-notes');
     AppTester::assertThatGet('/doc/nightly-8.0/release-notes')->redirect('/doc/8.0/en/release-notes');
@@ -157,8 +157,8 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/9.1/en/new-and-noteworthy')->redirect('/news/9.1');
     AppTester::assertThatGet('/doc/dev/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
     AppTester::assertThatGet('/doc/dev/en/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
-    AppTester::assertThatGet('/doc/sprint/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
-    AppTester::assertThatGet('/doc/sprint/en/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
+    AppTester::assertThatGet('/doc/milestone/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
+    AppTester::assertThatGet('/doc/milestone/en/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
     AppTester::assertThatGet('/doc/nightly/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
     AppTester::assertThatGet('/doc/nightly/en/new-and-noteworthy')->redirect('/doc/9.5/en/new-and-noteworthy');
     AppTester::assertThatGet('/doc/nightly-8.0/new-and-noteworthy')->redirect('/doc/8.0/en/new-and-noteworthy');

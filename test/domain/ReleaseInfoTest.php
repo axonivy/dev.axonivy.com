@@ -119,8 +119,8 @@ class ReleaseInfoTest extends TestCase
     $artifact = self::loadDockerArtifact('nightly-7');
     Assert::assertNull($artifact);
 
-    $artifact = self::loadDockerArtifact('sprint');
-    Assert::assertEquals('axonivy/axonivy-engine:sprint', $artifact->getFileName());
+    $artifact = self::loadDockerArtifact('milestone');
+    Assert::assertEquals('axonivy/axonivy-engine:milestone', $artifact->getFileName());
   }
 
   private static function loadDockerArtifact($version): ?Artifact

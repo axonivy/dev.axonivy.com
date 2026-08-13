@@ -29,11 +29,18 @@ class DownloadActionTest extends TestCase
     AppTester::assertThatGet('/download/nightly-71')->notFound();
   }
 
-  public function testSprint()
+  public function testMilestone()
   {
-    AppTester::assertThatGet('/download/sprint')->ok()
-      ->bodyContains('Sprint Release')
-      ->bodyContains('https://download.axonivy.com/sprint/AxonIvyEngine7.0.1.56047.S8_Windows_x64.zip');
+    AppTester::assertThatGet('/download/milestone')->ok()
+      ->bodyContains('Milestone Release')
+      ->bodyContains('https://download.axonivy.com/milestone/AxonIvyEngine7.0.1.56047.m8_Windows_x64.zip')
+      ->bodyContains('/permalink/milestone/')
+      ->bodyDoesNotContain('/permalink/sprint/');
+  }
+
+  public function testSprintRedirectsToMilestone()
+  {
+    AppTester::assertThatGet('/download/sprint')->redirect('/download/milestone');
   }
 
   public function testLTS()

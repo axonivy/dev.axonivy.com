@@ -64,7 +64,8 @@ class ReleaseInfoRepositoryTest extends TestCase
     Assert::assertEquals('8.0.1', self::bestMatchingVersion('8'));
 
     Assert::assertEquals('dev', self::bestMatchingVersion('dev'));
-    Assert::assertEquals('sprint', self::bestMatchingVersion('sprint'));
+    Assert::assertEquals('milestone', self::bestMatchingVersion('milestone'));
+    Assert::assertEquals('14.0.0-m8', self::bestMatchingVersion('14.0.0-m8'));
     Assert::assertEquals('nightly', self::bestMatchingVersion('nightly'));
     Assert::assertEquals('nightly-8.0', self::bestMatchingVersion('nightly-8.0'));
 
@@ -84,7 +85,7 @@ class ReleaseInfoRepositoryTest extends TestCase
     Assert::assertTrue(self::isReleased('8'));
 
     Assert::assertTrue(self::isReleased('dev'));
-    Assert::assertTrue(self::isReleased('sprint'));
+    Assert::assertTrue(self::isReleased('milestone'));
     Assert::assertTrue(self::isReleased('nightly'));
 
     Assert::assertFalse(self::isReleased('2.0.0'));

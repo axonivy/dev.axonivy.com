@@ -49,7 +49,7 @@ class RoutingRules
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/archive[/{version}]', ArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
-    $app->get('/download[/{version}]', DownloadAction::class); // leading-edge/sprint/nightly/dev
+    $app->get('/download[/{version}]', DownloadAction::class); // leading-edge/milestone/nightly/dev
 
     $app->get('/release-cycle', ReleaseCycleAction::class);
 

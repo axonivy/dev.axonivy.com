@@ -11,7 +11,7 @@ class DocProvider
    * Minor version number
    * @var $versionNumber
    */
-  private string $versionNumber;
+  private string $versionNumber = '';
   const DEFAULT_LANGUAGE = "en";
 
   public function __construct(string $versionNumber)
@@ -31,7 +31,8 @@ class DocProvider
 
   private function getDocDir()
   {
-    return Config::docDirectory() . "/" . $this->versionNumber;
+    $versionNumber = (string) $this->versionNumber;
+    return Config::docDirectory() . "/" . $versionNumber;
   }
 
   private function getDefaultLanguageDocDir()
@@ -138,9 +139,9 @@ class DocProvider
       $this->createReleaseDocument('ReadMe Engine', 'ReadMeEngine.html', 'readme-engine'), // legacy
       $this->createReleaseDocument('ReadMe Server', 'ReadMeServer.html', 'readme-server')  // legacy
     ];
-    return array_filter($documents, function (AbstractDocument $doc) {
-      return $doc->exists();
-    });
+    return array_values(array_filter($documents, function ($doc) {
+      return $doc != null && $doc->exists();
+    }));
   }
 
   private function createBook($name, $path, $pdfFile): Book
@@ -169,12 +170,12 @@ class DocProvider
 
   private function createBaseUrl(): string
   {
-    return '/doc/' . $this->versionNumber;
+    return '/doc/' . (string) $this->versionNumber;
   }
 
   private function createBaseResourceUrl(): string
   {
-    return '/docs/' . $this->versionNumber;
+    return '/docs/' . (string) $this->versionNumber;
   }
 
   public function getReleaseNotes(): ReleaseDocument
@@ -225,8 +226,9 @@ class DocProvider
 
   public function getNewAndNoteworthy(): ?ReleaseDocument
   {
-    if (version_compare($this->versionNumber, 8) >= 0) {      
-      if (NewsAction::exists($this->versionNumber)) {
+    $versionNumber = (string) $this->versionNumber;
+    if (version_compare($versionNumber, 8) >= 0) {      
+      if (NewsAction::exists($versionNumber)) {
         return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
       }
       return null;
@@ -251,7 +253,8 @@ class DocProvider
 
   public function getMinorUrl(): string
   {
-    if (Version::isValidVersionNumber($this->versionNumber)) {
+    $versionNumber = (string) $this->versionNumber;
+    if (Version::isValidVersionNumber($versionNumber)) {
       $v = $this->getMinorVersion();
       if ((new DocProvider($v))->exists()) {
         return '/doc/' . $v;
@@ -262,7 +265,7 @@ class DocProvider
 
   public function getMinorVersion(): string 
   {
-    return (new Version($this->versionNumber))->getMinorVersion();
+    return (new Version((string) $this->versionNumber))->getMinorVersion();
   }
 
   public function getLanguageMinorUrl(string $lang): string 
