@@ -1,0 +1,143 @@
+---
+import Layout from "@/layouts/main.astro";
+import { Card, CardContent } from "@/components/ui/card";
+import Placeholder from "@/assets/avatar-placeholder.svg";
+
+const team = [
+  {
+    name: "Alexander Suter",
+    imgSrc: Placeholder,
+    education: "B.Sc. Computer Science",
+    function: "Core Developer",
+    slogan: "Dock worker 👷",
+  },
+  {
+    name: "Bruno Bütler",
+    imgSrc: Placeholder,
+    education: "Inf. Ing. HTL",
+    function: "Product Owner & Team Leader",
+    slogan: "Primal rock 🗿",
+  },
+  {
+    name: "Christian Strebel",
+    imgSrc: Placeholder,
+    education: "Inf. Ing. FH",
+    function: "Core Developer",
+    slogan: "Infrastructure & Architecture 🏗️",
+  },
+  {
+    name: "Lukas Lieb",
+    imgSrc: Placeholder,
+    education: "B.Sc. Computer Science",
+    function: "Core Developer",
+    slogan: "Pixel mover 🌄",
+  },
+  {
+    name: "Reguel Wermelinger",
+    imgSrc: Placeholder,
+    education: "B.Sc. Computer Science",
+    function: "Core Developer",
+    slogan: "Swiss knife ⌨️",
+  },
+  {
+    name: "Reto Weiss",
+    imgSrc: Placeholder,
+    education: "El. Ing. HTL",
+    function: "Product Owner & Core Developer",
+    slogan: "Tracing Guru 📈",
+  },
+  {
+    name: "Louis Müller",
+    imgSrc: Placeholder,
+    education: "M.Sc. Computer Science",
+    function: "Core Developer",
+    slogan: "Quantum Engineer ⚛️",
+  },
+  {
+    name: "Tobias Gretler",
+    imgSrc: Placeholder,
+    education: "EFZ Information Technology",
+    function: "Core Developer",
+    slogan: "Learning Software development 🖥️",
+  },
+  {
+    name: "Elio Di Puma",
+    imgSrc: Placeholder,
+    education: "B.Sc. Computer Science",
+    function: "Core Developer",
+    slogan: "Frontend Flair, Design Spark ✨",
+  },
+  {
+    name: "Dominik Arnold",
+    imgSrc: Placeholder,
+    education: "M.Sc. Computer Science",
+    function: "Core Developer",
+    slogan: "Taking the first steps 🦿🦵",
+  },
+  {
+    name: "Lukas Giger",
+    imgSrc: Placeholder,
+    education: "EFZ Information Technology",
+    function: "Core Developer",
+    slogan: "Living Algorithm 🧮",
+  },
+  {
+    name: "Fabian Heuberger",
+    imgSrc: Placeholder,
+    education: "EFZ Information Technology",
+    function: "Core Developer",
+    slogan: "Just starting out 🐣",
+  },
+  {
+    name: "Alissa Villiger",
+    imgSrc: Placeholder,
+    education: "EFZ Information Technology",
+    function: "Core Developer",
+    slogan: "Starting the journey🛣️",
+  },
+  {
+    name: "Jacek Lajdecki",
+    imgSrc: Placeholder,
+    education: "EFZ Information Technology",
+    function: "Core Developer",
+    slogan: "Bringing fresh energy ⚡",
+  },
+  {
+    name: "Colin Graf",
+    imgSrc: Placeholder,
+    education: "EFZ Information Technology",
+    function: "Core Developer",
+    slogan: "Learning 📚",
+  },
+];
+---
+
+<Layout
+  title="🇨🇭IvyTeam"
+  description="IvyTeam is the core development team of the Axon Ivy Platform. The team is highly experienced in agile software development. Since the formation in the year 1993 the team is located in Zug in the heart of Switzerland."
+>
+  <div class="grid gap-6 md:grid-cols-3 grid-cols-1">
+    {
+      team.map((member) => {
+        const Avatar = member.imgSrc;
+
+        return (
+          <Card className="flex flex-row items-center p-2 py-2 gap-2 ">
+            <Avatar
+              aria-label={`${member.name} avatar`}
+              class="h-48 w-fit shrink-0 rounded-md"
+            />
+            <CardContent className="flex flex-col gap-2">
+              <p class="font-semibold text-xl">{member.name}</p>
+              <div class="text-sm text-n900">
+                <p>{member.function}</p>
+                <p>{member.education}</p>
+              </div>
+              <p class="text-sm">{member.slogan}</p>
+            </CardContent>
+          </Card>
+        );
+      })
+    }
+  </div>
+</Layout>
