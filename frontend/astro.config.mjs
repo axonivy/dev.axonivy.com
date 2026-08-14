@@ -1,15 +1,15 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import react from '@astrojs/react';
+import react from "@astrojs/react";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  output: 'static',
-  outDir: '../src/web',
+  output: "static",
+  outDir: "../src/web",
 
   build: {
-    format: 'directory',
+    format: "directory",
   },
 
   vite: {
@@ -20,7 +20,7 @@ export default defineConfig({
 
     server: {
       proxy: {
-        '/api': 'http://localhost:8080',
+        "/api": "http://localhost:8080",
       },
     },
 

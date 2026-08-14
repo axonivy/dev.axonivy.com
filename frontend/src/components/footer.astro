@@ -1,0 +1,218 @@
+---
+import AxonIvyLogo from "@/assets/axonivy-logo-2021-rgb.svg";
+import Navbar from "@/components/navbar";
+import { buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  IconBrandDocker,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandYoutube,
+} from "@tabler/icons-astro";
+
+const currentYear = new Date().getFullYear();
+
+const footerContent = {
+  copyright: `© ${currentYear} Axon Ivy Inc.`,
+  downloadLink: "/download",
+  releaseLinks: {
+    longTermSupport: {
+      label: "Long Term Support",
+      href: "/download",
+    },
+    leadingEdge: {
+      label: "Leading Edge",
+      href: "/download",
+    },
+  },
+  website: {
+    label: "www.axonivy.com",
+    href: "https://www.axonivy.com",
+  },
+  legalLinks: [
+    {
+      label: "Privacy Policy",
+      href: "/privacy-policy",
+    },
+    {
+      label: "Terms of Service",
+      href: "/terms-of-service",
+    },
+  ],
+  socialLinks: [
+    {
+      label: "LinkedIn",
+      href: "https://ch.linkedin.com/company/axonivy",
+      icon: IconBrandLinkedin,
+    },
+    {
+      label: "Docker",
+      href: "https://hub.docker.com/r/axonivy/axonivy-engine",
+      icon: IconBrandDocker,
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/axonivy",
+      icon: IconBrandGithub,
+    },
+    {
+      label: "YouTube",
+      href: "https://www.youtube.com/channel/UCkoNcDoeDAVM7FB-txy3jnQ",
+      icon: IconBrandYoutube,
+    },
+  ],
+};
+---
+
+<div class="w-full border-t border-n100">
+  <div
+    class="relative mx-auto flex w-full flex-col gap-8 py-8 px-4 md:max-w-6xl"
+  >
+    <div class="flex flex-col gap-4 md:hidden items-center">
+      <a href="/">
+        <!-- replace with the axonivy dev logo -->
+        <AxonIvyLogo width={160} height={40} />
+      </a>
+      <div class="w-full max-w-md text-center">
+        <p class="text-sm text-n900">
+          Get the latest stable
+          <a
+            href={footerContent.releaseLinks.longTermSupport.href}
+            class="text-primary underline"
+          >
+            {footerContent.releaseLinks.longTermSupport.label}
+          </a>
+          version of the Axon Ivy Platform - or download the
+          <a
+            href={footerContent.releaseLinks.leadingEdge.href}
+            class="text-primary underline"
+          >
+            {footerContent.releaseLinks.leadingEdge.label}
+          </a>
+          version.
+        </p>
+      </div>
+      <div>
+        <a
+          href={footerContent.downloadLink}
+          class={buttonVariants({ variant: "default" })}
+        >
+          Download
+        </a>
+      </div>
+    </div>
+
+    <div class="hidden flex-col gap-4 md:flex">
+      <div class="flex items-center justify-between">
+        <a href="/">
+          <!-- replace with the axonivy dev logo -->
+          <AxonIvyLogo width={160} height={40} />
+        </a>
+        <Navbar type="footer" client:load />
+      </div>
+      <div class="w-full max-w-md">
+        <p class="text-sm text-n900">
+          Get the latest stable
+          <a
+            href={footerContent.releaseLinks.longTermSupport.href}
+            class="text-primary underline"
+          >
+            {footerContent.releaseLinks.longTermSupport.label}
+          </a>
+          version of the Axon Ivy Platform - or download the
+          <a
+            href={footerContent.releaseLinks.leadingEdge.href}
+            class="text-primary underline"
+          >
+            {footerContent.releaseLinks.leadingEdge.label}
+          </a>
+          version.
+        </p>
+      </div>
+      <div class="flex flex-row justify-between">
+        <a
+          href={footerContent.downloadLink}
+          class={buttonVariants({ variant: "default" })}>Download</a
+        >
+        <a
+          href={footerContent.website.href}
+          class="text-primary underline"
+          target="_blank"
+          rel="noopener noreferrer">{footerContent.website.label}</a
+        >
+      </div>
+    </div>
+
+    <Separator />
+
+    <div class="flex flex-col gap-6 text-sm text-n900 md:hidden items-center">
+      <div class="flex flex-col gap-2 items-center">
+        <p>{footerContent.copyright}</p>
+        <div class="flex gap-6">
+          {
+            footerContent.legalLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))
+          }
+        </div>
+      </div>
+      <a
+        href={footerContent.website.href}
+        class="text-primary underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {footerContent.website.label}
+      </a>
+      <div class="flex flex-wrap items-center">
+        <div class="flex gap-4">
+          {
+            footerContent.socialLinks.map((link) => {
+              const SocialIcon = link.icon;
+
+              return (
+                <a
+                  href={link.href}
+                  aria-label={link.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SocialIcon class="size-4.5" />
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden items-center justify-between text-sm text-n900 md:flex">
+      <div class="flex gap-6">
+        <p>{footerContent.copyright}</p>
+        {
+          footerContent.legalLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))
+        }
+      </div>
+      <div class="flex items-center gap-4">
+        {
+          footerContent.socialLinks.map((link) => {
+            const SocialIcon = link.icon;
+
+            return (
+              <a
+                href={link.href}
+                aria-label={link.label}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SocialIcon class="size-4.5" />
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</div>

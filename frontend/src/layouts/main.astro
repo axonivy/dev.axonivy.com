@@ -1,0 +1,26 @@
+---
+import Header from "@/components/header.astro";
+import Footer from "@/components/footer.astro";
+import "@/styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Axon Ivy Developer</title>
+  </head>
+  <body>
+    <header>
+      <Header />
+    </header>
+    <div
+      class="w-full mx-auto flex md:max-w-6xl flex-col gap-6 px-4 pb-8 pt-20"
+    >
+      <slot />
+    </div>
+    <footer>
+      <Footer />
+    </footer>
+  </body>
+</html>
