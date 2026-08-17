@@ -18,7 +18,7 @@ import {
 
 const navItems = [
   { label: "News", href: "/news", external: false },
-  { label: "Docs", href: "/docs", external: false },
+  { label: "Documentation", href: "/doc", external: false },
   { label: "Market", href: "https://market.axonivy.com/", external: true },
   {
     label: "Community",
