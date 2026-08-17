@@ -28,7 +28,6 @@ use app\pages\support\SupportAction;
 use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
-use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
 use app\permalink\LegacyPortalPermalinkAction;
@@ -84,7 +83,5 @@ class RoutingRules
     $app->get('/sitemap.xml', SitemapAction::class);
 
     $app->get('/news[/{version}]', NewsAction::class);
-
-    $app->get('/market[/{path:.*}]', LegacyMarketRedirectAction::class);
   }
 }
