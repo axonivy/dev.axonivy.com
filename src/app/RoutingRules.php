@@ -30,7 +30,6 @@ use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
-use app\permalink\LegacyPortalPermalinkAction;
 use app\permalink\LinkAction;
 use Slim\App;
 
@@ -70,8 +69,6 @@ class RoutingRules
     $app->get('/link/{key}[/{version}]', LinkAction::class);
 
     $app->get('/api-browser', ApiBrowserAction::class);
-
-    $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
     $app->get('/installation', InstallationAction::class);
     $app->get('/features/deprecation', DeprecationAction::class);
