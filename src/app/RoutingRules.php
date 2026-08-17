@@ -28,10 +28,8 @@ use app\pages\support\SupportAction;
 use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
-use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
-use app\permalink\LegacyPortalPermalinkAction;
 use app\permalink\LinkAction;
 use Slim\App;
 
@@ -72,8 +70,6 @@ class RoutingRules
 
     $app->get('/api-browser', ApiBrowserAction::class);
 
-    $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
-
     $app->get('/installation', InstallationAction::class);
     $app->get('/features/deprecation', DeprecationAction::class);
 
@@ -84,7 +80,5 @@ class RoutingRules
     $app->get('/sitemap.xml', SitemapAction::class);
 
     $app->get('/news[/{version}]', NewsAction::class);
-
-    $app->get('/market[/{path:.*}]', LegacyMarketRedirectAction::class);
   }
 }
