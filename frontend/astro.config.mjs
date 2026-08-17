@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "static",
-  outDir: "../src/web",
+  outDir: "../src/web/astro",
 
   build: {
     format: "directory",

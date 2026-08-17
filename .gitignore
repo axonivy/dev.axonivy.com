@@ -10,5 +10,4 @@ composer.phar
 /src/web/documentation
 /src/web/swagger
 bom.json
-/src/web/_astro
-/src/web/index.html
+/src/web/astro/

@@ -25,7 +25,6 @@ use app\pages\release\ReleaseCycleAction;
 use app\pages\search\SearchAction;
 use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
-use app\pages\team\TeamAction;
 use app\pages\tutorial\TutorialAction;
 use app\pages\deprecation\DeprecationAction;
 use app\pages\market\LegacyMarketRedirectAction;
@@ -40,7 +39,6 @@ class RoutingRules
   public static function installRoutes(App $app)
   {
     $app->get('/', HomeAction::class);
-    $app->get('/team', TeamAction::class);
     $app->get('/support', SupportAction::class);
     $app->get('/search', SearchAction::class);
     $app->get('/github', GitHubAction::class);
