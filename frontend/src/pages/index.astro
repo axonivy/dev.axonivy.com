@@ -75,34 +75,21 @@ const cards: HomepageCard[] = [
 ];
 ---
 
-<Layout>
-  <div
-    class="relative isolate flex flex-col items-center gap-12 leading-loose md:py-12 py-4"
-  >
-    <div
-      aria-hidden="true"
-      class="absolute top-0 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl md:size-144"
+<Layout
+  title="Build and automate business process faster with Axon Ivy"
+  description={"The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."}
+>
+  <div class="flex flex-col items-center gap-12 leading-loose">
+    <a
+      href="/download"
+      class={buttonVariants({
+        variant: "default",
+        size: "lg",
+        class: "md:hidden w-full",
+      })}
     >
-    </div>
-    <div class="flex w-full md:w-2/3 flex-col items-center gap-8 text-center">
-      <h1 class="text-3xl font-semibold md:text-6xl">
-        Build and automate business process faster with Axon Ivy
-      </h1>
-      <p class="text-base md:text-xl text-n900">
-        The open BPM platform to build enterprise-grade applications. <br />
-        Model. Automate. Integrate. All in one.
-      </p>
-      <a
-        href="/download"
-        class={buttonVariants({
-          variant: "default",
-          size: "lg",
-          class: "md:hidden w-full",
-        })}
-      >
-        Download
-      </a>
-    </div>
+      Download
+    </a>
     <div
       class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
     >
