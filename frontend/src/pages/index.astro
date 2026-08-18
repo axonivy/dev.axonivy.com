@@ -1,83 +1,13 @@
 ---
 import Layout from "@/layouts/main.astro";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  IconArrowRight,
-  IconBook,
-  IconBuildingStore,
-  IconDownload,
-  IconNews,
-  IconPointFilled,
-  IconUsers,
-} from "@tabler/icons-astro";
+import { IconArrowRight, IconPointFilled } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
-
-const iconMap = {
-  IconDownload,
-  IconNews,
-  IconBook,
-  IconBuildingStore,
-  IconUsers,
-};
-
-type CardIconName = keyof typeof iconMap;
-
-type HomepageCard = {
-  id: number;
-  icon: CardIconName;
-  title: string;
-  description: string;
-  href: string;
-};
-
-const cards: HomepageCard[] = [
-  {
-    id: 1,
-    icon: "IconDownload",
-    title: "Download",
-    description: "Download Axon Ivy and set up your environment.",
-    href: "/download",
-  },
-  {
-    id: 2,
-    icon: "IconNews",
-    title: "News",
-    description: "Read the latest updates and releases",
-    href: "/news",
-  },
-  {
-    id: 3,
-    icon: "IconBook",
-    title: "Documentation",
-    description: "Guides, API, reference and tutorials.",
-    href: "/doc",
-  },
-  {
-    id: 4,
-    icon: "IconBuildingStore",
-    title: "Marketplace",
-    description: "Extend your projects with apps and connectors.",
-    href: "https://market.axonivy.com/",
-  },
-  {
-    id: 5,
-    icon: "IconUsers",
-    title: "Community",
-    description: "Join the community and get support.",
-    href: "https://community.axonivy.com/",
-  },
-];
 ---
 
 <Layout
   title="Build and automate business process faster with Axon Ivy"
   description={"The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."}
+  center={true}
 >
   <div class="flex flex-col items-center gap-12 leading-loose">
     <a
@@ -90,51 +20,26 @@ const cards: HomepageCard[] = [
     >
       Download
     </a>
-    <div
-      class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
-    >
-      {
-        cards.map((card) => {
-          const CardIcon = iconMap[card.icon];
-
-          return (
-            <a
-              href={card.href}
-              class="group block h-full rounded-xl focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1"
-            >
-              <Card className="h-full w-full transition-shadow group-hover:shadow-md">
-                <div class="flex items-center justify-between gap-4 px-4 md:hidden">
-                  {CardIcon && <CardIcon class="size-8 shrink-0" />}
-                  <div>
-                    <CardTitle>{card.title}</CardTitle>
-                    <CardDescription>{card.description}</CardDescription>
-                  </div>
-                  <IconArrowRight
-                    class="size-6 shrink-0 stroke-2"
-                    aria-hidden="true"
-                  />
-                </div>
-
-                <div class="hidden h-full md:flex md:flex-col">
-                  <CardHeader>
-                    {CardIcon && <CardIcon class="mb-2 mt-2 size-8" />}
-                    <CardTitle>{card.title}</CardTitle>
-                    <CardDescription className="w-3/4">
-                      {card.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="mt-auto">
-                    <IconArrowRight
-                      class="size-6 stroke-2"
-                      aria-hidden="true"
-                    />
-                  </CardContent>
-                </div>
-              </Card>
-            </a>
-          );
-        })
-      }
+    <div class="w-full max-w-3xs flex flex-col gap-4 justify-center">
+      <a
+        href="/download"
+        class={buttonVariants({
+          variant: "default",
+          size: "lg",
+          class: "w-full",
+        }) + " group"}
+      >
+        Get started
+        <IconArrowRight
+          class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+        />
+      </a>
+      <a
+        href="/news"
+        class={buttonVariants({ variant: "outline", size: "lg" })}
+      >
+        Latest News
+      </a>
     </div>
     <div class="flex flex-row items-center gap-2 text-lg text-n900">
       <p>Open Source</p>
