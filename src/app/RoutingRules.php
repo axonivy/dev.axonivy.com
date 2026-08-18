@@ -26,7 +26,6 @@ use app\pages\search\SearchAction;
 use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
 use app\pages\tutorial\TutorialAction;
-use app\pages\deprecation\DeprecationAction;
 use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
@@ -71,7 +70,6 @@ class RoutingRules
     $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
     $app->get('/installation', InstallationAction::class);
-    $app->get('/features/deprecation', DeprecationAction::class);
 
     $app->get('/api/currentRelease', ApiCurrentRelease::class);
     $app->get('/api/status', StatusApi::class);

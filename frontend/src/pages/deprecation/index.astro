@@ -1,8 +1,8 @@
 ---
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import DeprecationMobileCard from "@/components/deprecation-mobile-card.astro";
+import DeprecationStep from "@/components/deprecation-step.astro";
 import Layout from "@/layouts/main.astro";
-import { IconCircleCheck } from "@tabler/icons-astro";
 import deprecated from "@/data/deprecation.json";
 import {
   Table,
@@ -12,7 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IconExternalLink } from "@tabler/icons-astro";
 
 const deprecationSteps = [
   {
@@ -30,24 +29,14 @@ const deprecationSteps = [
   },
 ];
 
-const removalVersions = [
-  ...new Set(
-    deprecated
-      .map((item) => Number(item.removed))
-      .filter((version) => Number.isFinite(version)),
-  ),
-].sort((firstVersion, secondVersion) => secondVersion - firstVersion);
-
-const [latestRemovalVersion] = removalVersions;
-const recentRemovalVersions = removalVersions.slice(1, 4);
+const currentVersion = 14;
 
 const currentlyDeprecated = deprecated.filter(
-  (item) =>
-    item.removed === undefined || Number(item.removed) === latestRemovalVersion,
+  (item) => item.removed === undefined || Number(item.removed) > currentVersion,
 );
 
-const recentlyRemoved = deprecated.filter((item) =>
-  recentRemovalVersions.includes(Number(item.removed)),
+const recentlyRemoved = deprecated.filter(
+  (item) => Number(item.removed) <= currentVersion,
 );
 
 const deprecationSections = [
@@ -85,31 +74,7 @@ const deprecationSections = [
       <CardContent className="flex flex-col gap-4 md:flex-row md:gap-6">
         {
           deprecationSteps.map((step, index) => (
-            <>
-              {index > 0 && (
-                <>
-                  <Separator className="md:hidden" />
-                  <Separator
-                    orientation="vertical"
-                    className="hidden md:block"
-                  />
-                </>
-              )}
-              <div class="flex flex-1 items-start gap-3 pb-2">
-                <IconCircleCheck class="mt-0.5 size-5 shrink-0 text-primary" />
-                <p>
-                  {step.description}
-                  {step.code && (
-                    <>
-                      {" "}
-                      <code class="rounded bg-n75 px-1 py-0.5 font-code text-[0.875em] text-n900">
-                        {step.code}
-                      </code>
-                    </>
-                  )}
-                </p>
-              </div>
-            </>
+            <DeprecationStep step={step} showSeparator={index > 0} />
           ))
         }
       </CardContent>
@@ -166,41 +131,7 @@ const deprecationSections = [
           </div>
           <div class="flex flex-col md:hidden gap-4">
             {section.items.map((item) => (
-              <Card>
-                <CardHeader className="flex flex-row gap-3">
-                  <CardTitle className="flex w-full items-center justify-between gap-2">
-                    <span class="max-w-4/5">{item.name}</span>
-                    <a href={item.nameHref} class="shrink-0">
-                      <IconExternalLink class="h-4 w-4 shrink-0 text-primary" />
-                    </a>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div class="flex flex-col gap-2">
-                    <div class="flex flex-row items-start gap-2 justify-between w-full">
-                      <p class="text-n800">Introduced in:</p>
-                      <p>{item.released}</p>
-                    </div>
-                    <div class="flex flex-row items-start gap-2 justify-between w-full">
-                      <p class="text-n800">Deprecated in:</p>
-                      <p>{item.deprecated}</p>
-                    </div>
-                    <div class="flex flex-row items-start gap-2 justify-between w-full">
-                      <p class="text-n800">Removed in:</p>
-                      <p>{item.removed}</p>
-                    </div>
-                    <div class="flex flex-row items-start gap-2 justify-between w-full">
-                      <p class="text-n800">Successor:</p>
-                      <a
-                        href={item.successorHref}
-                        class="text-primary underline text-right"
-                      >
-                        {item.successor}
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <DeprecationMobileCard item={item} />
             ))}
           </div>
         </div>
