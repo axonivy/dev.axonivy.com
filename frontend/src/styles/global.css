@@ -12,6 +12,7 @@ html {
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: "Inter Variable", sans-serif;
+  --font-code: monospace;
 
   /* shadcn semantic tokens */
   --color-sidebar-ring: var(--sidebar-ring);

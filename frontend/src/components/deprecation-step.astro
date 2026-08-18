@@ -1,0 +1,39 @@
+---
+import { IconCircleCheck } from "@tabler/icons-astro";
+import { Separator } from "@/components/ui/separator";
+
+interface Props {
+  step: {
+    description: string;
+    code?: string;
+  };
+  showSeparator: boolean;
+}
+
+const { step, showSeparator } = Astro.props;
+---
+
+{
+  showSeparator && (
+    <>
+      <Separator className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+    </>
+  )
+}
+<div class="flex flex-1 items-start gap-3 pb-2">
+  <IconCircleCheck class="mt-0.5 size-5 shrink-0 text-primary" />
+  <p>
+    {step.description}
+    {
+      step.code && (
+        <>
+          {" "}
+          <code class="rounded bg-n75 px-1 py-0.5 font-code text-[0.875em] text-n900">
+            {step.code}
+          </code>
+        </>
+      )
+    }
+  </p>
+</div>
