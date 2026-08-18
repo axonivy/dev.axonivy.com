@@ -1,0 +1,210 @@
+---
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import Layout from "@/layouts/main.astro";
+import { IconCircleCheck } from "@tabler/icons-astro";
+import deprecated from "@/data/deprecation.json";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { IconExternalLink } from "@tabler/icons-astro";
+
+const deprecationSteps = [
+  {
+    description:
+      "We document features that we will remove in the future on this page.",
+  },
+  {
+    description:
+      "We document Public API that we will remove in future versions in the source code as",
+    code: "@Deprecated(forRemoval=true)",
+  },
+  {
+    description:
+      "We document features that we will remove on the Designer's UI in the Problem View as Warnings.",
+  },
+];
+
+const removalVersions = [
+  ...new Set(
+    deprecated
+      .map((item) => Number(item.removed))
+      .filter((version) => Number.isFinite(version)),
+  ),
+].sort((firstVersion, secondVersion) => secondVersion - firstVersion);
+
+const [latestRemovalVersion] = removalVersions;
+const recentRemovalVersions = removalVersions.slice(1, 4);
+
+const currentlyDeprecated = deprecated.filter(
+  (item) =>
+    item.removed === undefined || Number(item.removed) === latestRemovalVersion,
+);
+
+const recentlyRemoved = deprecated.filter((item) =>
+  recentRemovalVersions.includes(Number(item.removed)),
+);
+
+const deprecationSections = [
+  {
+    title: "Currently deprecated",
+    description:
+      "These features are deprecated and may be removed in future major releases:",
+    items: currentlyDeprecated,
+  },
+  {
+    title: "Recently removed",
+    description: "These features have been removed in recent major releases:",
+    items: recentlyRemoved,
+  },
+];
+---
+
+<Layout
+  title="Deprecation & Removal"
+  description={{
+    before:
+      "You should avoid using deprecated Public API and features. When migrating to a new version check for ",
+    link: {
+      href: "https://developer.axonivy.com/doc/12.0/en/public-api/deprecated-list.html",
+      label: "deprecated Public API",
+    },
+    after: " and features and replace them with the successor API or feature.",
+  }}
+>
+  <div class="flex flex-col gap-12">
+    <Card>
+      <CardHeader>
+        <CardTitle>We deprecate and remove Features as follows:</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 md:flex-row md:gap-6">
+        {
+          deprecationSteps.map((step, index) => (
+            <>
+              {index > 0 && (
+                <>
+                  <Separator className="md:hidden" />
+                  <Separator
+                    orientation="vertical"
+                    className="hidden md:block"
+                  />
+                </>
+              )}
+              <div class="flex flex-1 items-start gap-3 pb-2">
+                <IconCircleCheck class="mt-0.5 size-5 shrink-0 text-primary" />
+                <p>
+                  {step.description}
+                  {step.code && (
+                    <>
+                      {" "}
+                      <code class="rounded bg-n75 px-1 py-0.5 font-code text-[0.875em] text-n900">
+                        {step.code}
+                      </code>
+                    </>
+                  )}
+                </p>
+              </div>
+            </>
+          ))
+        }
+      </CardContent>
+    </Card>
+    {
+      deprecationSections.map((section) => (
+        <div class="flex flex-col gap-2">
+          <h2 class="text-xl font-semibold md:text-2xl">{section.title}</h2>
+          <p class="text-lg text-n900">{section.description}</p>
+          <div class="overflow-hidden rounded-lg border border-border md:flex hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[30%] whitespace-normal">
+                    Feature
+                  </TableHead>
+                  <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                    Introduced in
+                  </TableHead>
+                  <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                    Deprecated in
+                  </TableHead>
+                  <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                    Removed in
+                  </TableHead>
+                  <TableHead className="relative w-[30%] whitespace-normal pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                    Successor
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {section.items.map((item) => (
+                  <TableRow>
+                    <TableCell className="font-medium whitespace-normal">
+                      <a href={item.nameHref} class="text-primary underline">
+                        {item.name}
+                      </a>
+                    </TableCell>
+                    <TableCell>{item.released}</TableCell>
+                    <TableCell>{item.deprecated}</TableCell>
+                    <TableCell>{item.removed}</TableCell>
+                    <TableCell className="whitespace-normal">
+                      <a
+                        href={item.successorHref}
+                        class="text-primary underline"
+                      >
+                        {item.successor}
+                      </a>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <div class="flex flex-col md:hidden gap-4">
+            {section.items.map((item) => (
+              <Card>
+                <CardHeader className="flex flex-row gap-3">
+                  <CardTitle className="flex w-full items-center justify-between gap-2">
+                    <span class="max-w-4/5">{item.name}</span>
+                    <a href={item.nameHref} class="shrink-0">
+                      <IconExternalLink class="h-4 w-4 shrink-0 text-primary" />
+                    </a>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div class="flex flex-col gap-2">
+                    <div class="flex flex-row items-start gap-2 justify-between w-full">
+                      <p class="text-n800">Introduced in:</p>
+                      <p>{item.released}</p>
+                    </div>
+                    <div class="flex flex-row items-start gap-2 justify-between w-full">
+                      <p class="text-n800">Deprecated in:</p>
+                      <p>{item.deprecated}</p>
+                    </div>
+                    <div class="flex flex-row items-start gap-2 justify-between w-full">
+                      <p class="text-n800">Removed in:</p>
+                      <p>{item.removed}</p>
+                    </div>
+                    <div class="flex flex-row items-start gap-2 justify-between w-full">
+                      <p class="text-n800">Successor:</p>
+                      <a
+                        href={item.successorHref}
+                        class="text-primary underline text-right"
+                      >
+                        {item.successor}
+                      </a>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Layout>
