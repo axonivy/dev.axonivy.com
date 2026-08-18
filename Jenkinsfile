@@ -59,6 +59,30 @@ pipeline {
       }
     }
 
+    stage('sonar') {
+      when {
+        branch 'master'
+      }
+      agent {
+        docker {
+          image 'sonarsource/sonar-scanner-cli'
+        }
+      }
+      steps {
+        script {
+          withSonarQubeEnv() {
+            sh 'sonar-scanner'
+          }
+          timeout(time: 5, unit: 'MINUTES') {
+            def qg = waitForQualityGate abortPipeline: false
+            if (qg.status != 'OK') {
+              unstable("SonarQube Quality Gate failed: ${qg.status}")
+            }    
+          }
+        }
+      }
+    }
+
     stage('deploy') {
       when {
         branch 'master'
