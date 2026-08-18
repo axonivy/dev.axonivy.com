@@ -1,0 +1,70 @@
+---
+import { DocumentationQuery } from "@/components/query-components";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Layout from "@/layouts/main.astro";
+import { IconArrowRight, IconBook2 } from "@tabler/icons-astro";
+---
+
+<Layout
+  title="Documentation"
+  description="Find all information about the Axon Ivy Platform in our documents"
+>
+  <DocumentationQuery client:load />
+
+  <Card
+    className="hidden flex-row items-center justify-between gap-4 transition-shadow md:flex"
+  >
+    <CardHeader className="flex flex-row gap-3 flex-1 items-center">
+      <div class="flex bg-blue-bg text-blue p-2.5 rounded-md">
+        <IconBook2 class="h-6 w-6 shrink-0" />
+      </div>
+      <div class="flex flex-col gap-1">
+        <CardTitle>Want to see which features have been removed?</CardTitle>
+        <CardDescription>
+          Learn more about the features and products that have been deprecated
+          or removed recently.
+        </CardDescription>
+      </div>
+    </CardHeader>
+    <CardContent className="flex flex-row items-center justify-end">
+      <a href="/deprecated" class="group">
+        <span class={buttonVariants({ variant: "outline", size: "lg" })}>
+          View deprecation page
+          <IconArrowRight
+            class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+          />
+        </span>
+      </a>
+    </CardContent>
+  </Card>
+  <a
+    href="/deprecated"
+    class="group block h-full rounded-xl focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 md:hidden"
+  >
+    <Card className="flex flex-row gap-8 transition-shadow">
+      <CardHeader className="flex flex-row w-full gap-3">
+        <div class="flex bg-blue-bg text-blue p-2.5 rounded-md">
+          <IconBook2 class="h-6 w-6 shrink-0" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <CardTitle>Deprecation page</CardTitle>
+          <CardDescription>
+            Check the features that have recently been removed.
+          </CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-row items-center">
+        <IconArrowRight
+          class="h-6 w-6 transition-transform duration-200 group-hover:translate-x-1"
+        />
+      </CardContent>
+    </Card>
+  </a>
+</Layout>

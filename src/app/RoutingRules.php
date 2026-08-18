@@ -5,10 +5,10 @@ namespace app;
 use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
 use app\api\Docs;
+use app\ui\UiDocAction;
 use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
-use app\pages\doc\DocOverviewAction;
 use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
 use app\pages\doc\redirect\LegacyEngineGuideDocAction;
 use app\pages\doc\redirect\LegacyPublicAPIAction;
@@ -54,8 +54,6 @@ class RoutingRules
     $app->get('/maven/{groupId}/{artifactId}/{version}[/{type}]', MavenPermalinkAction::class);
     $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
 
-    $app->get('/doc', DocOverviewAction::class);
-
     $app->get('/doc/{version}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version}/{lang:[a-z][a-z]}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
@@ -78,6 +76,8 @@ class RoutingRules
     $app->get('/api/currentRelease', ApiCurrentRelease::class);
     $app->get('/api/status', StatusApi::class);
     $app->get('/api/docs/{product}/{version}/{language}', Docs::class);
+
+    $app->get('/ui/doc', UiDocAction::class);
 
     $app->get('/sitemap.xml', SitemapAction::class);
 
