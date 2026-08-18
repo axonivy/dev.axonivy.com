@@ -1,110 +1,130 @@
 ---
 import Layout from "@/layouts/main.astro";
 import { Card, CardContent } from "@/components/ui/card";
-import Placeholder from "@/assets/avatar-placeholder.svg";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Placeholder from "@/assets/team/avatar-placeholder.svg";
+import PortraitAls from "@/assets/team/als.jpg";
+import PortraitBb from "@/assets/team/bb.jpg";
+import PortraitCst from "@/assets/team/cst.jpg";
+import PortraitDar from "@/assets/team/dar.jpg";
+import PortraitEdp from "@/assets/team/edp.jpg";
+import PortraitLgi from "@/assets/team/lgi.jpg";
+import PortraitLli from "@/assets/team/lli.jpg";
+import PortraitRew from "@/assets/team/rew.jpg";
+import PortraitRwei from "@/assets/team/rwei.jpg";
 
-const team = [
+type TeamMember = {
+  name: string;
+  avatarSvg?: typeof Placeholder;
+  avatarImage?: ImageMetadata;
+  education: string;
+  function: string;
+  slogan: string;
+};
+
+const team: TeamMember[] = [
   {
     name: "Alexander Suter",
-    imgSrc: Placeholder,
+    avatarImage: PortraitAls,
     education: "B.Sc. Computer Science",
     function: "Core Developer",
     slogan: "Dock worker 👷",
   },
   {
     name: "Bruno Bütler",
-    imgSrc: Placeholder,
+    avatarImage: PortraitBb,
     education: "Inf. Ing. HTL",
     function: "Product Owner & Team Leader",
     slogan: "Primal rock 🗿",
   },
   {
     name: "Christian Strebel",
-    imgSrc: Placeholder,
+    avatarImage: PortraitCst,
     education: "Inf. Ing. FH",
     function: "Core Developer",
     slogan: "Infrastructure & Architecture 🏗️",
   },
   {
     name: "Lukas Lieb",
-    imgSrc: Placeholder,
+    avatarImage: PortraitLli,
     education: "B.Sc. Computer Science",
     function: "Core Developer",
     slogan: "Pixel mover 🌄",
   },
   {
     name: "Reguel Wermelinger",
-    imgSrc: Placeholder,
+    avatarImage: PortraitRew,
     education: "B.Sc. Computer Science",
     function: "Core Developer",
     slogan: "Swiss knife ⌨️",
   },
   {
     name: "Reto Weiss",
-    imgSrc: Placeholder,
+    avatarImage: PortraitRwei,
     education: "El. Ing. HTL",
     function: "Product Owner & Core Developer",
     slogan: "Tracing Guru 📈",
   },
   {
     name: "Louis Müller",
-    imgSrc: Placeholder,
+    avatarSvg: Placeholder,
     education: "M.Sc. Computer Science",
     function: "Core Developer",
     slogan: "Quantum Engineer ⚛️",
   },
   {
     name: "Tobias Gretler",
-    imgSrc: Placeholder,
+    avatarSvg: Placeholder,
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Learning Software development 🖥️",
   },
   {
     name: "Elio Di Puma",
-    imgSrc: Placeholder,
+    avatarImage: PortraitEdp,
     education: "B.Sc. Computer Science",
     function: "Core Developer",
     slogan: "Frontend Flair, Design Spark ✨",
   },
   {
     name: "Dominik Arnold",
-    imgSrc: Placeholder,
+    avatarImage: PortraitDar,
     education: "M.Sc. Computer Science",
     function: "Core Developer",
     slogan: "Taking the first steps 🦿🦵",
   },
   {
     name: "Lukas Giger",
-    imgSrc: Placeholder,
+    avatarImage: PortraitLgi,
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Living Algorithm 🧮",
   },
   {
     name: "Fabian Heuberger",
-    imgSrc: Placeholder,
+    avatarSvg: Placeholder,
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Just starting out 🐣",
   },
   {
     name: "Alissa Villiger",
-    imgSrc: Placeholder,
+    avatarSvg: Placeholder,
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Starting the journey🛣️",
   },
   {
     name: "Jacek Lajdecki",
-    imgSrc: Placeholder,
+    avatarSvg: Placeholder,
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Bringing fresh energy ⚡",
   },
   {
     name: "Colin Graf",
-    imgSrc: Placeholder,
+    avatarSvg: Placeholder,
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Learning 📚",
@@ -119,14 +139,26 @@ const team = [
   <div class="grid gap-6 md:grid-cols-3 grid-cols-1">
     {
       team.map((member) => {
-        const Avatar = member.imgSrc;
+        const AvatarSvg = member.avatarSvg;
 
         return (
-          <Card className="flex flex-row items-center p-2 py-2 gap-2 ">
-            <Avatar
-              aria-label={`${member.name} avatar`}
-              class="h-48 w-fit shrink-0 rounded-md"
-            />
+          <Card className="flex flex-row items-center p-2 py-2 gap-2">
+            {member.avatarImage ? (
+              <Image
+                src={member.avatarImage}
+                alt={`${member.name} avatar`}
+                width={115}
+                height={192}
+                class="shrink-0 rounded-md object-cover pt-2"
+              />
+            ) : (
+              AvatarSvg && (
+                <AvatarSvg
+                  aria-label={`${member.name} avatar`}
+                  class="h-48 w-fit shrink-0 rounded-md"
+                />
+              )
+            )}
             <CardContent className="flex flex-col gap-2">
               <p class="font-semibold text-xl">{member.name}</p>
               <div class="text-sm text-n900">

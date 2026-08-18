@@ -1,5 +1,5 @@
 ---
-import AxonIvyLogo from "@/assets/axonivy-logo-2021-rgb.svg";
+import AxonIvyDevLogo from "@/assets/axonivy-dev-logo.svg";
 import Navbar from "@/components/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -70,26 +70,25 @@ const footerContent = {
   >
     <div class="flex flex-col gap-4 md:hidden items-center">
       <a href="/">
-        <!-- replace with the axonivy dev logo -->
-        <AxonIvyLogo width={160} height={40} />
+        <AxonIvyDevLogo width={160} height={40} />
       </a>
       <div class="w-full max-w-md text-center">
         <p class="text-sm text-n900">
-          Get the latest stable
+          Get the latest stable{" "}
           <a
             href={footerContent.releaseLinks.longTermSupport.href}
             class="text-primary underline"
           >
             {footerContent.releaseLinks.longTermSupport.label}
           </a>
-          version of the Axon Ivy Platform - or download the
+          {" "}version of the Axon Ivy Platform - or download the{" "}
           <a
             href={footerContent.releaseLinks.leadingEdge.href}
             class="text-primary underline"
           >
             {footerContent.releaseLinks.leadingEdge.label}
           </a>
-          version.
+          {" "}version.
         </p>
       </div>
       <div>
@@ -105,28 +104,27 @@ const footerContent = {
     <div class="hidden flex-col gap-4 md:flex">
       <div class="flex items-center justify-between">
         <a href="/">
-          <!-- replace with the axonivy dev logo -->
-          <AxonIvyLogo width={160} height={40} />
+          <AxonIvyDevLogo width={160} height={40} />
         </a>
         <Navbar type="footer" client:load />
       </div>
       <div class="w-full max-w-md">
         <p class="text-sm text-n900">
-          Get the latest stable
+          Get the latest stable{" "}
           <a
             href={footerContent.releaseLinks.longTermSupport.href}
             class="text-primary underline"
           >
             {footerContent.releaseLinks.longTermSupport.label}
           </a>
-          version of the Axon Ivy Platform - or download the
+          {" "}version of the Axon Ivy Platform - or download the{" "}
           <a
             href={footerContent.releaseLinks.leadingEdge.href}
             class="text-primary underline"
           >
             {footerContent.releaseLinks.leadingEdge.label}
           </a>
-          version.
+          {" "}version.
         </p>
       </div>
       <div class="flex flex-row justify-between">

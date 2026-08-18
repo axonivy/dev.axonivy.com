@@ -23,6 +23,19 @@ RewriteRule ^doc/([^/]+)/([a-z][a-z])/(.+)$ /docs/$1/$2/$3 [L]
 #RewriteRule ^doc/([^/]+)$ /doc/$1/index.html [L]
 #DirectorySlash off
 
+RewriteCond %{DOCUMENT_ROOT}/astro/index.html -f
+RewriteRule ^$ /astro/index.html [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/astro%{REQUEST_URI} -f
+RewriteRule ^(.*)$ /astro/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/astro%{REQUEST_URI}/index.html -f
+RewriteRule ^(.*)$ /astro/$1/index.html [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
