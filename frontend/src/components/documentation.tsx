@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
+import { DocumentationSkeleton } from "./skeletons/documentation-skeleton";
 
 type DocLink = {
   url: string;
@@ -85,7 +86,7 @@ export default function Documentation() {
   });
 
   if (isLoading) {
-    return <p className="text-sm text-n900">Loading documentation links...</p>;
+    return <DocumentationSkeleton />;
   }
 
   if (error) {
