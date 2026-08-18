@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DeprecationMobileCard from "@/components/deprecation-mobile-card.astro";
 import DeprecationStep from "@/components/deprecation-step.astro";
 import Layout from "@/layouts/main.astro";
-import deprecated from "@/data/deprecation.json";
+import deprecated from "@/data/deprecation";
 import {
   Table,
   TableBody,
@@ -32,11 +32,11 @@ const deprecationSteps = [
 const currentVersion = 14;
 
 const currentlyDeprecated = deprecated.filter(
-  (item) => item.removed === undefined || Number(item.removed) > currentVersion,
+  (item) => item.removed === undefined || item.removed > currentVersion,
 );
 
 const recentlyRemoved = deprecated.filter(
-  (item) => Number(item.removed) <= currentVersion,
+  (item) => item.removed !== undefined && item.removed <= currentVersion,
 );
 
 const deprecationSections = [
@@ -100,7 +100,7 @@ const deprecationSections = [
                   <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
                     Removed in
                   </TableHead>
-                  <TableHead className="relative w-[30%] whitespace-normal pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                  <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border w-[30%] whitespace-normal">
                     Successor
                   </TableHead>
                 </TableRow>
@@ -109,20 +109,28 @@ const deprecationSections = [
                 {section.items.map((item) => (
                   <TableRow>
                     <TableCell className="font-medium whitespace-normal">
-                      <a href={item.nameHref} class="text-primary underline">
-                        {item.name}
-                      </a>
+                      {item.nameHref ? (
+                        <a href={item.nameHref} class="text-primary underline">
+                          {item.name}
+                        </a>
+                      ) : (
+                        item.name
+                      )}
                     </TableCell>
                     <TableCell>{item.released}</TableCell>
                     <TableCell>{item.deprecated}</TableCell>
                     <TableCell>{item.removed}</TableCell>
                     <TableCell className="whitespace-normal">
-                      <a
-                        href={item.successorHref}
-                        class="text-primary underline"
-                      >
-                        {item.successor}
-                      </a>
+                      {item.successorHref ? (
+                        <a
+                          href={item.successorHref}
+                          class="text-primary underline"
+                        >
+                          {item.successor}
+                        </a>
+                      ) : (
+                        item.successor
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
