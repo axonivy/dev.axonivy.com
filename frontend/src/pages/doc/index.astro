@@ -1,5 +1,6 @@
 ---
-import { DocumentationQuery } from "@/components/query-components";
+import type { UiDocResponse } from "@/components/documentation";
+import Documentation from "@/components/documentation";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -10,13 +11,20 @@ import {
 } from "@/components/ui/card";
 import Layout from "@/layouts/main.astro";
 import { IconArrowRight, IconBook2 } from "@tabler/icons-astro";
+
+const documentationApiOrigin = "https://axonivya.myhostpoint.ch";
+const res = await fetch(new URL("/ui/doc", documentationApiOrigin));
+if (!res.ok) {
+  throw new Error(`Failed to fetch documentation links: HTTP ${res.status}`);
+}
+const docLinks = (await res.json()) as UiDocResponse;
 ---
 
 <Layout
   title="Documentation"
   description="Find all information about the Axon Ivy Platform in our documents"
 >
-  <DocumentationQuery client:load />
+  <Documentation data={docLinks} />
 
   <Card
     className="hidden flex-row items-center justify-between gap-4 transition-shadow md:flex"
