@@ -6,6 +6,7 @@ use app\api\ApiCurrentRelease;
 use app\api\StatusApi;
 use app\api\Docs;
 use app\ui\UiDocAction;
+use app\ui\UiDownloadAction;
 use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
@@ -46,7 +47,6 @@ class RoutingRules
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/archive[/{version}]', ArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
-    $app->get('/download[/{version}]', DownloadAction::class); // leading-edge/milestone/nightly/dev
 
     $app->get('/release-cycle', ReleaseCycleAction::class);
 
@@ -76,6 +76,7 @@ class RoutingRules
     $app->get('/api/docs/{product}/{version}/{language}', Docs::class);
 
     $app->get('/ui/doc', UiDocAction::class);
+    $app->get('/ui/download[/{version}]', UiDownloadAction::class);
 
     $app->get('/sitemap.xml', SitemapAction::class);
 
