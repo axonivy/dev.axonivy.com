@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { DownloadCards, type DownloadRelease } from "./download-cards";
+import { DownloadSkeleton } from "./skeletons/download-skeleton";
 
 type UiDownloadResponse = {
   ltsCurrent: DownloadRelease[];
@@ -29,8 +30,7 @@ export default function Download() {
   });
 
   if (isLoading) {
-    // add DownloadSkeleton component for better UX
-    return <p className="text-sm text-n900">Loading download data...</p>;
+    return <DownloadSkeleton />;
   }
 
   if (error) {
