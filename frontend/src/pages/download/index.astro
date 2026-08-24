@@ -1,6 +1,9 @@
 ---
 import Layout from "@/layouts/main.astro";
-import { DownloadQuery } from "@/components/query-components";
+import {
+  DownloadQuery,
+  VersionOverviewQuery,
+} from "@/components/query-components";
 import {
   IconArrowRight,
   IconFileDescription,
@@ -16,32 +19,11 @@ import { Separator } from "@/components/ui/separator";
   title="Download Long Term Support 14.0"
   description={"Axon Ivy consists of two components: \nthe Designer to Build you applications and the Engine to run them."}
 >
-  <DownloadQuery client:load />
+  <div class="flex flex-col gap-24">
+    <DownloadQuery client:load />
 
-  <a
-    href="/release-cycle"
-    class="group flex min-w-0 flex-row items-center justify-between gap-3 rounded-md bg-n50 p-4 md:gap-4"
-  >
-    <div
-      class="grid min-w-0 flex-1 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-1 md:gap-x-4"
-    >
-      <div
-        class="bg-blue-bg text-blue row-start-1 shrink-0 rounded-md p-2 md:row-span-2"
-      >
-        <IconRefresh class="size-8" />
-      </div>
-      <p class="min-w-0 text-lg sm:text-xl">
-        Learn more about our release cycle
-      </p>
-      <p class="col-span-2 text-n900 md:col-span-1">
-        Get familiar with our release cycle before you are going to use the
-        Leading Edge version.
-      </p>
-    </div>
-    <IconArrowRight
-      class="text-primary size-6 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-    />
-  </a>
+    <VersionOverviewQuery client:load />
+  </div>
 
   <div
     class="flex flex-col items-stretch gap-4 rounded-md bg-n50 p-4 md:flex-row md:items-center md:justify-between"
@@ -64,11 +46,12 @@ import { Separator } from "@/components/ui/separator";
       </div>
       <p class="text-n900">Find guides and references.</p>
       <a href="/doc" class="group text-primary">
-        <span class="flex items-center gap-2"
-          >Go to Docs <IconArrowRight
+        <span class="flex items-center gap-2">
+          Go to Docs
+          <IconArrowRight
             class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-          /></span
-        >
+          />
+        </span>
       </a>
     </div>
     <Separator orientation="horizontal" className="md:hidden" />
@@ -85,11 +68,12 @@ import { Separator } from "@/components/ui/separator";
         rel="noopener noreferrer"
         class="group text-primary"
       >
-        <span class="flex items-center gap-2"
-          >Go to Community <IconArrowRight
+        <span class="flex items-center gap-2">
+          Go to Community
+          <IconArrowRight
             class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-          /></span
-        >
+          />
+        </span>
       </a>
     </div>
     <Separator orientation="horizontal" className="md:hidden" />
@@ -101,11 +85,11 @@ import { Separator } from "@/components/ui/separator";
       </div>
       <p class="text-n900">Need additional assistance?</p>
       <a href="/support" class="group text-primary">
-        <span class="flex items-center gap-2"
-          >Contact us <IconArrowRight
+        <span class="flex items-center gap-2">
+          Contact us <IconArrowRight
             class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-          /></span
-        >
+          />
+        </span>
       </a>
     </div>
   </div>

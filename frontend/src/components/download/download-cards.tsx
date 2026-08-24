@@ -20,7 +20,7 @@ import {
 } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Separator } from "./ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 export type Artifacts = {
   name: string;
@@ -319,8 +319,6 @@ function DownloadProductCard({
             {artifactOptions.map(({ artifact, label }) => {
               const isSelected =
                 artifact.permalink === selectedArtifact?.permalink;
-
-              console.log("options", artifact, artifactOptions);
 
               return (
                 <Button

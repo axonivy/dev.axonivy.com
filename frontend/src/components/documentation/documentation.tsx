@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
-import { DocumentationSkeleton } from "./skeletons/documentation-skeleton";
+import { DocumentationSkeleton } from "@/components/skeletons/documentation-skeleton";
 
 type DocLink = {
   url: string;
