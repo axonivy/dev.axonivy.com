@@ -4,6 +4,7 @@ import type {
   ArchiveProduct,
   ArchiveResponse,
 } from "@/components/download/archive";
+import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
 
 type DevReleasesProps = {
   product: ArchiveProduct;
@@ -22,7 +23,7 @@ export default function DevReleases({ product }: DevReleasesProps) {
   });
 
   if (isLoading) {
-    return <p className="text-sm text-n900">Loading dev releases...</p>;
+    return <ArchiveSkeleton rows={7} />;
   }
 
   if (error || !data) {
