@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import react from "@astrojs/react";
 
@@ -28,4 +28,23 @@ export default defineConfig({
   },
 
   integrations: [react()],
+
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Inter Variable",
+      cssVariable: "--font-inter",
+      options: {
+        variants: [
+          {
+            weight: "100 900",
+            style: "normal",
+            src: [
+              "./node_modules/@fontsource-variable/inter/files/inter-latin-standard-normal.woff2",
+            ],
+          },
+        ],
+      },
+    },
+  ],
 });

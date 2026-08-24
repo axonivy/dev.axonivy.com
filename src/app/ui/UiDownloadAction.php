@@ -232,7 +232,7 @@ class ReleaseInfoLoader implements Loader
     }
 
     $permalink = $artifact->getPermalink();
-    return new DownloadArtifact($name, $artifact->getInstallationUrl(), $artifact->getFileName(), $permalink);
+    return new DownloadArtifact($name, $artifact->getDownloadUrl(), $artifact->getFileName(), $permalink);
   }
 
   public function version(): string
