@@ -1,23 +1,19 @@
 <?php
 
-namespace app\pages\download\archive;
+namespace app\ui;
 
 use Slim\Exception\HttpNotFoundException;
-use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 use app\domain\ReleaseType;
 use app\domain\ReleaseInfo;
 
-class ArchiveAction
+class UiArchiveAction
 {
-
-  private Twig $view;
 
   private array $versions;
 
-  public function __construct(Twig $view)
+  public function __construct()
   {
-    $this->view = $view;
     $this->versions = DownloadArchive::versions();
   }
 
@@ -30,12 +26,19 @@ class ArchiveAction
       throw new HttpNotFoundException($request);
     }
 
-    $releaseInfos = $this->findReleaseInfos($archiveVersion);
-    return $this->view->render($response, 'download/archive/archive.twig', [
+    $releaseInfos = array_map(
+      fn (ReleaseInfo $releaseInfo) => $this->releaseInfoData($releaseInfo),
+      $this->findReleaseInfos($archiveVersion)
+    );
+    $data = [
       'releaseInfos' => $releaseInfos,
       'categorizedVersions' => $this->createCategorizedVersions(),
       'currentMajorVersion' => $archiveVersion
-    ]);
+    ];
+    $response->getBody()->write((string) json_encode($data));
+    $response = $response->withHeader('Content-Type', 'application/json');
+    return $response;
+    
   }
 
   private function getCurrentArchiveVersion(string $version): string
@@ -73,6 +76,41 @@ class ArchiveAction
       $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => !str_starts_with($releaseInfo->versionNumber(), $minorVersion));
     }
     return self::filterVirtualVersions($releaseInfos);
+  }
+
+  private function releaseInfoData(ReleaseInfo $releaseInfo): array
+  {
+    $artifacts = $releaseInfo->getArtifacts();
+
+    return [
+      'version' => $releaseInfo->versionNumber(),
+      'releaseDate' => $releaseInfo->getReleaseDate(),
+      'releaseNotes' => $releaseInfo->getDocProvider()->getReleaseNotes()->getUrl(),
+      'designerArtifacts' => array_values(array_map(
+        fn ($artifact) => $this->artifactData($artifact),
+        array_filter(
+          $artifacts,
+          fn ($artifact) => in_array($artifact->getProductName(), ['designer', 'vscode-extension'])
+        )
+      )),
+      'engineArtifacts' => array_values(array_map(
+        fn ($artifact) => $this->artifactData($artifact),
+        array_filter(
+          $artifacts,
+          fn ($artifact) => $artifact->getProductName() === 'engine'
+        )
+      )),
+    ];
+  }
+
+  private function artifactData($artifact): array
+  {
+    return [
+      'name' => $artifact->getFileName(),
+      'url' => $artifact->getDownloadUrl(),
+      'filename' => $artifact->getFileName(),
+      'permalink' => $artifact->getPermalink(),
+    ];
   }
 
   private function createCategorizedVersions(): array

@@ -1,6 +1,7 @@
 import { QueryProvider } from "@/providers/query-provider";
-import Documentation from "./documentation";
-import Download from "./download";
+import Documentation from "@/components/documentation/documentation";
+import Download from "@/components/download/download";
+import VersionOverview from "@/components/download/version-overview";
 
 export function DocumentationQuery() {
   return (
@@ -14,6 +15,14 @@ export function DownloadQuery() {
   return (
     <QueryProvider>
       <Download />
+    </QueryProvider>
+  );
+}
+
+export function VersionOverviewQuery() {
+  return (
+    <QueryProvider>
+      <VersionOverview />
     </QueryProvider>
   );
 }

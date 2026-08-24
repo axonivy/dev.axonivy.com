@@ -7,6 +7,7 @@ use app\api\StatusApi;
 use app\api\Docs;
 use app\ui\UiDocAction;
 use app\ui\UiDownloadAction;
+use app\ui\UiArchiveAction;
 use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
@@ -17,7 +18,6 @@ use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
 use app\pages\doc\redirect\RedirectPortalGuide;
 use app\pages\download\DownloadAction;
 use app\pages\download\DownloadRobotsAction;
-use app\pages\download\archive\ArchiveAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\home\HomeAction;
 use app\pages\installation\InstallationAction;
@@ -45,7 +45,6 @@ class RoutingRules
     $app->get('/tutorial', TutorialAction::class);
 
     $app->get('/download/maven.html', MavenArchiveAction::class);
-    $app->get('/download/archive[/{version}]', ArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
 
     $app->get('/release-cycle', ReleaseCycleAction::class);
@@ -77,6 +76,7 @@ class RoutingRules
 
     $app->get('/ui/doc', UiDocAction::class);
     $app->get('/ui/download[/{version}]', UiDownloadAction::class);
+    $app->get('/ui/archive[/{version}]', UiArchiveAction::class);
 
     $app->get('/sitemap.xml', SitemapAction::class);
 
