@@ -22,6 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
+
 export type ArchiveArtifact = {
   name: string;
   url: string;
@@ -375,7 +377,7 @@ export default function Archive({ product }: ArchiveProps) {
   });
 
   if (isLoading) {
-    return <p className="text-sm text-n900">Loading archive data...</p>;
+    return <ArchiveSkeleton rows={12} />;
   }
 
   if (error) {
