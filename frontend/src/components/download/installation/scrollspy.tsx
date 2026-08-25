@@ -18,7 +18,7 @@ import {
 } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const installationImages = import.meta.glob(
   "/src/assets/installation/**/*.{png,jpg,jpeg,webp}",
@@ -27,6 +27,11 @@ const installationImages = import.meta.glob(
 
 function imageUrl(path: string) {
   return installationImages[`/src/assets/installation/${path}`];
+}
+
+function queryParameter(name: string) {
+  if (typeof window === "undefined") return undefined;
+  return new URLSearchParams(window.location.search).get(name) ?? undefined;
 }
 
 function DockerCommandBlock({ command }: { command: string }) {
@@ -95,14 +100,8 @@ export default function InstallationScrollSpy({
   guideId,
   guide,
 }: InstallationScrollSpyProps) {
-  const [downloadUrl, setDownloadUrl] = useState<string>();
-  const [docLink, setDocLink] = useState<string>();
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setDownloadUrl(params.get("downloadUrl") ?? undefined);
-    setDocLink(params.get("docLink") ?? undefined);
-  }, []);
+  const [downloadUrl] = useState(() => queryParameter("downloadUrl"));
+  const [docLink] = useState(() => queryParameter("docLink"));
 
   return (
     <div className="flex flex-col">
