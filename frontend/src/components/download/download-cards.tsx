@@ -21,6 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { detect } from "detect-browser";
 
 export type Artifacts = {
   name: string;
@@ -161,7 +162,21 @@ function installationGuideHref(
 }
 
 function detectOperatingSystem(): OperatingSystem {
-  return operatingSystemFromText(navigator.userAgent);
+  const detectedOs = detect()?.os;
+
+  if (typeof detectedOs !== "string") {
+    return "unknown";
+  }
+  if (detectedOs.startsWith("Windows")) {
+    return "windows";
+  }
+  if (detectedOs === "Mac OS") {
+    return "mac";
+  }
+  if (detectedOs === "Linux") {
+    return "linux";
+  }
+  return "unknown";
 }
 
 function artifactOperatingSystem(artifact: Artifacts): OperatingSystem {
@@ -323,7 +338,7 @@ function DownloadProductCard({
           </div>
         </div>
         <CardTitle className="text-lg font-semibold">
-          AxonIvy {config.title} {release.versionShort}
+          Axon Ivy {config.title} {release.versionShort}
         </CardTitle>
         <CardDescription className="uppercase font-semibold text-n800 tracking-widest">
           {config.mode}

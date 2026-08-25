@@ -95,7 +95,7 @@ export default function Download() {
           Download {data.ltsMaintenance[0].versionShort}
         </h2>
         <p className="text-xl font-semibold">
-          Download the second last released long term support version.
+          Download second to last released long term support version.
         </p>
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <DownloadCards
