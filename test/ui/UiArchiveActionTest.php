@@ -18,4 +18,12 @@ class UiArchiveActionTest extends TestCase
             ->bodyContains('"engineArtifacts"')
             ->bodyContains('AxonIvyEngine8.0.1.96047_All_x64.zip');
     }
+
+    public function testArchiveWithFilteredVersionsReturnsReleaseInfoList(): void
+    {
+        AppTester::assertThatGet('/ui/archive/7.x')
+            ->ok()
+            ->bodyContains('"releaseInfos":[')
+            ->bodyContains('"version":"7.5.0"');
+    }
 }
