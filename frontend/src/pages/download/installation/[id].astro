@@ -7,10 +7,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import InstallationScrollSpy, {
-  type InstallationGuide,
-} from "@/components/download/installation/scrollspy";
-import guides from "@/data/installation-guides.json";
+import InstallationScrollSpy from "@/components/download/installation/scrollspy";
+import guides, { type InstallationGuide } from "@/data/installation-guides";
 import Layout from "@/layouts/news.astro";
 
 type GuideId = keyof typeof guides;
@@ -24,11 +22,11 @@ export function getStaticPaths() {
 
   const guidePaths = Object.entries(guides).map(([id, guide]) => ({
     params: { id },
-    props: { guideId: id as GuideId, guide: guide as InstallationGuide },
+    props: { guideId: id as GuideId, guide },
   }));
   const enginePaths = engineGuideIds.map((id) => ({
     params: { id },
-    props: { guideId: id, guide: guides.engine as InstallationGuide },
+    props: { guideId: id, guide: guides.engine },
   }));
 
   return [...guidePaths, ...enginePaths];
