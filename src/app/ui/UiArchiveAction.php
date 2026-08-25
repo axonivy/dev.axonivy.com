@@ -138,7 +138,7 @@ class UiArchiveAction
 
   private static function filterVirtualVersions(array $releaseInfos): array
   {
-    return array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isBugfix());
+    return array_values(array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isBugfix()));
   }
 }
 
