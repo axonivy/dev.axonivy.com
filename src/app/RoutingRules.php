@@ -36,10 +36,7 @@ class RoutingRules
 {
   public static function installRoutes(App $app)
   {
-    $app->get('/', HomeAction::class);
     $app->get('/support', SupportAction::class);
-    $app->get('/search', SearchAction::class);
-    $app->get('/github', GitHubAction::class);
     $app->get('/tutorial', TutorialAction::class);
 
     $app->get('/download/maven.html', MavenArchiveAction::class);
