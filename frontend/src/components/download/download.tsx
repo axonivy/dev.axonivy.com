@@ -72,7 +72,7 @@ export default function Download() {
           />
         </div>
         <a
-          href="/release-cycle"
+          href="/download/release-cycle"
           className="group flex min-w-0 flex-row items-center justify-between gap-3 rounded-md bg-n50 p-4 md:gap-4"
         >
           <div className="grid min-w-0 flex-1 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-1 md:gap-x-4">
