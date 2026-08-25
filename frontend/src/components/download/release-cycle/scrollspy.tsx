@@ -9,7 +9,7 @@ import { IconCircleCheck, IconBulb } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
 import releaseCycleIllustration from "@/assets/release-cycle-illustration.svg";
 
-export default function ScrollspyReleaseCycle() {
+export default function ReleaseCycleScrollspy() {
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">

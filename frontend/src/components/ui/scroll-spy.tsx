@@ -351,7 +351,7 @@ function ScrollSpyNav(props: ScrollSpyNavProps) {
       {
         dir,
         className: cn(
-          "flex gap-2",
+          "flex w-1/5 min-w-0 shrink-0 gap-2",
           orientation === "horizontal" ? "flex-col" : "flex-row",
           className,
         ),
@@ -393,7 +393,7 @@ function ScrollSpyLink(props: ScrollSpyLinkProps) {
       {
         href: `#${linkValue}`,
         className: cn(
-          "rounded px-3 py-1.5 font-medium text-muted-foreground text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
+          "block w-full break-words rounded px-3 py-1.5 font-medium text-muted-foreground text-sm whitespace-normal transition-colors hover:bg-accent hover:text-accent-foreground",
           isActive && "bg-accent text-primary",
           className,
         ),

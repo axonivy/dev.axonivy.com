@@ -131,6 +131,35 @@ function operatingSystemFromText(value: string): OperatingSystem {
   return "unknown";
 }
 
+function installationGuideHref(
+  product: DownloadProductCardProps["product"],
+  userOs: OperatingSystem,
+  artifact?: Artifacts,
+  docLink?: string,
+) {
+  const isDocker =
+    product === "engine" && artifact?.name.toLowerCase().includes("docker");
+
+  const selectedOs = artifact ? artifactOperatingSystem(artifact) : userOs;
+  const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
+
+  const guidePath = isDocker
+    ? "/download/installation/docker"
+    : product === "engine"
+      ? "/download/installation/engine"
+      : `/download/installation/designer-${guideOs === "unknown" ? "windows" : guideOs}`;
+
+  const query = new URLSearchParams();
+  if (artifact?.url) {
+    query.set("downloadUrl", artifact.url);
+  }
+  if (product === "engine" && !isDocker) {
+    query.set("docLink", docLink || "/doc/latest");
+  }
+
+  return query.toString() ? `${guidePath}?${query.toString()}` : guidePath;
+}
+
 function detectOperatingSystem(): OperatingSystem {
   return operatingSystemFromText(navigator.userAgent);
 }
@@ -364,8 +393,17 @@ function DownloadProductCard({
           />
         </div>
         <div className="flex flex-row gap-4 justify-between items-center">
-          {/* add link */}
-          <a className="text-primary text-center">Installation Guide</a>
+          <a
+            href={installationGuideHref(
+              product,
+              userOs,
+              selectedArtifact,
+              product === "engine" ? release.docLink : undefined,
+            )}
+            className="text-primary text-center"
+          >
+            Installation Guide
+          </a>
           <Separator orientation="vertical" />
           <p className="text-n900 text-center">
             {release.releaseDate

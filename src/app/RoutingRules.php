@@ -20,9 +20,7 @@ use app\pages\download\DownloadAction;
 use app\pages\download\DownloadRobotsAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\home\HomeAction;
-use app\pages\installation\InstallationAction;
 use app\pages\news\NewsAction;
-use app\pages\release\ReleaseCycleAction;
 use app\pages\search\SearchAction;
 use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
@@ -47,8 +45,6 @@ class RoutingRules
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
 
-    $app->get('/release-cycle', ReleaseCycleAction::class);
-
     $app->get('/maven/{groupId}/{artifactId}/{version}[/{type}]', MavenPermalinkAction::class);
     $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
 
@@ -67,8 +63,6 @@ class RoutingRules
     $app->get('/api-browser', ApiBrowserAction::class);
 
     $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
-
-    $app->get('/installation', InstallationAction::class);
 
     $app->get('/api/currentRelease', ApiCurrentRelease::class);
     $app->get('/api/status', StatusApi::class);
