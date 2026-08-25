@@ -19,6 +19,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useState } from "react";
+import type {
+  InstallationGuide,
+  InstallationSubstep,
+} from "@/data/installation-guides";
 
 const installationImages = import.meta.glob(
   "/src/assets/installation/**/*.{png,jpg,jpeg,webp}",
@@ -32,6 +36,17 @@ function imageUrl(path: string) {
 function queryParameter(name: string) {
   if (typeof window === "undefined") return undefined;
   return new URLSearchParams(window.location.search).get(name) ?? undefined;
+}
+
+function visibleSubsteps(
+  guideId: string,
+  substeps: InstallationSubstep[] | undefined,
+) {
+  return (
+    substeps?.filter(
+      (substep) => !(guideId === "docker" && substep.id === 2.1),
+    ) ?? []
+  );
 }
 
 function DockerCommandBlock({ command }: { command: string }) {
@@ -65,31 +80,6 @@ function DockerCommandBlock({ command }: { command: string }) {
     </div>
   );
 }
-
-export type InstallationSubstep = {
-  id: string;
-  title: string;
-  img?: string;
-};
-
-export type InstallationStep = {
-  id: string;
-  title: string;
-  url?: string;
-  img?: string;
-  substeps?: InstallationSubstep[];
-};
-
-export type InstallationGuide = {
-  title: string;
-  type: string;
-  product: "designer" | "engine";
-  hint?: {
-    title: string;
-    description: string;
-  };
-  steps: InstallationStep[];
-};
 
 type InstallationScrollSpyProps = {
   guideId: string;
@@ -151,34 +141,27 @@ export default function InstallationScrollSpy({
                   className="h-auto w-full"
                 />
               ) : null}
-              {step.substeps?.some(
-                (substep) => !(guideId === "docker" && substep.id === "2.1"),
-              ) ? (
+              {visibleSubsteps(guideId, step.substeps).length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  {step.substeps
-                    .filter(
-                      (substep) =>
-                        !(guideId === "docker" && substep.id === "2.1"),
-                    )
-                    .map((substep) => (
-                      <div key={substep.id} className="flex flex-col gap-4">
-                        <p>
-                          {substep.id} {substep.title}
-                        </p>
-                        {substep.img && imageUrl(substep.img) ? (
-                          <img
-                            src={imageUrl(substep.img)}
-                            alt={substep.title}
-                            className="h-auto w-full"
-                          />
-                        ) : null}
-                      </div>
-                    ))}
+                  {visibleSubsteps(guideId, step.substeps).map((substep) => (
+                    <div key={substep.id} className="flex flex-col gap-4">
+                      <p>
+                        {substep.id} {substep.title}
+                      </p>
+                      {substep.img && imageUrl(substep.img) ? (
+                        <img
+                          src={imageUrl(substep.img)}
+                          alt={substep.title}
+                          className="h-auto w-full"
+                        />
+                      ) : null}
+                    </div>
+                  ))}
                 </div>
               ) : null}
               {guideId === "docker"
                 ? step.substeps?.map((substep) =>
-                    substep.id === "2.1" ? (
+                    substep.id === 2.1 ? (
                       <div key={substep.id} className="w-full">
                         <DockerCommandBlock
                           command={substep.title
@@ -189,7 +172,7 @@ export default function InstallationScrollSpy({
                     ) : null,
                   )
                 : null}
-              {step.id === "1" && guideId !== "docker" && downloadUrl ? (
+              {step.id === 1 && guideId !== "docker" && downloadUrl ? (
                 <a
                   href={downloadUrl}
                   className={buttonVariants({
@@ -203,7 +186,7 @@ export default function InstallationScrollSpy({
                   Download Axon Ivy {guide.product}
                 </a>
               ) : null}
-              {guideId === "docker" && step.id === "1" && step.url ? (
+              {guideId === "docker" && step.id === 1 && step.url ? (
                 <a
                   href={step.url}
                   target="_blank"
