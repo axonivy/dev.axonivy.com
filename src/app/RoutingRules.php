@@ -23,7 +23,6 @@ use app\pages\search\SearchAction;
 use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
 use app\pages\tutorial\TutorialAction;
-use app\pages\market\LegacyMarketRedirectAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
 use app\permalink\LegacyPortalPermalinkAction;
@@ -68,7 +67,5 @@ class RoutingRules
     $app->get('/ui/archive[/{version}]', UiArchiveAction::class);
 
     $app->get('/sitemap.xml', SitemapAction::class);
-
-    $app->get('/market[/{path:.*}]', LegacyMarketRedirectAction::class);
   }
 }
