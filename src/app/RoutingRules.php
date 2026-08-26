@@ -11,11 +11,7 @@ use app\ui\UiArchiveAction;
 use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
-use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
-use app\pages\doc\redirect\LegacyEngineGuideDocAction;
-use app\pages\doc\redirect\LegacyPublicAPIAction;
-use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
-use app\pages\doc\redirect\RedirectPortalGuide;
+use app\permalink\RedirectPortalGuide;
 use app\pages\download\DownloadRobotsAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\search\SearchAction;
@@ -24,7 +20,6 @@ use app\pages\support\SupportAction;
 use app\permalink\TutorialAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
-use app\permalink\LegacyPortalPermalinkAction;
 use app\permalink\LinkAction;
 use Slim\App;
 
@@ -43,19 +38,12 @@ class RoutingRules
 
     $app->get('/doc/{version}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version}/{lang:[a-z][a-z]}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
-    $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
-    $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
-    $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
-    $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
-    $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
 
     $app->get('/link/{key}[/{version}]', LinkAction::class);
 
     $app->get('/api-browser', ApiBrowserAction::class);
-
-    $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
     $app->get('/api/currentRelease', ApiCurrentRelease::class);
     $app->get('/api/status', StatusApi::class);
