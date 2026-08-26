@@ -21,7 +21,7 @@ use app\pages\download\maven\MavenArchiveAction;
 use app\pages\search\SearchAction;
 use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
-use app\pages\permalink\TutorialAction;
+use app\permalink\TutorialAction;
 use app\permalink\ProductPermalinkAction;
 use app\permalink\MavenPermalinkAction;
 use app\permalink\LegacyPortalPermalinkAction;

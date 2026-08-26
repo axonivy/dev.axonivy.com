@@ -1,6 +1,6 @@
 <?php
 
-namespace test\pages\permalink;
+namespace test\permalink;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
