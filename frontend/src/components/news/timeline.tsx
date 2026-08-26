@@ -33,11 +33,11 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
       {items.map((item, index) => (
         <li
           key={item.id}
-          className="grid grid-cols-1 gap-4 pb-8 last:pb-0 md:grid-cols-[7rem_1.5rem_minmax(0,1fr)]"
+          className="grid grid-cols-1 gap-4 pb-8 last:pb-0 md:grid-cols-[auto_1.5rem_minmax(0,1fr)]"
         >
           <time
             dateTime={item.releaseDate.toISOString()}
-            className="hidden pt-0.5 text-right text-sm font-medium text-n700 md:block"
+            className="hidden pt-0.5 text-sm font-medium text-n700 md:block"
           >
             {formatDate(item.releaseDate)}
           </time>
@@ -49,7 +49,7 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
             )}
           </div>
 
-          <Card className="flex flex-col px-2 py-6 md:col-start-3 md:flex-row">
+          <Card className="flex flex-col px-2 py-6 md:col-start-3 md:flex-row gap-0">
             <CardHeader className="flex flex-col items-start min-w-0 w-full md:flex-[1.1]">
               <span className="flex flex-wrap w-full items-center justify-between md:justify-start gap-4">
                 <p className="min-w-0 text-xl font-semibold">
