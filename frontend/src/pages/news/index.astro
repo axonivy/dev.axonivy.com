@@ -1,0 +1,110 @@
+---
+import { getCollection } from "astro:content";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Layout from "@/layouts/main.astro";
+import { Badge } from "@/components/ui/badge";
+import {
+  IconCalendar,
+  IconCircleCheck,
+  IconStar,
+  IconArrowRight,
+  IconExternalLink,
+} from "@tabler/icons-astro";
+import { buttonVariants } from "@/components/ui/button";
+import { NewsTimeline } from "@/components/news/timeline";
+
+const releases = (await getCollection("news")).sort(
+  (left, right) =>
+    right.data.release_date.getTime() - left.data.release_date.getTime(),
+);
+const timelineItems = releases.slice(1).map((release) => ({
+  id: release.id,
+  versionTitle: release.data.version_title,
+  slogan: release.data.slogan,
+  releaseDate: release.data.release_date,
+  overview: release.data.overview,
+}));
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+---
+
+<Layout
+  title="What's new?"
+  description={`Explore the latest releases, features and improvements \nof the Axon Ivy platform`}
+>
+  <div class="flex flex-col gap-12">
+    <Card className="flex flex-col md:flex-row gap-8 p-6">
+      <div class="flex flex-col flex-1 gap-4">
+        <CardHeader className="px-0 gap-4">
+          <Badge variant="blue" className="uppercase">latest release</Badge>
+          <span class="flex items-center gap-2">
+            <CardTitle className="text-3xl font-semibold">
+              {releases[0].data.version_title}
+            </CardTitle>
+            <IconStar class="size-8 text-primary" />
+          </span>
+          <CardDescription
+            className="uppercase font-semibold text-n800 tracking-widest"
+          >
+            {releases[0].data.slogan}
+          </CardDescription>
+        </CardHeader>
+        <p class="text-n900">SHORT VERSION OVERVIEW</p>
+        <span class="flex items-center gap-2 text-n900">
+          <IconCalendar class="size-4" />
+          <p>Released: {formatDate(releases[0].data.release_date)}</p>
+        </span>
+        <div class="flex flex-row gap-4">
+          <a
+            href={`/news/${releases[0].id}`}
+            class={buttonVariants({ variant: "default", size: "lg" }) +
+              " group"}
+          >
+            Read more
+            <IconArrowRight
+              className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </a>
+          <a
+            href={releases[0].data.migration_guide_url}
+            class={buttonVariants({ variant: "outline", size: "lg" })}
+          >
+            Migration Guide
+            <IconExternalLink className="size-4" />
+          </a>
+        </div>
+      </div>
+      <CardContent className="flex flex-col flex-1 gap-4 px-0">
+        <p class="text-xl font-semibold">
+          What's new in {releases[0].data.id}
+        </p>
+        <div class="flex flex-col gap-2">
+          {
+            releases[0].data.overview.map((fact: string) => (
+              <span class="flex flex-row gap-2 items-start">
+                <IconCircleCheck class="size-4 text-primary shrink-0 mt-1" />
+                <p class="text-n900">{fact}</p>
+              </span>
+            ))
+          }
+        </div>
+      </CardContent>
+    </Card>
+    <div class="flex flex-col gap-8">
+      <p class="text-3xl font-semibold">Browse more news</p>
+
+      <NewsTimeline items={timelineItems} />
+    </div>
+  </div>
+</Layout>

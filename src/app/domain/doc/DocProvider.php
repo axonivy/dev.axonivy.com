@@ -3,7 +3,7 @@ namespace app\domain\doc;
 
 use app\domain\Version;
 use app\Config;
-use app\pages\news\NewsAction;
+// use app\pages\news\NewsAction;
 
 class DocProvider
 {
@@ -228,10 +228,10 @@ class DocProvider
   {
     $versionNumber = (string) $this->versionNumber;
     if (version_compare($versionNumber, 8) >= 0) {      
-      if (NewsAction::exists($versionNumber)) {
+      // if (NewsAction::exists($versionNumber)) {
         return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
-      }
-      return null;
+      // }
+      // return null;
     }
     return $this->createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
   }
