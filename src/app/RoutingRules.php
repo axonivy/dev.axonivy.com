@@ -11,8 +11,6 @@ use app\ui\UiArchiveAction;
 use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
-use app\pages\doc\redirect\LegacyDesignerGuideDocAction;
-use app\pages\doc\redirect\LegacyEngineGuideDocAction;
 use app\pages\doc\redirect\LegacyPublicAPIAction;
 use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
 use app\pages\doc\redirect\RedirectPortalGuide;
@@ -45,8 +43,6 @@ class RoutingRules
     $app->get('/doc/{version}/{lang:[a-z][a-z]}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
     $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
-    $app->get('/doc/{version}/EngineGuideHtml[/{htmlDocument}]', LegacyEngineGuideDocAction::class);
-    $app->get('/doc/{version}/DesignerGuideHtml[/{htmlDocument}]', LegacyDesignerGuideDocAction::class);
     $app->get('/doc/{version}/PublicAPI[/{path:.*}]', LegacyPublicAPIAction::class);
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
