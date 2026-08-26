@@ -11,8 +11,7 @@ use app\ui\UiArchiveAction;
 use app\pages\github\GitHubAction;
 use app\pages\api\ApiBrowserAction;
 use app\pages\doc\DocAction;
-use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
-use app\pages\doc\redirect\RedirectPortalGuide;
+use app\permalink\RedirectPortalGuide;
 use app\pages\download\DownloadRobotsAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\search\SearchAction;
@@ -40,8 +39,6 @@ class RoutingRules
 
     $app->get('/doc/{version}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
     $app->get('/doc/{version}/{lang:[a-z][a-z]}/portal-guide[/{path:.*}]', RedirectPortalGuide::class);
-    $app->get('/doc/{version:latest}[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
-    $app->get('/doc/{version}.latest[/{path:.*}]', LegacyRedirectLatestDocVersion::class);
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
 
