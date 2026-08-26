@@ -4,7 +4,6 @@ namespace app\domain;
 
 use app\domain\doc\DocProvider;
 use app\Config;
-use app\domain\doc\SimpleDocument;
 
 class ReleaseInfo
 {
@@ -72,49 +71,9 @@ class ReleaseInfo
     return new DocProvider($this->version->getMinorVersion());
   }
 
-  public function hasHotfix(): bool
-  {
-    return file_exists($this->getHotFixPath());
-  }
-
-  public function getHotfixFileUrl(): string
-  {
-    $fileNames = glob($this->getHotFixPath() . '/*.zip');
-    if (empty($fileNames)) {
-      return '';
-    }
-    $fileName = basename($fileNames[0]);
-
-    return '/releases/ivy/' . $this->versionNumber() . '/hotfix/' . $fileName;
-  }
-
-  public function getHotfixHowToDocument(): SimpleDocument
-  {
-    $filename = 'HowTo_Hotfix_AxonIvyEngine.txt';
-
-    $path = $this->createHotFixFilePath($filename);
-    if (!file_exists($path)) {
-      $filename = 'HowTo_Hotfix_XpertIvyServer.txt';
-    }
-
-    $path = $this->createHotFixFilePath($filename);
-    $url = '/releases/ivy/' . $this->versionNumber() . '/hotfix/' . $filename;
-    return new SimpleDocument('How to install Hotfix', $path, $url);
-  }
-
-  private function createHotFixFilePath(string $filename): string
-  {
-    return Config::releaseDirectory() . '/' . $this->versionNumber() . '/hotfix/' . $filename;
-  }
-
   public function getChecksumsUrl(): string
   {
     return Config::CDN_URL . "/" . $this->versionNumber() . "/checksums.sha256";
-  }
-
-  private function getHotFixPath(): string
-  {
-    return $this->getPath() . '/hotfix';
   }
 
   public function getPath(): string
