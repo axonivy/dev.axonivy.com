@@ -9,17 +9,12 @@ use app\domain\Artifact;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseType;
 use app\domain\Version;
-use app\domain\util\Redirect;
 
 class UiDownloadAction
 {
   public function __invoke(Request $request, $response, $args)
   {
     $version = $args['version'] ?? '';
-
-    if ($version == 'sprint') {
-      return Redirect::to($response, '/download/milestone');
-    }
 
     if (!empty($version)) {
       $releaseType = $this->releaseType($version);
