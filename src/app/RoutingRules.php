@@ -16,7 +16,6 @@ use app\pages\doc\redirect\LegacyEngineGuideDocAction;
 use app\pages\doc\redirect\LegacyPublicAPIAction;
 use app\pages\doc\redirect\LegacyRedirectLatestDocVersion;
 use app\pages\doc\redirect\RedirectPortalGuide;
-use app\pages\download\DownloadAction;
 use app\pages\download\DownloadRobotsAction;
 use app\pages\download\maven\MavenArchiveAction;
 use app\pages\search\SearchAction;
