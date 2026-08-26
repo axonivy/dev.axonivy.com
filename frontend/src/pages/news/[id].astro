@@ -1,0 +1,50 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/news.astro";
+
+type NewsEntry = CollectionEntry<"news">;
+
+export async function getStaticPaths() {
+  const releases = await getCollection("news");
+  return releases.map((release) => ({
+    params: { id: release.id },
+    props: { release },
+  }));
+}
+
+const { release } = Astro.props as { release: NewsEntry };
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/news/**/*.{gif,jpeg,jpg,png,webp,PNG}",
+  { eager: true },
+);
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+
+const imageSrc = (image: string) =>
+  images[`/src/assets/news/${image}`]?.default.src ??
+  `/src/assets/news/${image}`;
+---
+
+<Layout>
+  <article class="flex flex-col gap-12">
+    <div class="flex flex-col gap-4 border-b border-n200 pb-8">
+      <a href="/news" class="text-sm text-primary">News</a>
+      <p class="text-sm text-n600">{formatDate(release.data.release_date)}</p>
+      <h1 class="text-4xl font-semibold text-n900 md:text-6xl">
+        {release.data.version_title}
+      </h1>
+      {
+        release.data.slogan && (
+          <p class="max-w-3xl text-xl leading-relaxed text-n700">
+            {release.data.slogan}
+          </p>
+        )
+      }
+    </div>
+  </article>
+</Layout>

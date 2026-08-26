@@ -19,8 +19,6 @@ use app\pages\doc\redirect\RedirectPortalGuide;
 use app\pages\download\DownloadAction;
 use app\pages\download\DownloadRobotsAction;
 use app\pages\download\maven\MavenArchiveAction;
-use app\pages\home\HomeAction;
-use app\pages\news\NewsAction;
 use app\pages\search\SearchAction;
 use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
@@ -70,8 +68,6 @@ class RoutingRules
     $app->get('/ui/archive[/{version}]', UiArchiveAction::class);
 
     $app->get('/sitemap.xml', SitemapAction::class);
-
-    $app->get('/news[/{version}]', NewsAction::class);
 
     $app->get('/market[/{path:.*}]', LegacyMarketRedirectAction::class);
   }
