@@ -14,8 +14,6 @@ use app\pages\doc\DocAction;
 use app\permalink\RedirectPortalGuide;
 use app\pages\download\DownloadRobotsAction;
 use app\pages\download\maven\MavenArchiveAction;
-use app\pages\search\SearchAction;
-use app\pages\sitemap\SitemapAction;
 use app\pages\support\SupportAction;
 use app\permalink\TutorialAction;
 use app\permalink\ProductPermalinkAction;
@@ -52,7 +50,5 @@ class RoutingRules
     $app->get('/ui/doc', UiDocAction::class);
     $app->get('/ui/download[/{version}]', UiDownloadAction::class);
     $app->get('/ui/archive[/{version}]', UiArchiveAction::class);
-
-    $app->get('/sitemap.xml', SitemapAction::class);
   }
 }
