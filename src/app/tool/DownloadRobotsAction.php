@@ -1,6 +1,6 @@
 <?php
 
-namespace app\pages\download;
+namespace app\tool;
 
 class DownloadRobotsAction
 {
