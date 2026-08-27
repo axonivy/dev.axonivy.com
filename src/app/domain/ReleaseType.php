@@ -18,8 +18,6 @@ class ReleaseType
     $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLatestLongTermSupport();
     $type->allReleaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLongTermSupportVersions();
     $type->isDevRelease = false;
-    $type->headline = '<p>Get the latest stable <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Long Term Support</a> version of the Axon Ivy Platform. Or download the <a href="/download/leading-edge">Leading Edge</a> version.';
-    $type->bannerSupplier = fn (string $version) => $this->getLtsBanner($version);
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->minorVersion();
     $type->promotedDevVersion = false;
     return $type;
@@ -34,8 +32,6 @@ class ReleaseType
     $type->shortName = 'LE';
     $type->releaseInfoSupplier = fn (string $key) => ReleaseInfoRepository::getLeadingEdge();
     $type->isDevRelease = false;
-    $type->headline = '<p>Become an early adopter and take the <a href="/release-cycle" style="text-decoration:underline;font-weight:bold;">Leading Edge</a> road with newest features but frequent migrations.</p>';
-    $type->bannerSupplier = fn (string $version) => $this->getLeBanner($version);
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/' . $releaseInfo->majorVersion();
     $type->promotedDevVersion = false;
     return $type;
@@ -87,38 +83,8 @@ class ReleaseType
     $type->archiveKey = 'unstable';
     $type->releaseInfoSupplier = fn (string $key) => self::devReleaseInfoSupplier($key);
     $type->isDevRelease = true;
-    $type->headline = '<p>Our development releases are very unstable and only available for testing purposes.</p>';
-    $type->bannerSupplier = fn (string $version) => '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">These artifacts are for testing purposes only. Never use them on a productive system!</b>';
     $type->archiveLinkSupplier = fn (ReleaseInfo $releaseInfo) => '/download/archive/unstable';
     return $type;
-  }
-
-  private function getLtsBanner($version) {
-    if ($version == $this->key()) {
-      return '';
-    }
-    foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $ltsVersion) {
-      if (str_starts_with($ltsVersion->getVersion()->getBugfixVersion(), $version)) {
-        $latest_lts = ReleaseInfoRepository::getLatestLongTermSupport()->getVersion()->getBugfixVersion();
-        if (str_starts_with($latest_lts, $version)) {
-          return '';
-        }
-        return '<b>There is a <a href="/download">newer LTS version</a> available for download</b>';
-      }
-    }
-    return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Long Term Support release is no longer supported! Please update to the latest LTS version.</b>';
-  }
-
-  private function getLeBanner($version) {
-    $defaultBanner = '<i class="si si-bell"></i> <b>Get familiar with our <a href="/release-cycle">release cycle</a> before you are going to use Leading Edge.</b>';
-    if ($version == $this->key()) {
-      return $defaultBanner;
-    }
-    $leVersion = ReleaseInfoRepository::getLeadingEdge();
-    if ($leVersion == null || !str_starts_with($leVersion->getVersion()->getBugfixVersion(), $version)) {
-      return '<i class="si si-bell" style="background-color:#e62a10;"></i> <b style="color:#e62a10;">This Leading Edge release is no longer supported! Please update to LTS or latest LE version.</b>';
-    }
-    return $defaultBanner;
   }
 
   private static function devReleaseInfoSupplier(string $key): ?ReleaseInfo
@@ -219,10 +185,6 @@ class ReleaseType
 
   private bool $isDevRelease;
 
-  private string $headline;
-
-  private $bannerSupplier;
-
   private $archiveLinkSupplier;
 
   private bool $promotedDevVersion;
@@ -265,16 +227,6 @@ class ReleaseType
   public function isDevRelease(): bool
   {
     return $this->isDevRelease;
-  }
-
-  public function banner(string $version): string
-  {
-    return $this->bannerSupplier->call($this, $version);
-  }
-
-  public function headline(): string
-  {
-    return $this->headline;
   }
 
   public function downloadLink(): string
