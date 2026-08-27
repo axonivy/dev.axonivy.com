@@ -3,25 +3,31 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Setup Wizard`,
   anchor: `setup-wizard`,
-  paragraphs: [
-    `With the new theme and the introduction of the Engine Cockpit, the Engine Config UI doesn't really fit in our product toolset any longer. Because of that, we decided to reengineer this initial setup as a new Setup Wizard.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Write Yaml`,
-      description: `As our new configuration lives in yaml files, the new wizard saves your settings correctly.`,
+      type: `paragraph`,
+      text: `With the new theme and the introduction of the Engine Cockpit, the Engine Config UI doesn't really fit in our product toolset any longer. Because of that, we decided to reengineer this initial setup as a new Setup Wizard.`,
     },
     {
-      term: `Better integration`,
-      description: `The Setup Wizard is part of the Engine Cockpit, so all parts of the wizard are integrated in the cockpit as well.`,
-    },
-    {
-      term: `Improved Interface`,
-      description: `The user interface matches the theme of the 8.0 release.`,
-    },
-    {
-      term: `Better guidance`,
-      description: `We are now giving you better feedback to smoothly configure your engine.`,
+      type: `list`,
+      items: [
+        {
+          term: `Write Yaml`,
+          text: `As our new configuration lives in <code>yaml</code> files, the new wizard saves your settings correctly.`,
+        },
+        {
+          term: `Better integration`,
+          text: `The Setup Wizard is part of the Engine Cockpit, so all parts of the wizard are integrated in the cockpit as well.`,
+        },
+        {
+          term: `Improved Interface`,
+          text: `The user interface matches the theme of the 8.0 release.`,
+        },
+        {
+          term: `Better guidance`,
+          text: `We are now giving you better feedback to smoothly configure your engine.`,
+        },
+      ],
     },
   ],
   links: [
@@ -36,7 +42,6 @@ const section: NewsSection = {
     `8.0/setup-wizard/03-setup-systemdb.png`,
     `8.0/setup-wizard/04-setup-webserver.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `13.1`,
   version_title: `Axon Ivy 13.1`,
   slogan: `Improved editors and views, multilingual tooling, and a fully previewable UI experience`,
+  tag: `Leading Edge`,
   release_date: new Date(`2025-06-06`),
+  download_url: `/download`,
+  release_notes_url: `/doc/13.1/en/axonivy/release-notes`,
   migration_guide_url: `/doc/13.1/en/axonivy/migration/index.html`,
   overview: [
     "Dialog Preview returns with a more stable, accurate implementation for real-time rendering and direct navigation to elements.",

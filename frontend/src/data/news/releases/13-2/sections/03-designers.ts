@@ -3,50 +3,64 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Designers`,
   anchor: `designers`,
-  paragraphs: [
-    `The latest updates deliver significant improvements to the overall design experience across both environments:`,
-    `All new features are available in both tools, ensuring a consistent experience for all roles.`,
-  ],
-  features: [
+  content: [
     {
-      term: `NEO Designer`,
-      description: `the web-based, intuitive tool for business technologists`,
+      type: `paragraph`,
+      text: `The latest updates deliver significant improvements to the overall design experience across both environments:`,
     },
     {
-      term: `PRO Designer (VS Code Extension)`,
-      description: `development environment for experienced developers`,
+      type: `list`,
+      items: [
+        {
+          term: `NEO Designer`,
+          text: `the web-based, intuitive tool for business technologists`,
+        },
+        {
+          term: `PRO Designer (VS Code Extension)`,
+          text: `development environment for experienced developers`,
+        },
+      ],
     },
     {
-      term: `CMS Editor Enhancements`,
-      description: `Improved multilingual editing with integrated translation.`,
+      type: `paragraph`,
+      text: `All new features are available in both tools, ensuring a consistent experience for all roles.`,
     },
     {
-      term: `Form Editor Enhancements`,
-      description: `Support for lazy data models, listener properties, component conversion with preserved settings, a unified dialog framework, and direct control of column widths for richer, more responsive UIs.`,
-    },
-    {
-      term: `New XHTML Editor`,
-      description: `Smart code completion, validation, and contextual hover information improve speed and reliability.`,
-    },
-    {
-      term: `Generate from Data`,
-      description: `Automatic entity form generation from databases accelerates UI creation and ensures visual consistency.`,
-    },
-    {
-      term: `Improved Configuration & Inscription Experience`,
-      description: `Streamlined configuration with better defaults, tab-based settings, and more intuitive controls.`,
-    },
-    {
-      term: `Process Modeling Refinements`,
-      description: `Enhanced copy/paste, smoother insert actions, and improved undo/redo for more efficient modeling.`,
-    },
-    {
-      term: `BPMN-2 Import Improvements`,
-      description: `More reliable BPMN-2 imports with better semantic accuracy and support for standard BPMN icons.`,
-    },
-    {
-      term: `NEO Designer Updates`,
-      description: `Usability improvements and a new integrated Runtime Log View for faster diagnostics during design and testing.`,
+      type: `list`,
+      items: [
+        {
+          term: `CMS Editor Enhancements`,
+          text: `Improved multilingual editing with integrated translation.`,
+        },
+        {
+          term: `Form Editor Enhancements`,
+          text: `Support for lazy data models, listener properties, component conversion with preserved settings, a unified dialog framework, and direct control of column widths for richer, more responsive UIs.`,
+        },
+        {
+          term: `New XHTML Editor`,
+          text: `Smart code completion, validation, and contextual hover information improve speed and reliability.`,
+        },
+        {
+          term: `Generate from Data`,
+          text: `Automatic entity form generation from databases accelerates UI creation and ensures visual consistency.`,
+        },
+        {
+          term: `Improved Configuration & Inscription Experience`,
+          text: `Streamlined configuration with better defaults, tab-based settings, and more intuitive controls.`,
+        },
+        {
+          term: `Process Modeling Refinements`,
+          text: `Enhanced copy/paste, smoother insert actions, and improved undo/redo for more efficient modeling.`,
+        },
+        {
+          term: `BPMN-2 Import Improvements`,
+          text: `More reliable BPMN-2 imports with better semantic accuracy and support for standard BPMN icons.`,
+        },
+        {
+          term: `NEO Designer Updates`,
+          text: `Usability improvements and a new integrated Runtime Log View for faster diagnostics during design and testing.`,
+        },
+      ],
     },
   ],
   links: [
@@ -90,7 +104,6 @@ const section: NewsSection = {
     `13.2/designers/16-neo-bpmn-import.png`,
     `13.2/designers/17-neo-runtimelog.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

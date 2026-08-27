@@ -3,25 +3,31 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `New Process Editor`,
   anchor: `processEditor`,
-  paragraphs: [
-    `Version 9.4 replaces the old AWT-based Process Editor with a new, fully web-based alternative. The new editor allows you to implement business processes even faster.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Browser compatible`,
-      description: `The new process editor runs on native web technologies.`,
+      type: `paragraph`,
+      text: `Version 9.4 replaces the old AWT-based Process Editor with a new, fully web-based alternative. The new editor allows you to implement business processes even faster.`,
     },
     {
-      term: `Element palette`,
-      description: `The element palette is now divided into different categories to facilitate your search for the desired element.`,
-    },
-    {
-      term: `Quick Actions`,
-      description: `Besides the new look and feel of the editor view, there is a new way to interact with process elements. The Quick Action Bar gives you a range of actions which can be triggered (e.g. open an inscription mask or append a new element).`,
-    },
-    {
-      term: `Process viewer on engine`,
-      description: `The Dev-Workflow-UI and the Axon Ivy Portal now provide a process viewer.`,
+      type: `list`,
+      items: [
+        {
+          term: `Browser compatible`,
+          text: `The new process editor runs on native web technologies.`,
+        },
+        {
+          term: `Element palette`,
+          text: `The element palette is now divided into different categories to facilitate your search for the desired element.`,
+        },
+        {
+          term: `Quick Actions`,
+          text: `Besides the new look and feel of the editor view, there is a new way to interact with process elements. The Quick Action Bar gives you a range of actions which can be triggered (e.g. open an inscription mask or append a new element).`,
+        },
+        {
+          term: `Process viewer on engine`,
+          text: `The <code>Dev-Workflow-UI</code> and the <code>Axon Ivy Portal</code> now provide a process viewer.`,
+        },
+      ],
     },
   ],
   links: [
@@ -36,7 +42,6 @@ const section: NewsSection = {
     `9.4/new-process-editor/03-dark-mode.png`,
     `9.4/new-process-editor/04-portal-process-viewer.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

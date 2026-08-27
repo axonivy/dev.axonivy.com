@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Performance & Tracing`,
   anchor: `performance93`,
-  paragraphs: [
-    `The Engine Cockpit comes with built-in tooling to battle performance issues.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Performance`,
-      description: `Identify slow external systems with the new Performance Statistic in the Engine Cockpit.`,
+      type: `paragraph`,
+      text: `The Engine Cockpit comes with built-in tooling to battle performance issues.`,
     },
     {
-      term: `Tracing`,
-      description: `Simplifies consolidating log entries over multiple services of your solution by integrating with the most common tracing tools such as W3C Trace Context, Jaeger, Zipkin and Amazon X-Ray.`,
-    },
-    {
-      term: `Cache`,
-      description: `Optimize the system database cache settings with the new Cache View in the Engine Cockpit.`,
+      type: `list`,
+      items: [
+        {
+          term: `Performance`,
+          text: `Identify slow external systems with the new Performance Statistic in the Engine Cockpit.`,
+        },
+        {
+          term: `Tracing`,
+          text: `Simplifies consolidating log entries over multiple services of your solution by integrating with the most common tracing tools such as W3C Trace Context, Jaeger, Zipkin and Amazon X-Ray.`,
+        },
+        {
+          term: `Cache`,
+          text: `Optimize the system database cache settings with the new Cache View in the Engine Cockpit.`,
+        },
+      ],
     },
   ],
   links: [
@@ -44,7 +50,6 @@ const section: NewsSection = {
     `9.3/performance/03-log.png`,
     `9.3/performance/04-jaeger.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

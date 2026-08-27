@@ -1,9 +1,16 @@
-interface NewsFeature {
-  term: string | null;
-  description: string;
+export interface NewsListItem {
+  term?: string;
+  text: string;
+  items?: NewsListItem[];
 }
 
-interface NewsLink {
+export type NewsBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: NewsListItem[] }
+  | { type: "code"; code: string; language?: string }
+  | { type: "heading"; text: string };
+
+export interface NewsLink {
   label: string;
   url: string;
 }
@@ -11,18 +18,19 @@ interface NewsLink {
 export interface NewsSection {
   heading: string;
   anchor: string | null;
-  paragraphs: string[];
-  features: NewsFeature[];
+  content: NewsBlock[];
   links: NewsLink[];
   images: string[];
-  code_sample: string | null;
 }
 
 export interface NewsRelease {
   id: string;
   version_title: string;
   slogan: string | null;
+  tag: "Long Term Support" | "Leading Edge" | "Archived";
   release_date: Date;
+  download_url: string;
+  release_notes_url: string;
   migration_guide_url: string;
   overview: string[];
   sections: NewsSection[];

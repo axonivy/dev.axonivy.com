@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `11.3`,
   version_title: `Axon Ivy 11.3`,
   slogan: `Variables Editor and Mobile App`,
+  tag: `Archived`,
   release_date: new Date(`2024-05-23`),
+  download_url: `/download`,
+  release_notes_url: `/doc/11.3/en/axonivy/release-notes`,
   migration_guide_url: `/doc/11.3/en/axonivy/migration/index.html`,
   overview: [
     "New Variables Editor simplifies defining dynamic parts within highly configurable workflows.",

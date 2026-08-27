@@ -27,6 +27,7 @@ const timelineItems = releases.slice(1).map((release) => ({
   id: release.id,
   versionTitle: release.data.version_title,
   slogan: release.data.slogan,
+  tag: release.data.tag,
   releaseDate: release.data.release_date,
   overview: release.data.overview,
 }));
@@ -47,7 +48,14 @@ const formatDate = (date: Date) =>
     <Card className="flex flex-col md:flex-row gap-8 p-6">
       <div class="flex flex-col flex-1 gap-4">
         <CardHeader className="px-0 gap-4">
-          <Badge variant="blue" className="uppercase">latest release</Badge>
+          <Badge
+            variant={releases[0].data.tag === "Long Term Support"
+              ? "green"
+              : releases[0].data.tag === "Leading Edge"
+                ? "orange"
+                : "gray"}
+            className="uppercase">{releases[0].data.tag}</Badge
+          >
           <span class="flex items-center gap-2">
             <CardTitle className="text-3xl font-semibold">
               {releases[0].data.version_title}

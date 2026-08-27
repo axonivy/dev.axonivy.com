@@ -3,37 +3,43 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Core`,
   anchor: `core`,
-  paragraphs: [
-    `The platform foundation is strengthened with improved cloud capabilities, better integration, and future-ready technology updates:`,
-  ],
-  features: [
+  content: [
     {
-      term: `Internationalization`,
-      description: `Expanded multi-language support across the Developer Workflow UI, Engine Cockpit, notifications, and error messages.`,
+      type: `paragraph`,
+      text: `The platform foundation is strengthened with improved cloud capabilities, better integration, and future-ready technology updates:`,
     },
     {
-      term: `Cluster Deployment & Observability`,
-      description: `Enhanced deployment options, improved IdP support for administrators, and expanded Docker and Kubernetes examples improve cloud and enterprise readiness.`,
-    },
-    {
-      term: `Developer Workflow UI`,
-      description: `Improved navigation and new filtering simplify handling large projects.`,
-    },
-    {
-      term: `Public API & Maven Artifacts`,
-      description: `Public APIs are now available as Maven artifacts, simplifying integration, automation, and extension development.`,
-    },
-    {
-      term: `Database, Runtime & Jakarta`,
-      description: `Support for SQL Server 2025, Windows Server 2025, runtime improvements, and the first step toward Jakarta EE ensure long-term Java compatibility.`,
-    },
-    {
-      term: `Engine Cockpit`,
-      description: `SSL key import simplifies secure configuration and reduces manual setup.`,
-    },
-    {
-      term: `Mail API & IIS Script`,
-      description: `A new Mail API and updated IIS deployment script streamline communication and Windows installations.`,
+      type: `list`,
+      items: [
+        {
+          term: `Internationalization`,
+          text: `Expanded multi-language support across the Developer Workflow UI, Engine Cockpit, notifications, and error messages.`,
+        },
+        {
+          term: `Cluster Deployment & Observability`,
+          text: `Enhanced deployment options, improved IdP support for administrators, and expanded Docker and Kubernetes examples improve cloud and enterprise readiness.`,
+        },
+        {
+          term: `Developer Workflow UI`,
+          text: `Improved navigation and new filtering simplify handling large projects.`,
+        },
+        {
+          term: `Public API & Maven Artifacts`,
+          text: `Public APIs are now available as Maven artifacts, simplifying integration, automation, and extension development.`,
+        },
+        {
+          term: `Database, Runtime & Jakarta`,
+          text: `Support for SQL Server 2025, Windows Server 2025, runtime improvements, and the first step toward Jakarta EE ensure long-term Java compatibility.`,
+        },
+        {
+          term: `Engine Cockpit`,
+          text: `SSL key import simplifies secure configuration and reduces manual setup.`,
+        },
+        {
+          term: `Mail API & IIS Script`,
+          text: `A new Mail API and updated IIS deployment script streamline communication and Windows installations.`,
+        },
+      ],
     },
   ],
   links: [
@@ -65,7 +71,6 @@ const section: NewsSection = {
     `13.2/core/04-jakarta.png`,
     `13.2/core/05-engine-cockpit-ssl.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

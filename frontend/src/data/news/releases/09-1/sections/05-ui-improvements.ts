@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `General UI/UX improvements`,
   anchor: `general-ui-ux-improvements`,
-  paragraphs: [
-    `As we started to make our theme customizable we made a lot of improvements to our internal pages.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Color Customizing`,
-      description: `Our Serenity ivy theme provides some css variables to easily change colors.`,
+      type: `paragraph`,
+      text: `As we started to make our theme customizable we made a lot of improvements to our internal pages.`,
     },
     {
-      term: `User friendly error pages`,
-      description: `Streamlined and user friendly design of our internal error pages.`,
-    },
-    {
-      term: `Clean info page`,
-      description: `New clean and modern server info page.`,
+      type: `list`,
+      items: [
+        {
+          term: `Color Customizing`,
+          text: `Our Serenity ivy theme provides some css variables to easily change colors.`,
+        },
+        {
+          term: `User friendly error pages`,
+          text: `Streamlined and user friendly design of our internal error pages.`,
+        },
+        {
+          term: `Clean info page`,
+          text: `New clean and modern server info page.`,
+        },
+      ],
     },
   ],
   links: [
@@ -30,7 +36,6 @@ const section: NewsSection = {
     `9.1/ui-improvements/01-info-page.jpg`,
     `9.1/ui-improvements/02-error-page.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

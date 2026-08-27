@@ -3,42 +3,55 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Portal`,
   anchor: `portal`,
-  paragraphs: [
-    `Portal 13.2 introduces faster navigation, stronger analytics and more flexible process handling. Improved accessibility, new statistics features and Side Step Processes make daily work smoother, clearer and more efficient.`,
-    `And more`,
-  ],
-  features: [
+  content: [
     {
-      term: `Statistics`,
-      description: `With the Portal Statistics Widget Configurator, you can create meaningful insights into your process and business data in just a few clicks. Condition-based coloring for instant KPI visibility KPI-based charts using custom fields for tailored analysis Drill-down from charts directly to tasks and cases Preconfigured sample dashboards for fast setup`,
+      type: `paragraph`,
+      text: `Portal 13.2 introduces faster navigation, stronger analytics and more flexible process handling. Improved accessibility, new statistics features and Side Step Processes make daily work smoother, clearer and more efficient.`,
     },
     {
-      term: `Accessibility`,
-      description: `Improved focus order, enhanced keyboard navigation, optimized ARIA landmarks and better screen reader compatibility. Stronger contrasts, consistent labels and complete alt-text support ensure a modern, WCAG-aligned experience.`,
+      type: `list`,
+      items: [
+        {
+          term: `Statistics`,
+          text: `With the Portal Statistics Widget Configurator, you can create meaningful insights into your process and business data in just a few clicks.`,
+          items: [
+            { text: `Condition-based coloring for instant KPI visibility` },
+            {
+              text: `KPI-based charts using custom fields for tailored analysis`,
+            },
+            { text: `Drill-down from charts directly to tasks and cases` },
+            { text: `Preconfigured sample dashboards for fast setup` },
+          ],
+        },
+        {
+          term: `Accessibility`,
+          text: `Improved focus order, enhanced keyboard navigation, optimized ARIA landmarks and better screen reader compatibility. Stronger contrasts, consistent labels and complete alt-text support ensure a modern, WCAG-aligned experience.`,
+        },
+        {
+          term: `Side Step Process`,
+          text: `Pause or branch from an active workflow without interrupting the main case. Perfect for clarifications, additional information requests or parallel sub-processes. Fully multilingual and ready for global teams.`,
+        },
+        {
+          term: `Static Pages`,
+          text: `Add custom info or help pages directly into the Portal navigation. Fully styled, localizable, permission-controlled and seamlessly integrated into the Portal layout.`,
+        },
+      ],
     },
     {
-      term: `Side Step Process`,
-      description: `Pause or branch from an active workflow without interrupting the main case. Perfect for clarifications, additional information requests or parallel sub-processes. Fully multilingual and ready for global teams.`,
+      type: `paragraph`,
+      text: `And more`,
     },
     {
-      term: `Static Pages`,
-      description: `Add custom info or help pages directly into the Portal navigation. Fully styled, localizable, permission-controlled and seamlessly integrated into the Portal layout.`,
-    },
-    {
-      term: null,
-      description: `Improved stability for inactive browser tabs`,
-    },
-    { term: null, description: `Fixes for multilingual inconsistencies` },
-    {
-      term: null,
-      description: `Better shortcut handling in info widgets`,
-    },
-    { term: null, description: `More robust user menu and filters` },
-    { term: null, description: `Faster loading for large UI elements` },
-    { term: null, description: `Improved case detail handling` },
-    {
-      term: null,
-      description: `Safer streamed content and file deletion workflows`,
+      type: `list`,
+      items: [
+        { text: `Improved stability for inactive browser tabs` },
+        { text: `Fixes for multilingual inconsistencies` },
+        { text: `Better shortcut handling in info widgets` },
+        { text: `More robust user menu and filters` },
+        { text: `Faster loading for large UI elements` },
+        { text: `Improved case detail handling` },
+        { text: `Safer streamed content and file deletion workflows` },
+      ],
     },
   ],
   links: [
@@ -67,7 +80,6 @@ const section: NewsSection = {
     `13.2/portal/05-statistic-example1.png`,
     `13.2/portal/06-statistic-examples2.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Form Editor (Alpha) 🧪`,
   anchor: `formEditor`,
-  paragraphs: [
-    `We are enabling you to build user interfaces like never before.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Low-Code`,
-      description: `Committed to letting everyone partake in building UIs, the new Form Editor lets you define contents without writing any code. Drag and Drop skills are all you need to start your creative journey.`,
+      type: `paragraph`,
+      text: `We are enabling you to build user interfaces like never before.`,
     },
     {
-      term: `Agnostic`,
-      description: `Building the UI in technology-neutral mannor, we automatically generate the views for JSF as before. However, you're no longer the maintainer of them and can refrain from efforts to make them functional and keep them stable.`,
-    },
-    {
-      term: `Alpha`,
-      description: `Looking for feedback, we already integrated an early Alpha version of our new Form Editor. Nevertheless, we plan to support much more widgets, and integrations of complex components until the LTS 12 release.`,
+      type: `list`,
+      items: [
+        {
+          term: `Low-Code`,
+          text: `Committed to letting everyone partake in building UIs, the new Form Editor lets you define contents without writing any code. Drag and Drop skills are all you need to start your creative journey.`,
+        },
+        {
+          term: `Agnostic`,
+          text: `Building the UI in technology-neutral mannor, we automatically generate the views for JSF as before. However, you're no longer the maintainer of them and can refrain from efforts to make them functional and keep them stable.`,
+        },
+        {
+          term: `Alpha`,
+          text: `Looking for feedback, we already integrated an early Alpha version of our new Form Editor. Nevertheless, we plan to support much more widgets, and integrations of complex components until the LTS 12 release.`,
+        },
+      ],
     },
   ],
   links: [
@@ -30,7 +36,6 @@ const section: NewsSection = {
     `11.3/form-editor/01-form-widget-drop.png`,
     `11.3/form-editor/02-form-demo.gif`,
   ],
-  code_sample: null,
 };
 
 export default section;

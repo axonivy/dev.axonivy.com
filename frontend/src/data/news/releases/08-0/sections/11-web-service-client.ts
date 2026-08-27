@@ -3,29 +3,35 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `New Web Service Client Tooling`,
   anchor: `ws-client`,
-  paragraphs: [
-    `The tooling to call remote Web Services has been completely re-worked and is more powerful than ever.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Simple`,
-      description: `Clean and intuitive configuration mask on the Web Service Call activity`,
+      type: `paragraph`,
+      text: `The tooling to call remote Web Services has been completely re-worked and is more powerful than ever.`,
     },
     {
-      term: `Secure`,
-      description: `Integrated authentication features for HTTP-BASIC, HTTP-DIGEST, NTLM and WS-Security.`,
-    },
-    {
-      term: `Compliant`,
-      description: `A huge set of Web Service specifications (WS-*) are supported and ready to use`,
-    },
-    {
-      term: `Reliable`,
-      description: `Logs and monitoring capabilities let you easily identify fragile Web Service communications`,
-    },
-    {
-      term: `Open`,
-      description: `Additional client features can easily be contributed by process developers`,
+      type: `list`,
+      items: [
+        {
+          term: `Simple`,
+          text: `Clean and intuitive configuration mask on the Web Service Call activity`,
+        },
+        {
+          term: `Secure`,
+          text: `Integrated authentication features for HTTP-BASIC, HTTP-DIGEST, NTLM and WS-Security.`,
+        },
+        {
+          term: `Compliant`,
+          text: `A huge set of Web Service specifications (WS-*) are supported and ready to use`,
+        },
+        {
+          term: `Reliable`,
+          text: `Logs and monitoring capabilities let you easily identify fragile Web Service communications`,
+        },
+        {
+          term: `Open`,
+          text: `Additional client features can easily be contributed by process developers`,
+        },
+      ],
     },
   ],
   links: [
@@ -39,7 +45,6 @@ const section: NewsSection = {
     },
   ],
   images: [`8.0/new-webservice-client-tooling/01-ws-client-cxf.png`],
-  code_sample: null,
 };
 
 export default section;
