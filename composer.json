@@ -5,7 +5,6 @@
     "slim/psr7": "*",
     "php-di/php-di": "*",
     "middlewares/trailing-slash": "*",
-    "league/commonmark": "*",
     "guzzlehttp/guzzle": "*",
     "swagger-api/swagger-ui": "*"
   },
