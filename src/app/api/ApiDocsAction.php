@@ -10,7 +10,7 @@ use app\domain\Version;
 use app\domain\doc\DocProvider;
 use app\domain\util\ArrayUtil;
 
-class Docs
+class ApiDocsAction
 {
   public function __invoke(Request $request, $response, $args)
   {

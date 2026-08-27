@@ -8,7 +8,7 @@ use app\domain\ReleaseInfoRepository;
 use app\domain\Version;
 use app\domain\util\ArrayUtil;
 
-class ApiCurrentRelease
+class ApiCurrentReleaseAction
 {
   public function __invoke(Request $request, $response, $args)
   {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\permalink;
+namespace app\redirect;
 
 use Slim\Psr7\Request;
 use Slim\Exception\HttpNotFoundException;
