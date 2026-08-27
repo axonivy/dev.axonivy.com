@@ -1,6 +1,6 @@
 <?php
 
-namespace test\pages\download;
+namespace test\tool;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;

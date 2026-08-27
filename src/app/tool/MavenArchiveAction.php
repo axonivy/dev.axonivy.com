@@ -1,8 +1,7 @@
 <?php
 
-namespace app\pages\download\maven;
+namespace app\tool;
 
-use Slim\Views\Twig;
 use app\Config;
 use app\domain\ReleaseInfoRepository;
 use app\domain\Version;
@@ -10,33 +9,57 @@ use app\domain\ReleaseType;
 
 class MavenArchiveAction
 {
-  private Twig $view;
-
-  public function __construct(Twig $view)
-  {
-    $this->view = $view;
-  }
-
   public function __invoke($request, $response, $args)
   {
     $releases = [];
+
     foreach (ReleaseInfoRepository::getAvailableReleaseInfos() as $releaseInfo) {
       if (!self::versionSupported($releaseInfo->getVersion())) {
         continue;
       }
 
       $artifacts = [];
+
       foreach ($releaseInfo->getArtifacts() as $artifact) {
         if ($artifact->isMavenPluginCompatible()) {
-          $artifacts[] = new MavenArchiveArtifact($artifact->getDownloadUrl(), $artifact->getFilename());
+          $artifacts[] = new MavenArchiveArtifact(
+            $artifact->getDownloadUrl(),
+            $artifact->getFilename()
+          );
         }
       }
+
       if (!empty($artifacts)) {
-        $releases[] = new MavenArchiveRelease($releaseInfo->getVersion()->getVersionNumber(), $artifacts);
+        $releases[] = new MavenArchiveRelease(
+          $releaseInfo->getVersion()->getVersionNumber(),
+          $artifacts
+        );
       }
     }
+
     $releases = array_reverse($releases);
-    return $this->view->render($response, 'download/maven/maven.twig', ['releases' => $releases]);
+
+    $html = '<h1>Axon Ivy Maven Engine Archive</h1>';
+    $html .= '<p>The engine archive that can be used with the Maven plugin '
+      . '<code>com.axonivy.ivy.ci:project-compile-plugin</code>.</p>';
+
+    foreach ($releases as $release) {
+      $html .= '<h2>Release ' . htmlspecialchars($release->version, ENT_QUOTES, 'UTF-8') . '</h2>';
+      $html .= '<ul>';
+
+      foreach ($release->artifacts as $artifact) {
+        $url = htmlspecialchars($artifact->url, ENT_QUOTES, 'UTF-8');
+        $filename = htmlspecialchars($artifact->filename, ENT_QUOTES, 'UTF-8');
+
+        $html .= '<li><a href="' . $url . '">' . $filename . '</a></li>';
+      }
+
+      $html .= '</ul>';
+    }
+
+    $response->getBody()->write($html);
+
+    return $response->withHeader('Content-Type', 'text/html; charset=UTF-8');
   }
 
   private static function versionSupported(Version $version): bool
@@ -44,7 +67,10 @@ class MavenArchiveAction
     if (str_starts_with($version->getVersionNumber(), ReleaseType::NIGHTLY()->key())) {
       return true;
     }
-    return $version->isEqualOrGreaterThan(Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
+
+    return $version->isEqualOrGreaterThan(
+      Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION
+    );
   }
 }
 
