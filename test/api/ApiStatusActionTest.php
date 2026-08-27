@@ -5,7 +5,7 @@ namespace test\api;
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
 
-class StatusApiTest extends TestCase
+class ApiStatusActionTest extends TestCase
 {
   public function testStatus()
   {

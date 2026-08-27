@@ -1,5 +1,5 @@
 <?php
-namespace test\permalink;
+namespace test\redirect;
 
 use PHPUnit\Framework\TestCase;
 use test\AppTester;

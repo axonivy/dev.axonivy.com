@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use test\AppTester;
 use app\domain\ReleaseInfoRepository;
 
-class ApiCurrentReleaseTest extends TestCase
+class ApiCurrentReleaseActionTest extends TestCase
 {
   public function testCurrentRelease()
   {

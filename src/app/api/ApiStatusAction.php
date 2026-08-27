@@ -5,7 +5,7 @@ namespace app\api;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseInfoRepository;
 
-class StatusApi
+class ApiStatusAction
 {
   public function __invoke($request, $response, $args)
   {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\permalink;
+namespace app\redirect;
 
 use app\domain\util\Redirect;
 

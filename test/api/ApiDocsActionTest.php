@@ -1,12 +1,12 @@
 <?php
 
-namespace test\pages\api;
+namespace test\api;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use test\AppTester;
 
-class DocsTest extends TestCase
+class ApiDocsActionTest extends TestCase
 {  
   public function testVersions()
   {
