@@ -3,26 +3,52 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Customizable Designer`,
   anchor: `customizable-designer`,
-  paragraphs: [
-    `We made the latest Axon.ivy Designer much more flexible, so that it serves best for your development needs.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Lighter`,
-      description: `The Xpert.ivy 3.9 import feature has been retired. The project reporting feature is no longer included. But you can install it via the pre-configured update site.`,
+      type: `paragraph`,
+      text: `We made the latest Axon.ivy Designer much more flexible, so that it serves best for your development needs.`,
     },
     {
-      term: `Up to date`,
-      description: `Many developers switched to GIT as their primary source control management system. Now we ship the EGit team provider together with a new version of Subclipse for SVN users. Independent features of the designer such as GIT or SVN can now be updated. Now you are not bound to the Axon.ivy Designer release cycle to get the latest third-party improvements anymore.`,
-    },
-    {
-      term: `Totally yours`,
-      description: `You do not require some core parts of the Designer at all? We isolated features of the Designer so that you can uninstall them. Why don't you craft your custom Axon.ivy Designer with the essentials for you and your team?`,
+      type: `list`,
+      items: [
+        {
+          text: `Lighter`,
+          items: [
+            {
+              text: `The Xpert.ivy 3.9 import feature has been retired.`,
+            },
+            {
+              text: `The project reporting feature is no longer included. But you can install it via the pre-configured update site.`,
+            },
+          ],
+        },
+        {
+          text: `Up to date`,
+          items: [
+            {
+              text: `Many developers switched to GIT as their primary source control management system. Now we ship the EGit team provider together with a new version of Subclipse for SVN users.`,
+            },
+            {
+              text: `Independent features of the designer such as GIT or SVN can now be updated. Now you are not bound to the Axon.ivy Designer release cycle to get the latest third-party improvements anymore.`,
+            },
+          ],
+        },
+        {
+          text: `Totally yours`,
+          items: [
+            {
+              text: `You do not require some core parts of the Designer at all? We isolated features of the Designer so that you can uninstall them.`,
+            },
+            {
+              text: `Why don't you craft your custom Axon.ivy Designer with the essentials for you and your team?`,
+            },
+          ],
+        },
+      ],
     },
   ],
   links: [],
   images: [`8.0/customizable-designer/01-designer-isolated-features.png`],
-  code_sample: null,
 };
 
 export default section;

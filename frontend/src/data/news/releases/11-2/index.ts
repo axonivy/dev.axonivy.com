@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `11.2`,
   version_title: `Axon Ivy 11.2`,
   slogan: `Notifications and Inscriptions`,
+  tag: `Archived`,
   release_date: new Date(`2023-12-01`),
+  download_url: `/download`,
+  release_notes_url: `/doc/11.2/en/axonivy/release-notes`,
   migration_guide_url: `/doc/11.2/en/axonivy/migration/index.html`,
   overview: [
     "New notification framework informs users about events like new tasks across channels (Portal, email, Microsoft Teams).",

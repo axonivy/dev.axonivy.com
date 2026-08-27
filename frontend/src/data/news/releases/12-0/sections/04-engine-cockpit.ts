@@ -3,37 +3,43 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Engine Cockpit`,
   anchor: `engineCockpit`,
-  paragraphs: [
-    `The engine cockpit has been updated with new features designed to simplify operations.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Migration Wizard`,
-      description: `The migration wizard has been redesigned to assist with migrating an Engine between versions, including upgrades from one LTS (Long-Term Support) version to the next or between update releases.`,
+      type: `paragraph`,
+      text: `The engine cockpit has been updated with new features designed to simplify operations.`,
     },
     {
-      term: `Health Check`,
-      description: `The new health check service performs various checks to analyze the Engine's health, providing warnings if potential issues are detected.`,
-    },
-    {
-      term: `SSL / TLS Tester`,
-      description: `Keys and certificates can now be managed through the SSL view. The TLS tester helps verify connections to databases, REST, and SOAP services, with the option to import missing certificates.`,
-    },
-    {
-      term: `Monitoring`,
-      description: `The monitoring capabilities now include eleven new views, such as System Database Info, Class Histogram, Threads, Flight Recorder, Notifications, Session, Jobs, Health, Documents, Start Events, and Intermediate Events, for better operational insights.`,
-    },
-    {
-      term: `Security Export`,
-      description: `Users, roles, user-role assignments, and permissions can now be exported to Excel files to facilitate audits or documentation.`,
-    },
-    {
-      term: `Properties and Features`,
-      description: `The properties and features of REST clients or SOAP web services can be edited directly from the cockpit.`,
-    },
-    {
-      term: `More Improvements`,
-      description: `Enhanced Active Directory and Entra ID browsers, improved configuration file editor, updated search engine view, user substitute and absence management, and options for merging and changing the security system of an application.`,
+      type: `list`,
+      items: [
+        {
+          term: `Migration Wizard`,
+          text: `The migration wizard has been redesigned to assist with migrating an Engine between versions, including upgrades from one LTS (Long-Term Support) version to the next or between update releases.`,
+        },
+        {
+          term: `Health Check`,
+          text: `The new health check service performs various checks to analyze the Engine's health, providing warnings if potential issues are detected.`,
+        },
+        {
+          term: `SSL / TLS Tester`,
+          text: `Keys and certificates can now be managed through the SSL view. The TLS tester helps verify connections to databases, REST, and SOAP services, with the option to import missing certificates.`,
+        },
+        {
+          term: `Monitoring`,
+          text: `The monitoring capabilities now include eleven new views, such as System Database Info, Class Histogram, Threads, Flight Recorder, Notifications, Session, Jobs, Health, Documents, Start Events, and Intermediate Events, for better operational insights.`,
+        },
+        {
+          term: `Security Export`,
+          text: `Users, roles, user-role assignments, and permissions can now be exported to Excel files to facilitate audits or documentation.`,
+        },
+        {
+          term: `Properties and Features`,
+          text: `The properties and features of REST clients or SOAP web services can be edited directly from the cockpit.`,
+        },
+        {
+          term: `More Improvements`,
+          text: `Enhanced Active Directory and Entra ID browsers, improved configuration file editor, updated search engine view, user substitute and absence management, and options for merging and changing the security system of an application.`,
+        },
+      ],
     },
   ],
   links: [
@@ -60,7 +66,6 @@ const section: NewsSection = {
     `12.0/engine-cockpit/15-other-merge-security-system.png`,
     `12.0/engine-cockpit/16-other-change-security-system.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

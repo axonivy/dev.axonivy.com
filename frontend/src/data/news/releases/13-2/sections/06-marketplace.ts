@@ -3,48 +3,62 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Marketplace`,
   anchor: `market`,
-  paragraphs: [`New Market Extensions`, `Marketplace Website Improvements`],
-  features: [
+  content: [
     {
-      term: `Case Process Viewer`,
-      description: `A new UI component visualizes the current process step directly in the Axon Ivy UI and can be integrated with a single line of code.`,
+      type: `paragraph`,
+      text: `New Market Extensions`,
     },
     {
-      term: `Chaptcha Utils`,
-      description: `A ready-to-use CAPTCHA utility allows easy integration of human verification into Axon Ivy UIs for improved security.`,
+      type: `list`,
+      items: [
+        {
+          term: `Case Process Viewer`,
+          text: `A new UI component visualizes the current process step directly in the Axon Ivy UI and can be integrated with a single line of code.`,
+        },
+        {
+          term: `Chaptcha Utils`,
+          text: `A ready-to-use CAPTCHA utility allows easy integration of human verification into Axon Ivy UIs for improved security.`,
+        },
+        {
+          term: `Refactored Document Handling`,
+          text: `Document handling is now available as lightweight, modular components (Axon Ivy Cells, Axon Ivy Words, ...) instead of a single large SDK. Current modules target PRO developers, with upcoming support for text processing, PDF, and image generation.`,
+        },
+        {
+          term: `Process Analyser Improvement`,
+          text: `The Process Analyzer now offers easier usage without extra counting elements, improved data analysis, a new heat color map, summarized process start analysis, and direct integration as a Portal widget.`,
+        },
+        {
+          term: `New Mail Connector`,
+          text: `A new Email Connector enables sending and receiving case-related emails with automatic case linking for full communication tracking. It supports sending, receiving, replying, forwarding, and resending via an intuitive UI.`,
+        },
+        {
+          term: `Azure Service Bus Connector`,
+          text: `New support for Azure Service Bus enables sending and receiving messages via queues and topics with multiple configurable connections.`,
+        },
+        {
+          term: `IBM Db2 LUW`,
+          text: `This connectors provides a JDBC driver for IBM's DB2 (Linux, Unix, Windows) database.`,
+        },
+      ],
     },
     {
-      term: `Refactored Document Handling`,
-      description: `Document handling is now available as lightweight, modular components (Axon Ivy Cells, Axon Ivy Words, ...) instead of a single large SDK. Current modules target PRO developers, with upcoming support for text processing, PDF, and image generation.`,
+      type: `paragraph`,
+      text: `Marketplace Website Improvements`,
     },
     {
-      term: `Process Analyser Improvement`,
-      description: `The Process Analyzer now offers easier usage without extra counting elements, improved data analysis, a new heat color map, summarized process start analysis, and direct integration as a Portal widget.`,
-    },
-    {
-      term: `New Mail Connector`,
-      description: `A new Email Connector enables sending and receiving case-related emails with automatic case linking for full communication tracking. It supports sending, receiving, replying, forwarding, and resending via an intuitive UI.`,
-    },
-    {
-      term: `Azure Service Bus Connector`,
-      description: `New support for Azure Service Bus enables sending and receiving messages via queues and topics with multiple configurable connections.`,
-    },
-    {
-      term: `IBM Db2 LUW`,
-      description: `This connectors provides a JDBC driver for IBM's DB2 (Linux, Unix, Windows) database.`,
-    },
-    {
-      term: null,
-      description: `Improved monitoring UI for better transparency`,
-    },
-    {
-      term: null,
-      description: `Simplified publishing via GitHub workflow with just a few clicks`,
-    },
-    { term: null, description: `New drag & drop preview for artifacts` },
-    {
-      term: null,
-      description: `Clearer and more readable extension changelogs`,
+      type: `list`,
+      items: [
+        {
+          text: `Improved monitoring UI for better transparency`,
+        },
+        {
+          text: `Simplified publishing via GitHub workflow with just a few clicks`,
+        },
+        { text: `New drag & drop preview for artifacts` },
+        {
+          text: `Clearer and more readable extension changelogs`,
+        },
+      ],
     },
   ],
   links: [
@@ -97,7 +111,6 @@ const section: NewsSection = {
     `13.2/market/05-captcha.png`,
     `13.2/market/06-case-mail.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

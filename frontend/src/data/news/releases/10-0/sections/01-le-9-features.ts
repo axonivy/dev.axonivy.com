@@ -3,20 +3,31 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `All 9.x LE features`,
   anchor: `all`,
-  paragraphs: [`This new LTS release includes all latest 9.x LE features.`],
-  features: [
+  content: [
     {
-      term: `9.1`,
-      description: `Efficient user scaling and simplified testing`,
-    },
-    { term: `9.2`, description: `OpenAPI power and Axon Ivy Market` },
-    {
-      term: `9.3`,
-      description: `Grow with your business and simplified configuration files`,
+      type: `paragraph`,
+      text: `This new LTS release includes all latest 9.x LE features.`,
     },
     {
-      term: `9.4`,
-      description: `New Process Editor and multiple application context`,
+      type: `list`,
+      items: [
+        {
+          term: `<a href="/news/9.1">9.1</a>`,
+          text: `Efficient user scaling and simplified testing`,
+        },
+        {
+          term: `<a href="/news/9.2">9.2</a>`,
+          text: `OpenAPI power and Axon Ivy Market`,
+        },
+        {
+          term: `<a href="/news/9.3">9.3</a>`,
+          text: `Grow with your business and simplified configuration files`,
+        },
+        {
+          term: `<a href="/news/9.4">9.4</a>`,
+          text: `New Process Editor and multiple application context`,
+        },
+      ],
     },
   ],
   links: [
@@ -29,7 +40,6 @@ const section: NewsSection = {
     `10.0/all-le-features/03-scaling.jpg`,
     `10.0/all-le-features/04-test-flavour-selection.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Convert Project Wizard`,
   anchor: `migration`,
-  paragraphs: [
-    `Converting an Axon Ivy project to the latest version and technologies has never been easier.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Convert Project wizard`,
-      description: `The revised Convert Project wizard converts Axon Ivy projects to the latest version. But now, it also helps to convert from PrimeFaces 7 to 11 and web service clients from Axis to CXF.`,
+      type: `paragraph`,
+      text: `Converting an Axon Ivy project to the latest version and technologies has never been easier.`,
     },
     {
-      term: `Auto Conversion`,
-      description: `The Axon Ivy Engine auto-converts all deployed projects automatically to the latest version.`,
-    },
-    {
-      term: `Java 17`,
-      description: `After converting your projects, enjoy the new powerful features of Java 17.`,
+      type: `list`,
+      items: [
+        {
+          term: `Convert Project wizard`,
+          text: `The revised Convert Project wizard converts Axon Ivy projects to the latest version. But now, it also helps to convert from PrimeFaces 7 to 11 and web service clients from Axis to CXF.`,
+        },
+        {
+          term: `Auto Conversion`,
+          text: `The Axon Ivy Engine auto-converts all deployed projects automatically to the latest version.`,
+        },
+        {
+          term: `Java 17`,
+          text: `After converting your projects, enjoy the new powerful features of Java 17.`,
+        },
+      ],
     },
   ],
   links: [
@@ -43,7 +49,6 @@ const section: NewsSection = {
     `9.4/project-migration-wizards/02-convert-project.png`,
     `9.4/project-migration-wizards/03-convert-project.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

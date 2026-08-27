@@ -23,6 +23,7 @@ const badgeVariants = cva(
         purple: "bg-purple-bg text-purple [a]:hover:bg-purple-bg/80",
         orange: "bg-orange-bg text-orange [a]:hover:bg-orange-bg/80",
         blue: "bg-blue-bg text-blue [a]:hover:bg-blue-bg/80",
+        gray: "bg-n300 text-n900 [a]:hover:bg-n300/80",
       },
     },
     defaultVariants: {

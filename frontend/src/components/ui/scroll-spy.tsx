@@ -155,6 +155,7 @@ function ScrollSpy(props: ScrollSpyProps) {
   }, [listenersRef, stateRef, onValueChangeRef]);
 
   const sectionMapRef = React.useRef(new Map<string, Element>());
+  const [sectionVersion, setSectionVersion] = React.useState(0);
   const isScrollingRef = React.useRef(false);
   const rafIdRef = React.useRef<number | null>(null);
   const isMountedRef = React.useRef(false);
@@ -163,12 +164,14 @@ function ScrollSpy(props: ScrollSpyProps) {
   const onSectionRegister = React.useCallback(
     (id: string, element: SectionElement) => {
       sectionMapRef.current.set(id, element);
+      setSectionVersion((currentVersion) => currentVersion + 1);
     },
     [],
   );
 
   const onSectionUnregister = React.useCallback((id: string) => {
     sectionMapRef.current.delete(id);
+    setSectionVersion((currentVersion) => currentVersion + 1);
   }, []);
 
   const onScrollToSection = React.useCallback(
@@ -218,6 +221,39 @@ function ScrollSpy(props: ScrollSpyProps) {
     [scrollContainer, offset, scrollBehavior, store],
   );
 
+  const updateActiveSection = React.useCallback(() => {
+    const sections = Array.from(sectionMapRef.current.entries()).sort(
+      ([, firstElement], [, secondElement]) => {
+        return (
+          firstElement.getBoundingClientRect().top -
+          secondElement.getBoundingClientRect().top
+        );
+      },
+    );
+    if (sections.length === 0) return;
+
+    const containerRect = scrollContainer?.getBoundingClientRect();
+    const offsetLine = offset + 1;
+    let activeId = sections[0][0];
+
+    for (const [id, element] of sections) {
+      const sectionRect = element.getBoundingClientRect();
+      const sectionTop = containerRect
+        ? sectionRect.top - containerRect.top
+        : sectionRect.top;
+      const sectionBottom = containerRect
+        ? sectionRect.bottom - containerRect.top
+        : sectionRect.bottom;
+
+      if (sectionTop > offsetLine) break;
+
+      activeId = id;
+      if (sectionBottom > offsetLine) break;
+    }
+
+    store.setState("value", activeId);
+  }, [offset, scrollContainer, store]);
+
   useIsomorphicLayoutEffect(() => {
     const currentValue = value ?? defaultValue;
     if (currentValue === undefined) return;
@@ -234,6 +270,19 @@ function ScrollSpy(props: ScrollSpyProps) {
   useIsomorphicLayoutEffect(() => {
     const sectionMap = sectionMapRef.current;
     if (sectionMap.size === 0) return;
+
+    updateActiveSection();
+
+    const scrollElement = scrollContainer ?? window;
+    const onScroll = () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+      rafIdRef.current = requestAnimationFrame(updateActiveSection);
+    };
+
+    scrollElement.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
 
     const observerRootMargin = rootMargin ?? `${-offset}px 0px -70% 0px`;
 
@@ -275,6 +324,8 @@ function ScrollSpy(props: ScrollSpyProps) {
 
     return () => {
       observer.disconnect();
+      scrollElement.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
       }
@@ -282,7 +333,14 @@ function ScrollSpy(props: ScrollSpyProps) {
         clearTimeout(scrollTimeoutRef.current);
       }
     };
-  }, [offset, rootMargin, threshold, scrollContainer]);
+  }, [
+    offset,
+    rootMargin,
+    threshold,
+    scrollContainer,
+    sectionVersion,
+    updateActiveSection,
+  ]);
 
   const contextValue = React.useMemo<ScrollSpyContextValue>(
     () => ({
@@ -445,19 +503,18 @@ function ScrollSpySection(props: ScrollSpySectionProps) {
 
   const { orientation, onSectionRegister, onSectionUnregister } =
     useScrollSpyContext(SECTION_NAME);
-  const sectionRef = React.useRef<SectionElement>(null);
-  const composedRef = useComposedRefs(ref, sectionRef);
+  const sectionRef = React.useCallback(
+    (element: SectionElement | null) => {
+      if (element && value) {
+        onSectionRegister(value, element);
+        return;
+      }
 
-  useIsomorphicLayoutEffect(() => {
-    const element = sectionRef.current;
-    if (!element || !value) return;
-
-    onSectionRegister(value, element);
-
-    return () => {
       onSectionUnregister(value);
-    };
-  }, [value, onSectionRegister, onSectionUnregister]);
+    },
+    [value, onSectionRegister, onSectionUnregister],
+  );
+  const composedRef = useComposedRefs(ref, sectionRef);
 
   return useRender({
     defaultTagName: "div",

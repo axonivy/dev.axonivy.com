@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `UI Revisions`,
   anchor: `ui-revision`,
-  paragraphs: [
-    `We refurbished our general look and feel with a new PrimeFaces version, a new default theme and a completely new way to brand an Axon Ivy Engine for your company.`,
-  ],
-  features: [
+  content: [
     {
-      term: `PrimeFaces 11`,
-      description: `We updated from PrimeFaces 7 to 11, which means a lot of new and updated widgets. Be aware of our separate PrimeFaces Migration-Guide.`,
+      type: `paragraph`,
+      text: `We refurbished our general look and feel with a new PrimeFaces version, a new default theme and a completely new way to brand an Axon Ivy Engine for your company.`,
     },
     {
-      term: `Freya Theme`,
-      description: `We also provide the Freya Theme as the new default theme for your HTML Dialogs. Its fresh look also supports dark mode and of course we updated the Dev-Workflow-UI and the Engine Cockpit to use this new theme.`,
-    },
-    {
-      term: `Branding`,
-      description: `There is a completely new way to brand an Axon Ivy Engine with the colors and logo of your company, without the need to change the Axon Ivy Portal standard.`,
+      type: `list`,
+      items: [
+        {
+          term: `PrimeFaces 11`,
+          text: `We updated from PrimeFaces 7 to 11, which means a lot of new and updated widgets. Be aware of our separate <a href="/doc/9.4/en/axonivy/migration/migration-notes-94.html#primefaces-11">PrimeFaces Migration-Guide</a>.`,
+        },
+        {
+          term: `Freya Theme`,
+          text: `We also provide the <a href="https://primeui.store/templates/vue/freya">Freya Theme</a> as the new default theme for your HTML Dialogs. Its fresh look also supports dark mode and of course we updated the <code>Dev-Workflow-UI</code> and the <code>Engine Cockpit</code> to use this new theme.`,
+        },
+        {
+          term: `Branding`,
+          text: `There is a completely new way to <a href="/doc/9.4/en/designer-guide/user-interface/branding/index.html">brand</a> an Axon Ivy Engine with the colors and logo of your company, without the need to change the <code>Axon Ivy Portal</code> standard.`,
+        },
+      ],
     },
   ],
   links: [
@@ -39,7 +45,6 @@ const section: NewsSection = {
     `9.4/ui-revisions/02-cockpit-branding.png`,
     `9.4/ui-revisions/03-portal-branding.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

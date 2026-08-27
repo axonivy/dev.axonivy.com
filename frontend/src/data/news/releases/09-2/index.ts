@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `9.2`,
   version_title: `Axon Ivy 9.2`,
   slogan: `We are open!`,
+  tag: `Archived`,
   release_date: new Date(`2021-04-06`),
+  download_url: `/download`,
+  release_notes_url: `/doc/9.2/en/axonivy/release-notes`,
   migration_guide_url: `/doc/9.2/en/axonivy/migration/index.html`,
   overview: [
     "REST services are now documented in OpenAPI format by default, easing cross-system integration.",

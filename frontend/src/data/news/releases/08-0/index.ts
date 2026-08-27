@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `8.0`,
   version_title: `Axon.ivy Digital Business Platform 8.0`,
   slogan: `Smart, smarter, Axon.ivy Digital Business Platform`,
+  tag: `Archived`,
   release_date: new Date(`2019-12-04`),
+  download_url: `/download`,
+  release_notes_url: `/doc/8.0/en/release-notes`,
   migration_guide_url: `/doc/8.0/migration-notes`,
   overview: [
     "New Engine Cockpit replaces AdminUI with a rich, fully web-based feature set accessible from any browser or mobile device.",

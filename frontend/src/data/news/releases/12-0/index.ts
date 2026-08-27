@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `12.0`,
   version_title: `Axon Ivy 12.0`,
   slogan: `NEO - The all new Low Code Editor`,
+  tag: `Long Term Support`,
   release_date: new Date(`2024-11-28`),
+  download_url: `/download`,
+  release_notes_url: `/doc/12.0/en/axonivy/release-notes`,
   migration_guide_url: `/doc/12.0/en/axonivy/migration/index.html`,
   overview: [
     "Introduces the NEO Designer, a streamlined, web-based low-code platform for rapid application development.",

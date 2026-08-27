@@ -13,8 +13,11 @@ const release: NewsRelease = {
   id: `9.1`,
   version_title: `Axon.ivy Digital Business Platform 9.1`,
   slogan: `Efficient user scaling and simplified Testing`,
+  tag: `Archived`,
   release_date: new Date(`2020-08-05`),
   migration_guide_url: `/doc/9.1/en/axonivy/migration/index.html`,
+  download_url: `/download`,
+  release_notes_url: `/doc/9.1/en/axonivy/release-notes`,
   overview: [
     "Numerous memory, performance, UI, and API improvements let the engine efficiently serve hundreds of thousands of users.",
     "Simplified testing supports stable rollouts of large changesets with minimal manual effort via CI pipelines.",

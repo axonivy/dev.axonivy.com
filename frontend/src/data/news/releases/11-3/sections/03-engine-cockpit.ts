@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Engine Cockpit`,
   anchor: `engineCockpit`,
-  paragraphs: [
-    `The Cockpit includes new features to ease your secure operations.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Binaries`,
-      description: `The Config File Editor also lists binary key- and trust-store files now. Using the new up-/download functionality, you can edit them locally with a tool of your preference and put the modified version back in charge later on.`,
+      type: `paragraph`,
+      text: `The Cockpit includes new features to ease your secure operations.`,
     },
     {
-      term: `TLS Tester`,
-      description: `Secure TLS connections from the engine to remote services can now be tested directly in the cockpit. We list supported ciphers and used certificates. You get that feature not only on REST and SOAP WebServices but for LDAPS connections too.`,
-    },
-    {
-      term: `Focused`,
-      description: `To simplify configurations onto HTTP connectors, we integrated the documentation for configurable properties into the System Configuration editor. We list defaults, descriptive docs, and valid examples to keep you focused in the cockpit, having all information in sight.`,
+      type: `list`,
+      items: [
+        {
+          term: `Binaries`,
+          text: `The Config File Editor also lists binary key- and trust-store files now. Using the new up-/download functionality, you can edit them locally with a tool of your preference and put the modified version back in charge later on.`,
+        },
+        {
+          term: `TLS Tester`,
+          text: `Secure TLS connections from the engine to remote services can now be tested directly in the cockpit. We list supported ciphers and used certificates. You get that feature not only on REST and SOAP WebServices but for LDAPS connections too.`,
+        },
+        {
+          term: `Focused`,
+          text: `To simplify configurations onto HTTP connectors, we integrated the documentation for configurable properties into the System Configuration editor. We list defaults, descriptive docs, and valid examples to keep you focused in the cockpit, having all information in sight.`,
+        },
+      ],
     },
   ],
   links: [
@@ -32,7 +38,6 @@ const section: NewsSection = {
     `11.3/engine-cockpit/03-rest-tls-test.png`,
     `11.3/engine-cockpit/04-property-with-examples.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

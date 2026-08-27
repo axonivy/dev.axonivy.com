@@ -3,21 +3,27 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Role based Welcome`,
   anchor: `role93`,
-  paragraphs: [
-    `The refurbished Designer welcome page assists you in settings up the workspace according to your role.`,
-  ],
-  features: [
+  content: [
     {
-      term: `Accessible`,
-      description: `simple and uncluttered feature set to onboard new users quickly into the first Process drawing experience.`,
+      type: `paragraph`,
+      text: `The refurbished Designer welcome page assists you in settings up the workspace according to your role.`,
     },
     {
-      term: `Advanced actions`,
-      description: `Testers and Developers don't lose any features, but gain quick links to advanced features.`,
-    },
-    {
-      term: `Project filters`,
-      description: `contents within the Project tree will be filtered according to your role. Either to reduce complexity or to provide access to advanced configs and contents. You can switch at any time to a different filter set.`,
+      type: `list`,
+      items: [
+        {
+          term: `Accessible`,
+          text: `simple and uncluttered feature set to onboard new users quickly into the first Process drawing experience.`,
+        },
+        {
+          term: `Advanced actions`,
+          text: `Testers and Developers don't lose any features, but gain quick links to advanced features.`,
+        },
+        {
+          term: `Project filters`,
+          text: `contents within the Project tree will be filtered according to your role. Either to reduce complexity or to provide access to advanced configs and contents. You can switch at any time to a different filter set.`,
+        },
+      ],
     },
   ],
   links: [
@@ -34,7 +40,6 @@ const section: NewsSection = {
     `9.3/role-welcome/05-init-process-from-scratch.png`,
     `9.3/role-welcome/06-quick-filters-for-projects.png`,
   ],
-  code_sample: null,
 };
 
 export default section;

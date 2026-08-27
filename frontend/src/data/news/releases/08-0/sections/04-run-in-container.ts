@@ -3,26 +3,35 @@ import type { NewsSection } from "@/data/news/news";
 const section: NewsSection = {
   heading: `Run in Container`,
   anchor: `run-in-container`,
-  paragraphs: [
-    `Running the Axon.ivy Engine in an isolated container has become a lot easier.`,
-    `This means that the barriers between Docker, Kubernetes, OpenShift and all other container orchestration platforms have been broken down!`,
-  ],
-  features: [
+  content: [
     {
-      term: `Fully isolated`,
-      description: `Software running in a container is completely isolated from the outside world.`,
+      type: `paragraph`,
+      text: `Running the Axon.ivy Engine in an isolated container has become a lot easier.`,
     },
     {
-      term: `Reproducible systems`,
-      description: `Your system setup becomes fully reproducible in one go since the whole system configuration is defined in a so-called image.`,
+      type: `paragraph`,
+      text: `This means that the barriers between Docker, Kubernetes, OpenShift and all other container orchestration platforms have been broken down!`,
     },
     {
-      term: `Portable`,
-      description: `Build once, run everywhere! Once a docker image is generated it can be run on every system that supports Docker.`,
-    },
-    {
-      term: `Documented infrastructure`,
-      description: `The entire Axon.ivy Engine system setup is part of an image and thus fully documented.`,
+      type: `list`,
+      items: [
+        {
+          term: `Fully isolated`,
+          text: `Software running in a container is completely isolated from the outside world.`,
+        },
+        {
+          term: `Reproducible systems`,
+          text: `Your system setup becomes fully reproducible in one go since the whole system configuration is defined in a so-called image.`,
+        },
+        {
+          term: `Portable`,
+          text: `Build once, run everywhere! Once a docker image is generated it can be run on every system that supports Docker.`,
+        },
+        {
+          term: `Documented infrastructure`,
+          text: `The entire Axon.ivy Engine system setup is part of an image and thus fully documented.`,
+        },
+      ],
     },
   ],
   links: [
@@ -40,7 +49,6 @@ const section: NewsSection = {
     },
   ],
   images: [`8.0/run-in-container/01-ivy-on-docker.jpg`],
-  code_sample: null,
 };
 
 export default section;

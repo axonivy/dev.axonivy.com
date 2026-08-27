@@ -13,7 +13,10 @@ const release: NewsRelease = {
   id: `9.4`,
   version_title: `Axon Ivy 9.4`,
   slogan: `New process editor`,
+  tag: `Archived`,
   release_date: new Date(`2022-09-13`),
+  download_url: `/download`,
+  release_notes_url: `/doc/9.4/en/axonivy/release-notes`,
   migration_guide_url: `/doc/9.4/en/axonivy/migration/index.html`,
   overview: [
     "New Process Editor makes drawing business processes significantly easier.",
