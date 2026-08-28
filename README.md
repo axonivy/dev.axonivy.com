@@ -37,7 +37,7 @@ Run `./run-tests.sh` to execute tests.
 
 ## Update a php library
 
-```
+```bash
 // Show outdated dependencies
 docKer compose exec web composer show --outdated
 
