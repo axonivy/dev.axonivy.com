@@ -49,6 +49,59 @@ function visibleSubsteps(
   );
 }
 
+function InfoBoxLink({
+  icon,
+  title,
+  description,
+  link,
+  external,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  link: string;
+  external: boolean;
+}) {
+  return (
+    <div className="flex w-full flex-col md:w-auto">
+      <a
+        href={link}
+        target={external ? "_blank" : "_self"}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="flex flex-row items-center justify-between gap-3 md:hidden"
+      >
+        <div className="flex flex-col">
+          <div className="flex flex-row items-center gap-1">
+            {icon}
+            <p className="text-lg">{title}</p>
+          </div>
+          <p className="text-n900">{description}</p>
+        </div>
+        <IconArrowRight className="size-8 shrink-0" />
+      </a>
+
+      <div className="hidden md:flex md:flex-col">
+        <div className="flex flex-row items-center gap-1">
+          {icon}
+          <p className="text-lg">{title}</p>
+        </div>
+        <p className="text-n900">{description}</p>
+        <a
+          href={link}
+          target={external ? "_blank" : "_self"}
+          rel={external ? "noopener noreferrer" : undefined}
+          className="group text-primary"
+        >
+          <span className="flex items-center gap-2">
+            Go to {title}
+            <IconArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </span>
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function DockerCommandBlock({ command }: { command: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -96,7 +149,7 @@ export default function InstallationScrollSpy({
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
-        <ScrollSpyNav className="sticky top-50 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
+        <ScrollSpyNav className="sticky top-40 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
           {guide.steps.map((step) => (
             <ScrollSpyLink key={step.id} value={`step-${step.id}`}>
               {step.title}
@@ -106,7 +159,7 @@ export default function InstallationScrollSpy({
         <ScrollSpyViewport className="p-4">
           <div className="flex flex-col gap-4">
             <h1 className="text-3xl font-semibold">{guide.title}</h1>
-            <p className="uppercase font-semibold text-n800 tracking-widest">
+            <p className="uppercase font-semibold text-sm text-n800 tracking-widest">
               Step-by-step guide
             </p>
             <p className="text-n900">
@@ -209,49 +262,37 @@ export default function InstallationScrollSpy({
                   <IconMap2 className="size-8" />
                 </div>
                 <p className="text-n900">
-                  We're here to help <br /> you get started.
+                  We're here to help <br className="hidden md:block" />
+                  you get started.
                 </p>
               </div>
-              <Separator orientation="horizontal" className="md:hidden" />
-              <Separator
-                orientation="vertical"
-                className="hidden shrink-0 md:block"
-              />
-              <div className="flex w-full flex-col md:w-auto">
-                <div className="flex flex-row gap-1 items-center">
-                  <IconMessageChatbot className="size-5" />
-                  <p className="text-lg">Tutorials</p>
-                </div>
-                <p className="text-n900">Learn how to use the Designer.</p>
-                <a
-                  href="https://www.axonivy.com/tutorials"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group text-primary"
-                >
-                  <span className="flex items-center gap-2">
-                    Go to tutorials
-                    <IconArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
-                </a>
+              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                <Separator orientation="horizontal" className="md:hidden" />
+                <Separator
+                  orientation="vertical"
+                  className="hidden shrink-0 md:block"
+                />
+                <InfoBoxLink
+                  icon={<IconMessageChatbot className="size-5" />}
+                  title="Tutorials"
+                  description="Learn how to use the Designer."
+                  link="https://www.axonivy.com/tutorials"
+                  external
+                />
               </div>
-              <Separator orientation="horizontal" className="md:hidden" />
-              <Separator
-                orientation="vertical"
-                className="hidden shrink-0 md:block"
-              />
-              <div className="flex w-full flex-col md:w-auto">
-                <div className="flex flex-row gap-1 items-center">
-                  <IconFileDescription className="size-5" />
-                  <p className="text-lg">Documentation</p>
-                </div>
-                <p className="text-n900">Find guides and references.</p>
-                <a href="/support" className="group text-primary">
-                  <span className="flex items-center gap-2">
-                    Go to Docs
-                    <IconArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
-                </a>
+              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                <Separator orientation="horizontal" className="md:hidden" />
+                <Separator
+                  orientation="vertical"
+                  className="hidden shrink-0 md:block"
+                />
+                <InfoBoxLink
+                  icon={<IconFileDescription className="size-5" />}
+                  title="Documentation"
+                  description="Find guides and references."
+                  link="/doc"
+                  external={false}
+                />
               </div>
             </div>
           ) : null}

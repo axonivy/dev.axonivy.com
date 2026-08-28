@@ -10,16 +10,16 @@ import {
 import { IconMoon, IconSun } from "@tabler/icons-react";
 
 export function ModeToggle() {
-  const [theme, setThemeState] = React.useState<
-    "theme-light" | "dark" | "system"
-  >(() => {
-    if (typeof document === "undefined") {
-      return "theme-light";
-    }
-    return document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "theme-light";
-  });
+  const [theme, setThemeState] = React.useState<"light" | "dark" | "system">(
+    () => {
+      if (typeof document === "undefined") {
+        return "light";
+      }
+      return document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light";
+    },
+  );
 
   React.useEffect(() => {
     const isDark =
@@ -39,7 +39,7 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setThemeState("theme-light")}>
+        <DropdownMenuItem onClick={() => setThemeState("light")}>
           Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setThemeState("dark")}>

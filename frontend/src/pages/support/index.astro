@@ -1,0 +1,160 @@
+---
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import Layout from "@/layouts/main.astro";
+import {
+  IconArrowRight,
+  IconCircleCheck,
+  IconFileDescription,
+  IconHeadset,
+  IconMail,
+  IconMessageChatbot,
+  IconMessageCircle,
+  IconMessageCircleQuestion,
+  IconTicket,
+} from "@tabler/icons-astro";
+import { supportsViewTransitions } from "astro:transitions/client";
+
+const supportInfo = [
+  {
+    title: "Product / Service",
+    description: "Designer, Engine, REST Service, Web Service or Database",
+  },
+  {
+    title: "Version you're using",
+    description: "For example, version: 8.0.20",
+  },
+  {
+    title: "Description",
+    description: "Detailed description of your problem",
+  },
+  {
+    title: "*Way to reproduce",
+    description: "Detailed way how your bug or problem can be reproduced",
+  },
+  {
+    title: "*Stacktrace / Log",
+    description: "Share stacktraces as text or log files as attachments",
+  },
+  {
+    title: "*Screenshots",
+    description: "Share screenshots as attachments",
+  },
+  {
+    title: "*Configuration",
+    description: "Share your yaml configuration files as text or attachment",
+  },
+];
+---
+
+<Layout
+  title="Support"
+  description="Axon Ivy Support is commiting to provide high-quality, technical support for quick problem solving, training or consulting. This protects your Axon Ivy investment and lets all participants sleep well."
+>
+  <div class="flex flex-col gap-4">
+    <h4 class="text-xl font-semibold">
+      If you open a support ticket, please share the following information: <span
+        class="font-normal"
+      >
+        (*if available)
+      </span>
+    </h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {
+        supportInfo.map((info, index) => (
+          <Card
+            className={
+              index === supportInfo.length - 1 && supportInfo.length % 2 !== 0
+                ? "md:col-span-2"
+                : ""
+            }
+          >
+            <CardHeader className="flex flex-row gap-4 w-full">
+              <div class="text-primary">
+                <IconCircleCheck class="size-4 shrink-0" />
+              </div>
+              <div>
+                <CardTitle>{info.title}</CardTitle>
+                <CardDescription>{info.description}</CardDescription>
+              </div>
+            </CardHeader>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+  <div
+    class="flex flex-col items-stretch gap-4 rounded-md bg-n50 p-4 md:flex-row md:items-center md:justify-between"
+  >
+    <div class="flex w-full flex-row items-center gap-4 md:w-auto">
+      <div class="bg-yellow-bg text-yellow shrink-0 rounded-md p-2">
+        <IconHeadset class="size-8" />
+      </div>
+      <div class="flex flex-col">
+        <p class="text-xl">Need Support?</p>
+        <p class="text-n900">To get support please contact us</p>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="https://support.axonivy.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconTicket class="size-5" />
+              <p class="text-lg">Create ticket</p>
+            </div>
+            <p class="text-n900">Create a ticket in our help center</p>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconTicket class="size-5" />
+            <p class="text-lg">Create ticket</p>
+          </div>
+          <p class="text-n900">Create a ticket in our help center</p>
+          <a
+            href="https://support.axonivy.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group text-primary"
+          >
+            <span class="flex items-center gap-2">
+              Help center
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <div class="flex flex-row gap-1 items-center">
+          <IconMail class="size-5" />
+          <p class="text-lg">Send us an email</p>
+        </div>
+        <p class="text-n900">Let us know your support issue via email</p>
+        <a href="mailto:support@axonivy.com" class="group text-primary">
+          support@axonivy.com
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

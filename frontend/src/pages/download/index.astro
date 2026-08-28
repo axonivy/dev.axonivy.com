@@ -33,63 +33,122 @@ import { Separator } from "@/components/ui/separator";
       </div>
       <div class="flex flex-col">
         <p class="text-xl">Need help?</p>
-        <p class="text-n900">We're here to help <br /> you get started.</p>
+        <p class="text-n900">
+          We're here to help <br class="hidden md:block" /> you get started.
+        </p>
       </div>
     </div>
-    <Separator orientation="horizontal" className="md:hidden" />
-    <Separator orientation="vertical" className="hidden md:block" />
-    <div class="flex w-full flex-col md:w-auto">
-      <div class="flex flex-row gap-1 items-center">
-        <IconFileDescription class="size-5" />
-        <p class="text-lg">Documentation</p>
+    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="/doc"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconFileDescription class="size-5" />
+              <p class="text-lg">Documentation</p>
+            </div>
+            <p class="text-n900">Find guides and references.</p>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconFileDescription class="size-5" />
+            <p class="text-lg">Documentation</p>
+          </div>
+          <p class="text-n900">Find guides and references.</p>
+          <a href="/doc" class="group text-primary">
+            <span class="flex items-center gap-2">
+              Go to Docs
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
       </div>
-      <p class="text-n900">Find guides and references.</p>
-      <a href="/doc" class="group text-primary">
-        <span class="flex items-center gap-2">
-          Go to Docs
-          <IconArrowRight
-            class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-          />
-        </span>
-      </a>
     </div>
-    <Separator orientation="horizontal" className="md:hidden" />
-    <Separator orientation="vertical" className="hidden md:block" />
-    <div class="flex w-full flex-col md:w-auto">
-      <div class="flex flex-row gap-1 items-center">
-        <IconMessageCircle class="size-5" />
-        <p class="text-lg">Community</p>
+    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="https://community.axonivy.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconMessageCircle class="size-5" />
+              <p class="text-lg">Community</p>
+            </div>
+            <p class="text-n900">Ask questions and get help.</p>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconMessageCircle class="size-5" />
+            <p class="text-lg">Community</p>
+          </div>
+          <p class="text-n900">Ask questions and get help.</p>
+          <a
+            href="https://community.axonivy.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group text-primary"
+          >
+            <span class="flex items-center gap-2">
+              Go to Community
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
       </div>
-      <p class="text-n900">Ask questions and get help.</p>
-      <a
-        href="https://community.axonivy.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group text-primary"
-      >
-        <span class="flex items-center gap-2">
-          Go to Community
-          <IconArrowRight
-            class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-          />
-        </span>
-      </a>
     </div>
-    <Separator orientation="horizontal" className="md:hidden" />
-    <Separator orientation="vertical" className="hidden md:block" />
-    <div class="flex w-full flex-col md:w-auto">
-      <div class="flex flex-row gap-1 items-center">
-        <IconMessageChatbot class="size-5" />
-        <p class="text-lg">Contact Support</p>
+    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="/support"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconMessageChatbot class="size-5" />
+              <p class="text-lg">Contact Support</p>
+            </div>
+            <p class="text-n900">Need additional assistance?</p>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconMessageChatbot class="size-5" />
+            <p class="text-lg">Contact Support</p>
+          </div>
+          <p class="text-n900">Need additional assistance?</p>
+          <a href="/support" class="group text-primary">
+            <span class="flex items-center gap-2">
+              Contact us
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
       </div>
-      <p class="text-n900">Need additional assistance?</p>
-      <a href="/support" class="group text-primary">
-        <span class="flex items-center gap-2">
-          Contact us <IconArrowRight
-            class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-          />
-        </span>
-      </a>
     </div>
   </div>
 </Layout>
