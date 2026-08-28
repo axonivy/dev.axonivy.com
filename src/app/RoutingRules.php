@@ -17,7 +17,6 @@ use app\ui\UiDownloadAction;
 use app\ui\UiArchiveAction;
 use app\tool\DownloadRobotsAction;
 use app\tool\MavenArchiveAction;
-use app\pages\api\ApiBrowserAction;
 use Slim\App;
 
 class RoutingRules
@@ -48,8 +47,5 @@ class RoutingRules
     // tools
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
-
-    // 'remove'
-    $app->get('/api-browser', ApiBrowserAction::class);
   }
 }
