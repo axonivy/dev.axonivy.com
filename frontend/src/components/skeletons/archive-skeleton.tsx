@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 function TableSkeleton({ rows }: { rows: number }) {
   return (
-    <div className="hidden rounded-md bg-white px-4 py-2 md:block">
+    <div className="hidden rounded-md bg-background px-4 py-2 md:block">
       <div className="grid grid-cols-6 gap-3 border-b border-n200 py-3">
         {[...Array(6)].map((_, i) => (
           <Skeleton key={i} className="h-4 w-full" />
@@ -34,7 +34,7 @@ function MobileCardSkeleton({ rows }: { rows: number }) {
       {[...Array(rows)].map((_, cardIndex) => (
         <div
           key={cardIndex}
-          className="rounded-3xl bg-white px-6 py-5 shadow-sm"
+          className="rounded-3xl bg-background px-6 py-5 shadow-sm"
         >
           <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-2">

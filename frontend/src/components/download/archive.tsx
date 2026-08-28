@@ -123,7 +123,7 @@ function MobileArchiveCards({
         return (
           <article
             key={release.version}
-            className="rounded-3xl bg-white px-6 py-5 shadow-sm"
+            className="rounded-3xl bg-background px-6 py-5 shadow-sm"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -242,7 +242,7 @@ export function ArchiveTable({
   return (
     <>
       <MobileArchiveCards product={product} releases={releases} />
-      <div className="hidden rounded-md bg-white px-4 py-2 md:block">
+      <div className="hidden rounded-md bg-background px-4 py-2 md:block">
         <Table className="w-full">
           <TableHeader>
             <TableRow>
@@ -405,7 +405,7 @@ export default function Archive({ product }: ArchiveProps) {
         <NativeSelect
           value={selectedVersion || data.currentMajorVersion}
           onChange={(event) => setSelectedVersion(event.target.value)}
-          className="bg-white rounded-lg"
+          className="bg-background rounded-lg"
         >
           {Object.entries(data.categorizedVersions).map(
             ([category, versions]) => (
