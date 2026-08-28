@@ -100,6 +100,38 @@ export default function LegacyDocumentation({
     setPath(pathFromNiceUrl(version, link.url));
   }
 
+  function resizeIframe(iframe: HTMLIFrameElement) {
+    const doc = iframe.contentWindow?.document;
+    if (!doc) return;
+
+    iframe.style.height = `${doc.body.scrollHeight}px`;
+    removeHeader(doc);
+    openLinksInParentTab(doc);
+  }
+
+  function removeHeader(doc: Document) {
+    const headerDiv = doc.getElementById("headerdiv");
+    headerDiv?.parentElement?.remove();
+
+    for (const navbar of doc.getElementsByClassName("navbar ivy-subnav")) {
+      navbar.remove();
+    }
+
+    const container = doc.getElementsByClassName("container")[0] as
+      HTMLElement | undefined;
+    if (container) {
+      container.style.marginLeft = "0px";
+    }
+
+    doc.getElementsByTagName("nav")[0]?.remove();
+  }
+
+  function openLinksInParentTab(doc: Document) {
+    const base = doc.createElement("base");
+    base.target = "_parent";
+    doc.getElementsByTagName("head")[0]?.appendChild(base);
+  }
+
   if (isLoading) {
     // add loading skeleton
     return <div>Loading...</div>;
@@ -160,7 +192,8 @@ export default function LegacyDocumentation({
         key={data.documentUrl}
         src={data.documentUrl}
         title={data.version}
-        className="h-[80vh] w-full rounded-lg border border-n200"
+        onLoad={(event) => resizeIframe(event.currentTarget)}
+        className="w-full rounded-lg border border-n200"
       />
     </div>
   );

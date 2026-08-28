@@ -41,7 +41,7 @@ class RoutingRules
     $app->get('/ui/doc', UiDocAction::class);
     $app->get('/ui/download[/{version}]', UiDownloadAction::class);
     $app->get('/ui/archive[/{version}]', UiArchiveAction::class);
-    $app->get('/ui/legacy/doc[/{version}]', UiDocLegacyAction::class);
+    $app->get('/ui/legacy/doc/{version}[/{document:.*}]', UiDocLegacyAction::class);
 
     // tools
     $app->get('/download/maven.html', MavenArchiveAction::class);
