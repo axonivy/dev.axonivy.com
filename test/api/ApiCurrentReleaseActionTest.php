@@ -40,6 +40,13 @@ class ApiCurrentReleaseActionTest extends TestCase
       ->statusCode(200)
       ->bodyContains(self::responseNewest());
   }
+
+  public function testCurrentRelease_doesNotPromoteMilestoneAsServiceRelease()
+  {
+    AppTester::assertThatGet('/api/currentRelease?releaseVersion=14.0.0')
+      ->statusCode(200)
+      ->bodyContains(self::responseNewest());
+  }
   
   private static function response(): string
   {
