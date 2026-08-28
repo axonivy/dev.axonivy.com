@@ -11,12 +11,13 @@ use app\redirect\MavenPermalinkAction;
 use app\redirect\LinkAction;
 use app\redirect\RedirectPortalGuide;
 use app\ui\UiDocAction;
+use app\ui\UiDocLegacyAction;
 use app\ui\UiDownloadAction;
 use app\ui\UiArchiveAction;
 use app\tool\DownloadRobotsAction;
 use app\tool\MavenArchiveAction;
 use app\pages\api\ApiBrowserAction;
-use app\pages\doc\DocAction;
+// use app\pages\doc\DocAction;
 use Slim\App;
 
 class RoutingRules
@@ -40,14 +41,15 @@ class RoutingRules
     $app->get('/ui/doc', UiDocAction::class);
     $app->get('/ui/download[/{version}]', UiDownloadAction::class);
     $app->get('/ui/archive[/{version}]', UiArchiveAction::class);
+    $app->get('/ui/legacy/doc[/{version}]', UiDocLegacyAction::class);
 
     // tools
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
 
     // 'remove'
-    $app->get('/doc/{version}/{document:.*}', DocAction::class);
-    $app->get('/doc/{version}', DocAction::class);
+    // $app->get('/doc/{version}/{document:.*}', DocAction::class);
+    // $app->get('/doc/{version}', DocAction::class);
     $app->get('/api-browser', ApiBrowserAction::class);
   }
 }

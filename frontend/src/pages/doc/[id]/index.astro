@@ -1,0 +1,22 @@
+---
+import Layout from "@/layouts/news.astro";
+import { LegacyDocumentationQuery } from "@/components/query-components";
+import { legacyDocsVersions, type LegacyDocsVersion } from "@/components/documentation/legacy-documentation"
+
+
+export function getStaticPaths() {
+  return legacyDocsVersions.map((version: LegacyDocsVersion) => ({
+    params: { id: version },
+  }));
+}
+
+const { id } = Astro.params;
+
+if (!legacyDocsVersions.includes(id)) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout>
+    <LegacyDocumentationQuery version={id} client:load />
+</Layout>
