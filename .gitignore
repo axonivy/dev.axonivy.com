@@ -11,3 +11,4 @@ composer.phar
 /src/web/swagger
 bom.json
 /src/web/astro/
+/.pnpm-store
