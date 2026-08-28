@@ -105,24 +105,13 @@ class Website
   {
     $container = $this->app->getContainer();
     $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
-    $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
-      $response = new Response();
-      $data = ['message' => $exception->getMessage()];
-      $useragent = $request->getHeaderLine('User-Agent');
-      $fileName = str_contains($useragent, 'CloudFront') ? '_error/404-empty.twig' : '_error/404.twig';
-      return $container->get(Twig::class)
-        ->render($response, $fileName, $data)
-        ->withStatus(404);
-    });
-
-    if (Config::isProductionEnvironment()) {
-      $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
-        $response = new Response();
-        $data = ['message' => $exception->getMessage()];
-        return $container->get(Twig::class)
-          ->render($response, '_error/500.twig', $data)
-          ->withStatus(500);
-      });
-    }
+    $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+        return new Response(404);
+      }
+    );
+    $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+        return new Response(500);
+      }
+    );
   }
 }
