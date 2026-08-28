@@ -7,6 +7,8 @@ Allow from all
 
 RewriteEngine On
 
+ErrorDocument 404 /astro/404.html
+
 # route doc resource links from; from 13.1 onwards
 RewriteRule ^doc/((1[3-9]|[2-9]\d|\d\d\d)[^/]+)/openapi/(.+)$ /openapi/$1/$3 [L,R=302]
 RewriteRule ^doc/((1[3-9]|[2-9]\d|\d\d\d)[^/]+)/[a-z][a-z]/openapi/(.+)$ /openapi/$1/$3 [L,R=302]
@@ -41,4 +43,4 @@ RewriteRule ^(.*)$ /astro/$1/index.html [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+RewriteRule ^ - [R=404,L]
