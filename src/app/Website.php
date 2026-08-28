@@ -9,7 +9,6 @@ use Slim\App;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Response;
-use Slim\Views\Twig;
 use app\domain\ReleaseInfo;
 use app\domain\ReleaseType;
 use DI\ContainerBuilder;

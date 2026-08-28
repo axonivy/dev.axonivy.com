@@ -34,7 +34,6 @@ Run `./run-tests.sh` to execute tests.
 ## VSCode
 
 - Install extension **PHP Intelphense** and follow the Quickstart guide
-- Install extension **Twig**
 
 ## Update a php library
 

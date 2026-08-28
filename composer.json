@@ -1,7 +1,6 @@
 {
   "require": {
     "slim/slim": "*",
-    "slim/twig-view": "*",
     "slim/psr7": "*",
     "php-di/php-di": "*",
     "middlewares/trailing-slash": "*",
