@@ -13,7 +13,7 @@ export default function ReleaseCycleScrollspy() {
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
-        <ScrollSpyNav className="sticky top-50 z-10 shrink-0 self-start bg-white pt-2.5 hidden md:flex">
+        <ScrollSpyNav className="sticky top-50 z-10 shrink-0 self-start bg-background pt-2.5 hidden md:flex">
           <ScrollSpyLink value="LTS">Long Term Support (LTS)</ScrollSpyLink>
           <ScrollSpyLink value="LE">Leading Edge (LE)</ScrollSpyLink>
           <ScrollSpyLink value="maintenance">Maintenance support</ScrollSpyLink>

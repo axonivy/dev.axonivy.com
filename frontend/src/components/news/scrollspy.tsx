@@ -235,7 +235,7 @@ function NewsImageGallery({
               className="max-h-32 rounded-lg transition-opacity group-hover:opacity-80"
               loading="lazy"
             />
-            <span className="absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md bg-white/90 text-n900 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            <span className="absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md bg-background/90 text-n900 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
               <IconZoomIn className="size-4" />
               <span className="sr-only">Open image preview</span>
             </span>
@@ -261,7 +261,7 @@ function NewsImageGallery({
                   type="button"
                   onClick={showPrev}
                   aria-label="Previous image"
-                  className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 text-n900 shadow-sm hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 text-n900 shadow-sm hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   <IconChevronLeft className="size-4" />
                 </button>
@@ -269,11 +269,11 @@ function NewsImageGallery({
                   type="button"
                   onClick={showNext}
                   aria-label="Next image"
-                  className="absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 text-n900 shadow-sm hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 text-n900 shadow-sm hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   <IconChevronRight className="size-4" />
                 </button>
-                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-white/90 py-1 px-2 text-xs font-medium text-n900 shadow-sm">
+                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-background/90 py-1 px-2 text-xs font-medium text-n900 shadow-sm">
                   {index + 1} / {images.length}
                 </span>
               </>
@@ -306,7 +306,7 @@ export default function NewsScrollSpy({
         defaultValue={defaultSection}
         className="h-auto w-full gap-8"
       >
-        <ScrollSpyNav className="sticky top-50 z-10 hidden shrink-0 self-start bg-white pt-2.5 md:flex">
+        <ScrollSpyNav className="sticky top-50 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
           {sections.map((section, index) => (
             <ScrollSpyLink
               key={sectionValue(section, index, sections)}

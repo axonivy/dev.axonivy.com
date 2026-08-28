@@ -96,7 +96,7 @@ export default function InstallationScrollSpy({
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
-        <ScrollSpyNav className="sticky top-50 z-10 hidden shrink-0 self-start bg-white pt-2.5 md:flex">
+        <ScrollSpyNav className="sticky top-50 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
           {guide.steps.map((step) => (
             <ScrollSpyLink key={step.id} value={`step-${step.id}`}>
               {step.title}
