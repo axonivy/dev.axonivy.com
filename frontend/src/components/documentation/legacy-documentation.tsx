@@ -155,7 +155,9 @@ export default function LegacyDocumentation({
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-6xl font-semibold">Documentation {data.version}</h1>
+      <h1 className="text-6xl font-semibold pt-8">
+        Documentation {data.version}
+      </h1>
       <div className="flex flex-col gap-4">
         <div className="flex flex-row gap-4">
           {data.releaseDocuments.links.map((link) => (

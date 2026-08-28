@@ -340,7 +340,7 @@ function DownloadProductCard({
         <CardTitle className="text-lg font-semibold">
           Axon Ivy {config.title} {release.versionShort}
         </CardTitle>
-        <CardDescription className="uppercase font-semibold text-n800 tracking-widest">
+        <CardDescription className="uppercase font-semibold text-sm text-n800 tracking-widest">
           {config.mode}
         </CardDescription>
         <CardDescription className="text-n800">

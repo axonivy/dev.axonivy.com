@@ -306,7 +306,7 @@ export default function NewsScrollSpy({
         defaultValue={defaultSection}
         className="h-auto w-full gap-8"
       >
-        <ScrollSpyNav className="sticky top-50 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
+        <ScrollSpyNav className="sticky top-40 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
           {sections.map((section, index) => (
             <ScrollSpyLink
               key={sectionValue(section, index, sections)}
@@ -331,7 +331,7 @@ export default function NewsScrollSpy({
               {tag}
             </Badge>
             <h1 className="text-3xl font-semibold">{title}</h1>
-            <p className="uppercase font-semibold text-n800 tracking-widest">
+            <p className="uppercase font-semibold text-sm text-n800 tracking-widest">
               {slogan}
             </p>
             <span className="flex flex-row gap-2 text-n900 items-center">

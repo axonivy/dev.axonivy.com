@@ -8,12 +8,13 @@ import {
 import { IconCircleCheck, IconBulb } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
 import releaseCycleIllustration from "@/assets/release-cycle-illustration.svg";
+import releaseCycleDarkIllustration from "@/assets/release-cycle-dark-illustration.svg";
 
 export default function ReleaseCycleScrollspy() {
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
-        <ScrollSpyNav className="sticky top-50 z-10 shrink-0 self-start bg-background pt-2.5 hidden md:flex">
+        <ScrollSpyNav className="sticky top-40 z-10 shrink-0 self-start bg-background pt-2.5 hidden md:flex">
           <ScrollSpyLink value="LTS">Long Term Support (LTS)</ScrollSpyLink>
           <ScrollSpyLink value="LE">Leading Edge (LE)</ScrollSpyLink>
           <ScrollSpyLink value="maintenance">Maintenance support</ScrollSpyLink>
@@ -25,7 +26,7 @@ export default function ReleaseCycleScrollspy() {
           <ScrollSpySection value="LTS" className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
               <h1 className="text-3xl font-semibold">Release cycle</h1>
-              <p className="uppercase font-semibold text-n800 tracking-widest">
+              <p className="uppercase font-semibold text-sm text-n800 tracking-widest">
                 How does it work?
               </p>
               <p className="text-n900">
@@ -133,7 +134,12 @@ export default function ReleaseCycleScrollspy() {
               <img
                 src={releaseCycleIllustration.src}
                 alt="Release cycle illustration"
-                className="h-auto w-full"
+                className="h-auto w-full dark:hidden"
+              />
+              <img
+                src={releaseCycleDarkIllustration.src}
+                alt="Release cycle illustration"
+                className="hidden h-auto w-full dark:block"
               />
             </div>
           </ScrollSpySection>
