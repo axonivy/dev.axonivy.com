@@ -9,6 +9,7 @@ use app\redirect\TutorialAction;
 use app\redirect\ProductPermalinkAction;
 use app\redirect\MavenPermalinkAction;
 use app\redirect\LinkAction;
+use app\redirect\DocAction;
 use app\redirect\RedirectPortalGuide;
 use app\ui\UiDocAction;
 use app\ui\UiDocLegacyAction;
@@ -17,7 +18,6 @@ use app\ui\UiArchiveAction;
 use app\tool\DownloadRobotsAction;
 use app\tool\MavenArchiveAction;
 use app\pages\api\ApiBrowserAction;
-use app\pages\doc\DocAction;
 use Slim\App;
 
 class RoutingRules
@@ -36,6 +36,8 @@ class RoutingRules
     $app->get('/link/{key}[/{version}]', LinkAction::class);
     $app->get('/permalink/{version}/{file}', ProductPermalinkAction::class);
     $app->get('/maven/{groupId}/{artifactId}/{version}[/{type}]', MavenPermalinkAction::class);
+    $app->get('/doc/{version}/{document:.*}', DocAction::class);
+    $app->get('/doc/{version}', DocAction::class);
 
     // frontend api
     $app->get('/ui/doc', UiDocAction::class);
@@ -48,8 +50,6 @@ class RoutingRules
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
 
     // 'remove'
-    $app->get('/doc/{version}/{document:.*}', DocAction::class);
-    $app->get('/doc/{version}', DocAction::class);
     $app->get('/api-browser', ApiBrowserAction::class);
   }
 }

@@ -217,6 +217,10 @@ class UiDocLegacyAction
     $version = basename($docProvider->getMinorUrl());
     $docLinks = [];
 
+    foreach ($docProvider->getBooks() as $doc) {
+      $docLinks[] = new DocLink($doc->getUrl(), $doc->getName());
+    }
+
     foreach ($docProvider->getExternalBooks() as $doc) {
       $docLinks[] = new DocLink($doc->getUrl(), $doc->getName());
     }

@@ -1,10 +1,9 @@
 <?php
 
-namespace app\pages\doc;
+namespace app\redirect;
 
 use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Response;
-use Slim\Views\Twig;
 use app\domain\ReleaseInfoRepository;
 use app\domain\doc\DocProvider;
 use app\domain\util\Redirect;
@@ -14,13 +13,6 @@ use DI\NotFoundException;
 
 class DocAction
 {
-
-  private Twig $view;
-
-  public function __construct(Twig $view)
-  {
-    $this->view = $view;
-  }
 
   public function __invoke($request, Response $response, $args)
   {
@@ -80,8 +72,7 @@ class DocAction
       return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
 
-    if ($this->documentationBasedOnReadTheDocs($version))
-    {
+    if ($this->documentationBasedOnReadTheDocs($version)) {
       $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version), $hasLang);
       if (empty($newDocUrl)) {
         throw new HttpNotFoundException($request);
@@ -100,34 +91,17 @@ class DocAction
     } else {      
       $document = $docProvider->getOverviewDocument();
     }
-
-    if ($document == null) {
-      throw new HttpNotFoundException($request);
-    }
-
-    $portalLink = "";
-    if (version_compare($version, 8) >= 0) {
-      $portalLink = '/portal/8.0/doc';
-    }
-    return $this->view->render($response, 'doc/doc.twig', [
-      'version' => $version,
-      'docProvider' => $docProvider,
-      'documentUrl' => $document->getLanguageResourceUrl($lang) . '?v=' . time(),
-      'currentNiceUrlPath' => $docPath,
-      'portalLink' => $portalLink
-    ]);
+    throw new HttpNotFoundException($request);
   }
 
-  private function evaluateLanguage(string $docName) : string 
+  private function evaluateLanguage(string $docName) : string
   {
-    if (empty($docName)) 
-    {
+    if (empty($docName)) {
       return DocProvider::DEFAULT_LANGUAGE;
     }
     $path = explode('/', $docName);
     $lang = $path[0];
-    if (strlen($lang) != 2) 
-    {
+    if (strlen($lang) != 2) {
       return DocProvider::DEFAULT_LANGUAGE;
     }
     return $lang;
@@ -135,8 +109,7 @@ class DocAction
 
   private function hasLanguage(string $docName) : bool 
   {
-    if (empty($docName)) 
-    {
+    if (empty($docName)) {
       return false;
     }
     $path = explode('/', $docName);
@@ -147,13 +120,11 @@ class DocAction
   private function evaluateDocName(string $docName, string $lang) : string 
   {
     $prefix = $lang;
-    if ($docName === $prefix) 
-    {
+    if ($docName === $prefix) {
       return "";
     }
     $prefix = $prefix . '/';
-    if (substr($docName, 0, strlen($prefix)) == $prefix) 
-    {
+    if (substr($docName, 0, strlen($prefix)) == $prefix)  {
       return substr($docName, strlen($prefix));
     }
     return $docName;
@@ -161,8 +132,7 @@ class DocAction
 
   private function evaluateDocPath(string $docName) : string 
   {
-    if (empty($docName)) 
-    {
+    if (empty($docName)) {
       return "";
     }
     return '/' . $docName;
