@@ -2,8 +2,7 @@ Options -Indexes +FollowSymLinks
 
 DirectoryIndex index.html index.php
 
-Order allow,deny
-Allow from all
+Require all granted
 
 RewriteEngine On
 
