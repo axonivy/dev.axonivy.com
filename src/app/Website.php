@@ -74,7 +74,9 @@ class Website
     $container = $this->app->getContainer();
     $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
     $errorMiddleware->setErrorHandler(HttpNotFoundException::class, function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
-        return new Response(404);
+        $response = new Response(404);
+        $response->getBody()->write(file_get_contents(__DIR__ . '/../web/astro/404.html'));
+        return $response->withHeader('Content-Type', 'text/html; charset=utf-8');
       }
     );
     $errorMiddleware->setDefaultErrorHandler(function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
