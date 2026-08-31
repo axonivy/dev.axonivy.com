@@ -212,14 +212,10 @@ class UiDocLegacyAction
     return new DocVersionLinks($version, $docLinks);
   }
 
-    private function externalBooksFromProvider(DocProvider $docProvider): DocVersionLinks
+  private function externalBooksFromProvider(DocProvider $docProvider): DocVersionLinks
   {
     $version = basename($docProvider->getMinorUrl());
     $docLinks = [];
-
-    foreach ($docProvider->getBooks() as $doc) {
-      $docLinks[] = new DocLink($doc->getUrl(), $doc->getName());
-    }
 
     foreach ($docProvider->getExternalBooks() as $doc) {
       $docLinks[] = new DocLink($doc->getUrl(), $doc->getName());
