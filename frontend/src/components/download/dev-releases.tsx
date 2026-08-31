@@ -5,6 +5,7 @@ import type {
   ArchiveResponse,
 } from "@/components/download/archive";
 import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
+import { H4, P } from "@/components/ui/typography";
 
 type DevReleasesProps = {
   product: ArchiveProduct;
@@ -28,9 +29,9 @@ export default function DevReleases({ product }: DevReleasesProps) {
 
   if (error || !data) {
     return (
-      <p className="text-sm text-destructive">
+      <P className="text-destructive">
         Failed to load dev releases: {error?.message ?? "No data available"}
-      </p>
+      </P>
     );
   }
 
@@ -42,7 +43,7 @@ export default function DevReleases({ product }: DevReleasesProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <p className="text-xl font-semibold">Dev Releases</p>
+      <H4>Dev Releases</H4>
       <ArchiveTable product={product} releases={releases} />
     </div>
   );

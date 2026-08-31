@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { IconLink } from "@tabler/icons-react";
+import { H1, P } from "@/components/ui/typography";
 
 type LegacyDocLink = {
   url: string;
@@ -139,25 +140,19 @@ export default function LegacyDocumentation({
 
   if (error) {
     return (
-      <p className="text-sm text-destructive">
+      <P className="text-destructive">
         Failed to load legacy documentation links: {error.message}
-      </p>
+      </P>
     );
   }
 
   if (!data) {
-    return (
-      <p className="text-sm text-n900">
-        No legacy documentation data available.
-      </p>
-    );
+    return <P className="text-n900">No legacy documentation data available.</P>;
   }
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-6xl font-semibold pt-8">
-        Documentation {data.version}
-      </h1>
+      <H1 className="pt-8">Documentation {data.version}</H1>
       <div className="flex flex-col gap-4">
         <div className="flex flex-row gap-4">
           {data.releaseDocuments.links.map((link) => (

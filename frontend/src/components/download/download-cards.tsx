@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { detect } from "detect-browser";
+import { H6, P } from "@/components/ui/typography";
 
 export type Artifacts = {
   name: string;
@@ -132,14 +133,17 @@ function operatingSystemFromText(value: string): OperatingSystem {
   return "unknown";
 }
 
+function isDockerArtifact(artifact?: Artifacts): boolean {
+  return artifact?.name.toLowerCase().includes("docker") ?? false;
+}
+
 function installationGuideHref(
   product: DownloadProductCardProps["product"],
   userOs: OperatingSystem,
   artifact?: Artifacts,
   docLink?: string,
 ) {
-  const isDocker =
-    product === "engine" && artifact?.name.toLowerCase().includes("docker");
+  const isDocker = product === "engine" && isDockerArtifact(artifact);
 
   const selectedOs = artifact ? artifactOperatingSystem(artifact) : userOs;
   const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
@@ -306,10 +310,15 @@ function DownloadProductCard({
 
   const [showPermalinks, setShowPermalinks] = useState(false);
 
+  const defaultEngineArtifact = config.isDesigner
+    ? undefined
+    : artifacts.find(isDockerArtifact);
+
   const selectedArtifact =
     artifacts.find(
       (artifact) => artifact.permalink === selectedArtifactPermalink,
     ) ??
+    defaultEngineArtifact ??
     artifacts.find((artifact) =>
       artifactMatchesOperatingSystem(artifact, userOs, config.isDesigner),
     ) ??
@@ -330,7 +339,7 @@ function DownloadProductCard({
           <div className="flex flex-row gap-4">
             <div className="flex flex-row items-center gap-1">
               <IconCircleCheck className="h-4 w-4 text-n600" />
-              <p className="text-sm uppercase text-n600">{releaseLabel}</p>
+              <P className="uppercase text-n600">{releaseLabel}</P>
             </div>
             <Badge variant={config.badgeVariant} className="uppercase">
               {config.badge}
@@ -340,8 +349,8 @@ function DownloadProductCard({
         <CardTitle className="text-lg font-semibold">
           Axon Ivy {config.title} {release.versionShort}
         </CardTitle>
-        <CardDescription className="uppercase font-semibold text-sm text-n800 tracking-widest">
-          {config.mode}
+        <CardDescription>
+          <H6>{config.mode}</H6>
         </CardDescription>
         <CardDescription className="text-n800">
           {config.description}
@@ -420,11 +429,11 @@ function DownloadProductCard({
             Installation Guide
           </a>
           <Separator orientation="vertical" />
-          <p className="text-n900 text-center">
+          <P className="text-n900 text-center">
             {release.releaseDate
               ? `Released: ${release.releaseDate}`
               : "Release date not available"}
-          </p>
+          </P>
           <Separator orientation="vertical" />
           {hasVsCodeExtension ? (
             <a

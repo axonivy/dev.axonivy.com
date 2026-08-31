@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
+import { Base, H4, P } from "@/components/ui/typography";
 
 export type ArchiveArtifact = {
   name: string;
@@ -127,13 +128,11 @@ function MobileArchiveCards({
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="text-lg font-semibold text-n900">
-                  {release.version}
-                </h3>
-                <p className="mt-2 flex items-center gap-2 text-n600">
+                <H4 className="text-n900">{release.version}</H4>
+                <Base className="mt-2 flex items-center gap-2 text-n600">
                   <IconCalendar className="size-4" aria-hidden="true" />
                   {release.releaseDate || "-"}
-                </p>
+                </Base>
               </div>
               {release.releaseNotes ? (
                 <a
@@ -382,14 +381,14 @@ export default function Archive({ product }: ArchiveProps) {
 
   if (error) {
     return (
-      <p className="text-sm text-destructive">
+      <P className="text-destructive">
         Failed to load archive data: {error.message}
-      </p>
+      </P>
     );
   }
 
   if (!data) {
-    return <p className="text-sm text-n900">No archive data available.</p>;
+    return <P className="text-n900">No archive data available.</P>;
   }
 
   const releases = data.releaseInfos.filter((release) =>
@@ -401,7 +400,7 @@ export default function Archive({ product }: ArchiveProps) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-row items-center justify-between">
-        <p className="text-xl font-semibold">Archives</p>
+        <H4>Archives</H4>
         <NativeSelect
           value={selectedVersion || data.currentMajorVersion}
           onChange={(event) => setSelectedVersion(event.target.value)}

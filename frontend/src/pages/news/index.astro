@@ -18,6 +18,7 @@ import {
 } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
 import { NewsTimeline } from "@/components/news/timeline";
+import { Base, H3, H4, H6 } from "@/components/ui/typography";
 
 const releases = (await getCollection("news")).sort(
   (left, right) =>
@@ -62,16 +63,15 @@ const formatDate = (date: Date) =>
             </CardTitle>
             <IconStar class="size-8 text-primary" />
           </span>
-          <CardDescription
-            className="uppercase font-semibold text-sm text-n800 tracking-widest"
-          >
-            {releases[0].data.slogan}
+          <CardDescription>
+            <H6>
+              {releases[0].data.slogan}
+            </H6>
           </CardDescription>
         </CardHeader>
-        <p class="text-n900">SHORT VERSION OVERVIEW</p>
         <span class="flex items-center gap-2 text-n900">
           <IconCalendar class="size-4" />
-          <p>Released: {formatDate(releases[0].data.release_date)}</p>
+          <Base>Released: {formatDate(releases[0].data.release_date)}</Base>
         </span>
         <div class="flex flex-row gap-4">
           <a
@@ -94,15 +94,15 @@ const formatDate = (date: Date) =>
         </div>
       </div>
       <CardContent className="flex flex-col flex-1 gap-4 px-0">
-        <p class="text-xl font-semibold">
+        <H4>
           What's new in {releases[0].data.id}
-        </p>
+        </H4>
         <div class="flex flex-col gap-2">
           {
             releases[0].data.overview.map((fact: string) => (
               <span class="flex flex-row gap-2 items-start">
                 <IconCircleCheck class="size-4 text-primary shrink-0 mt-1" />
-                <p class="text-n900">{fact}</p>
+                <Base className="text-n900">{fact}</Base>
               </span>
             ))
           }
@@ -110,7 +110,7 @@ const formatDate = (date: Date) =>
       </CardContent>
     </Card>
     <div class="flex flex-col gap-8">
-      <p class="text-3xl font-semibold">Browse more news</p>
+      <H3>Browse more news</H3>
 
       <NewsTimeline items={timelineItems} />
     </div>

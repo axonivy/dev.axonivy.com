@@ -5,6 +5,7 @@ import DevReleases from "@/components/download/dev-releases";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import type { ArchiveProduct } from "@/components/download/archive";
+import { H3, H5 } from "@/components/ui/typography";
 
 export default function VersionOverview() {
   const [product, setProduct] = useState<ArchiveProduct>("designer");
@@ -13,13 +14,11 @@ export default function VersionOverview() {
     <div className="flex flex-col p-4 md:p-10 bg-n50 rounded-2xl gap-6">
       <div className="flex flex-col md:flex-row items-start justify-between gap-4">
         <div className="flex flex-col gap-4">
-          <h2 className="text-3xl font-semibold">
-            Version and Download Options
-          </h2>
-          <p className="text-lg text-n900">
+          <H3>Version and Download Options</H3>
+          <H5 className="font-normal text-n900">
             Explore some older versions and dev releases of the designer and
             engine.
-          </p>
+          </H5>
         </div>
         <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
           <Button

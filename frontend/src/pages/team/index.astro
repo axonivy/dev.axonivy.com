@@ -13,6 +13,7 @@ import PortraitLgi from "@/assets/team/lgi.jpg";
 import PortraitLli from "@/assets/team/lli.jpg";
 import PortraitRew from "@/assets/team/rew.jpg";
 import PortraitRwei from "@/assets/team/rwei.jpg";
+import { H4, P } from "@/components/ui/typography";
 
 type TeamMember = {
   name: string;
@@ -160,12 +161,12 @@ const team: TeamMember[] = [
               )
             )}
             <CardContent className="flex flex-col gap-2">
-              <p class="font-semibold text-xl">{member.name}</p>
-              <div class="text-sm text-n900">
-                <p>{member.function}</p>
-                <p>{member.education}</p>
+              <H4>{member.name}</H4>
+              <div>
+                <P className="text-n900">{member.function}</P>
+                <P className="text-n900">{member.education}</P>
               </div>
-              <p class="text-sm">{member.slogan}</p>
+              <P className="text-n900">{member.slogan}</P>
             </CardContent>
           </Card>
         );

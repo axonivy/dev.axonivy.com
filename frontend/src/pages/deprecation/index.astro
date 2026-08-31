@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { H4, H5 } from "@/components/ui/typography";
 
 const deprecationSteps = [
   {
@@ -82,8 +83,8 @@ const deprecationSections = [
     {
       deprecationSections.map((section) => (
         <div class="flex flex-col gap-2">
-          <h2 class="text-xl font-semibold md:text-2xl">{section.title}</h2>
-          <p class="text-lg text-n900">{section.description}</p>
+          <H4>{section.title}</H4>
+          <H5 className="font-normal text-n900">{section.description}</H5>
           <div class="overflow-hidden rounded-lg border border-border md:flex hidden">
             <Table>
               <TableHeader>

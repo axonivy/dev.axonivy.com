@@ -5,6 +5,7 @@ import {
 } from "@/components/download/download-cards";
 import { DownloadSkeleton } from "@/components/skeletons/download-skeleton";
 import { IconArrowRight, IconRefresh } from "@tabler/icons-react";
+import { Base, H2, H4, H5, P } from "@/components/ui/typography";
 
 type UiDownloadResponse = {
   ltsCurrent: DownloadRelease[];
@@ -39,14 +40,14 @@ export default function Download() {
 
   if (error) {
     return (
-      <p className="text-sm text-destructive">
+      <P className="text-destructive">
         Failed to load download links: {error.message}
-      </p>
+      </P>
     );
   }
 
   if (!data) {
-    return <p className="text-sm text-n900">No download data available.</p>;
+    return <P className="text-n900">No download data available.</P>;
   }
 
   const releases = [
@@ -59,7 +60,7 @@ export default function Download() {
   );
 
   if (releases.length === 0) {
-    return <p className="text-sm text-n900">No download data available.</p>;
+    return <P className="text-n900">No download data available.</P>;
   }
 
   return (
@@ -79,24 +80,18 @@ export default function Download() {
             <div className="bg-blue-bg text-blue row-start-1 shrink-0 rounded-md p-2 md:row-span-2">
               <IconRefresh className="size-8" />
             </div>
-            <p className="min-w-0 text-lg sm:text-xl">
-              Learn more about our release cycle
-            </p>
-            <p className="col-span-2 text-n900 md:col-span-1">
+            <H5>Learn more about our release cycle</H5>
+            <Base className="col-span-2 text-n900 md:col-span-1">
               Get familiar with our release cycle before you are going to use
               the Leading Edge version.
-            </p>
+            </Base>
           </div>
           <IconArrowRight className="text-primary size-6 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
         </a>
       </div>
       <div className="flex flex-col gap-6">
-        <h2 className="text-5xl font-semibold">
-          Download {data.ltsMaintenance[0].versionShort}
-        </h2>
-        <p className="text-xl font-semibold">
-          Download second to last released long term support version.
-        </p>
+        <H2>Download {data.ltsMaintenance[0].versionShort}</H2>
+        <H4>Download second to last released long term support version.</H4>
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <DownloadCards
             release={data.ltsMaintenance[0]}
@@ -105,14 +100,12 @@ export default function Download() {
         </div>
       </div>
       <div className="flex flex-col gap-6">
-        <h2 className="text-5xl font-semibold">
-          Want to check out brand new features?
-        </h2>
-        <p className="text-xl font-semibold">
+        <H2>Want to check out brand new features?</H2>
+        <H4>
           Download the Leading Edge version for early access to the newest
           features! <br />
           Be prepared for frequent migrations.
-        </p>
+        </H4>
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <DownloadCards release={data.le[0]} releaseLabel="Leading Edge" />
         </div>
