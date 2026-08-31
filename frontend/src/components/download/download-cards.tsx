@@ -133,14 +133,17 @@ function operatingSystemFromText(value: string): OperatingSystem {
   return "unknown";
 }
 
+function isDockerArtifact(artifact?: Artifacts): boolean {
+  return artifact?.name.toLowerCase().includes("docker") ?? false;
+}
+
 function installationGuideHref(
   product: DownloadProductCardProps["product"],
   userOs: OperatingSystem,
   artifact?: Artifacts,
   docLink?: string,
 ) {
-  const isDocker =
-    product === "engine" && artifact?.name.toLowerCase().includes("docker");
+  const isDocker = product === "engine" && isDockerArtifact(artifact);
 
   const selectedOs = artifact ? artifactOperatingSystem(artifact) : userOs;
   const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
@@ -307,10 +310,15 @@ function DownloadProductCard({
 
   const [showPermalinks, setShowPermalinks] = useState(false);
 
+  const defaultEngineArtifact = config.isDesigner
+    ? undefined
+    : artifacts.find(isDockerArtifact);
+
   const selectedArtifact =
     artifacts.find(
       (artifact) => artifact.permalink === selectedArtifactPermalink,
     ) ??
+    defaultEngineArtifact ??
     artifacts.find((artifact) =>
       artifactMatchesOperatingSystem(artifact, userOs, config.isDesigner),
     ) ??
