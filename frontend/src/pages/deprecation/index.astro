@@ -85,7 +85,7 @@ const deprecationSections = [
         <div class="flex flex-col gap-2">
           <H4>{section.title}</H4>
           <H5 className="font-normal text-n900">{section.description}</H5>
-          <div class="overflow-hidden rounded-lg border border-border md:flex hidden">
+          <div class="border-border hidden overflow-hidden rounded-lg border md:flex">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -138,7 +138,7 @@ const deprecationSections = [
               </TableBody>
             </Table>
           </div>
-          <div class="flex flex-col md:hidden gap-4">
+          <div class="flex flex-col gap-4 md:hidden">
             {section.items.map((item) => (
               <DeprecationMobileCard item={item} />
             ))}

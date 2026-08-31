@@ -42,7 +42,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
           title && !hasHeroBg && (
             <div
               aria-hidden="true"
-              class="absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl md:size-144 dark:hidden"
+              class="bg-primary/10 absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full blur-3xl md:size-144 dark:hidden"
             />
           )
         }
@@ -60,7 +60,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
               </div>
               <div
                 aria-hidden="true"
-                class="absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl dark:hidden md:hidden"
+                class="bg-primary/10 absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full blur-3xl md:hidden dark:hidden"
               />
             </>
           )
@@ -68,7 +68,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
 
         <div
           class:list={[
-            "w-full mx-auto flex min-h-screen md:max-w-6xl flex-col px-4 pb-20 pt-32",
+            "mx-auto flex min-h-screen w-full flex-col px-4 pt-32 pb-20 md:max-w-6xl",
             title ? "relative isolate gap-12" : "gap-6",
             center ? "justify-center" : "",
           ]}
@@ -88,7 +88,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
                           href={description.link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="underline underline-offset-4 hover:text-primary"
+                          class="hover:text-primary underline underline-offset-4"
                         >
                           {description.link.label}
                         </a>

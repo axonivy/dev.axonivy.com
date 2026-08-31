@@ -35,21 +35,21 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
         <li key={item.id} className="contents">
           <time
             dateTime={item.releaseDate.toISOString()}
-            className="hidden pt-0.5 text-sm font-medium text-n700 md:block"
+            className="text-n700 hidden pt-0.5 text-sm font-medium md:block"
           >
             {formatDate(item.releaseDate)}
           </time>
 
           <div className="relative hidden justify-center md:flex">
-            <span className="relative z-10 mt-1 size-4 rounded-full border-2 border-primary bg-accent" />
+            <span className="border-primary bg-accent relative z-10 mt-1 size-4 rounded-full border-2" />
             {index < items.length - 1 && (
-              <span className="absolute left-1/2 top-5 -bottom-8 w-px -translate-x-1/2 bg-n200" />
+              <span className="bg-n200 absolute top-5 -bottom-8 left-1/2 w-px -translate-x-1/2" />
             )}
           </div>
 
-          <Card className="flex flex-col px-2 py-6 md:col-start-3 md:flex-row gap-0">
-            <CardHeader className="flex flex-col items-start min-w-0 w-full md:flex-[1.5] px-4 md:px-0 md:pl-4 gap-4">
-              <span className="flex flex-wrap w-full items-center justify-between md:justify-start gap-4">
+          <Card className="flex flex-col gap-0 px-2 py-6 md:col-start-3 md:flex-row">
+            <CardHeader className="flex w-full min-w-0 flex-col items-start gap-4 px-4 md:flex-[1.5] md:px-0 md:pl-4">
+              <span className="flex w-full flex-wrap items-center justify-between gap-4 md:justify-start">
                 <H4 className="min-w-0">{item.versionTitle}</H4>
                 <Badge
                   variant={
@@ -68,15 +68,15 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
                 {item.slogan}
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col min-w-0 w-full md:flex-[2.5] px-4 md:px-0 md:pl-4 gap-2">
+            <CardContent className="flex w-full min-w-0 flex-col gap-2 px-4 md:flex-[2.5] md:px-0 md:pl-4">
               {item.overview.map((fact) => (
                 <span key={fact} className="flex min-w-0 items-start gap-2">
-                  <IconCircleCheck className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <IconCircleCheck className="text-primary mt-0.5 size-4 shrink-0" />
                   <span>{fact}</span>
                 </span>
               ))}
             </CardContent>
-            <div className="flex items-end w-full shrink-0 justify-end px-4 md:w-auto md:px-0 md:pr-4">
+            <div className="flex w-full shrink-0 items-end justify-end px-4 md:w-auto md:px-0 md:pr-4">
               <a
                 href={`/news/${item.id}`}
                 className={buttonVariants({ variant: "link" }) + " group"}

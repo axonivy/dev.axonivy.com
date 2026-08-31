@@ -5,7 +5,7 @@ export function DownloadProductCardSkeleton() {
   return (
     <Card className="h-fit">
       <CardHeader className="flex flex-col gap-3">
-        <div className="flex flex-row w-full items-start justify-between gap-4">
+        <div className="flex w-full flex-row items-start justify-between gap-4">
           <Skeleton className="h-12 w-12 rounded-md" />
           <div className="flex items-center gap-3">
             <Skeleton className="h-4 w-32" />

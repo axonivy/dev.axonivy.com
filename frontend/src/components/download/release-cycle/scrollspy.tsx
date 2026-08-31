@@ -15,7 +15,7 @@ export default function ReleaseCycleScrollspy() {
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
-        <ScrollSpyNav className="sticky top-40 z-10 shrink-0 self-start bg-background pt-2.5 hidden md:flex">
+        <ScrollSpyNav className="bg-background sticky top-40 z-10 hidden shrink-0 self-start pt-2.5 md:flex">
           <ScrollSpyLink value="LTS">Long Term Support (LTS)</ScrollSpyLink>
           <ScrollSpyLink value="LE">Leading Edge (LE)</ScrollSpyLink>
           <ScrollSpyLink value="maintenance">Maintenance support</ScrollSpyLink>
@@ -51,7 +51,7 @@ export default function ReleaseCycleScrollspy() {
                 start with an even major version number.
               </Base>
               <div className="flex flex-row items-center gap-2">
-                <IconCircleCheck className="size-4 text-primary" />
+                <IconCircleCheck className="text-primary size-4" />
                 <Base className="text-n900 font-semibold">
                   Current Long Term Support versions:
                   <span className="font-normal"> 10.0 / 12.0</span>
@@ -75,14 +75,14 @@ export default function ReleaseCycleScrollspy() {
                 number.
               </Base>
               <div className="flex flex-row items-center gap-2">
-                <IconCircleCheck className="size-4 text-primary" />
+                <IconCircleCheck className="text-primary size-4" />
                 <Base className="text-n900 font-semibold">
                   Current Leading Edge version:
                   <span className="font-normal"> 13.2</span>
                 </Base>
               </div>
-              <div className="flex flex-col md:flex-row gap-4 p-4 bg-n50 rounded-md">
-                <div className="flex p-2 bg-yellow-bg text-yellow rounded-md h-fit w-fit">
+              <div className="bg-n50 flex flex-col gap-4 rounded-md p-4 md:flex-row">
+                <div className="bg-yellow-bg text-yellow flex h-fit w-fit rounded-md p-2">
                   <IconBulb className="size-8" />
                 </div>
                 <div className="flex flex-col gap-2">

@@ -74,14 +74,14 @@ export default function Download() {
         </div>
         <a
           href="/download/release-cycle"
-          className="group flex min-w-0 flex-row items-center justify-between gap-3 rounded-md bg-n50 p-4 md:gap-4"
+          className="group bg-n50 flex min-w-0 flex-row items-center justify-between gap-3 rounded-md p-4 md:gap-4"
         >
           <div className="grid min-w-0 flex-1 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-1 md:gap-x-4">
             <div className="bg-blue-bg text-blue row-start-1 shrink-0 rounded-md p-2 md:row-span-2">
               <IconRefresh className="size-8" />
             </div>
             <H5>Learn more about our release cycle</H5>
-            <Base className="col-span-2 text-n900 md:col-span-1">
+            <Base className="text-n900 col-span-2 md:col-span-1">
               Get familiar with our release cycle before you are going to use
               the Leading Edge version.
             </Base>

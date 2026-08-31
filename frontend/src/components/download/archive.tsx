@@ -83,8 +83,8 @@ function MobileArtifactRow({
   artifacts: ArchiveArtifact[];
 }) {
   return (
-    <div className="flex items-center gap-3 border-b border-n200 py-2 last:border-b-0">
-      <div className="flex w-1/2 shrink-0 items-center gap-3 text-n900">
+    <div className="border-n200 flex items-center gap-3 border-b py-2 last:border-b-0">
+      <div className="text-n900 flex w-1/2 shrink-0 items-center gap-3">
         {icon}
         <span>{label}</span>
       </div>
@@ -94,7 +94,7 @@ function MobileArtifactRow({
               <a
                 key={artifact.filename}
                 href={artifact.url}
-                className="inline-flex items-center gap-2 text-primary"
+                className="text-primary inline-flex items-center gap-2"
               >
                 64-bit (exe)
                 <IconDownload className="size-5 shrink-0" aria-hidden="true" />
@@ -124,12 +124,12 @@ function MobileArchiveCards({
         return (
           <article
             key={release.version}
-            className="rounded-3xl bg-background px-6 py-5 shadow-sm"
+            className="bg-background rounded-3xl px-6 py-5 shadow-sm"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
                 <H4 className="text-n900">{release.version}</H4>
-                <Base className="mt-2 flex items-center gap-2 text-n600">
+                <Base className="text-n600 mt-2 flex items-center gap-2">
                   <IconCalendar className="size-4" aria-hidden="true" />
                   {release.releaseDate || "-"}
                 </Base>
@@ -137,7 +137,7 @@ function MobileArchiveCards({
               {release.releaseNotes ? (
                 <a
                   href={release.releaseNotes}
-                  className="inline-flex shrink-0 items-center gap-1 text-primary"
+                  className="text-primary inline-flex shrink-0 items-center gap-1"
                 >
                   Release notes
                   <IconArrowRight className="size-4" aria-hidden="true" />
@@ -241,7 +241,7 @@ export function ArchiveTable({
   return (
     <>
       <MobileArchiveCards product={product} releases={releases} />
-      <div className="hidden rounded-md bg-background px-4 py-2 md:block">
+      <div className="bg-background hidden rounded-md px-4 py-2 md:block">
         <Table className="w-full">
           <TableHeader>
             <TableRow>
@@ -340,7 +340,7 @@ export function ArchiveTable({
                       <a href={release.releaseNotes} className="text-primary">
                         Release notes
                         <IconArrowRight
-                          className="size-4 inline-block ml-1"
+                          className="ml-1 inline-block size-4"
                           aria-hidden="true"
                         />
                       </a>

@@ -5,7 +5,7 @@ export function DocumentationSkeleton() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <div className="md:col-span-2">
-        <Skeleton className="h-7 w-48 mb-3" />
+        <Skeleton className="mb-3 h-7 w-48" />
         <Card className="flex-1">
           <CardContent className="flex h-full flex-col gap-6 md:flex-row md:items-stretch">
             <div className="flex flex-1 flex-col gap-4">
@@ -21,7 +21,7 @@ export function DocumentationSkeleton() {
               </div>
             </div>
 
-            <div className="hidden md:block w-px bg-border" />
+            <div className="bg-border hidden w-px md:block" />
 
             <div className="flex flex-1 flex-col gap-4">
               <div className="flex items-center justify-between">
@@ -40,7 +40,7 @@ export function DocumentationSkeleton() {
       </div>
 
       <div>
-        <Skeleton className="h-7 w-32 mb-3" />
+        <Skeleton className="mb-3 h-7 w-32" />
         <Card className="flex-1">
           <CardContent className="flex h-full flex-col gap-5">
             <div className="flex items-center justify-between">
@@ -58,7 +58,7 @@ export function DocumentationSkeleton() {
       </div>
 
       <div>
-        <Skeleton className="h-7 w-40 mb-3" />
+        <Skeleton className="mb-3 h-7 w-40" />
         <Card className="flex-1">
           <CardContent className="flex h-full flex-col gap-5">
             <div className="flex items-center justify-between">

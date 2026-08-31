@@ -46,9 +46,9 @@ const formatDate = (date: Date) =>
   description={`Explore the latest releases, features and improvements \nof the Axon Ivy platform`}
 >
   <div class="flex flex-col gap-12">
-    <Card className="flex flex-col md:flex-row gap-8 p-6">
-      <div class="flex flex-col flex-1 gap-4">
-        <CardHeader className="px-0 gap-4">
+    <Card className="flex flex-col gap-8 p-6 md:flex-row">
+      <div class="flex flex-1 flex-col gap-4">
+        <CardHeader className="gap-4 px-0">
           <Badge
             variant={releases[0].data.tag === "Long Term Support"
               ? "green"
@@ -61,7 +61,7 @@ const formatDate = (date: Date) =>
             <CardTitle className="text-3xl font-semibold">
               {releases[0].data.version_title}
             </CardTitle>
-            <IconStar class="size-8 text-primary" />
+            <IconStar class="text-primary size-8" />
           </span>
           <CardDescription>
             <H6>
@@ -69,7 +69,7 @@ const formatDate = (date: Date) =>
             </H6>
           </CardDescription>
         </CardHeader>
-        <span class="flex items-center gap-2 text-n900">
+        <span class="text-n900 flex items-center gap-2">
           <IconCalendar class="size-4" />
           <Base>Released: {formatDate(releases[0].data.release_date)}</Base>
         </span>
@@ -93,15 +93,15 @@ const formatDate = (date: Date) =>
           </a>
         </div>
       </div>
-      <CardContent className="flex flex-col flex-1 gap-4 px-0">
+      <CardContent className="flex flex-1 flex-col gap-4 px-0">
         <H4>
           What's new in {releases[0].data.id}
         </H4>
         <div class="flex flex-col gap-2">
           {
             releases[0].data.overview.map((fact: string) => (
-              <span class="flex flex-row gap-2 items-start">
-                <IconCircleCheck class="size-4 text-primary shrink-0 mt-1" />
+              <span class="flex flex-row items-start gap-2">
+                <IconCircleCheck class="text-primary mt-1 size-4 shrink-0" />
                 <Base className="text-n900">{fact}</Base>
               </span>
             ))

@@ -16,7 +16,7 @@ const { item } = Astro.props;
     <CardTitle className="flex w-full items-center justify-between gap-2">
       <span class="max-w-4/5">{item.name}</span>
       <a href={item.nameHref} class="shrink-0">
-        <IconExternalLink class="h-4 w-4 shrink-0 text-primary" />
+        <IconExternalLink class="text-primary h-4 w-4 shrink-0" />
       </a>
     </CardTitle>
   </CardHeader>
@@ -36,7 +36,7 @@ const { item } = Astro.props;
       </div>
       <div class="flex w-full flex-row items-start justify-between gap-2">
         <P className="text-n800">Successor:</P>
-        <a href={item.successorHref} class="text-right text-primary underline">
+        <a href={item.successorHref} class="text-primary text-right underline">
           {item.successor}
         </a>
       </div>

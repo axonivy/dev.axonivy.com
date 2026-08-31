@@ -183,7 +183,7 @@ export default function Documentation() {
                                   variant: "outline",
                                   size: "sm",
                                   className:
-                                    "min-w-0 w-full h-auto flex-col gap-1 py-2 whitespace-normal! wrap-normal text-center",
+                                    "h-auto w-full min-w-0 flex-col gap-1 py-2 text-center wrap-normal whitespace-normal!",
                                 })}
                               >
                                 <SecondaryIconForText text={link.text} />

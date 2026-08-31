@@ -11,16 +11,16 @@ export default function VersionOverview() {
   const [product, setProduct] = useState<ArchiveProduct>("designer");
 
   return (
-    <div className="flex flex-col p-4 md:p-10 bg-n50 rounded-2xl gap-6">
-      <div className="flex flex-col md:flex-row items-start justify-between gap-4">
+    <div className="bg-n50 flex flex-col gap-6 rounded-2xl p-4 md:p-10">
+      <div className="flex flex-col items-start justify-between gap-4 md:flex-row">
         <div className="flex flex-col gap-4">
           <H3>Version and Download Options</H3>
-          <H5 className="font-normal text-n900">
+          <H5 className="text-n900 font-normal">
             Explore some older versions and dev releases of the designer and
             engine.
           </H5>
         </div>
-        <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+        <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row">
           <Button
             size="lg"
             variant={product === "designer" ? "default" : "outline"}
