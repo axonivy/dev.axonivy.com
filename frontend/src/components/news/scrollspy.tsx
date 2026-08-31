@@ -19,6 +19,7 @@ import type { NewsBlock, NewsLink, NewsListItem } from "@/data/news/news";
 import { buttonVariants } from "@/components/ui/button";
 import { useState, type KeyboardEvent } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
 
 const newsImages = import.meta.glob(
   "/src/assets/news/**/*.{gif,jpeg,jpg,png,webp,PNG}",
@@ -132,14 +133,14 @@ function NewsList({ items }: { items: NewsListItem[] }) {
         >
           <span className="flex items-start gap-2">
             <IconCircleCheck className="mt-1 size-4 shrink-0 text-primary" />
-            <p className="text-n900">
+            <Base className="text-n900">
               {item.term ? (
                 <strong className="font-semibold">
                   <InlineText text={item.term} />:{" "}
                 </strong>
               ) : null}
               <InlineText text={item.text} />
-            </p>
+            </Base>
           </span>
           {item.items && item.items.length > 0 ? (
             <div className="pl-6">
@@ -159,17 +160,17 @@ function NewsContent({ content }: { content: NewsBlock[] }) {
         switch (block.type) {
           case "paragraph":
             return (
-              <p key={index} className="leading-relaxed text-n900">
+              <Base key={index} className="leading-relaxed text-n900">
                 <InlineText text={block.text} />
-              </p>
+              </Base>
             );
           case "list":
             return <NewsList key={index} items={block.items} />;
           case "heading":
             return (
-              <h2 key={index} className="text-xl font-bold">
+              <H5 key={index}>
                 <InlineText text={block.text} />
-              </h2>
+              </H5>
             );
           case "code":
             return (
@@ -330,10 +331,8 @@ export default function NewsScrollSpy({
             >
               {tag}
             </Badge>
-            <h1 className="text-3xl font-semibold">{title}</h1>
-            <p className="uppercase font-semibold text-sm text-n800 tracking-widest">
-              {slogan}
-            </p>
+            <H4>{title}</H4>
+            <H6>{slogan}</H6>
             <span className="flex flex-row gap-2 text-n900 items-center">
               <IconCalendar className="size-4 shrink-0" />
               {releaseDate}
@@ -376,9 +375,7 @@ export default function NewsScrollSpy({
               value={sectionValue(section, index, sections)}
               className="flex flex-col gap-6 border-b border-n200 pb-12 last:border-b-0"
             >
-              <h2 className="text-2xl font-semibold text-n900 md:text-3xl">
-                {section.heading}
-              </h2>
+              <H3>{section.heading}</H3>
               <NewsContent content={section.content} />
               {section.links.length > 0 ? (
                 <ul className="flex flex-wrap items-center gap-2">
@@ -402,7 +399,7 @@ export default function NewsScrollSpy({
               ) : null}
               {section.images.length > 0 ? (
                 <div className="flex flex-col gap-4">
-                  <p className="font-semibold">Demo screenshots:</p>
+                  <Base className="font-semibold">Demo screenshots:</Base>
                   {section.images.length > 0 ? (
                     <div className="flex flex-col gap-4">
                       <NewsImageGallery

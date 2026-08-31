@@ -23,6 +23,7 @@ import type {
   InstallationGuide,
   InstallationSubstep,
 } from "@/data/installation-guides";
+import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
 
 const installationImages = import.meta.glob(
   "/src/assets/installation/**/*.{png,jpg,jpeg,webp}",
@@ -73,9 +74,9 @@ function InfoBoxLink({
         <div className="flex flex-col">
           <div className="flex flex-row items-center gap-1">
             {icon}
-            <p className="text-lg">{title}</p>
+            <H5>{title}</H5>
           </div>
-          <p className="text-n900">{description}</p>
+          <Base className="text-n900">{description}</Base>
         </div>
         <IconArrowRight className="size-8 shrink-0" />
       </a>
@@ -83,9 +84,9 @@ function InfoBoxLink({
       <div className="hidden md:flex md:flex-col">
         <div className="flex flex-row items-center gap-1">
           {icon}
-          <p className="text-lg">{title}</p>
+          <H5>{title}</H5>
         </div>
-        <p className="text-n900">{description}</p>
+        <Base className="text-n900">{description}</Base>
         <a
           href={link}
           target={external ? "_blank" : "_self"}
@@ -158,19 +159,17 @@ export default function InstallationScrollSpy({
         </ScrollSpyNav>
         <ScrollSpyViewport className="p-4">
           <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-semibold">{guide.title}</h1>
-            <p className="uppercase font-semibold text-sm text-n800 tracking-widest">
-              Step-by-step guide
-            </p>
-            <p className="text-n900">
+            <H3>{guide.title}</H3>
+            <H6>Step-by-step guide</H6>
+            <Base className="text-n900">
               Follow these steps to download and install Axon Ivy{" "}
               {guide.product}{" "}
               {guide.type != "Engine" ? `for ${guide.type}` : ""}.
-            </p>
+            </Base>
             {guide.hint ? (
               <div className="flex flex-col gap-4 rounded-md bg-yellow-bg border border-yellow p-4">
-                <h2 className="text-xl font-semibold">{guide.hint.title}</h2>
-                <p className="text-n900">{guide.hint.description}</p>
+                <H4>{guide.hint.title}</H4>
+                <Base className="text-n900">{guide.hint.description}</Base>
               </div>
             ) : null}
           </div>
@@ -185,7 +184,7 @@ export default function InstallationScrollSpy({
                 <div className="flex size-6.5 shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-primary">
                   {step.id}
                 </div>
-                <h2 className="text-xl font-semibold">{step.title}</h2>
+                <H4>{step.title}</H4>
               </div>
               {step.img && imageUrl(step.img) ? (
                 <img
@@ -198,9 +197,9 @@ export default function InstallationScrollSpy({
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   {visibleSubsteps(guideId, step.substeps).map((substep) => (
                     <div key={substep.id} className="flex flex-col gap-4">
-                      <p>
+                      <Base>
                         {substep.id} {substep.title}
-                      </p>
+                      </Base>
                       {substep.img && imageUrl(substep.img) ? (
                         <img
                           src={imageUrl(substep.img)}
@@ -261,10 +260,10 @@ export default function InstallationScrollSpy({
                 <div className="bg-orange-bg text-orange shrink-0 rounded-md p-2">
                   <IconMap2 className="size-8" />
                 </div>
-                <p className="text-n900">
+                <Base className="text-n900">
                   We're here to help <br className="hidden md:block" />
                   you get started.
-                </p>
+                </Base>
               </div>
               <div className="flex flex-col md:flex-row gap-4 md:gap-6">
                 <Separator orientation="horizontal" className="md:hidden" />

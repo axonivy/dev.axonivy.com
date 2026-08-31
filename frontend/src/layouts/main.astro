@@ -3,6 +3,7 @@ import Header from "@/components/header.astro";
 import Footer from "@/components/footer.astro";
 import "@/styles/global.css";
 import { Font } from "astro:assets";
+import { Base, H1 } from "@/components/ui/typography";
 
 type LinkedDescription = {
   before: string;
@@ -75,9 +76,9 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
           {
             title && (
               <div class="flex w-full flex-col items-center gap-8 pt-6 text-center leading-loose md:w-2/3 md:self-center md:pt-12">
-                <h1 class="text-3xl font-semibold md:text-6xl">{title}</h1>
+                <H1>{title}</H1>
                 {description && (
-                  <p class="whitespace-pre-line text-base text-n900 md:text-xl">
+                  <Base className="whitespace-pre-line text-n900 md:text-xl">
                     {typeof description === "string" ? (
                       description
                     ) : (
@@ -94,7 +95,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
                         {description.after}
                       </>
                     )}
-                  </p>
+                  </Base>
                 )}
               </div>
             )

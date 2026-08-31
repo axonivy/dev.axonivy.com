@@ -7,6 +7,7 @@ import {
 import { IconArrowRight, IconCircleCheck } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "../ui/button";
+import { H4 } from "@/components/ui/typography";
 
 export type NewsTimelineItem = {
   id: string;
@@ -49,9 +50,7 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
           <Card className="flex flex-col px-2 py-6 md:col-start-3 md:flex-row gap-0">
             <CardHeader className="flex flex-col items-start min-w-0 w-full md:flex-[1.5] px-4 md:px-0 md:pl-4 gap-4">
               <span className="flex flex-wrap w-full items-center justify-between md:justify-start gap-4">
-                <p className="min-w-0 text-xl font-semibold">
-                  {item.versionTitle}
-                </p>
+                <H4 className="min-w-0">{item.versionTitle}</H4>
                 <Badge
                   variant={
                     item.tag === "Long Term Support"

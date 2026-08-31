@@ -1,6 +1,7 @@
 ---
 import { IconCircleCheck } from "@tabler/icons-astro";
 import { Separator } from "@/components/ui/separator";
+import { Code, P } from "@/components/ui/typography";
 
 interface Props {
   step: {
@@ -23,17 +24,15 @@ const { step, showSeparator } = Astro.props;
 }
 <div class="flex flex-1 items-start gap-3 pb-2">
   <IconCircleCheck class="mt-0.5 size-5 shrink-0 text-primary" />
-  <p>
+  <P>
     {step.description}
     {
       step.code && (
         <>
           {" "}
-          <code class="rounded bg-n75 px-1 py-0.5 font-code text-[0.875em] text-n900">
-            {step.code}
-          </code>
+          <Code>{step.code}</Code>
         </>
       )
     }
-  </p>
+  </P>
 </div>

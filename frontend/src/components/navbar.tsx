@@ -15,6 +15,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const navItems = [
   { label: "News", href: "/news", external: false },
@@ -97,6 +98,26 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
                   </li>
                 ))}
               </ul>
+              <div className="flex flex-col gap-6 mt-4 ml-2">
+                <a
+                  href="/news"
+                  className={buttonVariants({
+                    variant: "accent",
+                    className: "w-fit",
+                  })}
+                >
+                  News
+                </a>
+                <a
+                  href="/download"
+                  className={buttonVariants({
+                    variant: "default",
+                    className: "w-fit",
+                  })}
+                >
+                  Download
+                </a>
+              </div>
             </nav>
           </DrawerContent>
         </Drawer>

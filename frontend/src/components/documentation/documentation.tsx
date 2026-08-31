@@ -13,6 +13,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { DocumentationSkeleton } from "@/components/skeletons/documentation-skeleton";
+import { H4, H5, P } from "@/components/ui/typography";
 
 type DocLink = {
   url: string;
@@ -91,16 +92,14 @@ export default function Documentation() {
 
   if (error) {
     return (
-      <p className="text-sm text-destructive">
+      <P className="text-destructive">
         Failed to load documentation links: {error.message}
-      </p>
+      </P>
     );
   }
 
   if (!data) {
-    return (
-      <p className="text-sm text-n900">No documentation data available.</p>
-    );
+    return <P className="text-n900">No documentation data available.</P>;
   }
 
   const visibleSections = sections.filter(
@@ -119,7 +118,7 @@ export default function Documentation() {
               groups.length > 1 ? "md:col-span-2" : ""
             }`}
           >
-            <h2 className="text-xl font-semibold">{section.title}</h2>
+            <H4>{section.title}</H4>
 
             <Card className="flex-1">
               <CardContent className="flex h-full flex-col gap-6 md:flex-row md:items-stretch">
@@ -136,9 +135,9 @@ export default function Documentation() {
                     <Fragment key={`${section.key}-${group.version}`}>
                       <div className="flex flex-1 flex-col gap-4">
                         <div className="flex items-center justify-between">
-                          <p className="text-lg font-medium leading-tight">
+                          <H5 className="leading-tight">
                             Version {group.version}
-                          </p>
+                          </H5>
                           <Badge variant={badge.variant}>{badge.label}</Badge>
                         </div>
 

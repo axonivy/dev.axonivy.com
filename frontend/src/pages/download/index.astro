@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/main.astro";
+import { Base, H4, H5 } from "@/components/ui/typography";
 import {
   DownloadQuery,
   VersionOverviewQuery,
@@ -32,10 +33,10 @@ import { Separator } from "@/components/ui/separator";
         <IconMessageCircleQuestion class="size-8" />
       </div>
       <div class="flex flex-col">
-        <p class="text-xl">Need help?</p>
-        <p class="text-n900">
+        <H4>Need help?</H4>
+        <Base className="text-n900">
           We're here to help <br class="hidden md:block" /> you get started.
-        </p>
+        </Base>
       </div>
     </div>
     <div class="flex flex-col md:flex-row gap-4 md:gap-6">
@@ -49,9 +50,9 @@ import { Separator } from "@/components/ui/separator";
           <div class="flex flex-col">
             <div class="flex flex-row items-center gap-1">
               <IconFileDescription class="size-5" />
-              <p class="text-lg">Documentation</p>
+              <H5>Documentation</H5>
             </div>
-            <p class="text-n900">Find guides and references.</p>
+            <Base className="text-n900">Find guides and references.</Base>
           </div>
           <IconArrowRight class="size-8 shrink-0" />
         </a>
@@ -59,9 +60,9 @@ import { Separator } from "@/components/ui/separator";
         <div class="hidden md:flex md:flex-col">
           <div class="flex flex-row items-center gap-1">
             <IconFileDescription class="size-5" />
-            <p class="text-lg">Documentation</p>
+            <H5>Documentation</H5>
           </div>
-          <p class="text-n900">Find guides and references.</p>
+          <Base className="text-n900">Find guides and references.</Base>
           <a href="/doc" class="group text-primary">
             <span class="flex items-center gap-2">
               Go to Docs
@@ -86,9 +87,9 @@ import { Separator } from "@/components/ui/separator";
           <div class="flex flex-col">
             <div class="flex flex-row items-center gap-1">
               <IconMessageCircle class="size-5" />
-              <p class="text-lg">Community</p>
+              <H5>Community</H5>
             </div>
-            <p class="text-n900">Ask questions and get help.</p>
+            <Base className="text-n900">Ask questions and get help.</Base>
           </div>
           <IconArrowRight class="size-8 shrink-0" />
         </a>
@@ -96,9 +97,9 @@ import { Separator } from "@/components/ui/separator";
         <div class="hidden md:flex md:flex-col">
           <div class="flex flex-row items-center gap-1">
             <IconMessageCircle class="size-5" />
-            <p class="text-lg">Community</p>
+            <H5>Community</H5>
           </div>
-          <p class="text-n900">Ask questions and get help.</p>
+          <Base className="text-n900">Ask questions and get help.</Base>
           <a
             href="https://community.axonivy.com/"
             target="_blank"
@@ -126,9 +127,9 @@ import { Separator } from "@/components/ui/separator";
           <div class="flex flex-col">
             <div class="flex flex-row items-center gap-1">
               <IconMessageChatbot class="size-5" />
-              <p class="text-lg">Contact Support</p>
+              <H5>Contact Support</H5>
             </div>
-            <p class="text-n900">Need additional assistance?</p>
+            <Base className="text-n900">Need additional assistance?</Base>
           </div>
           <IconArrowRight class="size-8 shrink-0" />
         </a>
@@ -136,9 +137,9 @@ import { Separator } from "@/components/ui/separator";
         <div class="hidden md:flex md:flex-col">
           <div class="flex flex-row items-center gap-1">
             <IconMessageChatbot class="size-5" />
-            <p class="text-lg">Contact Support</p>
+            <H5>Contact Support</H5>
           </div>
-          <p class="text-n900">Need additional assistance?</p>
+          <Base className="text-n900">Need additional assistance?</Base>
           <a href="/support" class="group text-primary">
             <span class="flex items-center gap-2">
               Contact us
