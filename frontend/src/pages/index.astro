@@ -1,7 +1,35 @@
 ---
 import Layout from "@/layouts/main.astro";
-import { IconArrowRight, IconPointFilled } from "@tabler/icons-astro";
+import { IconArrowRight, IconCheck, IconCopy } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
+import AxonIvySmall from "@/assets/axonivy-logo-small.svg";
+import AxonIvySmallDark from "@/assets/axonivy-logo-small-dark.svg";
+import { Image } from "astro:assets";
+import Processflowbackground from "@/components/processflowbackground.astro";
+
+const topSteps = [
+  { type: "start" },
+  { type: "task", label: "Enter Request" },
+  { type: "task", label: "Verify Request" },
+  { type: "task", label: "Check Stock" },
+  { type: "gateway", branch: "Handle Backorder" },
+  { type: "task", label: "Approve Request" },
+  { type: "task", label: "Assign Supplier" },
+  { type: "task", label: "Negotiate Price" },
+  { type: "end" },
+];
+
+const bottomSteps = [
+  { type: "start" },
+  { type: "task", label: "Create Order" },
+  { type: "task", label: "Confirm Order" },
+  { type: "task", label: "Schedule Delivery" },
+  { type: "gateway", branch: "Resolve Delay" },
+  { type: "task", label: "Ship Goods" },
+  { type: "task", label: "Track Shipment" },
+  { type: "task", label: "Confirm Receipt" },
+  { type: "end" },
+];
 ---
 
 <Layout
@@ -9,8 +37,10 @@ import { buttonVariants } from "@/components/ui/button";
   description={"The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."}
   center={true}
 >
-  <div class="flex flex-col items-center gap-12 leading-loose">
-    <div class="w-full max-w-3xs flex flex-col gap-4 justify-center">
+  <Processflowbackground slot="hero-background" class="absolute inset-0" />
+
+  <div class="flex flex-col items-center gap-4 leading-loose">
+    <div class="w-full flex max-w-3xs flex-col gap-4 justify-center">
       <a
         href="/download"
         class={buttonVariants({
@@ -31,17 +61,54 @@ import { buttonVariants } from "@/components/ui/button";
         Latest News
       </a>
     </div>
-    <div class="flex flex-row items-center gap-2 text-lg text-n900">
-      <p>Open Source</p>
-      <IconPointFilled class="h-3 w-3" />
-      <p>Enterprise ready</p>
-      <IconPointFilled class="h-3 w-3 hidden md:flex" />
-      <a
-        href="https://www.axonivy.com"
-        class="text-primary underline hidden md:flex"
+    <button
+      type="button"
+      data-copy-command="docker pull axonivy/axonivy-engine"
+      aria-label="Copy Docker command"
+      class="group relative flex max-w-full items-center justify-center gap-2 font-code text-code"
+    >
+      <Image
+        src={AxonIvySmall}
+        alt="Axon Ivy Small Logo"
+        class="size-4 dark:hidden"
+      />
+      <Image
+        src={AxonIvySmallDark}
+        alt="Axon Ivy Small Dark Logo"
+        class="size-4 hidden dark:block"
+      />
+      <span class="whitespace-nowrap">~ docker pull axonivy/axonivy-engine</span
       >
-        www.axonivy.com
-      </a>
-    </div>
+      <IconCopy
+        data-copy-icon
+        aria-hidden="true"
+        class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+      />
+      <IconCheck
+        data-check-icon
+        aria-hidden="true"
+        class="absolute -right-6 hidden size-4 text-primary"
+      />
+    </button>
   </div>
 </Layout>
+
+<script is:inline>
+  document.querySelectorAll("[data-copy-command]").forEach((commandButton) => {
+    const copyIcon = commandButton.querySelector("[data-copy-icon]");
+    const checkIcon = commandButton.querySelector("[data-check-icon]");
+
+    const resetIcon = () => {
+      copyIcon.classList.remove("hidden");
+      checkIcon.classList.add("hidden");
+    };
+
+    commandButton.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(commandButton.dataset.copyCommand);
+      copyIcon.classList.add("hidden");
+      checkIcon.classList.remove("hidden");
+    });
+
+    commandButton.addEventListener("mouseleave", resetIcon);
+  });
+</script>

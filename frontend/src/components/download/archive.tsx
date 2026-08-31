@@ -246,23 +246,23 @@ export function ArchiveTable({
         <Table className="w-full">
           <TableHeader>
             <TableRow>
-              <TableHead>Version</TableHead>
-              <TableHead>Release Date</TableHead>
+              <TableHead className="w-1/6">Version</TableHead>
+              <TableHead className="w-1/6">Release Date</TableHead>
               {product === "designer" ? (
                 <>
-                  <TableHead>Windows</TableHead>
-                  <TableHead>macOS</TableHead>
-                  <TableHead>Linux</TableHead>
+                  <TableHead className="w-1/6">Windows</TableHead>
+                  <TableHead className="w-1/6">macOS</TableHead>
+                  <TableHead className="w-1/6">Linux</TableHead>
                 </>
               ) : (
                 <>
-                  <TableHead>Windows</TableHead>
-                  <TableHead>Docker</TableHead>
-                  <TableHead>Linux / macOS</TableHead>
-                  <TableHead>Slim</TableHead>
+                  <TableHead className="w-1/6">Windows</TableHead>
+                  <TableHead className="w-1/6">Docker</TableHead>
+                  <TableHead className="w-1/6">Linux / macOS</TableHead>
+                  <TableHead className="w-1/6">Slim</TableHead>
                 </>
               )}
-              <TableHead>Release notes</TableHead>
+              <TableHead className="w-1/6">Release notes</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

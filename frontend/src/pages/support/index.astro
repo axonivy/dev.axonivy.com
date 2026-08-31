@@ -10,15 +10,10 @@ import Layout from "@/layouts/main.astro";
 import {
   IconArrowRight,
   IconCircleCheck,
-  IconFileDescription,
   IconHeadset,
   IconMail,
-  IconMessageChatbot,
-  IconMessageCircle,
-  IconMessageCircleQuestion,
   IconTicket,
 } from "@tabler/icons-astro";
-import { supportsViewTransitions } from "astro:transitions/client";
 
 const supportInfo = [
   {
@@ -75,7 +70,7 @@ const supportInfo = [
             }
           >
             <CardHeader className="flex flex-row gap-4 w-full">
-              <div class="text-primary">
+              <div class="text-primary mt-1">
                 <IconCircleCheck class="size-4 shrink-0" />
               </div>
               <div>
