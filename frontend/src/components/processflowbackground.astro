@@ -1,0 +1,1034 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+
+type Step =
+  | { type: "start" }
+  | { type: "end" }
+  | { type: "task"; label: string }
+  | { type: "gateway"; branch?: string };
+
+const steps: Step[] = [
+  { type: "start" },
+  { type: "task", label: "Enter Request" },
+  { type: "task", label: "Verify Request" },
+  { type: "task", label: "Check Stock" },
+  { type: "gateway", branch: "Handle Backorder" },
+  { type: "task", label: "Approve Request" },
+  { type: "task", label: "Assign Supplier" },
+  { type: "task", label: "Negotiate Price" },
+  { type: "gateway", branch: "Escalate Approval" },
+  { type: "task", label: "Create Order" },
+  { type: "task", label: "Confirm Order" },
+  { type: "task", label: "Schedule Delivery" },
+  { type: "gateway", branch: "Resolve Delay" },
+  { type: "task", label: "Ship Goods" },
+  { type: "task", label: "Track Shipment" },
+  { type: "task", label: "Confirm Receipt" },
+  { type: "end" },
+];
+
+const ROWS = 2;
+
+const TASK_W = 118;
+const TASK_H = 60;
+const GATE_D = 38;
+const EVENT_R = 12;
+const GAP = 62;
+const PAD = 56;
+const BELOW_OFFSET = 96;
+const BASE_CY = 130;
+const TOTAL_H = BASE_CY + BELOW_OFFSET + TASK_H / 2 + 30;
+
+const widthOf = (s: Step) =>
+  s.type === "task" ? TASK_W : s.type === "gateway" ? GATE_D : EVENT_R * 2;
+
+const stepWidth = (s: Step) =>
+  widthOf(s) + GAP + (s.type === "gateway" && s.branch ? TASK_W + GAP : 0);
+
+type Block = { indices: number[]; width: number };
+const blocks: Block[] = [];
+{
+  let i = 0;
+  while (i < steps.length) {
+    const s = steps[i];
+    if (s.type === "gateway" && s.branch && i + 1 < steps.length) {
+      blocks.push({
+        indices: [i, i + 1],
+        width: stepWidth(s) + stepWidth(steps[i + 1]),
+      });
+      i += 2;
+    } else {
+      blocks.push({ indices: [i], width: stepWidth(s) });
+      i += 1;
+    }
+  }
+}
+
+const blockPrefix: number[] = [];
+{
+  let sum = 0;
+  for (const b of blocks) {
+    sum += b.width;
+    blockPrefix.push(sum);
+  }
+}
+const totalBlockWidth = blockPrefix[blockPrefix.length - 1];
+
+let bestBoundary = 0;
+let bestDiff = Infinity;
+for (let k = 0; k < blocks.length - 1; k++) {
+  const row0Width = blockPrefix[k];
+  const row1Width = totalBlockWidth - row0Width;
+  const diff = Math.abs(row0Width - row1Width);
+  if (diff < bestDiff) {
+    bestDiff = diff;
+    bestBoundary = k;
+  }
+}
+
+const rowOfIndex: number[] = new Array(steps.length).fill(0);
+blocks.forEach((b, bi) => {
+  const row = bi <= bestBoundary ? 0 : 1;
+  b.indices.forEach((idx) => (rowOfIndex[idx] = row));
+});
+const numRows = 2;
+
+type LocalBelow = { gatewayIndex: number; localX: number; label: string };
+const localCenterX: number[] = new Array(steps.length);
+const localBelow: LocalBelow[] = [];
+const rowWidths: number[] = new Array(numRows).fill(0);
+
+for (let r = 0; r < numRows; r++) {
+  let cursor = PAD;
+  for (let i = 0; i < steps.length; i++) {
+    if (rowOfIndex[i] !== r) continue;
+    const s = steps[i];
+    const w = widthOf(s);
+    localCenterX[i] = cursor + w / 2;
+    cursor += w + GAP;
+    if (s.type === "gateway" && s.branch) {
+      localBelow.push({
+        gatewayIndex: i,
+        localX: cursor + TASK_W / 2,
+        label: s.branch,
+      });
+      cursor += TASK_W + GAP;
+    }
+  }
+  rowWidths[r] = cursor - GAP + PAD;
+}
+const ROW_WIDTH = Math.max(...rowWidths);
+
+const mirrorForRow = (r: number) => r % 2 === 1;
+
+type Point = { x: number; y: number };
+const centers: Point[] = steps.map((_, i) => {
+  const r = rowOfIndex[i];
+  const x = mirrorForRow(r) ? ROW_WIDTH - localCenterX[i] : localCenterX[i];
+  return { x, y: BASE_CY };
+});
+
+const belowNodes = localBelow.map((b, k) => {
+  const r = rowOfIndex[b.gatewayIndex];
+  const x = mirrorForRow(r) ? ROW_WIDTH - b.localX : b.localX;
+  return {
+    k,
+    gatewayIndex: b.gatewayIndex,
+    label: b.label,
+    x,
+    y: BASE_CY + BELOW_OFFSET,
+  };
+});
+
+const xJoin = ROW_WIDTH - PAD * 0.55;
+
+let lastIdxRow0 = -1;
+let firstIdxRow1 = -1;
+for (let i = 0; i < steps.length; i++) {
+  if (rowOfIndex[i] === 0) lastIdxRow0 = i;
+  if (rowOfIndex[i] === 1 && firstIdxRow1 === -1) firstIdxRow1 = i;
+}
+
+const pathOf = (pts: Point[]) =>
+  "M" + pts.map((p) => `${p.x},${p.y}`).join(" L ");
+
+type RowData = {
+  r: number;
+  wrapId: string;
+  width: number;
+  height: number;
+  indices: number[];
+  segments: { key: string; d: string }[];
+  branches: {
+    k: number;
+    x: number;
+    y: number;
+    label: string;
+    down: string;
+    up: string;
+    downPts: Point[];
+    upPts: Point[];
+  }[];
+  routePoints: { indices: number[]; throughPoints: Point[][] };
+  stub: { key: string; d: string; pts: Point[] } | null;
+};
+
+const wrapId = "pf-" + Math.random().toString(36).slice(2, 9);
+
+function buildRow(r: number): RowData {
+  const indices = steps.map((_, i) => i).filter((i) => rowOfIndex[i] === r);
+
+  const throughPoints: Point[][] = [];
+  for (let n = 0; n < indices.length - 1; n++) {
+    throughPoints.push([centers[indices[n]], centers[indices[n + 1]]]);
+  }
+
+  const segments = throughPoints.map((pts, n) => ({
+    key: String(indices[n]),
+    d: pathOf(pts),
+  }));
+
+  const branchesInRow = belowNodes.filter(
+    (b) => rowOfIndex[b.gatewayIndex] === r,
+  );
+  const branches = branchesInRow.map((b) => {
+    const gate = centers[b.gatewayIndex];
+    const next = centers[b.gatewayIndex + 1];
+    const downPts: Point[] = [gate, { x: gate.x, y: b.y }, { x: b.x, y: b.y }];
+    const upPts: Point[] = [{ x: b.x, y: b.y }, { x: next.x, y: b.y }, next];
+    return {
+      k: b.k,
+      x: b.x,
+      y: b.y,
+      label: b.label,
+      down: pathOf(downPts),
+      up: pathOf(upPts),
+      downPts,
+      upPts,
+    };
+  });
+
+  let stub: RowData["stub"] = null;
+  if (r === 0) {
+    const last = centers[lastIdxRow0];
+    const pts: Point[] = [
+      last,
+      { x: xJoin, y: BASE_CY },
+      { x: xJoin, y: TOTAL_H },
+    ];
+    stub = { key: "stub-out", d: pathOf(pts), pts };
+  } else if (r === 1) {
+    const first = centers[firstIdxRow1];
+    const pts: Point[] = [{ x: xJoin, y: 0 }, { x: xJoin, y: BASE_CY }, first];
+    stub = { key: "stub-in", d: pathOf(pts), pts };
+  }
+
+  return {
+    r,
+    wrapId: `${wrapId}-r${r}`,
+    width: ROW_WIDTH,
+    height: TOTAL_H,
+    indices,
+    segments,
+    branches,
+    routePoints: { indices, throughPoints },
+    stub,
+  };
+}
+
+const rowsData: RowData[] = [buildRow(0), buildRow(1)];
+const row0 = rowsData[0];
+const row1 = rowsData[1];
+
+const baseLength = (row: RowData) => {
+  let d = 0;
+  const acc = (pts: Point[]) => {
+    for (let i = 1; i < pts.length; i++)
+      d += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+  };
+  row.routePoints.throughPoints.forEach(acc);
+  if (row.stub) acc(row.stub.pts);
+  return d;
+};
+
+const row0Length = baseLength(row0);
+const row1Length = baseLength(row1);
+const BASE_DURATION = Math.max(10, +(steps.length * 1.15).toFixed(2));
+const speed = (row0Length + row1Length) / BASE_DURATION; // px/sec
+const CONNECTOR_DURATION = 1.6; // seconds, fixed — not distance-driven
+
+const clientRows = rowsData.map((row) => ({
+  r: row.r,
+  wrapId: row.wrapId,
+  centers: row.indices.map((i) => centers[i]),
+  indices: row.indices,
+  throughPoints: row.routePoints.throughPoints,
+  branchMeta: row.branches.map((b) => ({
+    k: b.k,
+    gatewayIndex: row.indices.indexOf(
+      belowNodes.find((n) => n.k === b.k)!.gatewayIndex,
+    ),
+    downPoints: b.downPts,
+    upPoints: b.upPts,
+  })),
+  stub: row.stub ? { key: row.stub.key, pts: row.stub.pts } : null,
+}));
+
+const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
+---
+
+<div
+  id={wrapId}
+  class={`process-flow-bg flex h-full w-4/5 mx-auto flex-col py-6 md:py-10 ${className}`}
+  aria-hidden="true"
+>
+  <!-- Row 0 -->
+  <svg
+    class="process-flow-svg shrink-0"
+    viewBox={`0 0 ${row0.width} ${row0.height}`}
+    preserveAspectRatio="xMidYMid meet"
+    style={`aspect-ratio: ${row0.width} / ${row0.height};`}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <pattern
+        id={`${row0.wrapId}-dots`}
+        width="24"
+        height="24"
+        patternUnits="userSpaceOnUse"
+      >
+        <circle cx="1.2" cy="1.2" r="1.2" fill="currentColor" class="pf-dot"
+        ></circle>
+      </pattern>
+      <filter
+        id={`${row0.wrapId}-glow`}
+        x="-80%"
+        y="-80%"
+        width="260%"
+        height="260%"
+      >
+        <feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="blur"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+      </filter>
+      <linearGradient id={`${row0.wrapId}-fade`} x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="white" stop-opacity="0"></stop>
+        <stop offset="6%" stop-color="white" stop-opacity="1"></stop>
+        <stop offset="94%" stop-color="white" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+      </linearGradient>
+      <mask id={`${row0.wrapId}-mask`}>
+        <rect
+          x="0"
+          y="0"
+          width={row0.width}
+          height={row0.height}
+          fill={`url(#${row0.wrapId}-fade)`}></rect>
+      </mask>
+    </defs>
+
+    <g mask={`url(#${row0.wrapId}-mask)`}>
+      <rect
+        x="0"
+        y="0"
+        width={row0.width}
+        height={row0.height}
+        fill={`url(#${row0.wrapId}-dots)`}
+        class="pf-grid"></rect>
+
+      {
+        row0.segments.map((seg) => (
+          <path d={seg.d} class="pf-line" fill="none" />
+        ))
+      }
+      {
+        row0.segments.map((seg) => (
+          <path d={seg.d} class="pf-seg" data-seg={seg.key} fill="none" />
+        ))
+      }
+
+      {
+        row0.stub && (
+          <>
+            <path d={row0.stub.d} class="pf-line" fill="none" />
+            <path
+              d={row0.stub.d}
+              class="pf-seg"
+              data-seg={row0.stub.key}
+              fill="none"
+            />
+          </>
+        )
+      }
+
+      {
+        row0.branches.map((b) => (
+          <>
+            <path d={b.down} class="pf-branch" fill="none" />
+            <path d={b.up} class="pf-branch" fill="none" />
+            <path
+              d={b.down}
+              class="pf-branch-seg"
+              data-seg={`bd-${b.k}`}
+              fill="none"
+            />
+            <path
+              d={b.up}
+              class="pf-branch-seg"
+              data-seg={`bu-${b.k}`}
+              fill="none"
+            />
+          </>
+        ))
+      }
+
+      {
+        row0.branches.map((b) => {
+          const [line1, line2] = b.label.split(" ");
+          return (
+            <>
+              <rect
+                x={b.x - TASK_W / 2}
+                y={b.y - TASK_H / 2}
+                width={TASK_W}
+                height={TASK_H}
+                rx="10"
+                class="pf-node pf-task"
+                data-node={`b-${b.k}`}
+              />
+              <text x={b.x} y={b.y - 4} class="pf-label">
+                {line1}
+              </text>
+              <text x={b.x} y={b.y + 14} class="pf-label">
+                {line2}
+              </text>
+            </>
+          );
+        })
+      }
+
+      {
+        row0.indices.map((i) => {
+          const s = steps[i];
+          const { x: cx, y: cy } = centers[i];
+          if (s.type === "start") {
+            return (
+              <circle
+                cx={cx}
+                cy={cy}
+                r={EVENT_R}
+                class="pf-node pf-start"
+                data-node={i}
+              />
+            );
+          }
+          if (s.type === "end") {
+            return (
+              <>
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={EVENT_R + 3}
+                  class="pf-node pf-end"
+                  data-node={i}
+                />
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={EVENT_R - 3}
+                  class="pf-node pf-end"
+                  data-node={i}
+                />
+              </>
+            );
+          }
+          if (s.type === "gateway") {
+            const side = GATE_D / Math.SQRT2;
+            return (
+              <rect
+                x={cx - side / 2}
+                y={cy - side / 2}
+                width={side}
+                height={side}
+                rx="4"
+                transform={`rotate(45 ${cx} ${cy})`}
+                class="pf-node pf-gate"
+                data-node={i}
+              />
+            );
+          }
+          const [line1, line2] = s.label.split(" ");
+          return (
+            <>
+              <rect
+                x={cx - TASK_W / 2}
+                y={cy - TASK_H / 2}
+                width={TASK_W}
+                height={TASK_H}
+                rx="10"
+                class="pf-node pf-task"
+                data-node={i}
+              />
+              <text x={cx} y={cy - 4} class="pf-label">
+                {line1}
+              </text>
+              <text x={cx} y={cy + 14} class="pf-label">
+                {line2}
+              </text>
+            </>
+          );
+        })
+      }
+
+      <circle
+        r="5"
+        class="pf-token"
+        data-row-token="0"
+        filter={`url(#${row0.wrapId}-glow)`}
+        cx={centers[0].x}
+        cy={centers[0].y}></circle>
+    </g>
+  </svg>
+
+  <div
+    class="pf-connector min-h-0 flex-1"
+    style={`--pf-join-x: ${xJoinPercent}%;`}
+  >
+    <div class="pf-connector-line"></div>
+    <div class="pf-connector-token"></div>
+  </div>
+
+  <!-- Row 1 -->
+  <svg
+    class="process-flow-svg shrink-0"
+    viewBox={`0 0 ${row1.width} ${row1.height}`}
+    preserveAspectRatio="xMidYMid meet"
+    style={`aspect-ratio: ${row1.width} / ${row1.height};`}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <pattern
+        id={`${row1.wrapId}-dots`}
+        width="24"
+        height="24"
+        patternUnits="userSpaceOnUse"
+      >
+        <circle cx="1.2" cy="1.2" r="1.2" fill="currentColor" class="pf-dot"
+        ></circle>
+      </pattern>
+      <filter
+        id={`${row1.wrapId}-glow`}
+        x="-80%"
+        y="-80%"
+        width="260%"
+        height="260%"
+      >
+        <feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="blur"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+      </filter>
+      <linearGradient id={`${row1.wrapId}-fade`} x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="white" stop-opacity="0"></stop>
+        <stop offset="6%" stop-color="white" stop-opacity="1"></stop>
+        <stop offset="94%" stop-color="white" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="white" stop-opacity="0"></stop>
+      </linearGradient>
+      <mask id={`${row1.wrapId}-mask`}>
+        <rect
+          x="0"
+          y="0"
+          width={row1.width}
+          height={row1.height}
+          fill={`url(#${row1.wrapId}-fade)`}></rect>
+      </mask>
+    </defs>
+
+    <g mask={`url(#${row1.wrapId}-mask)`}>
+      <rect
+        x="0"
+        y="0"
+        width={row1.width}
+        height={row1.height}
+        fill={`url(#${row1.wrapId}-dots)`}
+        class="pf-grid"></rect>
+
+      {
+        row1.segments.map((seg) => (
+          <path d={seg.d} class="pf-line" fill="none" />
+        ))
+      }
+      {
+        row1.segments.map((seg) => (
+          <path d={seg.d} class="pf-seg" data-seg={seg.key} fill="none" />
+        ))
+      }
+
+      {
+        row1.stub && (
+          <>
+            <path d={row1.stub.d} class="pf-line" fill="none" />
+            <path
+              d={row1.stub.d}
+              class="pf-seg"
+              data-seg={row1.stub.key}
+              fill="none"
+            />
+          </>
+        )
+      }
+
+      {
+        row1.branches.map((b) => (
+          <>
+            <path d={b.down} class="pf-branch" fill="none" />
+            <path d={b.up} class="pf-branch" fill="none" />
+            <path
+              d={b.down}
+              class="pf-branch-seg"
+              data-seg={`bd-${b.k}`}
+              fill="none"
+            />
+            <path
+              d={b.up}
+              class="pf-branch-seg"
+              data-seg={`bu-${b.k}`}
+              fill="none"
+            />
+          </>
+        ))
+      }
+
+      {
+        row1.branches.map((b) => {
+          const [line1, line2] = b.label.split(" ");
+          return (
+            <>
+              <rect
+                x={b.x - TASK_W / 2}
+                y={b.y - TASK_H / 2}
+                width={TASK_W}
+                height={TASK_H}
+                rx="10"
+                class="pf-node pf-task"
+                data-node={`b-${b.k}`}
+              />
+              <text x={b.x} y={b.y - 4} class="pf-label">
+                {line1}
+              </text>
+              <text x={b.x} y={b.y + 14} class="pf-label">
+                {line2}
+              </text>
+            </>
+          );
+        })
+      }
+
+      {
+        row1.indices.map((i) => {
+          const s = steps[i];
+          const { x: cx, y: cy } = centers[i];
+          if (s.type === "start") {
+            return (
+              <circle
+                cx={cx}
+                cy={cy}
+                r={EVENT_R}
+                class="pf-node pf-start"
+                data-node={i}
+              />
+            );
+          }
+          if (s.type === "end") {
+            return (
+              <>
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={EVENT_R + 3}
+                  class="pf-node pf-end"
+                  data-node={i}
+                />
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={EVENT_R - 3}
+                  class="pf-node pf-end"
+                  data-node={i}
+                />
+              </>
+            );
+          }
+          if (s.type === "gateway") {
+            const side = GATE_D / Math.SQRT2;
+            return (
+              <rect
+                x={cx - side / 2}
+                y={cy - side / 2}
+                width={side}
+                height={side}
+                rx="4"
+                transform={`rotate(45 ${cx} ${cy})`}
+                class="pf-node pf-gate"
+                data-node={i}
+              />
+            );
+          }
+          const [line1, line2] = s.label.split(" ");
+          return (
+            <>
+              <rect
+                x={cx - TASK_W / 2}
+                y={cy - TASK_H / 2}
+                width={TASK_W}
+                height={TASK_H}
+                rx="10"
+                class="pf-node pf-task"
+                data-node={i}
+              />
+              <text x={cx} y={cy - 4} class="pf-label">
+                {line1}
+              </text>
+              <text x={cx} y={cy + 14} class="pf-label">
+                {line2}
+              </text>
+            </>
+          );
+        })
+      }
+
+      <circle
+        r="5"
+        class="pf-token"
+        data-row-token="1"
+        filter={`url(#${row1.wrapId}-glow)`}
+        cx={centers[row1.indices[0]].x}
+        cy={centers[row1.indices[0]].y}></circle>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .process-flow-bg {
+    pointer-events: none;
+    overflow: visible;
+    color: var(--pf-grid-color, #94a3b8);
+  }
+
+  .process-flow-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .pf-dot {
+    opacity: 0.35;
+  }
+  .pf-grid {
+    opacity: 0.5;
+  }
+
+  .pf-line {
+    stroke: var(--pf-line-idle, #cbd5e1);
+    stroke-width: 1.5;
+  }
+
+  .pf-node {
+    fill: var(--pf-node-fill, #ffffff);
+    stroke: var(--pf-line-idle, #cbd5e1);
+    stroke-width: 2;
+    transition:
+      stroke 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .pf-node.pf-active {
+    stroke: var(--pf-accent, #3a9856);
+    filter: drop-shadow(
+      0 0 4px color-mix(in srgb, var(--pf-accent, #3a9856) 60%, transparent)
+    );
+  }
+
+  .pf-label {
+    font:
+      600 12.5px/1.3 system-ui,
+      -apple-system,
+      "Segoe UI",
+      sans-serif;
+    fill: var(--pf-text, #334155);
+    text-anchor: middle;
+    opacity: 0.75;
+  }
+
+  .pf-seg,
+  .pf-branch-seg {
+    fill: none;
+    stroke: var(--pf-accent, #3a9856);
+    stroke-linecap: round;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .pf-seg {
+    stroke-width: 2.5;
+  }
+  .pf-branch-seg {
+    stroke-width: 2;
+  }
+  .pf-seg.pf-active,
+  .pf-branch-seg.pf-active {
+    opacity: 0.9;
+  }
+
+  .pf-branch {
+    stroke: var(--pf-line-idle, #cbd5e1);
+    stroke-width: 1.5;
+  }
+
+  .pf-token {
+    fill: var(--pf-token-color, #0e7490);
+  }
+
+  .pf-connector {
+    position: relative;
+  }
+
+  .pf-connector-line {
+    position: absolute;
+    left: var(--pf-join-x);
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--pf-line-idle, #cbd5e1);
+    transform: translateX(-50%);
+  }
+
+  .pf-connector-token {
+    position: absolute;
+    left: var(--pf-join-x);
+    top: 0%;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--pf-token-color, #0e7490);
+    box-shadow: 0 0 6px
+      color-mix(in srgb, var(--pf-token-color, #0e7490) 70%, transparent);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .pf-connector-token.pf-visible {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf-token,
+    .pf-connector-token {
+      display: none;
+    }
+  }
+</style>
+
+<script define:vars={{ wrapId, rows: clientRows, speed, CONNECTOR_DURATION }}>
+  (function () {
+    const root = document.getElementById(wrapId);
+    if (!root) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) return;
+
+    const rowTokens = [
+      root.querySelector('[data-row-token="0"]'),
+      root.querySelector('[data-row-token="1"]'),
+    ];
+    const connectorToken = root.querySelector(".pf-connector-token");
+    if (!rowTokens[0] || !rowTokens[1] || !connectorToken) return;
+
+    function collect(rowRoot) {
+      const segEls = {};
+      rowRoot.querySelectorAll("[data-seg]").forEach((el) => {
+        const key = el.getAttribute("data-seg");
+        (segEls[key] ||= []).push(el);
+      });
+      const nodeEls = {};
+      rowRoot.querySelectorAll("[data-node]").forEach((el) => {
+        const key = el.getAttribute("data-node");
+        (nodeEls[key] ||= []).push(el);
+      });
+      return { segEls, nodeEls };
+    }
+
+    const svgEls = root.querySelectorAll(".process-flow-svg");
+    const rowEls = [collect(svgEls[0]), collect(svgEls[1])];
+
+    function dist(a, b) {
+      return Math.hypot(b.x - a.x, b.y - a.y);
+    }
+
+    function extend(points, pts, d) {
+      for (let i = 1; i < pts.length; i++) {
+        d += dist(pts[i - 1], pts[i]);
+        points.push(pts[i]);
+      }
+      return d;
+    }
+
+    function buildRowRoute(row) {
+      const branchByGateway = new Map(
+        row.branchMeta.map((b) => [b.gatewayIndex, b]),
+      );
+      const activeSeg = [];
+      const activeNode = [];
+      let d = 0;
+      let points;
+
+      if (row.stub && row.stub.key === "stub-in") {
+        points = [row.stub.pts[0]];
+        d = extend(points, row.stub.pts, d);
+        activeSeg.push({ key: row.stub.key, start: 0, end: d });
+      } else {
+        points = [row.centers[0]];
+      }
+
+      activeNode.push({ key: String(row.indices[0]), at: d });
+
+      for (let i = 0; i < row.centers.length - 1; i++) {
+        const branch = branchByGateway.get(i);
+        if (branch && Math.random() < 0.5) {
+          const start1 = d;
+          d = extend(points, branch.downPoints, d);
+          activeSeg.push({ key: `bd-${branch.k}`, start: start1, end: d });
+          activeNode.push({ key: `b-${branch.k}`, at: d });
+
+          const start2 = d;
+          d = extend(points, branch.upPoints, d);
+          activeSeg.push({ key: `bu-${branch.k}`, start: start2, end: d });
+        } else {
+          const start = d;
+          d = extend(points, row.throughPoints[i], d);
+          activeSeg.push({ key: String(row.indices[i]), start, end: d });
+        }
+        activeNode.push({ key: String(row.indices[i + 1]), at: d });
+      }
+
+      if (row.stub && row.stub.key === "stub-out") {
+        const start = d;
+        d = extend(points, row.stub.pts, d);
+        activeSeg.push({ key: row.stub.key, start, end: d });
+      }
+
+      return { points, totalLength: d, activeSeg, activeNode };
+    }
+
+    function pointAt(route, d) {
+      let acc = 0;
+      for (let i = 0; i < route.points.length - 1; i++) {
+        const a = route.points[i];
+        const b = route.points[i + 1];
+        const segLen = dist(a, b);
+        if (d <= acc + segLen || i === route.points.length - 2) {
+          const t =
+            segLen === 0 ? 0 : Math.min(1, Math.max(0, (d - acc) / segLen));
+          return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+        }
+        acc += segLen;
+      }
+      const last = route.points[route.points.length - 1];
+      return { x: last.x, y: last.y };
+    }
+
+    function clearActive(rowSet) {
+      Object.values(rowSet.segEls).forEach((els) =>
+        els.forEach((el) => el.classList.remove("pf-active")),
+      );
+      Object.values(rowSet.nodeEls).forEach((els) =>
+        els.forEach((el) => el.classList.remove("pf-active")),
+      );
+    }
+
+    function applyActive(rowSet, route, travelled) {
+      route.activeSeg.forEach((s) => {
+        const on = travelled >= s.start && travelled <= s.end;
+        (rowSet.segEls[s.key] || []).forEach((el) =>
+          el.classList.toggle("pf-active", on),
+        );
+      });
+      route.activeNode.forEach((n) => {
+        const on = travelled >= n.at && travelled <= n.at + speed * 0.45;
+        (rowSet.nodeEls[n.key] || []).forEach((el) =>
+          el.classList.toggle("pf-active", on),
+        );
+      });
+    }
+
+    let route0, route1, dur0, dur1, cycleDuration;
+
+    function rebuildRoutes() {
+      route0 = buildRowRoute(rows[0]);
+      route1 = buildRowRoute(rows[1]);
+      dur0 = route0.totalLength / speed;
+      dur1 = route1.totalLength / speed;
+      cycleDuration = dur0 + CONNECTOR_DURATION + dur1;
+    }
+
+    rebuildRoutes();
+
+    let cycleStart = null;
+
+    function showOnly(activeRow) {
+      rowTokens[0].style.display = activeRow === 0 ? "" : "none";
+      rowTokens[1].style.display = activeRow === 1 ? "" : "none";
+      connectorToken.classList.toggle("pf-visible", activeRow === null);
+    }
+
+    function frame(ts) {
+      if (cycleStart === null) cycleStart = ts;
+      const elapsed = (ts - cycleStart) / 1000;
+
+      if (elapsed >= cycleDuration) {
+        clearActive(rowEls[0]);
+        clearActive(rowEls[1]);
+        rebuildRoutes();
+        cycleStart = ts;
+        requestAnimationFrame(frame);
+        return;
+      }
+
+      if (elapsed < dur0) {
+        showOnly(0);
+        const p = pointAt(route0, elapsed * speed);
+        rowTokens[0].setAttribute("cx", String(p.x));
+        rowTokens[0].setAttribute("cy", String(p.y));
+        applyActive(rowEls[0], route0, elapsed * speed);
+        clearActive(rowEls[1]);
+      } else if (elapsed < dur0 + CONNECTOR_DURATION) {
+        showOnly(null);
+        clearActive(rowEls[0]);
+        clearActive(rowEls[1]);
+        const p = (elapsed - dur0) / CONNECTOR_DURATION;
+        connectorToken.style.top = `${p * 100}%`;
+      } else {
+        showOnly(1);
+        const t = elapsed - dur0 - CONNECTOR_DURATION;
+        const p = pointAt(route1, t * speed);
+        rowTokens[1].setAttribute("cx", String(p.x));
+        rowTokens[1].setAttribute("cy", String(p.y));
+        applyActive(rowEls[1], route1, t * speed);
+        clearActive(rowEls[0]);
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  })();
+</script>

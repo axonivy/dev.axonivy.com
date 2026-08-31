@@ -41,6 +41,14 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/astro%{REQUEST_URI}/index.html -f
 RewriteRule ^(.*)$ /astro/$1/index.html [L]
 
+# pass PHP-owned routes to the Slim front controller
+RewriteRule ^api(?:/|$) index.php [QSA,L]
+RewriteRule ^ui(?:/|$) index.php [QSA,L]
+RewriteRule ^doc(?:/|$) index.php [QSA,L]
+RewriteRule ^(?:tutorial|404)/?$ index.php [QSA,L]
+RewriteRule ^(?:link|permalink|maven)(?:/|$) index.php [QSA,L]
+RewriteRule ^download/(?:maven\.html|robots\.txt)$ index.php [QSA,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ - [R=404,L]
