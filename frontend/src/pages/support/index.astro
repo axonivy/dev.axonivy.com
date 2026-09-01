@@ -60,7 +60,7 @@ const supportInfo = [
         (*if available)
       </span>
     </H4>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       {
         supportInfo.map((info, index) => (
           <Card
@@ -85,7 +85,7 @@ const supportInfo = [
     </div>
   </div>
   <div
-    class="flex flex-col items-stretch gap-4 rounded-md bg-n50 p-4 md:flex-row md:items-center md:justify-between"
+    class="bg-n50 flex flex-col items-stretch gap-4 rounded-md p-4 md:flex-row md:items-center md:justify-between"
   >
     <div class="flex w-full flex-row items-center gap-4 md:w-auto">
       <div class="bg-yellow-bg text-yellow shrink-0 rounded-md p-2">
@@ -96,7 +96,7 @@ const supportInfo = [
         <Base className="text-n900">To get support please contact us</Base>
       </div>
     </div>
-    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
       <Separator orientation="horizontal" className="md:hidden" />
       <Separator orientation="vertical" className="hidden md:block" />
       <div class="flex w-full flex-col md:w-auto">
@@ -139,11 +139,11 @@ const supportInfo = [
         </div>
       </div>
     </div>
-    <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
       <Separator orientation="horizontal" className="md:hidden" />
       <Separator orientation="vertical" className="hidden md:block" />
       <div class="flex w-full flex-col md:w-auto">
-        <div class="flex flex-row gap-1 items-center">
+        <div class="flex flex-row items-center gap-1">
           <IconMail class="size-5" />
           <H5>Send us an email</H5>
         </div>

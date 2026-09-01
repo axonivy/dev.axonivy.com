@@ -39,7 +39,7 @@ export function H6({ children, className }: TypographyProps) {
   return (
     <h6
       className={cn(
-        "uppercase font-semibold text-sm text-n800 tracking-widest",
+        "text-n800 text-sm font-semibold tracking-widest uppercase",
         className,
       )}
     >
@@ -60,7 +60,7 @@ export function Code({ children, className }: TypographyProps) {
   return (
     <code
       className={cn(
-        "rounded bg-n75 px-1 py-0.5 font-code text-sm text-n900",
+        "bg-n75 font-code text-n900 rounded px-1 py-0.5 text-sm",
         className,
       )}
     >

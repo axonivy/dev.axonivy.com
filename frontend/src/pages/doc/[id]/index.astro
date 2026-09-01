@@ -1,8 +1,10 @@
 ---
 import Layout from "@/layouts/news.astro";
 import { LegacyDocumentationQuery } from "@/components/query-components";
-import { legacyDocsVersions, type LegacyDocsVersion } from "@/components/documentation/legacy-documentation"
-
+import {
+  legacyDocsVersions,
+  type LegacyDocsVersion,
+} from "@/components/documentation/legacy-documentation";
 
 export function getStaticPaths() {
   return legacyDocsVersions.map((version: LegacyDocsVersion) => ({
@@ -18,5 +20,5 @@ if (!legacyDocsVersions.includes(id)) {
 ---
 
 <Layout>
-    <LegacyDocumentationQuery version={id} client:load />
+  <LegacyDocumentationQuery version={id} client:load />
 </Layout>

@@ -162,7 +162,7 @@ export default function LegacyDocumentation({
               onClick={() => navigateTo(link)}
               className={
                 link.url === window.location.pathname
-                  ? "font-semibold text-primary underline"
+                  ? "text-primary font-semibold underline"
                   : "text-primary hover:underline"
               }
             >
@@ -190,7 +190,7 @@ export default function LegacyDocumentation({
         src={data.documentUrl}
         title={data.version}
         onLoad={(event) => resizeIframe(event.currentTarget)}
-        className="w-full rounded-lg border border-n200"
+        className="border-n200 w-full rounded-lg border"
       />
     </div>
   );

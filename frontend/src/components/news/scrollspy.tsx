@@ -75,7 +75,7 @@ function InlineText({ text }: { text: string }) {
           return (
             <code
               key={index}
-              className="rounded bg-n100 px-1.5 py-0.5 font-mono text-[0.9em] text-n900"
+              className="bg-n100 text-n900 rounded px-1.5 py-0.5 font-mono text-[0.9em]"
             >
               {part.slice(1, -1)}
             </code>
@@ -110,7 +110,7 @@ function InlineText({ text }: { text: string }) {
           return (
             <code
               key={index}
-              className="rounded bg-n100 px-1.5 py-0.5 font-mono text-[0.9em] text-n900"
+              className="bg-n100 text-n900 rounded px-1.5 py-0.5 font-mono text-[0.9em]"
             >
               {code[1]}
             </code>
@@ -132,7 +132,7 @@ function NewsList({ items }: { items: NewsListItem[] }) {
           className="flex flex-col gap-2"
         >
           <span className="flex items-start gap-2">
-            <IconCircleCheck className="mt-1 size-4 shrink-0 text-primary" />
+            <IconCircleCheck className="text-primary mt-1 size-4 shrink-0" />
             <Base className="text-n900">
               {item.term ? (
                 <strong className="font-semibold">
@@ -160,7 +160,7 @@ function NewsContent({ content }: { content: NewsBlock[] }) {
         switch (block.type) {
           case "paragraph":
             return (
-              <Base key={index} className="leading-relaxed text-n900">
+              <Base key={index} className="text-n900 leading-relaxed">
                 <InlineText text={block.text} />
               </Base>
             );
@@ -176,9 +176,9 @@ function NewsContent({ content }: { content: NewsBlock[] }) {
             return (
               <pre
                 key={index}
-                className="overflow-x-auto rounded-lg bg-n100 p-4"
+                className="bg-n100 overflow-x-auto rounded-lg p-4"
               >
-                <code className="font-code text-sm text-n900">
+                <code className="font-code text-n900 text-sm">
                   {block.code}
                 </code>
               </pre>
@@ -222,13 +222,13 @@ function NewsImageGallery({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-4 justify-items-center">
+      <div className="grid grid-cols-1 justify-items-center gap-4 md:grid-cols-4">
         {images.map((image, i) => (
           <button
             key={image}
             type="button"
             onClick={() => openAt(i)}
-            className="group relative rounded-lg p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="group focus-visible:outline-primary relative rounded-lg p-0 focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             <img
               src={imageUrl(image)}
@@ -236,7 +236,7 @@ function NewsImageGallery({
               className="max-h-32 rounded-lg transition-opacity group-hover:opacity-80"
               loading="lazy"
             />
-            <span className="absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md bg-background/90 text-n900 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            <span className="bg-background/90 text-n900 absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
               <IconZoomIn className="size-4" />
               <span className="sr-only">Open image preview</span>
             </span>
@@ -248,13 +248,13 @@ function NewsImageGallery({
         <DialogContent
           showCloseButton={false}
           onKeyDown={handleKeyDown}
-          className="overflow-auto sm:max-w-5xl p-0"
+          className="overflow-auto p-0 sm:max-w-5xl"
         >
           <div className="relative">
             <img
               src={imageUrl(images[index])}
               alt={title}
-              className="max-h-[calc(100vh-5rem)] max-w-[calc(100vw-1rem)] w-full rounded-lg"
+              className="max-h-[calc(100vh-5rem)] w-full max-w-[calc(100vw-1rem)] rounded-lg"
             />
             {images.length > 1 ? (
               <>
@@ -262,7 +262,7 @@ function NewsImageGallery({
                   type="button"
                   onClick={showPrev}
                   aria-label="Previous image"
-                  className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 text-n900 shadow-sm hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="bg-background/70 text-n900 hover:bg-background focus-visible:outline-primary absolute top-1/2 left-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   <IconChevronLeft className="size-4" />
                 </button>
@@ -270,11 +270,11 @@ function NewsImageGallery({
                   type="button"
                   onClick={showNext}
                   aria-label="Next image"
-                  className="absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-background/70 text-n900 shadow-sm hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className="bg-background/70 text-n900 hover:bg-background focus-visible:outline-primary absolute top-1/2 right-2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   <IconChevronRight className="size-4" />
                 </button>
-                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-background/90 py-1 px-2 text-xs font-medium text-n900 shadow-sm">
+                <span className="bg-background/90 text-n900 absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full px-2 py-1 text-xs font-medium shadow-sm">
                   {index + 1} / {images.length}
                 </span>
               </>
@@ -307,7 +307,7 @@ export default function NewsScrollSpy({
         defaultValue={defaultSection}
         className="h-auto w-full gap-8"
       >
-        <ScrollSpyNav className="sticky top-40 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
+        <ScrollSpyNav className="bg-background sticky top-40 z-10 hidden shrink-0 self-start pt-2.5 md:flex">
           {sections.map((section, index) => (
             <ScrollSpyLink
               key={sectionValue(section, index, sections)}
@@ -318,7 +318,7 @@ export default function NewsScrollSpy({
           ))}
         </ScrollSpyNav>
         <ScrollSpyViewport className="p-4">
-          <div className="flex flex-col gap-4 border-b border-n200 pb-8">
+          <div className="border-n200 flex flex-col gap-4 border-b pb-8">
             <Badge
               variant={
                 tag === "Long Term Support"
@@ -333,11 +333,11 @@ export default function NewsScrollSpy({
             </Badge>
             <H4>{title}</H4>
             <H6>{slogan}</H6>
-            <span className="flex flex-row gap-2 text-n900 items-center">
+            <span className="text-n900 flex flex-row items-center gap-2">
               <IconCalendar className="size-4 shrink-0" />
               {releaseDate}
             </span>
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col gap-4 md:flex-row">
               <a
                 href={downloadUrl}
                 className={buttonVariants({ variant: "default", size: "lg" })}
@@ -373,7 +373,7 @@ export default function NewsScrollSpy({
             <ScrollSpySection
               key={sectionValue(section, index, sections)}
               value={sectionValue(section, index, sections)}
-              className="flex flex-col gap-6 border-b border-n200 pb-12 last:border-b-0"
+              className="border-n200 flex flex-col gap-6 border-b pb-12 last:border-b-0"
             >
               <H3>{section.heading}</H3>
               <NewsContent content={section.content} />
@@ -386,7 +386,7 @@ export default function NewsScrollSpy({
                       ) : null}
                       <a
                         href={link.url}
-                        className="inline-flex items-center gap-1 text-primary hover:underline"
+                        className="text-primary inline-flex items-center gap-1 hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

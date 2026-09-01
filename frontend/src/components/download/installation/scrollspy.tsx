@@ -113,8 +113,8 @@ function DockerCommandBlock({ command }: { command: string }) {
   }
 
   return (
-    <div className="flex items-start justify-between gap-4 rounded-md bg-n100 p-4 text-n900">
-      <code className="min-w-0 flex-1 whitespace-pre-line wrap-break-word font-code text-sm">
+    <div className="bg-n100 text-n900 flex items-start justify-between gap-4 rounded-md p-4">
+      <code className="font-code min-w-0 flex-1 text-sm wrap-break-word whitespace-pre-line">
         {command}
       </code>
       <Button
@@ -150,7 +150,7 @@ export default function InstallationScrollSpy({
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
-        <ScrollSpyNav className="sticky top-40 z-10 hidden shrink-0 self-start bg-background pt-2.5 md:flex">
+        <ScrollSpyNav className="bg-background sticky top-40 z-10 hidden shrink-0 self-start pt-2.5 md:flex">
           {guide.steps.map((step) => (
             <ScrollSpyLink key={step.id} value={`step-${step.id}`}>
               {step.title}
@@ -167,7 +167,7 @@ export default function InstallationScrollSpy({
               {guide.type != "Engine" ? `for ${guide.type}` : ""}.
             </Base>
             {guide.hint ? (
-              <div className="flex flex-col gap-4 rounded-md bg-yellow-bg border border-yellow p-4">
+              <div className="bg-yellow-bg border-yellow flex flex-col gap-4 rounded-md border p-4">
                 <H4>{guide.hint.title}</H4>
                 <Base className="text-n900">{guide.hint.description}</Base>
               </div>
@@ -180,8 +180,8 @@ export default function InstallationScrollSpy({
               value={`step-${step.id}`}
               className="flex flex-col gap-8"
             >
-              <div className="flex flex-row gap-2 items-center">
-                <div className="flex size-6.5 shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-primary">
+              <div className="flex flex-row items-center gap-2">
+                <div className="border-primary bg-accent text-primary flex size-6.5 shrink-0 items-center justify-center rounded-full border">
                   {step.id}
                 </div>
                 <H4>{step.title}</H4>
@@ -224,19 +224,23 @@ export default function InstallationScrollSpy({
                     ) : null,
                   )
                 : null}
-              {step.id === 1 && guideId !== "docker" && downloadUrl ? (
-                <a
-                  href={downloadUrl}
-                  className={buttonVariants({
-                    className: "h-10 w-fit justify-start",
-                  })}
-                >
-                  <IconDownload
-                    className="size-5 shrink-0"
-                    aria-hidden="true"
-                  />
-                  Download Axon Ivy {guide.product}
-                </a>
+              {step.id === 1 && guideId !== "docker" ? (
+                <>
+                  {downloadUrl ? (
+                    <a
+                      href={downloadUrl}
+                      className={buttonVariants({
+                        className: "h-10 w-fit justify-start",
+                      })}
+                    >
+                      <IconDownload
+                        className="size-5 shrink-0"
+                        aria-hidden="true"
+                      />
+                      Download Axon Ivy {guide.product}
+                    </a>
+                  ) : null}
+                </>
               ) : null}
               {guideId === "docker" && step.id === 1 && step.url ? (
                 <a
@@ -255,7 +259,7 @@ export default function InstallationScrollSpy({
             </ScrollSpySection>
           ))}
           {guideId.startsWith("designer-") ? (
-            <div className="flex flex-col items-stretch gap-4 rounded-md bg-n50 p-4 md:flex-row md:items-center md:justify-between">
+            <div className="bg-n50 flex flex-col items-stretch gap-4 rounded-md p-4 md:flex-row md:items-center md:justify-between">
               <div className="flex w-full flex-row items-center gap-4 md:w-auto">
                 <div className="bg-orange-bg text-orange shrink-0 rounded-md p-2">
                   <IconMap2 className="size-8" />
@@ -265,7 +269,7 @@ export default function InstallationScrollSpy({
                   you get started.
                 </Base>
               </div>
-              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+              <div className="flex flex-col gap-4 md:flex-row md:gap-6">
                 <Separator orientation="horizontal" className="md:hidden" />
                 <Separator
                   orientation="vertical"
@@ -279,7 +283,7 @@ export default function InstallationScrollSpy({
                   external
                 />
               </div>
-              <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+              <div className="flex flex-col gap-4 md:flex-row md:gap-6">
                 <Separator orientation="horizontal" className="md:hidden" />
                 <Separator
                   orientation="vertical"
@@ -295,18 +299,22 @@ export default function InstallationScrollSpy({
               </div>
             </div>
           ) : null}
-          {guideId === "engine" && docLink ? (
-            <a
-              href={`${docLink}/engine-guide/getting-started/index.html`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonVariants({
-                className: "h-10 w-fit justify-start",
-              })}
-            >
-              <IconBook2 className="size-5 shrink-0" aria-hidden="true" />
-              Getting Started
-            </a>
+          {guideId === "engine" ? (
+            <>
+              {docLink ? (
+                <a
+                  href={`${docLink}/engine-guide/getting-started/index.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({
+                    className: "h-10 w-fit justify-start",
+                  })}
+                >
+                  <IconBook2 className="size-5 shrink-0" aria-hidden="true" />
+                  Getting Started
+                </a>
+              ) : null}
+            </>
           ) : null}
           {guideId === "docker" ? (
             <a

@@ -66,11 +66,11 @@ const footerContent = {
 };
 ---
 
-<div class="w-full border-t border-n100">
+<div class="border-n100 w-full border-t">
   <div
-    class="relative mx-auto flex w-full flex-col gap-8 py-8 px-4 md:max-w-6xl"
+    class="relative mx-auto flex w-full flex-col gap-8 px-4 py-8 md:max-w-6xl"
   >
-    <div class="flex flex-col gap-4 md:hidden items-center">
+    <div class="flex flex-col items-center gap-4 md:hidden">
       <a href="/">
         <AxonIvyDevLogo width={160} height={40} class="dark:hidden" />
         <AxonIvyDevLogoDark width={160} height={40} class="hidden dark:block" />
@@ -151,8 +151,8 @@ const footerContent = {
 
     <Separator />
 
-    <div class="flex flex-col gap-6 text-sm text-n900 md:hidden items-center">
-      <div class="flex flex-col gap-2 items-center">
+    <div class="text-n900 flex flex-col items-center gap-6 text-sm md:hidden">
+      <div class="flex flex-col items-center gap-2">
         <P>{footerContent.copyright}</P>
         <div class="flex gap-6">
           {
@@ -192,7 +192,7 @@ const footerContent = {
       </div>
     </div>
 
-    <div class="hidden items-center justify-between text-sm text-n900 md:flex">
+    <div class="text-n900 hidden items-center justify-between text-sm md:flex">
       <div class="flex gap-6">
         <P>{footerContent.copyright}</P>
         {

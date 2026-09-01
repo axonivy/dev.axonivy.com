@@ -451,7 +451,7 @@ function ScrollSpyLink(props: ScrollSpyLinkProps) {
       {
         href: `#${linkValue}`,
         className: cn(
-          "block w-full break-words rounded px-3 py-1.5 font-medium text-muted-foreground text-sm whitespace-normal transition-colors hover:bg-accent hover:text-accent-foreground",
+          "text-muted-foreground hover:bg-accent hover:text-accent-foreground block w-full rounded px-3 py-1.5 text-sm font-medium break-words whitespace-normal transition-colors",
           isActive && "bg-accent text-primary",
           className,
         ),

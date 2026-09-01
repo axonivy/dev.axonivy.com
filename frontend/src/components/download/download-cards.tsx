@@ -232,9 +232,9 @@ function productConfig(
       ? "Model, design and test your business application locally."
       : "Deploy and run your application in a server environment.",
     icon: isDesigner ? (
-      <IconTools className="h-8 w-8 text-green" />
+      <IconTools className="text-green h-8 w-8" />
     ) : (
-      <IconDashboard className="h-8 w-8 text-blue" />
+      <IconDashboard className="text-blue h-8 w-8" />
     ),
     backgroundClass: isDesigner ? "bg-green-bg" : "bg-blue-bg",
     badgeVariant: isDesigner ? "green" : "blue",
@@ -332,14 +332,14 @@ function DownloadProductCard({
   return (
     <Card data-user-os={userOs} className="h-fit">
       <CardHeader className="flex flex-col gap-2">
-        <div className="flex flex-row items-start justify-between w-full">
-          <div className={`flex p-2 rounded-md ${config.backgroundClass}`}>
+        <div className="flex w-full flex-row items-start justify-between">
+          <div className={`flex rounded-md p-2 ${config.backgroundClass}`}>
             {config.icon}
           </div>
           <div className="flex flex-row gap-4">
             <div className="flex flex-row items-center gap-1">
-              <IconCircleCheck className="h-4 w-4 text-n600" />
-              <P className="uppercase text-n600">{releaseLabel}</P>
+              <IconCircleCheck className="text-n600 h-4 w-4" />
+              <P className="text-n600 uppercase">{releaseLabel}</P>
             </div>
             <Badge variant={config.badgeVariant} className="uppercase">
               {config.badge}
@@ -405,7 +405,7 @@ function DownloadProductCard({
             })}
           </div>
         )}
-        <div className={hasVsCodeExtension ? "md:mt-14 mt-4" : "mt-auto"}>
+        <div className={hasVsCodeExtension ? "mt-4 md:mt-14" : "mt-auto"}>
           <DownloadAction
             title={config.title}
             version={release.versionShort}
@@ -416,7 +416,7 @@ function DownloadProductCard({
             }
           />
         </div>
-        <div className="flex flex-row gap-4 justify-between items-center">
+        <div className="flex flex-row items-center justify-between gap-4">
           <a
             href={installationGuideHref(
               product,
@@ -446,7 +446,7 @@ function DownloadProductCard({
             <Button
               type="button"
               variant="link"
-              className="h-auto p-0 hover:no-underline font-normal"
+              className="h-auto p-0 font-normal hover:no-underline"
               aria-expanded={showPermalinks}
               aria-controls={permalinkId}
               onClick={() => setShowPermalinks((current) => !current)}
@@ -466,14 +466,14 @@ function DownloadProductCard({
         {showPermalinks && (
           <ul
             id={permalinkId}
-            className="flex flex-col gap-2 rounded-lg border border-n300 bg-n50 p-3"
+            className="border-n300 bg-n50 flex flex-col gap-2 rounded-lg border p-3"
           >
             {artifactOptions
               .filter(({ artifact }) => artifact.permalink)
               .map(({ artifact, label }) => (
                 <li
                   key={`${product}-${artifact.name}`}
-                  className="text-sm text-n900"
+                  className="text-n900 text-sm"
                 >
                   <span className="font-semibold">{label}:</span>{" "}
                   <a href={artifact.permalink} className="text-primary">

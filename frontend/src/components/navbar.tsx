@@ -67,7 +67,7 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
       <div className="md:hidden">
         <Drawer open={isOpen} onOpenChange={setIsOpen} swipeDirection="right">
           <DrawerTrigger
-            className="inline-flex size-9 items-center justify-center rounded-lg text-foreground hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1"
+            className="text-foreground hover:bg-muted focus-visible:ring-ring/50 inline-flex size-9 items-center justify-center rounded-lg focus-visible:ring-3 focus-visible:outline-1"
             aria-label="Open navigation menu"
           >
             <IconMenu2 aria-hidden="true" />
@@ -76,7 +76,7 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
             <DrawerHeader className="relative p-4 pb-2 text-left">
               <DrawerTitle>Navigation</DrawerTitle>
               <DrawerClose
-                className="absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:ring-ring/50 absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-lg focus-visible:ring-3 focus-visible:outline-1"
                 aria-label="Close navigation menu"
               >
                 <IconX aria-hidden="true" />
@@ -87,7 +87,7 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
                 {visibleNavItems.map((item) => (
                   <li key={item.href}>
                     <a
-                      className="flex min-h-11 items-center rounded-md px-3 text-sm font-medium hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1"
+                      className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
                       href={item.href}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
@@ -98,7 +98,7 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-6 mt-4 ml-2">
+              <div className="mt-4 ml-2 flex flex-col gap-6">
                 <a
                   href="/news"
                   className={buttonVariants({
