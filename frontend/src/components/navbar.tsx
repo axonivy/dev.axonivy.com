@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import { buttonVariants } from "./ui/button";
 
 const navItems = [
   { label: "News", href: "/news", external: false },
@@ -65,25 +65,43 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
       </NavigationMenu>
 
       <div className="md:hidden">
-        <Drawer open={isOpen} onOpenChange={setIsOpen} swipeDirection="right">
-          <DrawerTrigger
-            className="text-foreground hover:bg-muted focus-visible:ring-ring/50 inline-flex size-9 items-center justify-center rounded-lg focus-visible:ring-3 focus-visible:outline-1"
-            aria-label="Open navigation menu"
-          >
+        <button
+          type="button"
+          className="text-foreground focus-visible:ring-ring/50 relative z-50 inline-flex size-9 items-center justify-center rounded-lg focus-visible:ring-3 focus-visible:outline-1"
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          {isOpen ? (
+            <IconX aria-hidden="true" />
+          ) : (
             <IconMenu2 aria-hidden="true" />
-          </DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader className="relative p-4 pb-2 text-left">
-              <DrawerTitle>Navigation</DrawerTitle>
-              <DrawerClose
-                className="text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:ring-ring/50 absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-lg focus-visible:ring-3 focus-visible:outline-1"
-                aria-label="Close navigation menu"
-              >
-                <IconX aria-hidden="true" />
-              </DrawerClose>
-            </DrawerHeader>
+          )}
+        </button>
+        <Drawer open={isOpen} onOpenChange={setIsOpen} swipeDirection="right">
+          <DrawerContent
+            className="w-full"
+            style={{
+              top: "4.6rem",
+              height: "calc(100dvh - 4.6rem)",
+              borderRadius: 0,
+            }}
+          >
+            <DrawerHeader className="p-4 pb-2 text-left"></DrawerHeader>
             <nav aria-label="Mobile navigation" className="px-4 pb-6">
               <ul className="flex flex-col gap-1">
+                <a
+                  href="/news"
+                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                >
+                  News
+                </a>
+                <a
+                  href="/download"
+                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                >
+                  Download
+                </a>
                 {visibleNavItems.map((item) => (
                   <li key={item.href}>
                     <a
@@ -98,27 +116,10 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
                   </li>
                 ))}
               </ul>
-              <div className="mt-4 ml-2 flex flex-col gap-6">
-                <a
-                  href="/news"
-                  className={buttonVariants({
-                    variant: "accent",
-                    className: "w-fit",
-                  })}
-                >
-                  News
-                </a>
-                <a
-                  href="/download"
-                  className={buttonVariants({
-                    variant: "default",
-                    className: "w-fit",
-                  })}
-                >
-                  Download
-                </a>
-              </div>
             </nav>
+            <DrawerFooter className="flex flex-row justify-start">
+              <ModeToggle />
+            </DrawerFooter>
           </DrawerContent>
         </Drawer>
       </div>

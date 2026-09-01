@@ -44,11 +44,11 @@ import { ModeToggle } from "./ui/mode-toggle";
       </a>
       <Navbar type="header" client:load />
       <div class="hidden gap-2 md:flex">
-        <ModeToggle client:load />
         <a href="/news" class={buttonVariants({ variant: "accent" })}>News</a>
         <a href="/download" class={buttonVariants({ variant: "default" })}
           >Download</a
         >
+        <ModeToggle client:load />
       </div>
     </div>
   </div>
