@@ -41,7 +41,7 @@ const section: NewsSection = {
     },
     {
       label: `Public API`,
-      url: `doc/11.2/public-api/ch/ivyteam/ivy/process/beans/IPoller.html`,
+      url: `/doc/11.2/en/public-api/ch/ivyteam/ivy/process/beans/IPoller.html`,
     },
   ],
   images: [

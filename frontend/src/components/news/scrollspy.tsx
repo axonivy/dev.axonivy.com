@@ -331,7 +331,7 @@ export default function NewsScrollSpy({
             >
               {tag}
             </Badge>
-            <H4>{title}</H4>
+            <H3>{title}</H3>
             <H6>{slogan}</H6>
             <span className="text-n900 flex flex-row items-center gap-2">
               <IconCalendar className="size-4 shrink-0" />
@@ -375,7 +375,7 @@ export default function NewsScrollSpy({
               value={sectionValue(section, index, sections)}
               className="border-n200 flex flex-col gap-6 border-b pb-12 last:border-b-0"
             >
-              <H3>{section.heading}</H3>
+              <H4>{section.heading}</H4>
               <NewsContent content={section.content} />
               {section.links.length > 0 ? (
                 <ul className="flex flex-wrap items-center gap-2">

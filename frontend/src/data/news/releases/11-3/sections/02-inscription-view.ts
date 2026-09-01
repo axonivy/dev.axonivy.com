@@ -29,7 +29,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Designer Guide`,
-      url: `/11.3/designer-guide/process-modeling/process-modeling/process-inscription-editor-view.html`,
+      url: `/doc/11.3/en/designer-guide/process-modeling/process-modeling/process-inscription-editor-view.html`,
     },
   ],
   images: [

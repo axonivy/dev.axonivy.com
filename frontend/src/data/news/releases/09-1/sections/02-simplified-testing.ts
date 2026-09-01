@@ -38,7 +38,7 @@ const section: NewsSection = {
   ],
   images: [
     `9.1/testing/01-test-flavour-selection.png`,
-    `9.1/testing/02-workflow-demos-test_workspace.png`,
+    `9.1/testing/02-worklow-demos-test-workspace.png`,
     `9.1/testing/03-webtesting-run.gif`,
     `9.1/testing/04-maven-job-build-examples.png`,
   ],
