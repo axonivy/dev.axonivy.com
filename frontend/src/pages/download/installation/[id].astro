@@ -64,6 +64,10 @@ if (!guide) {
       </Breadcrumb>
     </div>
 
-    <InstallationScrollSpy guideId={guideId} guide={guide} client:load />
+    <InstallationScrollSpy
+      guideId={guideId}
+      guide={guide}
+      client:only="react"
+    />
   </div>
 </Layout>

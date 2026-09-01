@@ -18,13 +18,12 @@ import {
 } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type {
   InstallationGuide,
   InstallationSubstep,
 } from "@/data/installation-guides";
 import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
-import ButtonSkeleton from "@/components/skeletons/installation-skeleton";
 
 const installationImages = import.meta.glob(
   "/src/assets/installation/**/*.{png,jpg,jpeg,webp}",
@@ -145,17 +144,8 @@ export default function InstallationScrollSpy({
   guideId,
   guide,
 }: InstallationScrollSpyProps) {
-  const [downloadUrl, setDownloadUrl] = useState<string>();
-  const [isDownloadUrlLoading, setIsDownloadUrlLoading] = useState(true);
-  const [docLink, setDocLink] = useState<string>();
-  const [isDocLinkLoading, setIsDocLinkLoading] = useState(true);
-
-  useEffect(() => {
-    setDownloadUrl(queryParameter("downloadUrl"));
-    setIsDownloadUrlLoading(false);
-    setDocLink(queryParameter("docLink"));
-    setIsDocLinkLoading(false);
-  }, []);
+  const [downloadUrl] = useState(() => queryParameter("downloadUrl"));
+  const [docLink] = useState(() => queryParameter("docLink"));
 
   return (
     <div className="flex flex-col">
@@ -236,7 +226,6 @@ export default function InstallationScrollSpy({
                 : null}
               {step.id === 1 && guideId !== "docker" ? (
                 <>
-                  {isDownloadUrlLoading ? <ButtonSkeleton /> : null}
                   {downloadUrl ? (
                     <a
                       href={downloadUrl}
@@ -312,7 +301,6 @@ export default function InstallationScrollSpy({
           ) : null}
           {guideId === "engine" ? (
             <>
-              {isDocLinkLoading ? <ButtonSkeleton /> : null}
               {docLink ? (
                 <a
                   href={`${docLink}/engine-guide/getting-started/index.html`}
