@@ -37,7 +37,7 @@ const section: NewsSection = {
   links: [
     {
       label: `VS Marketplace`,
-      url: `https://marketplace.visualstudio.com/items?itemName=axon-ivy.designer-11`,
+      url: `https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14`,
     },
   ],
   images: [`11.3/vsx-designer/01-add-project.gif`],
