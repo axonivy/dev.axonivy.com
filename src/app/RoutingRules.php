@@ -5,6 +5,7 @@ namespace app;
 use app\api\ApiCurrentReleaseAction;
 use app\api\ApiStatusAction;
 use app\api\ApiDocsAction;
+use app\redirect\LegacyPortalPermalinkAction;
 use app\redirect\TutorialAction;
 use app\redirect\ProductPermalinkAction;
 use app\redirect\MavenPermalinkAction;
@@ -37,6 +38,7 @@ class RoutingRules
     $app->get('/maven/{groupId}/{artifactId}/{version}[/{type}]', MavenPermalinkAction::class);
     $app->get('/doc/{version}/{document:.*}', DocAction::class);
     $app->get('/doc/{version}', DocAction::class);
+    $app->get('/portal[/{path:.*}]', LegacyPortalPermalinkAction::class);
 
     // frontend api
     $app->get('/ui/doc', UiDocAction::class);
