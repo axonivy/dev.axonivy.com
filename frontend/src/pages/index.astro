@@ -2,34 +2,7 @@
 import Layout from "@/layouts/main.astro";
 import { IconArrowRight, IconCheck, IconCopy } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
-import AxonIvySmall from "@/assets/axonivy-logo-small.svg";
-import AxonIvySmallDark from "@/assets/axonivy-logo-small-dark.svg";
-import { Image } from "astro:assets";
 import Processflowbackground from "@/components/processflowbackground.astro";
-
-const topSteps = [
-  { type: "start" },
-  { type: "task", label: "Enter Request" },
-  { type: "task", label: "Verify Request" },
-  { type: "task", label: "Check Stock" },
-  { type: "gateway", branch: "Handle Backorder" },
-  { type: "task", label: "Approve Request" },
-  { type: "task", label: "Assign Supplier" },
-  { type: "task", label: "Negotiate Price" },
-  { type: "end" },
-];
-
-const bottomSteps = [
-  { type: "start" },
-  { type: "task", label: "Create Order" },
-  { type: "task", label: "Confirm Order" },
-  { type: "task", label: "Schedule Delivery" },
-  { type: "gateway", branch: "Resolve Delay" },
-  { type: "task", label: "Ship Goods" },
-  { type: "task", label: "Track Shipment" },
-  { type: "task", label: "Confirm Receipt" },
-  { type: "end" },
-];
 ---
 
 <Layout
@@ -40,14 +13,13 @@ const bottomSteps = [
   <Processflowbackground slot="hero-background" class="absolute inset-0" />
 
   <div class="flex flex-col items-center gap-4 leading-loose">
-    <div class="flex w-full max-w-3xs flex-col justify-center gap-4">
+    <div class="flex w-full max-w-3xs flex-row justify-center gap-4">
       <a
         href="/download"
         class={buttonVariants({
           variant: "default",
           size: "lg",
-          class: "w-full",
-        }) + " group"}
+        }) + " px-6 group"}
       >
         Get started
         <IconArrowRight
@@ -56,40 +28,49 @@ const bottomSteps = [
       </a>
       <a
         href="/news"
-        class={buttonVariants({ variant: "outline", size: "lg" })}
+        class={buttonVariants({ variant: "outline", size: "lg" }) + " px-6 "}
       >
         Latest News
       </a>
     </div>
-    <button
-      type="button"
-      data-copy-command="docker pull axonivy/axonivy-engine"
-      aria-label="Copy Docker command"
-      class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"
-    >
-      <Image
-        src={AxonIvySmall}
-        alt="Axon Ivy Small Logo"
-        class="size-4 dark:hidden"
-      />
-      <Image
-        src={AxonIvySmallDark}
-        alt="Axon Ivy Small Dark Logo"
-        class="hidden size-4 dark:block"
-      />
-      <span class="whitespace-nowrap">~ docker pull axonivy/axonivy-engine</span
+    <div class="flex flex-col items-center">
+      <button
+        type="button"
+        data-copy-command="docker pull axonivy/axonivy-engine:12.0"
+        aria-label="Copy Docker command"
+        class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"
       >
-      <IconCopy
-        data-copy-icon
-        aria-hidden="true"
-        class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-      />
-      <IconCheck
-        data-check-icon
-        aria-hidden="true"
-        class="text-primary absolute -right-6 hidden size-4"
-      />
-    </button>
+        <span> ~ docker pull axonivy/axonivy-engine:12.0 </span>
+        <IconCopy
+          data-copy-icon
+          aria-hidden="true"
+          class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        />
+        <IconCheck
+          data-check-icon
+          aria-hidden="true"
+          class="text-primary absolute -right-6 hidden size-4"
+        />
+      </button>
+      <button
+        type="button"
+        data-copy-command="docker run -p 8080:8080 axonivy/axonivy-engine:12.0"
+        aria-label="Copy Docker command"
+        class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"
+      >
+        <span> ~ docker run -p 8080:8080 axonivy/axonivy-engine:12.0 </span>
+        <IconCopy
+          data-copy-icon
+          aria-hidden="true"
+          class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        />
+        <IconCheck
+          data-check-icon
+          aria-hidden="true"
+          class="text-primary absolute -right-6 hidden size-4"
+        />
+      </button>
+    </div>
   </div>
 </Layout>
 
