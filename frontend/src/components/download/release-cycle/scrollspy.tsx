@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import releaseCycleIllustration from "@/assets/release-cycle-illustration.svg";
 import releaseCycleDarkIllustration from "@/assets/release-cycle-dark-illustration.svg";
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
+import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
 
 export default function ReleaseCycleScrollspy() {
   return (
@@ -54,7 +55,10 @@ export default function ReleaseCycleScrollspy() {
                 <IconCircleCheck className="text-primary size-4" />
                 <Base className="text-n900 font-semibold">
                   Current Long Term Support versions:
-                  <span className="font-normal"> 10.0 / 12.0</span>
+                  <span className="font-normal">
+                    {" "}
+                    {LTS_VERSION} / {CURRENT_VERSION}
+                  </span>
                 </Base>
               </div>
             </div>
