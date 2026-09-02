@@ -24,62 +24,11 @@ class UiDocLegacyAction
     $docName = $this->evaluateDocName($docName, $lang);
     $docPath = $this->evaluateDocPath($docName);
 
-    // special treatment when using a major version e.g. 8/9/10
-    if (!str_contains($version, '.') && is_numeric($version)) {
-      $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
-      if ($releaseInfo == null) {
-        throw new NotFoundException();
-      }      
-      return Redirect::to($response, $releaseInfo->getDocProvider()->getLanguageMinorUrl($lang) . $docPath);
-    }
-
-    // special treatment for dev, milestone, nightly
-    if ($version == "dev" || $version == "milestone" || $version == "nightly") {
-      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);      
-      return Redirect::to($response, $url . $docPath);
-    }
-
-    // nightly-8.0
-    if (str_starts_with($version, "nightly-")) {
-      $v = str_replace("nightly-", "", $version);
-      $v = new Version($v);
-      $v = $v->getMinorVersion();
-      $docProvider = new DocProvider($v);
-      if (!$docProvider->exists()) {
-        throw new HttpNotFoundException($request);      
-      }
-      return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
-    }
-
-    // special treatement for latest
-    if ($version == "latest") {
-      $releaseInfo = ReleaseInfoRepository::getLatestLongTermSupport();
-      if ($releaseInfo == null) {
-        throw new NotFoundException();
-      }
-      return Redirect::to($response, $releaseInfo->getDocProvider()->getLanguageMinorUrl($lang) . $docPath);
-    }
-
     $v = new Version($version);
     $version = $v->getMinorVersion();
     $docProvider = new DocProvider($version);
     if (!$docProvider->exists()) {
       throw new HttpNotFoundException($request);      
-    }
-
-    // redirect to minor version if access is not via minor version
-    if ($args['version'] != $version) {
-      return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
-    }
-
-    if ($this->documentationBasedOnReadTheDocs($version))
-    {
-      $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version), $hasLang);
-      if (empty($newDocUrl)) {
-        throw new HttpNotFoundException($request);
-      } else {
-        return Redirect::to($response, $newDocUrl);
-      }
     }
 
     // legacy, before 9
@@ -157,47 +106,6 @@ class UiDocLegacyAction
       return "";
     }
     return '/' . $docName;
-  }
-
-  private function documentationBasedOnReadTheDocs(string $version): bool
-  {
-    if ($version == 'nightly-7.0') {
-      return false;
-    }
-    if (version_compare($version, 9) >= 0) {
-      return true;
-    }
-    $releaseType = ReleaseType::byKey($version);
-    if ($releaseType != null && $releaseType->isDevRelease()) {
-      return true;
-    }
-    return false;
-  }
-
-  private function resolveNewDocUrl($baseUrl, $document, Version $version, bool $hasLang): string
-  {
-    if (empty($document)) {
-      return "$baseUrl/index.html";
-    }
-    if ($document == 'migration-notes') {
-      return "$baseUrl/axonivy/migration/index.html";
-    }
-    if ($document == 'release-notes') {
-      return "$baseUrl/axonivy/release-notes/index.html";
-    }
-    if ($document == 'new-and-noteworthy') {
-      $newsLink = '/news';
-      if (!str_contains($version->getVersionNumber(), "nightly")) {
-        if ($version->isMinor() || $version->isBugfix()) {
-          $newsLink .= '/' . $version->getMinorVersion();
-        }
-      }
-      return $newsLink;
-    }
-    if ($hasLang) {
-      return '';
-    }
-    return "$baseUrl/$document";
   }
 
   private function docLinksFromProvider(DocProvider $docProvider): DocVersionLinks
