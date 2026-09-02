@@ -102,6 +102,7 @@ const deprecations: Deprecation[] = [
     successorHref: "https://commons.apache.org/proper/commons-lang/",
     released: 3,
     deprecated: 10,
+    removed: 14,
     description:
       "The Java library Apache Commons Lang 2 is provided currently on the ivy project classpath. It will be removed in future. Use Apache Commons Lang 3 which is provided on the ivy project classpath.",
   },
@@ -114,6 +115,7 @@ const deprecations: Deprecation[] = [
       "https://commons.apache.org/proper/commons-collections/release_4_4.html",
     released: 3,
     deprecated: 10,
+    removed: 14,
     description:
       "The Java library Apache Commons Collection 3 is provided currently on the ivy project classpath. It will be removed in future. Use Apache Commons Collection 4 which is provided on the ivy project classpath.",
   },
