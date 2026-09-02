@@ -402,7 +402,7 @@ export default function Archive({ product }: ArchiveProps) {
       <div className="flex flex-row items-start justify-between">
         <div className="flex flex-col gap-2">
           <H4>Archives</H4>
-          <Base>
+          <Base className="text-n900">
             Are you searching for even older versions? Have a look at our{" "}
             <a
               href="https://archive.axonivy.com/"

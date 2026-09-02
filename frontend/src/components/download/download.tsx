@@ -64,8 +64,8 @@ export default function Download() {
   }
 
   return (
-    <div className="flex flex-col gap-24">
-      <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 md:gap-24">
+      <div className="flex flex-col gap-8 md:gap-12">
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           <DownloadCards
             release={data.ltsCurrent[0]}
@@ -89,7 +89,7 @@ export default function Download() {
           <IconArrowRight className="text-primary size-6 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
         </a>
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4 md:gap-6">
         <H2>Download {data.ltsMaintenance[0].versionShort}</H2>
         <H4>Download second to last released long term support version.</H4>
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
@@ -99,7 +99,7 @@ export default function Download() {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4 md:gap-6">
         <H2>Want to check out brand new features?</H2>
         <H4>
           Download the Leading Edge version for early access to the newest

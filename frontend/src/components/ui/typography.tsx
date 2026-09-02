@@ -28,7 +28,11 @@ export function H3({ children, className }: TypographyProps) {
 }
 
 export function H4({ children, className }: TypographyProps) {
-  return <h4 className={cn("text-xl font-semibold", className)}>{children}</h4>;
+  return (
+    <h4 className={cn("text-lg font-semibold md:text-xl", className)}>
+      {children}
+    </h4>
+  );
 }
 
 export function H5({ children, className }: TypographyProps) {

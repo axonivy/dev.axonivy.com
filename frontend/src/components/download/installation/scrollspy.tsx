@@ -167,7 +167,7 @@ export default function InstallationScrollSpy({
               {guide.type != "Engine" ? `for ${guide.type}` : ""}.
             </Base>
             {guide.hint ? (
-              <div className="bg-yellow-bg border-yellow flex flex-col gap-4 rounded-md border p-4">
+              <div className="flex flex-col gap-4 rounded-md border border-[#FFC696] bg-[#FFF1E6] p-4">
                 <H4>{guide.hint.title}</H4>
                 <Base className="text-n900">{guide.hint.description}</Base>
               </div>
