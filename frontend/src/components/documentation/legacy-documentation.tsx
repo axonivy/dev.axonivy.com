@@ -29,17 +29,6 @@ export const legacyDocsVersions = [
   "7.2",
   "7.1",
   "7.0",
-  "6.7",
-  "6.6",
-  "6.5",
-  "6.4",
-  "6.3",
-  "6.2",
-  "6.1",
-  "6.0",
-  "5.1",
-  "5.0",
-  "3.9",
 ] as const;
 
 export type LegacyDocsVersion = (typeof legacyDocsVersions)[number];

@@ -877,13 +877,13 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
   }
 
   .pf-line {
-    stroke: var(--pf-line-idle, #cbd5e170);
+    stroke: var(--pf-line-idle, var(--process-gray));
     stroke-width: 1.5;
   }
 
   .pf-node {
     fill: var(--pf-node-fill, var(--background));
-    stroke: var(--pf-line-idle, #cbd5e170);
+    stroke: var(--pf-line-idle, var(--process-gray));
     stroke-width: 2;
     transition:
       stroke 0.2s ease,
@@ -891,14 +891,19 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
   }
 
   .pf-node.pf-active {
-    stroke: var(--pf-accent, #3a985670);
+    stroke: var(--pf-accent, var(--process-green));
     filter: drop-shadow(
-      0 0 4px color-mix(in srgb, var(--pf-accent, #3a985670) 60%, transparent)
+      0 0 4px
+        color-mix(
+          in srgb,
+          var(--pf-accent, var(--process-green)) 60%,
+          transparent
+        )
     );
   }
 
   .pf-node.pf-visited {
-    stroke: var(--pf-accent, #3a985670);
+    stroke: var(--pf-accent, var(--process-green));
   }
 
   .pf-label {
@@ -915,7 +920,7 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
   .pf-seg,
   .pf-branch-seg {
     fill: none;
-    stroke: var(--pf-accent, #3a985670);
+    stroke: var(--pf-accent, var(--process-green));
     stroke-linecap: round;
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -933,12 +938,12 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
   }
 
   .pf-branch {
-    stroke: var(--pf-line-idle, #cbd5e170);
+    stroke: var(--pf-line-idle, var(--process-gray));
     stroke-width: 1.5;
   }
 
   .pf-token {
-    fill: var(--pf-token-color, #3a985670);
+    fill: var(--pf-token-color, var(--process-green));
   }
 
   .pf-badge {
@@ -963,7 +968,7 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
 
   .pf-badge-circle {
     fill: var(--pf-badge-fill, var(--background));
-    stroke: var(--pf-accent, #3a985670);
+    stroke: var(--pf-accent, var(--process-green));
     stroke-width: 1.5;
   }
 
@@ -973,7 +978,7 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
       -apple-system,
       "Segoe UI",
       sans-serif;
-    fill: var(--pf-accent, #3a985670);
+    fill: var(--pf-accent, var(--process-green));
     text-anchor: middle;
     dominant-baseline: central;
   }
@@ -988,7 +993,7 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
     top: 0;
     bottom: 0;
     width: 1.5px;
-    background: var(--pf-line-idle, #cbd5e170);
+    background: var(--pf-line-idle, var(--process-gray));
     transform: translateX(-50%);
   }
 
@@ -999,9 +1004,13 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    background: var(--pf-accent, #3a985670);
+    background: var(--pf-accent, var(--process-green));
     box-shadow: 0 0 6px
-      color-mix(in srgb, var(--pf-accent, #3a985670) 70%, transparent);
+      color-mix(
+        in srgb,
+        var(--pf-accent, var(--process-green)) 70%,
+        transparent
+      );
     transform: translate(-50%, -50%);
     display: none;
   }
