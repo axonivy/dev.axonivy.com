@@ -33,7 +33,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Portal New & Noteworthy`,
-      url: `/portal/9.3/doc/portal-developer-guide/introduction/index.html#new-noteworthy-9-3`,
+      url: `/doc/9.3/en/portal-guide/portal-developer-guide/introduction/index.html#new-noteworthy-9-3`,
     },
   ],
   images: [

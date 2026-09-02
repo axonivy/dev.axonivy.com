@@ -37,7 +37,7 @@ const section: NewsSection = {
     },
     {
       label: `Jaeger Tracing Example`,
-      url: `https://github.com/axonivy/docker-samples/tree/master/ivy-tracing-jaeger`,
+      url: `https://github.com/axonivy/docker-samples/tree/master/ivy-tracing`,
     },
     {
       label: `Cache View`,

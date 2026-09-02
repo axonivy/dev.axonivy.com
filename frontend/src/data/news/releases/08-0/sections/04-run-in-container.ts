@@ -37,7 +37,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Getting started`,
-      url: `/doc/8.0/engine-guide/getting-started/docker.html`,
+      url: `/doc/8.0/en/engine-guide/getting-started/docker.html`,
     },
     {
       label: `Axon.ivy Engine Docker Image`,

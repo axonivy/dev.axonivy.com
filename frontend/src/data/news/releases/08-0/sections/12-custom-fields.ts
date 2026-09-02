@@ -41,11 +41,11 @@ const section: NewsSection = {
   links: [
     {
       label: `Public API Custom Field`,
-      url: `/doc/8.0/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html`,
+      url: `/doc/8.0/en/public-api/ch/ivyteam/ivy/workflow/custom/field/ICustomFields.html`,
     },
     {
       label: `Public API Query`,
-      url: `/doc/8.0/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--`,
+      url: `/doc/8.0/en/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--`,
     },
   ],
   images: [],
