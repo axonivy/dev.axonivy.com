@@ -27,7 +27,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    { label: `Browse the Market`, url: `/market` },
+    { label: `Browse the Market`, url: `https://market.axonivy.com/` },
     {
       label: `Market docs`,
       url: `/doc/9.3/market/index.html`,

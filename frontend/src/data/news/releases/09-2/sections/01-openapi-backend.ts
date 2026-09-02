@@ -49,10 +49,10 @@ const section: NewsSection = {
     },
   ],
   images: [
-    `9.2/openapi-backend/01-openapi.png`,
-    `9.2/openapi-backend/02-apibrowser.png`,
-    `9.2/openapi-backend/03-api-access.png`,
-    `9.2/openapi-backend/04-api-docs.png`,
+    `9.2/openApi-backend/01-openapi.png`,
+    `9.2/openApi-backend/02-apibrowser.png`,
+    `9.2/openApi-backend/03-api-access.png`,
+    `9.2/openApi-backend/04-api-docs.png`,
   ],
 };
 

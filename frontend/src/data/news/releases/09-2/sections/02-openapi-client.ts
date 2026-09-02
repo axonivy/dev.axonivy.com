@@ -57,11 +57,11 @@ const section: NewsSection = {
     },
   ],
   images: [
-    `9.2/openapi-client/01-inscribe-api-docs.png`,
-    `9.2/openapi-client/02-inscribe-resource-select.png`,
-    `9.2/openapi-client/03-inscribe-validate-and-typed.png`,
-    `9.2/openapi-client/04-generate-openapi-client.png`,
-    `9.2/openapi-client/05-inscribe-typed-body.png`,
+    `9.2/openApi-client/01-inscribe-api-docs.png`,
+    `9.2/openApi-client/02-inscribe-resource-select.png`,
+    `9.2/openApi-client/03-inscribe-validate-and-typed.png`,
+    `9.2/openApi-client/04-generate-openapi-client.png`,
+    `9.2/openApi-client/05-inscribe-typed-body.png`,
   ],
 };
 

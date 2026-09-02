@@ -134,7 +134,6 @@ export default function LegacyDocumentation({
   }
 
   if (isLoading) {
-    // add loading skeleton
     return <div>Loading...</div>;
   }
 
