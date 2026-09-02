@@ -33,7 +33,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Engine Guide`,
-      url: `/doc/8.0/engine-guide/tool-reference/setup-wizard.html`,
+      url: `/doc/8.0/en/engine-guide/tool-reference/setup-wizard.html`,
     },
   ],
   images: [

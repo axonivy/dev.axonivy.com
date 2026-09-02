@@ -37,12 +37,8 @@ const section: NewsSection = {
   links: [
     {
       label: `Debian : Getting Started`,
-      url: `/doc/8.0/engine-guide/getting-started/debian.html`,
-    },
-    {
-      label: `Download Debian package`,
-      url: `/permalink/8.0/axonivy-engine.deb`,
-    },
+      url: `/doc/8.0/en/engine-guide/getting-started/debian.html`,
+    }
   ],
   images: [`8.0/debian/01-debian-package-installer.png`],
 };

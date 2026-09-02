@@ -49,7 +49,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Engine Guide`,
-      url: `/doc/8.0/engine-guide/tool-reference/engine-cockpit/index.html`,
+      url: `/doc/8.0/en/engine-guide/tool-reference/engine-cockpit/index.html`,
     },
   ],
   images: [

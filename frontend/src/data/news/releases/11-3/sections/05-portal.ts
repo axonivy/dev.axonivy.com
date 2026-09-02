@@ -41,7 +41,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Portal`,
-      url: `/portal/11.3/doc`,
+      url: `/doc/11.3/en/portal-guide/index.html`,
     },
   ],
   images: [

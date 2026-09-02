@@ -56,7 +56,7 @@ Frontend:
   links: [
     {
       label: `Engine Guide Configuration`,
-      url: `/doc/8.0/engine-guide/configuration/`,
+      url: `/doc/8.0/en/engine-guide/configuration/index.xhtml`,
     },
     {
       label: `Configuration File Reference`,
