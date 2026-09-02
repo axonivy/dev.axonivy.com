@@ -399,8 +399,22 @@ export default function Archive({ product }: ArchiveProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-row items-center justify-between">
-        <H4>Archives</H4>
+      <div className="flex flex-row items-start justify-between">
+        <div className="flex flex-col gap-2">
+          <H4>Archives</H4>
+          <Base>
+            Are you searching for even older versions? Have a look at our{" "}
+            <a
+              href="https://archive.axonivy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              archive page
+            </a>
+            .
+          </Base>
+        </div>
         <NativeSelect
           value={selectedVersion || data.currentMajorVersion}
           onChange={(event) => setSelectedVersion(event.target.value)}

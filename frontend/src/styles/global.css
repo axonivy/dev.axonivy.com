@@ -133,6 +133,8 @@ html {
   --purple-bg: #e2d6fd;
   --yellow: #866d09;
   --yellow-bg: #fef5d0;
+  --process-green: #3a985670;
+  --process-gray: #cbd5e170;
 
   /* shadcn semantic tokens, mapped onto the old palette */
   --background: #ffffff;
@@ -207,6 +209,8 @@ html {
   --purple-bg: #493a69;
   --yellow: #ffd83d;
   --yellow-bg: #6a5c25;
+  --process-green: #3a985670;
+  --process-gray: #cbd5e170;
 
   /* shadcn semantic tokens, mapped onto the old palette */
   --background: #2c2c2c;
