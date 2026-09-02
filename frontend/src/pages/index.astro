@@ -40,24 +40,6 @@ import Processflowbackground from "@/components/processflowbackground.astro";
     <div class="flex flex-col items-center">
       <button
         type="button"
-        data-copy-command={`docker pull axonivy/axonivy-engine:${CURRENT_VERSION}`}
-        aria-label="Copy Docker command"
-        class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"
-      >
-        <span> ~ docker pull axonivy/axonivy-engine:{CURRENT_VERSION} </span>
-        <IconCopy
-          data-copy-icon
-          aria-hidden="true"
-          class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-        />
-        <IconCheck
-          data-check-icon
-          aria-hidden="true"
-          class="text-primary absolute -right-6 hidden size-4"
-        />
-      </button>
-      <button
-        type="button"
         data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`}
         aria-label="Copy Docker command"
         class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"

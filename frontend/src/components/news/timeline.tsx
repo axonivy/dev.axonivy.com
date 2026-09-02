@@ -76,7 +76,7 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
                 </span>
               ))}
             </CardContent>
-            <div className="flex w-full shrink-0 items-end justify-end px-4 md:w-auto md:px-0 md:pr-4">
+            <div className="flex w-full shrink-0 items-end justify-end px-4 pt-6 md:w-auto md:px-0 md:pt-0 md:pr-4">
               <a
                 href={`/news/${item.id}`}
                 className={buttonVariants({ variant: "link" }) + " group"}

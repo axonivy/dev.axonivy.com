@@ -39,8 +39,16 @@ import { ModeToggle } from "./ui/mode-toggle";
   <div class="relative mx-auto w-full px-4 py-4 md:max-w-6xl">
     <div class="flex w-full flex-row items-center justify-between gap-4">
       <a href="/">
-        <AxonIvyLogo width={160} height={40} class="dark:hidden" />
-        <AxonIvyLogoDark width={160} height={40} class="hidden dark:block" />
+        <AxonIvyLogo
+          width={108}
+          height={16}
+          class="md:h-10 md:w-40 dark:hidden"
+        />
+        <AxonIvyLogoDark
+          width={108}
+          height={16}
+          class="hidden md:h-10 md:w-40 dark:block"
+        />
       </a>
       <Navbar type="header" client:load />
       <div class="hidden gap-2 md:flex">

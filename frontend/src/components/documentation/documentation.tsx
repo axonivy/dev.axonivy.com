@@ -123,10 +123,19 @@ export default function Documentation() {
             <Card className="flex-1">
               <CardContent className="flex h-full flex-col gap-6 md:flex-row md:items-stretch">
                 {groups.map((group, groupIndex) => {
-                  const docLink = group.links.find((l) =>
+                  const links =
+                    section.key === "docLinksDev"
+                      ? group.links.filter(
+                          (link) =>
+                            !link.text
+                              .toLowerCase()
+                              .includes("new and noteworthy"),
+                        )
+                      : group.links;
+                  const docLink = links.find((l) =>
                     l.text.toLowerCase().includes("documentation"),
                   );
-                  const secondaryLinks = group.links.filter(
+                  const secondaryLinks = links.filter(
                     (l) => !l.text.toLowerCase().includes("documentation"),
                   );
                   const badge = getBadge(section.key, group, groups);

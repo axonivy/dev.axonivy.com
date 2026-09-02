@@ -18,7 +18,7 @@ import {
 } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
 import { NewsTimeline } from "@/components/news/timeline";
-import { Base, H3, H4, H6 } from "@/components/ui/typography";
+import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
 
 const releases = (await getCollection("news")).sort(
   (left, right) =>
@@ -58,8 +58,13 @@ const formatDate = (date: Date) =>
             className="uppercase">{releases[0].data.tag}</Badge
           >
           <span class="flex items-center gap-2">
-            <CardTitle className="text-3xl font-semibold">
-              {releases[0].data.version_title}
+            <CardTitle>
+              <H3 className="hidden md:flex">
+                {releases[0].data.version_title}
+              </H3>
+              <H5 className="md:hidden">
+                {releases[0].data.version_title}
+              </H5>
             </CardTitle>
             <IconStar class="text-primary size-8" />
           </span>
