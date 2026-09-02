@@ -159,13 +159,13 @@ class DocAction
       return "$baseUrl/index.html";
     }
     if ($document == 'migration-notes') {
-      if ($version->isEqualOrGreaterThan('14.0.0')) {
+      if ($version->isEqualOrGreaterThan('14.0')) {
         return "$baseUrl/technical-info/migration/migration-notes.html"; 
       }
       return "$baseUrl/axonivy/migration/index.html";
     }
     if ($document == 'release-notes') {
-      if ($version->isEqualOrGreaterThan('14.0.0')) {
+      if ($version->isEqualOrGreaterThan('14.0')) {
         return "$baseUrl/technical-info/release-notes/index.html"; 
       }
       return "$baseUrl/axonivy/release-notes/index.html";
