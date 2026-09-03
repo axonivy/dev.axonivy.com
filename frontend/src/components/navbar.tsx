@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import {
+  IconArrowUpRight,
+  IconExternalLink,
+  IconMenu2,
+  IconX,
+} from "@tabler/icons-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,43 +17,32 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
 } from "@/components/ui/drawer";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import { buttonVariants } from "./ui/button";
 
 const navItems = [
+  { label: "Download", href: "/download", external: false },
   { label: "News", href: "/news", external: false },
   { label: "Documentation", href: "/doc", external: false },
-  { label: "Market", href: "https://market.axonivy.com/", external: true },
+  { label: "Team", href: "/team", external: false },
   {
     label: "Community",
     href: "https://community.axonivy.com/",
     external: true,
   },
-  {
-    label: "Tutorial",
-    href: "https://www.axonivy.com/tutorials",
-    external: true,
-  },
-  { label: "Team", href: "/team", external: false },
 ];
 
 export default function Navbar({ type }: { type: "header" | "footer" }) {
   const [isOpen, setIsOpen] = useState(false);
-  const visibleNavItems =
-    type === "header"
-      ? navItems.filter((item) => item.label !== "News")
-      : navItems;
 
   return (
     <div className="relative">
       <NavigationMenu className="hidden md:flex">
         <NavigationMenuList>
-          {visibleNavItems.map((item) => (
+          {navItems.map((item) => (
             <NavigationMenuItem key={item.href}>
               <NavigationMenuLink
-                className={navigationMenuTriggerStyle()}
+                className={navigationMenuTriggerStyle() + " items-start gap-1"}
                 render={
                   <a
                     href={item.href}
@@ -56,6 +50,13 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
                     rel={item.external ? "noopener noreferrer" : undefined}
                   >
                     {item.label}
+
+                    {item.external && (
+                      <IconArrowUpRight
+                        className="size-3 stroke-2"
+                        aria-hidden="true"
+                      />
+                    )}
                   </a>
                 }
               />
@@ -82,39 +83,57 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
           <DrawerContent
             className="w-full"
             style={{
-              top: "4.6rem",
-              height: "calc(100dvh - 4.6rem)",
+              top: "4.3rem",
+              height: "calc(100dvh - 4.3rem)",
               borderRadius: 0,
             }}
           >
             <DrawerHeader className="p-4 pb-2 text-left"></DrawerHeader>
             <nav aria-label="Mobile navigation" className="px-4 pb-6">
               <ul className="flex flex-col gap-1">
-                <a
-                  href="/news"
-                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
-                >
-                  News
-                </a>
-                <a
-                  href="/download"
-                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
-                >
-                  Download
-                </a>
-                {visibleNavItems.map((item) => (
+                {navItems.map((item) => (
                   <li key={item.href}>
                     <a
-                      className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                      className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
                       href={item.href}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
+                      {item.external && (
+                        <IconArrowUpRight
+                          className="mt-3 size-3 self-start stroke-2"
+                          aria-hidden="true"
+                        />
+                      )}
                     </a>
                   </li>
                 ))}
+                <a
+                  href="https://axonivy.com/tutorial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                >
+                  Tutorial
+                  <IconArrowUpRight
+                    className="mt-3 size-3 self-start stroke-2"
+                    aria-hidden="true"
+                  />
+                </a>
+                <a
+                  href="https://market.axonivy.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                >
+                  Market
+                  <IconArrowUpRight
+                    className="mt-3 size-3 self-start stroke-2"
+                    aria-hidden="true"
+                  />
+                </a>
               </ul>
             </nav>
             <DrawerFooter className="flex flex-row justify-start">

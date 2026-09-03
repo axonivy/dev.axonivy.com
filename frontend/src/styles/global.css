@@ -49,6 +49,8 @@ html {
   /* status tokens carried over from the old palette */
   --color-warning: var(--warning);
   --color-success: var(--success);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
 
   /* brand accent colors + their tinted backgrounds */
   --color-orange: var(--orange);
@@ -133,6 +135,8 @@ html {
   --purple-bg: #e2d6fd;
   --yellow: #866d09;
   --yellow-bg: #fef5d0;
+  --info: #ffc696;
+  --info-bg: #fff1e6;
   --process-green: #3a985670;
   --process-gray: #cbd5e170;
 
@@ -209,6 +213,8 @@ html {
   --purple-bg: #493a69;
   --yellow: #ffd83d;
   --yellow-bg: #6a5c25;
+  --info: #784725;
+  --info-bg: #5f3e27;
   --process-green: #3a985670;
   --process-gray: #cbd5e170;
 

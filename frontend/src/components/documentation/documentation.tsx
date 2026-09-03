@@ -109,7 +109,14 @@ export default function Documentation() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {visibleSections.map((section) => {
-        const groups = data[section.key];
+        const groups =
+          section.key === "docLinksLTS"
+            ? [...data[section.key]].sort((first, second) =>
+                second.version.localeCompare(first.version, undefined, {
+                  numeric: true,
+                }),
+              )
+            : data[section.key];
 
         return (
           <div

@@ -1,6 +1,11 @@
 ---
 import Layout from "@/layouts/main.astro";
-import { IconArrowRight, IconCheck, IconCopy } from "@tabler/icons-astro";
+import {
+  IconArrowRight,
+  IconCheck,
+  IconCopy,
+  IconInfoCircle,
+} from "@tabler/icons-astro";
 import { CURRENT_VERSION } from "@/data/global-variables";
 import { buttonVariants } from "@/components/ui/button";
 import Processflowbackground from "@/components/processflowbackground.astro";
@@ -37,7 +42,15 @@ import Processflowbackground from "@/components/processflowbackground.astro";
         Latest News
       </a>
     </div>
-    <div class="flex flex-col items-center">
+    <div class="flex items-center gap-2">
+      <a
+        href="/download/installation/docker?downloadUrl=https%3A%2F%2Fhub.docker.com%2Fr%2Faxonivy%2Faxonivy-engine"
+        aria-label="View Docker installation guide"
+        title="View Docker installation guide"
+        class="text-code hover:text-primary shrink-0 transition-colors"
+      >
+        <IconInfoCircle aria-hidden="true" class="size-4" />
+      </a>
       <button
         type="button"
         data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`}

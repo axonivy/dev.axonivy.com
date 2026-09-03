@@ -6,6 +6,7 @@ use Slim\Exception\HttpNotFoundException;
 use app\domain\ReleaseInfoRepository;
 use app\domain\ReleaseType;
 use app\domain\ReleaseInfo;
+use app\Config;
 
 class UiArchiveAction
 {
@@ -38,7 +39,7 @@ class UiArchiveAction
     $response->getBody()->write((string) json_encode($data));
     $response = $response->withHeader('Content-Type', 'application/json');
     return $response;
-    
+
   }
 
   private function getCurrentArchiveVersion(string $version): string
@@ -86,6 +87,7 @@ class UiArchiveAction
       'version' => $releaseInfo->versionNumber(),
       'releaseDate' => $releaseInfo->getReleaseDate(),
       'releaseNotes' => $releaseInfo->getDocProvider()->getReleaseNotes()->getUrl(),
+      'vscodeExtensionLink' => $this->vscodeExtensionLink($releaseInfo),
       'designerArtifacts' => array_values(array_map(
         fn ($artifact) => $this->artifactData($artifact),
         array_filter(
@@ -101,6 +103,26 @@ class UiArchiveAction
         )
       )),
     ];
+  }
+
+  public function vscodeExtensionLink(ReleaseInfo $releaseInfo): string
+  {
+    if ($this->vscodeGetMajorVersion($releaseInfo)) {
+      $version = $releaseInfo->getVersion()->getMajorVersion();
+      //if ($this->releaseType->isDevRelease()) {
+      //  return Config::VSCODE_MARKETPLACE_URL . "-". $this->getDevVersion()->getMajorVersion();
+      //}
+      return Config::VSCODE_MARKETPLACE_URL . "-" . $version;
+    }
+    return '';
+  }
+
+  public function vscodeGetMajorVersion(ReleaseInfo $releaseInfo): bool
+  {
+    //if ($this->releaseType->isDevRelease()) {
+    // return version_compare($this->getDevVersion()->getMinorVersion(), Config::VSCODE_EXTENSION_SINCE_VERSION, '>=');
+    //} 
+    return version_compare($releaseInfo->getVersion()->getVersionNumber(), Config::VSCODE_EXTENSION_SINCE_VERSION, '>=');
   }
 
   private function artifactData($artifact): array
@@ -125,7 +147,7 @@ class UiArchiveAction
     foreach ($this->versions as $version => $description) {
       $versionLink = new VersionLink($version, $description);
       $type = $description;
-      
+
       if (isset($categorizedVersions[$type])) {
         $categorizedVersions[$type][] = $versionLink;
       } else {

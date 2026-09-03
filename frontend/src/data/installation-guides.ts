@@ -138,6 +138,49 @@ const installationGuides = {
       { id: 4, title: "Next steps" },
     ],
   },
+  "designer-vscode": {
+    title: "Install Axon Ivy VS Code Extension",
+    type: "VS Code",
+    product: "Designer",
+    steps: [
+      {
+        id: 1,
+        title: "Install Visual Studio Code following the official guide",
+        url: "https://code.visualstudio.com/docs/getstarted/overview",
+      },
+      {
+        id: 2,
+        title: "Open the Axon Ivy Extension in the Extensions Marketplace",
+      },
+      {
+        id: 3,
+        title: "Install the Axon Ivy Extension",
+        substeps: [
+          {
+            id: 3.1,
+            title: "Click on the green 'Install' button",
+            img: "designer-vscode/install-marketplace.png",
+          },
+          {
+            id: 3.2,
+            title:
+              "When prompted by your browser, click 'Open Visual Studio Code'",
+            img: "designer-vscode/confirm-open.png",
+          },
+          {
+            id: 3.3,
+            title:
+              "In Visual Studio Code, click Install to complete the installation.",
+            img: "designer-vscode/install-vscode.png",
+          },
+        ],
+      },
+      {
+        id: 4,
+        title: "Next steps",
+      },
+    ],
+  },
   engine: {
     title: "Install Axon Ivy Engine",
     type: "Engine",
