@@ -9,6 +9,7 @@ import {
   IconArrowRight,
   IconBook2,
   IconBrandDocker,
+  IconBrandVscode,
   IconCheck,
   IconCopy,
   IconDownload,
@@ -113,25 +114,34 @@ function DockerCommandBlock({ command }: { command: string }) {
   }
 
   return (
-    <div className="bg-n100 text-n900 flex items-start justify-between gap-4 rounded-md p-4">
-      <code className="font-code min-w-0 flex-1 text-sm wrap-break-word whitespace-pre-line">
-        {command}
-      </code>
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={copyCommand}
-        aria-label={copied ? "Command copied" : "Copy command"}
-      >
-        {copied ? (
-          <IconCheck className="size-4" aria-hidden="true" />
-        ) : (
-          <IconCopy className="size-4" aria-hidden="true" />
-        )}
-        {copied ? "Copied" : "Copy"}
-      </Button>
-    </div>
+    <>
+      <div className="bg-n100 text-n900 flex items-start justify-between gap-4 rounded-md p-4">
+        <code className="font-code min-w-0 flex-1 text-sm wrap-break-word whitespace-pre-line">
+          {command}
+        </code>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={copyCommand}
+          aria-label={copied ? "Command copied" : "Copy command"}
+        >
+          {copied ? (
+            <IconCheck className="size-4" aria-hidden="true" />
+          ) : (
+            <IconCopy className="size-4" aria-hidden="true" />
+          )}
+          {copied ? "Copied" : "Copy"}
+        </Button>
+      </div>
+      <Base className="text-n900 mt-4">
+        Now you can access your engine on{" "}
+        <a href="http://localhost:8080/" className="text-primary">
+          localhost:8080
+        </a>
+        .
+      </Base>
+    </>
   );
 }
 
@@ -146,6 +156,9 @@ export default function InstallationScrollSpy({
 }: InstallationScrollSpyProps) {
   const [downloadUrl] = useState(() => queryParameter("downloadUrl"));
   const [docLink] = useState(() => queryParameter("docLink"));
+  const [vscodeExtensionLink] = useState(() =>
+    queryParameter("vscodeExtensionLink"),
+  );
 
   return (
     <div className="flex flex-col">
@@ -164,10 +177,24 @@ export default function InstallationScrollSpy({
             <Base className="text-n900">
               Follow these steps to download and install Axon Ivy{" "}
               {guide.product}{" "}
-              {guide.type != "Engine" ? `for ${guide.type}` : ""}.
+              {guide.type === "Docker" ? (
+                <>
+                  for{" "}
+                  <a
+                    href={downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline"
+                  >
+                    Docker
+                  </a>
+                </>
+              ) : guide.type !== "Engine" ? (
+                `for ${guide.type}`
+              ) : null}
             </Base>
             {guide.hint ? (
-              <div className="flex flex-col gap-4 rounded-md border border-[#FFC696] bg-[#FFF1E6] p-4">
+              <div className="border-info bg-info-bg flex flex-col gap-4 rounded-md border p-4">
                 <H4>{guide.hint.title}</H4>
                 <Base className="text-n900">{guide.hint.description}</Base>
               </div>
@@ -253,6 +280,37 @@ export default function InstallationScrollSpy({
                 >
                   <IconBook2 className="size-5 shrink-0" aria-hidden="true" />
                   Official guide
+                </a>
+              ) : null}
+              {guideId === "designer-vscode" && step.id === 1 && step.url ? (
+                <a
+                  href={step.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({
+                    className: "h-10 w-fit justify-start",
+                  })}
+                >
+                  <IconBook2 className="size-5 shrink-0" aria-hidden="true" />
+                  Official guide
+                </a>
+              ) : null}
+              {guideId === "designer-vscode" &&
+              step.id === 2 &&
+              vscodeExtensionLink ? (
+                <a
+                  href={vscodeExtensionLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({
+                    className: "h-10 w-fit justify-start",
+                  })}
+                >
+                  <IconBrandVscode
+                    className="size-5 shrink-0"
+                    aria-hidden="true"
+                  />
+                  Open VS Code Marketplace
                 </a>
               ) : null}
               {stepIndex < guide.steps.length - 1 ? <Separator /> : null}

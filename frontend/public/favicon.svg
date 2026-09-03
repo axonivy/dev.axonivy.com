@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(3.90625,0,0,3.90625,0,0)"><svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none"><g clip-path="url(#clip0_837_159)">
+<rect width="256" height="256" rx="44.9123" fill="#1B1B1B"></rect>
+<path d="M140.497 40L114.503 40.0003L56 216H68.8224C78.5634 216 78.5656 215.993 81.5672 206.517C84.5685 197.04 118.558 91.2407 118.558 91.2407C121.872 80.5348 126.252 58.8927 126.252 58.8927H128.748C128.748 58.8927 133.128 80.5349 136.442 91.2407C136.442 91.2407 170.431 197.04 173.433 206.517C176.434 215.993 176.437 216 186.178 216H199L140.497 40Z" fill="white"></path>
+</g><defs>
+<clipPath id="clip0_837_159">
+<rect width="256" height="256" fill="white"></rect>
+</clipPath>
+</defs></svg></g></g></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(1.953125,0,0,1.953125,0,0)"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="89.8246" fill="white"></rect><path d="M270.402 107.79L228.667 107.79L134.737 390.251H155.324C170.964 390.251 170.967 390.24 175.787 375.032C180.605 359.823 235.177 190.026 235.177 190.026C240.498 172.844 247.531 138.111 247.531 138.111H251.538C251.538 138.111 258.571 172.844 263.892 190.026C263.892 190.026 318.463 359.823 323.283 375.032C328.101 390.24 328.105 390.251 343.745 390.251H364.332L270.402 107.79Z" fill="#1B1B1B"></path></svg></g></g></svg></g></svg>

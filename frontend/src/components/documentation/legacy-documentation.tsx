@@ -142,7 +142,7 @@ export default function LegacyDocumentation({
     <div className="flex flex-col gap-6">
       <H1 className="pt-8">Documentation {data.version}</H1>
       <div className="flex flex-col gap-4">
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
           {data.releaseDocuments.links.map((link) => (
             <button
               key={link.url}
@@ -158,7 +158,7 @@ export default function LegacyDocumentation({
             </button>
           ))}
         </div>
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
           {data.externalBooks.links.map((link) => (
             <a
               key={link.url}

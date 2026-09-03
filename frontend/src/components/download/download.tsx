@@ -70,6 +70,7 @@ export default function Download() {
           <DownloadCards
             release={data.ltsCurrent[0]}
             releaseLabel="Long Term Support"
+            badge="Stable"
           />
         </div>
         <a
@@ -96,20 +97,27 @@ export default function Download() {
           <DownloadCards
             release={data.ltsMaintenance[0]}
             releaseLabel="Long Term Support"
+            badge="Maintenance"
           />
         </div>
       </div>
-      <div className="flex flex-col gap-4 md:gap-6">
-        <H2>Want to check out brand new features?</H2>
-        <H4>
-          Download the Leading Edge version for early access to the newest
-          features! <br />
-          Be prepared for frequent migrations.
-        </H4>
-        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-          <DownloadCards release={data.le[0]} releaseLabel="Leading Edge" />
+      {data.le.length !== 0 && (
+        <div className="flex flex-col gap-4 md:gap-6">
+          <H2>Want to check out brand new features?</H2>
+          <H4>
+            Download the Leading Edge version for early access to the newest
+            features! <br />
+            Be prepared for frequent migrations.
+          </H4>
+          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+            <DownloadCards
+              release={data.le[0]}
+              releaseLabel="Leading Edge"
+              badge="Latest features"
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

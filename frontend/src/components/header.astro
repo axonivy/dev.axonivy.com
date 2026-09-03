@@ -4,6 +4,7 @@ import AxonIvyLogo from "@/assets/axonivy-logo-2021-rgb.svg";
 import AxonIvyLogoDark from "@/assets/axonivy-logo-2021-rgb-neg.svg";
 import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "./ui/mode-toggle";
+import { IconArrowUpRight, IconExternalLink } from "@tabler/icons-astro";
 ---
 
 <script is:inline>
@@ -52,10 +53,22 @@ import { ModeToggle } from "./ui/mode-toggle";
       </a>
       <Navbar type="header" client:load />
       <div class="hidden gap-2 md:flex">
-        <a href="/news" class={buttonVariants({ variant: "accent" })}>News</a>
-        <a href="/download" class={buttonVariants({ variant: "default" })}
-          >Download</a
+        <a
+          href="https://www.axonivy.com/tutorials"
+          target="_blank"
+          rel="noopener noreferrer"
+          class={buttonVariants({ variant: "gray" })}
         >
+          Tutorial
+        </a>
+        <a
+          href="https://market.axonivy.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class={buttonVariants({ variant: "accent" })}
+        >
+          Market
+        </a>
         <ModeToggle client:load />
       </div>
     </div>

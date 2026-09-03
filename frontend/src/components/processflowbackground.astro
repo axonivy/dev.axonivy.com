@@ -1151,7 +1151,7 @@ const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
     // Persistent visit tracking: numbers each node the moment the
     // token reaches it, keeps the node green ("pf-visited") for the
     // rest of the lap, and only clears when a full cycle completes.
-    let visitCounter = 1;
+    const visitCounter = 1;
     const visitedKeys = new Set();
 
     function markVisited(rowSet, key) {

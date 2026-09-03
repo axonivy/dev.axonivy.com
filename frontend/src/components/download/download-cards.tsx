@@ -13,9 +13,9 @@ import {
   IconBrandUbuntu,
   IconBrandVscode,
   IconBrandWindows,
-  IconCircleCheck,
   IconDashboard,
   IconDownload,
+  IconTerminal,
   IconTools,
 } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
@@ -52,12 +52,14 @@ type ArtifactOption = {
 type DownloadCardsProps = {
   release: DownloadRelease;
   releaseLabel: string;
+  badge: string;
 };
 
 type DownloadProductCardProps = {
   release: DownloadRelease;
   releaseLabel: string;
   product: "designer" | "engine";
+  badge: string;
   userOs: OperatingSystem;
 };
 
@@ -75,8 +77,9 @@ type ProductConfig = {
   mode: string;
   description: string;
   icon: ReactNode;
+  textClass: string;
   backgroundClass: string;
-  badgeVariant: "green" | "blue";
+  badgeVariant: "green" | "orange";
   artifacts: Artifacts[];
   isDesigner: boolean;
 };
@@ -142,19 +145,25 @@ function installationGuideHref(
   userOs: OperatingSystem,
   artifact?: Artifacts,
   docLink?: string,
+  vscodeExtensionLink?: string,
 ) {
   const isDocker = product === "engine" && isDockerArtifact(artifact);
 
   const selectedOs = artifact ? artifactOperatingSystem(artifact) : userOs;
   const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
 
-  const guidePath = isDocker
-    ? "/download/installation/docker"
-    : product === "engine"
-      ? "/download/installation/engine"
-      : `/download/installation/designer-${guideOs === "unknown" ? "windows" : guideOs}`;
+  const guidePath = vscodeExtensionLink
+    ? "/download/installation/designer-vscode"
+    : isDocker
+      ? "/download/installation/docker"
+      : product === "engine"
+        ? "/download/installation/engine"
+        : `/download/installation/designer-${guideOs === "unknown" ? "windows" : guideOs}`;
 
   const query = new URLSearchParams();
+  if (vscodeExtensionLink) {
+    query.set("vscodeExtensionLink", vscodeExtensionLink);
+  }
   if (artifact?.url) {
     query.set("downloadUrl", artifact.url);
   }
@@ -221,8 +230,10 @@ function artifactMatchesOperatingSystem(
 function productConfig(
   release: DownloadRelease,
   product: DownloadProductCardProps["product"],
+  releaseLabel: DownloadProductCardProps["releaseLabel"],
 ): ProductConfig {
   const isDesigner = product === "designer";
+  const isLts = releaseLabel === "Long Term Support";
 
   return {
     title: isDesigner ? "Designer" : "Engine",
@@ -232,12 +243,13 @@ function productConfig(
       ? "Model, design and test your business application locally."
       : "Deploy and run your application in a server environment.",
     icon: isDesigner ? (
-      <IconTools className="text-green h-8 w-8" />
+      <IconTools className="h-8 w-8" />
     ) : (
-      <IconDashboard className="text-blue h-8 w-8" />
+      <IconDashboard className="h-8 w-8" />
     ),
-    backgroundClass: isDesigner ? "bg-green-bg" : "bg-blue-bg",
-    badgeVariant: isDesigner ? "green" : "blue",
+    textClass: isLts ? "text-green" : "text-orange",
+    backgroundClass: isLts ? "bg-green-bg" : "bg-orange-bg",
+    badgeVariant: isLts ? "green" : "orange",
     artifacts: isDesigner ? release.designerArtifacts : release.engineArtifacts,
     isDesigner,
   };
@@ -253,21 +265,36 @@ function DownloadAction({
   if (vscodeExtensionLink) {
     return (
       <a
-        href={vscodeExtensionLink}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={`/download/installation/designer-vscode?vscodeExtensionLink=${encodeURIComponent(vscodeExtensionLink)}`}
         className={buttonVariants({
           className: "h-10 w-full justify-start",
         })}
       >
         <IconBrandVscode className="size-5 shrink-0" aria-hidden="true" />
-        View on Visual Studio Code
+        Install Designer using VS Code Marketplace
       </a>
     );
   }
 
   if (!artifact) {
     return null;
+  }
+
+  if (artifact.name === "Docker") {
+    return (
+      <a
+        href={`/download/installation/docker?downloadUrl=${artifact.url}`}
+        className={buttonVariants({
+          className: "h-10 w-full justify-start",
+        })}
+      >
+        <IconTerminal className="size-5 shrink-0" aria-hidden="true" />
+        Install {title} {version} via Docker
+        {artifactLabel && (
+          <span className="hidden sm:inline"> for {artifactLabel}</span>
+        )}
+      </a>
+    );
   }
 
   return (
@@ -290,9 +317,10 @@ function DownloadProductCard({
   release,
   releaseLabel,
   product,
+  badge,
   userOs,
 }: DownloadProductCardProps) {
-  const config = productConfig(release, product);
+  const config = productConfig(release, product, releaseLabel);
   const { artifacts } = config;
 
   const hasVsCodeExtension =
@@ -333,16 +361,14 @@ function DownloadProductCard({
     <Card data-user-os={userOs} className="h-fit">
       <CardHeader className="flex flex-col gap-2">
         <div className="flex w-full flex-row items-start justify-between">
-          <div className={`flex rounded-md p-2 ${config.backgroundClass}`}>
+          <div
+            className={`flex rounded-md p-2 ${config.backgroundClass} ${config.textClass}`}
+          >
             {config.icon}
           </div>
           <div className="flex flex-row gap-4">
-            <div className="flex flex-row items-center gap-1">
-              <IconCircleCheck className="text-n600 h-4 w-4" />
-              <P className="text-n600 uppercase">{releaseLabel}</P>
-            </div>
             <Badge variant={config.badgeVariant} className="uppercase">
-              {config.badge}
+              {badge}
             </Badge>
           </div>
         </div>
@@ -423,6 +449,7 @@ function DownloadProductCard({
               userOs,
               selectedArtifact,
               product === "engine" ? release.docLink : undefined,
+              hasVsCodeExtension ? release.vscodeExtensionLink : undefined,
             )}
             className="text-primary text-center"
           >
@@ -488,7 +515,11 @@ function DownloadProductCard({
   );
 }
 
-export function DownloadCards({ release, releaseLabel }: DownloadCardsProps) {
+export function DownloadCards({
+  release,
+  releaseLabel,
+  badge,
+}: DownloadCardsProps) {
   const [userOs, setUserOs] = useState<OperatingSystem>("unknown");
 
   useEffect(() => {
@@ -511,6 +542,7 @@ export function DownloadCards({ release, releaseLabel }: DownloadCardsProps) {
           release={release}
           releaseLabel={releaseLabel}
           product="designer"
+          badge={badge}
           userOs={userOs}
         />
       )}
@@ -519,6 +551,7 @@ export function DownloadCards({ release, releaseLabel }: DownloadCardsProps) {
           release={release}
           releaseLabel={releaseLabel}
           product="engine"
+          badge={badge}
           userOs={userOs}
         />
       )}
