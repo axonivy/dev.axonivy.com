@@ -1,0 +1,96 @@
+---
+import Layout from "@/layouts/main.astro";
+import {
+  IconArrowRight,
+  IconCheck,
+  IconCopy,
+  IconInfoCircle,
+} from "@tabler/icons-astro";
+import { CURRENT_VERSION } from "@/data/global-variables";
+import { buttonVariants } from "@/components/ui/button";
+import Processflowbackground from "@/components/processflowbackground.astro";
+---
+
+<Layout
+  title="Build and automate business processes faster with Axon Ivy"
+  description={"The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."}
+  center={true}
+>
+  <Processflowbackground
+    slot="hero-background"
+    class="absolute inset-0 blur-[1.5px]"
+  />
+
+  <div class="flex flex-col items-center gap-4 leading-loose">
+    <div class="flex w-full max-w-3xs flex-row justify-center gap-4">
+      <a
+        href="/download"
+        class={buttonVariants({
+          variant: "default",
+          size: "lg",
+        }) + " px-6 group"}
+      >
+        Get started
+        <IconArrowRight
+          class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+        />
+      </a>
+      <a
+        href="/news"
+        class={buttonVariants({ variant: "outline", size: "lg" }) + " px-6 "}
+      >
+        Latest News
+      </a>
+    </div>
+    <div class="flex items-center gap-2">
+      <a
+        href="/download/installation/docker?downloadUrl=https%3A%2F%2Fhub.docker.com%2Fr%2Faxonivy%2Faxonivy-engine"
+        aria-label="View Docker installation guide"
+        title="View Docker installation guide"
+        class="text-code hover:text-primary shrink-0 transition-colors"
+      >
+        <IconInfoCircle aria-hidden="true" class="size-4" />
+      </a>
+      <button
+        type="button"
+        data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`}
+        aria-label="Copy Docker command"
+        class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"
+      >
+        <span>
+          ~ docker run -p 8080:8080 axonivy/axonivy-engine:{CURRENT_VERSION}
+        </span>
+        <IconCopy
+          data-copy-icon
+          aria-hidden="true"
+          class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        />
+        <IconCheck
+          data-check-icon
+          aria-hidden="true"
+          class="text-primary absolute -right-6 hidden size-4"
+        />
+      </button>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll("[data-copy-command]").forEach((commandButton) => {
+    const copyIcon = commandButton.querySelector("[data-copy-icon]");
+    const checkIcon = commandButton.querySelector("[data-check-icon]");
+
+    const resetIcon = () => {
+      copyIcon.classList.remove("hidden");
+      checkIcon.classList.add("hidden");
+    };
+
+    commandButton.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(commandButton.dataset.copyCommand);
+      copyIcon.classList.add("hidden");
+      checkIcon.classList.remove("hidden");
+    });
+
+    commandButton.addEventListener("mouseleave", resetIcon);
+  });
+</script>

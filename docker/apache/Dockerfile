@@ -13,6 +13,11 @@ ADD install-composer.sh ./install-composer.sh
 RUN chmod ugo+x ./install-composer.sh
 RUN ./install-composer.sh
 
+# install Node.js and pnpm for frontend build
+RUN wget -qO- https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g pnpm
+
 # user for jenkins pipeline
 RUN addgroup --gid 1000 build && adduser --uid 1000 --gid 1000 --disabled-password --gecos "" build
 RUN usermod -a -G build www-data

@@ -1,0 +1,45 @@
+---
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Deprecation } from "@/data/deprecation";
+import { IconExternalLink } from "@tabler/icons-astro";
+import { P } from "@/components/ui/typography";
+
+interface Props {
+  item: Deprecation;
+}
+
+const { item } = Astro.props;
+---
+
+<Card>
+  <CardHeader className="flex flex-row gap-3">
+    <CardTitle className="flex w-full items-center justify-between gap-2">
+      <span class="max-w-4/5">{item.name}</span>
+      <a href={item.nameHref} class="shrink-0">
+        <IconExternalLink class="text-primary h-4 w-4 shrink-0" />
+      </a>
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div class="flex flex-col gap-2">
+      <div class="flex w-full flex-row items-start justify-between gap-2">
+        <P className="text-n800">Introduced in:</P>
+        <P>{item.released}</P>
+      </div>
+      <div class="flex w-full flex-row items-start justify-between gap-2">
+        <P className="text-n800">Deprecated in:</P>
+        <P>{item.deprecated}</P>
+      </div>
+      <div class="flex w-full flex-row items-start justify-between gap-2">
+        <P className="text-n800">Removed in:</P>
+        <P>{item.removed}</P>
+      </div>
+      <div class="flex w-full flex-row items-start justify-between gap-2">
+        <P className="text-n800">Successor:</P>
+        <a href={item.successorHref} class="text-primary text-right underline">
+          {item.successor}
+        </a>
+      </div>
+    </div>
+  </CardContent>
+</Card>

@@ -11,7 +11,7 @@ pipeline {
   }
   
   environment {
-    DIST_FILE = "ivy-website-developer.tar"
+    DIST_FILE = "ivy-website-redesign.tar"
   }
   
   stages {
@@ -23,13 +23,14 @@ pipeline {
       }
       steps {
         sh 'composer install --no-dev --no-progress'
+        sh 'pnpm --dir frontend install --frozen-lockfile'
+        sh 'pnpm --dir frontend build'
         sh "tar -cf ${env.DIST_FILE}\
           --exclude=src/web/releases\
           --exclude=src/web/docs\
           --exclude=src/web/openapi\
           --exclude=src/web/public-api\
           --exclude=src/web/systemdb\
-          --exclude=vendor/swagger-api\
           src\
           vendor"
         archiveArtifacts env.DIST_FILE
@@ -85,7 +86,7 @@ pipeline {
 
     stage('deploy') {
       when {
-        branch 'master'
+        branch 'redesign'
       }
       agent {
         docker {
@@ -97,9 +98,9 @@ pipeline {
           script {
             unstash 'website-tar'
 
-            def targetFolder = "/home/axonivya/deployment/ivy-website-developer-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
+            def targetFolder = "/home/axonivya/deployment/ivy-website-redesign-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFile =  targetFolder + ".tar"
-            def host = 'axonivya@217.26.51.247'
+            def host = 'axonivya@dev.axonivy.com'
 
             // copy
             sh "scp ${env.DIST_FILE} $host:$targetFile"
@@ -116,7 +117,7 @@ pipeline {
             sh "ssh $host ln -fns /home/axonivya/data/openapi $targetFolder/src/web/openapi"
             sh "ssh $host ln -fns /home/axonivya/data/systemdb $targetFolder/src/web/systemdb"
             sh "ssh $host ln -fns /home/axonivya/data/public-api $targetFolder/src/web/public-api"
-            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
+            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/axonivya.myhostpoint.ch/linktoweb"
           }
         }
       }

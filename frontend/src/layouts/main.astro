@@ -1,0 +1,118 @@
+---
+import Header from "@/components/header.astro";
+import Footer from "@/components/footer.astro";
+import "@/styles/global.css";
+import { Font } from "astro:assets";
+import { Base, H1 } from "@/components/ui/typography";
+
+type LinkedDescription = {
+  before: string;
+  link: {
+    href: string;
+    label: string;
+  };
+  after: string;
+};
+
+interface Props {
+  title?: string;
+  description?: string | LinkedDescription;
+  center?: boolean;
+}
+
+const { title, description, center } = Astro.props;
+const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
+---
+
+<html lang="en">
+  <head>
+    <Font cssVariable="--font-inter" preload />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="dev.axonivy" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Axon Ivy Developer</title>
+  </head>
+  <body>
+    <div class="flex min-h-screen flex-col">
+      <header class="shrink-0">
+        <Header />
+      </header>
+
+      <div class="relative isolate flex-1 overflow-hidden">
+        {
+          title && !hasHeroBg && (
+            <div
+              aria-hidden="true"
+              class="bg-primary/10 absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full blur-3xl md:size-144 dark:hidden"
+            />
+          )
+        }
+
+        {
+          hasHeroBg && (
+            <>
+              <div
+                aria-hidden="true"
+                class="absolute inset-0 -z-10 hidden md:block"
+              >
+                <div class="relative left-1/2 h-full w-screen -translate-x-1/2">
+                  <slot name="hero-background" />
+                </div>
+              </div>
+              <div
+                aria-hidden="true"
+                class="bg-primary/10 absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full blur-3xl md:hidden dark:hidden"
+              />
+            </>
+          )
+        }
+
+        <div
+          class:list={[
+            "mx-auto flex min-h-[calc(100vh-4.5rem)] w-full flex-col px-4 pt-32 pb-20 md:max-w-6xl",
+            title ? "relative isolate gap-12" : "gap-6",
+            center ? "justify-center" : "",
+          ]}
+        >
+          {
+            title && (
+              <div class="flex w-full flex-col items-center gap-8 pt-6 text-center leading-loose md:w-2/3 md:self-center md:pt-12">
+                <H1>{title}</H1>
+                {description && (
+                  <Base className="whitespace-pre-line text-n900 md:text-xl">
+                    {typeof description === "string" ? (
+                      description
+                    ) : (
+                      <>
+                        {description.before}
+                        <a
+                          href={description.link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:text-primary underline underline-offset-4"
+                        >
+                          {description.link.label}
+                        </a>
+                        {description.after}
+                      </>
+                    )}
+                  </Base>
+                )}
+              </div>
+            )
+          }
+          <slot />
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <Footer />
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+---
+import Navbar from "@/components/navbar";
+import AxonIvyLogo from "@/assets/axonivy-logo-2021-rgb.svg";
+import AxonIvyLogoDark from "@/assets/axonivy-logo-2021-rgb-neg.svg";
+import { buttonVariants } from "@/components/ui/button";
+import { ModeToggle } from "./ui/mode-toggle";
+import { IconArrowUpRight, IconExternalLink } from "@tabler/icons-astro";
+---
+
+<script is:inline>
+  (() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const applyTheme = (theme) => {
+      document.documentElement.classList.toggle("dark", theme === "dark");
+    };
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      applyTheme("dark");
+    } else if (savedTheme === "light") {
+      applyTheme("light");
+    } else {
+      applyTheme(mediaQuery.matches ? "dark" : "light");
+    }
+
+    mediaQuery.addEventListener("change", (event) => {
+      if (
+        !localStorage.getItem("theme") ||
+        localStorage.getItem("theme") === "system"
+      ) {
+        applyTheme(event.matches ? "dark" : "light");
+      }
+    });
+  })();
+</script>
+
+<div class="border-n100 bg-background fixed top-0 z-50 w-full border-b">
+  <div class="relative mx-auto w-full px-4 py-4 md:max-w-6xl">
+    <div class="flex w-full flex-row items-center justify-between gap-4">
+      <a href="/">
+        <AxonIvyLogo
+          width={108}
+          height={16}
+          class="md:h-10 md:w-40 dark:hidden"
+        />
+        <AxonIvyLogoDark
+          width={108}
+          height={16}
+          class="hidden md:h-10 md:w-40 dark:block"
+        />
+      </a>
+      <Navbar type="header" client:load />
+      <div class="hidden gap-2 md:flex">
+        <a
+          href="https://www.axonivy.com/tutorials"
+          target="_blank"
+          rel="noopener noreferrer"
+          class={buttonVariants({ variant: "gray" })}
+        >
+          Tutorial
+        </a>
+        <a
+          href="https://market.axonivy.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class={buttonVariants({ variant: "accent" })}
+        >
+          Market
+        </a>
+        <ModeToggle client:load />
+      </div>
+    </div>
+  </div>
+</div>

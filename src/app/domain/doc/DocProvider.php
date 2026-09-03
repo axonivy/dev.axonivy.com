@@ -3,7 +3,7 @@ namespace app\domain\doc;
 
 use app\domain\Version;
 use app\Config;
-use app\pages\news\NewsAction;
+// use app\pages\news\NewsAction;
 
 class DocProvider
 {
@@ -22,11 +22,6 @@ class DocProvider
   public function exists(): bool
   {
     return file_exists($this->getDefaultLanguageDocDir());
-  }
-
-  public function hasDocuments(): bool
-  {
-    return !empty($this->findAllDocuments());
   }
 
   private function getDocDir()
@@ -58,13 +53,6 @@ class DocProvider
     return array_shift($values);
   }
 
-  public function getBooks(): array
-  {
-    return array_filter($this->findAllDocuments(), function (AbstractDocument $doc) {
-      return $doc instanceof Book;
-    });
-  }
-
   public static function getNewestDocProvider(): DocProvider
   {
     $versions = [];
@@ -76,30 +64,6 @@ class DocProvider
       return version_compare($v2, $v1);
     });
     return new DocProvider($versions[0]);
-  }
-
-  
-  public function getExistingBooks(): array
-  {
-    $existingBooks = [];
-    foreach ($this->getBooks() as $book) {
-      if ($book->pdfExists()) {
-        $existingBooks[] = $book;
-      }
-    }
-    return $existingBooks;
-  }
-
-  public function getImportantBooks(): array
-  {
-    return array_filter($this->getBooks(), fn (Book $book) => !str_starts_with(strtolower($book->getName()), "portal"));
-  }
-
-  public function getNotImportantBooks(): array
-  {
-    return array_filter($this->getBooks(), function (Book $book) {
-      return str_starts_with(strtolower($book->getName()), "portal");
-    });
   }
 
   public function getExternalBooks(): array
@@ -119,15 +83,11 @@ class DocProvider
   private function findAllDocuments(): array
   {
     $documents = [
-      $this->createBook('Designer Guide', 'DesignerGuideHtml', 'DesignerGuide.pdf'), // legacy engine guide prior to 8.0
-      $this->createBook('Designer Guide', 'designer-guide', ''), // new guide since 8.0
+      $this->createExternalBook('Designer Guide', 'DesignerGuideHtml'), // legacy engine guide prior to 8.0
+      $this->createExternalBook('Designer Guide', 'designer-guide'), // new guide since 8.0
 
-      $this->getServerGuide(),
-      $this->createBook('Engine Guide', 'EngineGuideHtml', 'EngineGuide.pdf'), // legacy engine guide prior to 7.4
-      $this->createBook('Engine Guide', 'engine-guide', ''), // new engine guide since 7.4
-
-      $this->createBook('Portal Kit', 'PortalKitHtml', 'PortalKitDocumentation.pdf'),  // legacy
-      $this->createBook('Portal Connector', 'PortalConnectorHtml', 'PortalConnectorDocumentation.pdf'), // legacy
+      $this->createExternalBook('Engine Guide', 'EngineGuideHtml'), // legacy engine guide prior to 7.4
+      $this->createExternalBook('Engine Guide', 'engine-guide'), // new engine guide since 7.4
 
       $this->createExternalBook('Public API', 'PublicAPI'),  // legacy public api url
       $this->createExternalBook('Public API', 'public-api'),  // new url since 8.0
@@ -142,14 +102,6 @@ class DocProvider
     return array_values(array_filter($documents, function ($doc) {
       return $doc != null && $doc->exists();
     }));
-  }
-
-  private function createBook($name, $path, $pdfFile): Book
-  {
-    $rootPath = $this->getDocDir();
-    $baseUrl = $this->createBaseUrl();
-    $baseRessourceUrl = $this->createBaseResourceUrl();
-    return new Book($name, $rootPath, $baseUrl, $baseRessourceUrl, $path . '/', $pdfFile, self::DEFAULT_LANGUAGE);
   }
 
   private function createExternalBook($name, $path): ExternalBook
@@ -180,11 +132,7 @@ class DocProvider
 
   public function getReleaseNotes(): ReleaseDocument
   {
-    $fileName = 'ReleaseNotes.txt';
-    if ($this->getMinorVersion() == '3.9') {
-      $fileName = 'ReadMe.html';
-    }
-    return $this->createReleaseDocument('Release Notes', $fileName, 'release-notes');
+    return $this->createReleaseDocument('Release Notes', 'ReleaseNotes.txt', 'release-notes');
   }
 
   private function getMigrationNotes(): ReleaseDocument
@@ -196,7 +144,6 @@ class DocProvider
   {
     $docs = [
       $this->getNewAndNoteworthy(),
-      $this->getServerGuide(),
       $this->getReleaseNotes()
     ];
     foreach ($docs as $doc) {
@@ -219,19 +166,11 @@ class DocProvider
     return $docs;
   }
 
-  public function getServerGuide(): Book
-  {
-    return $this->createBook('Server Guide', 'ServerGuide', 'ServerGuide.pdf'); // ancient engine guide
-  }
-
   public function getNewAndNoteworthy(): ?ReleaseDocument
   {
     $versionNumber = (string) $this->versionNumber;
     if (version_compare($versionNumber, 8) >= 0) {      
-      if (NewsAction::exists($versionNumber)) {
-        return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
-      }
-      return null;
+      return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
     }
     return $this->createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
   }
@@ -239,11 +178,6 @@ class DocProvider
   public function getOverviewUrl(): string
   {
     return $this->createBaseUrl();
-  }
-
-  public function getDefaultLanguageOverviewUrl(): string
-  {
-    return $this->getLanguageOverviewUrl(self::DEFAULT_LANGUAGE);
   }
 
   public function getLanguageOverviewUrl(string $lang): string

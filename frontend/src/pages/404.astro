@@ -1,0 +1,40 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import Robot from "@/assets/robot.png";
+import RobotBlack from "@/assets/robot-black.png";
+import Layout from "@/layouts/news.astro";
+import { Image } from "astro:assets";
+import { H5, H6 } from "@/components/ui/typography";
+---
+
+<Layout>
+  <div
+    class="flex flex-1 flex-col items-center gap-4 pt-0 md:flex-row md:justify-between md:gap-24 md:pt-9"
+  >
+    <div
+      class="flex shrink-0 flex-col items-center gap-6 text-center md:flex-1 md:items-start md:text-start"
+    >
+      <H6> error code: 404 </H6>
+      <h1 class="text-n900 text-7xl font-bold">Oops!</h1>
+      <H5 className="text-n900 font-normal">
+        Not Found: Our website is taking a break. It seems that we cannot find
+        the page you requested. You would be doing us a great favor by reporting
+        it here: {" "}
+        <a href="mailto:support@axonivy.com" class="text-primary">
+          support@axonivy.com
+        </a>
+      </H5>
+      <a class={buttonVariants({ size: "lg" }) + " w-fit md:w-full"} href="/">
+        Back to homepage
+      </a>
+    </div>
+    <div class="w-full min-w-0 md:w-3/5">
+      <div class="dark:hidden">
+        <Image src={Robot} alt="404 Illustration" class="h-auto w-full" />
+      </div>
+      <div class="hidden dark:block">
+        <Image src={RobotBlack} alt="404 Illustration" class="h-auto w-full" />
+      </div>
+    </div>
+  </div>
+</Layout>

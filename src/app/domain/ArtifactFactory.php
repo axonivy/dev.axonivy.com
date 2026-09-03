@@ -118,7 +118,6 @@ class ArtifactFilenameParser
     }
 
     $productName = str_replace('AxonIvy', '', $fullName);
-    $productName = str_replace('XpertIvy', '', $productName);
     $productName = str_replace('Server', 'Engine', $productName);
     return $productName;
   }

@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/news.astro";
+import { LegacyDocumentationQuery } from "@/components/query-components";
+import {
+  legacyDocsVersions,
+  type LegacyDocsVersion,
+} from "@/components/documentation/legacy-documentation";
+
+export function getStaticPaths() {
+  const paths = [
+    "en/new-and-noteworthy",
+    "en/release-notes",
+    "en/migration-notes",
+    "en/readme",
+    "en/readme-engine",
+    "en/readme-server",
+  ];
+
+  return legacyDocsVersions.flatMap((version: LegacyDocsVersion) =>
+    paths.map((path) => ({
+      params: { id: version, path },
+    })),
+  );
+}
+
+const { id } = Astro.params;
+
+if (!legacyDocsVersions.includes(id)) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout>
+  <LegacyDocumentationQuery version={id} client:load />
+</Layout>

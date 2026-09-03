@@ -1,4 +1,6 @@
 /vendor
+/frontend/node_modules
+/frontend/.astro
 /src/cache
 /src/logs
 composer.phar
@@ -8,3 +10,5 @@ composer.phar
 /src/web/documentation
 /src/web/swagger
 bom.json
+/src/web/astro/
+/.pnpm-store
