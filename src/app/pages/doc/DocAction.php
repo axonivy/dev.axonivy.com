@@ -43,7 +43,12 @@ class DocAction
 
     // special treatment for dev, milestone, nightly
     if ($version == "dev" || $version == "milestone" || $version == "nightly") {
-      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);      
+      $docProvider = DocProvider::getNewestDocProvider();
+      $url = $docProvider->getLanguageMinorUrl($lang);
+      $docVersion = new Version($docProvider->getMinorVersion());
+      if ($docVersion->isEqualOrGreaterThan('14') && ($docName == 'migration-notes' || $docName == 'release-notes')) {
+        return Redirect::to($response, $this->resolveNewDocUrl($url, $docName, $docVersion, $hasLang));
+      }
       return Redirect::to($response, $url . $docPath);
     }
 
@@ -188,11 +193,12 @@ class DocAction
     if (empty($document)) {
       return "$baseUrl/index.html";
     }
+    $releaseInfoPath = $version->isEqualOrGreaterThan('14') ? 'technical-info' : 'axonivy';
     if ($document == 'migration-notes') {
-      return "$baseUrl/axonivy/migration/index.html";
+      return "$baseUrl/$releaseInfoPath/migration/index.html";
     }
     if ($document == 'release-notes') {
-      return "$baseUrl/axonivy/release-notes/index.html";
+      return "$baseUrl/$releaseInfoPath/release-notes/index.html";
     }
     if ($document == 'new-and-noteworthy') {
       $newsLink = '/news';
