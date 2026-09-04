@@ -103,6 +103,8 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/7.5.0/en/migration-notes')->redirect("/doc/7.5/en/migration-notes");
     AppTester::assertThatGet('/doc/9.1.0/migration-notes')->redirect('/doc/9.1/en/migration-notes');
     AppTester::assertThatGet('/doc/9.1.0/en/migration-notes')->redirect('/doc/9.1/en/migration-notes');
+    AppTester::assertThatGet('/doc/14.0/migration-notes')->redirect('/doc/14.0/en/technical-info/migration/index.html');
+    AppTester::assertThatGet('/doc/14.0/en/migration-notes')->redirect('/doc/14.0/en/technical-info/migration/index.html');
     AppTester::assertThatGet('/doc/dev/migration-notes')->redirect('/doc/9.5/en/migration-notes');
     AppTester::assertThatGet('/doc/dev/en/migration-notes')->redirect('/doc/9.5/en/migration-notes');
     AppTester::assertThatGet('/doc/milestone/migration-notes')->redirect('/doc/9.5/en/migration-notes');
@@ -128,6 +130,8 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/7.5.0/en/release-notes')->redirect("/doc/7.5/en/release-notes");
     AppTester::assertThatGet('/doc/9.1.0/release-notes')->redirect('/doc/9.1/en/release-notes');
     AppTester::assertThatGet('/doc/9.1.0/en/release-notes')->redirect('/doc/9.1/en/release-notes');
+    AppTester::assertThatGet('/doc/14.0/release-notes')->redirect('/doc/14.0/en/technical-info/release-notes/index.html');
+    AppTester::assertThatGet('/doc/14.0/en/release-notes')->redirect('/doc/14.0/en/technical-info/release-notes/index.html');
     AppTester::assertThatGet('/doc/dev/release-notes')->redirect('/doc/9.5/en/release-notes');
     AppTester::assertThatGet('/doc/dev/en/release-notes')->redirect('/doc/9.5/en/release-notes');
     AppTester::assertThatGet('/doc/milestone/release-notes')->redirect('/doc/9.5/en/release-notes');
