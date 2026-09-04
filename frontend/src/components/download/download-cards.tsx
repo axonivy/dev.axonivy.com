@@ -152,13 +152,20 @@ function installationGuideHref(
   const selectedOs = artifact ? artifactOperatingSystem(artifact) : userOs;
   const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
 
-  const guidePath = vscodeExtensionLink
-    ? "/download/installation/designer-vscode"
-    : isDocker
-      ? "/download/installation/docker"
-      : product === "engine"
-        ? "/download/installation/engine"
-        : `/download/installation/designer-${guideOs === "unknown" ? "windows" : guideOs}`;
+  const detectGuidePath = () => {
+    if (vscodeExtensionLink) {
+      return "/download/installation/designer-vscode";
+    }
+    if (isDocker) {
+      return "/download/installation/docker";
+    }
+    if (product === "engine") {
+      return "/download/installation/engine";
+    }
+    return `/download/installation/designer-${guideOs === "unknown" ? "windows" : guideOs}`;
+  };
+
+  const guidePath = detectGuidePath();
 
   const query = new URLSearchParams();
   if (vscodeExtensionLink) {
@@ -307,7 +314,10 @@ function DownloadAction({
       <IconDownload className="size-5 shrink-0" aria-hidden="true" />
       Download {title} {version}
       {artifactLabel && (
-        <span className="hidden sm:inline"> for {artifactLabel}</span>
+        <span className="hidden sm:inline">
+          {" "}
+          for {artifactLabel} {artifactLabel === "macOS" && "BETA"}
+        </span>
       )}
     </a>
   );
@@ -330,6 +340,9 @@ function DownloadProductCard({
 
   const artifactOptions = artifacts.map((artifact) =>
     artifactOption(artifact, config.isDesigner),
+  );
+  const permalinkOptions = artifactOptions.filter(
+    ({ artifact }) => artifact.permalink,
   );
 
   const [selectedArtifactPermalink, setSelectedArtifactPermalink] = useState<
@@ -367,9 +380,7 @@ function DownloadProductCard({
             {config.icon}
           </div>
           <div className="flex flex-row gap-4">
-            <Badge variant={config.badgeVariant} className="uppercase">
-              {badge}
-            </Badge>
+            <Badge variant={config.badgeVariant}>{badge}</Badge>
           </div>
         </div>
         <CardTitle className="text-lg font-semibold">
@@ -469,7 +480,7 @@ function DownloadProductCard({
             >
               Release notes
             </a>
-          ) : (
+          ) : permalinkOptions.length > 0 ? (
             <Button
               type="button"
               variant="link"
@@ -488,26 +499,26 @@ function DownloadProductCard({
                 />
               </span>
             </Button>
+          ) : (
+            <div className="w-24" />
           )}
         </div>
-        {showPermalinks && (
+        {showPermalinks && permalinkOptions.length > 0 && (
           <ul
             id={permalinkId}
-            className="border-n300 bg-n50 flex flex-col gap-2 rounded-lg border p-3"
+            className="bg-n50 flex flex-col gap-2 rounded-lg p-3"
           >
-            {artifactOptions
-              .filter(({ artifact }) => artifact.permalink)
-              .map(({ artifact, label }) => (
-                <li
-                  key={`${product}-${artifact.name}`}
-                  className="text-n900 text-sm"
-                >
-                  <span className="font-semibold">{label}:</span>{" "}
-                  <a href={artifact.permalink} className="text-primary">
-                    {artifact.permalink}
-                  </a>
-                </li>
-              ))}
+            {permalinkOptions.map(({ artifact, label }) => (
+              <li
+                key={`${product}-${artifact.name}`}
+                className="text-n900 text-sm"
+              >
+                <span className="font-semibold">{label}:</span>{" "}
+                <a href={artifact.permalink} className="text-primary">
+                  {artifact.permalink}
+                </a>
+              </li>
+            ))}
           </ul>
         )}
       </CardContent>

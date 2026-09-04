@@ -87,7 +87,7 @@ export default function Download() {
               the Leading Edge version.
             </Base>
           </div>
-          <IconArrowRight className="text-primary size-6 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+          <IconArrowRight className="text-primary size-6 shrink-0 self-end transition-transform duration-200 group-hover:translate-x-1" />
         </a>
       </div>
       <div className="flex flex-col gap-4 md:gap-6">

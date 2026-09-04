@@ -19,6 +19,7 @@ export default function ReleaseCycleScrollspy() {
         <ScrollSpyNav className="bg-background sticky top-40 z-10 hidden shrink-0 self-start pt-2.5 md:flex">
           <ScrollSpyLink value="LTS">Long Term Support (LTS)</ScrollSpyLink>
           <ScrollSpyLink value="LE">Leading Edge (LE)</ScrollSpyLink>
+          <ScrollSpyLink value="Milestones">Milestones</ScrollSpyLink>
           <ScrollSpyLink value="maintenance">Maintenance support</ScrollSpyLink>
           <ScrollSpyLink value="illustration">
             Release cycle illustration
@@ -102,6 +103,22 @@ export default function ReleaseCycleScrollspy() {
                   </Base>
                 </div>
               </div>
+            </div>
+            <Separator />
+          </ScrollSpySection>
+          <ScrollSpySection value="milestones" className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4">
+              <H4>Milestones</H4>
+              <Base className="text-n900">
+                If you want to build a new project with the latest Leading Edge
+                features without the instability of nightly releases, a
+                milestone release may be the right choice. Milestone releases
+                are published periodically during development and provide stable
+                snapshots of the Leading Edge codebase at a specific point in
+                time. By staying on the same milestone release, you get a
+                consistent set of features and behavior. Refer to the
+                documentation for the milestone setup guide.
+              </Base>
             </div>
             <Separator />
           </ScrollSpySection>
