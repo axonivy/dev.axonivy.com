@@ -92,13 +92,13 @@ const installationGuides = {
     ],
   },
   "designer-mac": {
-    title: "Install Axon Ivy Designer for Mac",
+    title: "Install Axon Ivy Designer for Mac BETA",
     type: "macOs",
     product: "Designer",
     hint: {
       title: "Mac Designer for Ventura and older",
       description:
-        "This Axon Ivy Designer runs best on Macs with Intel processors (x64 architecture). If you have a newer Mac with Apple Chips/Silicon (ARM architecture) you can run the Designer with the Rosetta 2 software. However, the Designer might not work as well as on the x64 architecture.",
+        "This Axon Ivy Designer runs best on Macs with Intel processors (x64 architecture). If you have a newer Mac with Apple Chips/Silicon (ARM architecture) you can run the Designer with the Rosetta 2 software. However, the Designer might not work as well as on the x64 architecture. Please note that this is a beta version, so you may encounter bugs, errors, or other unexpected issues.",
     },
     steps: [
       { id: 1, title: "Download the Axon Ivy Designer" },

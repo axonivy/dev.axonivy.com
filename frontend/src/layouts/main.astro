@@ -17,10 +17,10 @@ type LinkedDescription = {
 interface Props {
   title?: string;
   description?: string | LinkedDescription;
-  center?: boolean;
+  left?: boolean;
 }
 
-const { title, description, center } = Astro.props;
+const { title, description, left } = Astro.props;
 const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
 ---
 
@@ -58,7 +58,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
             <>
               <div
                 aria-hidden="true"
-                class="absolute inset-0 -z-10 hidden md:block"
+                class="absolute inset-x-0 top-18 -z-10 hidden h-[calc(100vh-4.5rem)] md:block"
               >
                 <div class="relative left-1/2 h-full w-screen -translate-x-1/2">
                   <slot name="hero-background" />
@@ -66,7 +66,7 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
               </div>
               <div
                 aria-hidden="true"
-                class="bg-primary/10 absolute top-20 left-1/2 -z-10 size-106 -translate-x-1/2 rounded-full blur-3xl md:hidden dark:hidden"
+                class="bg-primary/10 absolute top-[calc(50vh+2.25rem)] left-1/2 -z-20 size-106 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl md:size-144 dark:hidden"
               />
             </>
           )
@@ -76,12 +76,19 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
           class:list={[
             "mx-auto flex min-h-[calc(100vh-4.5rem)] w-full flex-col px-4 pt-32 pb-20 md:max-w-6xl",
             title ? "relative isolate gap-12" : "gap-6",
-            center ? "justify-center" : "",
+            left ? "justify-center" : "",
           ]}
         >
           {
             title && (
-              <div class="flex w-full flex-col items-center gap-8 pt-6 text-center leading-loose md:w-2/3 md:self-center md:pt-12">
+              <div
+                class:list={[
+                  "flex w-full flex-col gap-8 pt-6 leading-loose md:w-1/2 md:pt-12",
+                  left
+                    ? "items-start text-center md:text-left"
+                    : "items-center self-center text-center",
+                ]}
+              >
                 <H1>{title}</H1>
                 {description && (
                   <Base className="whitespace-pre-line text-n900 md:text-xl">
