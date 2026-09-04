@@ -10,6 +10,8 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
@@ -19,17 +21,55 @@ import {
   DrawerHeader,
 } from "@/components/ui/drawer";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
 
 const navItems = [
   { label: "Download", href: "/download", external: false },
   { label: "News", href: "/news", external: false },
-  { label: "Documentation", href: "/doc", external: false },
-  { label: "Team", href: "/team", external: false },
+
+  {
+    label: "Platform",
+    items: [
+      { label: "Market", href: "https://market.axonivy.com/", external: true },
+
+      {
+        label: "Release Cycle",
+        href: "/download/release-cycle",
+        external: false,
+      },
+      { label: "Deprecation", href: "/deprecation", external: false },
+
+      { label: "Support", href: "/support", external: false },
+    ],
+  },
+
+  {
+    label: "Documentation",
+    items: [
+      { label: "Overview", href: "/doc", external: false },
+      {
+        label: `LTS ${CURRENT_VERSION}`,
+        href: `/doc/${CURRENT_VERSION}/en`,
+        external: true,
+      },
+      {
+        label: `LTS ${LTS_VERSION}`,
+        href: `/doc/${LTS_VERSION}/en`,
+        external: true,
+      },
+      {
+        label: "Tutorial",
+        href: "https://axonivy.com/tutorial",
+        external: true,
+      },
+    ],
+  },
   {
     label: "Community",
     href: "https://community.axonivy.com/",
     external: true,
   },
+  { label: "Team", href: "/team", external: false },
 ];
 
 export default function Navbar({ type }: { type: "header" | "footer" }) {
@@ -39,29 +79,69 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
     <div className="relative">
       <NavigationMenu className="hidden md:flex">
         <NavigationMenuList>
-          {navItems.map((item) => (
-            <NavigationMenuItem key={item.href}>
-              <NavigationMenuLink
-                className={navigationMenuTriggerStyle() + " items-start gap-1"}
-                render={
-                  <a
-                    href={item.href}
-                    target={item.external ? "_blank" : "_self"}
-                    rel={item.external ? "noopener noreferrer" : undefined}
-                  >
-                    {item.label}
+          {navItems.map((item) => {
+            return item.items ? (
+              <NavigationMenuItem key={item.href}>
+                <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  {item.items.map((subItem) => (
+                    <NavigationMenuItem key={subItem.href}>
+                      <NavigationMenuLink
+                        className={
+                          navigationMenuTriggerStyle() +
+                          " w-full items-start justify-start gap-1"
+                        }
+                        render={
+                          <a
+                            href={subItem.href}
+                            target={subItem.external ? "_blank" : "_self"}
+                            rel={
+                              subItem.external
+                                ? "noopener noreferrer"
+                                : undefined
+                            }
+                          >
+                            {subItem.label}
 
-                    {item.external && (
-                      <IconArrowUpRight
-                        className="size-3 stroke-2"
-                        aria-hidden="true"
+                            {subItem.external && (
+                              <IconArrowUpRight
+                                className="size-3 stroke-2"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </a>
+                        }
                       />
-                    )}
-                  </a>
-                }
-              />
-            </NavigationMenuItem>
-          ))}
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            ) : (
+              <NavigationMenuItem key={item.href}>
+                <NavigationMenuLink
+                  className={
+                    navigationMenuTriggerStyle() + " items-start gap-1"
+                  }
+                  render={
+                    <a
+                      href={item.href}
+                      target={item.external ? "_blank" : "_self"}
+                      rel={item.external ? "noopener noreferrer" : undefined}
+                    >
+                      {item.label}
+
+                      {item.external && (
+                        <IconArrowUpRight
+                          className="size-3 stroke-2"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </a>
+                  }
+                />
+              </NavigationMenuItem>
+            );
+          })}
         </NavigationMenuList>
       </NavigationMenu>
 

@@ -35,7 +35,11 @@ export default function DevReleases({ product }: DevReleasesProps) {
     );
   }
 
-  const releases = data.releaseInfos.filter((release) =>
+  const sortedReleases = data.releaseInfos.sort((a, b) =>
+    b.version.localeCompare(a.version),
+  );
+
+  const releases = sortedReleases.filter((release) =>
     product === "designer"
       ? (release.designerArtifacts ?? []).length > 0
       : (release.engineArtifacts ?? []).length > 0,
