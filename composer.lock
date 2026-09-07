@@ -1896,16 +1896,16 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v5.32.14",
+            "version": "v5.32.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "6e8ce248db64190e4113676aba996943c56f2491"
+                "reference": "eb37d16243388857e5b7c68c93fd04635c7c96fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/6e8ce248db64190e4113676aba996943c56f2491",
-                "reference": "6e8ce248db64190e4113676aba996943c56f2491",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/eb37d16243388857e5b7c68c93fd04635c7c96fa",
+                "reference": "eb37d16243388857e5b7c68c93fd04635c7c96fa",
                 "shasum": ""
             },
             "type": "library",
@@ -1951,9 +1951,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
-                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.32.14"
+                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.32.15"
             },
-            "time": "2026-08-18T12:12:25+00:00"
+            "time": "2026-09-04T10:12:25+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3262,16 +3262,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "14.3.1",
+            "version": "14.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6ce313bb110384148d1dc7695a99175f59529069"
+                "reference": "93d62632fb675b76c9b941fdcfcfa10ffb9dea75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6ce313bb110384148d1dc7695a99175f59529069",
-                "reference": "6ce313bb110384148d1dc7695a99175f59529069",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/93d62632fb675b76c9b941fdcfcfa10ffb9dea75",
+                "reference": "93d62632fb675b76c9b941fdcfcfa10ffb9dea75",
                 "shasum": ""
             },
             "require": {
@@ -3290,7 +3290,7 @@
                 "theseer/tokenizer": "^2.0.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.3.1"
+                "phpunit/phpunit": "^13.3.2"
             },
             "suggest": {
                 "ext-pcov": "PHP extension that provides line coverage",
@@ -3328,7 +3328,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/14.3.1"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/14.3.2"
             },
             "funding": [
                 {
@@ -3348,7 +3348,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-16T05:23:47+00:00"
+            "time": "2026-09-04T03:46:43+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
