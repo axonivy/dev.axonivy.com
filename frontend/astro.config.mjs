@@ -1,4 +1,5 @@
 import { defineConfig, fontProviders } from "astro/config";
+import svgr from "vite-plugin-svgr";
 
 import react from "@astrojs/react";
 
@@ -25,7 +26,7 @@ export default defineConfig({
       },
     },
 
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), svgr()],
   },
 
   integrations: [react()],

@@ -2,7 +2,7 @@
 import { buttonVariants } from "@/components/ui/button";
 import Layout from "@/layouts/news.astro";
 import { H5, H6 } from "@/components/ui/typography";
-import Robot from "@/assets/robot.svg?raw";
+import Robot from "@/assets/robot.svg";
 ---
 
 <Layout>
@@ -27,11 +27,10 @@ import Robot from "@/assets/robot.svg?raw";
       </a>
     </div>
     <div class="w-full min-w-0 md:w-3/5">
-      <div
-        role="img"
-        aria-label="Release cycle illustration"
+      <Robot
+        width="full"
+        height="auto"
         class="w-full max-w-full overflow-x-hidden [&>svg]:h-auto [&>svg]:w-full"
-        set:html={Robot}
       />
     </div>
   </div>

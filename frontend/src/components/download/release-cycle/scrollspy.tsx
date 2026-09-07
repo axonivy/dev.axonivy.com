@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/scroll-spy";
 import { IconCircleCheck, IconBulb } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
-import releaseCycleIllustration from "@/assets/release-cycle-illustration.svg?raw";
+import ReleaseCycleIllustration from "@/assets/release-cycle-illustration.svg?react";
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
 import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
 
@@ -145,12 +145,7 @@ export default function ReleaseCycleScrollspy() {
           >
             <div>
               <H4>Release cycle illustration</H4>
-              <div
-                role="img"
-                aria-label="Release cycle illustration"
-                className="w-full max-w-full overflow-x-hidden [&>svg]:h-auto [&>svg]:w-full"
-                dangerouslySetInnerHTML={{ __html: releaseCycleIllustration }}
-              />
+              <ReleaseCycleIllustration />
             </div>
           </ScrollSpySection>
         </ScrollSpyViewport>
