@@ -33,9 +33,16 @@ const tasks = [
     icon: "user",
   },
 ];
+import vsCodeLight from "/src/assets/vscode-light.png";
+import vsCodeDark from "/src/assets/vscode-dark.png";
 
-// Maps the 900x640 canvas area onto the real screenshot's canvas area.
-const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
+// Maps the canvas area onto the real screenshot's canvas area.
+// Dot-grid background only — kept separate from DIAGRAM_TRANSFORM_PROCESS
+// below so the process itself can be nudged without dragging the
+// background along with it.
+const DIAGRAM_TRANSFORM = "translate(20.0, 145) scale(2.5)";
+// Pool, lanes, connectors, tasks, gateways, token, badges.
+const DIAGRAM_TRANSFORM_PROCESS = "translate(40, 84.5) scale(2.5)";
 ---
 
 <div
@@ -43,20 +50,26 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
 >
   <div class="mr-[-2%] ml-[50%] flex h-full w-1/2 items-center justify-end">
     <div
-      class="relative aspect-4032/2324 h-auto shrink-0 overflow-visible"
+      class="relative aspect-3024/1896 h-auto shrink-0 overflow-visible"
       style="width: 130%; transform: translateX(25%);"
     >
       <!-- ============ SCREENSHOT ============ -->
       <img
-        src="/src/assets/vscode-process-frame.png"
+        src={vsCodeLight.src}
         alt="Axon Ivy PRO Designer window"
-        class="absolute inset-0 h-full w-full object-contain"
+        class="absolute inset-0 h-full w-full object-contain dark:hidden"
+        draggable="false"
+      />
+      <img
+        src={vsCodeDark.src}
+        alt="Axon Ivy PRO Designer window"
+        class="absolute inset-0 hidden h-full w-full object-contain dark:flex"
         draggable="false"
       />
 
       <!-- ============ ANIMATED DIAGRAM ============ -->
       <svg
-        viewBox="0 0 4032 2324"
+        viewBox="0 0 3024 1896"
         class="absolute inset-0 h-full w-full overflow-visible"
         role="img"
         aria-label="Axon Ivy process designer showing an onboarding process diagram"
@@ -86,15 +99,18 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
             height="16"
             patternUnits="userSpaceOnUse"
           >
-            <rect width="16" height="16" fill="var(--background)"></rect>
+            <rect width="16" height="16" class="fill-background dark:fill-n50"
+            ></rect>
             <circle cx="1.2" cy="1.2" r="0.75" fill="var(--n300, #d1d5db)"
             ></circle>
           </pattern>
         </defs>
 
         <g transform={DIAGRAM_TRANSFORM}>
-          <rect x="50" y="82" width="850" height="532" fill="url(#dotGrid)"
+          <rect x="40" y="-30" width="1190" height="720" fill="url(#dotGrid)"
           ></rect>
+        </g>
+        <g transform={DIAGRAM_TRANSFORM_PROCESS}>
           <path
             d="M128,110 L108,110 Q100,110 100,118 L100,572 Q100,580 108,580 L128,580 Z"
             fill="var(--n25)"></path>
@@ -176,8 +192,8 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
               d="M558,290 L508,290 Q500,290 500,298 L500,343"
               marker-end="url(#arrow)"></path>
             <path d="M740,373 L740,495" marker-end="url(#arrow)"></path>
-            <path d="M796,520 L890,520" marker-end="url(#arrow)"></path>
-            <path d="M780,614 L780,579"></path>
+            <path d="M796,520 L900,520" marker-end="url(#arrow)"></path>
+            <path d="M780,721.5 L780,579"></path>
           </g>
 
           <!-- start event -->
@@ -462,133 +478,62 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
   // Highlights each shape as the token passes it and shows a "1" badge at
   // its top-right corner; clears when the token hands off to the next
   // route. Route identity comes from SMIL's beginEvent.
-  // Progress within a route is elapsed-time-since-beginEvent, so it
-  // self-corrects every route change instead of drifting.
-
   type RouteName = "routeFinish" | "routeLoop" | "routeDirect";
-  type Vertex = [number, number];
-  type Waypoint = [number, string];
 
   function initProcessFlowBg(root: Element): void {
     const svg = root.querySelector("svg");
     if (!svg) return;
 
-    const VERTS: Record<RouteName, Vertex[]> = {
-      routeFinish: [
-        [230, 178],
-        [311, 178],
-        [370, 178],
-        [370, 203],
-        [370, 333],
-        [370, 358],
-        [429, 358],
-        [485, 358],
-        [500, 358],
-        [500, 373],
-        [500, 422],
-      ],
-      routeLoop: [
-        [230, 178],
-        [311, 178],
-        [370, 178],
-        [370, 203],
-        [370, 333],
-        [370, 358],
-        [429, 358],
-        [485, 358],
-        [500, 358],
-        [515, 358],
-        [725, 358],
-        [740, 358],
-        [740, 343],
-        [740, 290],
-        [682, 290],
-        [670, 290],
-        [558, 290],
-        [508, 290],
-        [500, 298],
-        [500, 343],
-        [500, 358],
-        [515, 358],
-        [725, 358],
-        [740, 358],
-        [740, 373],
-        [740, 495],
-        [740, 520],
-        [796, 520],
-        [890, 520],
-      ],
-      routeDirect: [
-        [230, 178],
-        [311, 178],
-        [370, 178],
-        [370, 203],
-        [370, 333],
-        [370, 358],
-        [429, 358],
-        [485, 358],
-        [500, 358],
-        [515, 358],
-        [725, 358],
-        [740, 358],
-        [740, 373],
-        [740, 495],
-        [740, 520],
-        [796, 520],
-        [890, 520],
-      ],
-    };
-
-    // [vertex index, node name] — a name can repeat within a route (e.g.
-    // Gateway 1 and the check gateway are each visited twice on the loop).
-    const WAYPOINTS: Record<RouteName, Waypoint[]> = {
-      routeFinish: [
-        [0, "start"],
-        [2, "task-0"],
-        [5, "task-1"],
-        [8, "gateway1"],
-        [10, "finish"],
-      ],
-      routeLoop: [
-        [0, "start"],
-        [2, "task-0"],
-        [5, "task-1"],
-        [8, "gateway1"],
-        [11, "checkgateway"],
-        [15, "task-2"],
-        [20, "gateway1"],
-        [23, "checkgateway"],
-        [26, "task-3"],
-      ],
-      routeDirect: [
-        [0, "start"],
-        [2, "task-0"],
-        [5, "task-1"],
-        [8, "gateway1"],
-        [11, "checkgateway"],
-        [14, "task-3"],
-      ],
-    };
-
     const ORDER: RouteName[] = ["routeFinish", "routeLoop", "routeDirect"];
+    const DURATIONS: Record<RouteName, number> = {
+      routeFinish: 4.2,
+      routeLoop: 14,
+      routeDirect: 10,
+    };
+
+    // Ordered list of shapes each route passes through. A name can repeat
+    // within a route (Gateway 1 and the check gateway are each visited
+    // twice on the loop) — repeats are resolved in order below by always
+    // searching forward from the previous match.
+    const WAYPOINTS: Record<RouteName, string[]> = {
+      routeFinish: ["start", "task-0", "task-1", "gateway1", "finish"],
+      routeLoop: [
+        "start",
+        "task-0",
+        "task-1",
+        "gateway1",
+        "checkgateway",
+        "task-2",
+        "gateway1",
+        "checkgateway",
+        "task-3",
+      ],
+      routeDirect: [
+        "start",
+        "task-0",
+        "task-1",
+        "gateway1",
+        "checkgateway",
+        "task-3",
+      ],
+    };
+
+    const nodeNames: string[] = Array.from(
+      new Set(Object.values(WAYPOINTS).flat()),
+    );
 
     const badgeLayer = svg.querySelector("#badge-layer");
-    const nodeNames: string[] = Array.from(
-      new Set(
-        Object.values(WAYPOINTS)
-          .flat()
-          .map(([, name]) => name),
-      ),
-    );
     const badgeEls = new Map<string, SVGGElement>();
     const BADGE_W = 20;
     const BADGE_H = 13;
 
+    function firstShapeFor(name: string): SVGGraphicsElement | null {
+      return svg!.querySelector(`[data-node="${name}"]`);
+    }
+
     if (badgeLayer) {
       for (const name of nodeNames) {
-        const shape = svg.querySelector(
-          `[data-node="${name}"]`,
-        ) as SVGGraphicsElement | null;
+        const shape = firstShapeFor(name);
         if (!shape || typeof shape.getBBox !== "function") continue;
         const bbox = shape.getBBox();
         const x = bbox.x + bbox.width;
@@ -600,8 +545,6 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
         ) as SVGGElement;
         g.setAttribute("data-badge", name);
         g.setAttribute("transform", `translate(${x}, ${y})`);
-        // Astro's scoped <style> won't match elements created at runtime,
-        // so styling here is inline rather than via CSS classes.
         g.style.opacity = "0";
         g.style.transition = "opacity 0.2s ease";
 
@@ -658,43 +601,88 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
       if (badge) badge.style.opacity = "0";
     }
 
+    function closestLengthFrom(
+      pathEl: SVGPathElement,
+      x: number,
+      y: number,
+      fromLen: number,
+    ): number {
+      const total = pathEl.getTotalLength();
+      const span = Math.max(total - fromLen, 1);
+      const samples = 800;
+      const closeEnough = 4;
+
+      let firstCloseLen: number | null = null;
+      let bestLen = fromLen;
+      let bestD2 = Infinity;
+      for (let i = 0; i <= samples; i++) {
+        const len = fromLen + (i / samples) * span;
+        const pt = pathEl.getPointAtLength(len);
+        const dx = pt.x - x;
+        const dy = pt.y - y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < bestD2) {
+          bestD2 = d2;
+          bestLen = len;
+        }
+        if (firstCloseLen === null && d2 <= closeEnough * closeEnough) {
+          firstCloseLen = len;
+          break;
+        }
+      }
+
+      const anchor = firstCloseLen ?? bestLen;
+      const step = span / samples;
+      let lo = Math.max(fromLen, anchor - step);
+      let hi = Math.min(total, anchor + step);
+      for (let iter = 0; iter < 20; iter++) {
+        const m1 = lo + (hi - lo) / 3;
+        const m2 = hi - (hi - lo) / 3;
+        const p1 = pathEl.getPointAtLength(m1);
+        const p2 = pathEl.getPointAtLength(m2);
+        const d1 = (p1.x - x) ** 2 + (p1.y - y) ** 2;
+        const d2b = (p2.x - x) ** 2 + (p2.y - y) ** 2;
+        if (d1 < d2b) hi = m2;
+        else lo = m1;
+      }
+      return (lo + hi) / 2;
+    }
+
     const routeAnimEls: Record<RouteName, Element | null> = {
       routeFinish: svg.querySelector("#animFinish"),
       routeLoop: svg.querySelector("#animLoop"),
       routeDirect: svg.querySelector("#animDirect"),
     };
-    const DURATIONS: Record<RouteName, number> = {
-      routeFinish: 4.2,
-      routeLoop: 14,
-      routeDirect: 10,
+    const routePathEls: Record<RouteName, SVGPathElement | null> = {
+      routeFinish: svg.querySelector("#routeFinish"),
+      routeLoop: svg.querySelector("#routeLoop"),
+      routeDirect: svg.querySelector("#routeDirect"),
     };
 
-    // Distance-fraction-based waypoint timing (animateMotion defaults to
-    // constant-velocity "paced" motion, so time is proportional to
-    // distance along the path).
     const routeWaypointTimes = {} as Record<
       RouteName,
       { name: string; time: number }[]
     >;
     for (const routeName of ORDER) {
-      const verts = VERTS[routeName];
-      const dist: number[] = [0];
-      for (let i = 1; i < verts.length; i++) {
-        const [x1, y1] = verts[i - 1];
-        const [x2, y2] = verts[i];
-        dist.push(dist[i - 1] + Math.hypot(x2 - x1, y2 - y1));
-      }
-      const total = dist[dist.length - 1];
+      const pathEl = routePathEls[routeName];
       const dur = DURATIONS[routeName];
-      routeWaypointTimes[routeName] = WAYPOINTS[routeName].map(
-        ([idx, name]) => ({
-          name,
-          // Pull anything within the final 50ms back, so a waypoint at the
-          // route's exact end (e.g. "finish") can't race the next route's
-          // beginEvent reset.
-          time: Math.min((dist[idx] / total) * dur, dur - 0.05),
-        }),
-      );
+      const times: { name: string; time: number }[] = [];
+      if (pathEl) {
+        const total = pathEl.getTotalLength();
+        let fromLen = 0;
+        for (const name of WAYPOINTS[routeName]) {
+          const shape = firstShapeFor(name);
+          if (!shape || typeof shape.getBBox !== "function") continue;
+          const bbox = shape.getBBox();
+          const cx = bbox.x + bbox.width / 2;
+          const cy = bbox.y + bbox.height / 2;
+          const len = closestLengthFrom(pathEl, cx, cy, fromLen);
+          fromLen = len;
+          const time = Math.min((len / total) * dur, dur - 0.05);
+          times.push({ name, time });
+        }
+      }
+      routeWaypointTimes[routeName] = times;
     }
 
     let currentRoute: RouteName = "routeFinish";
