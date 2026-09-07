@@ -12,42 +12,40 @@ import Processflowbackground from "@/components/processflowbackground.astro";
 ---
 
 <Layout
-  title="Build and automate business processes faster with Axon Ivy"
+  title="Build and automate business processes with Axon Ivy"
   description={"The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."}
-  center={true}
+  left={true}
 >
   <Processflowbackground
     slot="hero-background"
     class="absolute inset-0 blur-[1.5px]"
   />
 
-  <div class="flex flex-col items-center gap-4 leading-loose">
-    <div class="flex w-full max-w-3xs flex-row justify-center gap-4">
+  <div class="flex flex-col items-center gap-4 leading-loose md:items-start">
+    <div class="flex max-w-3xs flex-row justify-center gap-4 md:justify-start">
       <a
-        href="/download"
-        class={buttonVariants({
-          variant: "default",
-          size: "lg",
-        }) + " px-6 group"}
+        href="download"
+        class={buttonVariants({ variant: "default", size: "lg" }) +
+          " px-6 group"}
       >
-        Get started
+        Get Started
         <IconArrowRight
           class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
         />
       </a>
       <a
         href="/news"
-        class={buttonVariants({ variant: "outline", size: "lg" }) + " px-6 "}
+        class={buttonVariants({ variant: "outline", size: "lg" }) + " px-6"}
       >
         Latest News
       </a>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-start gap-2 md:items-center">
       <a
         href="/download/installation/docker?downloadUrl=https%3A%2F%2Fhub.docker.com%2Fr%2Faxonivy%2Faxonivy-engine"
         aria-label="View Docker installation guide"
         title="View Docker installation guide"
-        class="text-code hover:text-primary shrink-0 transition-colors"
+        class="text-code hover:text-primary mt-1 shrink-0 transition-colors md:mt-0"
       >
         <IconInfoCircle aria-hidden="true" class="size-4" />
       </a>
@@ -55,20 +53,20 @@ import Processflowbackground from "@/components/processflowbackground.astro";
         type="button"
         data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`}
         aria-label="Copy Docker command"
-        class="group font-code text-code relative flex max-w-full items-center justify-center gap-2"
+        class="group font-code text-code relative flex max-w-full flex-row items-end justify-center gap-2"
       >
-        <span>
+        <span class="min-w-0 text-center">
           ~ docker run -p 8080:8080 axonivy/axonivy-engine:{CURRENT_VERSION}
+          <IconCheck
+            data-check-icon
+            aria-hidden="true"
+            class="text-primary ml-1 hidden size-4 align-middle md:absolute md:top-1/2 md:-right-6 md:-translate-y-1/2"
+          />
         </span>
         <IconCopy
           data-copy-icon
           aria-hidden="true"
-          class="absolute -right-6 size-4 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-        />
-        <IconCheck
-          data-check-icon
-          aria-hidden="true"
-          class="text-primary absolute -right-6 hidden size-4"
+          class="absolute top-1/2 -right-6 size-4 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
         />
       </button>
     </div>
@@ -83,12 +81,14 @@ import Processflowbackground from "@/components/processflowbackground.astro";
     const resetIcon = () => {
       copyIcon.classList.remove("hidden");
       checkIcon.classList.add("hidden");
+      checkIcon.classList.remove("inline-block");
     };
 
     commandButton.addEventListener("click", async () => {
       await navigator.clipboard.writeText(commandButton.dataset.copyCommand);
       copyIcon.classList.add("hidden");
       checkIcon.classList.remove("hidden");
+      checkIcon.classList.add("inline-block");
     });
 
     commandButton.addEventListener("mouseleave", resetIcon);

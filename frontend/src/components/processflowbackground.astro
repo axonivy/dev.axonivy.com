@@ -1,1345 +1,737 @@
 ---
-interface Props {
-  class?: string;
-}
-const { class: className = "" } = Astro.props;
-
-type Step =
-  | { type: "start" }
-  | { type: "end" }
-  | { type: "task"; label: string }
-  | { type: "gateway"; branch?: string };
-
-const steps: Step[] = [
-  { type: "start" },
-  { type: "task", label: "Enter Request" },
-  { type: "task", label: "Verify Request" },
-  { type: "task", label: "Check Stock" },
-  { type: "gateway", branch: "Handle Backorder" },
-  { type: "task", label: "Approve Request" },
-  { type: "task", label: "Assign Supplier" },
-  { type: "task", label: "Negotiate Price" },
-  { type: "gateway", branch: "Escalate Approval" },
-  { type: "task", label: "Create Order" },
-  { type: "task", label: "Confirm Order" },
-  { type: "task", label: "Schedule Delivery" },
-  { type: "gateway", branch: "Resolve Delay" },
-  { type: "task", label: "Ship Goods" },
-  { type: "task", label: "Track Shipment" },
-  { type: "task", label: "Confirm Receipt" },
-  { type: "end" },
+const tasks = [
+  {
+    x: 311,
+    y: 153,
+    w: 118,
+    h: 50,
+    lines: ["Enter", "Request"],
+    icon: "user",
+  },
+  {
+    x: 311,
+    y: 333,
+    w: 118,
+    h: 50,
+    lines: ["Accept", "Roles"],
+    icon: "user",
+  },
+  {
+    x: 558,
+    y: 267,
+    w: 124,
+    h: 46,
+    lines: ["Decrement", "Counter"],
+    icon: "code",
+  },
+  {
+    x: 684,
+    y: 495,
+    w: 112,
+    h: 50,
+    lines: ["Verify", "Request"],
+    icon: "user",
+  },
 ];
 
-const TASK_W = 118;
-const TASK_H = 60;
-const GATE_D = 38;
-const EVENT_R = 12;
-const GAP = 62;
-const PAD = 56;
-const BELOW_OFFSET = 96;
-const BASE_CY = 130;
-const TOTAL_H = BASE_CY + BELOW_OFFSET + TASK_H / 2 + 30;
-const FADE_PX = 4;
-const BADGE_RX = 14;
-const BADGE_RY = 9;
-
-const widthOf = (s: Step) =>
-  s.type === "task" ? TASK_W : s.type === "gateway" ? GATE_D : EVENT_R * 2;
-
-const stepWidth = (s: Step) =>
-  widthOf(s) + GAP + (s.type === "gateway" && s.branch ? TASK_W + GAP : 0);
-
-type Block = { indices: number[]; width: number };
-const blocks: Block[] = [];
-{
-  let i = 0;
-  while (i < steps.length) {
-    const s = steps[i];
-    if (s.type === "gateway" && s.branch && i + 1 < steps.length) {
-      blocks.push({
-        indices: [i, i + 1],
-        width: stepWidth(s) + stepWidth(steps[i + 1]),
-      });
-      i += 2;
-    } else {
-      blocks.push({ indices: [i], width: stepWidth(s) });
-      i += 1;
-    }
-  }
-}
-
-const blockPrefix: number[] = [];
-{
-  let sum = 0;
-  for (const b of blocks) {
-    sum += b.width;
-    blockPrefix.push(sum);
-  }
-}
-const totalBlockWidth = blockPrefix[blockPrefix.length - 1];
-
-let bestBoundary = 0;
-let bestDiff = Infinity;
-for (let k = 0; k < blocks.length - 1; k++) {
-  const row0Width = blockPrefix[k];
-  const row1Width = totalBlockWidth - row0Width;
-  const diff = Math.abs(row0Width - row1Width);
-  if (diff < bestDiff) {
-    bestDiff = diff;
-    bestBoundary = k;
-  }
-}
-
-const rowOfIndex: number[] = new Array(steps.length).fill(0);
-blocks.forEach((b, bi) => {
-  const row = bi <= bestBoundary ? 0 : 1;
-  b.indices.forEach((idx) => (rowOfIndex[idx] = row));
-});
-const numRows = 2;
-
-type LocalBelow = { gatewayIndex: number; localX: number; label: string };
-const localCenterX: number[] = new Array(steps.length);
-const localBelow: LocalBelow[] = [];
-const rowWidths: number[] = new Array(numRows).fill(0);
-
-for (let r = 0; r < numRows; r++) {
-  let cursor = PAD;
-  for (let i = 0; i < steps.length; i++) {
-    if (rowOfIndex[i] !== r) continue;
-    const s = steps[i];
-    const w = widthOf(s);
-    localCenterX[i] = cursor + w / 2;
-    cursor += w + GAP;
-    if (s.type === "gateway" && s.branch) {
-      localBelow.push({
-        gatewayIndex: i,
-        localX: cursor + TASK_W / 2,
-        label: s.branch,
-      });
-      cursor += TASK_W + GAP;
-    }
-  }
-  rowWidths[r] = cursor - GAP + PAD;
-}
-const ROW_WIDTH = Math.max(...rowWidths);
-
-const mirrorForRow = (r: number) => r % 2 === 1;
-
-type Point = { x: number; y: number };
-const centers: Point[] = steps.map((_, i) => {
-  const r = rowOfIndex[i];
-  const x = mirrorForRow(r) ? ROW_WIDTH - localCenterX[i] : localCenterX[i];
-  return { x, y: BASE_CY };
-});
-
-const belowNodes = localBelow.map((b, k) => {
-  const r = rowOfIndex[b.gatewayIndex];
-  const x = mirrorForRow(r) ? ROW_WIDTH - b.localX : b.localX;
-  return {
-    k,
-    gatewayIndex: b.gatewayIndex,
-    label: b.label,
-    x,
-    y: BASE_CY + BELOW_OFFSET,
-  };
-});
-
-const xJoin = ROW_WIDTH - PAD * 0.55;
-
-let lastIdxRow0 = -1;
-let firstIdxRow1 = -1;
-for (let i = 0; i < steps.length; i++) {
-  if (rowOfIndex[i] === 0) lastIdxRow0 = i;
-  if (rowOfIndex[i] === 1 && firstIdxRow1 === -1) firstIdxRow1 = i;
-}
-
-const pathOf = (pts: Point[]) =>
-  "M" + pts.map((p) => `${p.x},${p.y}`).join(" L ");
-
-type RowData = {
-  r: number;
-  wrapId: string;
-  width: number;
-  height: number;
-  indices: number[];
-  segments: { key: string; d: string }[];
-  branches: {
-    k: number;
-    x: number;
-    y: number;
-    label: string;
-    down: string;
-    up: string;
-    downPts: Point[];
-    upPts: Point[];
-  }[];
-  routePoints: { indices: number[]; throughPoints: Point[][] };
-  stub: { key: string; d: string; pts: Point[] } | null;
-};
-
-const wrapId = "pf-" + Math.random().toString(36).slice(2, 9);
-
-function buildRow(r: number): RowData {
-  const indices = steps.map((_, i) => i).filter((i) => rowOfIndex[i] === r);
-
-  const throughPoints: Point[][] = [];
-  for (let n = 0; n < indices.length - 1; n++) {
-    throughPoints.push([centers[indices[n]], centers[indices[n + 1]]]);
-  }
-
-  const segments = throughPoints.map((pts, n) => ({
-    key: String(indices[n]),
-    d: pathOf(pts),
-  }));
-
-  const branchesInRow = belowNodes.filter(
-    (b) => rowOfIndex[b.gatewayIndex] === r,
-  );
-  const branches = branchesInRow.map((b) => {
-    const gate = centers[b.gatewayIndex];
-    const next = centers[b.gatewayIndex + 1];
-    const downPts: Point[] = [gate, { x: gate.x, y: b.y }, { x: b.x, y: b.y }];
-    const upPts: Point[] = [{ x: b.x, y: b.y }, { x: next.x, y: b.y }, next];
-    return {
-      k: b.k,
-      x: b.x,
-      y: b.y,
-      label: b.label,
-      down: pathOf(downPts),
-      up: pathOf(upPts),
-      downPts,
-      upPts,
-    };
-  });
-
-  let stub: RowData["stub"] = null;
-  if (r === 0) {
-    const last = centers[lastIdxRow0];
-    const pts: Point[] = [
-      last,
-      { x: xJoin, y: BASE_CY },
-      { x: xJoin, y: TOTAL_H },
-    ];
-    stub = { key: "stub-out", d: pathOf(pts), pts };
-  } else if (r === 1) {
-    const first = centers[firstIdxRow1];
-    const pts: Point[] = [{ x: xJoin, y: 0 }, { x: xJoin, y: BASE_CY }, first];
-    stub = { key: "stub-in", d: pathOf(pts), pts };
-  }
-
-  return {
-    r,
-    wrapId: `${wrapId}-r${r}`,
-    width: ROW_WIDTH,
-    height: TOTAL_H,
-    indices,
-    segments,
-    branches,
-    routePoints: { indices, throughPoints },
-    stub,
-  };
-}
-
-const rowsData: RowData[] = [buildRow(0), buildRow(1)];
-const row0 = rowsData[0];
-const row1 = rowsData[1];
-
-const baseLength = (row: RowData) => {
-  let d = 0;
-  const acc = (pts: Point[]) => {
-    for (let i = 1; i < pts.length; i++)
-      d += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
-  };
-  row.routePoints.throughPoints.forEach(acc);
-  if (row.stub) acc(row.stub.pts);
-  return d;
-};
-
-const row0Length = baseLength(row0);
-const row1Length = baseLength(row1);
-const BASE_DURATION = Math.max(10, +(steps.length * 1.15).toFixed(2));
-const speed = (row0Length + row1Length) / BASE_DURATION; // px/sec
-const CONNECTOR_DURATION = 1.6; // seconds, fixed — not distance-driven
-
-const clientRows = rowsData.map((row) => ({
-  r: row.r,
-  wrapId: row.wrapId,
-  centers: row.indices.map((i) => centers[i]),
-  indices: row.indices,
-  throughPoints: row.routePoints.throughPoints,
-  branchMeta: row.branches.map((b) => ({
-    k: b.k,
-    gatewayIndex: row.indices.indexOf(
-      belowNodes.find((n) => n.k === b.k)!.gatewayIndex,
-    ),
-    downPoints: b.downPts,
-    upPoints: b.upPts,
-  })),
-  stub: row.stub ? { key: row.stub.key, pts: row.stub.pts } : null,
-}));
-
-const xJoinPercent = (xJoin / ROW_WIDTH) * 100;
+// Maps the 900x640 canvas area onto the real screenshot's canvas area.
+const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
 ---
 
 <div
-  id={wrapId}
-  class={`process-flow-bg flex h-full w-4/5 mx-auto flex-col py-6 md:pt-10 md:pb-18 ${className}`}
-  aria-hidden="true"
+  class="process-flow-bg pointer-events-none flex h-full w-full items-center overflow-hidden"
 >
-  <!-- Row 0 -->
-  <svg
-    class="process-flow-svg shrink-0"
-    viewBox={`0 0 ${row0.width} ${row0.height}`}
-    preserveAspectRatio="xMidYMid meet"
-    style={`aspect-ratio: ${row0.width} / ${row0.height};`}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <pattern
-        id={`${row0.wrapId}-dots`}
-        width="24"
-        height="24"
-        patternUnits="userSpaceOnUse"
+  <div class="mr-[-2%] ml-[50%] flex h-full w-1/2 items-center justify-end">
+    <div
+      class="relative aspect-4032/2324 h-auto shrink-0 overflow-visible"
+      style="width: 130%; transform: translateX(25%);"
+    >
+      <!-- ============ SCREENSHOT ============ -->
+      <img
+        src="/src/assets/vscode-process-frame.png"
+        alt="Axon Ivy PRO Designer window"
+        class="absolute inset-0 h-full w-full object-contain"
+        draggable="false"
+      />
+
+      <!-- ============ ANIMATED DIAGRAM ============ -->
+      <svg
+        viewBox="0 0 4032 2324"
+        class="absolute inset-0 h-full w-full overflow-visible"
+        role="img"
+        aria-label="Axon Ivy process designer showing an onboarding process diagram"
       >
-        <circle cx="1.2" cy="1.2" r="1.2" fill="currentColor" class="pf-dot"
-        ></circle>
-      </pattern>
-      <filter
-        id={`${row0.wrapId}-glow`}
-        x="-80%"
-        y="-80%"
-        width="260%"
-        height="260%"
-      >
-        <feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur>
-        <feMerge>
-          <feMergeNode in="blur"></feMergeNode>
-          <feMergeNode in="SourceGraphic"></feMergeNode>
-        </feMerge>
-      </filter>
-      <linearGradient id={`${row0.wrapId}-fade`} x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0" stop-color="white" stop-opacity="0"></stop>
-        <stop offset={FADE_PX / row0.width} stop-color="white" stop-opacity="1"
-        ></stop>
-        <stop
-          offset={1 - FADE_PX / row0.width}
-          stop-color="white"
-          stop-opacity="1"></stop>
-        <stop offset="1" stop-color="white" stop-opacity="0"></stop>
-      </linearGradient>
-      <mask id={`${row0.wrapId}-mask`}>
-        <rect
-          x="0"
-          y="0"
-          width={row0.width}
-          height={row0.height}
-          fill={`url(#${row0.wrapId}-fade)`}></rect>
-      </mask>
-    </defs>
+        <defs>
+          <marker
+            id="arrow"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6.5"
+            markerHeight="6.5"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--n900)"></path>
+          </marker>
+          <filter id="ballGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+            <feMerge>
+              <feMergeNode in="blur"></feMergeNode>
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
+          <pattern
+            id="dotGrid"
+            width="16"
+            height="16"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect width="16" height="16" fill="var(--background)"></rect>
+            <circle cx="1.2" cy="1.2" r="0.75" fill="var(--n300, #d1d5db)"
+            ></circle>
+          </pattern>
+        </defs>
 
-    {
-      row0.stub && (
-        <path
-          d={row0.stub.d}
-          class="pf-line"
-          data-seg={row0.stub.key}
-          fill="none"
-        />
-      )
-    }
+        <g transform={DIAGRAM_TRANSFORM}>
+          <rect x="50" y="82" width="850" height="532" fill="url(#dotGrid)"
+          ></rect>
+          <path
+            d="M128,110 L108,110 Q100,110 100,118 L100,572 Q100,580 108,580 L128,580 Z"
+            fill="var(--n25)"></path>
+          <path
+            d="M900,110 L108,110 Q100,110 100,118 L100,572 Q100,580 108,580 L900,580"
+            fill="none"
+            stroke="var(--n400)"
+            stroke-width="0.75"></path>
+          <line
+            x1="128"
+            y1="110"
+            x2="128"
+            y2="580"
+            stroke="var(--n400)"
+            stroke-width="0.75"></line>
+          <line
+            x1="128"
+            y1="250"
+            x2="900"
+            y2="250"
+            stroke="var(--n400)"
+            stroke-width="0.75"></line>
+          <line
+            x1="128"
+            y1="460"
+            x2="900"
+            y2="460"
+            stroke="var(--n400)"
+            stroke-width="0.75"></line>
 
-    <g mask={`url(#${row0.wrapId}-mask)`}>
-      <rect
-        x="0"
-        y="0"
-        width={row0.width}
-        height={row0.height}
-        fill={`url(#${row0.wrapId}-dots)`}
-        class="pf-grid"></rect>
+          <text
+            x="117"
+            y="355"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 117 355)">Department</text
+          >
+          <text
+            x="148"
+            y="180"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 148 180)">Employee</text
+          >
+          <text
+            x="148"
+            y="355"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 148 355)">Dynamic Tasks</text
+          >
+          <text
+            x="148"
+            y="520"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 148 520)">Manager</text
+          >
 
-      {
-        row0.segments.map((seg) => (
-          <path d={seg.d} class="pf-line" fill="none" />
-        ))
-      }
-      {
-        row0.segments.map((seg) => (
-          <path d={seg.d} class="pf-seg" data-seg={seg.key} fill="none" />
-        ))
-      }
-
-      {
-        row0.branches.map((b) => (
-          <>
-            <path d={b.down} class="pf-branch" fill="none" />
-            <path d={b.up} class="pf-branch" fill="none" />
+          <!-- connectors -->
+          <g fill="none" stroke="var(--n900)" stroke-width="1">
+            <path d="M243,178 L311,178" marker-end="url(#arrow)"></path>
+            <path d="M370,203 L370,333" marker-end="url(#arrow)"></path>
+            <path d="M429,358 L485,358" marker-end="url(#arrow)"></path>
+            <path d="M500,373 L500,410" marker-end="url(#arrow)"></path>
+            <path d="M515,358 L725,358" marker-end="url(#arrow)"></path>
             <path
-              d={b.down}
-              class="pf-branch-seg"
-              data-seg={`bd-${b.k}`}
-              fill="none"
-            />
+              d="M740,343 L740,298 Q740,290 732,290 L682,290"
+              marker-end="url(#arrow)"></path>
             <path
-              d={b.up}
-              class="pf-branch-seg"
-              data-seg={`bu-${b.k}`}
-              fill="none"
-            />
-          </>
-        ))
-      }
+              d="M558,290 L508,290 Q500,290 500,298 L500,343"
+              marker-end="url(#arrow)"></path>
+            <path d="M740,373 L740,495" marker-end="url(#arrow)"></path>
+            <path d="M796,520 L890,520" marker-end="url(#arrow)"></path>
+            <path d="M780,614 L780,579"></path>
+          </g>
 
-      {
-        row0.branches.map((b) => {
-          const [line1, line2] = b.label.split(" ");
-          return (
-            <>
-              <rect
-                x={b.x - TASK_W / 2}
-                y={b.y - TASK_H / 2}
-                width={TASK_W}
-                height={TASK_H}
-                rx="10"
-                class="pf-node pf-task"
-                data-node={`b-${b.k}`}
-              />
-              <text x={b.x} y={b.y - 4} class="pf-label">
-                {line1}
-              </text>
-              <text x={b.x} y={b.y + 14} class="pf-label">
-                {line2}
-              </text>
-              <g
-                transform={`translate(${b.x + TASK_W / 2} ${b.y - TASK_H / 2})`}
-              >
-                <g class="pf-badge" data-badge={`b-${b.k}`}>
+          <!-- start event -->
+          <circle
+            data-node="start"
+            cx="230"
+            cy="178"
+            r="13"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <text
+            x="230"
+            y="201"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10"
+            fill="var(--n700)">Start</text
+          >
+
+          <!-- task boxes: content (icon + text). -->
+          {
+            tasks.map((t, i) => {
+              const cy = t.y + t.h / 2;
+              const iconX = t.x + 14;
+              const iconY = cy - 12;
+              const textX = iconX + 24 + 10;
+              return (
+                <>
                   <rect
-                    x={-BADGE_RX}
-                    y={-BADGE_RY}
-                    width={BADGE_RX * 2}
-                    height={BADGE_RY * 2}
-                    rx={BADGE_RY}
-                    class="pf-badge-circle"
+                    data-node={`task-${i}`}
+                    x={t.x}
+                    y={t.y}
+                    width={t.w}
+                    height={t.h}
+                    rx="5"
+                    fill="var(--n25)"
+                    stroke="var(--foreground)"
+                    stroke-width="1"
                   />
-                  <text class="pf-badge-text" />
-                </g>
-              </g>
-            </>
-          );
-        })
-      }
-
-      {
-        row0.indices.map((i) => {
-          const s = steps[i];
-          const { x: cx, y: cy } = centers[i];
-          if (s.type === "start") {
-            return (
-              <>
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={EVENT_R}
-                  class="pf-node pf-start"
-                  data-node={i}
-                />
-                <g
-                  transform={`translate(${cx + EVENT_R * 0.75} ${cy - EVENT_R * 0.75})`}
-                >
-                  <g class="pf-badge" data-badge={i}>
-                    <rect
-                      x={-BADGE_RX}
-                      y={-BADGE_RY}
-                      width={BADGE_RX * 2}
-                      height={BADGE_RY * 2}
-                      rx={BADGE_RY}
-                      class="pf-badge-circle"
-                    />
-                    <text class="pf-badge-text" />
-                  </g>
-                </g>
-              </>
-            );
-          }
-          if (s.type === "end") {
-            return (
-              <>
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={EVENT_R}
-                  class="pf-node pf-end"
-                  data-node={i}
-                />
-                <g
-                  transform={`translate(${cx + EVENT_R * 0.75} ${cy - EVENT_R * 0.75})`}
-                >
-                  <g class="pf-badge" data-badge={i}>
-                    <rect
-                      x={-BADGE_RX}
-                      y={-BADGE_RY}
-                      width={BADGE_RX * 2}
-                      height={BADGE_RY * 2}
-                      rx={BADGE_RY}
-                      class="pf-badge-circle"
-                    />
-                    <text class="pf-badge-text" />
-                  </g>
-                </g>
-              </>
-            );
-          }
-          if (s.type === "gateway") {
-            const side = GATE_D / Math.SQRT2;
-            return (
-              <>
-                <rect
-                  x={cx - side / 2}
-                  y={cy - side / 2}
-                  width={side}
-                  height={side}
-                  rx="4"
-                  transform={`rotate(45 ${cx} ${cy})`}
-                  class="pf-node pf-gate"
-                  data-node={i}
-                />
-                <g
-                  transform={`translate(${cx + GATE_D * 0.42} ${cy - GATE_D * 0.42})`}
-                >
-                  <g class="pf-badge" data-badge={i}>
-                    <rect
-                      x={-BADGE_RX}
-                      y={-BADGE_RY}
-                      width={BADGE_RX * 2}
-                      height={BADGE_RY * 2}
-                      rx={BADGE_RY}
-                      class="pf-badge-circle"
-                    />
-                    <text class="pf-badge-text" />
-                  </g>
-                </g>
-              </>
-            );
-          }
-          const [line1, line2] = s.label.split(" ");
-          return (
-            <>
-              <rect
-                x={cx - TASK_W / 2}
-                y={cy - TASK_H / 2}
-                width={TASK_W}
-                height={TASK_H}
-                rx="10"
-                class="pf-node pf-task"
-                data-node={i}
-              />
-              <text x={cx} y={cy - 4} class="pf-label">
-                {line1}
-              </text>
-              <text x={cx} y={cy + 14} class="pf-label">
-                {line2}
-              </text>
-              <g transform={`translate(${cx + TASK_W / 2} ${cy - TASK_H / 2})`}>
-                <g class="pf-badge" data-badge={i}>
                   <rect
-                    x={-BADGE_RX}
-                    y={-BADGE_RY}
-                    width={BADGE_RX * 2}
-                    height={BADGE_RY * 2}
-                    rx={BADGE_RY}
-                    class="pf-badge-circle"
+                    x={iconX}
+                    y={iconY}
+                    width="24"
+                    height="24"
+                    rx="4"
+                    fill="var(--accent)"
                   />
-                  <text class="pf-badge-text" />
-                </g>
-              </g>
-            </>
-          );
-        })
-      }
-    </g>
-    <circle
-      r="5"
-      class="pf-token"
-      data-row-token="0"
-      filter={`url(#${row0.wrapId}-glow)`}
-      cx={centers[0].x}
-      cy={centers[0].y}></circle>
-  </svg>
+                  {t.icon === "code" ? (
+                    <g
+                      stroke="var(--primary)"
+                      stroke-width="1.3"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      {/* "<" */}
+                      <path d={`M${iconX + 8},${iconY + 7} l-4,5 l4,5`} />
+                      {/* ">" */}
+                      <path d={`M${iconX + 16},${iconY + 7} l4,5 l-4,5`} />
+                      {/* "/" */}
+                      <line
+                        x1={iconX + 13}
+                        y1={iconY + 5}
+                        x2={iconX + 11}
+                        y2={iconY + 19}
+                      />
+                    </g>
+                  ) : (
+                    <g stroke="var(--primary)" stroke-linecap="round">
+                      <line
+                        x1={iconX + 3}
+                        y1={iconY + 8}
+                        x2={iconX + 9}
+                        y2={iconY + 8}
+                        stroke-width="1"
+                      />
+                      <line
+                        x1={iconX + 3}
+                        y1={iconY + 12}
+                        x2={iconX + 8}
+                        y2={iconY + 12}
+                        stroke-width="1"
+                      />
+                      <line
+                        x1={iconX + 3}
+                        y1={iconY + 16}
+                        x2={iconX + 7}
+                        y2={iconY + 16}
+                        stroke-width="1"
+                      />
+                      <circle
+                        cx={iconX + 16.5}
+                        cy={iconY + 9}
+                        r="2.3"
+                        fill="none"
+                        stroke-width="1.15"
+                      />
+                      <path
+                        d={`M${iconX + 11.8},${iconY + 16} a4.7,4.7 0 0 1 9.4,0`}
+                        fill="none"
+                        stroke-width="1.15"
+                      />
+                    </g>
+                  )}
+                  <text
+                    x={textX}
+                    y={cy - 4}
+                    font-family="ui-sans-serif, system-ui"
+                    font-size="11.5"
+                    fill="var(--foreground)"
+                  >
+                    {t.lines[0]}
+                  </text>
+                  <text
+                    x={textX}
+                    y={cy + 12}
+                    font-family="ui-sans-serif, system-ui"
+                    font-size="11.5"
+                    fill="var(--foreground)"
+                  >
+                    {t.lines[1]}
+                  </text>
+                </>
+              );
+            })
+          }
 
-  <div
-    class="pf-connector min-h-0 flex-1"
-    style={`--pf-join-x: ${xJoinPercent}%;`}
-  >
-    <div class="pf-connector-line"></div>
-    <div class="pf-connector-token"></div>
+          <!-- Gateway 1 (exclusive) -->
+          <path
+            data-node="gateway1"
+            d="M497.4,345.6 Q500,343 502.6,345.6 L512.4,355.4 Q515,358 512.4,360.6 L502.6,370.4 Q500,373 497.4,370.4 L487.6,360.6 Q485,358 487.6,355.4 Z"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></path>
+          <g
+            data-node="gateway1"
+            stroke="var(--foreground)"
+            stroke-width="1"
+            stroke-linecap="round"
+            ><line x1="495.5" y1="353.5" x2="504.5" y2="362.5"></line><line
+              x1="504.5"
+              y1="353.5"
+              x2="495.5"
+              y2="362.5"></line></g
+          >
+
+          <!-- Finish end event -->
+          <circle
+            data-node="finish"
+            cx="500"
+            cy="422"
+            r="12"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="2"></circle>
+
+          <!-- Check gateway (circle-plus) -->
+          <path
+            data-node="checkgateway"
+            d="M737.4,345.6 Q740,343 742.6,345.6 L752.4,355.4 Q755,358 752.4,360.6 L742.6,370.4 Q740,373 737.4,370.4 L727.6,360.6 Q725,358 727.6,355.4 Z"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></path>
+          <circle
+            data-node="checkgateway"
+            cx="740"
+            cy="358"
+            r="7"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <g
+            data-node="checkgateway"
+            stroke="var(--foreground)"
+            stroke-width="1"
+          >
+            <line x1="740" y1="354" x2="740" y2="362"></line>
+            <line x1="736" y1="358" x2="744" y2="358"></line>
+          </g>
+
+          <!-- boundary escalation event on Verify Request -->
+          <circle
+            cx="780"
+            cy="549"
+            r="13"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <circle
+            cx="780"
+            cy="549"
+            r="11"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <path
+            d="M780,544 L785,553 L775,553 Z"
+            fill="none"
+            stroke="var(--foreground)"
+            stroke-width="1"
+            stroke-linejoin="round"></path>
+          <text
+            x="780"
+            y="574"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10"
+            fill="var(--foreground)">dynamic:cancel</text
+          >
+
+          <!-- ============ animated token: cycles through all three real routes ============ -->
+          <path
+            id="routeFinish"
+            d="M230,178 L311,178 L370,178 L370,203 L370,333 L370,358 L429,358 L485,358 L500,358 L500,373 L500,422"
+            fill="none"
+            stroke="none"></path>
+          <path
+            id="routeLoop"
+            d="M230,178 L311,178 L370,178 L370,203 L370,333 L370,358 L429,358 L485,358 L500,358 L515,358 L725,358 L740,358 L740,343 L740,290 L682,290 L670,290 L558,290 L508,290 Q500,290 500,298 L500,343 L500,358 L515,358 L725,358 L740,358 L740,373 L740,495 L740,520 L796,520 L890,520"
+            fill="none"
+            stroke="none"></path>
+          <path
+            id="routeDirect"
+            d="M230,178 L311,178 L370,178 L370,203 L370,333 L370,358 L429,358 L485,358 L500,358 L515,358 L725,358 L740,358 L740,373 L740,495 L740,520 L796,520 L890,520"
+            fill="none"
+            stroke="none"></path>
+
+          <circle
+            id="flow-token"
+            r="5"
+            fill="var(--success)"
+            filter="url(#ballGlow)"
+          >
+            <animateMotion
+              id="animFinish"
+              begin="0s;animDirect.end"
+              dur="4.2s"
+              fill="freeze"
+              repeatCount="1"
+            >
+              <mpath href="#routeFinish"></mpath>
+            </animateMotion>
+            <animateMotion
+              id="animLoop"
+              begin="animFinish.end"
+              dur="14s"
+              fill="freeze"
+              repeatCount="1"
+            >
+              <mpath href="#routeLoop"></mpath>
+            </animateMotion>
+            <animateMotion
+              id="animDirect"
+              begin="animLoop.end"
+              dur="10s"
+              fill="freeze"
+              repeatCount="1"
+            >
+              <mpath href="#routeDirect"></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- "visited" badges are injected here at runtime by the script -->
+          <g id="badge-layer"></g>
+        </g>
+      </svg>
+    </div>
   </div>
-
-  <!-- Row 1 -->
-  <svg
-    class="process-flow-svg shrink-0"
-    viewBox={`0 0 ${row1.width} ${row1.height}`}
-    preserveAspectRatio="xMidYMid meet"
-    style={`aspect-ratio: ${row1.width} / ${row1.height};`}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <pattern
-        id={`${row1.wrapId}-dots`}
-        width="24"
-        height="24"
-        patternUnits="userSpaceOnUse"
-      >
-        <circle cx="1.2" cy="1.2" r="1.2" fill="currentColor" class="pf-dot"
-        ></circle>
-      </pattern>
-      <filter
-        id={`${row1.wrapId}-glow`}
-        x="-80%"
-        y="-80%"
-        width="260%"
-        height="260%"
-      >
-        <feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur>
-        <feMerge>
-          <feMergeNode in="blur"></feMergeNode>
-          <feMergeNode in="SourceGraphic"></feMergeNode>
-        </feMerge>
-      </filter>
-      <linearGradient id={`${row1.wrapId}-fade`} x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0" stop-color="white" stop-opacity="0"></stop>
-        <stop offset={FADE_PX / row1.width} stop-color="white" stop-opacity="1"
-        ></stop>
-        <stop
-          offset={1 - FADE_PX / row1.width}
-          stop-color="white"
-          stop-opacity="1"></stop>
-        <stop offset="1" stop-color="white" stop-opacity="0"></stop>
-      </linearGradient>
-      <mask id={`${row1.wrapId}-mask`}>
-        <rect
-          x="0"
-          y="0"
-          width={row1.width}
-          height={row1.height}
-          fill={`url(#${row1.wrapId}-fade)`}></rect>
-      </mask>
-    </defs>
-
-    {
-      row1.stub && (
-        <path
-          d={row1.stub.d}
-          class="pf-line"
-          data-seg={row1.stub.key}
-          fill="none"
-        />
-      )
-    }
-
-    <g mask={`url(#${row1.wrapId}-mask)`}>
-      <rect
-        x="0"
-        y="0"
-        width={row1.width}
-        height={row1.height}
-        fill={`url(#${row1.wrapId}-dots)`}
-        class="pf-grid"></rect>
-
-      {
-        row1.segments.map((seg) => (
-          <path d={seg.d} class="pf-line" fill="none" />
-        ))
-      }
-      {
-        row1.segments.map((seg) => (
-          <path d={seg.d} class="pf-seg" data-seg={seg.key} fill="none" />
-        ))
-      }
-
-      {
-        row1.branches.map((b) => (
-          <>
-            <path d={b.down} class="pf-branch" fill="none" />
-            <path d={b.up} class="pf-branch" fill="none" />
-            <path
-              d={b.down}
-              class="pf-branch-seg"
-              data-seg={`bd-${b.k}`}
-              fill="none"
-            />
-            <path
-              d={b.up}
-              class="pf-branch-seg"
-              data-seg={`bu-${b.k}`}
-              fill="none"
-            />
-          </>
-        ))
-      }
-
-      {
-        row1.branches.map((b) => {
-          const [line1, line2] = b.label.split(" ");
-          return (
-            <>
-              <rect
-                x={b.x - TASK_W / 2}
-                y={b.y - TASK_H / 2}
-                width={TASK_W}
-                height={TASK_H}
-                rx="10"
-                class="pf-node pf-task"
-                data-node={`b-${b.k}`}
-              />
-              <text x={b.x} y={b.y - 4} class="pf-label">
-                {line1}
-              </text>
-              <text x={b.x} y={b.y + 14} class="pf-label">
-                {line2}
-              </text>
-              <g
-                transform={`translate(${b.x + TASK_W / 2} ${b.y - TASK_H / 2})`}
-              >
-                <g class="pf-badge" data-badge={`b-${b.k}`}>
-                  <rect
-                    x={-BADGE_RX}
-                    y={-BADGE_RY}
-                    width={BADGE_RX * 2}
-                    height={BADGE_RY * 2}
-                    rx={BADGE_RY}
-                    class="pf-badge-circle"
-                  />
-                  <text class="pf-badge-text" />
-                </g>
-              </g>
-            </>
-          );
-        })
-      }
-
-      {
-        row1.indices.map((i) => {
-          const s = steps[i];
-          const { x: cx, y: cy } = centers[i];
-          if (s.type === "start") {
-            return (
-              <>
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={EVENT_R}
-                  class="pf-node pf-start"
-                  data-node={i}
-                />
-                <g
-                  transform={`translate(${cx + EVENT_R * 0.75} ${cy - EVENT_R * 0.75})`}
-                >
-                  <g class="pf-badge" data-badge={i}>
-                    <rect
-                      x={-BADGE_RX}
-                      y={-BADGE_RY}
-                      width={BADGE_RX * 2}
-                      height={BADGE_RY * 2}
-                      rx={BADGE_RY}
-                      class="pf-badge-circle"
-                    />
-                    <text class="pf-badge-text" />
-                  </g>
-                </g>
-              </>
-            );
-          }
-          if (s.type === "end") {
-            return (
-              <>
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={EVENT_R}
-                  class="pf-node pf-end"
-                  data-node={i}
-                />
-                <g
-                  transform={`translate(${cx + EVENT_R * 0.75} ${cy - EVENT_R * 0.75})`}
-                >
-                  <g class="pf-badge" data-badge={i}>
-                    <rect
-                      x={-BADGE_RX}
-                      y={-BADGE_RY}
-                      width={BADGE_RX * 2}
-                      height={BADGE_RY * 2}
-                      rx={BADGE_RY}
-                      class="pf-badge-circle"
-                    />
-                    <text class="pf-badge-text" />
-                  </g>
-                </g>
-              </>
-            );
-          }
-          if (s.type === "gateway") {
-            const side = GATE_D / Math.SQRT2;
-            return (
-              <>
-                <rect
-                  x={cx - side / 2}
-                  y={cy - side / 2}
-                  width={side}
-                  height={side}
-                  rx="4"
-                  transform={`rotate(45 ${cx} ${cy})`}
-                  class="pf-node pf-gate"
-                  data-node={i}
-                />
-                <g
-                  transform={`translate(${cx + GATE_D * 0.42} ${cy - GATE_D * 0.42})`}
-                >
-                  <g class="pf-badge" data-badge={i}>
-                    <rect
-                      x={-BADGE_RX}
-                      y={-BADGE_RY}
-                      width={BADGE_RX * 2}
-                      height={BADGE_RY * 2}
-                      rx={BADGE_RY}
-                      class="pf-badge-circle"
-                    />
-                    <text class="pf-badge-text" />
-                  </g>
-                </g>
-              </>
-            );
-          }
-          const [line1, line2] = s.label.split(" ");
-          return (
-            <>
-              <rect
-                x={cx - TASK_W / 2}
-                y={cy - TASK_H / 2}
-                width={TASK_W}
-                height={TASK_H}
-                rx="10"
-                class="pf-node pf-task"
-                data-node={i}
-              />
-              <text x={cx} y={cy - 4} class="pf-label">
-                {line1}
-              </text>
-              <text x={cx} y={cy + 14} class="pf-label">
-                {line2}
-              </text>
-              <g transform={`translate(${cx + TASK_W / 2} ${cy - TASK_H / 2})`}>
-                <g class="pf-badge" data-badge={i}>
-                  <rect
-                    x={-BADGE_RX}
-                    y={-BADGE_RY}
-                    width={BADGE_RX * 2}
-                    height={BADGE_RY * 2}
-                    rx={BADGE_RY}
-                    class="pf-badge-circle"
-                  />
-                  <text class="pf-badge-text" />
-                </g>
-              </g>
-            </>
-          );
-        })
-      }
-    </g>
-
-    <circle
-      r="5"
-      class="pf-token"
-      data-row-token="1"
-      filter={`url(#${row1.wrapId}-glow)`}
-      cx={centers[row1.indices[0]].x}
-      cy={centers[row1.indices[0]].y}></circle>
-  </svg>
 </div>
 
 <style>
-  .process-flow-bg {
-    pointer-events: none;
-    overflow: visible;
-    color: var(--pf-grid-color, #94a3b8);
+  .process-flow-bg [data-node] {
+    transition: stroke 0.25s ease;
   }
-
-  .process-flow-svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .pf-dot {
-    opacity: 0.35;
-  }
-  .pf-grid {
-    opacity: 0.5;
-  }
-
-  .pf-line {
-    stroke: var(--pf-line-idle, var(--process-gray));
-    stroke-width: 1.5;
-  }
-
-  .pf-node {
-    fill: var(--pf-node-fill, var(--background));
-    stroke: var(--pf-line-idle, var(--process-gray));
-    stroke-width: 2;
-    transition:
-      stroke 0.2s ease,
-      filter 0.2s ease;
-  }
-
-  .pf-node.pf-active {
-    stroke: var(--pf-accent, var(--process-green));
-    filter: drop-shadow(
-      0 0 4px
-        color-mix(
-          in srgb,
-          var(--pf-accent, var(--process-green)) 60%,
-          transparent
-        )
-    );
-  }
-
-  .pf-node.pf-visited {
-    stroke: var(--pf-accent, var(--process-green));
-  }
-
-  .pf-label {
-    font:
-      600 12.5px/1.3 system-ui,
-      -apple-system,
-      "Segoe UI",
-      sans-serif;
-    fill: var(--pf-text, var(--foreground));
-    text-anchor: middle;
-    opacity: var(--pf-label-opacity, 0.5);
-  }
-
-  .pf-seg,
-  .pf-branch-seg {
-    fill: none;
-    stroke: var(--pf-accent, var(--process-green));
-    stroke-linecap: round;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .pf-seg {
-    stroke-width: 2.5;
-  }
-  .pf-branch-seg {
-    stroke-width: 2;
-  }
-  s .pf-seg.pf-active,
-  .pf-branch-seg.pf-active {
-    opacity: 0.9;
-  }
-
-  .pf-branch {
-    stroke: var(--pf-line-idle, var(--process-gray));
-    stroke-width: 1.5;
-  }
-
-  .pf-token {
-    fill: var(--pf-token-color, var(--process-green));
-  }
-
-  .pf-badge {
-    opacity: 0;
-    transform: scale(0.4);
-    transform-box: fill-box;
-    transform-origin: center center;
-    transition:
-      opacity 0.25s ease,
-      transform 0.25s ease;
-  }
-
-  .pf-badge.pf-badge-visible {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .pf-badge.pf-badge-leaving {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-
-  .pf-badge-circle {
-    fill: var(--pf-badge-fill, var(--background));
-    stroke: var(--pf-accent, var(--process-green));
-    stroke-width: 1.5;
-  }
-
-  .pf-badge-text {
-    font:
-      700 10px/1 system-ui,
-      -apple-system,
-      "Segoe UI",
-      sans-serif;
-    fill: var(--pf-accent, var(--process-green));
-    text-anchor: middle;
-    dominant-baseline: central;
-  }
-
-  .pf-connector {
-    position: relative;
-  }
-
-  .pf-connector-line {
-    position: absolute;
-    left: var(--pf-join-x);
-    top: 0;
-    bottom: 0;
-    width: 1.5px;
-    background: var(--pf-line-idle, var(--process-gray));
-    transform: translateX(-50%);
-  }
-
-  .pf-connector-token {
-    position: absolute;
-    left: var(--pf-join-x);
-    top: 0%;
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: var(--pf-accent, var(--process-green));
-    box-shadow: 0 0 6px
-      color-mix(
-        in srgb,
-        var(--pf-accent, var(--process-green)) 70%,
-        transparent
-      );
-    transform: translate(-50%, -50%);
-    display: none;
-  }
-
-  .pf-connector-token.pf-visible {
-    display: block;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pf-token,
-    .pf-connector-token {
-      display: none;
-    }
+  .process-flow-bg .node-visited {
+    stroke: var(--success) !important;
   }
 </style>
 
-<script define:vars={{ wrapId, rows: clientRows, speed, CONNECTOR_DURATION }}>
-  (function () {
-    const root = document.getElementById(wrapId);
-    if (!root) return;
+<script>
+  // Highlights each shape as the token passes it and shows a "1" badge at
+  // its top-right corner; clears when the token hands off to the next
+  // route. Route identity comes from SMIL's beginEvent.
+  // Progress within a route is elapsed-time-since-beginEvent, so it
+  // self-corrects every route change instead of drifting.
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduceMotion) return;
+  type RouteName = "routeFinish" | "routeLoop" | "routeDirect";
+  type Vertex = [number, number];
+  type Waypoint = [number, string];
 
-    const rowTokens = [
-      root.querySelector('[data-row-token="0"]'),
-      root.querySelector('[data-row-token="1"]'),
-    ];
-    const connectorToken = root.querySelector(".pf-connector-token");
-    if (!rowTokens[0] || !rowTokens[1] || !connectorToken) return;
+  function initProcessFlowBg(root: Element): void {
+    const svg = root.querySelector("svg");
+    if (!svg) return;
 
-    function collect(rowRoot) {
-      const segEls = {};
-      rowRoot.querySelectorAll("[data-seg]").forEach((el) => {
-        const key = el.getAttribute("data-seg");
-        (segEls[key] ||= []).push(el);
-      });
-      const nodeEls = {};
-      rowRoot.querySelectorAll("[data-node]").forEach((el) => {
-        const key = el.getAttribute("data-node");
-        (nodeEls[key] ||= []).push(el);
-      });
-      const badgeEls = {};
-      rowRoot.querySelectorAll("[data-badge]").forEach((el) => {
-        const key = el.getAttribute("data-badge");
-        (badgeEls[key] ||= []).push(el);
-      });
-      return { segEls, nodeEls, badgeEls };
-    }
+    const VERTS: Record<RouteName, Vertex[]> = {
+      routeFinish: [
+        [230, 178],
+        [311, 178],
+        [370, 178],
+        [370, 203],
+        [370, 333],
+        [370, 358],
+        [429, 358],
+        [485, 358],
+        [500, 358],
+        [500, 373],
+        [500, 422],
+      ],
+      routeLoop: [
+        [230, 178],
+        [311, 178],
+        [370, 178],
+        [370, 203],
+        [370, 333],
+        [370, 358],
+        [429, 358],
+        [485, 358],
+        [500, 358],
+        [515, 358],
+        [725, 358],
+        [740, 358],
+        [740, 343],
+        [740, 290],
+        [682, 290],
+        [670, 290],
+        [558, 290],
+        [508, 290],
+        [500, 298],
+        [500, 343],
+        [500, 358],
+        [515, 358],
+        [725, 358],
+        [740, 358],
+        [740, 373],
+        [740, 495],
+        [740, 520],
+        [796, 520],
+        [890, 520],
+      ],
+      routeDirect: [
+        [230, 178],
+        [311, 178],
+        [370, 178],
+        [370, 203],
+        [370, 333],
+        [370, 358],
+        [429, 358],
+        [485, 358],
+        [500, 358],
+        [515, 358],
+        [725, 358],
+        [740, 358],
+        [740, 373],
+        [740, 495],
+        [740, 520],
+        [796, 520],
+        [890, 520],
+      ],
+    };
 
-    const svgEls = root.querySelectorAll(".process-flow-svg");
-    const rowEls = [collect(svgEls[0]), collect(svgEls[1])];
+    // [vertex index, node name] — a name can repeat within a route (e.g.
+    // Gateway 1 and the check gateway are each visited twice on the loop).
+    const WAYPOINTS: Record<RouteName, Waypoint[]> = {
+      routeFinish: [
+        [0, "start"],
+        [2, "task-0"],
+        [5, "task-1"],
+        [8, "gateway1"],
+        [10, "finish"],
+      ],
+      routeLoop: [
+        [0, "start"],
+        [2, "task-0"],
+        [5, "task-1"],
+        [8, "gateway1"],
+        [11, "checkgateway"],
+        [15, "task-2"],
+        [20, "gateway1"],
+        [23, "checkgateway"],
+        [26, "task-3"],
+      ],
+      routeDirect: [
+        [0, "start"],
+        [2, "task-0"],
+        [5, "task-1"],
+        [8, "gateway1"],
+        [11, "checkgateway"],
+        [14, "task-3"],
+      ],
+    };
 
-    function dist(a, b) {
-      return Math.hypot(b.x - a.x, b.y - a.y);
-    }
+    const ORDER: RouteName[] = ["routeFinish", "routeLoop", "routeDirect"];
 
-    function extend(points, pts, d) {
-      for (let i = 1; i < pts.length; i++) {
-        d += dist(pts[i - 1], pts[i]);
-        points.push(pts[i]);
+    const badgeLayer = svg.querySelector("#badge-layer");
+    const nodeNames: string[] = Array.from(
+      new Set(
+        Object.values(WAYPOINTS)
+          .flat()
+          .map(([, name]) => name),
+      ),
+    );
+    const badgeEls = new Map<string, SVGGElement>();
+    const BADGE_W = 20;
+    const BADGE_H = 13;
+
+    if (badgeLayer) {
+      for (const name of nodeNames) {
+        const shape = svg.querySelector(
+          `[data-node="${name}"]`,
+        ) as SVGGraphicsElement | null;
+        if (!shape || typeof shape.getBBox !== "function") continue;
+        const bbox = shape.getBBox();
+        const x = bbox.x + bbox.width;
+        const y = bbox.y;
+
+        const g = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "g",
+        ) as SVGGElement;
+        g.setAttribute("data-badge", name);
+        g.setAttribute("transform", `translate(${x}, ${y})`);
+        // Astro's scoped <style> won't match elements created at runtime,
+        // so styling here is inline rather than via CSS classes.
+        g.style.opacity = "0";
+        g.style.transition = "opacity 0.2s ease";
+
+        const rect = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "rect",
+        ) as SVGRectElement;
+        rect.setAttribute("x", String(-BADGE_W / 2));
+        rect.setAttribute("y", String(-BADGE_H / 2));
+        rect.setAttribute("width", String(BADGE_W));
+        rect.setAttribute("height", String(BADGE_H));
+        rect.setAttribute("rx", String(BADGE_H / 2));
+        rect.setAttribute("ry", String(BADGE_H / 2));
+        rect.setAttribute("fill", "var(--background)");
+        rect.setAttribute("stroke", "var(--success)");
+        rect.setAttribute("stroke-width", "1");
+
+        const text = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        ) as SVGTextElement;
+        text.setAttribute("y", "0.5");
+        text.setAttribute("fill", "var(--success)");
+        text.setAttribute("font-family", "ui-sans-serif, system-ui");
+        text.setAttribute("font-size", "9");
+        text.setAttribute("font-weight", "700");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "central");
+        text.textContent = "1";
+
+        g.append(rect, text);
+        badgeLayer.append(g);
+        badgeEls.set(name, g);
       }
-      return d;
     }
 
-    function buildRowRoute(row) {
-      const branchByGateway = new Map(
-        row.branchMeta.map((b) => [b.gatewayIndex, b]),
-      );
-      const activeSeg = [];
-      const activeNode = [];
-      let d = 0;
-      let points;
+    function highlight(name: string): void {
+      svg!
+        .querySelectorAll(`[data-node="${name}"]`)
+        .forEach((el) => el.classList.add("node-visited"));
+      const badge = badgeEls.get(name);
+      if (badge) badge.style.opacity = "1";
+    }
 
-      if (row.stub && row.stub.key === "stub-in") {
-        points = [row.stub.pts[0]];
-        d = extend(points, row.stub.pts, d);
-      } else {
-        points = [row.centers[0]];
+    function unhighlight(name: string): void {
+      svg!
+        .querySelectorAll(`[data-node="${name}"]`)
+        .forEach((el) => el.classList.remove("node-visited"));
+      const badge = badgeEls.get(name);
+      if (badge) badge.style.opacity = "0";
+    }
+
+    const routeAnimEls: Record<RouteName, Element | null> = {
+      routeFinish: svg.querySelector("#animFinish"),
+      routeLoop: svg.querySelector("#animLoop"),
+      routeDirect: svg.querySelector("#animDirect"),
+    };
+    const DURATIONS: Record<RouteName, number> = {
+      routeFinish: 4.2,
+      routeLoop: 14,
+      routeDirect: 10,
+    };
+
+    // Distance-fraction-based waypoint timing (animateMotion defaults to
+    // constant-velocity "paced" motion, so time is proportional to
+    // distance along the path).
+    const routeWaypointTimes = {} as Record<
+      RouteName,
+      { name: string; time: number }[]
+    >;
+    for (const routeName of ORDER) {
+      const verts = VERTS[routeName];
+      const dist: number[] = [0];
+      for (let i = 1; i < verts.length; i++) {
+        const [x1, y1] = verts[i - 1];
+        const [x2, y2] = verts[i];
+        dist.push(dist[i - 1] + Math.hypot(x2 - x1, y2 - y1));
       }
-
-      activeNode.push({ key: String(row.indices[0]), at: d });
-
-      for (let i = 0; i < row.centers.length - 1; i++) {
-        const branch = branchByGateway.get(i);
-        if (branch && Math.random() < 0.5) {
-          const start1 = d;
-          d = extend(points, branch.downPoints, d);
-          activeSeg.push({ key: `bd-${branch.k}`, start: start1, end: d });
-          activeNode.push({ key: `b-${branch.k}`, at: d });
-
-          const start2 = d;
-          d = extend(points, branch.upPoints, d);
-          activeSeg.push({ key: `bu-${branch.k}`, start: start2, end: d });
-        } else {
-          const start = d;
-          d = extend(points, row.throughPoints[i], d);
-          activeSeg.push({ key: String(row.indices[i]), start, end: d });
-        }
-        activeNode.push({ key: String(row.indices[i + 1]), at: d });
-      }
-
-      if (row.stub && row.stub.key === "stub-out") {
-        d = extend(points, row.stub.pts, d);
-      }
-
-      return { points, totalLength: d, activeSeg, activeNode };
-    }
-
-    function pointAt(route, d) {
-      let acc = 0;
-      for (let i = 0; i < route.points.length - 1; i++) {
-        const a = route.points[i];
-        const b = route.points[i + 1];
-        const segLen = dist(a, b);
-        if (d <= acc + segLen || i === route.points.length - 2) {
-          const t =
-            segLen === 0 ? 0 : Math.min(1, Math.max(0, (d - acc) / segLen));
-          return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
-        }
-        acc += segLen;
-      }
-      const last = route.points[route.points.length - 1];
-      return { x: last.x, y: last.y };
-    }
-
-    function clearActive(rowSet) {
-      Object.values(rowSet.segEls).forEach((els) =>
-        els.forEach((el) => el.classList.remove("pf-active")),
-      );
-      Object.values(rowSet.nodeEls).forEach((els) =>
-        els.forEach((el) => el.classList.remove("pf-active")),
-      );
-    }
-
-    // Persistent visit tracking: numbers each node the moment the
-    // token reaches it, keeps the node green ("pf-visited") for the
-    // rest of the lap, and only clears when a full cycle completes.
-    const visitCounter = 1;
-    const visitedKeys = new Set();
-
-    function markVisited(rowSet, key) {
-      if (visitedKeys.has(key)) return;
-      visitedKeys.add(key);
-      (rowSet.nodeEls[key] || []).forEach((el) =>
-        el.classList.add("pf-visited"),
-      );
-      (rowSet.badgeEls[key] || []).forEach((el) => {
-        const text = el.querySelector(".pf-badge-text");
-        if (text) text.textContent = String(visitCounter);
-        el.classList.remove("pf-badge-leaving");
-        el.classList.add("pf-badge-visible");
-      });
-    }
-
-    function playBadgeExit(rowSet) {
-      Object.values(rowSet.badgeEls).forEach((els) =>
-        els.forEach((el) => {
-          el.classList.remove("pf-badge-visible");
-          el.classList.add("pf-badge-leaving");
+      const total = dist[dist.length - 1];
+      const dur = DURATIONS[routeName];
+      routeWaypointTimes[routeName] = WAYPOINTS[routeName].map(
+        ([idx, name]) => ({
+          name,
+          // Pull anything within the final 50ms back, so a waypoint at the
+          // route's exact end (e.g. "finish") can't race the next route's
+          // beginEvent reset.
+          time: Math.min((dist[idx] / total) * dur, dur - 0.05),
         }),
       );
     }
 
-    function hardResetVisited(rowSet) {
-      Object.values(rowSet.nodeEls).forEach((els) =>
-        els.forEach((el) => el.classList.remove("pf-visited")),
-      );
-      Object.values(rowSet.badgeEls).forEach((els) =>
-        els.forEach((el) => {
-          el.classList.remove("pf-badge-visible", "pf-badge-leaving");
-        }),
-      );
-    }
+    let currentRoute: RouteName = "routeFinish";
+    let routeStartTime = performance.now();
+    let previousActive = new Set<string>();
 
-    function applyActive(rowSet, route, travelled) {
-      route.activeSeg.forEach((s) => {
-        const on = travelled >= s.start && travelled <= s.end;
-        (rowSet.segEls[s.key] || []).forEach((el) =>
-          el.classList.toggle("pf-active", on),
-        );
-      });
-      route.activeNode.forEach((n) => {
-        const on = travelled >= n.at && travelled <= n.at + speed * 0.45;
-        (rowSet.nodeEls[n.key] || []).forEach((el) =>
-          el.classList.toggle("pf-active", on),
-        );
-        if (travelled >= n.at) markVisited(rowSet, n.key);
+    for (const routeName of ORDER) {
+      const animEl = routeAnimEls[routeName];
+      if (!animEl) continue;
+      animEl.addEventListener("beginEvent", () => {
+        for (const name of nodeNames) unhighlight(name);
+        previousActive = new Set();
+        currentRoute = routeName;
+        routeStartTime = performance.now();
       });
     }
 
-    const totalBaseLength =
-      rows[0].throughPoints.reduce((s, p) => s + dist(p[0], p[1]), 0) +
-      (rows[0].stub
-        ? rows[0].stub.pts.reduce(
-            (s, _, i, arr) => (i === 0 ? 0 : s + dist(arr[i - 1], arr[i])),
-            0,
-          )
-        : 0) +
-      rows[1].throughPoints.reduce((s, p) => s + dist(p[0], p[1]), 0) +
-      (rows[1].stub
-        ? rows[1].stub.pts.reduce(
-            (s, _, i, arr) => (i === 0 ? 0 : s + dist(arr[i - 1], arr[i])),
-            0,
-          )
-        : 0);
+    function tick(): void {
+      const elapsed = (performance.now() - routeStartTime) / 1000;
+      const dur = DURATIONS[currentRoute];
+      const t = Math.min(Math.max(elapsed, 0), dur);
 
-    const row0BaseLength =
-      rows[0].throughPoints.reduce((s, p) => s + dist(p[0], p[1]), 0) +
-      (rows[0].stub
-        ? rows[0].stub.pts.reduce(
-            (s, _, i, arr) => (i === 0 ? 0 : s + dist(arr[i - 1], arr[i])),
-            0,
-          )
-        : 0);
+      const active = new Set<string>();
+      for (const wp of routeWaypointTimes[currentRoute]) {
+        if (wp.time <= t) active.add(wp.name);
+      }
 
-    const BASE_DURATION = totalBaseLength / speed;
-    const row0Duration = BASE_DURATION * (row0BaseLength / totalBaseLength);
-    const row1Duration = BASE_DURATION - row0Duration;
+      for (const name of nodeNames) {
+        const isActive = active.has(name);
+        const wasActive = previousActive.has(name);
+        if (isActive && !wasActive) highlight(name);
+        else if (!isActive && wasActive) unhighlight(name);
+      }
+      previousActive = active;
 
-    let route0, route1, speed0, speed1, cycleDuration;
-
-    function rebuildRoutes() {
-      route0 = buildRowRoute(rows[0]);
-      route1 = buildRowRoute(rows[1]);
-      speed0 = route0.totalLength / row0Duration;
-      speed1 = route1.totalLength / row1Duration;
-      cycleDuration = row0Duration + CONNECTOR_DURATION + row1Duration;
+      requestAnimationFrame(tick);
     }
+    requestAnimationFrame(tick);
+  }
 
-    rebuildRoutes();
-
-    let cycleStart = null;
-    let hiddenAtElapsed = null;
-    let lastPhase = null;
-    let cycleResetPending = false;
-
-    function setPhase(phase) {
-      if (phase === lastPhase) return;
-
-      if (phase === "row0") {
-        rowTokens[0].style.display = "";
-        rowTokens[1].style.display = "none";
-        connectorToken.classList.remove("pf-visible");
-        clearActive(rowEls[1]);
-      } else if (phase === "row1") {
-        rowTokens[0].style.display = "none";
-        rowTokens[1].style.display = "";
-        connectorToken.classList.remove("pf-visible");
-        clearActive(rowEls[0]);
-      } else {
-        const start = route1.points[0];
-        rowTokens[1].setAttribute("cx", String(start.x));
-        rowTokens[1].setAttribute("cy", String(start.y));
-
-        rowTokens[0].style.display = "none";
-        rowTokens[1].style.display = "none";
-        connectorToken.classList.add("pf-visible");
-        clearActive(rowEls[0]);
-        clearActive(rowEls[1]);
-      }
-
-      lastPhase = phase;
-    }
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        hiddenAtElapsed =
-          cycleStart !== null
-            ? (performance.now() - cycleStart) % cycleDuration
-            : 0;
-      } else if (hiddenAtElapsed !== null) {
-        cycleStart = performance.now() - hiddenAtElapsed;
-        hiddenAtElapsed = null;
-      }
-    });
-
-    function frame(ts) {
-      if (cycleStart === null) cycleStart = ts;
-      const elapsed = (ts - cycleStart) / 1000;
-
-      if (elapsed >= cycleDuration) {
-        if (cycleResetPending) {
-          requestAnimationFrame(frame);
-          return;
-        }
-
-        cycleResetPending = true;
-        clearActive(rowEls[0]);
-        clearActive(rowEls[1]);
-        playBadgeExit(rowEls[0]);
-        playBadgeExit(rowEls[1]);
-        setTimeout(() => {
-          hardResetVisited(rowEls[0]);
-          hardResetVisited(rowEls[1]);
-          visitedKeys.clear();
-          rebuildRoutes();
-          cycleStart = performance.now();
-          lastPhase = null;
-          cycleResetPending = false;
-        }, 260);
-        requestAnimationFrame(frame);
-        return;
-      }
-
-      if (elapsed < row0Duration) {
-        setPhase("row0");
-        const p = pointAt(route0, elapsed * speed0);
-        rowTokens[0].setAttribute("cx", String(p.x));
-        rowTokens[0].setAttribute("cy", String(p.y));
-        applyActive(rowEls[0], route0, elapsed * speed0);
-      } else if (elapsed < row0Duration + CONNECTOR_DURATION) {
-        setPhase("connector");
-        const p = (elapsed - row0Duration) / CONNECTOR_DURATION;
-        connectorToken.style.top = `${p * 100}%`;
-      } else {
-        setPhase("row1");
-        const t = elapsed - row0Duration - CONNECTOR_DURATION;
-        const p = pointAt(route1, t * speed1);
-        rowTokens[1].setAttribute("cx", String(p.x));
-        rowTokens[1].setAttribute("cy", String(p.y));
-        applyActive(rowEls[1], route1, t * speed1);
-      }
-
-      requestAnimationFrame(frame);
-    }
-
-    requestAnimationFrame(frame);
-  })();
+  document
+    .querySelectorAll(".process-flow-bg")
+    .forEach((root) => initProcessFlowBg(root));
 </script>
