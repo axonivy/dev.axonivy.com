@@ -7,8 +7,7 @@ import {
 } from "@/components/ui/scroll-spy";
 import { IconCircleCheck, IconBulb } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
-import releaseCycleIllustration from "@/assets/release-cycle-illustration.svg";
-import releaseCycleDarkIllustration from "@/assets/release-cycle-dark-illustration.svg";
+import releaseCycleIllustration from "@/assets/release-cycle-illustration.svg?raw";
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
 import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
 
@@ -116,8 +115,7 @@ export default function ReleaseCycleScrollspy() {
                 are published periodically during development and provide stable
                 snapshots of the Leading Edge codebase at a specific point in
                 time. By staying on the same milestone release, you get a
-                consistent set of features and behavior. Refer to the
-                documentation for the milestone setup guide.
+                consistent set of features and behavior.
               </Base>
             </div>
             <Separator />
@@ -145,17 +143,13 @@ export default function ReleaseCycleScrollspy() {
             value="illustration"
             className="flex flex-col gap-8"
           >
-            <div className="w-full">
+            <div>
               <H4>Release cycle illustration</H4>
-              <img
-                src={releaseCycleIllustration.src}
-                alt="Release cycle illustration"
-                className="h-auto w-full dark:hidden"
-              />
-              <img
-                src={releaseCycleDarkIllustration.src}
-                alt="Release cycle illustration"
-                className="hidden h-auto w-full dark:block"
+              <div
+                role="img"
+                aria-label="Release cycle illustration"
+                className="w-full max-w-full overflow-x-hidden [&>svg]:h-auto [&>svg]:w-full"
+                dangerouslySetInnerHTML={{ __html: releaseCycleIllustration }}
               />
             </div>
           </ScrollSpySection>

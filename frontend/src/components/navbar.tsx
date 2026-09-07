@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   IconArrowUpRight,
-  IconExternalLink,
+  IconChevronDown,
   IconMenu2,
   IconX,
 } from "@tabler/icons-react";
@@ -14,19 +14,18 @@ import {
   NavigationMenuContent,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { Drawer, DrawerContent, DrawerFooter } from "@/components/ui/drawer";
 import {
-  Drawer,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-} from "@/components/ui/drawer";
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
 
 const navItems = [
   { label: "Download", href: "/download", external: false },
   { label: "News", href: "/news", external: false },
-
   {
     label: "Platform",
     items: [
@@ -42,7 +41,6 @@ const navItems = [
       { label: "Support", href: "/support", external: false },
     ],
   },
-
   {
     label: "Documentation",
     items: [
@@ -72,7 +70,7 @@ const navItems = [
   { label: "Team", href: "/team", external: false },
 ];
 
-export default function Navbar({ type }: { type: "header" | "footer" }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -81,11 +79,11 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
         <NavigationMenuList>
           {navItems.map((item) => {
             return item.items ? (
-              <NavigationMenuItem key={item.href}>
+              <NavigationMenuItem key={item.label}>
                 <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   {item.items.map((subItem) => (
-                    <NavigationMenuItem key={subItem.href}>
+                    <NavigationMenuItem key={subItem.label}>
                       <NavigationMenuLink
                         className={
                           navigationMenuTriggerStyle() +
@@ -117,7 +115,7 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
                 </NavigationMenuContent>
               </NavigationMenuItem>
             ) : (
-              <NavigationMenuItem key={item.href}>
+              <NavigationMenuItem key={item.label}>
                 <NavigationMenuLink
                   className={
                     navigationMenuTriggerStyle() + " items-start gap-1"
@@ -168,52 +166,66 @@ export default function Navbar({ type }: { type: "header" | "footer" }) {
               borderRadius: 0,
             }}
           >
-            <DrawerHeader className="p-4 pb-2 text-left"></DrawerHeader>
-            <nav aria-label="Mobile navigation" className="px-4 pb-6">
+            <nav aria-label="Mobile navigation" className="px-4 pt-4">
               <ul className="flex flex-col gap-1">
-                {navItems.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
-                      href={item.href}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                      {item.external && (
-                        <IconArrowUpRight
-                          className="mt-3 size-3 self-start stroke-2"
-                          aria-hidden="true"
+                {navItems.map((item) =>
+                  item.items ? (
+                    <li key={item.label}>
+                      <Collapsible className="flex w-full flex-col gap-2">
+                        <CollapsibleTrigger
+                          render={
+                            <button className="group/button focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1">
+                              {item.label}
+                              <IconChevronDown className="ml-auto group-data-panel-open/button:rotate-180" />
+                            </button>
+                          }
                         />
-                      )}
-                    </a>
-                  </li>
-                ))}
-                <a
-                  href="https://axonivy.com/tutorial"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
-                >
-                  Tutorial
-                  <IconArrowUpRight
-                    className="mt-3 size-3 self-start stroke-2"
-                    aria-hidden="true"
-                  />
-                </a>
-                <a
-                  href="https://market.axonivy.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:bg-muted focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
-                >
-                  Market
-                  <IconArrowUpRight
-                    className="mt-3 size-3 self-start stroke-2"
-                    aria-hidden="true"
-                  />
-                </a>
+                        <CollapsibleContent className="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
+                          {item.items.map((subItem) => (
+                            <a
+                              key={subItem.label}
+                              className="focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                              href={subItem.href}
+                              target={subItem.external ? "_blank" : undefined}
+                              rel={
+                                subItem.external
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {subItem.label}
+                              {subItem.external && (
+                                <IconArrowUpRight
+                                  className="mt-3 size-3 self-start stroke-2"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </a>
+                          ))}
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </li>
+                  ) : (
+                    <li key={item.label}>
+                      <a
+                        className="focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                        href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.label}
+                        {item.external && (
+                          <IconArrowUpRight
+                            className="mt-3 size-3 self-start stroke-2"
+                            aria-hidden="true"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  ),
+                )}
               </ul>
             </nav>
             <DrawerFooter className="flex flex-row justify-start">

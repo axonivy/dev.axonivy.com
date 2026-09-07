@@ -638,12 +638,16 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
       }
     }
 
-    function highlight(name: string): void {
+    function highlight(name: string, count: number): void {
       svg!
         .querySelectorAll(`[data-node="${name}"]`)
         .forEach((el) => el.classList.add("node-visited"));
       const badge = badgeEls.get(name);
-      if (badge) badge.style.opacity = "1";
+      if (badge) {
+        badge.style.opacity = "1";
+        const text = badge.querySelector("text");
+        if (text) text.textContent = String(count);
+      }
     }
 
     function unhighlight(name: string): void {
@@ -695,14 +699,14 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
 
     let currentRoute: RouteName = "routeFinish";
     let routeStartTime = performance.now();
-    let previousActive = new Set<string>();
+    let previousActive = new Map<string, number>();
 
     for (const routeName of ORDER) {
       const animEl = routeAnimEls[routeName];
       if (!animEl) continue;
       animEl.addEventListener("beginEvent", () => {
         for (const name of nodeNames) unhighlight(name);
-        previousActive = new Set();
+        previousActive = new Map();
         currentRoute = routeName;
         routeStartTime = performance.now();
       });
@@ -713,16 +717,18 @@ const DIAGRAM_TRANSFORM = "translate(70, -4.1) scale(3.4511)";
       const dur = DURATIONS[currentRoute];
       const t = Math.min(Math.max(elapsed, 0), dur);
 
-      const active = new Set<string>();
+      const active = new Map<string, number>();
       for (const wp of routeWaypointTimes[currentRoute]) {
-        if (wp.time <= t) active.add(wp.name);
+        if (wp.time <= t) active.set(wp.name, (active.get(wp.name) ?? 0) + 1);
       }
 
       for (const name of nodeNames) {
-        const isActive = active.has(name);
-        const wasActive = previousActive.has(name);
-        if (isActive && !wasActive) highlight(name);
-        else if (!isActive && wasActive) unhighlight(name);
+        const newCount = active.get(name) ?? 0;
+        const oldCount = previousActive.get(name) ?? 0;
+        if (newCount !== oldCount) {
+          if (newCount > 0) highlight(name, newCount);
+          else unhighlight(name);
+        }
       }
       previousActive = active;
 

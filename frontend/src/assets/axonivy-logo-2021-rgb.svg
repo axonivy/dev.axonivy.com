@@ -2,7 +2,7 @@
   <defs>
     <style>
       .acaa3874-16b7-4c94-9b43-d64955716b45 {
-        fill: #1b1b1b;
+        fill: var(--foreground);
       }
     </style>
   </defs>
