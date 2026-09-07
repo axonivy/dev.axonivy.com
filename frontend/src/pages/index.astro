@@ -53,7 +53,7 @@ import Processflowbackground from "@/components/processflowbackground.astro";
         type="button"
         data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`}
         aria-label="Copy Docker command"
-        class="group font-code text-code relative flex max-w-full flex-row items-end justify-center gap-2"
+        class="group font-code text-code relative flex max-w-full flex-row items-end justify-center gap-2 hover:cursor-pointer"
       >
         <span class="min-w-0 text-center">
           ~ docker run -p 8080:8080 axonivy/axonivy-engine:{CURRENT_VERSION}

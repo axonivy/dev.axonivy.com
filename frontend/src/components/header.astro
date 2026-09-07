@@ -1,10 +1,7 @@
 ---
 import Navbar from "@/components/navbar";
 import AxonIvyLogo from "@/assets/axonivy-logo-2021-rgb.svg";
-import AxonIvyLogoDark from "@/assets/axonivy-logo-2021-rgb-neg.svg";
-import { buttonVariants } from "@/components/ui/button";
 import { ModeToggle } from "./ui/mode-toggle";
-import { IconArrowUpRight, IconExternalLink } from "@tabler/icons-astro";
 ---
 
 <script is:inline>
@@ -40,18 +37,9 @@ import { IconArrowUpRight, IconExternalLink } from "@tabler/icons-astro";
   <div class="relative mx-auto w-full px-4 py-4 md:max-w-6xl">
     <div class="flex w-full flex-row items-center justify-between gap-4">
       <a href="/">
-        <AxonIvyLogo
-          width={108}
-          height={16}
-          class="md:h-10 md:w-40 dark:hidden"
-        />
-        <AxonIvyLogoDark
-          width={108}
-          height={16}
-          class="hidden md:h-10 md:w-40 dark:block"
-        />
+        <AxonIvyLogo width={108} height={16} class="md:h-10 md:w-40" />
       </a>
-      <Navbar type="header" client:load />
+      <Navbar client:load />
       <div class="hidden gap-2 md:flex">
         <ModeToggle client:load />
       </div>
