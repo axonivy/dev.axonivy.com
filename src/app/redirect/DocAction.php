@@ -35,7 +35,7 @@ class DocAction
 
     // special treatment for dev, milestone, nightly
     if ($version == "dev" || $version == "milestone" || $version == "nightly") {
-      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);      
+      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang); 
       return Redirect::to($response, $url . $docPath);
     }
 
@@ -62,9 +62,9 @@ class DocAction
 
     $v = new Version($version);
     $version = $v->getMinorVersion();
-    $docProvider = new DocProvider($version);
+    $docProvider = new DocProvider($version);    
     if (!$docProvider->exists()) {
-      throw new HttpNotFoundException($request);      
+      throw new HttpNotFoundException($request);
     }
 
     // redirect to minor version if access is not via minor version
@@ -80,7 +80,7 @@ class DocAction
         return Redirect::to($response, $newDocUrl);
       }
     }
-
+ 
     // legacy, before 9
     $document = null;
     if (!empty($docName)) {
@@ -158,17 +158,12 @@ class DocAction
     if (empty($document)) {
       return "$baseUrl/index.html";
     }
-    if ($document == 'migration-notes') {
-      if ($version->isEqualOrGreaterThan('14.0')) {
-        return "$baseUrl/technical-info/migration/migration-notes.html"; 
-      }
-      return "$baseUrl/axonivy/migration/index.html";
+    $releaseInfoPath = version_compare($version->getVersionNumber(), 14) >= 0 ? 'technical-info' : 'axonivy';
+    if ($document == 'migration-notes') {      
+      return "$baseUrl/$releaseInfoPath/migration/index.html";
     }
-    if ($document == 'release-notes') {
-      if ($version->isEqualOrGreaterThan('14.0')) {
-        return "$baseUrl/technical-info/release-notes/index.html"; 
-      }
-      return "$baseUrl/axonivy/release-notes/index.html";
+    if ($document == 'release-notes') {      
+      return "$baseUrl/$releaseInfoPath/release-notes/index.html";
     }
     if ($document == 'new-and-noteworthy') {
       $newsLink = '/news';
