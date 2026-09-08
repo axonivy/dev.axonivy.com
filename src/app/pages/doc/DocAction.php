@@ -43,7 +43,7 @@ class DocAction
 
     // special treatment for dev, milestone, nightly
     if ($version == "dev" || $version == "milestone" || $version == "nightly") {
-      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);      
+      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang); 
       return Redirect::to($response, $url . $docPath);
     }
 
@@ -70,9 +70,9 @@ class DocAction
 
     $v = new Version($version);
     $version = $v->getMinorVersion();
-    $docProvider = new DocProvider($version);
+    $docProvider = new DocProvider($version);    
     if (!$docProvider->exists()) {
-      throw new HttpNotFoundException($request);      
+      throw new HttpNotFoundException($request);
     }
 
     // redirect to minor version if access is not via minor version
@@ -80,8 +80,7 @@ class DocAction
       return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
 
-    if ($this->documentationBasedOnReadTheDocs($version))
-    {
+    if ($this->documentationBasedOnReadTheDocs($version)) {
       $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version), $hasLang);
       if (empty($newDocUrl)) {
         throw new HttpNotFoundException($request);
@@ -89,7 +88,7 @@ class DocAction
         return Redirect::to($response, $newDocUrl);
       }
     }
-
+ 
     // legacy, before 9
     $document = null;
     if (!empty($docName)) {
@@ -135,8 +134,7 @@ class DocAction
 
   private function hasLanguage(string $docName) : bool 
   {
-    if (empty($docName)) 
-    {
+    if (empty($docName)) {
       return false;
     }
     $path = explode('/', $docName);
@@ -188,11 +186,12 @@ class DocAction
     if (empty($document)) {
       return "$baseUrl/index.html";
     }
+    $releaseInfoPath = version_compare($version->getVersionNumber(), 14) >= 0 ? 'technical-info' : 'axonivy';
     if ($document == 'migration-notes') {
-      return "$baseUrl/axonivy/migration/index.html";
+      return "$baseUrl/$releaseInfoPath/migration/index.html";
     }
     if ($document == 'release-notes') {
-      return "$baseUrl/axonivy/release-notes/index.html";
+      return "$baseUrl/$releaseInfoPath/release-notes/index.html";
     }
     if ($document == 'new-and-noteworthy') {
       $newsLink = '/news';
