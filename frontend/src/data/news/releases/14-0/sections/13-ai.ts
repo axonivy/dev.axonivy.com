@@ -69,8 +69,12 @@ const section: NewsSection = {
   ],
   links: [],
   images: [
-    `14.0/tabler-icons-visual-modernization/01-icon-showcase.png`,
-    `14.0/tabler-icons-visual-modernization/02-icon-overview.png`,
+    `14.0/ai/01-edit-agent.png`,
+    `14.0/ai/02-agent-in-diagram.png`,
+    `14.0/ai/03-ai-governance-center.png`,
+    `14.0/ai/04-agent-pipeline.png`,
+    `14.0/ai/05-github-dev-skills.png`,
+    `14.0/ai/06-language-model.png`,
   ],
 };
 
