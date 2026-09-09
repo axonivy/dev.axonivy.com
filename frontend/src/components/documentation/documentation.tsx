@@ -134,9 +134,9 @@ export default function Documentation() {
                     section.key === "docLinksDev"
                       ? group.links.filter(
                           (link) =>
-                            !link.text
+                            !link.url
                               .toLowerCase()
-                              .includes("new and noteworthy"),
+                              .includes("new-and-noteworthy"),
                         )
                       : group.links;
                   const docLink = links.find((l) =>
