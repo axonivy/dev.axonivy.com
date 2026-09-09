@@ -27,10 +27,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `Concepts: Testing`,
-      url: `/doc/9.1/concepts/testing/index.html`,
-    },
+    { label: `Concepts: Testing`, url: `/doc/9.1/concepts/testing/index.html` },
     {
       label: `Youtube: Tutorial`,
       url: `https://www.youtube.com/playlist?list=PLrFKpclzHMnJXhDEWjY8Bp_kqXdgdc_b_`,

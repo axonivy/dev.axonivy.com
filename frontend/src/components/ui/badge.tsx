@@ -26,9 +26,7 @@ const badgeVariants = cva(
         gray: "bg-n300 text-n900 [a]:hover:bg-n300/80",
       },
     },
-    defaultVariants: {
-      variant: "default",
-    },
+    defaultVariants: { variant: "default" },
   },
 );
 
@@ -41,16 +39,11 @@ function Badge({
   return useRender({
     defaultTagName: "span",
     props: mergeProps<"span">(
-      {
-        className: cn(badgeVariants({ variant }), className),
-      },
+      { className: cn(badgeVariants({ variant }), className) },
       props,
     ),
     render,
-    state: {
-      slot: "badge",
-      variant,
-    },
+    state: { slot: "badge", variant },
   });
 }
 

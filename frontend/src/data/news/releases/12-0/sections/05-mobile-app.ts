@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Streamline Your Workflow On the Go - Axon Ivy has released a new version of the Axon Ivy Mobile App.`,
     },
-    {
-      type: `paragraph`,
-      text: `New Code, New Design, More Functionality!`,
-    },
+    { type: `paragraph`, text: `New Code, New Design, More Functionality!` },
     {
       type: `list`,
       items: [
@@ -37,10 +34,7 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `Install the App for iOS and Android now:`,
-    },
+    { type: `paragraph`, text: `Install the App for iOS and Android now:` },
   ],
   links: [
     {

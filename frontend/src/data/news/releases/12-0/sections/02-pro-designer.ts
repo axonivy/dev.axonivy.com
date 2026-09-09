@@ -40,10 +40,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `PRO Designer`,
-      url: `/doc/12.0/designer-guide/index.html`,
-    },
+    { label: `PRO Designer`, url: `/doc/12.0/designer-guide/index.html` },
   ],
   images: [
     `12.0/pro-designer/01-inscription-view.png`,

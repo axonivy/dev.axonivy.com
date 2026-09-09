@@ -39,10 +39,7 @@ const section: NewsSection = {
       label: `Drop Axis`,
       url: `/doc/9.4/axonivy/migration/migration-notes-93.html#migrate-93-axis`,
     },
-    {
-      label: `Java 17`,
-      url: `https://docs.oracle.com/en/java/javase/17/`,
-    },
+    { label: `Java 17`, url: `https://docs.oracle.com/en/java/javase/17/` },
   ],
   images: [
     `9.4/project-migration-wizards/01-convert-project.png`,

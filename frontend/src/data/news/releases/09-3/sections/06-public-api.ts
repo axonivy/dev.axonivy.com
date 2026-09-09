@@ -38,12 +38,7 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [
-    {
-      label: `Public API`,
-      url: `/doc/9.3/public-api`,
-    },
-  ],
+  links: [{ label: `Public API`, url: `/doc/9.3/public-api` }],
   images: [
     `9.3/public-api/01-security.PNG`,
     `9.3/public-api/02-role-matcher.PNG`,

@@ -3,15 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { IconLink } from "@tabler/icons-react";
 import { H1, P } from "@/components/ui/typography";
 
-type LegacyDocLink = {
-  url: string;
-  text: string;
-};
+type LegacyDocLink = { url: string; text: string };
 
-type LegacyDocVersionLinks = {
-  version: string;
-  links: LegacyDocLink[];
-};
+type LegacyDocVersionLinks = { version: string; links: LegacyDocLink[] };
 
 type UiLegacyDocResponse = {
   version: string;
@@ -49,9 +43,7 @@ function getInitialPath(version: LegacyDocsVersion) {
   return pathFromNiceUrl(version, window.location.pathname);
 }
 
-type LegacyDocumentationProps = {
-  version: LegacyDocsVersion;
-};
+type LegacyDocumentationProps = { version: LegacyDocsVersion };
 
 export default function LegacyDocumentation({
   version,

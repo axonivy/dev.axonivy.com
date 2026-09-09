@@ -54,7 +54,6 @@ describe("NewsScrollSpy", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Faster, smarter, better")).toBeInTheDocument();
     expect(screen.getByText("January 2024")).toBeInTheDocument();
-
     expect(screen.getByRole("link", { name: /Download/ })).toHaveAttribute(
       "href",
       "/download",
@@ -166,7 +165,6 @@ describe("NewsScrollSpy", () => {
     expect(migrationLink).not.toHaveClass("text-primary");
 
     await user.click(migrationLink);
-
     expect(migrationLink).toHaveClass("text-primary");
     expect(overviewLink).not.toHaveClass("text-primary");
   });
@@ -234,7 +232,6 @@ describe("NewsScrollSpy", () => {
       name: /Open image preview/,
     });
     await user.click(thumbnails[0]);
-
     const dialog = await screen.findByRole("dialog");
     expect(within(dialog).getByText("1 / 3")).toBeInTheDocument();
 
@@ -242,7 +239,6 @@ describe("NewsScrollSpy", () => {
       within(dialog).getByRole("button", { name: "Next image" }),
     );
     expect(within(dialog).getByText("2 / 3")).toBeInTheDocument();
-
     await user.click(
       within(dialog).getByRole("button", { name: "Next image" }),
     );
@@ -250,7 +246,6 @@ describe("NewsScrollSpy", () => {
       within(dialog).getByRole("button", { name: "Next image" }),
     );
     expect(within(dialog).getByText("1 / 3")).toBeInTheDocument();
-
     await user.click(
       within(dialog).getByRole("button", { name: "Previous image" }),
     );
@@ -274,7 +269,6 @@ describe("NewsScrollSpy", () => {
     dialog.focus();
     await user.keyboard("{ArrowRight}");
     expect(within(dialog).getByText("2 / 2")).toBeInTheDocument();
-
     await user.keyboard("{ArrowLeft}");
     expect(within(dialog).getByText("1 / 2")).toBeInTheDocument();
   });
@@ -289,7 +283,6 @@ describe("NewsScrollSpy", () => {
       screen.getByRole("button", { name: /Open image preview/ }),
     );
     const dialog = await screen.findByRole("dialog");
-
     expect(
       within(dialog).queryByRole("button", { name: "Next image" }),
     ).not.toBeInTheDocument();

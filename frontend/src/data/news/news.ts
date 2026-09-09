@@ -38,9 +38,7 @@ export interface NewsRelease {
 
 const modules = import.meta.glob<{ default: NewsRelease }>(
   "./releases/*/index.ts",
-  {
-    eager: true,
-  },
+  { eager: true },
 );
 
 export const news: NewsRelease[] = Object.values(modules)

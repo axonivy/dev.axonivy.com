@@ -46,10 +46,7 @@ const section: NewsSection = {
   ],
   links: [
     { label: `Axon Ivy Market`, url: `https://market.axonivy.com/` },
-    {
-      label: `Market`,
-      url: `/doc/12.0/market/index.html`,
-    },
+    { label: `Market`, url: `/doc/12.0/market/index.html` },
   ],
   images: [`12.0/market/01-market.png`],
 };

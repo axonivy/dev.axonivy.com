@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Welcome to the next level of productivity and efficiency with the release of Axon Ivy Portal LTS 12! This version marks a significant milestone, combining all the powerful features and enhancements from the 11.x Leading Edge releases into one robust, stable LTS version. With LTS 12, we’re delivering the most intuitive, accessible, and customizable portal experience yet.`,
     },
-    {
-      type: `heading`,
-      text: `Features Included from Leading Edge Versions`,
-    },
+    { type: `heading`, text: `Features Included from Leading Edge Versions` },
     {
       type: `paragraph`,
       text: `LTS 12 builds upon the innovations and optimizations introduced in previous versions, including:`,
@@ -33,10 +30,7 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `heading`,
-      text: `Further Improvements`,
-    },
+    { type: `heading`, text: `Further Improvements` },
     {
       type: `paragraph`,
       text: `Beyond the well-known features from versions 11.1 to 11.3, LTS 12 brings additional enhancements:`,
@@ -67,12 +61,7 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [
-    {
-      label: `Portal`,
-      url: `/doc/12.0/portal-guide/index.html`,
-    },
-  ],
+  links: [{ label: `Portal`, url: `/doc/12.0/portal-guide/index.html` }],
   images: [
     `12.0/portal/01-new-design.png`,
     `12.0/portal/02-charts.png`,

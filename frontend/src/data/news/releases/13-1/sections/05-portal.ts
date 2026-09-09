@@ -25,10 +25,7 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `And much more`,
-    },
+    { type: `paragraph`, text: `And much more` },
     {
       type: `list`,
       items: [
@@ -51,12 +48,7 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [
-    {
-      label: `Portal`,
-      url: `/doc/13.1/portal-guide/index.html`,
-    },
-  ],
+  links: [{ label: `Portal`, url: `/doc/13.1/portal-guide/index.html` }],
   images: [
     `13.1/portal/01-statistics.png`,
     `13.1/portal/02-pin-tasks.png`,

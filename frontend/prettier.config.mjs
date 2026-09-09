@@ -6,5 +6,7 @@ export default {
   singleQuote: false,
   tabWidth: 2,
   trailingComma: "all",
-  plugins: ["prettier-plugin-astro"],
+  objectWrap: "collapse",
+  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  tailwindFunctions: ["cn", "cva"],
 };

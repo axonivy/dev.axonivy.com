@@ -46,12 +46,7 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [
-    {
-      label: `NEO Designer`,
-      url: `/doc/13.1/designer-guide`,
-    },
-  ],
+  links: [{ label: `NEO Designer`, url: `/doc/13.1/designer-guide` }],
   images: [
     `13.1/neo-designer/01-project-dependencies.png`,
     `13.1/neo-designer/02-data-class-graph.png`,

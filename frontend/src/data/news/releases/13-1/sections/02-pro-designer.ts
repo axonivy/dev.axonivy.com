@@ -43,10 +43,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `PRO Designer`,
-      url: `/doc/13.1/designer-guide/index.html`,
-    },
+    { label: `PRO Designer`, url: `/doc/13.1/designer-guide/index.html` },
   ],
   images: [
     `13.1/pro-designer/01-dialog-preview.png`,

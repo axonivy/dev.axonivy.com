@@ -145,10 +145,7 @@ function DockerCommandBlock({ command }: { command: string }) {
   );
 }
 
-type InstallationScrollSpyProps = {
-  guideId: string;
-  guide: InstallationGuide;
-};
+type InstallationScrollSpyProps = { guideId: string; guide: InstallationGuide };
 
 export default function InstallationScrollSpy({
   guideId,

@@ -33,7 +33,6 @@ describe("Documentation", () => {
     );
 
     const { container } = renderWithQueryClient(<Documentation />);
-
     expect(container.querySelector('[data-slot="skeleton"]')).toBeTruthy();
 
     resolveFetch(
@@ -54,9 +53,7 @@ describe("Documentation", () => {
 
   it("shows an error message when the request fails", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null, { status: 500 }));
-
     renderWithQueryClient(<Documentation />);
-
     expect(
       await screen.findByText(/Failed to load documentation links: HTTP 500/),
     ).toBeInTheDocument();
@@ -64,9 +61,7 @@ describe("Documentation", () => {
 
   it("shows a fallback message when the response has no data", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null));
-
     renderWithQueryClient(<Documentation />);
-
     expect(
       await screen.findByText("No documentation data available."),
     ).toBeInTheDocument();
@@ -87,7 +82,6 @@ describe("Documentation", () => {
     );
 
     renderWithQueryClient(<Documentation />);
-
     await screen.findByText("LTS - Long Term Support");
     expect(screen.queryByText("LE - Leading Edge")).not.toBeInTheDocument();
     expect(screen.queryByText("Development build")).not.toBeInTheDocument();
@@ -116,7 +110,6 @@ describe("Documentation", () => {
     );
 
     renderWithQueryClient(<Documentation />);
-
     await screen.findByText("LTS - Long Term Support");
     const headings = screen.getAllByRole("heading", { level: 5 });
     expect(headings.map((heading) => heading.textContent)).toEqual([
@@ -158,7 +151,6 @@ describe("Documentation", () => {
 
     renderWithQueryClient(<Documentation />);
     await screen.findByText("LTS - Long Term Support");
-
     const badgeNear = (versionText: string) => {
       const heading = screen.getByRole("heading", {
         level: 5,
@@ -196,7 +188,6 @@ describe("Documentation", () => {
     );
 
     renderWithQueryClient(<Documentation />);
-
     await screen.findByText("Development build");
     expect(screen.queryByText("New and Noteworthy")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Documentation/ })).toHaveAttribute(
@@ -224,10 +215,9 @@ describe("Documentation", () => {
     );
 
     renderWithQueryClient(<Documentation />);
-
     const docLink = await screen.findByRole("link", { name: /Documentation/ });
-    expect(docLink).toHaveAttribute("href", "/doc/11.0");
 
+    expect(docLink).toHaveAttribute("href", "/doc/11.0");
     expect(
       screen.getByRole("link", { name: /Migration Guide/ }),
     ).toHaveAttribute("href", "/doc/11.0/migration");

@@ -11,10 +11,7 @@ const section: NewsSection = {
     {
       type: `list`,
       items: [
-        {
-          term: `Simple`,
-          text: `Install & run the Engine with one click.`,
-        },
+        { term: `Simple`, text: `Install & run the Engine with one click.` },
         {
           term: `Best practice`,
           text: `Run the Axon.ivy Engine as systemd service and restricts the access to Engine and workflow application files.`,
@@ -38,7 +35,7 @@ const section: NewsSection = {
     {
       label: `Debian : Getting Started`,
       url: `/doc/8.0/en/engine-guide/getting-started/debian.html`,
-    }
+    },
   ],
   images: [`8.0/debian/01-debian-package-installer.png`],
 };

@@ -39,10 +39,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `Market docs`,
-      url: `/doc/9.2/market/index.html`,
-    },
+    { label: `Market docs`, url: `/doc/9.2/market/index.html` },
     { label: `Browse the Market`, url: `https://market.axonivy.com/` },
   ],
   images: [

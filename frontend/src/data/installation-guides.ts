@@ -1,10 +1,6 @@
 export type InstallationProduct = "Designer" | "Engine";
 
-export type InstallationSubstep = {
-  id: number;
-  title: string;
-  img?: string;
-};
+export type InstallationSubstep = { id: number; title: string; img?: string };
 
 export type InstallationStep = {
   id: number;
@@ -18,10 +14,7 @@ export type InstallationGuide = {
   title: string;
   type: string;
   product: InstallationProduct;
-  hint?: {
-    title: string;
-    description: string;
-  };
+  hint?: { title: string; description: string };
   steps: InstallationStep[];
 };
 
@@ -175,10 +168,7 @@ const installationGuides = {
           },
         ],
       },
-      {
-        id: 4,
-        title: "Next steps",
-      },
+      { id: 4, title: "Next steps" },
     ],
   },
   engine: {
@@ -186,10 +176,7 @@ const installationGuides = {
     type: "Engine",
     product: "Engine",
     steps: [
-      {
-        id: 1,
-        title: "Download the Axon Ivy Engine to your desired location",
-      },
+      { id: 1, title: "Download the Axon Ivy Engine to your desired location" },
       {
         id: 2,
         title: "Extract the downloaded zip file",

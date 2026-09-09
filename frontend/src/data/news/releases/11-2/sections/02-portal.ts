@@ -33,29 +33,19 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `And much more:`,
-    },
+    { type: `paragraph`, text: `And much more:` },
     {
       type: `list`,
       items: [
         {
           text: `Custom Order of the Processes in the Dashboard Process Widget`,
         },
-        {
-          text: `More End-user-like business states for tasks and cases`,
-        },
+        { text: `More End-user-like business states for tasks and cases` },
         { text: `Skeleton loading in the portal` },
       ],
     },
   ],
-  links: [
-    {
-      label: `Portal`,
-      url: `/doc/11.2/en/portal-guide/index.html`,
-    },
-  ],
+  links: [{ label: `Portal`, url: `/doc/11.2/en/portal-guide/index.html` }],
   images: [
     `11.2/portal/01-dashboard-share.png`,
     `11.2/portal/02-all-sorting-options.png`,

@@ -17,9 +17,7 @@ export function getStaticPaths() {
   ];
 
   return legacyDocsVersions.flatMap((version: LegacyDocsVersion) =>
-    paths.map((path) => ({
-      params: { id: version, path },
-    })),
+    paths.map((path) => ({ params: { id: version, path } })),
   );
 }
 

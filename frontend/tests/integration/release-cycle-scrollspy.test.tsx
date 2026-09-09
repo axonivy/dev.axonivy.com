@@ -28,12 +28,10 @@ describe("ReleaseCycleScrollspy", () => {
   it("marks the clicked nav link as active", async () => {
     const user = userEvent.setup();
     render(<ReleaseCycleScrollspy />);
-
     const milestonesLink = screen.getByRole("link", { name: "Milestones" });
     const ltsLink = screen.getByRole("link", { name: /Long Term Support/ });
 
     await user.click(milestonesLink);
-
     expect(milestonesLink).toHaveClass("text-primary");
     expect(ltsLink).not.toHaveClass("text-primary");
   });

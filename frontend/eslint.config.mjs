@@ -6,18 +6,13 @@ import prettier from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  {
-    ignores: [".astro/", "dist/", "node_modules/", "../src/web/"],
-  },
+  { ignores: [".astro/", "dist/", "node_modules/", "../src/web/"] },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...astro.configs["flat/recommended"],
   {
     files: ["**/*.{jsx,tsx}"],
-    plugins: {
-      "jsx-a11y": jsxA11y,
-      "react-hooks": reactHooks,
-    },
+    plugins: { "jsx-a11y": jsxA11y, "react-hooks": reactHooks },
     rules: {
       "jsx-a11y/anchor-is-valid": "error",
       "jsx-a11y/alt-text": "error",

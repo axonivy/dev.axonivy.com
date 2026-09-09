@@ -119,10 +119,7 @@ describe("InstallationScrollSpy", () => {
               id: 2,
               title: "Run as Docker image",
               substeps: [
-                {
-                  id: 2.1,
-                  title: "docker pull image <br /> docker run image",
-                },
+                { id: 2.1, title: "docker pull image <br /> docker run image" },
               ],
             },
           ],
@@ -131,13 +128,11 @@ describe("InstallationScrollSpy", () => {
     );
 
     expect(screen.queryByText(/2\.1/)).not.toBeInTheDocument();
-
     const commandBlock = document.querySelector("code");
     expect(commandBlock).toHaveTextContent("docker pull image");
     expect(commandBlock).toHaveTextContent("docker run image");
 
     await user.click(screen.getByRole("button", { name: "Copy command" }));
-
     expect(writeText).toHaveBeenCalledWith(
       "docker pull image\ndocker run image",
     );
@@ -175,9 +170,7 @@ describe("InstallationScrollSpy", () => {
     render(
       <InstallationScrollSpy
         guideId="engine"
-        guide={guide({
-          steps: [{ id: 1, title: "Download the engine" }],
-        })}
+        guide={guide({ steps: [{ id: 1, title: "Download the engine" }] })}
       />,
     );
 

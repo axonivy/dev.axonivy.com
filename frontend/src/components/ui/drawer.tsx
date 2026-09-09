@@ -28,9 +28,7 @@ function Drawer({
   snapPoints,
   swipeDirection = "down",
   ...props
-}: DrawerPrimitive.Root.Props & {
-  showSwipeHandle?: boolean;
-}) {
+}: DrawerPrimitive.Root.Props & { showSwipeHandle?: boolean }) {
   const hasSnapPoints = snapPoints != null && snapPoints.length > 0;
   const contextValue = React.useMemo(
     () => ({ hasSnapPoints, modal, showSwipeHandle, swipeDirection }),

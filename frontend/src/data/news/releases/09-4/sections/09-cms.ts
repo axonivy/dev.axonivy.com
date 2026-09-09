@@ -35,10 +35,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `Designer Guide`,
-      url: `/doc/9.4/designer-guide/cms/index.html`,
-    },
+    { label: `Designer Guide`, url: `/doc/9.4/designer-guide/cms/index.html` },
   ],
   images: [`9.4/cms/01-structure.png`, `9.4/cms/02-cms-yaml.png`],
 };

@@ -104,16 +104,13 @@ describe("VersionOverview", () => {
 
   it("defaults to the engine product for both the dev releases and archive tables", async () => {
     setUpFetchMock();
-
     renderWithQueryClient(<VersionOverview />);
-
     await waitFor(() => expect(screen.getAllByRole("table")).toHaveLength(2));
     const [devTable, archiveTable] = screen.getAllByRole("table");
 
     expect(within(devTable).getByText("13.0.0-m010")).toBeInTheDocument();
     expect(within(devTable).queryByText("13.0.0-m011")).not.toBeInTheDocument();
     expect(within(devTable).getByText("Slim")).toBeInTheDocument();
-
     expect(within(archiveTable).getByText("12.0.1")).toBeInTheDocument();
     expect(within(archiveTable).queryByText("11.5.0")).not.toBeInTheDocument();
     expect(within(archiveTable).getByText("Slim")).toBeInTheDocument();
@@ -122,31 +119,24 @@ describe("VersionOverview", () => {
   it("filters both tables to the designer product without issuing new requests", async () => {
     const user = userEvent.setup();
     setUpFetchMock();
-
     renderWithQueryClient(<VersionOverview />);
-
     await waitFor(() => expect(screen.getAllByRole("table")).toHaveLength(2));
     const callCountBeforeSwitch = vi.mocked(fetch).mock.calls.length;
 
     await user.click(screen.getByRole("button", { name: /Designer Versions/ }));
-
     const [devTable, archiveTable] = screen.getAllByRole("table");
-
     expect(within(devTable).getByText("13.0.0-m011")).toBeInTheDocument();
     expect(within(devTable).queryByText("13.0.0-m010")).not.toBeInTheDocument();
     expect(within(devTable).queryByText("Slim")).not.toBeInTheDocument();
-
     expect(within(archiveTable).getByText("11.5.0")).toBeInTheDocument();
     expect(within(archiveTable).queryByText("12.0.1")).not.toBeInTheDocument();
     expect(within(archiveTable).queryByText("Slim")).not.toBeInTheDocument();
-
     expect(vi.mocked(fetch)).toHaveBeenCalledTimes(callCountBeforeSwitch);
   });
 
   it("highlights the active product button", async () => {
     const user = userEvent.setup();
     setUpFetchMock();
-
     renderWithQueryClient(<VersionOverview />);
     await waitFor(() => expect(screen.getAllByRole("table")).toHaveLength(2));
 
@@ -156,12 +146,10 @@ describe("VersionOverview", () => {
     const designerButton = screen.getByRole("button", {
       name: /Designer Versions/,
     });
-
     expect(engineButton).toHaveClass("bg-primary");
     expect(designerButton).not.toHaveClass("bg-primary");
 
     await user.click(designerButton);
-
     expect(designerButton).toHaveClass("bg-primary");
     expect(engineButton).not.toHaveClass("bg-primary");
   });

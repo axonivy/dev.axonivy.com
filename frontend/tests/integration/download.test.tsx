@@ -67,19 +67,14 @@ describe("Download", () => {
     );
 
     const { container } = renderWithQueryClient(<Download />);
-
     expect(container.querySelector('[data-slot="skeleton"]')).toBeTruthy();
-
     resolveFetch(mockFetchOnce(downloadData()));
-
     await screen.findByText("Axon Ivy Designer 12.0");
   });
 
   it("shows an error message when the request fails", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null, { status: 500 }));
-
     renderWithQueryClient(<Download />);
-
     expect(
       await screen.findByText(/Failed to load download links: HTTP 500/),
     ).toBeInTheDocument();
@@ -93,7 +88,6 @@ describe("Download", () => {
     );
 
     renderWithQueryClient(<Download />);
-
     expect(
       await screen.findByText("No download data available."),
     ).toBeInTheDocument();
@@ -115,9 +109,7 @@ describe("Download", () => {
 
   it("renders the Leading Edge section only when LE data is present", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(downloadData()));
-
     renderWithQueryClient(<Download />);
-
     expect(
       await screen.findByText("Want to check out brand new features?"),
     ).toBeInTheDocument();
@@ -126,9 +118,7 @@ describe("Download", () => {
 
   it("hides the Leading Edge section when there is no LE data", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(downloadData({ le: [] })));
-
     renderWithQueryClient(<Download />);
-
     await screen.findByText("Axon Ivy Designer 12.0");
     expect(
       screen.queryByText("Want to check out brand new features?"),
