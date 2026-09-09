@@ -13,7 +13,7 @@ const release: NewsRelease = {
   id: `10.0`,
   version_title: `Axon Ivy 10.0`,
   slogan: `All new user experience`,
-  tag: `Long Term Support`,
+  tag: `Archived`,
   release_date: new Date(`2022-10-17`),
   download_url: `/download`,
   release_notes_url: `/doc/10.0/en/axonivy/release-notes`,

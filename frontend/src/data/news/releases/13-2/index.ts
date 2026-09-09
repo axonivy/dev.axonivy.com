@@ -13,7 +13,7 @@ const release: NewsRelease = {
   id: `13.2`,
   version_title: `Axon Ivy 13.2`,
   slogan: `Agents, Statistics, Visual Studio Code Extension and Editors`,
-  tag: `Leading Edge`,
+  tag: `Archived`,
   release_date: new Date(`2025-12-22`),
   download_url: `/download`,
   release_notes_url: `/doc/13.2/en/axonivy/release-notes`,
