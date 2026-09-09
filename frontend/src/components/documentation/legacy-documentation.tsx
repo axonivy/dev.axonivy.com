@@ -103,7 +103,7 @@ export default function LegacyDocumentation({
     const headerDiv = doc.getElementById("headerdiv");
     headerDiv?.parentElement?.remove();
 
-    for (const navbar of doc.getElementsByClassName("navbar ivy-subnav")) {
+    for (const navbar of [...doc.getElementsByClassName("navbar ivy-subnav")]) {
       navbar.remove();
     }
 

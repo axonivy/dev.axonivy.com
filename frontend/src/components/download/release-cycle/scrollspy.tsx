@@ -105,7 +105,7 @@ export default function ReleaseCycleScrollspy() {
             </div>
             <Separator />
           </ScrollSpySection>
-          <ScrollSpySection value="milestones" className="flex flex-col gap-8">
+          <ScrollSpySection value="Milestones" className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
               <H4>Milestones</H4>
               <Base className="text-n900">
