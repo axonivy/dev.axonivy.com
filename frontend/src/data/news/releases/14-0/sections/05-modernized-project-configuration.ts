@@ -29,7 +29,6 @@ const section: NewsSection = {
       text: `These changes simplify automated processing and validation of project resources and align configuration formats with the new web-based editors.`,
     },
   ],
-  links: [],
   images: [
     `14.0/modernized-project-configuration/01-users-yaml.png`,
     `14.0/modernized-project-configuration/02-json-deterministic-versioning.png`,

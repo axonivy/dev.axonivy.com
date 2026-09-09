@@ -26,7 +26,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `9.3/dev-workflow-ui/01-starts.png`,
     `9.3/dev-workflow-ui/02-home.png`,

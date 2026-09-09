@@ -27,7 +27,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `14.0/vscode-pro-designer/01-extension.png`,
     `14.0/vscode-pro-designer/02-welcome-sample-dialog.png`,

@@ -30,7 +30,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `14.0/webbased-editor/01-dialog.png`,
     `14.0/webbased-editor/02-data-class.png`,

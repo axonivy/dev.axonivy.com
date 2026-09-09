@@ -35,8 +35,6 @@ const section: NewsSection = {
       text: `These changes are particularly relevant for hosted, clustered, and externally integrated environments.`,
     },
   ],
-  links: [],
-  images: [],
 };
 
 export default section;

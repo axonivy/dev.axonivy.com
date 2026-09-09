@@ -30,7 +30,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [`8.0/native-mac-gtk3/01-high-sierra-rest-activity.png`],
 };
 

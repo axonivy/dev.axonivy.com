@@ -52,7 +52,6 @@ const section: NewsSection = {
       url: `https://github.com/axonivy/project-build-examples`,
     },
   ],
-  images: [],
 };
 
 export default section;

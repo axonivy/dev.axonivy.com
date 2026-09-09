@@ -44,7 +44,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `13.1/market-artifacts/01-coffee-machine.png`,
     `13.1/market-artifacts/02-gdpr.png`,

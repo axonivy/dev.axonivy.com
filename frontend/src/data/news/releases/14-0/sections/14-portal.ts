@@ -66,8 +66,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
-  images: [],
 };
 
 export default section;

@@ -63,7 +63,6 @@ Frontend:
       url: `/doc/8.0/en/engine-guide/configuration/file-reference.html`,
     },
   ],
-  images: [],
 };
 
 export default section;

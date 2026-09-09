@@ -377,7 +377,7 @@ export default function NewsScrollSpy({
             >
               <H4>{section.heading}</H4>
               <NewsContent content={section.content} />
-              {section.links.length > 0 ? (
+              {section.links ? (
                 <ul className="flex flex-wrap items-center gap-2">
                   {section.links.map((link, linkIndex) => (
                     <li key={link.url} className="flex items-center gap-2">
@@ -397,17 +397,15 @@ export default function NewsScrollSpy({
                   ))}
                 </ul>
               ) : null}
-              {section.images.length > 0 ? (
+              {section.images ? (
                 <div className="flex flex-col gap-4">
                   <Base className="font-semibold">Demo screenshots:</Base>
-                  {section.images.length > 0 ? (
-                    <div className="flex flex-col gap-4">
-                      <NewsImageGallery
-                        images={section.images}
-                        title={section.heading}
-                      />
-                    </div>
-                  ) : null}
+                  <div className="flex flex-col gap-4">
+                    <NewsImageGallery
+                      images={section.images}
+                      title={section.heading}
+                    />
+                  </div>
                 </div>
               ) : null}
             </ScrollSpySection>

@@ -67,7 +67,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `14.0/ai/01-edit-agent.png`,
     `14.0/ai/02-agent-in-diagram.png`,

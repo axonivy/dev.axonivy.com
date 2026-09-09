@@ -29,7 +29,6 @@ const section: NewsSection = {
       text: `Existing deployment scripts and CI/CD automation should be reviewed when migrating to LTS 14.`,
     },
   ],
-  links: [],
   images: [
     `14.0/deployment-packaging/01-deployment-overview.png`,
     `14.0/deployment-packaging/02-deployment-configuration.png`,

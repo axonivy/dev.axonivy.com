@@ -17,7 +17,6 @@ const section: NewsSection = {
       text: `This provides earlier and more consistent feedback during development and enables validation to become part of automated CI/CD quality checks.`,
     },
   ],
-  links: [],
   images: [
     `14.0/unified-validation/01-validation-error.png`,
     `14.0/unified-validation/02-warnings.png`,

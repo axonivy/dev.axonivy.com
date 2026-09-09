@@ -34,7 +34,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `14.0/marketplace/01-cms-editor.png`,
     `14.0/marketplace/02-market.png`,

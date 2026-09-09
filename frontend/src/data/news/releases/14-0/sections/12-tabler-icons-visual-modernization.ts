@@ -29,7 +29,6 @@ const section: NewsSection = {
       text: `This provides a more consistent and modern visual language across development and administration interfaces.`,
     },
   ],
-  links: [],
   images: [
     `14.0/tabler-icons-visual-modernization/01-icon-showcase.png`,
     `14.0/tabler-icons-visual-modernization/02-icon-overview.png`,
