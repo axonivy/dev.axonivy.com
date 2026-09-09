@@ -20,6 +20,8 @@ RewriteCond %{DOCUMENT_ROOT}/astro%{REQUEST_URI}/index.html -f
 RewriteRule ^download/installation/([^/]+)/?$ /astro/download/installation/$1/index.html [L,QSA]
 
 RewriteRule ^download/([^/]+)/(.+)$ /releases/ivy/$1/downloads/$2 [L]
+
+RewriteCond %{DOCUMENT_ROOT}/docs/$1/$2/$3 -f
 RewriteRule ^doc/([^/]+)/([a-z][a-z])/(.+)$ /docs/$1/$2/$3 [L]
 
 RewriteCond %{DOCUMENT_ROOT}/astro/index.html -f
