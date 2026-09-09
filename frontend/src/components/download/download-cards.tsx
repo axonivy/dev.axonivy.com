@@ -44,10 +44,7 @@ export type DownloadRelease = {
   engineArtifacts: Artifacts[];
 };
 
-type ArtifactOption = {
-  artifact: Artifacts;
-  label: string;
-};
+type ArtifactOption = { artifact: Artifacts; label: string };
 
 type DownloadCardsProps = {
   release: DownloadRelease;
@@ -206,10 +203,7 @@ function artifactOperatingSystem(artifact: Artifacts): OperatingSystem {
 function engineArtifactOption(artifact: Artifacts): ArtifactOption {
   const os = artifactOperatingSystem(artifact);
   if (os === "linux") {
-    return {
-      artifact,
-      label: "Linux / macOS",
-    };
+    return { artifact, label: "Linux / macOS" };
   }
   return { artifact, label: artifact.name };
 }
@@ -273,9 +267,7 @@ function DownloadAction({
     return (
       <a
         href={`/download/installation/designer-vscode?vscodeExtensionLink=${encodeURIComponent(vscodeExtensionLink)}`}
-        className={buttonVariants({
-          className: "h-10 w-full justify-start",
-        })}
+        className={buttonVariants({ className: "h-10 w-full justify-start" })}
       >
         <IconBrandVscode className="size-5 shrink-0" aria-hidden="true" />
         Install Designer using VS Code Marketplace
@@ -291,9 +283,7 @@ function DownloadAction({
     return (
       <a
         href={`/download/installation/docker?downloadUrl=${artifact.url}`}
-        className={buttonVariants({
-          className: "h-10 w-full justify-start",
-        })}
+        className={buttonVariants({ className: "h-10 w-full justify-start" })}
       >
         <IconTerminal className="size-5 shrink-0" aria-hidden="true" />
         Install {title} {version} via Docker
@@ -307,9 +297,7 @@ function DownloadAction({
   return (
     <a
       href={artifact.url}
-      className={buttonVariants({
-        className: "h-10 w-full justify-start",
-      })}
+      className={buttonVariants({ className: "h-10 w-full justify-start" })}
     >
       <IconDownload className="size-5 shrink-0" aria-hidden="true" />
       Download {title} {version}

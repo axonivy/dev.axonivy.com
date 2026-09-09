@@ -24,14 +24,16 @@ const releases = (await getCollection("news")).sort(
   (left, right) =>
     right.data.release_date.getTime() - left.data.release_date.getTime(),
 );
-const timelineItems = releases.slice(1).map((release) => ({
-  id: release.id,
-  versionTitle: release.data.version_title,
-  slogan: release.data.slogan,
-  tag: release.data.tag,
-  releaseDate: release.data.release_date,
-  overview: release.data.overview,
-}));
+const timelineItems = releases
+  .slice(1)
+  .map((release) => ({
+    id: release.id,
+    versionTitle: release.data.version_title,
+    slogan: release.data.slogan,
+    tag: release.data.tag,
+    releaseDate: release.data.release_date,
+    overview: release.data.overview,
+  }));
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en", {

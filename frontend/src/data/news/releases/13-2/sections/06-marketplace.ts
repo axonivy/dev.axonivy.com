@@ -4,10 +4,7 @@ const section: NewsSection = {
   heading: `Marketplace`,
   anchor: `market`,
   content: [
-    {
-      type: `paragraph`,
-      text: `New Market Extensions`,
-    },
+    { type: `paragraph`, text: `New Market Extensions` },
     {
       type: `list`,
       items: [
@@ -41,23 +38,16 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `Marketplace Website Improvements`,
-    },
+    { type: `paragraph`, text: `Marketplace Website Improvements` },
     {
       type: `list`,
       items: [
-        {
-          text: `Improved monitoring UI for better transparency`,
-        },
+        { text: `Improved monitoring UI for better transparency` },
         {
           text: `Simplified publishing via GitHub workflow with just a few clicks`,
         },
         { text: `New drag & drop preview for artifacts` },
-        {
-          text: `Clearer and more readable extension changelogs`,
-        },
+        { text: `Clearer and more readable extension changelogs` },
       ],
     },
   ],

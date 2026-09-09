@@ -29,10 +29,7 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `Improvements of market extensions`,
-    },
+    { type: `paragraph`, text: `Improvements of market extensions` },
     {
       type: `list`,
       items: [

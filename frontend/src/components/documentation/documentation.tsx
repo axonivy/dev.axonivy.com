@@ -15,15 +15,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DocumentationSkeleton } from "@/components/skeletons/documentation-skeleton";
 import { H4, H5, P } from "@/components/ui/typography";
 
-type DocLink = {
-  url: string;
-  text: string;
-};
+type DocLink = { url: string; text: string };
 
-type DocVersionLinks = {
-  version: string;
-  links: DocLink[];
-};
+type DocVersionLinks = { version: string; links: DocLink[] };
 
 type UiDocResponse = {
   docLinksLTS: DocVersionLinks[];
@@ -73,9 +67,7 @@ export default function Documentation() {
     queryFn: async () => {
       const response = await fetch("/ui/doc", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       if (!response.ok) {

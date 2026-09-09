@@ -11,10 +11,7 @@ const section: NewsSection = {
     {
       type: `list`,
       items: [
-        {
-          term: `Meaningful Name`,
-          text: `Name the custom field as you like.`,
-        },
+        { term: `Meaningful Name`, text: `Name the custom field as you like.` },
         {
           term: `Searchable`,
           text: `You won't miss any search capabilities. Simply use <code>TaskQuery</code> and <code>CaseQuery</code> API to filter, aggregate and order by custom fields.`,

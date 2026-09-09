@@ -14,9 +14,7 @@ const section: NewsSection = {
         {
           text: `Lighter`,
           items: [
-            {
-              text: `The Xpert.ivy 3.9 import feature has been retired.`,
-            },
+            { text: `The Xpert.ivy 3.9 import feature has been retired.` },
             {
               text: `The project reporting feature is no longer included. But you can install it via the pre-configured update site.`,
             },

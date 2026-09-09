@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `The Visual Studio Code Extension is now the primary PRO Designer, offering a modern and actively evolving environment despite its beta status. The Eclipse-based PRO Designer is in maintenance mode with only essential bug fixes and no new features in 13.2.`,
     },
-    {
-      type: `paragraph`,
-      text: `New Features in the VS Code Extension:`,
-    },
+    { type: `paragraph`, text: `New Features in the VS Code Extension:` },
     {
       type: `list`,
       items: [

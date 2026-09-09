@@ -61,19 +61,14 @@ describe("LegacyDocumentation", () => {
     );
 
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-
     expect(screen.getByText("Loading...")).toBeInTheDocument();
-
     resolveFetch(mockFetchOnce(legacyDocResponse()));
-
     await screen.findByText("Documentation 8.0");
   });
 
   it("shows an error message when the request fails", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null, { status: 500 }));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-
     expect(
       await screen.findByText(
         /Failed to load legacy documentation links: HTTP 500/,
@@ -83,9 +78,7 @@ describe("LegacyDocumentation", () => {
 
   it("shows a fallback message when the response has no data", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-
     expect(
       await screen.findByText("No legacy documentation data available."),
     ).toBeInTheDocument();
@@ -94,9 +87,7 @@ describe("LegacyDocumentation", () => {
   it("derives the initial request path from the current URL", async () => {
     setLocation("/doc/8.0/intro");
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(legacyDocResponse()));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-
     await screen.findByText("Documentation 8.0");
     expect(vi.mocked(fetch)).toHaveBeenCalledWith(
       "/ui/legacy/doc/8.0/intro",
@@ -107,9 +98,7 @@ describe("LegacyDocumentation", () => {
   it("requests the default endpoint when the URL does not match the doc path", async () => {
     setLocation("/some/other/page");
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(legacyDocResponse()));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-
     await screen.findByText("Documentation 8.0");
     expect(vi.mocked(fetch)).toHaveBeenCalledWith(
       "/ui/legacy/doc/8.0",
@@ -139,7 +128,6 @@ describe("LegacyDocumentation", () => {
     expect(setupButton).not.toHaveClass("font-semibold");
 
     await user.click(setupButton);
-
     expect(window.location.pathname).toBe("/doc/8.0/setup");
     await waitFor(() =>
       expect(vi.mocked(fetch)).toHaveBeenCalledWith(
@@ -159,7 +147,6 @@ describe("LegacyDocumentation", () => {
 
   it("syncs the requested path when the browser back/forward navigation fires popstate", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(legacyDocResponse()));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
     await screen.findByText("Documentation 8.0");
     expect(vi.mocked(fetch)).toHaveBeenCalledWith(
@@ -180,9 +167,7 @@ describe("LegacyDocumentation", () => {
 
   it("renders external book links pointing out to a new tab", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(legacyDocResponse()));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-
     const externalLink = await screen.findByRole("link", {
       name: /External Book/,
     });
@@ -192,10 +177,8 @@ describe("LegacyDocumentation", () => {
 
   it("strips the legacy header/nav and injects a parent-targeted base tag on iframe load", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(legacyDocResponse()));
-
     renderWithQueryClient(<LegacyDocumentation version="8.0" />);
     await screen.findByText("Documentation 8.0");
-
     const iframe = screen.getByTitle("8.0") as HTMLIFrameElement;
 
     const legacyDoc = document.implementation.createHTMLDocument("legacy");
@@ -213,7 +196,6 @@ describe("LegacyDocumentation", () => {
     } as unknown as Window);
 
     fireEvent.load(iframe);
-
     expect(legacyDoc.getElementById("header-wrapper")).toBeNull();
     expect(legacyDoc.getElementsByClassName("navbar ivy-subnav")).toHaveLength(
       0,

@@ -59,10 +59,7 @@ const section: NewsSection = {
       label: `Mail API`,
       url: `/doc/13.2/public-api/ch/ivyteam/ivy/mail/package-summary.html`,
     },
-    {
-      label: `IIS Script`,
-      url: `https://github.com/axonivy-market/iis-proxy`,
-    },
+    { label: `IIS Script`, url: `https://github.com/axonivy-market/iis-proxy` },
   ],
   images: [
     `13.2/core/01-internationalisation.png`,

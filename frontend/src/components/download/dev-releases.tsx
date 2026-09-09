@@ -7,9 +7,7 @@ import type {
 import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
 import { H4, P } from "@/components/ui/typography";
 
-type DevReleasesProps = {
-  product: ArchiveProduct;
-};
+type DevReleasesProps = { product: ArchiveProduct };
 
 export default function DevReleases({ product }: DevReleasesProps) {
   const { data, isLoading, error } = useQuery({

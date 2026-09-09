@@ -31,12 +31,7 @@ const section: NewsSection = {
       text: `With enhanced usability, seamless workspace management and robust integration capabilities, NEO Designer enables business users to build and maintain scalable applications with ease.`,
     },
   ],
-  links: [
-    {
-      label: `NEO Designer`,
-      url: `/doc/12.0/designer-guide`,
-    },
-  ],
+  links: [{ label: `NEO Designer`, url: `/doc/12.0/designer-guide` }],
   images: [
     `12.0/neo-designer/01-welcome-page.png`,
     `12.0/neo-designer/02-overview.png`,

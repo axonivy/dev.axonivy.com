@@ -9,9 +9,7 @@ export default defineConfig({
   output: "static",
   outDir: "../src/web/astro",
 
-  build: {
-    format: "directory",
-  },
+  build: { format: "directory" },
 
   vite: {
     build: {

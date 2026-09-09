@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `The Visual Studio Code PRO Designer Extension continues to expand as the future platform for Ivy application development offering a modern, extensible, and developer-friendly alternative to the Eclipse-based PRO Designer. With version 13.1, the extension introduces key additions while continuing to support essential modeling features such as the Process Editor, Form Editor, and Variable Editor.`,
     },
-    {
-      type: `paragraph`,
-      text: `New in 13.1:`,
-    },
+    { type: `paragraph`, text: `New in 13.1:` },
     {
       type: `list`,
       items: [
@@ -35,10 +32,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `PRO Designer`,
-      url: `/doc/13.1/designer-guide/index.html`,
-    },
+    { label: `PRO Designer`, url: `/doc/13.1/designer-guide/index.html` },
   ],
   images: [
     `13.1/vscode-designer/01-vs-code-extension.png`,

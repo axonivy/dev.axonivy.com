@@ -37,10 +37,7 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `And more`,
-    },
+    { type: `paragraph`, text: `And more` },
     {
       type: `list`,
       items: [
@@ -67,10 +64,7 @@ const section: NewsSection = {
       label: `Static Pages`,
       url: `https://market.axonivy.com/market-cache/portal/portal-guide/13.2.0-m284/doc/en/portal-developer-guide/static-page/index.html`,
     },
-    {
-      label: `Portal`,
-      url: `/doc/13.2/portal-guide/index.html`,
-    },
+    { label: `Portal`, url: `/doc/13.2/portal-guide/index.html` },
   ],
   images: [
     `13.2/portal/01-light.png`,

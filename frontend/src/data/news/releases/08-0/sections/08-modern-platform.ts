@@ -31,10 +31,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `Eclipse 2019-09`,
-      url: `https://www.eclipse.org/downloads/`,
-    },
+    { label: `Eclipse 2019-09`, url: `https://www.eclipse.org/downloads/` },
     { label: `Marketplace`, url: `https://marketplace.eclipse.org/` },
   ],
   images: [

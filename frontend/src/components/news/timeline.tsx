@@ -18,15 +18,12 @@ export type NewsTimelineItem = {
   overview: string[];
 };
 
-type NewsTimelineProps = {
-  items: NewsTimelineItem[];
-};
+type NewsTimelineProps = { items: NewsTimelineItem[] };
 
 const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("en", {
-    year: "numeric",
-    month: "short",
-  }).format(date);
+  new Intl.DateTimeFormat("en", { year: "numeric", month: "short" }).format(
+    date,
+  );
 
 export function NewsTimeline({ items }: NewsTimelineProps) {
   return (

@@ -76,10 +76,7 @@ const section: NewsSection = {
   ],
   links: [
     { label: `Browse the Market`, url: `https://market.axonivy.com/` },
-    {
-      label: `Market docs`,
-      url: `/doc/11.2/market/index.html`,
-    },
+    { label: `Market docs`, url: `/doc/11.2/market/index.html` },
     {
       label: `Contribution Wiki`,
       url: `https://github.com/axonivy/market/wiki`,

@@ -39,10 +39,7 @@ const section: NewsSection = {
       label: `Designer Guide`,
       url: `/doc/8.0/en/designer-guide/3rd-party-integration/index.html#web-services`,
     },
-    {
-      label: `Tutorial Video`,
-      url: `/tutorial`,
-    },
+    { label: `Tutorial Video`, url: `/tutorial` },
   ],
   images: [`8.0/new-webservice-client-tooling/01-ws-client-cxf.png`],
 };

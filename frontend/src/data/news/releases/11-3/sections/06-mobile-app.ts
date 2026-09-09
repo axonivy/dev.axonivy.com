@@ -37,10 +37,7 @@ const section: NewsSection = {
         },
       ],
     },
-    {
-      type: `paragraph`,
-      text: `Install the App for iOS and Android now:`,
-    },
+    { type: `paragraph`, text: `Install the App for iOS and Android now:` },
   ],
   links: [
     {

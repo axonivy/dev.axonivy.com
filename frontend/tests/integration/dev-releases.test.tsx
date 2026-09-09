@@ -41,9 +41,7 @@ describe("DevReleases", () => {
 
   it("requests the unstable archive endpoint", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(archiveResponse()));
-
     renderWithQueryClient(<DevReleases product="engine" />);
-
     await screen.findByText("Dev Releases");
     expect(vi.mocked(fetch)).toHaveBeenCalledWith("/ui/archive/unstable");
   });
@@ -87,9 +85,7 @@ describe("DevReleases", () => {
 
   it("shows an error message when the request fails", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null, { status: 500 }));
-
     renderWithQueryClient(<DevReleases product="engine" />);
-
     expect(
       await screen.findByText(/Failed to load dev releases: HTTP 500/),
     ).toBeInTheDocument();
@@ -97,9 +93,7 @@ describe("DevReleases", () => {
 
   it("shows a fallback error message when the response has no data", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null));
-
     renderWithQueryClient(<DevReleases product="engine" />);
-
     expect(
       await screen.findByText(/Failed to load dev releases: No data available/),
     ).toBeInTheDocument();
@@ -127,9 +121,8 @@ describe("DevReleases", () => {
     );
 
     renderWithQueryClient(<DevReleases product="engine" />);
-
     const table = await screen.findByRole("table");
-    const rows = within(table).getAllByRole("row").slice(1); // drop header row
+    const rows = within(table).getAllByRole("row").slice(1);
     expect(
       rows.map((row) => within(row).getAllByRole("cell")[0].textContent),
     ).toEqual(["13.1.0", "12.0.1", "11.5.0"]);
@@ -170,7 +163,6 @@ describe("DevReleases", () => {
     );
 
     renderWithQueryClient(<DevReleases product="engine" />);
-
     const table = await screen.findByRole("table");
     expect(within(table).getByText("12.0.1")).toBeInTheDocument();
     expect(within(table).queryByText("11.5.0")).not.toBeInTheDocument();
@@ -188,8 +180,7 @@ describe("DevReleases", () => {
     );
 
     renderWithQueryClient(<DevReleases product="engine" />);
-
     const table = await screen.findByRole("table");
-    expect(within(table).getAllByRole("row")).toHaveLength(1); // header only
+    expect(within(table).getAllByRole("row")).toHaveLength(1);
   });
 });

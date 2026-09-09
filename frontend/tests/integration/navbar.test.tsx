@@ -23,7 +23,6 @@ describe("Navbar", () => {
 
   it("marks the Community link as external", () => {
     render(<Navbar />);
-
     const community = screen.getByRole("link", { name: /Community/ });
     expect(community).toHaveAttribute("href", "https://community.axonivy.com/");
     expect(community).toHaveAttribute("target", "_blank");
@@ -35,7 +34,6 @@ describe("Navbar", () => {
     render(<Navbar />);
 
     await user.click(screen.getByRole("button", { name: /Platform/ }));
-
     expect(screen.getByRole("link", { name: "Release Cycle" })).toHaveAttribute(
       "href",
       "/download/release-cycle",
@@ -57,7 +55,6 @@ describe("Navbar", () => {
   it("opens the Documentation dropdown with version-specific links", async () => {
     const user = userEvent.setup();
     render(<Navbar />);
-
     await user.click(screen.getByRole("button", { name: /Documentation/ }));
 
     expect(screen.getByRole("link", { name: "Overview" })).toHaveAttribute(
@@ -86,7 +83,6 @@ describe("Navbar", () => {
     expect(toggle).toHaveAttribute("aria-expanded", "false");
 
     await user.click(toggle);
-
     expect(toggle).toHaveAttribute("aria-label", "Close navigation menu");
     expect(toggle).toHaveAttribute("aria-expanded", "true");
     expect(
@@ -94,7 +90,6 @@ describe("Navbar", () => {
     ).toBeInTheDocument();
 
     await user.click(toggle);
-
     expect(toggle).toHaveAttribute("aria-label", "Open navigation menu");
     expect(toggle).toHaveAttribute("aria-expanded", "false");
     expect(
@@ -110,12 +105,10 @@ describe("Navbar", () => {
       screen.getByRole("button", { name: "Open navigation menu" }),
     );
     await screen.findByRole("navigation", { name: "Mobile navigation" });
-
     const platformTrigger = screen.getByRole("button", { name: "Platform" });
     expect(platformTrigger).toHaveAttribute("aria-expanded", "false");
 
     await user.click(platformTrigger);
-
     expect(platformTrigger).toHaveAttribute("aria-expanded", "true");
     const releaseCycleLink = screen.getByRole("link", {
       name: "Release Cycle",
@@ -123,7 +116,6 @@ describe("Navbar", () => {
     expect(releaseCycleLink).toHaveAttribute("href", "/download/release-cycle");
 
     await user.click(releaseCycleLink);
-
     expect(
       screen.queryByRole("navigation", { name: "Mobile navigation" }),
     ).not.toBeInTheDocument();
@@ -136,7 +128,6 @@ describe("Navbar", () => {
     await user.click(
       screen.getByRole("button", { name: "Open navigation menu" }),
     );
-
     expect(
       await screen.findByRole("button", { name: "Toggle theme" }),
     ).toBeInTheDocument();

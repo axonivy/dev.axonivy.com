@@ -64,10 +64,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    {
-      label: `NEO Designer`,
-      url: `/doc/13.2/neo-designer/index.html`,
-    },
+    { label: `NEO Designer`, url: `/doc/13.2/neo-designer/index.html` },
     {
       label: `PRO Designer (Deprecated)`,
       url: `/doc/13.2/designer-guide/index.html`,

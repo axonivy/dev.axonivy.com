@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type TypographyProps = {
-  children: React.ReactNode;
-  className?: string;
-};
+type TypographyProps = { children: React.ReactNode; className?: string };
 
 export function H1({ children, className }: TypographyProps) {
   return (

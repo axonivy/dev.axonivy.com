@@ -49,19 +49,14 @@ describe("Archive", () => {
     );
 
     renderWithQueryClient(<Archive product="engine" />);
-
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
-
     resolveFetch(mockFetchOnce(archiveResponse()));
-
     await waitFor(() => screen.getByRole("table"));
   });
 
   it("shows an error message when the request fails", async () => {
     vi.mocked(fetch).mockResolvedValue(mockFetchOnce(null, { status: 500 }));
-
     renderWithQueryClient(<Archive product="engine" />);
-
     expect(
       await screen.findByText(/Failed to load archive data: HTTP 500/),
     ).toBeInTheDocument();
@@ -102,7 +97,6 @@ describe("Archive", () => {
     );
 
     renderWithQueryClient(<Archive product="engine" />);
-
     const table = await screen.findByRole("table");
     expect(within(table).getByText("12.0.1")).toBeInTheDocument();
     expect(within(table).queryByText("11.5.0")).not.toBeInTheDocument();
@@ -147,7 +141,6 @@ describe("Archive", () => {
 
     renderWithQueryClient(<Archive product="engine" />);
     await screen.findByRole("table");
-
     const select = screen.getByRole("combobox");
     await user.selectOptions(select, "11.5");
 
@@ -167,7 +160,6 @@ describe("Archive", () => {
 
     renderWithQueryClient(<Archive product="engine" />);
     await screen.findByRole("table");
-
     const select = screen.getByRole("combobox");
     await user.selectOptions(select, "older");
 
@@ -259,8 +251,8 @@ describe("ArchiveTable", () => {
     expect(
       screen.getByRole("link", { name: /VS Code Extension/i }),
     ).toBeInTheDocument();
-
     rerender(<ArchiveTable product="engine" releases={[sharedRelease]} />);
+
     expect(
       screen.queryByRole("link", { name: /VS Code Extension/i }),
     ).not.toBeInTheDocument();

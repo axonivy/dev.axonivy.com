@@ -20,9 +20,7 @@ export default function Download() {
     queryFn: async () => {
       const response = await fetch("/ui/download", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       if (!response.ok) {

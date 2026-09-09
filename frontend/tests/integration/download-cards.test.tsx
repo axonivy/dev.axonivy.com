@@ -214,7 +214,6 @@ describe("DownloadCards", () => {
     );
 
     await screen.findByRole("button", { pressed: true });
-
     await user.click(screen.getByRole("button", { name: "Linux / macOS" }));
 
     expect(
@@ -265,7 +264,6 @@ describe("DownloadCards", () => {
     ).not.toBeInTheDocument();
 
     await user.click(toggle);
-
     expect(toggle).toHaveAttribute("aria-expanded", "true");
     expect(screen.getByText("/permalink/designer-windows")).toBeInTheDocument();
     expect(

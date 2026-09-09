@@ -61,7 +61,6 @@ describe("NewsTimeline", () => {
     ["Archived", "gray"],
   ] as const)("renders the %s badge with the %s variant", (tag, variant) => {
     render(<NewsTimeline items={[item({ tag })]} />);
-
     const badge = screen.getByText(tag);
     expect(badge).toHaveAttribute("data-variant", variant);
   });
@@ -72,7 +71,6 @@ describe("NewsTimeline", () => {
         items={[item({ id: "a" }), item({ id: "b" }), item({ id: "c" })]}
       />,
     );
-
     const connectors = container.querySelectorAll("span.bg-n200.absolute");
     expect(connectors).toHaveLength(2);
   });

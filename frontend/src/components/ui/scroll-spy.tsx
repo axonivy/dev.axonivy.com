@@ -204,10 +204,7 @@ function ScrollSpy(props: ScrollSpyProps) {
         const sectionPosition = section.getBoundingClientRect().top;
         const offsetPosition = sectionPosition + window.scrollY - offset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: scrollBehavior,
-        });
+        window.scrollTo({ top: offsetPosition, behavior: scrollBehavior });
       }
 
       if (scrollTimeoutRef.current !== null) {
@@ -311,11 +308,7 @@ function ScrollSpy(props: ScrollSpyProps) {
           }
         });
       },
-      {
-        root: scrollContainer,
-        rootMargin: observerRootMargin,
-        threshold,
-      },
+      { root: scrollContainer, rootMargin: observerRootMargin, threshold },
     );
 
     for (const element of sectionMap.values()) {
@@ -380,10 +373,7 @@ function ScrollSpy(props: ScrollSpyProps) {
       rootProps,
     ),
     render,
-    state: {
-      slot: "scroll-spy",
-      orientation,
-    },
+    state: { slot: "scroll-spy", orientation },
   });
 
   return (
@@ -417,10 +407,7 @@ function ScrollSpyNav(props: ScrollSpyNavProps) {
       navProps,
     ),
     render,
-    state: {
-      slot: "scroll-spy-nav",
-      orientation,
-    },
+    state: { slot: "scroll-spy-nav", orientation },
   });
 }
 
@@ -479,17 +466,11 @@ function ScrollSpyViewport(props: ScrollSpyViewportProps) {
   return useRender({
     defaultTagName: "div",
     props: mergeProps<"div">(
-      {
-        dir,
-        className: cn("flex flex-1 flex-col gap-8", className),
-      },
+      { dir, className: cn("flex flex-1 flex-col gap-8", className) },
       viewportProps,
     ),
     render,
-    state: {
-      slot: "scroll-spy-viewport",
-      orientation,
-    },
+    state: { slot: "scroll-spy-viewport", orientation },
   });
 }
 
@@ -518,18 +499,9 @@ function ScrollSpySection(props: ScrollSpySectionProps) {
 
   return useRender({
     defaultTagName: "div",
-    props: mergeProps<"div">(
-      {
-        id: value,
-        ref: composedRef,
-      },
-      sectionProps,
-    ),
+    props: mergeProps<"div">({ id: value, ref: composedRef }, sectionProps),
     render,
-    state: {
-      slot: "scroll-spy-section",
-      orientation,
-    },
+    state: { slot: "scroll-spy-section", orientation },
   });
 }
 

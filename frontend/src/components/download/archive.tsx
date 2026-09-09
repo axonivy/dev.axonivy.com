@@ -47,9 +47,7 @@ export type ArchiveRelease = {
   engineArtifacts: ArchiveArtifact[];
 };
 
-export type ArchiveVersionOption = {
-  id: string;
-};
+export type ArchiveVersionOption = { id: string };
 
 export type ArchiveResponse = {
   releaseInfos: ArchiveRelease[];
@@ -498,9 +496,7 @@ function MobileArchiveCards({
   );
 }
 
-type ArchiveProps = {
-  product: ArchiveProduct;
-};
+type ArchiveProps = { product: ArchiveProduct };
 
 export default function Archive({ product }: ArchiveProps) {
   const [selectedVersion, setSelectedVersion] = useState("");
