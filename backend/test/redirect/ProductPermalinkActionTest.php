@@ -69,7 +69,7 @@ class ProductPermalinkActionTest extends TestCase
 
   public function testPermalink_latest()
   {
-    AppTester::assertThatGet('/permalink/latest/axonivy-engine-slim.zip')->redirect('https://download.axonivy.com/8.0.1/AxonIvyEngine8.0.1.96047_Slim_All_x64.zip');
+    AppTester::assertThatGet('/permalink/latest/axonivy-engine-slim.zip')->redirect('https://download.axonivy.com/14.0.0/AxonIvyEngine14.0.0.2609101306_Slim_All_x64.zip');
   }
 
   public function testPermalink_latest_notexisting()
