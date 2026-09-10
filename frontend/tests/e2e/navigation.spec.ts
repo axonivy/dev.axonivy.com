@@ -11,18 +11,16 @@ test.describe("Site navigation", () => {
     await expect(page.getByText("Failed to load")).toHaveCount(0);
   });
 
-  test("navigates from the homepage to Documentation overview via the navbar", async ({
+  test("navigates from the homepage to deprecation via the navbar", async ({
     page,
   }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
     const nav = page.getByRole("banner");
-    await nav
-      .getByRole("button", { name: "Documentation", exact: true })
-      .hover();
-    await page.getByRole("link", { name: "Overview" }).click();
-    await expect(page).toHaveURL("/doc");
+    await nav.getByRole("button", { name: "Resources", exact: true }).hover();
+    await page.getByRole("link", { name: "Deprecation" }).click();
+    await expect(page).toHaveURL("/deprecation");
     await expect(page.getByText("Failed to load")).toHaveCount(0);
   });
 });

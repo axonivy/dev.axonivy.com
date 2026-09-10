@@ -145,7 +145,7 @@ export default function ReleaseCycleScrollspy() {
           >
             <div>
               <H4>Release cycle illustration</H4>
-              <ReleaseCycleIllustration />
+              <ReleaseCycleIllustration className="h-auto w-full max-w-svw" />
             </div>
           </ScrollSpySection>
         </ScrollSpyViewport>

@@ -21,52 +21,58 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ModeToggle } from "@/components/ui/mode-toggle";
-import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
+import { Base, H6 } from "@/components/ui/typography";
+import { Separator } from "@/components/ui/separator";
 
 const navItems = [
   { label: "Download", href: "/download", external: false },
+  { label: "Documentation", href: "/doc", external: false },
+  {
+    label: "Resources",
+    items: [
+      {
+        label: "Product information",
+        items: [
+          {
+            label: "Release cycle",
+            description: "Understand the release schedule",
+            href: "/download/release-cycle",
+            external: false,
+          },
+          {
+            label: "Deprecation",
+            description: "Plan for upcoming changes",
+            href: "/deprecation",
+            external: false,
+          },
+        ],
+      },
+      {
+        label: "External resources",
+        items: [
+          {
+            label: "Market",
+            description: "Explore extensions and connectors",
+            href: "https://market.axonivy.com/",
+            external: true,
+          },
+          {
+            label: "Community",
+            description: "Ask questions and share ideas",
+            href: "https://community.axonivy.com/",
+            external: true,
+          },
+          {
+            label: "Tutorial",
+            description: "Learn step by step",
+            href: "https://axonivy.com/tutorial",
+            external: true,
+          },
+        ],
+      },
+    ],
+  },
   { label: "News", href: "/news", external: false },
-  {
-    label: "Platform",
-    items: [
-      { label: "Market", href: "https://market.axonivy.com/", external: true },
-
-      {
-        label: "Release Cycle",
-        href: "/download/release-cycle",
-        external: false,
-      },
-      { label: "Deprecation", href: "/deprecation", external: false },
-
-      { label: "Support", href: "/support", external: false },
-    ],
-  },
-  {
-    label: "Documentation",
-    items: [
-      { label: "Overview", href: "/doc", external: false },
-      {
-        label: `LTS ${CURRENT_VERSION}`,
-        href: `/doc/${CURRENT_VERSION}/en`,
-        external: true,
-      },
-      {
-        label: `LTS ${LTS_VERSION}`,
-        href: `/doc/${LTS_VERSION}/en`,
-        external: true,
-      },
-      {
-        label: "Tutorial",
-        href: "https://axonivy.com/tutorial",
-        external: true,
-      },
-    ],
-  },
-  {
-    label: "Community",
-    href: "https://community.axonivy.com/",
-    external: true,
-  },
   { label: "Team", href: "/team", external: false },
 ];
 
@@ -75,43 +81,60 @@ export default function Navbar() {
 
   return (
     <div className="relative">
-      <NavigationMenu className="hidden md:flex">
+      <NavigationMenu align="center" className="hidden md:flex">
         <NavigationMenuList>
           {navItems.map((item) => {
             return item.items ? (
               <NavigationMenuItem key={item.label}>
                 <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  {item.items.map((subItem) => (
-                    <NavigationMenuItem key={subItem.label}>
-                      <NavigationMenuLink
-                        className={
-                          navigationMenuTriggerStyle() +
-                          " w-full items-start justify-start gap-1"
-                        }
-                        render={
-                          <a
-                            href={subItem.href}
-                            target={subItem.external ? "_blank" : "_self"}
-                            rel={
-                              subItem.external
-                                ? "noopener noreferrer"
-                                : undefined
-                            }
-                          >
-                            {subItem.label}
-
-                            {subItem.external && (
-                              <IconArrowUpRight
-                                className="size-3 stroke-2"
-                                aria-hidden="true"
+                  <div className="flex w-fit gap-4 p-2">
+                    {item.items.map((subItem, index) => (
+                      <>
+                        {index > 0 && <Separator orientation="vertical" />}
+                        <ul className="flex flex-1 flex-col">
+                          <H6 className="p-2">{subItem.label}</H6>
+                          {subItem.items.map((subSubItem) => (
+                            <li key={subSubItem.label}>
+                              <NavigationMenuLink
+                                className="w-full items-start justify-start"
+                                render={
+                                  <a
+                                    href={subSubItem.href}
+                                    target={
+                                      subSubItem.external ? "_blank" : "_self"
+                                    }
+                                    rel={
+                                      subSubItem.external
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                    }
+                                  >
+                                    <span className="flex flex-col gap-0.5">
+                                      <span className="flex items-center gap-1">
+                                        <Base className="text-n900">
+                                          {subSubItem.label}
+                                        </Base>
+                                        {subSubItem.external && (
+                                          <IconArrowUpRight
+                                            className="text-n900 size-3 stroke-2"
+                                            aria-hidden="true"
+                                          />
+                                        )}
+                                      </span>
+                                      <span className="text-muted-foreground text-sm whitespace-nowrap">
+                                        {subSubItem.description}
+                                      </span>
+                                    </span>
+                                  </a>
+                                }
                               />
-                            )}
-                          </a>
-                        }
-                      />
-                    </NavigationMenuItem>
-                  ))}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ))}
+                  </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             ) : (
@@ -181,28 +204,39 @@ export default function Navbar() {
                           }
                         />
                         <CollapsibleContent className="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
-                          {item.items.map((subItem) => (
-                            <a
-                              key={subItem.label}
-                              className="focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
-                              href={subItem.href}
-                              target={subItem.external ? "_blank" : undefined}
-                              rel={
-                                subItem.external
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {subItem.label}
-                              {subItem.external && (
-                                <IconArrowUpRight
-                                  className="mt-3 size-3 self-start stroke-2"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </a>
-                          ))}
+                          {item.items.map((subItem) => {
+                            return (
+                              <>
+                                <H6 className="py-2 pl-3 text-xs">
+                                  {subItem.label}
+                                </H6>
+                                {subItem.items.map((subSubItem) => (
+                                  <a
+                                    key={subSubItem.label}
+                                    className="focus:bg-muted focus-visible:ring-ring/50 flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium focus-visible:ring-3 focus-visible:outline-1"
+                                    href={subSubItem.href}
+                                    target={
+                                      subSubItem.external ? "_blank" : undefined
+                                    }
+                                    rel={
+                                      subSubItem.external
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                    }
+                                    onClick={() => setIsOpen(false)}
+                                  >
+                                    {subSubItem.label}
+                                    {subSubItem.external && (
+                                      <IconArrowUpRight
+                                        className="mt-3 size-3 self-start stroke-2"
+                                        aria-hidden="true"
+                                      />
+                                    )}
+                                  </a>
+                                ))}
+                              </>
+                            );
+                          })}
                         </CollapsibleContent>
                       </Collapsible>
                     </li>
