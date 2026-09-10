@@ -3,6 +3,9 @@
   "extends": [
     "local>axonivy/renovate-config:php"
   ],
+  "baseBranchPatterns": [
+    "redesign"
+  ],
   "packageRules": [
     {
       "matchPackageNames": [
