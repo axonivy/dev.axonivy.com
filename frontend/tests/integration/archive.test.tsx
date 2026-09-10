@@ -13,7 +13,6 @@ function release(overrides: Partial<ArchiveRelease> = {}): ArchiveRelease {
     version: "12.0.1",
     releaseDate: "2024-01-15",
     releaseNotes: "https://example.com/notes/12.0.1",
-    vscodeExtensionLink: "",
     designerArtifacts: [],
     engineArtifacts: [],
     ...overrides,
@@ -222,41 +221,6 @@ describe("ArchiveTable", () => {
     const slimLinks = within(cells[3]).getAllByRole("link");
     expect(slimLinks).toHaveLength(1);
     expect(slimLinks[0]).toHaveAttribute("href", "/slim");
-  });
-
-  it("shows the VS Code extension link for designer but not for engine", () => {
-    const sharedRelease = release({
-      vscodeExtensionLink: "https://marketplace.example/ext",
-      designerArtifacts: [
-        {
-          name: "AxonIvyDesigner-windows-x64.zip",
-          url: "/win",
-          filename: "designer-windows.zip",
-          permalink: "p1",
-        },
-      ],
-      engineArtifacts: [
-        {
-          name: "AxonIvyEngine-windows-x64.zip",
-          url: "/win",
-          filename: "engine-windows.zip",
-          permalink: "p2",
-        },
-      ],
-    });
-
-    const { rerender, container } = renderWithQueryClient(
-      <ArchiveTable product="designer" releases={[sharedRelease]} />,
-    );
-    expect(
-      screen.getByRole("link", { name: /VS Code Extension/i }),
-    ).toBeInTheDocument();
-    rerender(<ArchiveTable product="engine" releases={[sharedRelease]} />);
-
-    expect(
-      screen.queryByRole("link", { name: /VS Code Extension/i }),
-    ).not.toBeInTheDocument();
-    void container;
   });
 
   it("renders a dash when there are no artifacts or release notes", () => {

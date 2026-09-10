@@ -27,7 +27,6 @@ function release(overrides: Partial<DownloadRelease> = {}): DownloadRelease {
     releaseDate: "2024-01-15",
     releaseNotesLink: "https://example.com/notes",
     docLink: "https://example.com/docs",
-    vscodeExtensionLink: "",
     designerArtifacts: [],
     engineArtifacts: [],
     ...overrides,
@@ -39,7 +38,7 @@ describe("DownloadCards", () => {
     vi.mocked(detect).mockReturnValue(null);
   });
 
-  it("renders nothing when there are no artifacts and no vscode extension link", () => {
+  it("renders nothing when there are no artifacts", () => {
     const { container } = render(
       <DownloadCards
         release={release()}
@@ -51,7 +50,7 @@ describe("DownloadCards", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("shows only the engine card when there are no designer artifacts or vscode link", () => {
+  it("shows only the engine card when there are no designer artifacts", () => {
     render(
       <DownloadCards
         release={release({ engineArtifacts: [artifact()] })}
@@ -66,26 +65,34 @@ describe("DownloadCards", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("shows only the designer card via the VS Code Marketplace action when there are no designer artifacts but a vscode link is present", () => {
+  it("uses the VS Code Extension artifact for the Marketplace install flow", () => {
     render(
       <DownloadCards
         release={release({
-          vscodeExtensionLink: "https://marketplace.example/ext",
+          designerArtifacts: [
+            artifact({ name: "AxonIvyDesigner-windows.zip" }),
+            artifact({
+              name: "VS Code Extension",
+              url: "https://marketplace.example/ext",
+            }),
+          ],
         })}
         releaseLabel="Long Term Support"
         badge="Stable"
       />,
     );
 
-    expect(screen.getByText("Axon Ivy Designer 12.0")).toBeInTheDocument();
-    expect(screen.queryByText("Axon Ivy Engine 12.0")).not.toBeInTheDocument();
-
-    const installLink = screen.getByRole("link", {
-      name: /Install Designer using VS Code Marketplace/,
-    });
-    expect(installLink).toHaveAttribute(
+    expect(
+      screen.getByRole("link", {
+        name: /Install Designer using VS Code Marketplace/,
+      }),
+    ).toHaveAttribute(
       "href",
-      "/download/installation/designer-vscode?vscodeExtensionLink=https%3A%2F%2Fmarketplace.example%2Fext",
+      "/download/installation/designer-vscode?downloadUrl=https%3A%2F%2Fmarketplace.example%2Fext",
+    );
+    expect(screen.getByRole("link", { name: "Installation Guide" })).toHaveAttribute(
+      "href",
+      "/download/installation/designer-vscode?downloadUrl=https%3A%2F%2Fmarketplace.example%2Fext",
     );
     expect(screen.getByRole("link", { name: "Release notes" })).toHaveAttribute(
       "href",

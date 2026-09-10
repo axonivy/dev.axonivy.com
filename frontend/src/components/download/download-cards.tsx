@@ -39,7 +39,6 @@ export type DownloadRelease = {
   releaseDate: string;
   releaseNotesLink: string;
   docLink: string;
-  vscodeExtensionLink: string;
   designerArtifacts: Artifacts[];
   engineArtifacts: Artifacts[];
 };
@@ -65,7 +64,6 @@ type DownloadActionProps = {
   version: string;
   artifactLabel: string;
   artifact?: Artifacts;
-  vscodeExtensionLink?: string;
 };
 
 type ProductConfig = {
@@ -137,12 +135,15 @@ function isDockerArtifact(artifact?: Artifacts): boolean {
   return artifact?.name.toLowerCase().includes("docker") ?? false;
 }
 
+function isVsCodeExtensionArtifact(artifact?: Artifacts): boolean {
+  return artifact?.name === "VS Code Extension";
+}
+
 function installationGuideHref(
   product: DownloadProductCardProps["product"],
   userOs: OperatingSystem,
   artifact?: Artifacts,
   docLink?: string,
-  vscodeExtensionLink?: string,
 ) {
   const isDocker = product === "engine" && isDockerArtifact(artifact);
 
@@ -150,7 +151,7 @@ function installationGuideHref(
   const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
 
   const detectGuidePath = () => {
-    if (vscodeExtensionLink) {
+    if (product === "designer" && isVsCodeExtensionArtifact(artifact)) {
       return "/download/installation/designer-vscode";
     }
     if (isDocker) {
@@ -165,9 +166,6 @@ function installationGuideHref(
   const guidePath = detectGuidePath();
 
   const query = new URLSearchParams();
-  if (vscodeExtensionLink) {
-    query.set("vscodeExtensionLink", vscodeExtensionLink);
-  }
   if (artifact?.url) {
     query.set("downloadUrl", artifact.url);
   }
@@ -261,22 +259,21 @@ function DownloadAction({
   version,
   artifactLabel,
   artifact,
-  vscodeExtensionLink,
 }: DownloadActionProps) {
-  if (vscodeExtensionLink) {
+  if (!artifact) {
+    return null;
+  }
+
+  if (isVsCodeExtensionArtifact(artifact)) {
     return (
       <a
-        href={`/download/installation/designer-vscode?vscodeExtensionLink=${encodeURIComponent(vscodeExtensionLink)}`}
+        href={`/download/installation/designer-vscode?downloadUrl=${encodeURIComponent(artifact.url)}`}
         className={buttonVariants({ className: "h-10 w-full justify-start" })}
       >
         <IconBrandVscode className="size-5 shrink-0" aria-hidden="true" />
         Install Designer using VS Code Marketplace
       </a>
     );
-  }
-
-  if (!artifact) {
-    return null;
   }
 
   if (artifact.name === "Docker") {
@@ -320,11 +317,9 @@ function DownloadProductCard({
 }: DownloadProductCardProps) {
   const config = productConfig(release, product, releaseLabel);
   const { artifacts } = config;
-
-  const hasVsCodeExtension =
-    config.isDesigner &&
-    artifacts.length === 0 &&
-    Boolean(release.vscodeExtensionLink);
+  const vsCodeExtensionArtifact = config.isDesigner
+    ? artifacts.find(isVsCodeExtensionArtifact)
+    : undefined;
 
   const artifactOptions = artifacts.map((artifact) =>
     artifactOption(artifact, config.isDesigner),
@@ -344,6 +339,7 @@ function DownloadProductCard({
     : artifacts.find(isDockerArtifact);
 
   const selectedArtifact =
+    vsCodeExtensionArtifact ??
     artifacts.find(
       (artifact) => artifact.permalink === selectedArtifactPermalink,
     ) ??
@@ -392,7 +388,7 @@ function DownloadProductCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        {!hasVsCodeExtension && (
+        {!vsCodeExtensionArtifact && (
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {artifactOptions.map(({ artifact, label }) => {
               const isSelected =
@@ -430,85 +426,85 @@ function DownloadProductCard({
             })}
           </div>
         )}
-        <div className={hasVsCodeExtension ? "mt-4 md:mt-14" : "mt-auto"}>
+        <div
+          className={vsCodeExtensionArtifact ? "mt-4 md:mt-14" : "mt-auto"}
+        >
           <DownloadAction
             title={config.title}
             version={release.versionShort}
             artifactLabel={artifactLabel}
             artifact={selectedArtifact}
-            vscodeExtensionLink={
-              hasVsCodeExtension ? release.vscodeExtensionLink : undefined
-            }
           />
         </div>
         <div className="flex flex-row items-center justify-between gap-4">
-          <a
-            href={installationGuideHref(
-              product,
-              userOs,
-              selectedArtifact,
-              product === "engine" ? release.docLink : undefined,
-              hasVsCodeExtension ? release.vscodeExtensionLink : undefined,
-            )}
-            className="text-primary text-center"
-          >
-            Installation Guide
-          </a>
-          <Separator orientation="vertical" />
-          <P className="text-n900 text-center">
-            {release.releaseDate
-              ? `Released: ${release.releaseDate}`
-              : "Release date not available"}
-          </P>
-          <Separator orientation="vertical" />
-          {hasVsCodeExtension ? (
-            <a
-              href={release.releaseNotesLink}
-              className="text-primary text-center"
-            >
-              Release notes
-            </a>
-          ) : permalinkOptions.length > 0 ? (
-            <Button
-              type="button"
-              variant="link"
-              className="h-auto p-0 font-normal hover:no-underline"
-              aria-expanded={showPermalinks}
-              aria-controls={permalinkId}
-              onClick={() => setShowPermalinks((current) => !current)}
-            >
-              <span className="flex w-full items-center gap-2">
-                Permalinks
-                <IconArrowRight
-                  className={`size-4 shrink-0 transition-transform ${
-                    showPermalinks ? "rotate-90" : ""
-                  }`}
-                  aria-hidden="true"
-                />
-              </span>
-            </Button>
-          ) : (
-            <div className="w-24" />
-          )}
-        </div>
-        {showPermalinks && permalinkOptions.length > 0 && (
-          <ul
-            id={permalinkId}
-            className="bg-n50 flex flex-col gap-2 rounded-lg p-3"
-          >
-            {permalinkOptions.map(({ artifact, label }) => (
-              <li
-                key={`${product}-${artifact.name}`}
-                className="text-n900 text-sm"
+              <a
+                href={installationGuideHref(
+                  product,
+                  userOs,
+                  selectedArtifact,
+                  product === "engine" ? release.docLink : undefined,
+                )}
+                className="text-primary text-center"
               >
-                <span className="font-semibold">{label}:</span>{" "}
-                <a href={artifact.permalink} className="text-primary">
-                  {artifact.permalink}
+                Installation Guide
+              </a>
+              <Separator orientation="vertical" />
+              <P className="text-n900 text-center">
+                {release.releaseDate
+                  ? `Released: ${release.releaseDate}`
+                  : "Release date not available"}
+              </P>
+              <Separator orientation="vertical" />
+              {vsCodeExtensionArtifact ? (
+                <a
+                  href={release.releaseNotesLink}
+                  className="text-primary text-center"
+                >
+                  Release notes
                 </a>
-              </li>
-            ))}
-          </ul>
-        )}
+              ) : permalinkOptions.length > 0 ? (
+                <Button
+                  type="button"
+                  variant="link"
+                  className="h-auto p-0 font-normal hover:no-underline"
+                  aria-expanded={showPermalinks}
+                  aria-controls={permalinkId}
+                  onClick={() => setShowPermalinks((current) => !current)}
+                >
+                  <span className="flex w-full items-center gap-2">
+                    Permalinks
+                    <IconArrowRight
+                      className={`size-4 shrink-0 transition-transform ${
+                        showPermalinks ? "rotate-90" : ""
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Button>
+              ) : (
+                <div className="w-24" />
+              )}
+        </div>
+        {!vsCodeExtensionArtifact &&
+          showPermalinks &&
+          permalinkOptions.length > 0 && (
+              <ul
+                id={permalinkId}
+                className="bg-n50 flex flex-col gap-2 rounded-lg p-3"
+              >
+                {permalinkOptions.map(({ artifact, label }) => (
+                  <li
+                    key={`${product}-${artifact.name}`}
+                    className="text-n900 text-sm"
+                  >
+                    <span className="font-semibold">{label}:</span>{" "}
+                    <a href={artifact.permalink} className="text-primary">
+                      {artifact.permalink}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
       </CardContent>
     </Card>
   );
@@ -525,9 +521,7 @@ export function DownloadCards({
     setUserOs(detectOperatingSystem());
   }, []);
 
-  const showDesignerCard =
-    release.designerArtifacts.length > 0 ||
-    Boolean(release.vscodeExtensionLink);
+  const showDesignerCard = release.designerArtifacts.length > 0;
   const showEngineCard = release.engineArtifacts.length > 0;
 
   if (!showDesignerCard && !showEngineCard) {

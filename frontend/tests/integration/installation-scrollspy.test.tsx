@@ -199,10 +199,38 @@ describe("InstallationScrollSpy", () => {
     expect(
       screen.getByRole("link", { name: "Official guide" }),
     ).toHaveAttribute("href", "https://docs.docker.com/get-started/");
+
+    setSearch("downloadUrl=https%3A%2F%2Fmarketplace.example%2Fext");
+    render(
+      <InstallationScrollSpy
+        guideId="designer-vscode"
+        guide={guide({
+          type: "VS Code",
+          product: "Designer",
+          steps: [
+            {
+              id: 1,
+              title: "Install the extension",
+              url: "https://code.visualstudio.com/docs/setup/setup-overview",
+            },
+          ],
+        })}
+      />,
+    );
+
+    expect(
+      screen.getAllByRole("link", { name: "Official guide" })[1],
+    ).toHaveAttribute(
+      "href",
+      "https://code.visualstudio.com/docs/setup/setup-overview",
+    );
+    expect(
+      screen.queryByRole("link", { name: /Download Axon Ivy Designer/ }),
+    ).not.toBeInTheDocument();
   });
 
-  it("shows the VS Code Marketplace link on step 2 of the designer-vscode guide", () => {
-    setSearch("vscodeExtensionLink=https%3A%2F%2Fmarketplace.example%2Fext");
+  it("uses the VS Code Extension artifact URL for the Marketplace link", () => {
+    setSearch("downloadUrl=https%3A%2F%2Fmarketplace.example%2Fext");
     render(
       <InstallationScrollSpy
         guideId="designer-vscode"

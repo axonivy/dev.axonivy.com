@@ -11,7 +11,6 @@ function release(overrides: Partial<DownloadRelease> = {}): DownloadRelease {
     releaseDate: "2024-01-15",
     releaseNotesLink: "https://example.com/notes",
     docLink: "https://example.com/docs",
-    vscodeExtensionLink: "",
     designerArtifacts: [
       {
         name: "AxonIvyDesigner-windows-x64.zip",

@@ -6,7 +6,6 @@ import {
   IconBrandDebian,
   IconBrandDocker,
   IconBrandUbuntu,
-  IconBrandVscode,
   IconBrandWindows,
   IconCalendar,
   IconDeviceLaptop,
@@ -42,7 +41,6 @@ export type ArchiveRelease = {
   version: string;
   releaseDate: string;
   releaseNotes: string;
-  vscodeExtensionLink: string;
   designerArtifacts: ArchiveArtifact[];
   engineArtifacts: ArchiveArtifact[];
 };
@@ -157,10 +155,8 @@ function sortArtifacts(artifacts: ArchiveArtifact[]) {
 
 function ArtifactLinks({
   artifacts,
-  vscodeExtensionLink,
 }: {
   artifacts: ArchiveArtifact[];
-  vscodeExtensionLink?: string;
 }) {
   const sortedArtifacts = sortArtifacts(artifacts);
   if (artifacts.length === 0) {
@@ -186,21 +182,6 @@ function ArtifactLinks({
           </li>
         );
       })}
-      {vscodeExtensionLink ? (
-        <li key="vscode-extension">
-          <a
-            href={vscodeExtensionLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary inline-flex items-center gap-1"
-          >
-            <span className="inline-flex items-center gap-1">
-              <IconBrandVscode className="size-4" aria-hidden="true" />
-              VS Code Extension
-            </span>
-          </a>
-        </li>
-      ) : null}
     </ul>
   );
 }
@@ -250,11 +231,6 @@ export function ArchiveTable({
                                 getArtifactMeta(artifact).category !== "slim",
                             )
                           : artifacts
-                      }
-                      vscodeExtensionLink={
-                        product === "designer"
-                          ? (release.vscodeExtensionLink ?? null)
-                          : ""
                       }
                     />
                   </TableCell>
@@ -332,32 +308,6 @@ function MobileArtifactRow({
               );
             })
           : "-"}
-      </div>
-    </div>
-  );
-}
-
-function MobileVsCodeRow({
-  vsCodeExtensionLink,
-}: {
-  vsCodeExtensionLink: string;
-}) {
-  return (
-    <div className="border-n200 flex justify-between gap-3 border-b py-2 last:border-b-0">
-      <div className="text-n900 flex w-1/2 shrink-0 items-center gap-3">
-        <IconBrandVscode className="size-4" aria-hidden="true" />
-        <span>VS Code</span>
-      </div>
-      <div className="min-w-0 flex-1 text-right">
-        <a
-          href={vsCodeExtensionLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary inline-flex items-center gap-2"
-        >
-          <IconLink className="size-5 shrink-0" aria-hidden="true" />
-          Marketplace
-        </a>
       </div>
     </div>
   );
@@ -483,11 +433,6 @@ function MobileArchiveCards({
                   />
                 </>
               )}
-              {release.vscodeExtensionLink ? (
-                <MobileVsCodeRow
-                  vsCodeExtensionLink={release.vscodeExtensionLink}
-                />
-              ) : null}
             </div>
           </article>
         );

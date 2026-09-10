@@ -12,7 +12,6 @@ function release(overrides: Partial<ArchiveRelease> = {}): ArchiveRelease {
     version: "12.0.1",
     releaseDate: "2024-01-15",
     releaseNotes: "https://example.com/notes",
-    vscodeExtensionLink: "",
     designerArtifacts: [],
     engineArtifacts: [],
     ...overrides,

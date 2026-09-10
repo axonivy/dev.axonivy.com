@@ -153,9 +153,6 @@ export default function InstallationScrollSpy({
 }: InstallationScrollSpyProps) {
   const [downloadUrl] = useState(() => queryParameter("downloadUrl"));
   const [docLink] = useState(() => queryParameter("docLink"));
-  const [vscodeExtensionLink] = useState(() =>
-    queryParameter("vscodeExtensionLink"),
-  );
 
   return (
     <div className="flex flex-col">
@@ -248,7 +245,9 @@ export default function InstallationScrollSpy({
                     ) : null,
                   )
                 : null}
-              {step.id === 1 && guideId !== "docker" ? (
+              {step.id === 1 &&
+              guideId !== "docker" &&
+              guideId !== "designer-vscode" ? (
                 <>
                   {downloadUrl ? (
                     <a
@@ -292,11 +291,9 @@ export default function InstallationScrollSpy({
                   Official guide
                 </a>
               ) : null}
-              {guideId === "designer-vscode" &&
-              step.id === 2 &&
-              vscodeExtensionLink ? (
+              {guideId === "designer-vscode" && step.id === 2 && downloadUrl ? (
                 <a
-                  href={vscodeExtensionLink}
+                  href={downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({
