@@ -7,5 +7,7 @@ export default getViteConfig({
     globals: true,
     setupFiles: ["./tests/setup.ts"],
     exclude: ["**/node_modules/**", "tests/e2e/**"],
+    reporters: process.env.CI ? ['default', 'junit'] : ['default'],
+    outputFile: 'report.xml'
   },
 });
