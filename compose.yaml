@@ -4,6 +4,6 @@ services:
       context: ./build
       dockerfile: Dockerfile.php
     volumes:
-      - ./:/var/www/html      
+      - ./backend/:/var/www/html      
     ports:
        - 8080:80

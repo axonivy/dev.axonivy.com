@@ -7,13 +7,13 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "static",
-  outDir: "../src/web/astro",
+  outDir: "../backend/src/web/astro",
 
   build: { format: "directory" },
 
   vite: {
     build: {
-      // preserve docs/, releases/, images/, etc. in src/web
+      // preserve docs/, releases/, images/, etc. in backend/src/web
       emptyOutDir: false,
     },
 

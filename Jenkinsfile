@@ -21,38 +21,46 @@ pipeline {
         // build
         script {
           docker.build('composer', '-f build/Dockerfile.composer .').inside {
-            sh 'composer install --no-dev --no-progress'
+            dir ('backend') {
+              sh 'composer install --no-dev --no-progress'
+            }
           }
 
           docker.build('node', '-f build/Dockerfile.node .').inside {
-            sh 'pnpm --dir frontend install --frozen-lockfile'
-            sh 'pnpm --dir frontend build'
+            dir ('frontend') {
+              sh 'pnpm install --frozen-lockfile'
+              sh 'pnpm build'
+            }
           }
         }
 
-        sh "tar -cf ${env.DIST_FILE}\
-          --exclude=src/web/releases\
-          --exclude=src/web/docs\
-          --exclude=src/web/openapi\
-          --exclude=src/web/public-api\
-          --exclude=src/web/systemdb\
-          src\
-          vendor"
-        archiveArtifacts env.DIST_FILE
-        stash name: 'website-tar', includes: env.DIST_FILE
-         
+        dir ('backend') {
+          sh "tar -cf ${env.DIST_FILE}\
+            --exclude=src/web/releases\
+            --exclude=src/web/docs\
+            --exclude=src/web/openapi\
+            --exclude=src/web/public-api\
+            --exclude=src/web/systemdb\
+            src\
+            vendor"
+          archiveArtifacts env.DIST_FILE
+          stash name: 'website-tar', includes: env.DIST_FILE
+        }
+
         script {
           docker.build('composer', '-f build/Dockerfile.composer .').inside {
-            // tests
-            sh 'composer install --no-progress'
-            sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-            junit 'phpunit-junit.xml'
+            dir ('backend') {
+              // tests
+              sh 'composer install --no-progress'
+              sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
+              junit 'phpunit-junit.xml'
 
-            // bom
-            if (env.BRANCH_NAME == 'master') {
-              sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
-              sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
-              uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
+              // bom
+              if (env.BRANCH_NAME == 'master') {
+                sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
+                sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
+                uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
+              }
             }
           }
         }

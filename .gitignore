@@ -1,4 +1,4 @@
-/vendor
+/backend/vendor
 /frontend/node_modules
 /frontend/.astro
 /frontend/test-results/
@@ -6,14 +6,13 @@
 /frontend/blob-report/
 /frontend/playwright/.cache/
 /frontend/playwright/.auth/
-/src/cache
-/src/logs
-composer.phar
+/backend/src/cache
+/backend/src/logs
 .phpunit.result.cache
 .sonar
 .scannerwork
-/src/web/documentation
-/src/web/swagger
+/backend/src/web/documentation
+/backend/src/web/swagger
 bom.json
-/src/web/astro/
+/backend/src/web/astro/
 /.pnpm-store
