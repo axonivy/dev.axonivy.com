@@ -34,6 +34,7 @@ pipeline {
           }
         }
 
+        // bundle
         dir ('backend') {
           sh "tar -cf ${env.DIST_FILE}\
             --exclude=src/web/releases\
@@ -45,12 +46,25 @@ pipeline {
         }
 
         script {
+          docker.build('node', '-f build/Dockerfile.node .').inside {
+            dir ('frontend') {
+              sh 'pnpm run test'
+              withChecks('Frontend Tests') {
+                junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'report.xml'
+              }
+            }
+          }
+        }
+
+        script {
           docker.build('composer', '-f build/Dockerfile.composer .').inside {
             dir ('backend') {
               // tests
               sh 'composer install --no-progress'
               sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-              junit 'phpunit-junit.xml'
+              withChecks('Backend Tests') {
+                junit 'phpunit-junit.xml'
+              }
 
               // bom
               if (env.BRANCH_NAME == 'master') {
