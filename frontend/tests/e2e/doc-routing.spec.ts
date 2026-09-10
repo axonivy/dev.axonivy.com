@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.use({ baseURL: "http://localhost:8080" });
+test.use({ baseURL: process.env.BACKEND_URL ?? "http://localhost:8080" });
 
 test.describe("Doc URL rewriting (.htaccess)", () => {
   test("falls through to the Astro app for an extensionless legacy-doc path with no matching static file", async ({

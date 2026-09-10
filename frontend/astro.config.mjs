@@ -5,6 +5,8 @@ import react from "@astrojs/react";
 
 import tailwindcss from "@tailwindcss/vite";
 
+const backendUrl = process.env.BACKEND_URL ?? "http://localhost:8080";
+
 export default defineConfig({
   output: "static",
   outDir: "../backend/src/web/astro",
@@ -17,12 +19,7 @@ export default defineConfig({
       emptyOutDir: false,
     },
 
-    server: {
-      proxy: {
-        "/api": "http://localhost:8080",
-        "/ui": "http://localhost:8080",
-      },
-    },
+    server: { proxy: { "/api": backendUrl, "/ui": backendUrl } },
 
     plugins: [tailwindcss(), svgr()],
   },

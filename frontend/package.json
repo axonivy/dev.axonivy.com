@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:e2e": "pnpm build && playwright test"
+    "test:e2e": "node scripts/test-e2e.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
