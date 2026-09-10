@@ -6,6 +6,7 @@ import {
   IconBrandDebian,
   IconBrandDocker,
   IconBrandUbuntu,
+  IconBrandVscode,
   IconBrandWindows,
   IconCalendar,
   IconDeviceLaptop,
@@ -54,7 +55,15 @@ export type ArchiveResponse = {
 };
 
 type ArtifactCategory =
-  "all" | "deb" | "docker" | "windows" | "macos" | "linux" | "slim" | "other";
+  | "all"
+  | "deb"
+  | "docker"
+  | "windows"
+  | "macos"
+  | "linux"
+  | "slim"
+  | "vscode"
+  | "other";
 
 type ArtifactMeta = {
   category: ArtifactCategory;
@@ -70,10 +79,15 @@ const artifactCategoryOrder: ArtifactCategory[] = [
   "macos",
   "windows",
   "slim",
+  "vscode",
 ];
 
 function isDockerArtifact(artifact: ArchiveArtifact) {
   return artifact.name.includes("/");
+}
+
+function isVscodeArtifact(artifact: ArchiveArtifact) {
+  return artifact.name.toLowerCase().includes("vscode");
 }
 
 function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
@@ -107,13 +121,6 @@ function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
       icon: <IconBrandUbuntu className="size-4" aria-hidden="true" />,
     };
   }
-  if (filename.includes("linux")) {
-    return {
-      category: "linux",
-      label: "Linux",
-      icon: <IconBrandUbuntu className="size-4" aria-hidden="true" />,
-    };
-  }
   if (filename.endsWith(".deb")) {
     return {
       category: "deb",
@@ -121,11 +128,25 @@ function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
       icon: <IconBrandDebian className="size-4" aria-hidden="true" />,
     };
   }
+  if (filename.includes("linux")) {
+    return {
+      category: "linux",
+      label: "Linux",
+      icon: <IconBrandUbuntu className="size-4" aria-hidden="true" />,
+    };
+  }
   if (filename.includes("all")) {
     return {
       category: "all",
       label: "All",
       icon: <IconDeviceLaptop className="size-4" aria-hidden="true" />,
+    };
+  }
+  if (isVscodeArtifact(artifact)) {
+    return {
+      category: "vscode",
+      label: "VS Code",
+      icon: <IconBrandVscode className="size-4" aria-hidden="true" />,
     };
   }
 
@@ -153,11 +174,7 @@ function sortArtifacts(artifacts: ArchiveArtifact[]) {
   });
 }
 
-function ArtifactLinks({
-  artifacts,
-}: {
-  artifacts: ArchiveArtifact[];
-}) {
+function ArtifactLinks({ artifacts }: { artifacts: ArchiveArtifact[] }) {
   const sortedArtifacts = sortArtifacts(artifacts);
   if (artifacts.length === 0) {
     return "-";
@@ -278,6 +295,10 @@ function MobileArtifactRow({
 }) {
   const sortedArtifacts = sortArtifacts(artifacts);
 
+  if (sortedArtifacts.length === 0) {
+    return null;
+  }
+
   return (
     <div className="border-n200 flex justify-between gap-3 border-b py-2 last:border-b-0">
       <div className="text-n900 flex w-1/2 shrink-0 items-center gap-3">
@@ -285,29 +306,25 @@ function MobileArtifactRow({
         <span>{label}</span>
       </div>
       <div className="min-w-0 flex-1 text-right">
-        {sortedArtifacts.length > 0
-          ? sortedArtifacts.map((artifact) => {
-              const isDocker = isDockerArtifact(artifact);
+        {sortedArtifacts.map((artifact) => {
+          const isDocker = isDockerArtifact(artifact);
+          const isVscode = isVscodeArtifact(artifact);
 
-              return (
-                <a
-                  key={artifact.filename}
-                  href={artifact.url}
-                  className="text-primary inline-flex items-center gap-2"
-                >
-                  {isDocker ? (
-                    <IconLink className="size-5 shrink-0" aria-hidden="true" />
-                  ) : (
-                    <IconDownload
-                      className="size-5 shrink-0"
-                      aria-hidden="true"
-                    />
-                  )}
-                  {isDocker ? "Docker" : "x64"}
-                </a>
-              );
-            })
-          : "-"}
+          return (
+            <a
+              key={artifact.filename}
+              href={artifact.url}
+              className="text-primary inline-flex items-center gap-2"
+            >
+              {isDocker || isVscode ? (
+                <IconLink className="size-5 shrink-0" aria-hidden="true" />
+              ) : (
+                <IconDownload className="size-5 shrink-0" aria-hidden="true" />
+              )}
+              {isDocker ? "Docker" : isVscode ? "VS Code" : "x64"}
+            </a>
+          );
+        })}
       </div>
     </div>
   );
@@ -356,12 +373,12 @@ function MobileArchiveCards({
                 <>
                   <MobileArtifactRow
                     icon={
-                      <IconBrandWindows className="size-4" aria-hidden="true" />
+                      <IconBrandUbuntu className="size-4" aria-hidden="true" />
                     }
-                    label="Windows"
+                    label="Linux"
                     artifacts={artifacts.filter(
                       (artifact) =>
-                        getArtifactMeta(artifact).category === "windows",
+                        getArtifactMeta(artifact).category === "linux",
                     )}
                   />
                   <MobileArtifactRow
@@ -376,25 +393,42 @@ function MobileArchiveCards({
                   />
                   <MobileArtifactRow
                     icon={
-                      <IconBrandUbuntu className="size-4" aria-hidden="true" />
-                    }
-                    label="Linux"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "linux",
-                    )}
-                  />
-                </>
-              ) : (
-                <>
-                  <MobileArtifactRow
-                    icon={
                       <IconBrandWindows className="size-4" aria-hidden="true" />
                     }
                     label="Windows"
                     artifacts={artifacts.filter(
                       (artifact) =>
                         getArtifactMeta(artifact).category === "windows",
+                    )}
+                  />
+                  <MobileArtifactRow
+                    icon={
+                      <IconBrandVscode className="size-4" aria-hidden="true" />
+                    }
+                    label="VS Code"
+                    artifacts={artifacts.filter(isVscodeArtifact)}
+                  />
+                </>
+              ) : (
+                <>
+                  <MobileArtifactRow
+                    icon={
+                      <IconDeviceLaptop className="size-4" aria-hidden="true" />
+                    }
+                    label="All"
+                    artifacts={artifacts.filter(
+                      (artifact) =>
+                        getArtifactMeta(artifact).category === "all",
+                    )}
+                  />
+                  <MobileArtifactRow
+                    icon={
+                      <IconBrandDebian className="size-4" aria-hidden="true" />
+                    }
+                    label="Debian"
+                    artifacts={artifacts.filter(
+                      (artifact) =>
+                        getArtifactMeta(artifact).category === "deb",
                     )}
                   />
                   <MobileArtifactRow
@@ -417,9 +451,20 @@ function MobileArchiveCards({
                         category !== "windows" &&
                         category !== "docker" &&
                         category !== "slim" &&
-                        category !== "deb"
+                        category !== "deb" &&
+                        category !== "all"
                       );
                     })}
+                  />
+                  <MobileArtifactRow
+                    icon={
+                      <IconBrandWindows className="size-4" aria-hidden="true" />
+                    }
+                    label="Windows"
+                    artifacts={artifacts.filter(
+                      (artifact) =>
+                        getArtifactMeta(artifact).category === "windows",
+                    )}
                   />
                   <MobileArtifactRow
                     icon={
