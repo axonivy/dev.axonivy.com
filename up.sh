@@ -1,7 +1,7 @@
 #/bin/bash
 
 # install php dependencies
-docker run --rm --interactive --tty --user $(id -u):$(id -g) --volume $PWD:/app composer install
+docker run --rm --interactive --tty --user $(id -u):$(id -g) --volume $PWD/backend:/app composer install
 
 # build frontend
 pnpm --dir frontend install

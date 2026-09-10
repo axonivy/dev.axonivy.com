@@ -18,16 +18,16 @@ class Config
 
   public static function isProductionEnvironment()
   {
-    return !file_exists(__DIR__ . '/../../Jenkinsfile');
+    return !file_exists(__DIR__ . '/../../composer.json');
   }
 
   public static function releaseDirectory(): string
   {
-    return self::isProductionEnvironment() ? '/home/axonivya/data/ivy-releases' : __DIR__ . '/../../src/web/releases/ivy';
+    return self::isProductionEnvironment() ? '/home/axonivya/data/ivy-releases' : __DIR__ . '/../web/releases/ivy';
   }
 
   public static function docDirectory(): string
   {
-    return self::isProductionEnvironment() ? '/home/axonivya/data/doc' : __DIR__ . '/../../src/web/docs';
+    return self::isProductionEnvironment() ? '/home/axonivya/data/doc' : __DIR__ . '/../web/docs';
   }
 }

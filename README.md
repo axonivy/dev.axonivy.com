@@ -6,10 +6,6 @@ Run `./up.sh` to start the website in docker
   
 ... and later `docker compose down` to stop the containers.
 
-```bash
-./up.sh
-```
-
 ## Execute tests
 
 Run `./run-tests.sh` to execute tests.
@@ -36,6 +32,3 @@ docker compose exec web composer update --prefer-dist -a --with-all-dependencies
 ## Resources
 
 - Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
-- SlimFramework <http://www.slimframework.com>
-- Template <https://templated.co/introspect>
-- JS-Framework <https://github.com/ajlkn/skel>
