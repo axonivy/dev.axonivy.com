@@ -49,7 +49,6 @@ class UiDownloadAction
       'releaseDate' => $loader->releaseDate(),
       'releaseNotesLink' => $loader->releaseNotesLink(),
       'docLink' => $loader->docLink(),
-      'vscodeExtensionLink' => $loader->vscodeExtensionLink(),
       'designerArtifacts' => $loader->designerArtifacts(),
       'engineArtifacts' => $loader->engineArtifacts(),
     ]];
@@ -87,8 +86,6 @@ interface Loader
 
   function releaseNotesLink(): string;
 
-  function vscodeExtensionLink(): string;
-
   function docLink(): string;
   
   function designerArtifacts(): array;
@@ -114,11 +111,6 @@ class ReleaseTypeNotAvailableLoader implements Loader
   public function engineArtifacts(): array
   {
     return [];
-  }
-
-  public function vscodeExtensionLink(): string
-  {
-    return '';
   }
 
   public function version(): string
@@ -160,29 +152,15 @@ class ReleaseInfoLoader implements Loader
     $this->releaseInfo = $releaseInfo;
   }
 
-  public function vscodeGetMajorVersion(): bool
-  {
-    if ($this->releaseType->isDevRelease()) {
-     return version_compare($this->getDevVersion()->getMinorVersion(), Config::VSCODE_EXTENSION_SINCE_VERSION, '>=');
-    } 
-    return version_compare($this->releaseInfo->getVersion()->getVersionNumber(), Config::VSCODE_EXTENSION_SINCE_VERSION, '>=');
-  }
-
   public function designerArtifacts(): array
   {
-    if ($this->vscodeGetMajorVersion()) {
-      $artifacts = [
-        $this->createDownloadArtifact('VS Code Extension', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
-      ];
-      return array_values(array_filter($artifacts));
-    }
-
     $artifacts = [
       $this->createDownloadArtifact('Windows', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS),
       $this->createDownloadArtifact('Linux', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX),
       $this->createDownloadArtifact('macOS', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC),
       $this->createDownloadArtifact('macOS', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA),
-      $this->createDownloadArtifact('macOS', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA_NEW)
+      $this->createDownloadArtifact('macOS', Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_MAC_BETA_NEW),
+      $this->createDownloadArtifact('VS Code Extension', Artifact::PRODUCT_NAME_VSCODE_EXTENSION, Artifact::TYPE_VSCODE)
     ];
     return array_values(array_filter($artifacts));
   }
@@ -197,35 +175,12 @@ class ReleaseInfoLoader implements Loader
     return array_values(array_filter($artifacts));
   }
 
-  public function vscodeExtensionLink(): string
-  {
-    if ($this->vscodeGetMajorVersion()) {
-      $version = $this->releaseInfo->getVersion()->getMajorVersion();
-      if ($this->releaseType->isDevRelease()) {
-        return Config::VSCODE_MARKETPLACE_URL . "-". $this->getDevVersion()->getMajorVersion();
-      }
-      return Config::VSCODE_MARKETPLACE_URL . "-" . $version;
-    }
-    return '';
-  }
-
   private function createDownloadArtifact($name, $productName, $type): ?DownloadArtifact
   {
-    if ($productName === Artifact::PRODUCT_NAME_VSCODE_EXTENSION) {
-      $vscodeMarketplaceUrl = $this->vscodeExtensionLink();
-      return new DownloadArtifact(
-        $name,
-        $vscodeMarketplaceUrl,
-        'VS Code Marketplace',
-        $vscodeMarketplaceUrl,
-      );
-    } 
-
     $artifact = $this->releaseInfo->getArtifactByProductNameAndType($productName, $type);
     if ($artifact == null) {
       return null;
     }
-
     $permalink = $artifact->getPermalink();
     return new DownloadArtifact($name, $artifact->getDownloadUrl(), $artifact->getFileName(), $permalink);
   }

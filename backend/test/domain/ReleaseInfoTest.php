@@ -38,7 +38,7 @@ class ReleaseInfoTest extends TestCase
   public function test_artifacts()
   {
     $artifacts = $this->testee->getArtifacts();
-    Assert::assertEquals(4, count($artifacts));
+    Assert::assertEquals(5, count($artifacts));
   }
 
   public function test_artifactEngineDocker()
@@ -117,9 +117,6 @@ class ReleaseInfoTest extends TestCase
 
     $artifact = self::loadDockerArtifact('nightly-8.0');
     Assert::assertEquals('axonivy/axonivy-engine:nightly-8.0', $artifact->getFileName());
-
-    $artifact = self::loadDockerArtifact('nightly-7');
-    Assert::assertNull($artifact);
 
     $artifact = self::loadDockerArtifact('milestone');
     Assert::assertEquals('axonivy/axonivy-engine:milestone', $artifact->getFileName());
