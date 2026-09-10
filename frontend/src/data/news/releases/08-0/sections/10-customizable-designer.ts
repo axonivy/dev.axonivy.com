@@ -45,7 +45,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [`8.0/customizable-designer/01-designer-isolated-features.png`],
 };
 

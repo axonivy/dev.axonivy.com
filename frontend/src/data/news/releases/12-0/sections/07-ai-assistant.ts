@@ -42,7 +42,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `12.0/ai-assistant/01-portal-assistant.png`,
     `12.0/ai-assistant/02-ai-management.png`,

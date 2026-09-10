@@ -38,7 +38,6 @@ const section: NewsSection = {
       text: `Axon Ivy IDP is now available to enhance document management and automation strategies.`,
     },
   ],
-  links: [],
   images: [
     `12.0/idp/01-extraction.png`,
     `12.0/idp/02-extraction.png`,

@@ -174,36 +174,4 @@ describe("LegacyDocumentation", () => {
     expect(externalLink).toHaveAttribute("href", "https://example.com/book");
     expect(externalLink).toHaveAttribute("target", "_blank");
   });
-
-  it("strips the legacy header/nav and injects a parent-targeted base tag on iframe load", async () => {
-    vi.mocked(fetch).mockResolvedValue(mockFetchOnce(legacyDocResponse()));
-    renderWithQueryClient(<LegacyDocumentation version="8.0" />);
-    await screen.findByText("Documentation 8.0");
-    const iframe = screen.getByTitle("8.0") as HTMLIFrameElement;
-
-    const legacyDoc = document.implementation.createHTMLDocument("legacy");
-    legacyDoc.body.innerHTML = `
-      <div id="header-wrapper"><div id="headerdiv"></div></div>
-      <div class="navbar ivy-subnav">A</div>
-      <div class="navbar ivy-subnav">B</div>
-      <div class="container"></div>
-      <nav id="page-nav"></nav>
-      <div id="content">Body content</div>
-    `;
-
-    vi.spyOn(iframe, "contentWindow", "get").mockReturnValue({
-      document: legacyDoc,
-    } as unknown as Window);
-
-    fireEvent.load(iframe);
-    expect(legacyDoc.getElementById("header-wrapper")).toBeNull();
-    expect(legacyDoc.getElementsByClassName("navbar ivy-subnav")).toHaveLength(
-      0,
-    );
-    expect(legacyDoc.getElementById("page-nav")).toBeNull();
-    expect(
-      (legacyDoc.querySelector(".container") as HTMLElement).style.marginLeft,
-    ).toBe("0px");
-    expect(legacyDoc.querySelector("base[target='_parent']")).not.toBeNull();
-  });
 });

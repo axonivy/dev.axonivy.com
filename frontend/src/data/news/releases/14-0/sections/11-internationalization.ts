@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 extends internationalization support across the platform, providing a stronger foundation for multilingual applications and platform interfaces.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key improvements include:**`,
-    },
+    { type: `paragraph`, text: `**Key improvements include:**` },
     {
       type: `list`,
       items: [
@@ -29,7 +26,6 @@ const section: NewsSection = {
       text: `These improvements make Axon Ivy better suited for applications and teams operating across different languages and regions.`,
     },
   ],
-  links: [],
   images: [
     `14.0/internationalization/01-german-version.png`,
     `14.0/internationalization/02-japanese-version.png`,

@@ -8,20 +8,13 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 introduces **Tabler Icons** as the modern icon set across the platform, replacing deprecated Streamline and Font Awesome icons.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key improvements include:**`,
-    },
+    { type: `paragraph`, text: `**Key improvements include:**` },
     {
       type: `list`,
       items: [
         { text: `Tabler Icons integrated into the core platform` },
-        {
-          text: `Updated icons across editors and selectors`,
-        },
-        {
-          text: `Updated icons in project and file views`,
-        },
+        { text: `Updated icons across editors and selectors` },
+        { text: `Updated icons in project and file views` },
       ],
     },
     {
@@ -29,7 +22,6 @@ const section: NewsSection = {
       text: `This provides a more consistent and modern visual language across development and administration interfaces.`,
     },
   ],
-  links: [],
   images: [
     `14.0/tabler-icons-visual-modernization/01-icon-showcase.png`,
     `14.0/tabler-icons-visual-modernization/02-icon-overview.png`,

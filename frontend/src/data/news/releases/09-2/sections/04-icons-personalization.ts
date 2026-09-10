@@ -34,7 +34,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `9.2/icons/01-icons-processstart.png`,
     `9.2/icons/02-icons-restclient-ditor.PNG`,

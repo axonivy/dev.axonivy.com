@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `HTML Dialog development receives stronger IDE support, providing a shorter feedback loop between implementation, validation, and preview.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key capabilities:**`,
-    },
+    { type: `paragraph`, text: `**Key capabilities:**` },
     {
       type: `list`,
       items: [
@@ -24,7 +21,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `14.0/html-dialog-development/01-property-overview.png`,
     `14.0/html-dialog-development/02-property-proposal.png`,

@@ -34,7 +34,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `9.1/200k-user/01-200k-users.png`,
     `9.1/200k-user/02-disabled-user.png`,

@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Project structure and configuration becomes more consistent, tooling-friendly, and easier for AI-assisted development tools to understand and work with.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key format changes:**`,
-    },
+    { type: `paragraph`, text: `**Key format changes:**` },
     {
       type: `list`,
       items: [
@@ -29,7 +26,6 @@ const section: NewsSection = {
       text: `These changes simplify automated processing and validation of project resources and align configuration formats with the new web-based editors.`,
     },
   ],
-  links: [],
   images: [
     `14.0/modernized-project-configuration/01-users-yaml.png`,
     `14.0/modernized-project-configuration/02-json-deterministic-versioning.png`,

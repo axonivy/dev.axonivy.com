@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Application Versions introduce a new foundation for application-level versioning and lifecycle management. Reducing the complexity of project dependencies.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key capabilities:**`,
-    },
+    { type: `paragraph`, text: `**Key capabilities:**` },
     {
       type: `list`,
       items: [
@@ -27,7 +24,6 @@ const section: NewsSection = {
       text: `The new model provides a clearer relationship between an application, its deployed versions, its included projects, and their runtime states.`,
     },
   ],
-  links: [],
   images: [
     `14.0/application-versions/01-application-version-overview.png`,
     `14.0/application-versions/02-application-version-status.png`,

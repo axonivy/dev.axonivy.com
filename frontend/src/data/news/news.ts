@@ -19,8 +19,8 @@ export interface NewsSection {
   heading: string;
   anchor: string | null;
   content: NewsBlock[];
-  links: NewsLink[];
-  images: string[];
+  links?: NewsLink[];
+  images?: string[];
 }
 
 export interface NewsRelease {

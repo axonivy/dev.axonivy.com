@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 includes security improvements that go beyond individual bug fixes and introduce additional platform-level controls.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key areas include:**`,
-    },
+    { type: `paragraph`, text: `**Key areas include:**` },
     {
       type: `list`,
       items: [
@@ -35,8 +32,6 @@ const section: NewsSection = {
       text: `These changes are particularly relevant for hosted, clustered, and externally integrated environments.`,
     },
   ],
-  links: [],
-  images: [],
 };
 
 export default section;

@@ -9,10 +9,7 @@ const section: NewsSection = {
       text: `Deployment capabilities are aligned with the Application Version model and have been strengthened for more reliable application delivery.
 `,
     },
-    {
-      type: `paragraph`,
-      text: `**Key improvements:**`,
-    },
+    { type: `paragraph`, text: `**Key improvements:**` },
     {
       type: `list`,
       items: [
@@ -29,7 +26,6 @@ const section: NewsSection = {
       text: `Existing deployment scripts and CI/CD automation should be reviewed when migrating to LTS 14.`,
     },
   ],
-  links: [],
   images: [
     `14.0/deployment-packaging/01-deployment-overview.png`,
     `14.0/deployment-packaging/02-deployment-configuration.png`,

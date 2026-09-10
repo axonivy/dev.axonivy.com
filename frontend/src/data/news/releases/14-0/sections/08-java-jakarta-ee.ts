@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 modernizes the underlying Java enterprise technology stack.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Technology updates include:**`,
-    },
+    { type: `paragraph`, text: `**Technology updates include:**` },
     {
       type: `list`,
       items: [
@@ -32,7 +29,6 @@ const section: NewsSection = {
       text: `Project converters assist with Java EE to Jakarta EE references and migration from legacy managed bean patterns toward CDI as well as migrating to Primefaces 15.`,
     },
   ],
-  links: [],
   images: [`14.0/java-jakarta-ee/01-jakarta-ee.png`],
 };
 

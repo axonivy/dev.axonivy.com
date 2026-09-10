@@ -45,7 +45,6 @@ const section: NewsSection = {
       url: `/doc/8.0/en/public-api/ch/ivyteam/ivy/workflow/query/TaskQuery.IFilterableColumns.html#customField--`,
     },
   ],
-  images: [],
 };
 
 export default section;

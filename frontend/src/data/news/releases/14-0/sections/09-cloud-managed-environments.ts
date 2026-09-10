@@ -17,8 +17,6 @@ const section: NewsSection = {
       text: `Together with the Application Version model, deployment reliability improvements, and additional operational controls, this strengthens the foundation for hosted, clustered, and cloud-oriented Axon Ivy environments.`,
     },
   ],
-  links: [],
-  images: [],
 };
 
 export default section;

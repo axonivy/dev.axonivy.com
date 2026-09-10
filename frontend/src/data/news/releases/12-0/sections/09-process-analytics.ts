@@ -27,7 +27,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [`12.0/process-analytics/01-process-analytics.png`],
 };
 

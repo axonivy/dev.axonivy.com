@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 significantly expands the web-based editor architecture. More application modeling and configuration tasks are available.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Editors and tooling include:**`,
-    },
+    { type: `paragraph`, text: `**Editors and tooling include:**` },
     {
       type: `list`,
       items: [
@@ -30,7 +27,6 @@ const section: NewsSection = {
       ],
     },
   ],
-  links: [],
   images: [
     `14.0/webbased-editor/01-dialog.png`,
     `14.0/webbased-editor/02-data-class.png`,
