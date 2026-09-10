@@ -16,6 +16,9 @@ class ArtifactFactory
     if (self::isDockerAvailableForVersion($versionNumber)) {
       $artifacts[] = self::createDockerArtifact($versionNumber);
     }
+    if (self::isVsCodeExtensionAvailableForVersion($versionNumber)) {
+      $artifacts[] = self::createVsCodeExtensionArtifact($versionNumber);
+    }
     return $artifacts;
   }
 
@@ -38,9 +41,6 @@ class ArtifactFactory
 
   private static function isDockerAvailableForVersion(string $versionNumber): bool
   {
-    if ($versionNumber == 'nightly-7.0') {
-      return false;
-    }
     if (version_compare($versionNumber, Config::DOCKER_IMAGE_SINCE_VERSION) >= 0) {
       return true;
     }
@@ -49,6 +49,35 @@ class ArtifactFactory
       return true;
     }
     return false;
+  }
+
+  private static function isVsCodeExtensionAvailableForVersion(string $versionNumber): bool
+  {
+    if (version_compare($versionNumber, Config::VSCODE_EXTENSION_SINCE_VERSION) >= 0) {
+      return true;
+    }
+    $versionWithoutDots = str_replace('.', '', $versionNumber);
+    if (!is_numeric($versionWithoutDots)) { // dev, nighlty, ...
+      return true;
+    }
+    return false;
+  }
+
+  private static function createVsCodeExtensionArtifact($versionNumber): Artifact
+  {
+    return new Artifact(
+      Artifact::TYPE_VSCODE,
+      Artifact::PRODUCT_NAME_VSCODE_EXTENSION,
+      $versionNumber,
+      Artifact::TYPE_VSCODE,
+      Artifact::ARCHITECTURE_X64,
+      '',
+      false,
+      '',
+      Config::VSCODE_MARKETPLACE_URL,
+      $versionNumber,
+      ''
+    );
   }
 }
 
