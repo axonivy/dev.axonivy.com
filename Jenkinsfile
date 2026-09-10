@@ -15,6 +15,16 @@ pipeline {
   }
   
   stages {
+    stage('editorconfig') {
+      steps {
+        script {
+          docker.build('editorconfig-checker', '-f build/Dockerfile.editorconfig .').inside {
+            sh 'editorconfig-checker -no-color'
+          }
+        }
+      }
+    }
+
     stage('build') {      
       steps {
 
@@ -54,6 +64,19 @@ pipeline {
               }
             }
           }
+
+          def phpImage = docker.build('php', '-f build/Dockerfile.php build')
+          def playwrightImage = docker.build('playwright', '-f build/Dockerfile.playwright .')
+          phpImage.withRun('-v ' + pwd() + '/backend:/var/www/html') { phpContainer ->
+            playwrightImage.inside("--network container:${phpContainer.id}") {
+              dir ('frontend') {
+                sh 'pnpm run test:e2e --backendUrl=http://localhost:80'
+                withChecks('End2End Tests') {
+                  junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'report.xml'
+                }
+              }
+            }
+          }
         }
 
         script {
@@ -73,16 +96,6 @@ pipeline {
                 uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
               }
             }
-          }
-        }
-      }
-    }
-
-    stage('editorconfig') {
-      steps {
-        script {
-          docker.build('editorconfig-checker', '-f build/Dockerfile.editorconfig .').inside {
-            sh 'editorconfig-checker -no-color'
           }
         }
       }
