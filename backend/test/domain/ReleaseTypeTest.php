@@ -34,7 +34,7 @@ class ReleaseTypeTest extends TestCase
   public function test_allReleaseInfos()
   {
     Assert::assertEquals(2, count(ReleaseType::LTS()->allReleaseInfos()));
-    Assert::assertEquals(1, count(ReleaseType::LE()->allReleaseInfos()));
+    Assert::assertEquals(0, count(ReleaseType::LE()->allReleaseInfos()));
   }
 
   public function test_byArchiveKey()

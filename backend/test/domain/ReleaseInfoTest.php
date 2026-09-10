@@ -25,20 +25,20 @@ class ReleaseInfoTest extends TestCase
 
   public function test_version()
   {
-    Assert::assertEquals('8.0.1', $this->testee->versionNumber());
-    Assert::assertEquals('8.0.1', $this->testee->getVersion()->getVersionNumber());
-    Assert::assertEquals('8.0', $this->testee->minorVersion());
+    Assert::assertEquals('14.0.0', $this->testee->versionNumber());
+    Assert::assertEquals('14.0.0', $this->testee->getVersion()->getVersionNumber());
+    Assert::assertEquals('14.0', $this->testee->minorVersion());
   }
 
   public function test_checksumsUrl()
   {
-    Assert::assertEquals('https://download.axonivy.com/8.0.1/checksums.sha256', $this->testee->getChecksumsUrl());
+    Assert::assertEquals('https://download.axonivy.com/14.0.0/checksums.sha256', $this->testee->getChecksumsUrl());
   }
 
   public function test_artifacts()
   {
     $artifacts = $this->testee->getArtifacts();
-    Assert::assertEquals(8, count($artifacts));
+    Assert::assertEquals(4, count($artifacts));
   }
 
   public function test_artifactEngineDocker()
@@ -47,11 +47,11 @@ class ReleaseInfoTest extends TestCase
 
     Assert::assertEquals(Artifact::PRODUCT_NAME_ENGINE, $artifact->getProductName());
     Assert::assertEquals(Artifact::TYPE_DOCKER, $artifact->getType());
-    Assert::assertEquals('8.0.1', $artifact->getVersion()->getVersionNumber());
+    Assert::assertEquals('14.0.0', $artifact->getVersion()->getVersionNumber());
     Assert::assertEquals('', $artifact->getPermalink());
-    Assert::assertEquals('axonivy/axonivy-engine:8.0.1', $artifact->getFileName());
+    Assert::assertEquals('axonivy/axonivy-engine:14.0.0', $artifact->getFileName());
     Assert::assertEquals(Config::DOCKER_HUB_IMAGE_URL, $artifact->getDownloadUrl());
-    Assert::assertEquals('/installation?downloadUrl=https://hub.docker.com/r/axonivy/axonivy-engine&version=8.0.1&product=engine&type=docker', $artifact->getInstallationUrl());
+    Assert::assertEquals('/installation?downloadUrl=https://hub.docker.com/r/axonivy/axonivy-engine&version=14.0.0&product=engine&type=docker', $artifact->getInstallationUrl());
     Assert::assertFalse($artifact->isBeta());
     Assert::assertFalse($artifact->isMavenPluginCompatible());
   }
@@ -68,6 +68,7 @@ class ReleaseInfoTest extends TestCase
 
   public function test_artifactWithoutBomJson()
   {
+    $this->testee = ReleaseInfoRepository::getBestMatchingVersion("8.0.0");
     $artifact = $this->testee->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_LINUX);
     Assert::assertEquals(Artifact::PRODUCT_NAME_DESIGNER, $artifact->getProductName());
     Assert::assertEquals(Artifact::TYPE_LINUX, $artifact->getType());
@@ -77,6 +78,7 @@ class ReleaseInfoTest extends TestCase
 
   public function test_artifactDesignerWindows()
   {
+    $this->testee = ReleaseInfoRepository::getBestMatchingVersion("8.0.1");
     $artifact = $this->testee->getArtifactByProductNameAndType(Artifact::PRODUCT_NAME_DESIGNER, Artifact::TYPE_WINDOWS);
 
     Assert::assertEquals(Artifact::PRODUCT_NAME_DESIGNER, $artifact->getProductName());

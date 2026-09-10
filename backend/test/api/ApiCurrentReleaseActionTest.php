@@ -55,7 +55,7 @@ class ApiCurrentReleaseActionTest extends TestCase
   
   private static function responseNewest(): string
   {
-      return '{"latestReleaseVersion":"'. self::currentRelease() .'","latestServiceReleaseVersion":"8.0.1"}';
+      return '{"latestReleaseVersion":"'. self::currentRelease() .'","latestServiceReleaseVersion":"14.0.0"}';
   }
   
   private static function currentRelease(): string

@@ -38,7 +38,7 @@ class ReleaseInfoRepositoryTest extends TestCase
   {
     $le = ReleaseInfoRepository::getLeadingEdgesSinceLastLongTermVersion();
     Assert::assertNotNull($le);
-    Assert::assertNotEmpty($le);
+    Assert::assertEmpty($le);
     foreach($le as $version) {
       Assert::assertNotNull($version);
     }
