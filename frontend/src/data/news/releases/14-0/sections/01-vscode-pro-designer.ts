@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Visual Studio Code is the development environment for Axon Ivy PRO development. The VS Code PRO Designer integrates the complete development workflow into a modern IDE.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key capabilities:**`,
-    },
+    { type: `paragraph`, text: `**Key capabilities:**` },
     {
       type: `list`,
       items: [

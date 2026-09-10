@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 modernizes the underlying Java enterprise technology stack.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Technology updates include:**`,
-    },
+    { type: `paragraph`, text: `**Technology updates include:**` },
     {
       type: `list`,
       items: [

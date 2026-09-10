@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Project structure and configuration becomes more consistent, tooling-friendly, and easier for AI-assisted development tools to understand and work with.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key format changes:**`,
-    },
+    { type: `paragraph`, text: `**Key format changes:**` },
     {
       type: `list`,
       items: [

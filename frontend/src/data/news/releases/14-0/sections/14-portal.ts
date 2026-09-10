@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Ivy Portal 14 brings together everything from the 13.1 and 13.2 Leading Edge releases into one stable LTS version, and adds a modernized UI, central menu management, smarter task and case handling, configuration portability, and stronger enterprise readiness.`,
     },
-    {
-      type: `heading`,
-      text: `From 13.1 and 13.2`,
-    },
+    { type: `heading`, text: `From 13.1 and 13.2` },
     {
       type: `list`,
       items: [
@@ -21,21 +18,14 @@ const section: NewsSection = {
         {
           text: `Pin tasks and cases, Navigation Widget with hidden dashboards`,
         },
-        {
-          text: `Side Step Processes and Static Pages`,
-        },
+        { text: `Side Step Processes and Static Pages` },
         {
           text: `Accessibility upgrades, hardened security, multiple task activators`,
         },
-        {
-          text: `Full multilingual and Japanese localization support`,
-        },
+        { text: `Full multilingual and Japanese localization support` },
       ],
     },
-    {
-      type: `heading`,
-      text: `New in LTS 14`,
-    },
+    { type: `heading`, text: `New in LTS 14` },
     {
       type: `list`,
       items: [

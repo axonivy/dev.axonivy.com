@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `Application Versions introduce a new foundation for application-level versioning and lifecycle management. Reducing the complexity of project dependencies.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key capabilities:**`,
-    },
+    { type: `paragraph`, text: `**Key capabilities:**` },
     {
       type: `list`,
       items: [

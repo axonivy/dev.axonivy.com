@@ -9,10 +9,7 @@ const section: NewsSection = {
       text: `Deployment capabilities are aligned with the Application Version model and have been strengthened for more reliable application delivery.
 `,
     },
-    {
-      type: `paragraph`,
-      text: `**Key improvements:**`,
-    },
+    { type: `paragraph`, text: `**Key improvements:**` },
     {
       type: `list`,
       items: [

@@ -8,20 +8,13 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 introduces **Tabler Icons** as the modern icon set across the platform, replacing deprecated Streamline and Font Awesome icons.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key improvements include:**`,
-    },
+    { type: `paragraph`, text: `**Key improvements include:**` },
     {
       type: `list`,
       items: [
         { text: `Tabler Icons integrated into the core platform` },
-        {
-          text: `Updated icons across editors and selectors`,
-        },
-        {
-          text: `Updated icons in project and file views`,
-        },
+        { text: `Updated icons across editors and selectors` },
+        { text: `Updated icons in project and file views` },
       ],
     },
     {

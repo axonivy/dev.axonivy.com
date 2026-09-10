@@ -8,10 +8,7 @@ const section: NewsSection = {
       type: `paragraph`,
       text: `LTS 14 extends internationalization support across the platform, providing a stronger foundation for multilingual applications and platform interfaces.`,
     },
-    {
-      type: `paragraph`,
-      text: `**Key improvements include:**`,
-    },
+    { type: `paragraph`, text: `**Key improvements include:**` },
     {
       type: `list`,
       items: [
