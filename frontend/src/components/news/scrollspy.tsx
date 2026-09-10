@@ -348,6 +348,8 @@ export default function NewsScrollSpy({
               <div className="grid grid-cols-2 gap-4">
                 <a
                   href={releaseNotesUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={
                     buttonVariants({ variant: "outline", size: "lg" }) +
                     " w-full md:w-auto"
@@ -358,6 +360,8 @@ export default function NewsScrollSpy({
                 </a>
                 <a
                   href={migrationGuideUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={
                     buttonVariants({ variant: "outline", size: "lg" }) +
                     " w-full md:w-auto"
