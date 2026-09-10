@@ -38,9 +38,6 @@ pipeline {
           sh "tar -cf ${env.DIST_FILE}\
             --exclude=src/web/releases\
             --exclude=src/web/docs\
-            --exclude=src/web/openapi\
-            --exclude=src/web/public-api\
-            --exclude=src/web/systemdb\
             src\
             vendor"
           archiveArtifacts env.DIST_FILE
