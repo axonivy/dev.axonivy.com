@@ -7,19 +7,7 @@ Run `./up.sh` to start the website in docker
 ... and later `docker compose down` to stop the containers.
 
 ```bash
-# get the backend running
-docker compose build --pull
-docker compose up -d
-docker compose exec web composer install
-
-# build the frontend
-docker compose exec web pnpm --dir frontend install --frozen-lockfile
-docker compose exec web pnpm --dir frontend build
-
-# get the frontend running in dev mode
-docker compose exec web pnpm install
-docker compose exec web pnpm run dev
-docker compose exec web pnpm run build
+./up.sh
 ```
 
 ## Execute tests

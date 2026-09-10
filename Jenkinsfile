@@ -15,16 +15,21 @@ pipeline {
   }
   
   stages {
-    stage('build') {
-      agent {
-        dockerfile {
-          dir 'docker/apache'    
-        }
-      }
+    stage('build') {      
       steps {
-        sh 'composer install --no-dev --no-progress'
-        sh 'pnpm --dir frontend install --frozen-lockfile'
-        sh 'pnpm --dir frontend build'
+
+        // build
+        script {
+          docker.build('composer', '-f build/Dockerfile.composer .').inside {
+            sh 'composer install --no-dev --no-progress'
+          }
+
+          docker.build('node', '-f build/Dockerfile.node .').inside {
+            sh 'pnpm --dir frontend install --frozen-lockfile'
+            sh 'pnpm --dir frontend build'
+          }
+        }
+
         sh "tar -cf ${env.DIST_FILE}\
           --exclude=src/web/releases\
           --exclude=src/web/docs\
@@ -35,26 +40,30 @@ pipeline {
           vendor"
         archiveArtifacts env.DIST_FILE
         stash name: 'website-tar', includes: env.DIST_FILE
- 
-        sh 'composer install --no-progress'
-        sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-        junit 'phpunit-junit.xml'
-
+         
         script {
-          if (env.BRANCH_NAME == 'master') {
-            sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
-            sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
-            uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
+          docker.build('composer', '-f build/Dockerfile.composer .').inside {
+            // tests
+            sh 'composer install --no-progress'
+            sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
+            junit 'phpunit-junit.xml'
+
+            // bom
+            if (env.BRANCH_NAME == 'master') {
+              sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
+              sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
+              uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
+            }
           }
         }
       }
     }
 
-    stage('check editorconfig') {
+    stage('editorconfig') {
       steps {
         script {
-          docker.image('mstruebing/editorconfig-checker:v3.11.3').inside {
-            sh 'ec -no-color'
+          docker.build('editorconfig-checker', '-f build/Dockerfile.editorconfig .').inside {
+            sh 'editorconfig-checker -no-color'
           }
         }
       }
