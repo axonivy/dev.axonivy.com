@@ -346,18 +346,20 @@ export default function NewsScrollSpy({
                 Download
               </a>
               <div className="grid grid-cols-2 gap-4">
-                <a
-                  href={releaseNotesUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={
-                    buttonVariants({ variant: "outline", size: "lg" }) +
-                    " w-full md:w-auto"
-                  }
-                >
-                  Release Notes
-                  <IconExternalLink className="size-4 shrink-0" />
-                </a>
+                {tag === "Long Term Support" || tag === "Leading Edge" ? (
+                  <a
+                    href={releaseNotesUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={
+                      buttonVariants({ variant: "outline", size: "lg" }) +
+                      " w-full md:w-auto"
+                    }
+                  >
+                    Release Notes
+                    <IconExternalLink className="size-4 shrink-0" />
+                  </a>
+                ) : null}
                 <a
                   href={migrationGuideUrl}
                   target="_blank"

@@ -14,7 +14,7 @@ const release: NewsRelease = {
   version_title: `Axon Ivy 14.0`,
   slogan: `Development, AI & developer enablement, Deployment and Technology`,
   tag: `Long Term Support`,
-  release_date: new Date(`2026-09-28`),
+  release_date: new Date(`2026-09-25`),
   download_url: `/download`,
   release_notes_url: `/doc/14.0/en/axonivy/release-notes`,
   migration_guide_url: `/doc/14.0/en/axonivy/migration/index.html`,
