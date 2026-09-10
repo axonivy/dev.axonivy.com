@@ -171,6 +171,98 @@ describe("Archive", () => {
 });
 
 describe("ArchiveTable", () => {
+  it("sorts engine mobile rows like the desktop artifact links", () => {
+    const { container } = renderWithQueryClient(
+      <ArchiveTable
+        product="engine"
+        releases={[
+          release({
+            releaseNotes: "",
+            engineArtifacts: [
+              {
+                name: "AxonIvyEngine-windows-x64.zip",
+                url: "/windows",
+                filename: "engine-windows.zip",
+                permalink: "p1",
+              },
+              {
+                name: "AxonIvyEngine-slim-x64.tar.gz",
+                url: "/slim",
+                filename: "engine-slim.tar.gz",
+                permalink: "p2",
+              },
+              {
+                name: "AxonIvyEngine-all-x64.tar.gz",
+                url: "/all",
+                filename: "engine-all.tar.gz",
+                permalink: "p3",
+              },
+              {
+                name: "AxonIvyEngine-linux-x64.deb",
+                url: "/deb",
+                filename: "engine.deb",
+                permalink: "p4",
+              },
+              {
+                name: "axonivy/engine",
+                url: "/docker",
+                filename: "docker-image",
+                permalink: "p5",
+              },
+              {
+                name: "AxonIvyEngine-linux-x64.tar.gz",
+                url: "/linux",
+                filename: "engine-linux.tar.gz",
+                permalink: "p6",
+              },
+            ],
+          }),
+        ]}
+      />,
+    );
+
+    const mobileCard = container.querySelector("article") as HTMLElement;
+    expect(within(mobileCard).getByText("All")).toBeInTheDocument();
+    expect(within(mobileCard).getByText("Debian")).toBeInTheDocument();
+    expect(
+      within(mobileCard)
+        .getAllByRole("link")
+        .map((link) => link.getAttribute("href")),
+    ).toEqual(["/all", "/deb", "/docker", "/linux", "/windows", "/slim"]);
+  });
+
+  it("shows only available artifact rows in designer mobile cards", () => {
+    const { container } = renderWithQueryClient(
+      <ArchiveTable
+        product="designer"
+        releases={[
+          release({
+            designerArtifacts: [
+              {
+                name: "AxonIvyDesigner-windows-x64.zip",
+                url: "/windows",
+                filename: "designer-windows.zip",
+                permalink: "p1",
+              },
+              {
+                name: "VSCode",
+                url: "/vscode",
+                filename: "vscode-extension",
+                permalink: "p2",
+              },
+            ],
+          }),
+        ]}
+      />,
+    );
+
+    const mobileCard = container.querySelector("article") as HTMLElement;
+    expect(within(mobileCard).getByText("Windows")).toBeInTheDocument();
+    expect(within(mobileCard).getAllByText("VS Code")).toHaveLength(2);
+    expect(within(mobileCard).queryByText("macOS")).not.toBeInTheDocument();
+    expect(within(mobileCard).queryByText("Linux")).not.toBeInTheDocument();
+  });
+
   it("sorts and categorizes artifacts, routing slim artifacts to their own column for engine", () => {
     const { container } = renderWithQueryClient(
       <ArchiveTable
