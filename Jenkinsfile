@@ -11,49 +11,91 @@ pipeline {
   }
   
   environment {
-    DIST_FILE = "ivy-website-developer.tar"
+    DIST_FILE = "ivy-website-redesign.tar"
   }
   
   stages {
-    stage('build') {
-      agent {
-        dockerfile {
-          dir 'docker/apache'    
-        }
-      }
+    stage('editorconfig') {
       steps {
-        sh 'composer install --no-dev --no-progress'
-        sh "tar -cf ${env.DIST_FILE}\
-          --exclude=src/web/releases\
-          --exclude=src/web/docs\
-          --exclude=src/web/openapi\
-          --exclude=src/web/public-api\
-          --exclude=src/web/systemdb\
-          --exclude=vendor/swagger-api\
-          src\
-          vendor"
-        archiveArtifacts env.DIST_FILE
-        stash name: 'website-tar', includes: env.DIST_FILE
- 
-        sh 'composer install --no-progress'
-        sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
-        junit 'phpunit-junit.xml'
-
         script {
-          if (env.BRANCH_NAME == 'master') {
-            sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
-            sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
-            uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
+          docker.build('editorconfig-checker', '-f build/Dockerfile.editorconfig .').inside {
+            sh 'editorconfig-checker -no-color'
           }
         }
       }
     }
 
-    stage('check editorconfig') {
+    stage('build') {      
       steps {
+
+        // build
         script {
-          docker.image('mstruebing/editorconfig-checker:v3.11.3').inside {
-            sh 'ec -no-color'
+          docker.build('composer', '-f build/Dockerfile.composer .').inside {
+            dir ('backend') {
+              sh 'composer install --no-dev --no-progress'
+            }
+          }
+
+          docker.build('node', '-f build/Dockerfile.node .').inside {
+            dir ('frontend') {
+              sh 'pnpm install --frozen-lockfile'
+              sh 'pnpm build'
+            }
+          }
+        }
+
+        // bundle
+        dir ('backend') {
+          sh "tar -cf ${env.DIST_FILE}\
+            --exclude=src/web/releases\
+            --exclude=src/web/docs\
+            src\
+            vendor"
+          archiveArtifacts env.DIST_FILE
+          stash name: 'website-tar', includes: env.DIST_FILE
+        }
+
+        script {
+          docker.build('node', '-f build/Dockerfile.node .').inside {
+            dir ('frontend') {
+              sh 'pnpm run test'
+              withChecks('Frontend Tests') {
+                junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'report.xml'
+              }
+            }
+          }
+
+          def phpImage = docker.build('php', '-f build/Dockerfile.php build')
+          def playwrightImage = docker.build('playwright', '-f build/Dockerfile.playwright .')
+          phpImage.withRun('-v ' + pwd() + '/backend:/var/www/html') { phpContainer ->
+            playwrightImage.inside("--network container:${phpContainer.id}") {
+              dir ('frontend') {
+                sh 'pnpm run test:e2e --backendUrl=http://localhost:80'
+                withChecks('End2End Tests') {
+                  junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'report.xml'
+                }
+              }
+            }
+          }
+        }
+
+        script {
+          docker.build('composer', '-f build/Dockerfile.composer .').inside {
+            dir ('backend') {
+              // tests
+              sh 'composer install --no-progress'
+              sh './vendor/bin/phpunit --log-junit phpunit-junit.xml || exit 0'
+              withChecks('Backend Tests') {
+                junit 'phpunit-junit.xml'
+              }
+
+              // bom
+              if (env.BRANCH_NAME == 'master') {
+                sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
+                sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
+                uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
+              }
+            }
           }
         }
       }
@@ -85,7 +127,7 @@ pipeline {
 
     stage('deploy') {
       when {
-        branch 'master'
+        branch 'redesign'
       }
       agent {
         docker {
@@ -97,9 +139,9 @@ pipeline {
           script {
             unstash 'website-tar'
 
-            def targetFolder = "/home/axonivya/deployment/ivy-website-developer-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
+            def targetFolder = "/home/axonivya/deployment/ivy-website-redesign-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFile =  targetFolder + ".tar"
-            def host = 'axonivya@217.26.51.247'
+            def host = 'axonivya@dev.axonivy.com'
 
             // copy
             sh "scp ${env.DIST_FILE} $host:$targetFile"
@@ -116,7 +158,7 @@ pipeline {
             sh "ssh $host ln -fns /home/axonivya/data/openapi $targetFolder/src/web/openapi"
             sh "ssh $host ln -fns /home/axonivya/data/systemdb $targetFolder/src/web/systemdb"
             sh "ssh $host ln -fns /home/axonivya/data/public-api $targetFolder/src/web/public-api"
-            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
+            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/axonivya.myhostpoint.ch/linktoweb"
           }
         }
       }

@@ -1,0 +1,710 @@
+---
+const tasks = [
+  { x: 311, y: 153, w: 118, h: 50, lines: ["Enter", "Request"], icon: "user" },
+  { x: 311, y: 333, w: 118, h: 50, lines: ["Accept", "Roles"], icon: "user" },
+  {
+    x: 558,
+    y: 267,
+    w: 124,
+    h: 46,
+    lines: ["Decrement", "Counter"],
+    icon: "code",
+  },
+  { x: 684, y: 495, w: 112, h: 50, lines: ["Verify", "Request"], icon: "user" },
+];
+import vsCodeLight from "/src/assets/vscode-light.png";
+import vsCodeDark from "/src/assets/vscode-dark.png";
+
+// Maps the canvas area onto the real screenshot's canvas area.
+// Dot-grid background only — kept separate from DIAGRAM_TRANSFORM_PROCESS
+// below so the process itself can be nudged without dragging the
+// background along with it.
+const DIAGRAM_TRANSFORM = "translate(20.0, 145) scale(2.5)";
+// Pool, lanes, connectors, tasks, gateways, token, badges.
+const DIAGRAM_TRANSFORM_PROCESS = "translate(40, 84.5) scale(2.5)";
+---
+
+<div
+  class="process-flow-bg pointer-events-none flex h-full w-full items-center overflow-hidden"
+>
+  <div class="mr-[-2%] ml-[50%] flex h-full w-1/2 items-center justify-end">
+    <div
+      class="relative aspect-3024/1896 h-auto shrink-0 overflow-visible"
+      style="width: 130%; transform: translateX(25%);"
+    >
+      <!-- ============ SCREENSHOT ============ -->
+      <img
+        src={vsCodeLight.src}
+        alt="Axon Ivy PRO Designer window"
+        class="absolute inset-0 h-full w-full object-contain dark:hidden"
+        draggable="false"
+      />
+      <img
+        src={vsCodeDark.src}
+        alt="Axon Ivy PRO Designer window"
+        class="absolute inset-0 hidden h-full w-full object-contain dark:flex"
+        draggable="false"
+      />
+
+      <!-- ============ ANIMATED DIAGRAM ============ -->
+      <svg
+        viewBox="0 0 3024 1896"
+        class="absolute inset-0 h-full w-full overflow-visible"
+        role="img"
+        aria-label="Axon Ivy process designer showing an onboarding process diagram"
+      >
+        <defs>
+          <marker
+            id="arrow"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6.5"
+            markerHeight="6.5"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--n900)"></path>
+          </marker>
+          <filter id="ballGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+            <feMerge>
+              <feMergeNode in="blur"></feMergeNode>
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
+          <pattern
+            id="dotGrid"
+            width="16"
+            height="16"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect width="16" height="16" class="fill-background dark:fill-n50"
+            ></rect>
+            <circle cx="1.2" cy="1.2" r="0.75" fill="var(--n300, #d1d5db)"
+            ></circle>
+          </pattern>
+        </defs>
+
+        <g transform={DIAGRAM_TRANSFORM}>
+          <rect x="40" y="-30" width="1190" height="720" fill="url(#dotGrid)"
+          ></rect>
+        </g>
+        <g transform={DIAGRAM_TRANSFORM_PROCESS}>
+          <path
+            d="M128,110 L108,110 Q100,110 100,118 L100,572 Q100,580 108,580 L128,580 Z"
+            fill="var(--n25)"></path>
+          <path
+            d="M900,110 L108,110 Q100,110 100,118 L100,572 Q100,580 108,580 L900,580"
+            fill="none"
+            stroke="var(--n400)"
+            stroke-width="0.75"></path>
+          <line
+            x1="128"
+            y1="110"
+            x2="128"
+            y2="580"
+            stroke="var(--n400)"
+            stroke-width="0.75"></line>
+          <line
+            x1="128"
+            y1="250"
+            x2="900"
+            y2="250"
+            stroke="var(--n400)"
+            stroke-width="0.75"></line>
+          <line
+            x1="128"
+            y1="460"
+            x2="900"
+            y2="460"
+            stroke="var(--n400)"
+            stroke-width="0.75"></line>
+
+          <text
+            x="117"
+            y="355"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 117 355)">Department</text
+          >
+          <text
+            x="148"
+            y="180"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 148 180)">Employee</text
+          >
+          <text
+            x="148"
+            y="355"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 148 355)">Dynamic Tasks</text
+          >
+          <text
+            x="148"
+            y="520"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10.5"
+            fill="var(--foreground)"
+            transform="rotate(-90 148 520)">Manager</text
+          >
+
+          <!-- connectors -->
+          <g fill="none" stroke="var(--n900)" stroke-width="1">
+            <path d="M243,178 L311,178" marker-end="url(#arrow)"></path>
+            <path d="M370,203 L370,333" marker-end="url(#arrow)"></path>
+            <path d="M429,358 L485,358" marker-end="url(#arrow)"></path>
+            <path d="M500,373 L500,410" marker-end="url(#arrow)"></path>
+            <path d="M515,358 L725,358" marker-end="url(#arrow)"></path>
+            <path
+              d="M740,343 L740,298 Q740,290 732,290 L682,290"
+              marker-end="url(#arrow)"></path>
+            <path
+              d="M558,290 L508,290 Q500,290 500,298 L500,343"
+              marker-end="url(#arrow)"></path>
+            <path d="M740,373 L740,495" marker-end="url(#arrow)"></path>
+            <path d="M796,520 L900,520" marker-end="url(#arrow)"></path>
+            <path d="M780,721.5 L780,579"></path>
+          </g>
+
+          <!-- start event -->
+          <circle
+            data-node="start"
+            cx="230"
+            cy="178"
+            r="13"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <text
+            x="230"
+            y="201"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10"
+            fill="var(--n700)">Start</text
+          >
+
+          <!-- task boxes: content (icon + text). -->
+          {
+            tasks.map((t, i) => {
+              const cy = t.y + t.h / 2;
+              const iconX = t.x + 14;
+              const iconY = cy - 12;
+              const textX = iconX + 24 + 10;
+              return (
+                <>
+                  <rect
+                    data-node={`task-${i}`}
+                    x={t.x}
+                    y={t.y}
+                    width={t.w}
+                    height={t.h}
+                    rx="5"
+                    fill="var(--n25)"
+                    stroke="var(--foreground)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x={iconX}
+                    y={iconY}
+                    width="24"
+                    height="24"
+                    rx="4"
+                    fill="var(--accent)"
+                  />
+                  {t.icon === "code" ? (
+                    <g
+                      stroke="var(--primary)"
+                      stroke-width="1.3"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      {/* "<" */}
+                      <path d={`M${iconX + 8},${iconY + 7} l-4,5 l4,5`} />
+                      {/* ">" */}
+                      <path d={`M${iconX + 16},${iconY + 7} l4,5 l-4,5`} />
+                      {/* "/" */}
+                      <line
+                        x1={iconX + 13}
+                        y1={iconY + 5}
+                        x2={iconX + 11}
+                        y2={iconY + 19}
+                      />
+                    </g>
+                  ) : (
+                    <g stroke="var(--primary)" stroke-linecap="round">
+                      <line
+                        x1={iconX + 3}
+                        y1={iconY + 8}
+                        x2={iconX + 9}
+                        y2={iconY + 8}
+                        stroke-width="1"
+                      />
+                      <line
+                        x1={iconX + 3}
+                        y1={iconY + 12}
+                        x2={iconX + 8}
+                        y2={iconY + 12}
+                        stroke-width="1"
+                      />
+                      <line
+                        x1={iconX + 3}
+                        y1={iconY + 16}
+                        x2={iconX + 7}
+                        y2={iconY + 16}
+                        stroke-width="1"
+                      />
+                      <circle
+                        cx={iconX + 16.5}
+                        cy={iconY + 9}
+                        r="2.3"
+                        fill="none"
+                        stroke-width="1.15"
+                      />
+                      <path
+                        d={`M${iconX + 11.8},${iconY + 16} a4.7,4.7 0 0 1 9.4,0`}
+                        fill="none"
+                        stroke-width="1.15"
+                      />
+                    </g>
+                  )}
+                  <text
+                    x={textX}
+                    y={cy - 4}
+                    font-family="ui-sans-serif, system-ui"
+                    font-size="11.5"
+                    fill="var(--foreground)"
+                  >
+                    {t.lines[0]}
+                  </text>
+                  <text
+                    x={textX}
+                    y={cy + 12}
+                    font-family="ui-sans-serif, system-ui"
+                    font-size="11.5"
+                    fill="var(--foreground)"
+                  >
+                    {t.lines[1]}
+                  </text>
+                </>
+              );
+            })
+          }
+
+          <!-- Gateway 1 (exclusive) -->
+          <path
+            data-node="gateway1"
+            d="M497.4,345.6 Q500,343 502.6,345.6 L512.4,355.4 Q515,358 512.4,360.6 L502.6,370.4 Q500,373 497.4,370.4 L487.6,360.6 Q485,358 487.6,355.4 Z"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></path>
+          <g
+            data-node="gateway1"
+            stroke="var(--foreground)"
+            stroke-width="1"
+            stroke-linecap="round"
+            ><line x1="495.5" y1="353.5" x2="504.5" y2="362.5"></line><line
+              x1="504.5"
+              y1="353.5"
+              x2="495.5"
+              y2="362.5"></line></g
+          >
+
+          <!-- Finish end event -->
+          <circle
+            data-node="finish"
+            cx="500"
+            cy="422"
+            r="12"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="2"></circle>
+
+          <!-- Check gateway (circle-plus) -->
+          <path
+            data-node="checkgateway"
+            d="M737.4,345.6 Q740,343 742.6,345.6 L752.4,355.4 Q755,358 752.4,360.6 L742.6,370.4 Q740,373 737.4,370.4 L727.6,360.6 Q725,358 727.6,355.4 Z"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></path>
+          <circle
+            data-node="checkgateway"
+            cx="740"
+            cy="358"
+            r="7"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <g
+            data-node="checkgateway"
+            stroke="var(--foreground)"
+            stroke-width="1"
+          >
+            <line x1="740" y1="354" x2="740" y2="362"></line>
+            <line x1="736" y1="358" x2="744" y2="358"></line>
+          </g>
+
+          <!-- boundary escalation event on Verify Request -->
+          <circle
+            cx="780"
+            cy="549"
+            r="13"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <circle
+            cx="780"
+            cy="549"
+            r="11"
+            fill="var(--background)"
+            stroke="var(--foreground)"
+            stroke-width="1"></circle>
+          <path
+            d="M780,544 L785,553 L775,553 Z"
+            fill="none"
+            stroke="var(--foreground)"
+            stroke-width="1"
+            stroke-linejoin="round"></path>
+          <text
+            x="780"
+            y="574"
+            text-anchor="middle"
+            font-family="ui-sans-serif, system-ui"
+            font-size="10"
+            fill="var(--foreground)">dynamic:cancel</text
+          >
+
+          <!-- ============ animated token: cycles through all three real routes ============ -->
+          <path
+            id="routeFinish"
+            d="M230,178 L311,178 L370,178 L370,203 L370,333 L370,358 L429,358 L485,358 L500,358 L500,373 L500,422"
+            fill="none"
+            stroke="none"></path>
+          <path
+            id="routeLoop"
+            d="M230,178 L311,178 L370,178 L370,203 L370,333 L370,358 L429,358 L485,358 L500,358 L515,358 L725,358 L740,358 L740,343 L740,290 L682,290 L670,290 L558,290 L508,290 Q500,290 500,298 L500,343 L500,358 L515,358 L725,358 L740,358 L740,373 L740,495 L740,520 L796,520 L890,520"
+            fill="none"
+            stroke="none"></path>
+          <path
+            id="routeDirect"
+            d="M230,178 L311,178 L370,178 L370,203 L370,333 L370,358 L429,358 L485,358 L500,358 L515,358 L725,358 L740,358 L740,373 L740,495 L740,520 L796,520 L890,520"
+            fill="none"
+            stroke="none"></path>
+
+          <circle
+            id="flow-token"
+            r="5"
+            fill="var(--success)"
+            filter="url(#ballGlow)"
+          >
+            <animateMotion
+              id="animFinish"
+              begin="0s;animDirect.end"
+              dur="4.2s"
+              fill="freeze"
+              repeatCount="1"
+            >
+              <mpath href="#routeFinish"></mpath>
+            </animateMotion>
+            <animateMotion
+              id="animLoop"
+              begin="animFinish.end"
+              dur="14s"
+              fill="freeze"
+              repeatCount="1"
+            >
+              <mpath href="#routeLoop"></mpath>
+            </animateMotion>
+            <animateMotion
+              id="animDirect"
+              begin="animLoop.end"
+              dur="10s"
+              fill="freeze"
+              repeatCount="1"
+            >
+              <mpath href="#routeDirect"></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- "visited" badges are injected here at runtime by the script -->
+          <g id="badge-layer"></g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<style>
+  .process-flow-bg [data-node] {
+    transition: stroke 0.25s ease;
+  }
+  .process-flow-bg .node-visited {
+    stroke: var(--success) !important;
+  }
+</style>
+
+<script>
+  // Highlights each shape as the token passes it and shows a "1" badge at
+  // its top-right corner; clears when the token hands off to the next
+  // route. Route identity comes from SMIL's beginEvent.
+  type RouteName = "routeFinish" | "routeLoop" | "routeDirect";
+
+  function initProcessFlowBg(root: Element): void {
+    const svg = root.querySelector("svg");
+    if (!svg) return;
+
+    const ORDER: RouteName[] = ["routeFinish", "routeLoop", "routeDirect"];
+    const DURATIONS: Record<RouteName, number> = {
+      routeFinish: 4.2,
+      routeLoop: 14,
+      routeDirect: 10,
+    };
+
+    // Ordered list of shapes each route passes through. A name can repeat
+    // within a route (Gateway 1 and the check gateway are each visited
+    // twice on the loop) — repeats are resolved in order below by always
+    // searching forward from the previous match.
+    const WAYPOINTS: Record<RouteName, string[]> = {
+      routeFinish: ["start", "task-0", "task-1", "gateway1", "finish"],
+      routeLoop: [
+        "start",
+        "task-0",
+        "task-1",
+        "gateway1",
+        "checkgateway",
+        "task-2",
+        "gateway1",
+        "checkgateway",
+        "task-3",
+      ],
+      routeDirect: [
+        "start",
+        "task-0",
+        "task-1",
+        "gateway1",
+        "checkgateway",
+        "task-3",
+      ],
+    };
+
+    const nodeNames: string[] = Array.from(
+      new Set(Object.values(WAYPOINTS).flat()),
+    );
+
+    const badgeLayer = svg.querySelector("#badge-layer");
+    const badgeEls = new Map<string, SVGGElement>();
+    const BADGE_W = 20;
+    const BADGE_H = 13;
+
+    function firstShapeFor(name: string): SVGGraphicsElement | null {
+      return svg!.querySelector(`[data-node="${name}"]`);
+    }
+
+    if (badgeLayer) {
+      for (const name of nodeNames) {
+        const shape = firstShapeFor(name);
+        if (!shape || typeof shape.getBBox !== "function") continue;
+        const bbox = shape.getBBox();
+        const x = bbox.x + bbox.width;
+        const y = bbox.y;
+
+        const g = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "g",
+        ) as SVGGElement;
+        g.setAttribute("data-badge", name);
+        g.setAttribute("transform", `translate(${x}, ${y})`);
+        g.style.opacity = "0";
+        g.style.transition = "opacity 0.2s ease";
+
+        const rect = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "rect",
+        ) as SVGRectElement;
+        rect.setAttribute("x", String(-BADGE_W / 2));
+        rect.setAttribute("y", String(-BADGE_H / 2));
+        rect.setAttribute("width", String(BADGE_W));
+        rect.setAttribute("height", String(BADGE_H));
+        rect.setAttribute("rx", String(BADGE_H / 2));
+        rect.setAttribute("ry", String(BADGE_H / 2));
+        rect.setAttribute("fill", "var(--background)");
+        rect.setAttribute("stroke", "var(--success)");
+        rect.setAttribute("stroke-width", "1");
+
+        const text = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        ) as SVGTextElement;
+        text.setAttribute("y", "0.5");
+        text.setAttribute("fill", "var(--success)");
+        text.setAttribute("font-family", "ui-sans-serif, system-ui");
+        text.setAttribute("font-size", "9");
+        text.setAttribute("font-weight", "700");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "central");
+        text.textContent = "1";
+
+        g.append(rect, text);
+        badgeLayer.append(g);
+        badgeEls.set(name, g);
+      }
+    }
+
+    function highlight(name: string, count: number): void {
+      svg!
+        .querySelectorAll(`[data-node="${name}"]`)
+        .forEach((el) => el.classList.add("node-visited"));
+      const badge = badgeEls.get(name);
+      if (badge) {
+        badge.style.opacity = "1";
+        const text = badge.querySelector("text");
+        if (text) text.textContent = String(count);
+      }
+    }
+
+    function unhighlight(name: string): void {
+      svg!
+        .querySelectorAll(`[data-node="${name}"]`)
+        .forEach((el) => el.classList.remove("node-visited"));
+      const badge = badgeEls.get(name);
+      if (badge) badge.style.opacity = "0";
+    }
+
+    function closestLengthFrom(
+      pathEl: SVGPathElement,
+      x: number,
+      y: number,
+      fromLen: number,
+    ): number {
+      const total = pathEl.getTotalLength();
+      const span = Math.max(total - fromLen, 1);
+      const samples = 800;
+      const closeEnough = 4;
+
+      let firstCloseLen: number | null = null;
+      let bestLen = fromLen;
+      let bestD2 = Infinity;
+      for (let i = 0; i <= samples; i++) {
+        const len = fromLen + (i / samples) * span;
+        const pt = pathEl.getPointAtLength(len);
+        const dx = pt.x - x;
+        const dy = pt.y - y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < bestD2) {
+          bestD2 = d2;
+          bestLen = len;
+        }
+        if (firstCloseLen === null && d2 <= closeEnough * closeEnough) {
+          firstCloseLen = len;
+          break;
+        }
+      }
+
+      const anchor = firstCloseLen ?? bestLen;
+      const step = span / samples;
+      let lo = Math.max(fromLen, anchor - step);
+      let hi = Math.min(total, anchor + step);
+      for (let iter = 0; iter < 20; iter++) {
+        const m1 = lo + (hi - lo) / 3;
+        const m2 = hi - (hi - lo) / 3;
+        const p1 = pathEl.getPointAtLength(m1);
+        const p2 = pathEl.getPointAtLength(m2);
+        const d1 = (p1.x - x) ** 2 + (p1.y - y) ** 2;
+        const d2b = (p2.x - x) ** 2 + (p2.y - y) ** 2;
+        if (d1 < d2b) hi = m2;
+        else lo = m1;
+      }
+      return (lo + hi) / 2;
+    }
+
+    const routeAnimEls: Record<RouteName, Element | null> = {
+      routeFinish: svg.querySelector("#animFinish"),
+      routeLoop: svg.querySelector("#animLoop"),
+      routeDirect: svg.querySelector("#animDirect"),
+    };
+    const routePathEls: Record<RouteName, SVGPathElement | null> = {
+      routeFinish: svg.querySelector("#routeFinish"),
+      routeLoop: svg.querySelector("#routeLoop"),
+      routeDirect: svg.querySelector("#routeDirect"),
+    };
+
+    const routeWaypointTimes = {} as Record<
+      RouteName,
+      { name: string; time: number }[]
+    >;
+    for (const routeName of ORDER) {
+      const pathEl = routePathEls[routeName];
+      const dur = DURATIONS[routeName];
+      const times: { name: string; time: number }[] = [];
+      if (pathEl) {
+        const total = pathEl.getTotalLength();
+        let fromLen = 0;
+        for (const name of WAYPOINTS[routeName]) {
+          const shape = firstShapeFor(name);
+          if (!shape || typeof shape.getBBox !== "function") continue;
+          const bbox = shape.getBBox();
+          const cx = bbox.x + bbox.width / 2;
+          const cy = bbox.y + bbox.height / 2;
+          const len = closestLengthFrom(pathEl, cx, cy, fromLen);
+          fromLen = len;
+          const time = Math.min((len / total) * dur, dur - 0.05);
+          times.push({ name, time });
+        }
+      }
+      routeWaypointTimes[routeName] = times;
+    }
+
+    let currentRoute: RouteName = "routeFinish";
+    let routeStartTime = performance.now();
+    let previousActive = new Map<string, number>();
+
+    for (const routeName of ORDER) {
+      const animEl = routeAnimEls[routeName];
+      if (!animEl) continue;
+      animEl.addEventListener("beginEvent", () => {
+        for (const name of nodeNames) unhighlight(name);
+        previousActive = new Map();
+        currentRoute = routeName;
+        routeStartTime = performance.now();
+      });
+    }
+
+    function tick(): void {
+      const elapsed = (performance.now() - routeStartTime) / 1000;
+      const dur = DURATIONS[currentRoute];
+      const t = Math.min(Math.max(elapsed, 0), dur);
+
+      const active = new Map<string, number>();
+      for (const wp of routeWaypointTimes[currentRoute]) {
+        if (wp.time <= t) active.set(wp.name, (active.get(wp.name) ?? 0) + 1);
+      }
+
+      for (const name of nodeNames) {
+        const newCount = active.get(name) ?? 0;
+        const oldCount = previousActive.get(name) ?? 0;
+        if (newCount !== oldCount) {
+          if (newCount > 0) highlight(name, newCount);
+          else unhighlight(name);
+        }
+      }
+      previousActive = active;
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  document
+    .querySelectorAll(".process-flow-bg")
+    .forEach((root) => initProcessFlowBg(root));
+</script>

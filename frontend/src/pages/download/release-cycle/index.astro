@@ -1,0 +1,38 @@
+---
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import ReleaseCycleScrollspy from "@/components/download/release-cycle/scrollspy";
+import Layout from "@/layouts/news.astro";
+---
+
+<Layout>
+  <div class="flex flex-col">
+    <div
+      class="bg-background before:bg-background sticky top-24 z-20 py-2 pb-8 before:absolute before:inset-x-0 before:-top-16 before:h-16 before:content-['']"
+    >
+      <Breadcrumb className="px-3">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/download">Download</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Release Cycle</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+
+    <ReleaseCycleScrollspy client:load />
+  </div>
+</Layout>

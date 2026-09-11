@@ -1,0 +1,156 @@
+---
+import Layout from "@/layouts/main.astro";
+import { Base, H4, H5 } from "@/components/ui/typography";
+import { CURRENT_VERSION } from "@/data/global-variables";
+import {
+  DownloadQuery,
+  VersionOverviewQuery,
+} from "@/components/query-components";
+import {
+  IconArrowRight,
+  IconFileDescription,
+  IconMessageChatbot,
+  IconMessageCircle,
+  IconMessageCircleQuestion,
+} from "@tabler/icons-astro";
+import { Separator } from "@/components/ui/separator";
+---
+
+<Layout
+  title={`Download Long Term Support ${CURRENT_VERSION}`}
+  description={"Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them."}
+>
+  <div class="flex flex-col gap-24">
+    <DownloadQuery client:load />
+
+    <VersionOverviewQuery client:load />
+  </div>
+
+  <div
+    class="bg-n50 flex flex-col items-stretch gap-4 rounded-md p-4 md:flex-row md:items-center md:justify-between"
+  >
+    <div class="flex w-full flex-row items-center gap-4 md:w-auto">
+      <div class="bg-orange-bg text-orange shrink-0 rounded-md p-2">
+        <IconMessageCircleQuestion class="size-8" />
+      </div>
+      <div class="flex flex-col">
+        <H4>Need help?</H4>
+        <Base className="text-n900">
+          We're here to help <br class="hidden md:block" /> you get started.
+        </Base>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="/doc"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconFileDescription class="size-5" />
+              <H5>Documentation</H5>
+            </div>
+            <Base className="text-n900">Find guides and references.</Base>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconFileDescription class="size-5" />
+            <H5>Documentation</H5>
+          </div>
+          <Base className="text-n900">Find guides and references.</Base>
+          <a href="/doc" class="group text-primary">
+            <span class="flex items-center gap-2">
+              Go to Docs
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="https://community.axonivy.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconMessageCircle class="size-5" />
+              <H5>Community</H5>
+            </div>
+            <Base className="text-n900">Ask questions and get help.</Base>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconMessageCircle class="size-5" />
+            <H5>Community</H5>
+          </div>
+          <Base className="text-n900">Ask questions and get help.</Base>
+          <a
+            href="https://community.axonivy.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group text-primary"
+          >
+            <span class="flex items-center gap-2">
+              Go to Community
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
+      <Separator orientation="horizontal" className="md:hidden" />
+      <Separator orientation="vertical" className="hidden md:block" />
+      <div class="flex w-full flex-col md:w-auto">
+        <a
+          href="/support"
+          class="flex flex-row items-center justify-between gap-3 md:hidden"
+        >
+          <div class="flex flex-col">
+            <div class="flex flex-row items-center gap-1">
+              <IconMessageChatbot class="size-5" />
+              <H5>Contact Support</H5>
+            </div>
+            <Base className="text-n900">Need additional assistance?</Base>
+          </div>
+          <IconArrowRight class="size-8 shrink-0" />
+        </a>
+
+        <div class="hidden md:flex md:flex-col">
+          <div class="flex flex-row items-center gap-1">
+            <IconMessageChatbot class="size-5" />
+            <H5>Contact Support</H5>
+          </div>
+          <Base className="text-n900">Need additional assistance?</Base>
+          <a href="/support" class="group text-primary">
+            <span class="flex items-center gap-2">
+              Contact us
+              <IconArrowRight
+                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

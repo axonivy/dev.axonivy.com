@@ -1,0 +1,67 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Layout from "@/layouts/news.astro";
+import NewsScrollSpy from "@/components/news/scrollspy";
+
+type NewsEntry = CollectionEntry<"news">;
+
+export async function getStaticPaths() {
+  const releases = await getCollection("news");
+  return releases.map((release) => ({
+    params: { id: release.id },
+    props: { release },
+  }));
+}
+
+const { release } = Astro.props as { release: NewsEntry };
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+---
+
+<Layout>
+  <div class="flex flex-col">
+    <div
+      class="bg-background before:bg-background sticky top-24 z-20 py-2 pb-8 before:absolute before:inset-x-0 before:-top-16 before:h-16 before:content-['']"
+    >
+      <Breadcrumb className="px-3">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/news">News</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{release.data.version_title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+
+    <NewsScrollSpy
+      title={release.data.version_title}
+      slogan={release.data.slogan}
+      tag={release.data.tag}
+      releaseDate={formatDate(release.data.release_date)}
+      downloadUrl={release.data.download_url}
+      releaseNotesUrl={release.data.release_notes_url}
+      migrationGuideUrl={release.data.migration_guide_url}
+      sections={release.data.sections}
+      client:load
+    />
+  </div>
+</Layout>

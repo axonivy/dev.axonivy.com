@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/news.astro";
+---
+
+<Layout>
+  <link rel="stylesheet" href="/swagger/swagger-ui.css" />
+
+  <div id="swagger-ui"></div>
+
+  <script is:inline src="/swagger/swagger-ui-bundle.js"></script>
+  <script is:inline src="/swagger/swagger-ui-standalone-preset.js"></script>
+
+  <script is:inline>
+    const params = new URL(window.location.href).searchParams;
+    let configUrl = params.get("configUrl");
+
+    if (!configUrl) {
+      configUrl = "null";
+    } else {
+      const isRelative =
+        new URL(document.baseURI).origin ===
+        new URL(configUrl, document.baseURI).origin;
+
+      if (!isRelative) {
+        console.warn(`Blocked external config URL: ${configUrl}`);
+        configUrl = "null";
+      }
+    }
+
+    window.onload = () => {
+      window.ui = SwaggerUIBundle({
+        dom_id: "#swagger-ui",
+        configUrl,
+        deepLinking: true,
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+        plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+        layout: "StandaloneLayout",
+      });
+    };
+  </script>
+</Layout>

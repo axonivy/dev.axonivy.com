@@ -1,0 +1,311 @@
+export type Deprecation = {
+  name: string;
+  nameHref?: string;
+  successor?: string;
+  successorHref?: string;
+  released: Version;
+  deprecated: Version;
+  removed?: Version;
+  description: string;
+};
+
+type Version = 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
+
+const deprecations: Deprecation[] = [
+  {
+    name: "Dropin Process Element extension point",
+    nameHref:
+      "https://dev.axonivy.com/doc/12.0/en/concepts/3rd-party-integration/process-extensions.html#dropin-elements",
+    successor: "Program Elements in project",
+    successorHref:
+      "https://dev.axonivy.com/doc/14.0/en/concepts/3rd-party-integration/process-extensions.html#extendible-process-elements",
+    released: 4,
+    deprecated: 12,
+    removed: 14,
+    description:
+      "The Dropin Process Element extension point was removed in favor of the simpler Program Elements in project.",
+  },
+  {
+    name: "NTLM Authentication for REST and SOAP WebService Clients",
+    nameHref:
+      "https://community.axonivy.com/d/1257-usage-of-ntlm-authentication-for-rest-and-soap-services",
+    successor:
+      "Microsoft recommends to use more modern and more secure authentication methods",
+    successorHref:
+      "https://community.axonivy.com/d/1257-usage-of-ntlm-authentication-for-rest-and-soap-services",
+    released: 5,
+    deprecated: 12,
+    removed: 14,
+    description:
+      "Support for NTLM has been deprecated with Apache HTTP Client 5 library that is used by the REST and SOAP WebService client implementations. Also Microsoft recommends to use more modern and more secure authentication methods.",
+  },
+  {
+    name: "Eclipse-based PRO Designer",
+    nameHref:
+      "https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer",
+    successor: "VS Code PRO Designer Extension",
+    successorHref:
+      "https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13",
+    released: 4,
+    deprecated: 13,
+    removed: 14,
+    description:
+      "The Eclipse-based PRO Designer will be replaced by the VS Code PRO Designer Extension.",
+  },
+  {
+    name: "Rule Engine based on Drools",
+    nameHref: "/doc/12.0/en/designer-guide/how-to/rule-engine.html",
+    successor: "",
+    successorHref: "",
+    released: 7,
+    deprecated: 12,
+    removed: 14,
+    description:
+      "The Rule Engine Process Element and the Rules Public API based on Drools. Rules could be written using either DRL or Excel files.",
+  },
+  {
+    name: "Font Awesome Icons",
+    successor: "Tabler Icons",
+    nameHref:
+      "https://community.axonivy.com/d/1225-icon-library-update-in-axon-ivy-lts-14",
+    released: 5,
+    deprecated: 14,
+    removed: 16,
+    description:
+      "The included font awesome icons have been deprecated and will no longer be shipped by default in the future. Use the tabler icons available in the platform.",
+  },
+  {
+    name: "Streamline Icons",
+    successor: "Tabler Icons",
+    nameHref:
+      "https://community.axonivy.com/d/1225-icon-library-update-in-axon-ivy-lts-14",
+    released: 10,
+    deprecated: 14,
+    removed: 16,
+    description:
+      "The included streamline icons have been deprecated and will no longer be shipped by default in the future. Use the tabler icons available in the platform.",
+  },
+  {
+    name: "Java Library - Guava",
+    nameHref: "https://github.com/google/guava",
+    successor: "JDK",
+    successorHref: "https://docs.oracle.com/en/java/javase/11/",
+    released: 3,
+    deprecated: 10,
+    description:
+      "The Java library Guava is provided currently on the ivy project classpath. It will be removed in future. Use the utilities from the JDK.",
+  },
+  {
+    name: "Java Library - Apache Commons Lang 2",
+    nameHref: "https://commons.apache.org/proper/commons-lang/",
+    successor: "Apache Commons Lang 3",
+    successorHref: "https://commons.apache.org/proper/commons-lang/",
+    released: 3,
+    deprecated: 10,
+    removed: 14,
+    description:
+      "The Java library Apache Commons Lang 2 is provided currently on the ivy project classpath. It will be removed in future. Use Apache Commons Lang 3 which is provided on the ivy project classpath.",
+  },
+  {
+    name: "Java Library - Apache Commons Collection 3",
+    nameHref:
+      "https://commons.apache.org/proper/commons-collections/release_3_2_2.html",
+    successor: "Apache Commons Collection 4",
+    successorHref:
+      "https://commons.apache.org/proper/commons-collections/release_4_4.html",
+    released: 3,
+    deprecated: 10,
+    removed: 14,
+    description:
+      "The Java library Apache Commons Collection 3 is provided currently on the ivy project classpath. It will be removed in future. Use Apache Commons Collection 4 which is provided on the ivy project classpath.",
+  },
+  {
+    name: "Java Library - Apache HTTP Client",
+    nameHref: "https://hc.apache.org/index.html",
+    successor: "JDK HTTP Client",
+    successorHref: "https://openjdk.java.net/groups/net/httpclient/intro.html",
+    released: 3,
+    deprecated: 10,
+    description:
+      "The Java library Apache Http Client is provided currently on the ivy project classpath. It will be removed in future. Use the HTTP Client from the JDK.",
+  },
+  {
+    name: "HTML Dialog: Primefaces Serenity Theme",
+    nameHref:
+      "/doc/10.0/en/designer-guide/user-interface/user-dialogs/html-dialog-themes.html#serenity-themes-deprecated",
+    successor: "Primefaces Freya Theme",
+    successorHref:
+      "/doc/10.0/en/designer-guide/user-interface/user-dialogs/html-dialog-themes.html#freya-themes",
+    released: 8,
+    deprecated: 10,
+    removed: 13,
+    description:
+      "Primefaces no longer supports Serenity Theme. Consider switching to Freya Theme",
+  },
+  {
+    name: "Overriding (Case Scope)",
+    nameHref: "/doc/8.0/en/designer-guide/how-to/overrides.html#case-scope",
+    successor: "Overriding (Strict)",
+    successorHref:
+      "/doc/8.0/en/designer-guide/how-to/overrides.html#strict-overriding",
+    released: 5,
+    deprecated: 8,
+    removed: 13,
+    description:
+      "The Case Scope Overriding is deprecated in favor of Strict Overriding.",
+  },
+  {
+    name: "Eclipse DRL Editor",
+    nameHref: "/doc/10.0/en/designer-guide/how-to/rule-engine.html",
+    successor: "VS Code DRL Editor",
+    successorHref:
+      "https://community.axonivy.com/d/560-drl-editor-will-be-removed-with-axon-ivy-113",
+    released: 7,
+    deprecated: 10,
+    removed: 12,
+    description: "Syntax Highlighting for DRL files.",
+  },
+  {
+    name: "Dynamic HTML Dialog id",
+    nameHref:
+      "/doc/10.0/en/designer-guide/process-modeling/process-elements/user-dialog.html#call-tab",
+    released: 4,
+    deprecated: 10,
+    removed: 12,
+    description: "Dynamic HTML Dialog id from a data class attribute.",
+  },
+  {
+    name: "Environments",
+    nameHref: "/doc/8.0/en/designer-guide/configuration/environments.html",
+    successor: "Containers / Configuration",
+    successorHref:
+      "https://community.axonivy.com/d/142-environments-will-disappear-in-the-long-term",
+    released: 4,
+    deprecated: 10,
+    removed: 12,
+    description:
+      "Environments are deprecated and we won't invest in new features. Please use containers or correct configurations instead.",
+  },
+  {
+    name: "Tomcat AJP Protocol",
+    nameHref: "/doc/8.0/en/engine-guide/integration/apache-httpd.html",
+    successor: "HTTP/S Protocol",
+    successorHref: "/doc/10.0/en/engine-guide/integration/index.html",
+    released: 4,
+    deprecated: 10,
+    removed: 12,
+    description:
+      "The AJP Protocol is deprecated. Please use the HTTP or HTTPS Protocol instead.",
+  },
+  {
+    name: "WebPage element",
+    nameHref:
+      "/doc/10.0/en/designer-guide/process-modeling/process-elements/web-page.html",
+    successor: "Html Dialog",
+    successorHref:
+      "/doc/10.0/en/designer-guide/user-interface/user-dialogs/html-dialogs.html",
+    released: 4,
+    deprecated: 8,
+    removed: 12,
+    description: "The WebPage activity process element.",
+  },
+  {
+    name: "Process Documentation (BIRT)",
+    nameHref: "/doc/8.0/en/market/extension/reporting.html",
+    released: 4,
+    deprecated: 8,
+    removed: 10,
+    description: "The Process Reporting extension tool BIRT is removed.",
+  },
+  {
+    name: "Call & Wait element",
+    nameHref:
+      "/doc/8.0/en/designer-guide/designer-guide/process-modeling/process-elements/call-and-wait.html",
+    released: 4,
+    deprecated: 8,
+    removed: 10,
+    description: "The Call & Wait intermediate process element.",
+  },
+  {
+    name: "CMS Page",
+    nameHref:
+      "/doc/8.0/en/designer-guide/user-interface/web-page/html-content-in-the-cms.html",
+    successor: "Html Dialog",
+    successorHref:
+      "/doc/10.0/en/designer-guide/user-interface/user-dialogs/html-dialogs.html",
+    released: 3,
+    deprecated: 8,
+    removed: 10,
+    description:
+      "The cms page (also Smart Table) feature has been removed. Use html dialog to implement user interfaces.",
+  },
+  {
+    name: "Macros in RTF documents",
+    nameHref: "/doc/8.0/en/designer-guide/user-interface/web-page/index.html",
+    successor: "Doc Factory",
+    successorHref: "/market/doc-factory",
+    released: 3,
+    deprecated: 8,
+    removed: 10,
+    description:
+      "Macro expansion in RTF documents has been removed. Use the doc factory to generate documents.",
+  },
+  {
+    name: "WebService Axis 1 & 2",
+    nameHref:
+      "/doc/8.0/en/designer-guide/configuration/webservice-clients.html",
+    successor: "WebService CXF",
+    successorHref:
+      "/doc/10.0/en/designer-guide/configuration/webservice-clients.html",
+    released: 3,
+    deprecated: 8,
+    removed: 10,
+    description:
+      "The Axis web service client technology stack has been removed. Use the brand new CXF web service client stack.",
+  },
+  {
+    name: "Process Editor: Classic mode",
+    successor: "Process Editor: BPMN mode",
+    released: 3,
+    deprecated: 8,
+    removed: 10,
+    description:
+      "Processes drawn vertically (labels outside of activities, vertical swimlanes)",
+  },
+  {
+    name: "CMS Meta Data",
+    nameHref: "/doc/8.0/en/public-api/ch/ivyteam/ivy/cm/IContentObject.html",
+    successor: "Modern CMS",
+    successorHref: "https://community.axonivy.com/d/245-modern-cms",
+    released: 3,
+    deprecated: 7,
+    removed: 10,
+    description:
+      "There was a .meta file for each CMS entry. This file is completely removed in favor of a modern CMS structure.",
+  },
+  {
+    name: "RIA / Rich Dialog",
+    nameHref:
+      "/doc/7.0/en/DesignerGuideHtml/ivy.userinterface.html#ivy-richdialogs",
+    successor: "Html Dialog",
+    successorHref:
+      "/doc/10.0/en/designer-guide/user-interface/user-dialogs/html-dialogs.html",
+    released: 4,
+    deprecated: 7,
+    removed: 8,
+    description:
+      "The rich dialog technology stack has been removed. Use html dialog to implement user interfaces.",
+  },
+  {
+    name: "Import Ivy 3.9 Project",
+    nameHref:
+      "/doc/7.0/en/DesignerGuideHtml/ivy.processmodeling.html#ivy-project-convert39",
+    released: 5,
+    deprecated: 8,
+    removed: 8,
+    description:
+      "The 3.9 project importer has been removed. Import 3.9 with e.g. Axon Ivy Designer 5.0 and then use the latest Designer to migrate to the latest version.",
+  },
+];
+
+export default deprecations;
