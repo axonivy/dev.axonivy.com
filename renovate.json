@@ -5,13 +5,5 @@
   ],
   "baseBranchPatterns": [
     "redesign"
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "ch.ivyteam.maven:jira-plugin"
-      ],
-      "enabled": false
-    }
   ]
 }
