@@ -2,13 +2,5 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>axonivy/renovate-config:php"
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "ch.ivyteam.maven:jira-plugin"
-      ],
-      "enabled": false
-    }
   ]
 }
