@@ -29,14 +29,6 @@ class MavenArchiveActionTest extends TestCase
     AppTester::assertThatGet('/download/maven.html')->ok()->bodyDoesNotContain('docker');
   }
 
-  public function testDoesNotContainDevReleases()
-  {
-    AppTester::assertThatGet('/download/maven.html')
-      ->ok()
-      ->bodyDoesNotContain('dev')
-      ->bodyDoesNotContain('sprint');
-  }
-
   public function testContainNightlyReleases()
   {
     AppTester::assertThatGet('/download/maven.html')

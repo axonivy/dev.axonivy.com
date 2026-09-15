@@ -21,10 +21,6 @@ class MavenArchiveAction
   {
     $releases = [];
     foreach (ReleaseInfoRepository::getAvailableReleaseInfos() as $releaseInfo) {
-      if (!self::versionSupported($releaseInfo->getVersion())) {
-        continue;
-      }
-
       $artifacts = [];
       foreach ($releaseInfo->getArtifacts() as $artifact) {
         if ($artifact->isMavenPluginCompatible()) {
@@ -35,16 +31,30 @@ class MavenArchiveAction
         $releases[] = new MavenArchiveRelease($releaseInfo->getVersion()->getVersionNumber(), $artifacts);
       }
     }
-    $releases = array_reverse($releases);
-    return $this->view->render($response, 'download/maven/maven.twig', ['releases' => $releases]);
-  }
 
-  private static function versionSupported(Version $version): bool
-  {
-    if (str_starts_with($version->getVersionNumber(), ReleaseType::NIGHTLY()->key())) {
-      return true;
-    }
-    return $version->isEqualOrGreaterThan(Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION);
+    usort($releases, function (MavenArchiveRelease $left, MavenArchiveRelease $right): int {
+      $group = function (string $version): int {
+        if (str_starts_with($version, 'nightly')) {
+          return 0;
+        }
+        if (str_starts_with($version, 'milestone')) {
+          return 1;
+        }
+        if (str_starts_with($version, 'dev')) {
+          return 2;
+        }
+        return 3;
+      };
+
+      $groupComparison = $group($left->version) <=> $group($right->version);
+
+      if ($groupComparison !== 0) {
+        return $groupComparison;
+      }
+      return version_compare($right->version, $left->version);
+    });
+
+    return $this->view->render($response, 'download/maven/maven.twig', ['releases' => $releases]);
   }
 }
 
