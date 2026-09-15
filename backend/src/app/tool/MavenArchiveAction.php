@@ -14,12 +14,7 @@ class MavenArchiveAction
     $releases = [];
 
     foreach (ReleaseInfoRepository::getAvailableReleaseInfos() as $releaseInfo) {
-      if (!self::versionSupported($releaseInfo->getVersion())) {
-        continue;
-      }
-
       $artifacts = [];
-
       foreach ($releaseInfo->getArtifacts() as $artifact) {
         if ($artifact->isMavenPluginCompatible()) {
           $artifacts[] = new MavenArchiveArtifact(
@@ -37,7 +32,27 @@ class MavenArchiveAction
       }
     }
 
-    $releases = array_reverse($releases);
+    usort($releases, function (MavenArchiveRelease $left, MavenArchiveRelease $right): int {
+      $group = function (string $version): int {
+        if (str_starts_with($version, 'nightly')) {
+          return 0;
+        }
+        if (str_starts_with($version, 'milestone')) {
+          return 1;
+        }
+        if (str_starts_with($version, 'dev')) {
+          return 2;
+        }
+        return 3;
+      };
+
+      $groupComparison = $group($left->version) <=> $group($right->version);
+
+      if ($groupComparison !== 0) {
+        return $groupComparison;
+      }
+      return version_compare($right->version, $left->version);
+    });
 
     $html = '<h1>Axon Ivy Maven Engine Archive</h1>';
     $html .= '<p>The engine archive that can be used with the Maven plugin '
@@ -60,17 +75,6 @@ class MavenArchiveAction
     $response->getBody()->write($html);
 
     return $response->withHeader('Content-Type', 'text/html; charset=UTF-8');
-  }
-
-  private static function versionSupported(Version $version): bool
-  {
-    if (str_starts_with($version->getVersionNumber(), ReleaseType::NIGHTLY()->key())) {
-      return true;
-    }
-
-    return $version->isEqualOrGreaterThan(
-      Config::MAVEN_SUPPORTED_RELEASES_SINCE_VERSION
-    );
   }
 }
 
