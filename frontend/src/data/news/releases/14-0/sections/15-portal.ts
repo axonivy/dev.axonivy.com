@@ -56,6 +56,17 @@ const section: NewsSection = {
       ],
     },
   ],
+  images: [
+    `14.0/portal/01-home-darkmode.png`,
+    `14.0/portal/02-home.png`,
+    `14.0/portal/03-filters.png`,
+    `14.0/portal/04-task-view.png`,
+    `14.0/portal/05-portal-configuration-dashboard.png`,
+    `14.0/portal/06-portal-configuration-sidebar.png`,
+    `14.0/portal/07-home-tasks.png`,
+    `14.0/portal/08-statistics-configuration.png`,
+    `14.0/portal/09-portal-configuration-package-management.png`,
+  ],
 };
 
 export default section;
