@@ -90,7 +90,7 @@ function isVscodeArtifact(artifact: ArchiveArtifact) {
   return artifact.name.toLowerCase().includes("vscode");
 }
 
-function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
+export function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
   const filename = artifact.name.toLowerCase();
 
   if (isDockerArtifact(artifact)) {
@@ -157,7 +157,7 @@ function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
   };
 }
 
-function sortArtifacts(artifacts: ArchiveArtifact[]) {
+export function sortArtifacts(artifacts: ArchiveArtifact[]) {
   return [...artifacts].sort((a, b) => {
     const categoryA = getArtifactMeta(a).category;
     const categoryB = getArtifactMeta(b).category;
@@ -172,6 +172,10 @@ function sortArtifacts(artifacts: ArchiveArtifact[]) {
 
     return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
   });
+}
+
+export function sortReleasesByVersionDescending(releases: ArchiveRelease[]) {
+  return [...releases].sort((a, b) => b.version.localeCompare(a.version));
 }
 
 function ArtifactLinks({ artifacts }: { artifacts: ArchiveArtifact[] }) {
