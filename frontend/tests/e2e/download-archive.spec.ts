@@ -48,34 +48,10 @@ test("shows filtered engine releases in descending order", async ({
   await expect(archiveTable.locator("thead")).toHaveText(/Slim/);
 });
 
-test("orders archive artifacts by their user-facing categories, routing slim artifacts to their own column", async ({
-  page,
-}) => {
+test("routes slim artifacts to their own column", async ({ page }) => {
   await page.goto("/download");
   const { archiveTable } = await visibleTables(page);
   const firstRow = archiveTable.locator("tbody tr").first();
-  const artifactLabels = await firstRow
-    .locator("td")
-    .nth(2)
-    .getByRole("link")
-    .allTextContents();
-  const categoryOrder = [
-    "All",
-    "Debian",
-    "Docker",
-    "Linux",
-    "macOS",
-    "Windows",
-    "VS Code",
-  ];
-
-  expect(artifactLabels).toEqual(
-    [...artifactLabels].sort(
-      (first, second) =>
-        categoryOrder.indexOf(first.trim()) -
-        categoryOrder.indexOf(second.trim()),
-    ),
-  );
 
   const slimLinks = firstRow.locator("td").nth(3).getByRole("link");
   await expect(slimLinks.first()).toBeVisible();

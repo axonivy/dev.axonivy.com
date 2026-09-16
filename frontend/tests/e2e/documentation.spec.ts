@@ -12,19 +12,17 @@ test("renders only populated documentation sections", async ({
   request,
 }) => {
   const data = await documentationData(request);
-  const sections = [
-    { title: "LTS - Long Term Support", groups: data.docLinksLTS },
-    { title: "LE - Leading Edge", groups: data.docLinksLE },
-    { title: "Development build", groups: data.docLinksDev },
-  ];
-
   await page.goto("/doc");
 
-  for (const section of sections) {
-    await expect(
-      page.getByRole("heading", { name: section.title }),
-    ).toHaveCount(section.groups.length > 0 ? 1 : 0);
-  }
+  await expect(
+    page.getByRole("heading", { name: "LTS - Long Term Support" }),
+  ).toHaveCount(data.docLinksLTS.length > 0 ? 1 : 0);
+  await expect(
+    page.getByRole("heading", { name: "LE - Leading Edge" }),
+  ).toHaveCount(data.docLinksLE.length > 0 ? 1 : 0);
+  await expect(
+    page.getByRole("heading", { name: "Development build" }),
+  ).toHaveCount(data.docLinksDev.length > 0 ? 1 : 0);
 });
 
 test("sorts LTS versions and assigns their lifecycle badges", async ({
