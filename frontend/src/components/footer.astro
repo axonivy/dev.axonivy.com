@@ -51,9 +51,7 @@ const footerContent = {
 ---
 
 <div class="border-n100 w-full border-t">
-  <div
-    class="relative mx-auto flex w-full flex-col gap-8 px-4 py-8 md:max-w-6xl"
-  >
+  <div class="relative mx-auto flex w-full flex-col gap-8 px-4 py-8 md:max-w-6xl">
     <div class="flex flex-col items-center gap-4 md:hidden">
       <a href="/">
         <AxonIvyDevLogo width={160} height={40} />
@@ -66,15 +64,15 @@ const footerContent = {
             class="text-primary underline"
           >
             {footerContent.releaseLinks.longTermSupport.label}
-          </a>
-          {" "}version of the Axon Ivy Platform - or download the{" "}
+          </a>{" "}
+          version of the Axon Ivy Platform - or download the{" "}
           <a
             href={footerContent.releaseLinks.leadingEdge.href}
             class="text-primary underline"
           >
             {footerContent.releaseLinks.leadingEdge.label}
-          </a>
-          {" "}version.
+          </a>{" "}
+          version.
         </P>
       </div>
       <div>
@@ -102,28 +100,32 @@ const footerContent = {
             class="text-primary underline"
           >
             {footerContent.releaseLinks.longTermSupport.label}
-          </a>
-          {" "}version of the Axon Ivy Platform - or download the{" "}
+          </a>{" "}
+          version of the Axon Ivy Platform - or download the{" "}
           <a
             href={footerContent.releaseLinks.leadingEdge.href}
             class="text-primary underline"
           >
             {footerContent.releaseLinks.leadingEdge.label}
-          </a>
-          {" "}version.
+          </a>{" "}
+          version.
         </P>
       </div>
       <div class="flex flex-row justify-between">
         <a
           href={footerContent.downloadLink}
-          class={buttonVariants({ variant: "default" })}>Download</a
+          class={buttonVariants({ variant: "default" })}
         >
+          Download
+        </a>
         <a
           href={footerContent.website.href}
           class="text-primary underline"
           target="_blank"
-          rel="noopener noreferrer">{footerContent.website.label}</a
+          rel="noopener noreferrer"
         >
+          {footerContent.website.label}
+        </a>
       </div>
     </div>
 
@@ -133,11 +135,9 @@ const footerContent = {
       <div class="flex flex-col items-center gap-2">
         <P>{footerContent.copyright}</P>
         <div class="flex gap-6">
-          {
-            footerContent.legalLinks.map((link) => (
-              <a href={link.href}>{link.label}</a>
-            ))
-          }
+          {footerContent.legalLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
         </div>
       </div>
       <a
@@ -150,38 +150,7 @@ const footerContent = {
       </a>
       <div class="flex flex-wrap items-center">
         <div class="flex gap-4">
-          {
-            footerContent.socialLinks.map((link) => {
-              const SocialIcon = link.icon;
-
-              return (
-                <a
-                  href={link.href}
-                  aria-label={link.label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <SocialIcon class="size-4.5" />
-                </a>
-              );
-            })
-          }
-        </div>
-      </div>
-    </div>
-
-    <div class="text-n900 hidden items-center justify-between text-sm md:flex">
-      <div class="flex gap-6">
-        <P>{footerContent.copyright}</P>
-        {
-          footerContent.legalLinks.map((link) => (
-            <a href={link.href}>{link.label}</a>
-          ))
-        }
-      </div>
-      <div class="flex items-center gap-4">
-        {
-          footerContent.socialLinks.map((link) => {
+          {footerContent.socialLinks.map((link) => {
             const SocialIcon = link.icon;
 
             return (
@@ -194,8 +163,33 @@ const footerContent = {
                 <SocialIcon class="size-4.5" />
               </a>
             );
-          })
-        }
+          })}
+        </div>
+      </div>
+    </div>
+
+    <div class="text-n900 hidden items-center justify-between text-sm md:flex">
+      <div class="flex gap-6">
+        <P>{footerContent.copyright}</P>
+        {footerContent.legalLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </div>
+      <div class="flex items-center gap-4">
+        {footerContent.socialLinks.map((link) => {
+          const SocialIcon = link.icon;
+
+          return (
+            <a
+              href={link.href}
+              aria-label={link.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SocialIcon class="size-4.5" />
+            </a>
+          );
+        })}
       </div>
     </div>
   </div>

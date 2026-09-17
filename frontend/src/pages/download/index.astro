@@ -18,7 +18,9 @@ import { Separator } from "@/components/ui/separator";
 
 <Layout
   title={`Download Long Term Support ${CURRENT_VERSION}`}
-  description={"Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them."}
+  description={
+    "Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them."
+  }
 >
   <div class="flex flex-col gap-24">
     <DownloadQuery client:load />
@@ -26,9 +28,7 @@ import { Separator } from "@/components/ui/separator";
     <VersionOverviewQuery client:load />
   </div>
 
-  <div
-    class="bg-n50 flex flex-col items-stretch gap-4 rounded-md p-4 md:flex-row md:items-center md:justify-between"
-  >
+  <div class="bg-n50 flex flex-col items-stretch gap-4 rounded-md p-4 md:flex-row md:items-center md:justify-between">
     <div class="flex w-full flex-row items-center gap-4 md:w-auto">
       <div class="bg-orange-bg text-orange shrink-0 rounded-md p-2">
         <IconMessageCircleQuestion class="size-8" />
@@ -67,9 +67,7 @@ import { Separator } from "@/components/ui/separator";
           <a href="/doc" class="group text-primary">
             <span class="flex items-center gap-2">
               Go to Docs
-              <IconArrowRight
-                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-              />
+              <IconArrowRight class="size-4 transition-transform duration-200 group-hover:translate-x-1" />
             </span>
           </a>
         </div>
@@ -109,9 +107,7 @@ import { Separator } from "@/components/ui/separator";
           >
             <span class="flex items-center gap-2">
               Go to Community
-              <IconArrowRight
-                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-              />
+              <IconArrowRight class="size-4 transition-transform duration-200 group-hover:translate-x-1" />
             </span>
           </a>
         </div>
@@ -144,9 +140,7 @@ import { Separator } from "@/components/ui/separator";
           <a href="/support" class="group text-primary">
             <span class="flex items-center gap-2">
               Contact us
-              <IconArrowRight
-                class="size-4 transition-transform duration-200 group-hover:translate-x-1"
-              />
+              <IconArrowRight class="size-4 transition-transform duration-200 group-hover:translate-x-1" />
             </span>
           </a>
         </div>

@@ -138,39 +138,37 @@ const team: TeamMember[] = [
   description="IvyTeam is the core development team of the Axon Ivy Platform. The team is highly experienced in agile software development. Since the formation in the year 1993 the team is located in Zug in the heart of Switzerland."
 >
   <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-    {
-      team.map((member) => {
-        const AvatarSvg = member.avatarSvg;
+    {team.map((member) => {
+      const AvatarSvg = member.avatarSvg;
 
-        return (
-          <Card className="flex flex-row items-center p-2 py-2 gap-2">
-            {member.avatarImage ? (
-              <Image
-                src={member.avatarImage}
-                alt={`${member.name} avatar`}
-                width={115}
-                height={192}
-                class="shrink-0 rounded-md object-cover pt-2"
+      return (
+        <Card className="flex flex-row items-center p-2 py-2 gap-2">
+          {member.avatarImage ? (
+            <Image
+              src={member.avatarImage}
+              alt={`${member.name} avatar`}
+              width={115}
+              height={192}
+              class="shrink-0 rounded-md object-cover pt-2"
+            />
+          ) : (
+            AvatarSvg && (
+              <AvatarSvg
+                aria-label={`${member.name} avatar`}
+                class="h-48 w-auto shrink-0 rounded-md"
               />
-            ) : (
-              AvatarSvg && (
-                <AvatarSvg
-                  aria-label={`${member.name} avatar`}
-                  class="h-48 w-fit shrink-0 rounded-md"
-                />
-              )
-            )}
-            <CardContent className="flex flex-col gap-2">
-              <H4>{member.name}</H4>
-              <div>
-                <P className="text-n900">{member.function}</P>
-                <P className="text-n900">{member.education}</P>
-              </div>
-              <P className="text-n900">{member.slogan}</P>
-            </CardContent>
-          </Card>
-        );
-      })
-    }
+            )
+          )}
+          <CardContent className="flex flex-col gap-2">
+            <H4>{member.name}</H4>
+            <div>
+              <P className="text-n900">{member.function}</P>
+              <P className="text-n900">{member.education}</P>
+            </div>
+            <P className="text-n900">{member.slogan}</P>
+          </CardContent>
+        </Card>
+      );
+    })}
   </div>
 </Layout>

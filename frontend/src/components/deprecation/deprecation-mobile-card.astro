@@ -36,9 +36,20 @@ const { item } = Astro.props;
       </div>
       <div class="flex w-full flex-row items-start justify-between gap-2">
         <P className="text-n800">Successor:</P>
-        <a href={item.successorHref} class="text-primary text-right underline">
-          {item.successor}
-        </a>
+        {item.successorHref ? (
+          <a
+            href={item.successorHref}
+            class="text-primary text-right underline"
+          >
+            {item.successor}
+          </a>
+        ) : (
+          <P>
+            {item.successor == null || item.successor === ""
+              ? "-"
+              : item.successor}
+          </P>
+        )}
       </div>
     </div>
   </CardContent>

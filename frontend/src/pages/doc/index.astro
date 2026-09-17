@@ -18,9 +18,7 @@ import { IconArrowRight, IconBook2 } from "@tabler/icons-astro";
 >
   <DocumentationQuery client:load />
 
-  <Card
-    className="hidden flex-row items-center justify-between gap-4 transition-shadow md:flex"
-  >
+  <Card className="hidden flex-row items-center justify-between gap-4 transition-shadow md:flex">
     <CardHeader className="flex flex-1 flex-row items-center gap-3">
       <div class="bg-blue-bg text-blue flex rounded-md p-2.5">
         <IconBook2 class="h-6 w-6 shrink-0" />
@@ -37,9 +35,7 @@ import { IconArrowRight, IconBook2 } from "@tabler/icons-astro";
       <a href="/deprecation" class="group">
         <span class={buttonVariants({ variant: "outline", size: "lg" })}>
           View deprecation page
-          <IconArrowRight
-            class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-          />
+          <IconArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
         </span>
       </a>
     </CardContent>
@@ -61,9 +57,7 @@ import { IconArrowRight, IconBook2 } from "@tabler/icons-astro";
         </div>
       </CardHeader>
       <CardContent className="flex flex-row items-center">
-        <IconArrowRight
-          class="h-6 w-6 transition-transform duration-200 group-hover:translate-x-1"
-        />
+        <IconArrowRight class="h-6 w-6 transition-transform duration-200 group-hover:translate-x-1" />
       </CardContent>
     </Card>
   </a>

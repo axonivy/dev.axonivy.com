@@ -13,7 +13,9 @@ import Processflowbackground from "@/components/processflowbackground.astro";
 
 <Layout
   title="Build and automate business processes with Axon Ivy"
-  description={"The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."}
+  description={
+    "The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."
+  }
   left={true}
 >
   <Processflowbackground
@@ -25,13 +27,12 @@ import Processflowbackground from "@/components/processflowbackground.astro";
     <div class="flex max-w-3xs flex-row justify-center gap-4 md:justify-start">
       <a
         href="download"
-        class={buttonVariants({ variant: "default", size: "lg" }) +
-          " px-6 group"}
+        class={
+          buttonVariants({ variant: "default", size: "lg" }) + " px-6 group"
+        }
       >
         Get Started
-        <IconArrowRight
-          class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-        />
+        <IconArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
       </a>
       <a
         href="/news"
