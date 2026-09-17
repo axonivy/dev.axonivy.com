@@ -112,7 +112,7 @@ function OsOptionLabel({ label }: { label: string }) {
   );
 }
 
-function operatingSystemFromText(value: string): OperatingSystem {
+export function operatingSystemFromText(value: string): OperatingSystem {
   const normalizedValue = value.toLowerCase();
   if (normalizedValue.includes("windows")) {
     return "windows";
@@ -176,7 +176,7 @@ function installationGuideHref(
   return query.toString() ? `${guidePath}?${query.toString()}` : guidePath;
 }
 
-function detectOperatingSystem(): OperatingSystem {
+export function detectOperatingSystem(): OperatingSystem {
   const detectedOs = detect()?.os;
 
   if (typeof detectedOs !== "string") {
@@ -194,7 +194,7 @@ function detectOperatingSystem(): OperatingSystem {
   return "unknown";
 }
 
-function artifactOperatingSystem(artifact: Artifacts): OperatingSystem {
+export function artifactOperatingSystem(artifact: Artifacts): OperatingSystem {
   return operatingSystemFromText(artifact.name);
 }
 
@@ -215,7 +215,7 @@ function artifactOption(
     : engineArtifactOption(artifact);
 }
 
-function artifactMatchesOperatingSystem(
+export function artifactMatchesOperatingSystem(
   artifact: Artifacts,
   os: OperatingSystem,
   isDesigner: boolean,

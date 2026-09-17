@@ -19,7 +19,7 @@ type DocLink = { url: string; text: string };
 
 type DocVersionLinks = { version: string; links: DocLink[] };
 
-type UiDocResponse = {
+export type UiDocResponse = {
   docLinksLTS: DocVersionLinks[];
   docLinksLE: DocVersionLinks[];
   docLinksDev: DocVersionLinks[];

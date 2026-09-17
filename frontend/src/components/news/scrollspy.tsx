@@ -26,7 +26,7 @@ const newsImages = import.meta.glob(
   { eager: true, import: "default", query: "?url" },
 ) as Record<string, string>;
 
-type NewsScrollSpySection = {
+export type NewsScrollSpySection = {
   heading: string;
   anchor: string | null;
   content: NewsBlock[];
@@ -49,7 +49,7 @@ function imageUrl(image: string) {
   return newsImages[`/src/assets/news/${image}`] ?? `/src/assets/news/${image}`;
 }
 
-function sectionValue(
+export function sectionValue(
   section: NewsScrollSpySection,
   index: number,
   sections: NewsScrollSpySection[],

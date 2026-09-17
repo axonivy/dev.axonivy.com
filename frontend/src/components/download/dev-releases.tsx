@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { ArchiveTable } from "@/components/download/archive";
+import {
+  ArchiveTable,
+  sortReleasesByVersionDescending,
+} from "@/components/download/archive";
 import type {
   ArchiveProduct,
   ArchiveResponse,
@@ -33,9 +36,7 @@ export default function DevReleases({ product }: DevReleasesProps) {
     );
   }
 
-  const sortedReleases = data.releaseInfos.sort((a, b) =>
-    b.version.localeCompare(a.version),
-  );
+  const sortedReleases = sortReleasesByVersionDescending(data.releaseInfos);
 
   const releases = sortedReleases.filter((release) =>
     product === "designer"
