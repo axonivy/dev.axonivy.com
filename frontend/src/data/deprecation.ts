@@ -220,7 +220,7 @@ const deprecations: Deprecation[] = [
   {
     name: "Call & Wait element",
     nameHref:
-      "/doc/8.0/en/designer-guide/designer-guide/process-modeling/process-elements/call-and-wait.html",
+      "/doc/8.0/en/designer-guide/process-modeling/process-elements/call-and-wait.html",
     released: 4,
     deprecated: 8,
     removed: 10,
@@ -241,9 +241,9 @@ const deprecations: Deprecation[] = [
   },
   {
     name: "Macros in RTF documents",
-    nameHref: "/doc/8.0/en/designer-guide/user-interface/web-page/index.html",
+    nameHref: "https://market.axonivy.com/doc-factory",
     successor: "Doc Factory",
-    successorHref: "/market/doc-factory",
+    successorHref: "https://market.axonivy.com/doc-factory",
     released: 3,
     deprecated: 8,
     removed: 10,
