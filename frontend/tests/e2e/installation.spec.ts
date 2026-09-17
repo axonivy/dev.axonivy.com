@@ -48,7 +48,7 @@ test("builds the engine Getting Started link from the docLink query param", asyn
     page.getByRole("link", { name: "Getting Started" }),
   ).toHaveAttribute(
     "href",
-    "/doc/12.0/en/engine-guide/getting-started/index.html",
+    "http://localhost:4321/doc/12.0/en/engine-guide/getting-started/index.html",
   );
 });
 
