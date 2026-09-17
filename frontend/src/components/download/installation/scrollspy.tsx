@@ -40,6 +40,18 @@ function queryParameter(name: string) {
   return new URLSearchParams(window.location.search).get(name) ?? undefined;
 }
 
+function safeUrl(value: string | undefined) {
+  if (!value || typeof window === "undefined") return undefined;
+  try {
+    const url = new URL(value, window.location.origin);
+    return url.protocol === "http:" || url.protocol === "https:"
+      ? value
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function visibleSubsteps(
   guideId: string,
   substeps: InstallationSubstep[] | undefined,
@@ -151,8 +163,8 @@ export default function InstallationScrollSpy({
   guideId,
   guide,
 }: InstallationScrollSpyProps) {
-  const [downloadUrl] = useState(() => queryParameter("downloadUrl"));
-  const [docLink] = useState(() => queryParameter("docLink"));
+  const [downloadUrl] = useState(() => safeUrl(queryParameter("downloadUrl")));
+  const [docLink] = useState(() => safeUrl(queryParameter("docLink")));
 
   return (
     <div className="flex flex-col">
