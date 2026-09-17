@@ -65,81 +65,9 @@ class UiDownloadAction
     }
     return ReleaseType::VERSION($version);
   }
-
-  private function createLoader(ReleaseType $releaseType)
-  {
-    $releaseInfo = $releaseType->releaseInfo();
-    if ($releaseInfo == null) {
-      return new ReleaseTypeNotAvailableLoader($releaseType);
-    }
-    return new ReleaseInfoLoader($releaseType, $releaseInfo);
-  }
 }
 
-interface Loader
-{
-  function version(): string;
-
-  function versionShort(): string;
-
-  function releaseDate(): string;
-
-  function releaseNotesLink(): string;
-
-  function docLink(): string;
-  
-  function designerArtifacts(): array;
-
-  function engineArtifacts(): array;
-}
-
-class ReleaseTypeNotAvailableLoader implements Loader
-{
-
-  private ReleaseType $releaseType;
-
-  public function __construct(ReleaseType $releaseType)
-  {
-    $this->releaseType = $releaseType;
-  }
-
-  public function designerArtifacts(): array
-  {
-    return [];
-  }
-
-  public function engineArtifacts(): array
-  {
-    return [];
-  }
-
-  public function version(): string
-  {
-    return $this->releaseType->name();
-  }
-
-  public function versionShort(): string
-  {
-    return $this->releaseType->shortName();
-  }
-
-  public function releaseNotesLink(): string
-  {
-    return '';
-  }
-
-  public function docLink(): string
-  {
-    return '';
-  }
-
-  public function releaseDate(): string
-  {
-    return "";
-  }
-}
-
-class ReleaseInfoLoader implements Loader
+class ReleaseInfoLoader
 {
 
   private ReleaseType $releaseType;

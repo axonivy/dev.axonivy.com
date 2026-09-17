@@ -61,7 +61,7 @@ class ApiDocsAction
     }
     if ($versionInfo == null) {
       $versions[] = $this->createVersion($request, $docProvider, $version, $language);
-    } else if (!in_array($versionInfo, $leadingEdgeVersions) && !in_array($versionInfo, $ltsVersions)) {
+    } elseif (!in_array($versionInfo, $leadingEdgeVersions) && !in_array($versionInfo, $ltsVersions)) {
       $versions[] = $this->createVersion($request, $versionInfo->getDocProvider(), $releaseInfo->minorVersion(), $language);
     }
     return $versions;
