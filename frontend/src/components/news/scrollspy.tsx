@@ -17,7 +17,13 @@ import {
 } from "@tabler/icons-react";
 import type { NewsBlock, NewsLink, NewsListItem } from "@/data/news/news";
 import { buttonVariants } from "@/components/ui/button";
-import { useState, type KeyboardEvent } from "react";
+import {
+  Fragment,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type TouchEvent,
+} from "react";
 import { Badge } from "@/components/ui/badge";
 import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
 
@@ -71,17 +77,6 @@ function InlineText({ text }: { text: string }) {
   return (
     <>
       {parts.map((part, index) => {
-        if (part.startsWith("`") && part.endsWith("`")) {
-          return (
-            <code
-              key={index}
-              className="bg-n100 text-n900 rounded px-1.5 py-0.5 font-mono text-[0.9em]"
-            >
-              {part.slice(1, -1)}
-            </code>
-          );
-        }
-
         const link = part.match(/^<a\s+href="([^"]+)">(.*)<\/a>$/);
         if (link) {
           return (
@@ -110,7 +105,7 @@ function InlineText({ text }: { text: string }) {
           return (
             <code
               key={index}
-              className="bg-n100 text-n900 rounded px-1.5 py-0.5 font-mono text-[0.9em]"
+              className="bg-n100 text-n900 rounded px-1.5 py-0.5 font-mono text-[0.9em] wrap-break-word"
             >
               {code[1]}
             </code>
@@ -220,9 +215,37 @@ function NewsImageGallery({
     }
   };
 
+  const touchStartX = useRef<number | null>(null);
+  const SWIPE_THRESHOLD = 50;
+
+  const handleTouchStart = (event: TouchEvent) => {
+    touchStartX.current =
+      event.touches.length === 1 ? event.touches[0].clientX : null;
+  };
+
+  const handleTouchMove = (event: TouchEvent) => {
+    if (event.touches.length > 1) {
+      touchStartX.current = null;
+    }
+  };
+
+  const handleTouchEnd = (event: TouchEvent) => {
+    if (touchStartX.current === null) return;
+
+    const deltaX = event.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
+    if (deltaX > 0) {
+      showPrev();
+    } else {
+      showNext();
+    }
+  };
+
   return (
     <>
-      <div className="grid grid-cols-1 justify-items-center gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 justify-items-center gap-4 md:grid-cols-4">
         {images.map((image, i) => (
           <button
             key={image}
@@ -250,7 +273,12 @@ function NewsImageGallery({
           onKeyDown={handleKeyDown}
           className="overflow-auto p-0 sm:max-w-5xl"
         >
-          <div className="relative">
+          <div
+            className="relative"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <img
               src={imageUrl(images[index])}
               alt={title}
@@ -384,24 +412,24 @@ export default function NewsScrollSpy({
               <H4>{section.heading}</H4>
               <NewsContent content={section.content} />
               {section.links ? (
-                <ul className="flex flex-wrap items-center gap-2">
+                <p className="leading-7">
                   {section.links.map((link, linkIndex) => (
-                    <li key={link.url} className="flex items-center gap-2">
-                      {linkIndex > 0 ? (
-                        <span className="text-p75">•</span>
-                      ) : null}
+                    <Fragment key={link.url}>
                       <a
                         href={link.url}
-                        className="text-primary inline-flex items-center gap-1 hover:underline"
+                        className="text-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         {link.label}
-                        <IconExternalLink className="size-4" />
+                        <IconExternalLink className="ml-1 inline-block size-4 align-middle" />
                       </a>
-                    </li>
+                      {linkIndex < section.links.length - 1 ? (
+                        <span className="text-p75 mx-3">•</span>
+                      ) : null}
+                    </Fragment>
                   ))}
-                </ul>
+                </p>
               ) : null}
               {section.images ? (
                 <div className="flex flex-col gap-4">

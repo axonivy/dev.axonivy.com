@@ -426,9 +426,7 @@ function DownloadProductCard({
             })}
           </div>
         )}
-        <div
-          className={vsCodeExtensionArtifact ? "mt-4 md:mt-14" : "mt-auto"}
-        >
+        <div className={vsCodeExtensionArtifact ? "mt-4 md:mt-14" : "mt-auto"}>
           <DownloadAction
             title={config.title}
             version={release.versionShort}
@@ -437,74 +435,74 @@ function DownloadProductCard({
           />
         </div>
         <div className="flex flex-row items-center justify-between gap-4">
-              <a
-                href={installationGuideHref(
-                  product,
-                  userOs,
-                  selectedArtifact,
-                  product === "engine" ? release.docLink : undefined,
-                )}
-                className="text-primary text-center"
-              >
-                Installation Guide
-              </a>
-              <Separator orientation="vertical" />
-              <P className="text-n900 text-center">
-                {release.releaseDate
-                  ? `Released: ${release.releaseDate}`
-                  : "Release date not available"}
-              </P>
-              <Separator orientation="vertical" />
-              {vsCodeExtensionArtifact ? (
-                <a
-                  href={release.releaseNotesLink}
-                  className="text-primary text-center"
-                >
-                  Release notes
-                </a>
-              ) : permalinkOptions.length > 0 ? (
-                <Button
-                  type="button"
-                  variant="link"
-                  className="h-auto p-0 font-normal hover:no-underline"
-                  aria-expanded={showPermalinks}
-                  aria-controls={permalinkId}
-                  onClick={() => setShowPermalinks((current) => !current)}
-                >
-                  <span className="flex w-full items-center gap-2">
-                    Permalinks
-                    <IconArrowRight
-                      className={`size-4 shrink-0 transition-transform ${
-                        showPermalinks ? "rotate-90" : ""
-                      }`}
-                      aria-hidden="true"
-                    />
-                  </span>
-                </Button>
-              ) : (
-                <div className="w-24" />
-              )}
+          <a
+            href={installationGuideHref(
+              product,
+              userOs,
+              selectedArtifact,
+              product === "engine" ? release.docLink : undefined,
+            )}
+            className="text-primary text-center"
+          >
+            Installation Guide
+          </a>
+          <Separator orientation="vertical" />
+          <P className="text-n900 text-center">
+            {release.releaseDate
+              ? `Released: ${release.releaseDate}`
+              : "Release date not available"}
+          </P>
+          <Separator orientation="vertical" />
+          {vsCodeExtensionArtifact ? (
+            <a
+              href={release.releaseNotesLink}
+              className="text-primary text-center"
+            >
+              Release notes
+            </a>
+          ) : permalinkOptions.length > 0 ? (
+            <Button
+              type="button"
+              variant="link"
+              className="h-auto p-0 font-normal hover:no-underline"
+              aria-expanded={showPermalinks}
+              aria-controls={permalinkId}
+              onClick={() => setShowPermalinks((current) => !current)}
+            >
+              <span className="flex w-full items-center gap-2">
+                Permalinks
+                <IconArrowRight
+                  className={`size-4 shrink-0 transition-transform ${
+                    showPermalinks ? "rotate-90" : ""
+                  }`}
+                  aria-hidden="true"
+                />
+              </span>
+            </Button>
+          ) : (
+            <div className="w-24" />
+          )}
         </div>
         {!vsCodeExtensionArtifact &&
           showPermalinks &&
           permalinkOptions.length > 0 && (
-              <ul
-                id={permalinkId}
-                className="bg-n50 flex flex-col gap-2 rounded-lg p-3"
-              >
-                {permalinkOptions.map(({ artifact, label }) => (
-                  <li
-                    key={`${product}-${artifact.name}`}
-                    className="text-n900 text-sm"
-                  >
-                    <span className="font-semibold">{label}:</span>{" "}
-                    <a href={artifact.permalink} className="text-primary">
-                      {artifact.permalink}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ul
+              id={permalinkId}
+              className="bg-n50 flex flex-col gap-2 rounded-lg p-3"
+            >
+              {permalinkOptions.map(({ artifact, label }) => (
+                <li
+                  key={`${product}-${artifact.name}`}
+                  className="text-n900 text-sm"
+                >
+                  <span className="font-semibold">{label}:</span>{" "}
+                  <a href={artifact.permalink} className="text-primary">
+                    {artifact.permalink}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
       </CardContent>
     </Card>
   );

@@ -11,25 +11,21 @@ interface Props {
 const { step, showSeparator } = Astro.props;
 ---
 
-{
-  showSeparator && (
-    <>
-      <Separator className="md:hidden" />
-      <Separator orientation="vertical" className="hidden md:block" />
-    </>
-  )
-}
+{showSeparator && (
+  <>
+    <Separator className="md:hidden" />
+    <Separator orientation="vertical" className="hidden md:block" />
+  </>
+)}
 <div class="flex flex-1 items-start gap-3 pb-2">
   <IconCircleCheck class="text-primary mt-0.5 size-5 shrink-0" />
   <P>
     {step.description}
-    {
-      step.code && (
-        <>
-          {" "}
-          <Code>{step.code}</Code>
-        </>
-      )
-    }
+    {step.code && (
+      <>
+        {" "}
+        <Code>{step.code}</Code>
+      </>
+    )}
   </P>
 </div>
