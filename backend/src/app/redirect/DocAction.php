@@ -39,6 +39,12 @@ class DocAction
       return Redirect::to($response, $url . $docPath);
     }
 
+    // archived docs
+    $archivedDocs = ["9.4", "9.3", "9.2", "9.1", "7.4", "7.3", "7.2", "7.1", "6.7", "6.6", "6.5", "6.4", "6.3", "6.2", "6.1", "6.0", "5.1", "5.0", "3.9"];
+    if (in_array($version, $archivedDocs)) {
+      return Redirect::to($response, "https://archive.axonivy.com/doc/" . $version . '/en' . $docPath);
+    }
+
     // nightly-8.0
     if (str_starts_with($version, "nightly-")) {
       $v = str_replace("nightly-", "", $version);
