@@ -29,7 +29,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Java 11 Migration Notes`,
-      url: `/doc/8.0/migration-notes#74java11migration`,
+      url: `/doc/8.0/en/migration-notes#74java11migration`,
     },
   ],
   images: [`8.0/java-11/01-adopt-open-jdk.png`],
