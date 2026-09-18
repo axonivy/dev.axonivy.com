@@ -84,10 +84,8 @@ class ReleaseInfo
   public function getArtifactByProductNameAndType(string $productName, string $type): ?Artifact
   {
     foreach ($this->artifacts as $artifact) {
-      if ($artifact->getProductName() == $productName) {
-        if ($artifact->getType() == $type) {
-          return $artifact;
-        }
+      if ($artifact->getProductName() == $productName && $artifact->getType() == $type) {
+        return $artifact;
       }
     }
     return null;

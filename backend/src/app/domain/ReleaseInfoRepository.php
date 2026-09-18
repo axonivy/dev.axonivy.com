@@ -61,8 +61,7 @@ class ReleaseInfoRepository
   public static function getLongTermSupportVersions(): array
   {
     $ltsMajorVersions = self::getAllEverLongTermSupportVersions();
-    $lts = array_slice($ltsMajorVersions, -Config::NUMBER_LTS, Config::NUMBER_LTS);
-    return $lts;
+    return array_slice($ltsMajorVersions, -Config::NUMBER_LTS, Config::NUMBER_LTS);
   }
 
   /**

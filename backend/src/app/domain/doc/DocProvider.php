@@ -3,7 +3,6 @@ namespace app\domain\doc;
 
 use app\domain\Version;
 use app\Config;
-// use app\pages\news\NewsAction;
 
 class DocProvider
 {

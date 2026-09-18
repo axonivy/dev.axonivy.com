@@ -46,7 +46,7 @@ class UiArchiveAction
   {
     if (empty($version) && !empty($this->versions)) {
       return ReleaseType::LTS()->releaseInfo()->minorVersion();
-    } else if (array_key_exists($version, $this->versions)) {
+    } elseif (array_key_exists($version, $this->versions)) {
       return $version;
     }
     return '';
@@ -164,11 +164,11 @@ class DownloadArchive
 
     if (version_compare($v, 6) <= 0) {
       return $version->getMinorVersion();
-    } else if (version_compare($v, 6.1) >= 0 && version_compare($v, 7) < 0) {
+    } elseif (version_compare($v, 6.1) >= 0 && version_compare($v, 7) < 0) {
       return '6.x';
-    } else if (version_compare($v, 7) >= 0 && version_compare($v, 7.1) < 0) {
+    } elseif (version_compare($v, 7) >= 0 && version_compare($v, 7.1) < 0) {
       return '7.0';
-    } else if (version_compare($v, 7.1) >= 0 && version_compare($v, 8) < 0) {
+    } elseif (version_compare($v, 7.1) >= 0 && version_compare($v, 8) < 0) {
       return '7.x';
     } else {
       $majorNumber = $version->getMajorVersion();
