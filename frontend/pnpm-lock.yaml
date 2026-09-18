@@ -25,7 +25,7 @@ importers:
         version: 3.46.0(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.46.0(react@19.3.0)
+        version: 3.47.0(react@19.3.0)
       '@tanstack/react-query':
         specifier: ^5.101.4
         version: 5.103.1(react@19.3.0)
@@ -1221,13 +1221,16 @@ packages:
     peerDependencies:
       astro: '>=4.0.0'
 
-  '@tabler/icons-react@3.46.0':
-    resolution: {integrity: sha512-CCm7xJWhDT2PH4ZIFkP6AgYKtVhq0gpYkjUN+GVh1AzmIQaa77OW0bQPBPQiTE0PsXMR9oSxFqA3qBglzPyrVQ==}
+  '@tabler/icons-react@3.47.0':
+    resolution: {integrity: sha512-lQkDkYwqTzRNt+MYNinu+fkcIZLKjYBcI37RWkcY72doOgE/vMVFvrFrGZ2cVo2ueB3zH1dWMIhnGgi8Y5mFJA==}
     peerDependencies:
       react: '>= 16'
 
   '@tabler/icons@3.46.0':
     resolution: {integrity: sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==}
+
+  '@tabler/icons@3.47.0':
+    resolution: {integrity: sha512-aCbSemVrGvSA3w0sJi8mka6QrnQCN8wCD1jKNXXIR/h6Q4ffov/yFPyzjTULDM8ETtK4DABUZhWdYlygqy3npA==}
 
   '@tailwindcss/node@4.3.3':
     resolution: {integrity: sha512-/T8IKEsf9VTU6tLjgC7+sv2mOPtQxzE2jMw7u4Tt40Tx+QSZxpzh95/H6cMKoja9XuW7iMdLJYBB0o9G1CaAgg==}
@@ -5516,12 +5519,14 @@ snapshots:
       '@tabler/icons': 3.46.0
       astro: 7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1)
 
-  '@tabler/icons-react@3.46.0(react@19.3.0)':
+  '@tabler/icons-react@3.47.0(react@19.3.0)':
     dependencies:
-      '@tabler/icons': 3.46.0
+      '@tabler/icons': 3.47.0
       react: 19.3.0
 
   '@tabler/icons@3.46.0': {}
+
+  '@tabler/icons@3.47.0': {}
 
   '@tailwindcss/node@4.3.3':
     dependencies:
