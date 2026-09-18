@@ -22,7 +22,7 @@ importers:
         version: 5.3.0
       '@tabler/icons-astro':
         specifier: ^3.46.0
-        version: 3.46.0(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 3.47.0(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))
       '@tabler/icons-react':
         specifier: ^3.46.0
         version: 3.46.0(react@19.3.0)
@@ -1216,8 +1216,8 @@ packages:
     peerDependencies:
       '@svgr/core': '*'
 
-  '@tabler/icons-astro@3.46.0':
-    resolution: {integrity: sha512-hLbPYqiVOAe6SPNRnXyMCmeVJpcqoIiXDqlMjb2deMdhZXZU6FSOtUVUG08T6zBYXqP0CieZZAkvrFgIFHfeCg==}
+  '@tabler/icons-astro@3.47.0':
+    resolution: {integrity: sha512-Usxu1GN0eg0YK5ttlpQ9oFpu/c8/n6zTnnsZIka8sGk/r2al67i3iGLEvPHgVcF0pUA25d+2kwfhBHAvIM4pmQ==}
     peerDependencies:
       astro: '>=4.0.0'
 
@@ -1228,6 +1228,9 @@ packages:
 
   '@tabler/icons@3.46.0':
     resolution: {integrity: sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==}
+
+  '@tabler/icons@3.47.0':
+    resolution: {integrity: sha512-aCbSemVrGvSA3w0sJi8mka6QrnQCN8wCD1jKNXXIR/h6Q4ffov/yFPyzjTULDM8ETtK4DABUZhWdYlygqy3npA==}
 
   '@tailwindcss/node@4.3.3':
     resolution: {integrity: sha512-/T8IKEsf9VTU6tLjgC7+sv2mOPtQxzE2jMw7u4Tt40Tx+QSZxpzh95/H6cMKoja9XuW7iMdLJYBB0o9G1CaAgg==}
@@ -5511,9 +5514,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tabler/icons-astro@3.46.0(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))':
+  '@tabler/icons-astro@3.47.0(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
-      '@tabler/icons': 3.46.0
+      '@tabler/icons': 3.47.0
       astro: 7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.6.1)(jiti@2.7.0)(yaml@2.9.1)
 
   '@tabler/icons-react@3.46.0(react@19.3.0)':
@@ -5522,6 +5525,8 @@ snapshots:
       react: 19.3.0
 
   '@tabler/icons@3.46.0': {}
+
+  '@tabler/icons@3.47.0': {}
 
   '@tailwindcss/node@4.3.3':
     dependencies:
