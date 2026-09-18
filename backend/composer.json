@@ -1,0 +1,28 @@
+{
+  "require": {
+    "slim/slim": "*",
+    "slim/psr7": "*",
+    "php-di/php-di": "*",
+    "middlewares/trailing-slash": "*",
+    "guzzlehttp/guzzle": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "cyclonedx/cyclonedx-php-composer": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "src/app/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "test\\": "test/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "cyclonedx/cyclonedx-php-composer": true
+    }
+  }
+}
