@@ -223,7 +223,7 @@ html {
   --foreground: #ffffff;
   --card: var(--n50);
   --card-foreground: #ffffff;
-  --popover: var(--n50);
+  --popover: #2c2c2c;
   --popover-foreground: #ffffff;
   --primary: var(--p300);
   --primary-foreground: #2c2c2c;
