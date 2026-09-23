@@ -93,7 +93,9 @@ export default function Navbar() {
                       <>
                         {index > 0 && <Separator orientation="vertical" />}
                         <ul className="flex flex-1 flex-col">
-                          <H6 className="p-2">{subItem.label}</H6>
+                          <H6 className="dark:text-n700 p-2">
+                            {subItem.label}
+                          </H6>
                           {subItem.items.map((subSubItem) => (
                             <li key={subSubItem.label}>
                               <NavigationMenuLink
@@ -122,7 +124,7 @@ export default function Navbar() {
                                           />
                                         )}
                                       </span>
-                                      <span className="text-muted-foreground text-sm whitespace-nowrap">
+                                      <span className="text-muted-foreground dark:text-n700 text-sm whitespace-nowrap">
                                         {subSubItem.description}
                                       </span>
                                     </span>
