@@ -160,6 +160,7 @@ function ScrollSpy(props: ScrollSpyProps) {
   const rafIdRef = React.useRef<number | null>(null);
   const isMountedRef = React.useRef(false);
   const scrollTimeoutRef = React.useRef<number | null>(null);
+  const scrollEndHandlerRef = React.useRef<(() => void) | null>(null);
 
   const onSectionRegister = React.useCallback(
     (id: string, element: SectionElement) => {
@@ -189,31 +190,57 @@ function ScrollSpy(props: ScrollSpyProps) {
       isScrollingRef.current = true;
       store.setState("value", sectionId);
 
-      if (scrollContainer) {
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const sectionRect = section.getBoundingClientRect();
-        const scrollTop = scrollContainer.scrollTop;
-        const offsetPosition =
-          sectionRect.top - containerRect.top + scrollTop - offset;
+      const scrollToTarget = (behavior: ScrollBehavior) => {
+        if (scrollContainer) {
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const sectionRect = section.getBoundingClientRect();
+          const scrollTop = scrollContainer.scrollTop;
+          const offsetPosition =
+            sectionRect.top - containerRect.top + scrollTop - offset;
 
-        scrollContainer.scrollTo({
-          top: offsetPosition,
-          behavior: scrollBehavior,
-        });
-      } else {
+          scrollContainer.scrollTo({ top: offsetPosition, behavior });
+          return;
+        }
+
         const sectionPosition = section.getBoundingClientRect().top;
         const offsetPosition = sectionPosition + window.scrollY - offset;
+        window.scrollTo({ top: offsetPosition, behavior });
+      };
 
-        window.scrollTo({ top: offsetPosition, behavior: scrollBehavior });
+      const scrollElement = scrollContainer ?? window;
+      let completed = false;
+      const completeScroll = () => {
+        if (completed) return;
+        completed = true;
+        scrollElement.removeEventListener("scrollend", completeScroll);
+        scrollEndHandlerRef.current = null;
+
+        requestAnimationFrame(() => {
+          scrollToTarget("auto");
+          isScrollingRef.current = false;
+        });
+      };
+
+      if (scrollEndHandlerRef.current) {
+        scrollElement.removeEventListener(
+          "scrollend",
+          scrollEndHandlerRef.current,
+        );
       }
+      scrollEndHandlerRef.current = completeScroll;
+      scrollElement.addEventListener("scrollend", completeScroll, {
+        once: true,
+      });
+
+      requestAnimationFrame(() => scrollToTarget(scrollBehavior));
 
       if (scrollTimeoutRef.current !== null) {
         clearTimeout(scrollTimeoutRef.current);
       }
 
       scrollTimeoutRef.current = window.setTimeout(() => {
-        isScrollingRef.current = false;
-      }, 500);
+        completeScroll();
+      }, 1000);
     },
     [scrollContainer, offset, scrollBehavior, store],
   );

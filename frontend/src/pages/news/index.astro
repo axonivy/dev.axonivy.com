@@ -14,7 +14,7 @@ import {
   IconCircleCheck,
   IconStar,
   IconArrowRight,
-  IconExternalLink,
+  IconArrowUpRight,
 } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
 import { NewsTimeline } from "@/components/news/timeline";
@@ -97,7 +97,7 @@ const formatDate = (date: Date) =>
             class={buttonVariants({ variant: "outline", size: "lg" })}
           >
             Migration Guide
-            <IconExternalLink className="size-4" />
+            <IconArrowUpRight className="size-4" />
           </a>
         </div>
       </div>
