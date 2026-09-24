@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   IconArrowRight,
+  IconArrowUpRight,
   IconBrandApple,
   IconBrandDebian,
   IconBrandDocker,
@@ -267,9 +268,14 @@ export function ArchiveTable({
                   ) : null}
                   <TableCell>
                     {release.releaseNotes ? (
-                      <a href={release.releaseNotes} className="text-primary">
+                      <a
+                        href={release.releaseNotes}
+                        className="text-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Release notes
-                        <IconArrowRight
+                        <IconArrowUpRight
                           className="ml-1 inline-block size-4"
                           aria-hidden="true"
                         />

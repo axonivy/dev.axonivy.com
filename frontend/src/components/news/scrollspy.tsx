@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/scroll-spy";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
+  IconArrowUpRight,
   IconCalendar,
   IconChevronLeft,
   IconChevronRight,
   IconCircleCheck,
   IconDownload,
-  IconExternalLink,
   IconZoomIn,
 } from "@tabler/icons-react";
 import type { NewsBlock, NewsLink, NewsListItem } from "@/data/news/news";
@@ -385,7 +385,7 @@ export default function NewsScrollSpy({
                     }
                   >
                     Release Notes
-                    <IconExternalLink className="size-4 shrink-0" />
+                    <IconArrowUpRight className="size-4 shrink-0" />
                   </a>
                 ) : null}
                 <a
@@ -398,7 +398,7 @@ export default function NewsScrollSpy({
                   }
                 >
                   Migration Guide
-                  <IconExternalLink className="size-4 shrink-0" />
+                  <IconArrowUpRight className="size-4 shrink-0" />
                 </a>
               </div>
             </div>
@@ -422,7 +422,7 @@ export default function NewsScrollSpy({
                         rel="noopener noreferrer"
                       >
                         {link.label}
-                        <IconExternalLink className="ml-1 inline-block size-4 align-middle" />
+                        <IconArrowUpRight className="ml-1 inline-block size-4 align-middle" />
                       </a>
                       {linkIndex < section.links.length - 1 ? (
                         <span className="text-p75 mx-3">•</span>
