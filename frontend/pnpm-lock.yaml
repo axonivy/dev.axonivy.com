@@ -25,7 +25,7 @@ importers:
         version: 3.48.0(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.6.2)(jiti@2.7.0)(yaml@2.9.1))
       '@tabler/icons-react':
         specifier: ^3.46.0
-        version: 3.47.0(react@19.3.0)
+        version: 3.48.0(react@19.3.0)
       '@tanstack/react-query':
         specifier: ^5.101.4
         version: 5.103.2(react@19.3.0)
@@ -1228,8 +1228,8 @@ packages:
     peerDependencies:
       astro: '>=4.0.0'
 
-  '@tabler/icons-react@3.47.0':
-    resolution: {integrity: sha512-lQkDkYwqTzRNt+MYNinu+fkcIZLKjYBcI37RWkcY72doOgE/vMVFvrFrGZ2cVo2ueB3zH1dWMIhnGgi8Y5mFJA==}
+  '@tabler/icons-react@3.48.0':
+    resolution: {integrity: sha512-OCeAlpaWHEMV+EsgdVeGQ3YuKfmfnThZhc++CaZ/ujYzi5+/DONDQlX4OGvH1ikYhIfmc0grI4otJgHy7QAvng==}
     peerDependencies:
       react: '>= 16'
 
@@ -5576,9 +5576,9 @@ snapshots:
       '@tabler/icons': 3.48.0
       astro: 7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.6.2)(jiti@2.7.0)(yaml@2.9.1)
 
-  '@tabler/icons-react@3.47.0(react@19.3.0)':
+  '@tabler/icons-react@3.48.0(react@19.3.0)':
     dependencies:
-      '@tabler/icons': 3.47.0
+      '@tabler/icons': 3.48.0
       react: 19.3.0
 
   '@tabler/icons@3.47.0': {}
