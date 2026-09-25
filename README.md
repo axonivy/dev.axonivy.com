@@ -18,11 +18,10 @@ Run `./run-tests.sh` to execute tests.
 ## VSCode
 
 - Install extension **PHP Intelphense** and follow the Quickstart guide
-- Install extension **Twig**
 
 ## Update a php library
 
-```
+```bash
 // Show outdated dependencies
 docKer compose exec web composer show --outdated
 
@@ -33,6 +32,3 @@ docker compose exec web composer update --prefer-dist -a --with-all-dependencies
 ## Resources
 
 - Slim Project Bootstrap <https://github.com/kalvn/Slim-Framework-Skeleton>
-- SlimFramework <http://www.slimframework.com>
-- Template <https://templated.co/introspect>
-- JS-Framework <https://github.com/ajlkn/skel>
