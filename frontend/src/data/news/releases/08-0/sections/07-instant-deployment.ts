@@ -40,7 +40,7 @@ const section: NewsSection = {
   ],
   links: [
     {
-      label: `Engine Guide`,
+      label: `Engine Guide Deployment`,
       url: `/doc/8.0/en/engine-guide/administration/deployment.html`,
     },
     {

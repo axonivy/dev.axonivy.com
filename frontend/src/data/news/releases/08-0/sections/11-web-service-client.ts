@@ -36,7 +36,7 @@ const section: NewsSection = {
   ],
   links: [
     {
-      label: `Designer Guide`,
+      label: `3rd Party Integration`,
       url: `/doc/8.0/en/concepts/3rd-party-integration/index.html#web-services`,
     },
     { label: `Tutorial Video`, url: `/tutorial` },

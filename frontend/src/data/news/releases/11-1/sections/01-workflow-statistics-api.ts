@@ -34,12 +34,6 @@ const section: NewsSection = {
       text: `Upgrade your workflow statistics today with our powerful REST API, and start enjoying faster, more complex, and more fully featured insights into your business processes.`,
     },
   ],
-  links: [
-    {
-      label: `Open API Specification`,
-      url: `/api-browser?configUrl=https%3A%2F%2Fdeveloper.axonivy.com%2Fdoc%2F11.1%2Fopenapi%2Fconfig.json&urls.primaryName=default`,
-    },
-  ],
   images: [`11.1/workflow-statistics/01-workflow-statistic.png`],
 };
 
