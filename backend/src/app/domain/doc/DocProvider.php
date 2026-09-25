@@ -57,7 +57,7 @@ class DocProvider
     $versions = [];
     $directories = array_filter(glob(Config::docDirectory() . '/*'), 'is_dir');
     foreach ($directories as $directory) {
-      $versions[] = basename($directory);      
+      $versions[] = basename($directory);
     }
     usort($versions, function (string $v1, string $v2) {
       return version_compare($v2, $v1);
@@ -168,7 +168,7 @@ class DocProvider
   public function getNewAndNoteworthy(): ?ReleaseDocument
   {
     $versionNumber = (string) $this->versionNumber;
-    if (version_compare($versionNumber, 8) >= 0) {      
+    if (version_compare($versionNumber, 8) >= 0) {
       return $this->createReleaseDocument('News', 'NewAndNoteworthy.html', 'new-and-noteworthy');
     }
     return $this->createReleaseDocument('N&N', 'NewAndNoteworthy.html', 'new-and-noteworthy');
@@ -196,12 +196,12 @@ class DocProvider
     return $this->getOverviewUrl();
   }
 
-  public function getMinorVersion(): string 
+  public function getMinorVersion(): string
   {
     return (new Version((string) $this->versionNumber))->getMinorVersion();
   }
 
-  public function getLanguageMinorUrl(string $lang): string 
+  public function getLanguageMinorUrl(string $lang): string
   {
     return $this->getMinorUrl() . '/' . $lang;
   }

@@ -91,13 +91,13 @@ class ReleaseType
   {
     return ReleaseInfoRepository::getBestMatchingVersion($key);
   }
-  
+
   public static function VERSION(string $version): ?ReleaseType
   {
     if (!Version::isValidVersionNumber($version)) {
       return null;
     }
-    
+
     if (ReleaseInfoRepository::isOrWasLtsVersion(new Version($version))) {
       $type = ReleaseType::LTS();
     } else {
@@ -121,7 +121,7 @@ class ReleaseType
     $nightlyReleases = [];
     foreach (ReleaseInfoRepository::getNightlyMinorReleaseInfos() as $releaseInfo) {
       $v = $releaseInfo->getVersion()->getNightlyMinorVersion();
-      
+
       $promoted = false;
       foreach (ReleaseInfoRepository::getLongTermSupportVersions() as $info) {
         $minorVersion = $info->getVersion()->getMinorVersion();
@@ -135,7 +135,7 @@ class ReleaseType
           $minorVersion = $le->getVersion()->getMinorVersion();
           if (str_ends_with($v, $minorVersion)) {
             $promoted = true;
-          } 
+          }
         }
       }
       $nightlyReleases[] = self::MINOR_NIGHTLY($v, $promoted);

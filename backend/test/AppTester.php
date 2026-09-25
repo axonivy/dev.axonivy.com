@@ -52,7 +52,7 @@ class AppTester
     Assert::assertStringContainsString($expectedToContain, $content);
     return $this;
   }
-  
+
   public function bodyContainsIgnoreWhitespaces(string $expectedToContain): AppTester
   {
     $expectedToContain = preg_replace('/\s+/', '', $expectedToContain);

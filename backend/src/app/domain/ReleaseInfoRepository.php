@@ -65,7 +65,7 @@ class ReleaseInfoRepository
   }
 
   /**
-   * All lts releases ever (not only the current ones) 
+   * All lts releases ever (not only the current ones)
    */
   public static function getAllEverLongTermSupportVersions(): array
   {
@@ -117,7 +117,7 @@ class ReleaseInfoRepository
         if (!file_exists($releaseReadyFile)) {
           continue;
         }
-  
+
         $versionNumber = basename($directory);
         $artifacts = ArtifactFactory::create($directory);
         $releaseInfos[] = new ReleaseInfo(new Version($versionNumber), $artifacts, $releaseReadyFile);
@@ -209,11 +209,11 @@ class ReleaseInfoRepository
     return $releaseInfos;
   }
 
-  public static function isOrWasLtsVersion(Version $version): bool 
+  public static function isOrWasLtsVersion(Version $version): bool
   {
     return ReleaseInfoRepository::isOrWasLts($version->getMajorVersion());
   }
-  
+
   private static function isOrWasLts(string $majorVersion): bool
   {
     $major = intval($majorVersion);
@@ -224,7 +224,7 @@ class ReleaseInfoRepository
       return true;
     }
     if ($major <= 7) { // before 8 also uneven numbers where LTS
-      return true;  
+      return true;
     }
     return false;
   }

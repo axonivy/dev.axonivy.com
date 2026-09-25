@@ -53,7 +53,7 @@ class ReleaseInfo
   {
     return file_exists($this->getUnsafeVersionPath());
   }
-  
+
   public function getUnsafeReasons(): array
   {
     $unsaveContent = file_get_contents($this->getUnsafeVersionPath());

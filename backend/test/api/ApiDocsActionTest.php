@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use test\AppTester;
 
 class ApiDocsActionTest extends TestCase
-{  
+{
   public function testVersions()
   {
     AppTester::assertThatGet('/api/docs/AxonIvy/8.0/en')
@@ -17,17 +17,17 @@ class ApiDocsActionTest extends TestCase
     AppTester::assertThatGet('/api/docs/AxonIvy/7.0/en')
       ->ok()
       ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/en"},{"version":"14.0","url":"\/doc\/14.0\/en"}');
- 
+
     AppTester::assertThatGet('/api/docs/AxonIvy/9.4/en')
       ->ok()
       ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/en"},{"version":"14.0","url":"\/doc\/14.0\/en"}');
- 
+
     AppTester::assertThatGet('/api/docs/AxonIvy/9.4/ja')
       ->ok()
       ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/ja"},{"version":"14.0","url":"\/doc\/14.0\/ja"}');
   }
-  
-  public function testVersionUnknown() 
+
+  public function testVersionUnknown()
   {
     AppTester::assertThatGet('/api/docs/AxonIvy/13.3/ja')
       ->ok()
@@ -37,7 +37,7 @@ class ApiDocsActionTest extends TestCase
       ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/en"},{"version":"14.0","url":"\/doc\/14.0\/en"}]');
   }
 
-  public function testVersionLatestDoc() 
+  public function testVersionLatestDoc()
   {
     AppTester::assertThatGet('/api/docs/AxonIvy/14.0/en')
       ->ok()
@@ -47,7 +47,7 @@ class ApiDocsActionTest extends TestCase
       ->bodyContains('{"versions":[{"version":"12.0","url":"\/doc\/12.0\/ja"},{"version":"14.0","url":"\/doc\/14.0\/ja"}],"languages":[{"language":"en","url":"\/doc\/14.0\/en"},{"language":"ja","url":"\/doc\/14.0\/ja"}]}');
   }
 
-  public function testVersionDevDoc() 
+  public function testVersionDevDoc()
   {
     AppTester::assertThatGet('/api/docs/AxonIvy/dev/en')
       ->ok()
@@ -66,11 +66,11 @@ class ApiDocsActionTest extends TestCase
     AppTester::assertThatGet('/api/docs/AxonIvy/7.0/en')
       ->ok()
       ->bodyContains('"languages":[{"language":"en","url":"\/doc\/7.0\/en"}]');
- 
+
     AppTester::assertThatGet('/api/docs/AxonIvy/9.4/en')
       ->ok()
       ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.4\/en"},{"language":"ja","url":"\/doc\/9.4\/ja"}]');
- 
+
     AppTester::assertThatGet('/api/docs/AxonIvy/9.4/ja')
       ->ok()
       ->bodyContains('"languages":[{"language":"en","url":"\/doc\/9.4\/en"},{"language":"ja","url":"\/doc\/9.4\/ja"}]');

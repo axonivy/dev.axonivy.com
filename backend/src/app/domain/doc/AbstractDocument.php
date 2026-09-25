@@ -33,7 +33,7 @@ abstract class AbstractDocument
     return $this->baseUrl . '/' . $this->lang . '/' . $this->path;
   }
 
-  public function getLanguageResourceUrl(String $lang): string 
+  public function getLanguageResourceUrl(String $lang): string
   {
     return $this->baseRessourceUrl . '/' . $lang . '/' . $this->path;
   }
@@ -53,7 +53,7 @@ abstract class AbstractDocument
     return $this->rootPath;
   }
 
-  protected function getLanguage(): string 
+  protected function getLanguage(): string
   {
     return $this->lang;
   }

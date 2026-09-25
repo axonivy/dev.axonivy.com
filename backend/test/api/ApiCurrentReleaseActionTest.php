@@ -47,17 +47,17 @@ class ApiCurrentReleaseActionTest extends TestCase
       ->statusCode(200)
       ->bodyContains(self::responseNewest());
   }
-  
+
   private static function response(): string
   {
      return '{"latestReleaseVersion":"'. self::currentRelease() .'","latestServiceReleaseVersion":"7.0.1"}';
   }
-  
+
   private static function responseNewest(): string
   {
       return '{"latestReleaseVersion":"'. self::currentRelease() .'","latestServiceReleaseVersion":"14.0.0"}';
   }
-  
+
   private static function currentRelease(): string
   {
     return ReleaseInfoRepository::getLatest()->getVersion()->getBugfixVersion();

@@ -1,9 +1,9 @@
 # Axon Ivy Dev Website
 
 ## Setup
-  
+
 Run `./up.sh` to start the website in docker
-  
+
 ... and later `docker compose down` to stop the containers.
 
 ## Execute tests

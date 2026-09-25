@@ -29,13 +29,13 @@ class DocAction
       $releaseInfo = ReleaseInfoRepository::getBestMatchingVersion($version);
       if ($releaseInfo == null) {
         throw new NotFoundException();
-      }      
+      }
       return Redirect::to($response, $releaseInfo->getDocProvider()->getLanguageMinorUrl($lang) . $docPath);
     }
 
     // special treatment for dev, milestone, nightly
     if ($version == "dev" || $version == "milestone" || $version == "nightly") {
-      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang); 
+      $url = DocProvider::getNewestDocProvider()->getLanguageMinorUrl($lang);
       return Redirect::to($response, $url . $docPath);
     }
 
@@ -46,7 +46,7 @@ class DocAction
       $v = $v->getMinorVersion();
       $docProvider = new DocProvider($v);
       if (!$docProvider->exists()) {
-        throw new HttpNotFoundException($request);      
+        throw new HttpNotFoundException($request);
       }
       return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
@@ -62,7 +62,7 @@ class DocAction
 
     $v = new Version($version);
     $version = $v->getMinorVersion();
-    $docProvider = new DocProvider($version);    
+    $docProvider = new DocProvider($version);
     if (!$docProvider->exists()) {
       // archived docs
       $archivedDocs = ["9.4", "9.3", "9.2", "9.1", "7.4", "7.3", "7.2", "7.1", "6.7", "6.6", "6.5", "6.4", "6.3", "6.2", "6.1", "6.0", "5.1", "5.0", "3.9"];
@@ -85,16 +85,10 @@ class DocAction
         return Redirect::to($response, $newDocUrl);
       }
     }
- 
+
     // legacy, before 9
-    $document = null;
-    if (!empty($docName)) {
-      if ($docName == 'ReleaseNotes.html') {
-        return Redirect::to($response, 'release-notes');
-      }
-      $document = $docProvider->findDocumentByNiceUrlPath($docName);
-    } else {      
-      $document = $docProvider->getOverviewDocument();
+    if (!empty($docName) && $docName == 'ReleaseNotes.html') {
+      return Redirect::to($response, 'release-notes');
     }
     throw new HttpNotFoundException($request);
   }
@@ -112,7 +106,7 @@ class DocAction
     return $lang;
   }
 
-  private function hasLanguage(string $docName) : bool 
+  private function hasLanguage(string $docName) : bool
   {
     if (empty($docName)) {
       return false;
@@ -122,7 +116,7 @@ class DocAction
     return strlen($lang) == 2;
   }
 
-  private function evaluateDocName(string $docName, string $lang) : string 
+  private function evaluateDocName(string $docName, string $lang) : string
   {
     $prefix = $lang;
     if ($docName === $prefix) {
@@ -135,7 +129,7 @@ class DocAction
     return $docName;
   }
 
-  private function evaluateDocPath(string $docName) : string 
+  private function evaluateDocPath(string $docName) : string
   {
     if (empty($docName)) {
       return "";
@@ -164,10 +158,10 @@ class DocAction
       return "$baseUrl/index.html";
     }
     $releaseInfoPath = version_compare($version->getVersionNumber(), 14) >= 0 ? 'technical-info' : 'axonivy';
-    if ($document == 'migration-notes') {      
+    if ($document == 'migration-notes') {
       return "$baseUrl/$releaseInfoPath/migration/index.html";
     }
-    if ($document == 'release-notes') {      
+    if ($document == 'release-notes') {
       return "$baseUrl/$releaseInfoPath/release-notes/index.html";
     }
     if ($document == 'new-and-noteworthy') {

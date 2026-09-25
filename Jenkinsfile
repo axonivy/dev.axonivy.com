@@ -1,31 +1,31 @@
 pipeline {
   agent any
-  
+
   triggers {
     cron 'H 22 * * *'
   }
-  
+
   options {
     buildDiscarder(logRotator(numToKeepStr: '120', artifactNumToKeepStr: '3'))
     skipStagesAfterUnstable()
   }
-  
+
   environment {
     DIST_FILE = "ivy-website-developer.tar"
   }
-  
+
   stages {
     stage('editorconfig') {
       steps {
         script {
           docker.build('editorconfig-checker', '-f build/Dockerfile.editorconfig .').inside {
-            sh 'editorconfig-checker -no-color'
+            sh 'editorconfig-checker'
           }
         }
       }
     }
 
-    stage('build') {      
+    stage('build') {
       steps {
 
         // build
@@ -118,8 +118,8 @@ pipeline {
           timeout(time: 5, unit: 'MINUTES') {
             def qg = waitForQualityGate abortPipeline: false
             if (qg.status != 'OK') {
-              //unstable("SonarQube Quality Gate failed: ${qg.status}")
-            }    
+              unstable("SonarQube Quality Gate failed: ${qg.status}")
+            }
           }
         }
       }
