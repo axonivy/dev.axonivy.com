@@ -54,7 +54,7 @@ const section: NewsSection = {
   links: [
     {
       label: `Case Process Viewer`,
-      url: `https://market.axonivy.com/case-process-viewer?version=12.0.10#description`,
+      url: `https://market.axonivy.com/case-process-viewer-utils?version=13.2.3#description`,
     },
     {
       label: `Captcha Utils`,
@@ -74,7 +74,7 @@ const section: NewsSection = {
     },
     {
       label: `Case Mail Component`,
-      url: `https://market.axonivy.com/case-mail-component-connector?version=12.0.4#description`,
+      url: `https://market.axonivy.com/case-mail-component-utils?version=13.2.2#description`,
     },
     {
       label: `Azure Service Bus`,
