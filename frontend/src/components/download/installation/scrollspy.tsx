@@ -24,7 +24,8 @@ import type {
   InstallationGuide,
   InstallationSubstep,
 } from "@/data/installation-guides";
-import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
+import { Base, Code, H3, H4, H5, H6 } from "@/components/ui/typography";
+import { CURRENT_VERSION } from "@/data/global-variables";
 
 const installationImages = import.meta.glob(
   "/src/assets/installation/**/*.{png,jpg,jpeg,webp}",
@@ -126,7 +127,13 @@ function DockerCommandBlock({ command }: { command: string }) {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <Base>
+        <span className="font-semibold">Note:</span> This Docker image version
+        defaults to the latest LTS release. To use a different version, replace{" "}
+        <Code>{CURRENT_VERSION}</Code> in the commands above with your desired
+        version.
+      </Base>
       <div className="bg-n100 text-n900 flex items-start justify-between gap-4 rounded-md p-4">
         <code className="font-code min-w-0 flex-1 text-sm wrap-break-word whitespace-pre-line">
           {command}
@@ -146,14 +153,14 @@ function DockerCommandBlock({ command }: { command: string }) {
           {copied ? "Copied" : "Copy"}
         </Button>
       </div>
-      <Base className="text-n900 mt-4">
+      <Base className="text-n900">
         Now you can access your engine on{" "}
         <a href="http://localhost:8080/" className="text-primary">
           localhost:8080
         </a>
         .
       </Base>
-    </>
+    </div>
   );
 }
 
