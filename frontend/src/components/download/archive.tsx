@@ -43,6 +43,7 @@ export type ArchiveProduct = "designer" | "engine";
 
 export type ArchiveRelease = {
   version: string;
+  checksumsUrl: string;
   releaseDate: string;
   releaseNotes: string;
   designerArtifacts: ArchiveArtifact[];
@@ -229,7 +230,7 @@ export function ArchiveTable({ releases }: { releases: ArchiveRelease[] }) {
               <TableHead className="w-1/8">Version</TableHead>
               <TableHead className="w-1/8">Release Date</TableHead>
               <TableHead className="w-1/2">Artifacts</TableHead>
-              <TableHead className="w-1/6">Release notes</TableHead>
+              <TableHead className="w-1/6">Details</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -262,18 +263,32 @@ export function ArchiveTable({ releases }: { releases: ArchiveRelease[] }) {
                   </TableCell>
                   <TableCell className="align-top">
                     {release.releaseNotes ? (
-                      <a
-                        href={release.releaseNotes}
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Release notes
-                        <IconArrowUpRight
-                          className="ml-1 inline-block size-4"
-                          aria-hidden="true"
-                        />
-                      </a>
+                      <div className="flex flex-col gap-2">
+                        <a
+                          href={release.releaseNotes}
+                          className="text-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Release notes
+                          <IconArrowUpRight
+                            className="ml-1 inline-block size-4"
+                            aria-hidden="true"
+                          />
+                        </a>
+                        <a
+                          href={release.checksumsUrl}
+                          className="text-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Checksums
+                          <IconArrowUpRight
+                            className="ml-1 inline-block size-4"
+                            aria-hidden="true"
+                          />
+                        </a>
+                      </div>
                     ) : (
                       "-"
                     )}
