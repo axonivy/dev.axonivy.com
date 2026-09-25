@@ -11,7 +11,7 @@ pipeline {
   }
   
   environment {
-    DIST_FILE = "ivy-website-redesign.tar"
+    DIST_FILE = "ivy-website-developer.tar"
   }
   
   stages {
@@ -127,7 +127,7 @@ pipeline {
 
     stage('deploy') {
       when {
-        branch 'redesign'
+        branch 'master'
       }
       agent {
         docker {
@@ -139,7 +139,7 @@ pipeline {
           script {
             unstash 'website-tar'
 
-            def targetFolder = "/home/axonivya/deployment/ivy-website-redesign-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
+            def targetFolder = "/home/axonivya/deployment/ivy-website-developer-" + new Date().format("yyyy-MM-dd_HH-mm-ss-SSS");
             def targetFile =  targetFolder + ".tar"
             def host = 'axonivya@dev.axonivy.com'
 
@@ -158,7 +158,7 @@ pipeline {
             sh "ssh $host ln -fns /home/axonivya/data/openapi $targetFolder/src/web/openapi"
             sh "ssh $host ln -fns /home/axonivya/data/systemdb $targetFolder/src/web/systemdb"
             sh "ssh $host ln -fns /home/axonivya/data/public-api $targetFolder/src/web/public-api"
-            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/axonivya.myhostpoint.ch/linktoweb"
+            sh "ssh $host ln -fns $targetFolder/src/web /home/axonivya/www/developer.axonivy.com/linktoweb"
           }
         }
       }
