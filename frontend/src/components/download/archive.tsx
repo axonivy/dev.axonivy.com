@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { parseAsString, useQueryState } from "nuqs";
+import { useEffect, useMemo } from "react";
 import {
   IconArrowRight,
   IconArrowUpRight,
@@ -188,6 +189,17 @@ function hasSlimEngineArtifact(releases: ArchiveRelease[]) {
       (artifact) => getArtifactMeta(artifact).category === "slim",
     ),
   );
+}
+
+async function fetchArchive(version: string) {
+  const endpoint = version
+    ? `/ui/archive/${encodeURIComponent(version)}`
+    : "/ui/archive";
+  const response = await fetch(endpoint);
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+  return (await response.json()) as ArchiveResponse;
 }
 
 function ArtifactLinks({ artifacts }: { artifacts: ArchiveArtifact[] }) {
@@ -505,21 +517,56 @@ function MobileArchiveCards({ releases }: { releases: ArchiveRelease[] }) {
 }
 
 export default function Archive() {
-  const [selectedVersion, setSelectedVersion] = useState("");
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["archive", selectedVersion || "latest"],
+  const [selectedVersion, setSelectedVersion] = useQueryState(
+    "archive",
+    parseAsString.withDefault(""),
+  );
+  const defaultArchive = useQuery({
+    queryKey: ["archive", "latest"],
     placeholderData: (previousData) => previousData,
-    queryFn: async () => {
-      const endpoint = selectedVersion
-        ? `/ui/archive/${encodeURIComponent(selectedVersion)}`
-        : "/ui/archive";
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      return (await response.json()) as ArchiveResponse;
-    },
+    queryFn: () => fetchArchive(""),
   });
+  const knownArchiveVersions = useMemo(
+    () =>
+      Object.values(defaultArchive.data?.categorizedVersions ?? {})
+        .flat()
+        .map((version) => version.id),
+    [defaultArchive.data?.categorizedVersions],
+  );
+  const shouldFetchSelectedArchive =
+    selectedVersion !== "" &&
+    selectedVersion !== "older" &&
+    knownArchiveVersions.includes(selectedVersion);
+  const selectedArchive = useQuery({
+    queryKey: ["archive", selectedVersion],
+    enabled: shouldFetchSelectedArchive,
+    placeholderData: (previousData) => previousData,
+    queryFn: () => fetchArchive(selectedVersion),
+  });
+  const data = shouldFetchSelectedArchive
+    ? (selectedArchive.data ?? defaultArchive.data)
+    : defaultArchive.data;
+  const isLoading =
+    defaultArchive.isLoading ||
+    (shouldFetchSelectedArchive && selectedArchive.isLoading && !data);
+  const error = defaultArchive.error ?? selectedArchive.error;
+
+  useEffect(() => {
+    if (!defaultArchive.data || !selectedVersion) {
+      return;
+    }
+    if (
+      selectedVersion !== "older" &&
+      !knownArchiveVersions.includes(selectedVersion)
+    ) {
+      void setSelectedVersion(null);
+    }
+  }, [
+    defaultArchive.data,
+    knownArchiveVersions,
+    selectedVersion,
+    setSelectedVersion,
+  ]);
 
   if (isLoading) {
     return <ArchiveSkeleton rows={12} />;
@@ -562,7 +609,7 @@ export default function Archive() {
               <Button
                 key={version.id}
                 variant={activeVersion === version.id ? "default" : "outline"}
-                onClick={() => setSelectedVersion(version.id)}
+                onClick={() => void setSelectedVersion(version.id)}
               >
                 LTS {version.id}
               </Button>
@@ -575,7 +622,7 @@ export default function Archive() {
               <Button
                 key={version.id}
                 variant={activeVersion === version.id ? "default" : "outline"}
-                onClick={() => setSelectedVersion(version.id)}
+                onClick={() => void setSelectedVersion(version.id)}
               >
                 Dev
               </Button>
@@ -584,7 +631,7 @@ export default function Archive() {
         ) : null}
         <NativeSelect
           value={isSelectSelected ? activeVersion : ""}
-          onChange={(event) => setSelectedVersion(event.target.value)}
+          onChange={(event) => void setSelectedVersion(event.target.value)}
           className={cn(
             "bg-background rounded-lg",
             isSelectSelected &&
