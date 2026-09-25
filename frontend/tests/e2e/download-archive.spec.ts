@@ -14,47 +14,53 @@ async function archiveData(request: APIRequestContext, path = "/ui/archive") {
 
 async function visibleTables(page: Page) {
   const tables = page.getByRole("table");
-  await expect(tables).toHaveCount(2);
-  return { devTable: tables.nth(0), archiveTable: tables.nth(1) };
+  await expect(tables).toHaveCount(1);
+  return tables.first();
 }
 
-test("shows filtered engine releases in descending order", async ({
+test("shows current releases and switches to dev releases", async ({
   page,
   request,
 }) => {
   const current = await archiveData(request);
   const unstable = await archiveData(request, "/ui/archive/unstable");
-  const expectedDevVersions = unstable.releaseInfos
-    .filter((release) => release.engineArtifacts.length > 0)
-    .map((release) => release.version)
-    .sort((first, second) => second.localeCompare(first));
-  const expectedArchiveVersions = current.releaseInfos
-    .filter((release) => release.engineArtifacts.length > 0)
-    .map((release) => release.version);
+  const expectedCurrentVersions = current.releaseInfos.map(
+    (release) => release.version,
+  );
+  const expectedDevVersions = unstable.releaseInfos.map(
+    (release) => release.version,
+  );
 
   await page.goto("/download");
-  const { devTable, archiveTable } = await visibleTables(page);
+  const archiveTable = await visibleTables(page);
 
-  await expect(devTable.locator("tbody tr")).toHaveCount(
+  await expect(archiveTable.locator("tbody tr td:first-child")).toHaveText(
+    expectedCurrentVersions,
+  );
+
+  await page.getByRole("button", { name: "Dev" }).click();
+  await expect(archiveTable.locator("tbody tr")).toHaveCount(
     expectedDevVersions.length,
   );
-  expect(
-    await devTable.locator("tbody tr td:first-child").allTextContents(),
-  ).toEqual(expectedDevVersions);
-  expect(
-    await archiveTable.locator("tbody tr td:first-child").allTextContents(),
-  ).toEqual(expectedArchiveVersions);
-  await expect(devTable.locator("thead")).toHaveText(/Slim/);
-  await expect(archiveTable.locator("thead")).toHaveText(/Slim/);
+  await expect(archiveTable.locator("tbody tr td:first-child")).toHaveText(
+    expectedDevVersions,
+  );
 });
 
-test("routes slim artifacts to their own column", async ({ page }) => {
+test("shows slim artifacts and their footnote", async ({ page }) => {
   await page.goto("/download");
-  const { archiveTable } = await visibleTables(page);
+  const archiveTable = await visibleTables(page);
   const firstRow = archiveTable.locator("tbody tr").first();
 
-  const slimLinks = firstRow.locator("td").nth(3).getByRole("link");
-  await expect(slimLinks.first()).toBeVisible();
+  await expect(
+    firstRow
+      .locator("td")
+      .nth(2)
+      .getByRole("link", { name: /All Slim/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/This version is similar to the 'All' product/),
+  ).toBeVisible();
 });
 
 test("shows an external archive link when 'Older Versions' is selected", async ({
@@ -74,53 +80,7 @@ test("shows an external archive link when 'Older Versions' is selected", async (
   await expect(
     page.getByRole("link", { name: /archive page/i }),
   ).toHaveAttribute("href", "https://archive.axonivy.com/");
-  await expect(page.getByRole("table")).toHaveCount(1);
-});
-
-test("switches both tables to Designer without refetching", async ({
-  page,
-  request,
-}) => {
-  const current = await archiveData(request);
-  const unstable = await archiveData(request, "/ui/archive/unstable");
-  const expectedDevVersions = unstable.releaseInfos
-    .filter((release) => release.designerArtifacts.length > 0)
-    .map((release) => release.version)
-    .sort((first, second) => second.localeCompare(first));
-  const expectedArchiveVersions = current.releaseInfos
-    .filter((release) => release.designerArtifacts.length > 0)
-    .map((release) => release.version);
-  const archiveRequests: string[] = [];
-  page.on("request", (pageRequest) => {
-    if (new URL(pageRequest.url()).pathname.startsWith("/ui/archive")) {
-      archiveRequests.push(pageRequest.url());
-    }
-  });
-
-  await page.goto("/download");
-  const { devTable, archiveTable } = await visibleTables(page);
-  const requestsBeforeSwitch = archiveRequests.length;
-  const designerButton = page.getByRole("button", {
-    name: "Designer Versions",
-  });
-  await designerButton.click();
-  await expect(designerButton).toHaveClass(/bg-primary/);
-  await expect(
-    page.getByRole("button", { name: "Engine Versions" }),
-  ).not.toHaveClass(/bg-primary/);
-  await expect(devTable.locator("tbody")).not.toHaveText(/Slim/);
-  await expect(archiveTable.locator("tbody")).not.toHaveText(/Slim/);
-
-  await expect(devTable.locator("tbody tr")).toHaveCount(
-    expectedDevVersions.length,
-  );
-  expect(
-    await devTable.locator("tbody tr td:first-child").allTextContents(),
-  ).toEqual(expectedDevVersions);
-  expect(
-    await archiveTable.locator("tbody tr td:first-child").allTextContents(),
-  ).toEqual(expectedArchiveVersions);
-  expect(archiveRequests).toHaveLength(requestsBeforeSwitch);
+  await expect(page.getByRole("table")).toHaveCount(0);
 });
 
 test("loads a selected archive version from the backend", async ({
@@ -128,10 +88,14 @@ test("loads a selected archive version from the backend", async ({
   request,
 }) => {
   const current = await archiveData(request);
-  const selectedVersion = Object.values(current.categorizedVersions)
-    .flat()
+  const selectedVersion = Object.entries(current.categorizedVersions)
+    .filter(
+      ([category]) =>
+        category !== "Long Term Support" && category !== "unstable",
+    )
+    .flatMap(([, versions]) => versions)
     .map(({ id }) => id)
-    .find((id) => id !== current.currentMajorVersion && id !== "unstable");
+    .find((id) => id !== current.currentMajorVersion);
   if (!selectedVersion) {
     throw new Error("The backend returned no selectable archive version");
   }
@@ -139,19 +103,19 @@ test("loads a selected archive version from the backend", async ({
     request,
     `/ui/archive/${encodeURIComponent(selectedVersion)}`,
   );
-  const expectedVersions = selected.releaseInfos
-    .filter((release) => release.engineArtifacts.length > 0)
-    .map((release) => release.version);
+  const expectedVersions = selected.releaseInfos.map(
+    (release) => release.version,
+  );
 
   await page.goto("/download");
   await visibleTables(page);
   await page.getByRole("combobox").selectOption(selectedVersion);
 
-  const { archiveTable } = await visibleTables(page);
+  const archiveTable = await visibleTables(page);
   await expect(archiveTable.locator("tbody tr")).toHaveCount(
     expectedVersions.length,
   );
-  expect(
-    await archiveTable.locator("tbody tr td:first-child").allTextContents(),
-  ).toEqual(expectedVersions);
+  await expect(archiveTable.locator("tbody tr td:first-child")).toHaveText(
+    expectedVersions,
+  );
 });

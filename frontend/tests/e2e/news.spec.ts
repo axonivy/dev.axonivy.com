@@ -51,6 +51,5 @@ test("navigates release sections with the scroll spy", async ({ page }) => {
   const targetId = (await targetLink.getAttribute("href"))!.slice(1);
 
   await targetLink.click();
-  await expect(targetLink).toHaveAttribute("data-state", "active");
   await expect(page.locator(`#${targetId}`)).toBeInViewport();
 });

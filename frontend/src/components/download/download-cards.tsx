@@ -426,7 +426,7 @@ function DownloadProductCard({
             })}
           </div>
         )}
-        <div className={vsCodeExtensionArtifact ? "mt-4 md:mt-14" : "mt-auto"}>
+        <div className={vsCodeExtensionArtifact ? "mt-4 md:mt-15" : "mt-auto"}>
           <DownloadAction
             title={config.title}
             version={release.versionShort}

@@ -93,6 +93,6 @@ test("renders Docker-specific guidance instead of a generic substep", async ({
     page.getByRole("link", { name: "Getting Started with Docker" }),
   ).toHaveAttribute(
     "href",
-    "https://dev.axonivy.com/doc/12.0/en/engine-guide/getting-started/docker/index.html",
+    "https://dev.axonivy.com/doc/14.0/en/engine-guide/installation/docker/index.html",
   );
 });
