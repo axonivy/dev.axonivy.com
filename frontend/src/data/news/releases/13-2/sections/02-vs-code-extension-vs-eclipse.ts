@@ -33,8 +33,8 @@ const section: NewsSection = {
   ],
   links: [
     {
-      label: `Axon Ivy PRO Designer 13 Extension for Visual Studio Code`,
-      url: `https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13`,
+      label: `Axon Ivy PRO Designer Extension for Visual Studio Code`,
+      url: `https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14`,
     },
     {
       label: `Deprecation of the Eclipse-based PRO Designer`,

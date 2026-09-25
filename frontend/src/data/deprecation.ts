@@ -45,7 +45,7 @@ const deprecations: Deprecation[] = [
       "https://community.axonivy.com/d/1149-maintenance-mode-of-the-eclipse-based-pro-designer",
     successor: "VS Code PRO Designer Extension",
     successorHref:
-      "https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13",
+      "https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14",
     released: 4,
     deprecated: 13,
     removed: 14,

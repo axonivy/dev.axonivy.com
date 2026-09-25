@@ -71,7 +71,7 @@ const section: NewsSection = {
     },
     {
       label: `PRO Designer (VS Code Extension)`,
-      url: `https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-13`,
+      url: `https://marketplace.visualstudio.com/items?itemName=axonivy.vscode-designer-14`,
     },
     {
       label: `CMS Editor`,
