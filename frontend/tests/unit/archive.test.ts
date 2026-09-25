@@ -66,9 +66,9 @@ describe("sortArtifacts", () => {
 
     expect(sortArtifacts(artifacts).map((a) => a.name)).toEqual([
       "AxonIvyEngine-all.zip",
+      "AxonIvyEngine-slim-x64.tar.gz",
       "myorg/axonivy-engine",
       "AxonIvyEngine-windows-x64.zip",
-      "AxonIvyEngine-slim-x64.tar.gz",
     ]);
   });
 

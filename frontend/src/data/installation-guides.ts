@@ -1,3 +1,5 @@
+import { CURRENT_VERSION } from "@/data/global-variables";
+
 export type InstallationProduct = "Designer" | "Engine";
 
 export type InstallationSubstep = { id: number; title: string; img?: string };
@@ -201,15 +203,14 @@ const installationGuides = {
         substeps: [
           {
             id: 2.1,
-            title:
-              "docker pull axonivy/axonivy-engine:12.0 <br /> docker run -p 8080:8080 axonivy/axonivy-engine:12.0",
+            title: `docker pull axonivy/axonivy-engine:${CURRENT_VERSION} <br /> docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`,
           },
         ],
       },
       {
         id: 3,
         title: "Learn more about Axon Ivy with Docker",
-        url: "https://dev.axonivy.com/doc/12.0/en/engine-guide/getting-started/docker/index.html",
+        url: `https://dev.axonivy.com/doc/${CURRENT_VERSION}/en/engine-guide/installation/docker/index.html`,
       },
     ],
   },

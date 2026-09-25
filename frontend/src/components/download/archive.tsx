@@ -28,7 +28,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
-import { Base, H4, P } from "@/components/ui/typography";
+import { Base, H4, H5, P } from "@/components/ui/typography";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export type ArchiveArtifact = {
   name: string;
@@ -74,12 +76,12 @@ type ArtifactMeta = {
 
 const artifactCategoryOrder: ArtifactCategory[] = [
   "all",
+  "slim",
   "deb",
   "docker",
   "linux",
   "macos",
   "windows",
-  "slim",
   "vscode",
 ];
 
@@ -118,7 +120,7 @@ export function getArtifactMeta(artifact: ArchiveArtifact): ArtifactMeta {
   if (filename.includes("slim")) {
     return {
       category: "slim",
-      label: "Slim",
+      label: "All Slim\u00B9",
       icon: <IconBrandUbuntu className="size-4" aria-hidden="true" />,
     };
   }
@@ -179,6 +181,14 @@ export function sortReleasesByVersionDescending(releases: ArchiveRelease[]) {
   return [...releases].sort((a, b) => b.version.localeCompare(a.version));
 }
 
+function hasSlimEngineArtifact(releases: ArchiveRelease[]) {
+  return releases.some((release) =>
+    release.engineArtifacts.some(
+      (artifact) => getArtifactMeta(artifact).category === "slim",
+    ),
+  );
+}
+
 function ArtifactLinks({ artifacts }: { artifacts: ArchiveArtifact[] }) {
   const sortedArtifacts = sortArtifacts(artifacts);
   if (artifacts.length === 0) {
@@ -208,65 +218,49 @@ function ArtifactLinks({ artifacts }: { artifacts: ArchiveArtifact[] }) {
   );
 }
 
-export function ArchiveTable({
-  product,
-  releases,
-}: {
-  product: ArchiveProduct;
-  releases: ArchiveRelease[];
-}) {
+export function ArchiveTable({ releases }: { releases: ArchiveRelease[] }) {
   return (
     <>
-      <MobileArchiveCards product={product} releases={releases} />
+      <MobileArchiveCards releases={releases} />
       <div className="bg-background hidden rounded-md px-4 py-2 md:block">
         <Table className="w-full">
           <TableHeader>
             <TableRow>
               <TableHead className="w-1/8">Version</TableHead>
               <TableHead className="w-1/8">Release Date</TableHead>
-              <TableHead className={product === "engine" ? "w-1/3" : "w-1/2"}>
-                Artifacts
-              </TableHead>
-              {product === "engine" ? (
-                <TableHead className="w-1/6">Slim</TableHead>
-              ) : null}
+              <TableHead className="w-1/2">Artifacts</TableHead>
               <TableHead className="w-1/6">Release notes</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {releases.map((release) => {
-              const artifacts =
-                product === "designer"
-                  ? (release.designerArtifacts ?? [])
-                  : (release.engineArtifacts ?? []);
-
               return (
                 <TableRow key={release.version}>
-                  <TableCell>{release.version}</TableCell>
-                  <TableCell>{release.releaseDate || "-"}</TableCell>
-                  <TableCell>
-                    <ArtifactLinks
-                      artifacts={
-                        product === "engine"
-                          ? artifacts.filter(
-                              (artifact) =>
-                                getArtifactMeta(artifact).category !== "slim",
-                            )
-                          : artifacts
-                      }
-                    />
+                  <TableCell className="align-top">{release.version}</TableCell>
+                  <TableCell className="align-top">
+                    {release.releaseDate || "-"}
                   </TableCell>
-                  {product === "engine" ? (
-                    <TableCell>
-                      <ArtifactLinks
-                        artifacts={artifacts.filter(
-                          (artifact) =>
-                            getArtifactMeta(artifact).category === "slim",
-                        )}
-                      />
-                    </TableCell>
-                  ) : null}
-                  <TableCell>
+                  <TableCell className="align-top">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-start gap-2">
+                        <span className="text-n900 w-18 shrink-0 font-medium">
+                          Engine:
+                        </span>
+                        <ArtifactLinks
+                          artifacts={release.engineArtifacts ?? []}
+                        />
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-n900 w-18 shrink-0 font-medium">
+                          Designer:
+                        </span>
+                        <ArtifactLinks
+                          artifacts={release.designerArtifacts ?? []}
+                        />
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="align-top">
                     {release.releaseNotes ? (
                       <a
                         href={release.releaseNotes}
@@ -340,20 +334,27 @@ function MobileArtifactRow({
   );
 }
 
-function MobileArchiveCards({
-  product,
-  releases,
+function MobileArtifactSection({
+  title,
+  children,
 }: {
-  product: ArchiveProduct;
-  releases: ArchiveRelease[];
+  title: string;
+  children: React.ReactNode;
 }) {
+  return (
+    <section className="mt-4 first:mt-0">
+      <Base className="text-n900 font-semibold">{title}</Base>
+      <div className="mt-2">{children}</div>
+    </section>
+  );
+}
+
+function MobileArchiveCards({ releases }: { releases: ArchiveRelease[] }) {
   return (
     <div className="flex flex-col gap-6 md:hidden">
       {releases.map((release) => {
-        const artifacts =
-          product === "designer"
-            ? (release.designerArtifacts ?? [])
-            : (release.engineArtifacts ?? []);
+        const designerArtifacts = release.designerArtifacts ?? [];
+        const engineArtifacts = release.engineArtifacts ?? [];
 
         return (
           <article
@@ -379,115 +380,107 @@ function MobileArchiveCards({
               ) : null}
             </div>
             <div className="mt-4">
-              {product === "designer" ? (
-                <>
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandUbuntu className="size-4" aria-hidden="true" />
-                    }
-                    label="Linux"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "linux",
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandApple className="size-4" aria-hidden="true" />
-                    }
-                    label="macOS"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "macos",
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandWindows className="size-4" aria-hidden="true" />
-                    }
-                    label="Windows"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "windows",
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandVscode className="size-4" aria-hidden="true" />
-                    }
-                    label="VS Code"
-                    artifacts={artifacts.filter(isVscodeArtifact)}
-                  />
-                </>
-              ) : (
-                <>
-                  <MobileArtifactRow
-                    icon={
-                      <IconDeviceLaptop className="size-4" aria-hidden="true" />
-                    }
-                    label="All"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "all",
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandDebian className="size-4" aria-hidden="true" />
-                    }
-                    label="Debian"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "deb",
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandDocker className="size-4" aria-hidden="true" />
-                    }
-                    label="Docker"
-                    artifacts={artifacts.filter((artifact) =>
-                      isDockerArtifact(artifact),
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandUbuntu className="size-4" aria-hidden="true" />
-                    }
-                    label="Linux / macOS"
-                    artifacts={artifacts.filter((artifact) => {
-                      const category = getArtifactMeta(artifact).category;
-                      return (
-                        category !== "windows" &&
-                        category !== "docker" &&
-                        category !== "slim" &&
-                        category !== "deb" &&
-                        category !== "all"
-                      );
-                    })}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandWindows className="size-4" aria-hidden="true" />
-                    }
-                    label="Windows"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "windows",
-                    )}
-                  />
-                  <MobileArtifactRow
-                    icon={
-                      <IconBrandUbuntu className="size-4" aria-hidden="true" />
-                    }
-                    label="Slim"
-                    artifacts={artifacts.filter(
-                      (artifact) =>
-                        getArtifactMeta(artifact).category === "slim",
-                    )}
-                  />
-                </>
-              )}
+              <MobileArtifactSection title="Designer">
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandUbuntu className="size-4" aria-hidden="true" />
+                  }
+                  label="Linux"
+                  artifacts={designerArtifacts.filter(
+                    (artifact) =>
+                      getArtifactMeta(artifact).category === "linux",
+                  )}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandApple className="size-4" aria-hidden="true" />
+                  }
+                  label="macOS"
+                  artifacts={designerArtifacts.filter(
+                    (artifact) =>
+                      getArtifactMeta(artifact).category === "macos",
+                  )}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandWindows className="size-4" aria-hidden="true" />
+                  }
+                  label="Windows"
+                  artifacts={designerArtifacts.filter(
+                    (artifact) =>
+                      getArtifactMeta(artifact).category === "windows",
+                  )}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandVscode className="size-4" aria-hidden="true" />
+                  }
+                  label="VS Code"
+                  artifacts={designerArtifacts.filter(isVscodeArtifact)}
+                />
+              </MobileArtifactSection>
+              <MobileArtifactSection title="Engine">
+                <MobileArtifactRow
+                  icon={
+                    <IconDeviceLaptop className="size-4" aria-hidden="true" />
+                  }
+                  label="All"
+                  artifacts={engineArtifacts.filter(
+                    (artifact) => getArtifactMeta(artifact).category === "all",
+                  )}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandDebian className="size-4" aria-hidden="true" />
+                  }
+                  label="Debian"
+                  artifacts={engineArtifacts.filter(
+                    (artifact) => getArtifactMeta(artifact).category === "deb",
+                  )}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandDocker className="size-4" aria-hidden="true" />
+                  }
+                  label="Docker"
+                  artifacts={engineArtifacts.filter(isDockerArtifact)}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandUbuntu className="size-4" aria-hidden="true" />
+                  }
+                  label="Linux / macOS"
+                  artifacts={engineArtifacts.filter((artifact) => {
+                    const category = getArtifactMeta(artifact).category;
+                    return (
+                      category !== "windows" &&
+                      category !== "docker" &&
+                      category !== "slim" &&
+                      category !== "deb" &&
+                      category !== "all"
+                    );
+                  })}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandWindows className="size-4" aria-hidden="true" />
+                  }
+                  label="Windows"
+                  artifacts={engineArtifacts.filter(
+                    (artifact) =>
+                      getArtifactMeta(artifact).category === "windows",
+                  )}
+                />
+                <MobileArtifactRow
+                  icon={
+                    <IconBrandUbuntu className="size-4" aria-hidden="true" />
+                  }
+                  label="All Slim"
+                  artifacts={engineArtifacts.filter(
+                    (artifact) => getArtifactMeta(artifact).category === "slim",
+                  )}
+                />
+              </MobileArtifactSection>
             </div>
           </article>
         );
@@ -496,9 +489,7 @@ function MobileArchiveCards({
   );
 }
 
-type ArchiveProps = { product: ArchiveProduct };
-
-export default function Archive({ product }: ArchiveProps) {
+export default function Archive() {
   const [selectedVersion, setSelectedVersion] = useState("");
   const { data, isLoading, error } = useQuery({
     queryKey: ["archive", selectedVersion || "latest"],
@@ -531,39 +522,80 @@ export default function Archive({ product }: ArchiveProps) {
     return <P className="text-n900">No archive data available.</P>;
   }
 
-  const releases = data.releaseInfos.filter((release) =>
-    product === "designer"
-      ? (release.designerArtifacts ?? []).length > 0
-      : (release.engineArtifacts ?? []).length > 0,
+  const activeVersion = selectedVersion || data.currentMajorVersion;
+  const ltsVersions = data.categorizedVersions["Long Term Support"] ?? [];
+  const unstableVersions = data.categorizedVersions.unstable ?? [];
+  const selectVersionGroups = Object.entries(data.categorizedVersions).filter(
+    ([category, versions]) =>
+      category !== "Long Term Support" &&
+      category !== "unstable" &&
+      versions.length > 0,
   );
+  const selectVersionIds = selectVersionGroups.flatMap(([, versions]) =>
+    versions.map((version) => version.id),
+  );
+  const isSelectSelected =
+    activeVersion === "older" || selectVersionIds.includes(activeVersion);
+  const selectLabel = "Archive";
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-row items-start justify-between">
-        <div className="flex flex-col gap-2">
-          <H4>Archives</H4>
-        </div>
+      <div className="flex flex-row items-start gap-2">
+        {ltsVersions.length > 0 ? (
+          <div className="flex flex-row gap-2">
+            {ltsVersions.map((version) => (
+              <Button
+                key={version.id}
+                variant={activeVersion === version.id ? "default" : "outline"}
+                onClick={() => setSelectedVersion(version.id)}
+              >
+                LTS {version.id}
+              </Button>
+            ))}
+          </div>
+        ) : null}
+        {unstableVersions.length > 0 ? (
+          <div className="flex flex-row gap-2">
+            {unstableVersions.map((version) => (
+              <Button
+                key={version.id}
+                variant={activeVersion === version.id ? "default" : "outline"}
+                onClick={() => setSelectedVersion(version.id)}
+              >
+                Dev
+              </Button>
+            ))}
+          </div>
+        ) : null}
         <NativeSelect
-          value={selectedVersion || data.currentMajorVersion}
+          value={isSelectSelected ? activeVersion : ""}
           onChange={(event) => setSelectedVersion(event.target.value)}
-          className="bg-background rounded-lg"
-        >
-          {Object.entries(data.categorizedVersions).map(
-            ([category, versions]) => (
-              <NativeSelectOptGroup key={category} label={category}>
-                {versions.map((version) => (
-                  <NativeSelectOption key={version.id} value={version.id}>
-                    {version.id}
-                  </NativeSelectOption>
-                ))}
-                {category === "UNSUPPORTED" ? (
-                  <NativeSelectOption key="older" value="older">
-                    Older Versions
-                  </NativeSelectOption>
-                ) : null}
-              </NativeSelectOptGroup>
-            ),
+          className={cn(
+            "bg-background rounded-lg",
+            isSelectSelected &&
+              "[&_select]:border-primary! [&_select]:bg-primary [&_select]:text-primary-foreground [&_select]:hover:bg-primary/80 [&_svg]:text-primary-foreground",
           )}
+        >
+          <NativeSelectOption value="" disabled hidden>
+            {selectLabel}
+          </NativeSelectOption>
+          {selectVersionGroups.map(([category, versions]) => (
+            <NativeSelectOptGroup
+              key={category}
+              label={category === "UNSUPPORTED" ? selectLabel : category}
+            >
+              {versions.map((version) => (
+                <NativeSelectOption key={version.id} value={version.id}>
+                  {version.id}
+                </NativeSelectOption>
+              ))}
+              {category === "UNSUPPORTED" ? (
+                <NativeSelectOption key="older" value="older">
+                  Older
+                </NativeSelectOption>
+              ) : null}
+            </NativeSelectOptGroup>
+          ))}
         </NativeSelect>
       </div>
 
@@ -581,7 +613,15 @@ export default function Archive({ product }: ArchiveProps) {
           .
         </Base>
       ) : (
-        <ArchiveTable product={product} releases={releases} />
+        <>
+          <ArchiveTable releases={data.releaseInfos} />
+          {hasSlimEngineArtifact(data.releaseInfos) ? (
+            <P className="text-n800">
+              <sup>1</sup> This version is similar to the 'All' product, but
+              without the 'demo-portal'.
+            </P>
+          ) : null}
+        </>
       )}
     </div>
   );
