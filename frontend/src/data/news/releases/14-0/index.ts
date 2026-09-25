@@ -16,7 +16,7 @@ const release: NewsRelease = {
   tag: `Long Term Support`,
   release_date: new Date(`2026-09-25`),
   download_url: `/download`,
-  release_notes_url: `/doc/14.0/en/axonivy/release-notes`,
+  release_notes_url: `/doc/14.0/en/technical-info/release-notes/`,
   migration_guide_url: `/doc/14.0/en/technical-info/migration/index.html`,
   overview: [
     "Development: VS Code PRO Designer, web-based editors, improved HTML Dialog tooling, and unified validation.",

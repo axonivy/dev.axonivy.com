@@ -27,11 +27,7 @@ const section: NewsSection = {
     },
   ],
   links: [
-    { label: `Concepts: Testing`, url: `/doc/9.1/concepts/testing/index.html` },
-    {
-      label: `Youtube: Tutorial`,
-      url: `https://www.youtube.com/playlist?list=PLrFKpclzHMnJXhDEWjY8Bp_kqXdgdc_b_`,
-    },
+    { label: `Concepts: Testing`, url: `/doc/9.1/concepts/testing/index.html` }
   ],
   images: [
     `9.1/testing/01-test-flavour-selection.png`,
