@@ -25,16 +25,16 @@ class LinkAction
 
     $demosPrefix = 'https://github.com/axonivy-market/demo-projects/';
     $demosBlobPrefix = $demosPrefix . 'blob/master/';
-    
+
     $samplesPrefix = 'https://github.com/axonivy/docker-samples/';
     $samplesTreePrefix = $samplesPrefix . 'tree/master/';
-    
+
     $buildExamplePrefix = 'https://github.com/axonivy/project-build-examples/';
     $buildExampleBlobPrefix = $buildExamplePrefix . 'blob/' . $branchVersion .'/compile-test/';
-    
+
     $redirects = [
         'docker-image' => 'https://github.com/axonivy/docker-image/',
-        
+
         'kubernetes-samples' => 'https://github.com/axonivy/kubernetes-samples/',
 
         'docker-samples' => $samplesPrefix,
@@ -47,18 +47,18 @@ class LinkAction
         'docker-secrets' => $samplesTreePrefix . 'ivy-secrets',
         'docker-tracing-jaeger' => $samplesTreePrefix . 'ivy-tracing',
         'docker-tracing' => $samplesTreePrefix . 'ivy-tracing',
-        
+
         'demos' => $demosPrefix,
         'demos-connect-secure-service-java' => $demosBlobPrefix . 'connectivity/connectivity-demos/src/com/axonivy/connectivity/rest/provider/SecureService.java',
         'demos-hd-color-custom-css' => $demosBlobPrefix . 'html-dialog/html-dialog-demos/webContent/layouts/styles/color-customize.css#L1-L54',
-        
+
         'build-plugin' => 'https://github.com/axonivy/project-build-plugin/',
-        
+
         'webtester' => 'https://github.com/axonivy/web-tester/',
 
         'market-contribute' => 'https://github.com/axonivy-market/market/wiki',
         'market-install-portal' => self::installPortal($version),
-        
+
         'build-examples' => $buildExamplePrefix . 'tree/' . $branchVersion,
         'build-examples-test-project' => $buildExampleBlobPrefix,
         'build-examples-web-test-pom' => $buildExampleBlobPrefix . 'pom.xml',

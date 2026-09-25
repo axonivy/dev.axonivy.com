@@ -20,7 +20,6 @@ class UiDocLegacyAction
     $docName = $args['document'] ?? '';
 
     $lang = $this->evaluateLanguage($docName);
-    $hasLang = $this->hasLanguage($docName);
     $docName = $this->evaluateDocName($docName, $lang);
     $docPath = $this->evaluateDocPath($docName);
 
@@ -28,7 +27,7 @@ class UiDocLegacyAction
     $version = $v->getMinorVersion();
     $docProvider = new DocProvider($version);
     if (!$docProvider->exists()) {
-      throw new HttpNotFoundException($request);      
+      throw new HttpNotFoundException($request);
     }
 
     // legacy, before 9
@@ -38,7 +37,7 @@ class UiDocLegacyAction
         return Redirect::to($response, 'release-notes');
       }
       $document = $docProvider->findDocumentByNiceUrlPath($docName);
-    } else {      
+    } else {
       $document = $docProvider->getOverviewDocument();
     }
 
@@ -58,50 +57,39 @@ class UiDocLegacyAction
     return $response;
   }
 
-  private function evaluateLanguage(string $docName) : string 
+  private function evaluateLanguage(string $docName) : string
   {
-    if (empty($docName)) 
+    if (empty($docName))
     {
       return DocProvider::DEFAULT_LANGUAGE;
     }
     $path = explode('/', $docName);
     $lang = $path[0];
-    if (strlen($lang) != 2) 
+    if (strlen($lang) != 2)
     {
       return DocProvider::DEFAULT_LANGUAGE;
     }
     return $lang;
   }
 
-  private function hasLanguage(string $docName) : bool 
-  {
-    if (empty($docName)) 
-    {
-      return false;
-    }
-    $path = explode('/', $docName);
-    $lang = $path[0];
-    return strlen($lang) == 2;
-  }
-
-  private function evaluateDocName(string $docName, string $lang) : string 
+  private function evaluateDocName(string $docName, string $lang) : string
   {
     $prefix = $lang;
-    if ($docName === $prefix) 
+    if ($docName === $prefix)
     {
       return "";
     }
     $prefix = $prefix . '/';
-    if (substr($docName, 0, strlen($prefix)) == $prefix) 
+    if (substr($docName, 0, strlen($prefix)) == $prefix)
     {
       return substr($docName, strlen($prefix));
     }
     return $docName;
   }
 
-  private function evaluateDocPath(string $docName) : string 
+  private function evaluateDocPath(string $docName) : string
   {
-    if (empty($docName)) 
+    if (empty($docName))
     {
       return "";
     }

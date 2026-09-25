@@ -25,7 +25,7 @@ class Website
 
   private function createDiContainer(): Container
   {
-    $builder = new ContainerBuilder();    
+    $builder = new ContainerBuilder();
     return $builder->build();
   }
 

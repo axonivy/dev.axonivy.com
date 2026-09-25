@@ -20,7 +20,7 @@ class Artifact
   public const ARCHITECTURE_X64 = 'x64';
   public const ARCHITECTURE_X86 = 'x86';
 
-  private string $fileName; // real filename 
+  private string $fileName; // real filename
   private string $productName;  // see PRODUCT_* constants
   private string $versionNumber; // version parsed from filename
   private string $type; // see TYPE_* constants

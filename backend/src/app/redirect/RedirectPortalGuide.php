@@ -13,7 +13,7 @@ class RedirectPortalGuide
     if (empty($version)) {
       throw new HttpNotFoundException($request, 'version not set');
     }
-    
+
     $path = $args['path'] ?? '';
     if (!empty($path)) {
       $path = '/' . $path;

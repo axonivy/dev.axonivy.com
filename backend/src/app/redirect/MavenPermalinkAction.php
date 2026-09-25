@@ -160,7 +160,7 @@ class MavenArtifact
   }
 }
 
-class MavenVersionResolver 
+class MavenVersionResolver
 {
   private MavenArtifact $artifact;
 

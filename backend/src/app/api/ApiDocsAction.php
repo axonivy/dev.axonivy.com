@@ -14,12 +14,10 @@ class ApiDocsAction
 {
   public function __invoke(Request $request, $response, $args)
   {
-    $product = $args["product"];
     $version = $args["version"];
     $language = $args["language"];
     $versionInfo = $this->findVersionInfo($version);
     $docProvider = $this->findDocProvider($versionInfo, $version);
-
     $data = [
       'versions' => $this->getVersions($request, $versionInfo, $docProvider, $version, $language),
       'languages' => $this->getLanguages($request, $docProvider, $language)
@@ -67,13 +65,13 @@ class ApiDocsAction
     return $versions;
   }
 
-  private function createVersion(Request $request, ?DocProvider $docProvider, string $version, string $language) 
+  private function createVersion(Request $request, ?DocProvider $docProvider, string $version, string $language)
   {
     if ($docProvider == null) {
       return ["version" =>  $version, "url" => "#"];
     }
     $path = $docProvider->getLanguageMinorUrl($language);
-    if (!in_array($language, $docProvider->getLanguages())) 
+    if (!in_array($language, $docProvider->getLanguages()))
     {
       $path = $docProvider->getDefaultLanguageMinorUrl();
     }
@@ -103,8 +101,8 @@ class ApiDocsAction
     return $languages;
   }
 
-  private function createLanguage(string $lang, string $url) : array 
+  private function createLanguage(string $lang, string $url) : array
   {
-    return ["language" => $lang, "url" => $url];    
+    return ["language" => $lang, "url" => $url];
   }
 }

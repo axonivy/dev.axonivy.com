@@ -24,7 +24,7 @@ class ReleaseInfoRepositoryTest extends TestCase
       }
   }
 
-  public function test_getAllEverLongTermSupportVersions() 
+  public function test_getAllEverLongTermSupportVersions()
   {
     $lts = ReleaseInfoRepository::getAllEverLongTermSupportVersions();
     Assert::assertNotNull($lts);
