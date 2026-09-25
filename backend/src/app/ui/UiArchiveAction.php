@@ -85,6 +85,7 @@ class UiArchiveAction
 
     return [
       'version' => $releaseInfo->versionNumber(),
+      'checksumsUrl' => $releaseInfo->getChecksumsUrl(),
       'releaseDate' => $releaseInfo->getReleaseDate(),
       'releaseNotes' => $releaseInfo->getDocProvider()->getReleaseNotes()->getUrl(),
       'designerArtifacts' => array_values(array_map(

@@ -24,6 +24,7 @@ function archiveRelease(
 ): ArchiveRelease {
   return {
     version: "12.0.1",
+    checksumsUrl: "",
     releaseDate: "2024-01-15",
     releaseNotes: "",
     designerArtifacts: [],
