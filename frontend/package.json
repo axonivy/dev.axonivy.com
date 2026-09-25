@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:e2e": "node scripts/test-e2e.mjs"
+    "test:e2e": "node scripts/test-e2e.mjs",
+    "sbom": "pnpm sbom --sbom-format cyclonedx > bom.json"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

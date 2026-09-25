@@ -62,6 +62,10 @@ pipeline {
               withChecks('Frontend Tests') {
                 junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'report.xml'
               }
+              // bom
+              if (env.BRANCH_NAME == 'master') {
+                sh 'pnpm run sbom'
+              }
             }
           }
 
@@ -93,9 +97,15 @@ pipeline {
               if (env.BRANCH_NAME == 'master') {
                 sh 'composer require --dev cyclonedx/cyclonedx-php-composer --no-progress'
                 sh 'composer CycloneDX:make-sbom --output-format=JSON --output-file=bom.json'
-                uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'bom.json')
               }
             }
+          }
+        }
+
+        script {
+          if (env.BRANCH_NAME == 'master') {
+            sh "docker run -v './':'/sbom' cyclonedx/cyclonedx-cli merge --input-files /sbom/backend/bom.json /sbom/frontend/bom.json --output-file /sbom/full-sbom.json"
+            uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'full-sbom.json')
           }
         }
       }
