@@ -559,7 +559,7 @@ export default function Archive() {
       selectedVersion !== "older" &&
       !knownArchiveVersions.includes(selectedVersion)
     ) {
-      void setSelectedVersion(null);
+      setSelectedVersion(null);
     }
   }, [
     defaultArchive.data,
@@ -567,6 +567,11 @@ export default function Archive() {
     selectedVersion,
     setSelectedVersion,
   ]);
+
+  const changeVersion = (version: string) => {
+    history.replaceState(history.state, "", "#archive");
+    setSelectedVersion(version);
+  };
 
   if (isLoading) {
     return <ArchiveSkeleton rows={12} />;
@@ -609,7 +614,7 @@ export default function Archive() {
               <Button
                 key={version.id}
                 variant={activeVersion === version.id ? "default" : "outline"}
-                onClick={() => void setSelectedVersion(version.id)}
+                onClick={() => changeVersion(version.id)}
               >
                 LTS {version.id}
               </Button>
@@ -622,7 +627,7 @@ export default function Archive() {
               <Button
                 key={version.id}
                 variant={activeVersion === version.id ? "default" : "outline"}
-                onClick={() => void setSelectedVersion(version.id)}
+                onClick={() => changeVersion(version.id)}
               >
                 Dev
               </Button>
@@ -631,7 +636,7 @@ export default function Archive() {
         ) : null}
         <NativeSelect
           value={isSelectSelected ? activeVersion : ""}
-          onChange={(event) => void setSelectedVersion(event.target.value)}
+          onChange={(event) => changeVersion(event.target.value)}
           className={cn(
             "bg-background rounded-lg",
             isSelectSelected &&

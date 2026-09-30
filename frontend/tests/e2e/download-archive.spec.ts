@@ -39,7 +39,7 @@ test("shows current releases and switches to dev releases", async ({
   );
 
   await page.getByRole("button", { name: "Dev" }).click();
-  await expect(page).toHaveURL(/\?archive=unstable$/);
+  await expect(page).toHaveURL(/\?archive=unstable#archive$/);
   await expect(archiveTable.locator("tbody tr")).toHaveCount(
     expectedDevVersions.length,
   );
@@ -52,7 +52,7 @@ test("shows current releases and switches to dev releases", async ({
     .click();
   await expect(page).toHaveURL(
     new RegExp(
-      `\\?archive=${encodeURIComponent(current.currentMajorVersion)}$`,
+      `\\?archive=${encodeURIComponent(current.currentMajorVersion)}#archive$`,
     ),
   );
   await expect(archiveTable.locator("tbody tr td:first-child")).toHaveText(
@@ -89,7 +89,7 @@ test("shows an external archive link when 'Older Versions' is selected", async (
   await page.goto("/download");
   await visibleTables(page);
   await page.getByRole("combobox").selectOption("older");
-  await expect(page).toHaveURL(/\?archive=older$/);
+  await expect(page).toHaveURL(/\?archive=older#archive$/);
 
   await expect(
     page.getByRole("link", { name: /archive page/i }),
@@ -125,7 +125,7 @@ test("loads a selected archive version from the backend", async ({
   await visibleTables(page);
   await page.getByRole("combobox").selectOption(selectedVersion);
   await expect(page).toHaveURL(
-    new RegExp(`\\?archive=${encodeURIComponent(selectedVersion)}$`),
+    new RegExp(`\\?archive=${encodeURIComponent(selectedVersion)}#archive$`),
   );
 
   const archiveTable = await visibleTables(page);
@@ -158,15 +158,20 @@ test("clears an unknown archive URL parameter", async ({ page, request }) => {
   );
 });
 
-test("scrolls to the archive section from an archive URL parameter", async ({
+test("scrolls to the archive section from an archive anchor link", async ({
   page,
   request,
 }) => {
   const current = await archiveData(request);
-
+  await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto(
-    `/download?archive=${encodeURIComponent(current.currentMajorVersion)}`,
+    `/download?archive=${encodeURIComponent(current.currentMajorVersion)}#archive`,
   );
+  await visibleTables(page);
 
-  await expect(page.locator("#archive")).toBeInViewport();
+  const top = await page
+    .locator("#archive")
+    .evaluate((el) => el.getBoundingClientRect().top);
+  expect(top).toBeGreaterThanOrEqual(0);
+  expect(top).toBeLessThan(200);
 });
