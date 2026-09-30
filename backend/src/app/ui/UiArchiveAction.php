@@ -87,6 +87,7 @@ class UiArchiveAction
       'version' => $releaseInfo->versionNumber(),
       'checksumsUrl' => $releaseInfo->getChecksumsUrl(),
       'releaseDate' => $releaseInfo->getReleaseDate(),
+      'unsafeReasons' => $releaseInfo->getUnsafeReasons(),
       'releaseNotes' => $releaseInfo->getDocProvider()->getReleaseNotes()->getUrl(),
       'designerArtifacts' => array_values(array_map(
         fn ($artifact) => $this->artifactData($artifact),
@@ -112,6 +113,7 @@ class UiArchiveAction
       'url' => $artifact->getDownloadUrl(),
       'filename' => $artifact->getFileName(),
       'permalink' => $artifact->getPermalink(),
+      'bomUrl' => $artifact->getDownloadBomUrl(),
     ];
   }
 
