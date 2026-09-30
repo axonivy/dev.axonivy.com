@@ -28,7 +28,7 @@ class UiArchiveAction
     }
 
     $releaseInfos = array_map(
-      fn (ReleaseInfo $releaseInfo) => $this->releaseInfoData($releaseInfo),
+      fn(ReleaseInfo $releaseInfo) => $this->releaseInfoData($releaseInfo),
       $this->findReleaseInfos($archiveVersion)
     );
     $data = [
@@ -39,7 +39,6 @@ class UiArchiveAction
     $response->getBody()->write((string) json_encode($data));
     $response = $response->withHeader('Content-Type', 'application/json');
     return $response;
-
   }
 
   private function getCurrentArchiveVersion(string $version): string
@@ -74,7 +73,7 @@ class UiArchiveAction
 
     if ($filterLTS) {
       $minorVersion = $version . '0';
-      $releaseInfos = array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => !str_starts_with($releaseInfo->versionNumber(), $minorVersion));
+      $releaseInfos = array_filter($releaseInfos, fn(ReleaseInfo $releaseInfo) => !str_starts_with($releaseInfo->versionNumber(), $minorVersion));
     }
     return self::filterVirtualVersions($releaseInfos);
   }
@@ -87,19 +86,20 @@ class UiArchiveAction
       'version' => $releaseInfo->versionNumber(),
       'checksumsUrl' => $releaseInfo->getChecksumsUrl(),
       'releaseDate' => $releaseInfo->getReleaseDate(),
+      'unsafeReasons' => $releaseInfo->getUnsafeReasons(),
       'releaseNotes' => $releaseInfo->getDocProvider()->getReleaseNotes()->getUrl(),
       'designerArtifacts' => array_values(array_map(
-        fn ($artifact) => $this->artifactData($artifact),
+        fn($artifact) => $this->artifactData($artifact),
         array_filter(
           $artifacts,
-          fn ($artifact) => in_array($artifact->getProductName(), ['designer', 'vscode-extension'])
+          fn($artifact) => in_array($artifact->getProductName(), ['designer', 'vscode-extension'])
         )
       )),
       'engineArtifacts' => array_values(array_map(
-        fn ($artifact) => $this->artifactData($artifact),
+        fn($artifact) => $this->artifactData($artifact),
         array_filter(
           $artifacts,
-          fn ($artifact) => $artifact->getProductName() === 'engine'
+          fn($artifact) => $artifact->getProductName() === 'engine'
         )
       )),
     ];
@@ -112,6 +112,7 @@ class UiArchiveAction
       'url' => $artifact->getDownloadUrl(),
       'filename' => $artifact->getFileName(),
       'permalink' => $artifact->getPermalink(),
+      'bomUrl' => $artifact->getDownloadBomUrl(),
     ];
   }
 
@@ -140,7 +141,7 @@ class UiArchiveAction
 
   private static function filterVirtualVersions(array $releaseInfos): array
   {
-    return array_values(array_filter($releaseInfos, fn (ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isBugfix()));
+    return array_values(array_filter($releaseInfos, fn(ReleaseInfo $releaseInfo) => $releaseInfo->getVersion()->isBugfix()));
   }
 }
 
@@ -184,7 +185,7 @@ class DownloadArchive
   public static function versions(): array
   {
     $releaseInfos = ReleaseInfoRepository::getAvailableReleaseInfos();
-    $versions = array_map(fn (ReleaseInfo $releaseInfo) => self::toVersion($releaseInfo), $releaseInfos);
+    $versions = array_map(fn(ReleaseInfo $releaseInfo) => self::toVersion($releaseInfo), $releaseInfos);
     $versions = array_unique($versions);
     $versions = array_reverse($versions);
     $versions = array_flip($versions);

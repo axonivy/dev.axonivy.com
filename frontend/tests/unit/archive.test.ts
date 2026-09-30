@@ -15,6 +15,7 @@ function archiveArtifact(
     url: "/artifact",
     filename: "artifact.tar.gz",
     permalink: "/permalink/artifact",
+    bomUrl: "/bom/artifact",
     ...overrides,
   };
 }
@@ -26,6 +27,7 @@ function archiveRelease(
     version: "12.0.1",
     checksumsUrl: "",
     releaseDate: "2024-01-15",
+    unsafeReasons: [],
     releaseNotes: "",
     designerArtifacts: [],
     engineArtifacts: [],

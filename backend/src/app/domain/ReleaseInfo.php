@@ -56,6 +56,9 @@ class ReleaseInfo
 
   public function getUnsafeReasons(): array
   {
+    if (!$this->isUnsafeVersion()) {
+      return array();
+    }
     $unsaveContent = file_get_contents($this->getUnsafeVersionPath());
     $issues = json_decode($unsaveContent, true);
     return (isset($issues) && is_array($issues)) ? $issues : array();
