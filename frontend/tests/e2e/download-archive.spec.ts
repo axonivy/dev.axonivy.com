@@ -1,4 +1,4 @@
-import type { ArchiveResponse } from "@/components/download/archive";
+import type { ArchiveResponse } from "@/components/download/archive/archive";
 import {
   expect,
   test,
