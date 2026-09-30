@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { parseAsString, useQueryState } from "nuqs";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
+  IconAlertTriangle,
   IconArrowRight,
   IconArrowUpRight,
   IconBrandApple,
@@ -13,6 +14,7 @@ import {
   IconCalendar,
   IconDeviceLaptop,
   IconDownload,
+  IconFileDescription,
   IconLink,
 } from "@tabler/icons-react";
 import {
@@ -29,16 +31,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
-import { Base, H4, H5, P } from "@/components/ui/typography";
+import { Base, H4, P } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export type ArchiveArtifact = {
   name: string;
   url: string;
   filename: string;
   permalink: string;
+  bomUrl: string;
 };
+
+type UnsafeReason = { issue: string; url: string };
 
 export type ArchiveProduct = "designer" | "engine";
 
@@ -46,12 +52,15 @@ export type ArchiveRelease = {
   version: string;
   checksumsUrl: string;
   releaseDate: string;
+  unsafeReasons: UnsafeReason[];
   releaseNotes: string;
   designerArtifacts: ArchiveArtifact[];
   engineArtifacts: ArchiveArtifact[];
 };
 
 export type ArchiveVersionOption = { id: string };
+
+export type ArchiveView = "downloads" | "sbom";
 
 export type ArchiveResponse = {
   releaseInfos: ArchiveRelease[];
@@ -202,36 +211,97 @@ async function fetchArchive(version: string) {
   return (await response.json()) as ArchiveResponse;
 }
 
-function ArtifactLinks({ artifacts }: { artifacts: ArchiveArtifact[] }) {
-  const sortedArtifacts = sortArtifacts(artifacts);
-  if (artifacts.length === 0) {
-    return "-";
+function linkFor(artifact: ArchiveArtifact, view: ArchiveView) {
+  return view === "sbom" ? artifact.bomUrl : artifact.url;
+}
+
+function hasSbom(release: ArchiveRelease) {
+  return [
+    ...(release.engineArtifacts ?? []),
+    ...(release.designerArtifacts ?? []),
+  ].some((artifact) => artifact.bomUrl);
+}
+
+function ArtifactRow({
+  label,
+  artifacts,
+  view,
+}: {
+  label: string;
+  artifacts: ArchiveArtifact[];
+  view: ArchiveView;
+}) {
+  const sortedArtifacts = sortArtifacts(
+    artifacts.filter((artifact) => linkFor(artifact, view)),
+  );
+  if (sortedArtifacts.length === 0) {
+    return null;
   }
 
   return (
-    <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
-      {sortedArtifacts.map((artifact) => {
-        const { icon, label } = getArtifactMeta(artifact);
+    <div className="flex items-start gap-2">
+      <span
+        className={cn(
+          "text-n900 shrink-0 font-medium",
+          view === "sbom" ? "w-30" : "w-18",
+        )}
+      >
+        {label}
+        {view === "sbom" ? " SBOM:" : ":"}
+      </span>
+      <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        {sortedArtifacts.map((artifact) => {
+          const { icon, label } = getArtifactMeta(artifact);
 
-        return (
-          <li key={artifact.filename}>
-            <a
-              href={artifact.url}
-              className="text-primary inline-flex items-center gap-1"
-            >
-              <span className="inline-flex items-center gap-1">
+          return (
+            <li key={artifact.filename} className="flex">
+              <a
+                href={linkFor(artifact, view)}
+                className="text-primary inline-flex items-center gap-1"
+              >
                 {icon}
                 {label}
-              </span>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
-export function ArchiveTable({ releases }: { releases: ArchiveRelease[] }) {
+function ExternalLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      className={"text-primary " + className}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+      <IconArrowUpRight
+        className="ml-1 inline-block size-4"
+        aria-hidden="true"
+      />
+    </a>
+  );
+}
+
+export function ArchiveTable({
+  releases,
+  view,
+}: {
+  releases: ArchiveRelease[];
+  view: ArchiveView;
+}) {
   return (
     <>
       <MobileArchiveCards releases={releases} />
@@ -254,56 +324,52 @@ export function ArchiveTable({ releases }: { releases: ArchiveRelease[] }) {
                     {release.releaseDate || "-"}
                   </TableCell>
                   <TableCell className="align-top">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-start gap-2">
-                        <span className="text-n900 w-18 shrink-0 font-medium">
-                          Engine:
-                        </span>
-                        <ArtifactLinks
+                    {view === "sbom" && !hasSbom(release) ? (
+                      <span className="text-n900">No SBOM files available</span>
+                    ) : (
+                      <div className="flex flex-col gap-2">
+                        <ArtifactRow
+                          label="Engine"
+                          view={view}
                           artifacts={release.engineArtifacts ?? []}
                         />
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-n900 w-18 shrink-0 font-medium">
-                          Designer:
-                        </span>
-                        <ArtifactLinks
+                        <ArtifactRow
+                          label="Designer"
+                          view={view}
                           artifacts={release.designerArtifacts ?? []}
                         />
                       </div>
-                    </div>
+                    )}
                   </TableCell>
                   <TableCell className="align-top">
-                    {release.releaseNotes ? (
-                      <div className="flex flex-col gap-2">
-                        <a
-                          href={release.releaseNotes}
-                          className="text-primary"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                    <div className="flex flex-col gap-2">
+                      {release.releaseNotes && (
+                        <ExternalLink href={release.releaseNotes}>
                           Release notes
-                          <IconArrowUpRight
-                            className="ml-1 inline-block size-4"
-                            aria-hidden="true"
-                          />
-                        </a>
-                        <a
-                          href={release.checksumsUrl}
-                          className="text-primary"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        </ExternalLink>
+                      )}
+                      {release.checksumsUrl && (
+                        <ExternalLink href={release.checksumsUrl}>
                           Checksums
-                          <IconArrowUpRight
-                            className="ml-1 inline-block size-4"
+                        </ExternalLink>
+                      )}
+                      {release.unsafeReasons?.map((reason) => (
+                        <ExternalLink
+                          key={reason.url}
+                          href={reason.url}
+                          className="text-red"
+                        >
+                          <IconAlertTriangle
+                            className="mr-1 inline-block size-4"
                             aria-hidden="true"
                           />
-                        </a>
-                      </div>
-                    ) : (
-                      "-"
-                    )}
+                          {reason.issue}
+                        </ExternalLink>
+                      ))}
+                      {!release.releaseNotes &&
+                        !release.checksumsUrl &&
+                        !release.unsafeReasons?.length && <Base>-</Base>}
+                    </div>
                   </TableCell>
                 </TableRow>
               );
@@ -550,6 +616,7 @@ export default function Archive() {
     defaultArchive.isLoading ||
     (shouldFetchSelectedArchive && selectedArchive.isLoading && !data);
   const error = defaultArchive.error ?? selectedArchive.error;
+  const [view, setView] = useState<ArchiveView>("downloads");
 
   useEffect(() => {
     if (!defaultArchive.data || !selectedVersion) {
@@ -607,63 +674,81 @@ export default function Archive() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-row items-start gap-2">
-        {ltsVersions.length > 0 ? (
-          <div className="flex flex-row gap-2">
-            {ltsVersions.map((version) => (
-              <Button
-                key={version.id}
-                variant={activeVersion === version.id ? "default" : "outline"}
-                onClick={() => changeVersion(version.id)}
-              >
-                LTS {version.id}
-              </Button>
-            ))}
-          </div>
-        ) : null}
-        {unstableVersions.length > 0 ? (
-          <div className="flex flex-row gap-2">
-            {unstableVersions.map((version) => (
-              <Button
-                key={version.id}
-                variant={activeVersion === version.id ? "default" : "outline"}
-                onClick={() => changeVersion(version.id)}
-              >
-                Dev
-              </Button>
-            ))}
-          </div>
-        ) : null}
-        <NativeSelect
-          value={isSelectSelected ? activeVersion : ""}
-          onChange={(event) => changeVersion(event.target.value)}
-          className={cn(
-            "bg-background rounded-lg",
-            isSelectSelected &&
-              "[&_select]:border-primary! [&_select]:bg-primary [&_select]:text-primary-foreground [&_select]:hover:bg-primary/80 [&_svg]:text-primary-foreground",
-          )}
-        >
-          <NativeSelectOption value="" disabled hidden>
-            {selectLabel}
-          </NativeSelectOption>
-          {selectVersionGroups.map(([category, versions]) => (
-            <NativeSelectOptGroup
-              key={category}
-              label={category === "UNSUPPORTED" ? selectLabel : category}
-            >
-              {versions.map((version) => (
-                <NativeSelectOption key={version.id} value={version.id}>
-                  {version.id}
-                </NativeSelectOption>
+      <div className="flex flex-row items-center justify-between gap-2">
+        <div className="flex flex-row gap-2">
+          {ltsVersions.length > 0 ? (
+            <div className="flex flex-row gap-2">
+              {ltsVersions.map((version) => (
+                <Button
+                  key={version.id}
+                  variant={activeVersion === version.id ? "default" : "outline"}
+                  onClick={() => changeVersion(version.id)}
+                >
+                  LTS {version.id}
+                </Button>
               ))}
-              {category === "UNSUPPORTED" ? (
-                <NativeSelectOption key="older" value="older">
-                  Older
-                </NativeSelectOption>
-              ) : null}
-            </NativeSelectOptGroup>
-          ))}
-        </NativeSelect>
+            </div>
+          ) : null}
+          {unstableVersions.length > 0 ? (
+            <div className="flex flex-row gap-2">
+              {unstableVersions.map((version) => (
+                <Button
+                  key={version.id}
+                  variant={activeVersion === version.id ? "default" : "outline"}
+                  onClick={() => changeVersion(version.id)}
+                >
+                  Dev
+                </Button>
+              ))}
+            </div>
+          ) : null}
+          <NativeSelect
+            value={isSelectSelected ? activeVersion : ""}
+            onChange={(event) => changeVersion(event.target.value)}
+            className={cn(
+              "bg-background rounded-lg",
+              isSelectSelected &&
+                "[&_select]:border-primary! [&_select]:bg-primary dark:[&_select]:bg-primary [&_select]:text-primary-foreground dark:[&_select]:text-primary-foreground [&_select]:hover:bg-primary/80 dark:[&_select]:hover:bg-primary/80 [&_svg]:text-primary-foreground",
+            )}
+          >
+            <NativeSelectOption value="" disabled hidden>
+              {selectLabel}
+            </NativeSelectOption>
+            {selectVersionGroups.map(([category, versions]) => (
+              <NativeSelectOptGroup
+                key={category}
+                label={category === "UNSUPPORTED" ? selectLabel : category}
+              >
+                {versions.map((version) => (
+                  <NativeSelectOption key={version.id} value={version.id}>
+                    {version.id}
+                  </NativeSelectOption>
+                ))}
+                {category === "UNSUPPORTED" ? (
+                  <NativeSelectOption key="older" value="older">
+                    Older
+                  </NativeSelectOption>
+                ) : null}
+              </NativeSelectOptGroup>
+            ))}
+          </NativeSelect>
+        </div>
+        <Tabs
+          className="hidden md:flex"
+          value={view}
+          onValueChange={(v) => setView(v as ArchiveView)}
+        >
+          <TabsList className="bg-n100 gap-2 px-0.75 py-4.5">
+            <TabsTrigger value="downloads" className="gap-2 px-3 py-3.5">
+              <IconDownload className="size-4" aria-hidden="true" />
+              Download
+            </TabsTrigger>
+            <TabsTrigger value="sbom" className="gap-2 px-3 py-3.5">
+              <IconFileDescription className="size-4" aria-hidden="true" />
+              SBOM files
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
 
       {selectedVersion === "older" ? (
@@ -681,7 +766,7 @@ export default function Archive() {
         </Base>
       ) : (
         <>
-          <ArchiveTable releases={data.releaseInfos} />
+          <ArchiveTable releases={data.releaseInfos} view={view} />
           {hasSlimEngineArtifact(data.releaseInfos) ? (
             <P className="text-n800">
               <sup>1</sup> This version is similar to the 'All' product, but

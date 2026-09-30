@@ -158,6 +158,82 @@ test("clears an unknown archive URL parameter", async ({ page, request }) => {
   );
 });
 
+test("switches artifact links to SBOM files in the SBOM tab", async ({
+  page,
+  request,
+}) => {
+  const current = await archiveData(request);
+  const releaseWithSbom = current.releaseInfos.find((release) =>
+    release.engineArtifacts.some((artifact) => artifact.bomUrl),
+  );
+  if (!releaseWithSbom) {
+    throw new Error("The backend returned no release with SBOM files");
+  }
+  const expectedBomUrls = releaseWithSbom.engineArtifacts
+    .map((artifact) => artifact.bomUrl)
+    .filter(Boolean);
+
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.goto("/download");
+  const archiveTable = await visibleTables(page);
+  const artifactsCell = archiveTable
+    .locator("tbody tr")
+    .filter({
+      has: page.locator("td:first-child", {
+        hasText: new RegExp(
+          `^${releaseWithSbom.version.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
+        ),
+      }),
+    })
+    .locator("td")
+    .nth(2);
+
+  await expect(
+    artifactsCell.getByText("Engine:", { exact: true }),
+  ).toBeVisible();
+
+  await page.getByRole("tab", { name: "SBOM files" }).click();
+
+  await expect(
+    artifactsCell.getByText("Engine SBOM:", { exact: true }),
+  ).toBeVisible();
+  await expect(artifactsCell.getByText("Engine:", { exact: true })).toHaveCount(
+    0,
+  );
+  const links = artifactsCell.getByRole("link");
+  await expect(links).toHaveCount(expectedBomUrls.length);
+  for (const link of await links.all()) {
+    await expect(link).toHaveAttribute("href", /\.bom\.json$/);
+  }
+});
+
+test("shows a placeholder in the SBOM tab for releases without SBOM files", async ({
+  page,
+  request,
+}) => {
+  const versionWithoutSbom = "8.0";
+  const archive = await archiveData(
+    request,
+    `/ui/archive/${versionWithoutSbom}`,
+  );
+  const hasSbom = archive.releaseInfos.some((release) =>
+    [...release.engineArtifacts, ...release.designerArtifacts].some(
+      (artifact) => artifact.bomUrl,
+    ),
+  );
+  expect(hasSbom).toBe(false);
+
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.goto(`/download?archive=${versionWithoutSbom}`);
+  const archiveTable = await visibleTables(page);
+  await page.getByRole("tab", { name: "SBOM files" }).click();
+
+  await expect(archiveTable.getByText("No SBOM files available")).toHaveCount(
+    archive.releaseInfos.length,
+  );
+  await expect(archiveTable.locator("a[href$='.bom.json']")).toHaveCount(0);
+});
+
 test("scrolls to the archive section from an archive anchor link", async ({
   page,
   request,
