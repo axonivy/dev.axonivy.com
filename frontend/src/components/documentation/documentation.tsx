@@ -7,7 +7,6 @@ import {
   IconRoute,
   IconListDetails,
 } from "@tabler/icons-react";
-
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -21,12 +20,14 @@ type DocVersionLinks = { version: string; links: DocLink[] };
 
 export type UiDocResponse = {
   docLinksLTS: DocVersionLinks[];
+  docLinksArchiveLTS: DocVersionLinks[];
   docLinksLE: DocVersionLinks[];
   docLinksDev: DocVersionLinks[];
 };
 
 const sections: Array<{ key: keyof UiDocResponse; title: string }> = [
   { key: "docLinksLTS", title: "LTS - Long Term Support" },
+  { key: "docLinksArchiveLTS", title: "Archive" },
   { key: "docLinksLE", title: "LE - Leading Edge" },
   { key: "docLinksDev", title: "Development build" },
 ];
@@ -46,12 +47,15 @@ const getBadge = (
   sectionKey: keyof UiDocResponse,
   group: DocVersionLinks,
   groups: DocVersionLinks[],
-): { label: string; variant: "green" | "orange" | "purple" } => {
+): { label: string; variant: "green" | "orange" | "purple" | "gray" } => {
   if (sectionKey === "docLinksLE") {
     return { label: "Latest features", variant: "orange" };
   }
   if (sectionKey === "docLinksDev") {
     return { label: "In development", variant: "purple" };
+  }
+  if (sectionKey === "docLinksArchiveLTS") {
+    return { label: "Archived", variant: "gray" };
   }
 
   const newestVersion = Math.max(...groups.map((g) => parseFloat(g.version)));
@@ -61,7 +65,7 @@ const getBadge = (
     : { label: "Maintenance", variant: "green" };
 };
 
-export default function Documentation() {
+export default function Documentation({ archived }: { archived?: boolean }) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["documentation"],
     queryFn: async () => {
@@ -95,14 +99,16 @@ export default function Documentation() {
   }
 
   const visibleSections = sections.filter(
-    (section) => data[section.key].length > 0,
+    (section) =>
+      (section.key === "docLinksArchiveLTS") === !!archived &&
+      data[section.key].length > 0,
   );
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {visibleSections.map((section) => {
         const groups =
-          section.key === "docLinksLTS"
+          section.key === "docLinksLTS" || section.key === "docLinksArchiveLTS"
             ? [...data[section.key]].sort((first, second) =>
                 second.version.localeCompare(first.version, undefined, {
                   numeric: true,

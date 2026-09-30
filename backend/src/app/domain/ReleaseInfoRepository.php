@@ -65,6 +65,15 @@ class ReleaseInfoRepository
   }
 
   /**
+   * the lts releases right before the current ones
+   */
+  public static function getArchivedLongTermSupportVersions(): array
+  {
+    $olderLtsVersions = array_slice(self::getAllEverLongTermSupportVersions(), 0, -Config::NUMBER_LTS);
+    return array_slice($olderLtsVersions, -Config::NUMBER_LTS);
+  }
+
+  /**
    * All lts releases ever (not only the current ones)
    */
   public static function getAllEverLongTermSupportVersions(): array

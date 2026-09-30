@@ -6,10 +6,10 @@ import LegacyDocumentation from "@/components/documentation/legacy-documentation
 import type { ComponentProps } from "react";
 import { NuqsAdapter } from "nuqs/adapters/react";
 
-export function DocumentationQuery() {
+export function DocumentationQuery(props: { archived?: boolean }) {
   return (
     <QueryProvider>
-      <Documentation />
+      <Documentation {...props} />
     </QueryProvider>
   );
 }
