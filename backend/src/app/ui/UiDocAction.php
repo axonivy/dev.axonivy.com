@@ -6,6 +6,7 @@ use app\domain\doc\DocProvider;
 use Slim\Psr7\Response;
 use app\domain\ReleaseType;
 use app\domain\ReleaseInfo;
+use app\domain\ReleaseInfoRepository;
 
 class UiDocAction
 {
@@ -16,6 +17,7 @@ class UiDocAction
     $leadingEdgeVersions = ReleaseType::LE()->allReleaseInfos();
     $data = [
       'docLinksLTS' => $this->docLinks($ltsVersions),
+      'docLinksArchiveLTS' => $this->docLinks(ReleaseInfoRepository::getArchivedLongTermSupportVersions()),
       'docLinksLE' => $this->docLinks($leadingEdgeVersions),
       'docLinksDev' => [$this->docLinksFromProvider(DocProvider::getNewestDocProvider())]
     ];
