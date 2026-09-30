@@ -40,16 +40,16 @@ test("renders the Mac engine guide's hint box and 'for' suffix", async ({
   ).toBeVisible();
 });
 
-test("builds the engine Getting Started link from the docLink query param", async ({
+test("uses the docLink query param as the engine Getting Started link", async ({
   page,
 }) => {
-  await page.goto("/download/installation/engine?docLink=%2Fdoc%2F12.0%2Fen");
+  const docLink = "/doc/14.0/engine-guide/installation/windows/index.html";
+  await page.goto(
+    `/download/installation/engine?docLink=${encodeURIComponent(docLink)}`,
+  );
   await expect(
     page.getByRole("link", { name: "Getting Started" }),
-  ).toHaveAttribute(
-    "href",
-    "http://localhost:4321/doc/12.0/en/engine-guide/getting-started/index.html",
-  );
+  ).toHaveAttribute("href", `http://localhost:4321${docLink}`);
 });
 
 test("renders Docker-specific guidance instead of a generic substep", async ({
@@ -73,7 +73,9 @@ test("renders Docker-specific guidance instead of a generic substep", async ({
     page.getByRole("link", { name: "Official guide", exact: true }),
   ).toHaveAttribute("href", "https://docs.docker.com/get-started/get-docker/");
   await expect(
-    page.getByText(/docker pull axonivy\/axonivy-engine/),
+    page
+      .locator("astro-island")
+      .getByText(/docker pull axonivy\/axonivy-engine/),
   ).toBeVisible();
   const copyButton = page.getByRole("button", { name: "Copy command" });
   await expect(copyButton).toBeVisible();

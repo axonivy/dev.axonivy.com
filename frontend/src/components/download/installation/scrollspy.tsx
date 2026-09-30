@@ -374,7 +374,7 @@ export default function InstallationScrollSpy({
             <>
               {docLink ? (
                 <a
-                  href={`${docLink}/engine-guide/getting-started/index.html`}
+                  href={docLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({
