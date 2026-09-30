@@ -4,6 +4,7 @@ import Download from "@/components/download/download";
 import VersionOverview from "@/components/download/version-overview";
 import LegacyDocumentation from "@/components/documentation/legacy-documentation";
 import type { ComponentProps } from "react";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 export function DocumentationQuery() {
   return (
@@ -33,8 +34,10 @@ export function DownloadQuery() {
 
 export function VersionOverviewQuery() {
   return (
-    <QueryProvider>
-      <VersionOverview />
-    </QueryProvider>
+    <NuqsAdapter>
+      <QueryProvider>
+        <VersionOverview />
+      </QueryProvider>
+    </NuqsAdapter>
   );
 }
