@@ -139,6 +139,13 @@ function isVsCodeExtensionArtifact(artifact?: Artifacts): boolean {
   return artifact?.name === "VS Code Extension";
 }
 
+export function engineGuideDocLink(docLink: string, os: OperatingSystem) {
+  const majorVersion = Number(/^\/doc\/(\d+)/.exec(docLink)?.[1]);
+  const section = majorVersion < 14 ? "getting-started" : "installation";
+  const osPath = os === "windows" || os === "linux" ? `${os}/` : "";
+  return `${docLink}/engine-guide/${section}/${osPath}index.html`;
+}
+
 function installationGuideHref(
   product: DownloadProductCardProps["product"],
   userOs: OperatingSystem,
@@ -170,7 +177,7 @@ function installationGuideHref(
     query.set("downloadUrl", artifact.url);
   }
   if (product === "engine" && !isDocker) {
-    query.set("docLink", docLink || "/doc/latest");
+    query.set("docLink", engineGuideDocLink(docLink || "/doc/latest", guideOs));
   }
 
   return query.toString() ? `${guidePath}?${query.toString()}` : guidePath;

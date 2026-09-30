@@ -4,6 +4,7 @@ import {
   detectOperatingSystem,
   operatingSystemFromText,
   artifactMatchesOperatingSystem,
+  engineGuideDocLink,
   type Artifacts,
 } from "@/components/download/download-cards";
 
@@ -43,6 +44,40 @@ describe("detectOperatingSystem", () => {
   ] as const)("maps detect() result %o to %s", (detected, os) => {
     vi.mocked(detect).mockReturnValue(detected as ReturnType<typeof detect>);
     expect(detectOperatingSystem()).toBe(os);
+  });
+});
+
+describe("engineGuideDocLink", () => {
+  it.each([
+    [
+      "/doc/12.0",
+      "windows",
+      "/doc/12.0/engine-guide/getting-started/windows/index.html",
+    ],
+    [
+      "/doc/12.0",
+      "linux",
+      "/doc/12.0/engine-guide/getting-started/linux/index.html",
+    ],
+    ["/doc/12.0", "mac", "/doc/12.0/engine-guide/getting-started/index.html"],
+    [
+      "/doc/14.0",
+      "windows",
+      "/doc/14.0/engine-guide/installation/windows/index.html",
+    ],
+    [
+      "/doc/14.0",
+      "linux",
+      "/doc/14.0/engine-guide/installation/linux/index.html",
+    ],
+    ["/doc/14.0", "unknown", "/doc/14.0/engine-guide/installation/index.html"],
+    [
+      "/doc/latest",
+      "windows",
+      "/doc/latest/engine-guide/installation/windows/index.html",
+    ],
+  ] as const)("builds the %s guide link for %s", (docLink, os, expected) => {
+    expect(engineGuideDocLink(docLink, os)).toBe(expected);
   });
 });
 
