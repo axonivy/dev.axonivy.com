@@ -6,44 +6,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  IconArrowRight,
-  IconBrandApple,
-  IconBrandDocker,
-  IconBrandUbuntu,
-  IconBrandVscode,
-  IconBrandWindows,
-  IconDashboard,
-  IconDownload,
-  IconTerminal,
-  IconTools,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconDashboard, IconTools } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { detect } from "detect-browser";
 import { H6, P } from "@/components/ui/typography";
-
-export type Artifacts = {
-  name: string;
-  url: string;
-  filename: string;
-  permalink: string;
-};
-
-export type OperatingSystem = "windows" | "mac" | "linux" | "unknown";
-
-export type DownloadRelease = {
-  version: string;
-  versionShort: string;
-  releaseDate: string;
-  releaseNotesLink: string;
-  docLink: string;
-  designerArtifacts: Artifacts[];
-  engineArtifacts: Artifacts[];
-};
-
-type ArtifactOption = { artifact: Artifacts; label: string };
+import {
+  artifactMatchesOperatingSystem,
+  artifactOption,
+  detectOperatingSystem,
+  installationGuideHref,
+  isDockerArtifact,
+  isVsCodeExtensionArtifact,
+  type Artifacts,
+  type DownloadRelease,
+  type OperatingSystem,
+  type Product,
+} from "@/components/download/download-artifacts";
+import { DownloadAction } from "@/components/download/download-action";
+import { ArtifactPicker } from "@/components/download/artifact-picker";
 
 type DownloadCardsProps = {
   release: DownloadRelease;
@@ -54,16 +35,9 @@ type DownloadCardsProps = {
 type DownloadProductCardProps = {
   release: DownloadRelease;
   releaseLabel: string;
-  product: "designer" | "engine";
+  product: Product;
   badge: string;
   userOs: OperatingSystem;
-};
-
-type DownloadActionProps = {
-  title: string;
-  version: string;
-  artifactLabel: string;
-  artifact?: Artifacts;
 };
 
 type ProductConfig = {
@@ -78,160 +52,6 @@ type ProductConfig = {
   artifacts: Artifacts[];
   isDesigner: boolean;
 };
-
-function OsIcon({ os }: { os: string }) {
-  const normalized = os.toLowerCase();
-  if (normalized.includes("windows")) {
-    return <IconBrandWindows className="size-6 shrink-0" aria-hidden="true" />;
-  }
-  if (normalized.includes("macos")) {
-    return <IconBrandApple className="size-6 shrink-0" aria-hidden="true" />;
-  }
-  if (normalized.includes("linux")) {
-    return <IconBrandUbuntu className="size-6 shrink-0" aria-hidden="true" />;
-  }
-  if (normalized.includes("docker")) {
-    return <IconBrandDocker className="size-6 shrink-0" aria-hidden="true" />;
-  }
-  return null;
-}
-
-function OsOptionLabel({ label }: { label: string }) {
-  if (label !== "Linux / macOS") {
-    return <span className="hidden font-medium sm:inline">{label}</span>;
-  }
-
-  return (
-    <span className="flex items-center gap-1 font-medium">
-      <IconBrandUbuntu className="size-6 shrink-0" aria-hidden="true" />
-      <span className="hidden sm:inline">Linux</span>
-      <span className="text-n600">/</span>
-      <IconBrandApple className="size-6 shrink-0" aria-hidden="true" />
-      <span className="hidden sm:inline">macOS</span>
-    </span>
-  );
-}
-
-export function operatingSystemFromText(value: string): OperatingSystem {
-  const normalizedValue = value.toLowerCase();
-  if (normalizedValue.includes("windows")) {
-    return "windows";
-  }
-  if (
-    normalizedValue.includes("macintosh") ||
-    normalizedValue.includes("mac os") ||
-    normalizedValue.includes("macos") ||
-    normalizedValue.includes("apple")
-  ) {
-    return "mac";
-  }
-  if (normalizedValue.includes("linux")) {
-    return "linux";
-  }
-  return "unknown";
-}
-
-function isDockerArtifact(artifact?: Artifacts): boolean {
-  return artifact?.name.toLowerCase().includes("docker") ?? false;
-}
-
-function isVsCodeExtensionArtifact(artifact?: Artifacts): boolean {
-  return artifact?.name === "VS Code Extension";
-}
-
-export function engineGuideDocLink(docLink: string, os: OperatingSystem) {
-  const majorVersion = Number(/^\/doc\/(\d+)/.exec(docLink)?.[1]);
-  const section = majorVersion < 14 ? "getting-started" : "installation";
-  const osPath = os === "windows" || os === "linux" ? `${os}/` : "";
-  return `${docLink}/engine-guide/${section}/${osPath}index.html`;
-}
-
-function installationGuideHref(
-  product: DownloadProductCardProps["product"],
-  userOs: OperatingSystem,
-  artifact?: Artifacts,
-  docLink?: string,
-) {
-  const isDocker = product === "engine" && isDockerArtifact(artifact);
-
-  const selectedOs = artifact ? artifactOperatingSystem(artifact) : userOs;
-  const guideOs = selectedOs === "unknown" ? userOs : selectedOs;
-
-  const detectGuidePath = () => {
-    if (product === "designer" && isVsCodeExtensionArtifact(artifact)) {
-      return "/download/installation/designer-vscode";
-    }
-    if (isDocker) {
-      return "/download/installation/docker";
-    }
-    if (product === "engine") {
-      return "/download/installation/engine";
-    }
-    return `/download/installation/designer-${guideOs === "unknown" ? "windows" : guideOs}`;
-  };
-
-  const guidePath = detectGuidePath();
-
-  const query = new URLSearchParams();
-  if (artifact?.url) {
-    query.set("downloadUrl", artifact.url);
-  }
-  if (product === "engine" && !isDocker) {
-    query.set("docLink", engineGuideDocLink(docLink || "/doc/latest", guideOs));
-  }
-
-  return query.toString() ? `${guidePath}?${query.toString()}` : guidePath;
-}
-
-export function detectOperatingSystem(): OperatingSystem {
-  const detectedOs = detect()?.os;
-
-  if (typeof detectedOs !== "string") {
-    return "unknown";
-  }
-  if (detectedOs.startsWith("Windows")) {
-    return "windows";
-  }
-  if (detectedOs === "Mac OS") {
-    return "mac";
-  }
-  if (detectedOs === "Linux") {
-    return "linux";
-  }
-  return "unknown";
-}
-
-export function artifactOperatingSystem(artifact: Artifacts): OperatingSystem {
-  return operatingSystemFromText(artifact.name);
-}
-
-function engineArtifactOption(artifact: Artifacts): ArtifactOption {
-  const os = artifactOperatingSystem(artifact);
-  if (os === "linux") {
-    return { artifact, label: "Linux / macOS" };
-  }
-  return { artifact, label: artifact.name };
-}
-
-function artifactOption(
-  artifact: Artifacts,
-  isDesigner: boolean,
-): ArtifactOption {
-  return isDesigner
-    ? { artifact, label: artifact.name }
-    : engineArtifactOption(artifact);
-}
-
-export function artifactMatchesOperatingSystem(
-  artifact: Artifacts,
-  os: OperatingSystem,
-  isDesigner: boolean,
-): boolean {
-  if (!isDesigner && os === "mac") {
-    return artifactOperatingSystem(artifact) === "linux";
-  }
-  return artifactOperatingSystem(artifact) === os;
-}
 
 function productConfig(
   release: DownloadRelease,
@@ -259,60 +79,6 @@ function productConfig(
     artifacts: isDesigner ? release.designerArtifacts : release.engineArtifacts,
     isDesigner,
   };
-}
-
-function DownloadAction({
-  title,
-  version,
-  artifactLabel,
-  artifact,
-}: DownloadActionProps) {
-  if (!artifact) {
-    return null;
-  }
-
-  if (isVsCodeExtensionArtifact(artifact)) {
-    return (
-      <a
-        href={`/download/installation/designer-vscode?downloadUrl=${encodeURIComponent(artifact.url)}`}
-        className={buttonVariants({ className: "h-10 w-full justify-start" })}
-      >
-        <IconBrandVscode className="size-5 shrink-0" aria-hidden="true" />
-        Install Designer using VS Code Marketplace
-      </a>
-    );
-  }
-
-  if (artifact.name === "Docker") {
-    return (
-      <a
-        href={`/download/installation/docker?downloadUrl=${artifact.url}`}
-        className={buttonVariants({ className: "h-10 w-full justify-start" })}
-      >
-        <IconTerminal className="size-5 shrink-0" aria-hidden="true" />
-        Install {title} {version} via Docker
-        {artifactLabel && (
-          <span className="hidden sm:inline"> for {artifactLabel}</span>
-        )}
-      </a>
-    );
-  }
-
-  return (
-    <a
-      href={artifact.url}
-      className={buttonVariants({ className: "h-10 w-full justify-start" })}
-    >
-      <IconDownload className="size-5 shrink-0" aria-hidden="true" />
-      Download {title} {version}
-      {artifactLabel && (
-        <span className="hidden sm:inline">
-          {" "}
-          for {artifactLabel} {artifactLabel === "macOS" && "BETA"}
-        </span>
-      )}
-    </a>
-  );
 }
 
 function DownloadProductCard({
@@ -396,42 +162,13 @@ function DownloadProductCard({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         {!vsCodeExtensionArtifact && (
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            {artifactOptions.map(({ artifact, label }) => {
-              const isSelected =
-                artifact.permalink === selectedArtifact?.permalink;
-
-              return (
-                <Button
-                  key={`${product}-${artifact.name}`}
-                  type="button"
-                  aria-label={label}
-                  aria-pressed={isSelected}
-                  onClick={() =>
-                    setSelectedArtifactPermalink(artifact.permalink)
-                  }
-                  variant={isSelected ? "accent" : "outline"}
-                  className={`h-auto flex-row items-center justify-center gap-1 p-2 ${
-                    isSelected ? "border-primary" : ""
-                  }`}
-                >
-                  {label === "Linux / macOS" ? (
-                    <OsOptionLabel label={label} />
-                  ) : (
-                    <OsIcon os={label} />
-                  )}
-                  {config.isDesigner && (
-                    <span className="hidden font-medium sm:inline">
-                      {artifact.name}
-                    </span>
-                  )}
-                  {!config.isDesigner && label !== "Linux / macOS" && (
-                    <OsOptionLabel label={label} />
-                  )}
-                </Button>
-              );
-            })}
-          </div>
+          <ArtifactPicker
+            product={product}
+            options={artifactOptions}
+            selectedPermalink={selectedArtifact?.permalink}
+            isDesigner={config.isDesigner}
+            onSelect={setSelectedArtifactPermalink}
+          />
         )}
         <div className={vsCodeExtensionArtifact ? "mt-4 md:mt-15" : "mt-auto"}>
           <DownloadAction

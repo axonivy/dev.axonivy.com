@@ -8,6 +8,7 @@ import {
 } from "@tabler/icons-astro";
 import { CURRENT_VERSION } from "@/data/global-variables";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Processflowbackground from "@/components/processflowbackground.astro";
 ---
 
@@ -27,16 +28,22 @@ import Processflowbackground from "@/components/processflowbackground.astro";
     <div class="flex max-w-3xs flex-row justify-center gap-4 md:justify-start">
       <a
         href="download"
-        class={
-          buttonVariants({ variant: "default", size: "lg" }) + " px-6 group"
-        }
+        class={cn(
+          buttonVariants({
+            variant: "default",
+            size: "lg",
+            className: "group px-6",
+          }),
+        )}
       >
         Get Started
         <IconArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
       </a>
       <a
         href="/news"
-        class={buttonVariants({ variant: "outline", size: "lg" }) + " px-6"}
+        class={cn(
+          buttonVariants({ variant: "outline", size: "lg", className: "px-6" }),
+        )}
       >
         Latest News
       </a>
