@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
-  getArtifactMeta,
-  sortArtifacts,
   sortReleasesByVersionDescending,
   type ArchiveArtifact,
   type ArchiveRelease,
-} from "@/components/download/archive";
+} from "@/components/download/archive/archive";
+import {
+  getArtifactMeta,
+  sortArtifacts,
+} from "@/components/download/archive/artifact-meta";
 
 function archiveArtifact(
   overrides: Partial<ArchiveArtifact> = {},

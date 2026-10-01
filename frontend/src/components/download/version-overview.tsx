@@ -1,4 +1,4 @@
-import Archive from "@/components/download/archive";
+import Archive from "@/components/download/archive/archive";
 import { H3, H5 } from "@/components/ui/typography";
 
 export default function VersionOverview() {
