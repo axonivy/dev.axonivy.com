@@ -7,6 +7,7 @@ import {
 import { IconArrowRight, IconCircleCheck } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 import { H4 } from "@/components/ui/typography";
 
 export type NewsTimelineItem = {
@@ -76,7 +77,9 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
             <div className="flex w-full shrink-0 items-end justify-end px-4 pt-6 md:w-auto md:px-0 md:pt-0 md:pr-4">
               <a
                 href={`/news/${item.id}`}
-                className={buttonVariants({ variant: "link" }) + " group"}
+                className={cn(
+                  buttonVariants({ variant: "link", className: "group" }),
+                )}
               >
                 View Details
                 <IconArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

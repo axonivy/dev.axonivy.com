@@ -17,6 +17,7 @@ import {
   IconArrowUpRight,
 } from "@tabler/icons-astro";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { NewsTimeline } from "@/components/news/timeline";
 import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
 
@@ -83,9 +84,13 @@ const formatDate = (date: Date) =>
         <div class="flex flex-row gap-4">
           <a
             href={`/news/${releases[0].id}`}
-            class={
-              buttonVariants({ variant: "default", size: "lg" }) + " group"
-            }
+            class={cn(
+              buttonVariants({
+                variant: "default",
+                size: "lg",
+                className: "group",
+              }),
+            )}
           >
             Read more
             <IconArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />

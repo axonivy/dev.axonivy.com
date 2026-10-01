@@ -5,32 +5,19 @@ import {
   ScrollSpySection,
   ScrollSpyViewport,
 } from "@/components/ui/scroll-spy";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   IconArrowUpRight,
   IconCalendar,
-  IconChevronLeft,
-  IconChevronRight,
-  IconCircleCheck,
   IconDownload,
-  IconZoomIn,
 } from "@tabler/icons-react";
-import type { NewsBlock, NewsLink, NewsListItem } from "@/data/news/news";
+import type { NewsBlock, NewsLink } from "@/data/news/news";
 import { buttonVariants } from "@/components/ui/button";
-import {
-  Fragment,
-  useRef,
-  useState,
-  type KeyboardEvent,
-  type TouchEvent,
-} from "react";
+import { cn } from "@/lib/utils";
+import { Fragment } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
-
-const newsImages = import.meta.glob(
-  "/src/assets/news/**/*.{gif,jpeg,jpg,png,webp,PNG}",
-  { eager: true, import: "default", query: "?url" },
-) as Record<string, string>;
+import { Base, H3, H4, H6 } from "@/components/ui/typography";
+import { NewsContent } from "@/components/news/news-content";
+import { NewsImageGallery } from "@/components/news/news-image-gallery";
 
 export type NewsScrollSpySection = {
   heading: string;
@@ -51,10 +38,6 @@ type NewsScrollSpyProps = {
   sections: NewsScrollSpySection[];
 };
 
-function imageUrl(image: string) {
-  return newsImages[`/src/assets/news/${image}`] ?? `/src/assets/news/${image}`;
-}
-
 export function sectionValue(
   section: NewsScrollSpySection,
   index: number,
@@ -67,251 +50,6 @@ export function sectionValue(
   );
 
   return firstValueIndex === index ? value : `${value}-${index + 1}`;
-}
-
-function InlineText({ text }: { text: string }) {
-  const parts = text.split(
-    /(`[^`]+`|\*\*[^*]+\*\*|<a\s+href="[^"]+">.*?<\/a>|<code>.*?<\/code>)/g,
-  );
-
-  return (
-    <>
-      {parts.map((part, index) => {
-        const link = part.match(/^<a\s+href="([^"]+)">(.*)<\/a>$/);
-        if (link) {
-          return (
-            <a
-              key={index}
-              href={link[1]}
-              className="text-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {link[2]}
-            </a>
-          );
-        }
-
-        if (part.startsWith("**") && part.endsWith("**")) {
-          return (
-            <strong key={index} className="font-semibold">
-              {part.slice(2, -2)}
-            </strong>
-          );
-        }
-
-        const code = part.match(/^<code>(.*)<\/code>$/);
-        if (code) {
-          return (
-            <code
-              key={index}
-              className="bg-n100 text-n900 rounded px-1.5 py-0.5 font-mono text-[0.9em] wrap-break-word"
-            >
-              {code[1]}
-            </code>
-          );
-        }
-
-        return part;
-      })}
-    </>
-  );
-}
-
-function NewsList({ items }: { items: NewsListItem[] }) {
-  return (
-    <ul className="flex flex-col gap-2">
-      {items.map((item, index) => (
-        <li
-          key={`${item.term ?? item.text}-${index}`}
-          className="flex flex-col gap-2"
-        >
-          <span className="flex items-start gap-2">
-            <IconCircleCheck className="text-primary mt-1 size-4 shrink-0" />
-            <Base className="text-n900">
-              {item.term ? (
-                <strong className="font-semibold">
-                  <InlineText text={item.term} />:{" "}
-                </strong>
-              ) : null}
-              <InlineText text={item.text} />
-            </Base>
-          </span>
-          {item.items && item.items.length > 0 ? (
-            <div className="pl-6">
-              <NewsList items={item.items} />
-            </div>
-          ) : null}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function NewsContent({ content }: { content: NewsBlock[] }) {
-  return (
-    <div className="flex flex-col gap-4">
-      {content.map((block, index) => {
-        switch (block.type) {
-          case "paragraph":
-            return (
-              <Base key={index} className="text-n900 leading-relaxed">
-                <InlineText text={block.text} />
-              </Base>
-            );
-          case "list":
-            return <NewsList key={index} items={block.items} />;
-          case "heading":
-            return (
-              <H5 key={index}>
-                <InlineText text={block.text} />
-              </H5>
-            );
-          case "code":
-            return (
-              <pre
-                key={index}
-                className="bg-n100 overflow-x-auto rounded-lg p-4"
-              >
-                <code className="font-code text-n900 text-sm">
-                  {block.code}
-                </code>
-              </pre>
-            );
-          default:
-            return null;
-        }
-      })}
-    </div>
-  );
-}
-
-function NewsImageGallery({
-  images,
-  title,
-}: {
-  images: string[];
-  title: string;
-}) {
-  const [open, setOpen] = useState(false);
-  const [index, setIndex] = useState(0);
-
-  const openAt = (i: number) => {
-    setIndex(i);
-    setOpen(true);
-  };
-
-  const showPrev = () =>
-    setIndex((i) => (i - 1 + images.length) % images.length);
-  const showNext = () => setIndex((i) => (i + 1) % images.length);
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      showPrev();
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      showNext();
-    }
-  };
-
-  const touchStartX = useRef<number | null>(null);
-  const SWIPE_THRESHOLD = 50;
-
-  const handleTouchStart = (event: TouchEvent) => {
-    touchStartX.current =
-      event.touches.length === 1 ? event.touches[0].clientX : null;
-  };
-
-  const handleTouchMove = (event: TouchEvent) => {
-    if (event.touches.length > 1) {
-      touchStartX.current = null;
-    }
-  };
-
-  const handleTouchEnd = (event: TouchEvent) => {
-    if (touchStartX.current === null) return;
-
-    const deltaX = event.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-
-    if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
-    if (deltaX > 0) {
-      showPrev();
-    } else {
-      showNext();
-    }
-  };
-
-  return (
-    <>
-      <div className="grid grid-cols-2 justify-items-center gap-4 md:grid-cols-4">
-        {images.map((image, i) => (
-          <button
-            key={image}
-            type="button"
-            onClick={() => openAt(i)}
-            className="group focus-visible:outline-primary relative rounded-lg p-0 focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
-            <img
-              src={imageUrl(image)}
-              alt={title}
-              className="max-h-32 rounded-lg transition-opacity group-hover:opacity-80"
-              loading="lazy"
-            />
-            <span className="bg-background/90 text-n900 absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-              <IconZoomIn className="size-4" />
-              <span className="sr-only">Open image preview</span>
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent
-          showCloseButton={false}
-          onKeyDown={handleKeyDown}
-          className="overflow-auto p-0 sm:max-w-5xl"
-        >
-          <div
-            className="relative"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <img
-              src={imageUrl(images[index])}
-              alt={title}
-              className="max-h-[calc(100vh-5rem)] w-full max-w-[calc(100vw-1rem)] rounded-lg"
-            />
-            {images.length > 1 ? (
-              <>
-                <button
-                  type="button"
-                  onClick={showPrev}
-                  aria-label="Previous image"
-                  className="bg-background/70 text-n900 hover:bg-background focus-visible:outline-primary absolute top-1/2 left-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
-                >
-                  <IconChevronLeft className="size-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={showNext}
-                  aria-label="Next image"
-                  className="bg-background/70 text-n900 hover:bg-background focus-visible:outline-primary absolute top-1/2 right-2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
-                >
-                  <IconChevronRight className="size-4" />
-                </button>
-                <span className="bg-background/90 text-n900 absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full px-2 py-1 text-xs font-medium shadow-sm">
-                  {index + 1} / {images.length}
-                </span>
-              </>
-            ) : null}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
 }
 
 export default function NewsScrollSpy({
@@ -379,10 +117,13 @@ export default function NewsScrollSpy({
                     href={releaseNotesUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={
-                      buttonVariants({ variant: "outline", size: "lg" }) +
-                      " w-full md:w-auto"
-                    }
+                    className={cn(
+                      buttonVariants({
+                        variant: "outline",
+                        size: "lg",
+                        className: "w-full md:w-auto",
+                      }),
+                    )}
                   >
                     Release Notes
                     <IconArrowUpRight className="size-4 shrink-0" />
@@ -392,10 +133,13 @@ export default function NewsScrollSpy({
                   href={migrationGuideUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={
-                    buttonVariants({ variant: "outline", size: "lg" }) +
-                    " w-full md:w-auto"
-                  }
+                  className={cn(
+                    buttonVariants({
+                      variant: "outline",
+                      size: "lg",
+                      className: "w-full md:w-auto",
+                    }),
+                  )}
                 >
                   Migration Guide
                   <IconArrowUpRight className="size-4 shrink-0" />

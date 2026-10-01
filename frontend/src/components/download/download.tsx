@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  DownloadCards,
-  type DownloadRelease,
-} from "@/components/download/download-cards";
+import { DownloadCards } from "@/components/download/download-cards";
+import type { DownloadRelease } from "@/components/download/download-artifacts";
 import { DownloadSkeleton } from "@/components/skeletons/download-skeleton";
 import { IconArrowRight, IconRefresh } from "@tabler/icons-react";
 import { Base, H2, H4, H5, P } from "@/components/ui/typography";

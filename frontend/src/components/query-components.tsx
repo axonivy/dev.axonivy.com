@@ -1,8 +1,8 @@
 import { QueryProvider } from "@/providers/query-provider";
 import Documentation from "@/components/documentation/documentation";
 import Download from "@/components/download/download";
-import VersionOverview from "@/components/download/version-overview";
 import LegacyDocumentation from "@/components/documentation/legacy-documentation";
+import Archive from "@/components/download/archive/archive";
 import type { ComponentProps } from "react";
 import { NuqsAdapter } from "nuqs/adapters/react";
 
@@ -32,11 +32,11 @@ export function DownloadQuery() {
   );
 }
 
-export function VersionOverviewQuery() {
+export function ArchiveQuery() {
   return (
     <NuqsAdapter>
       <QueryProvider>
-        <VersionOverview />
+        <Archive />
       </QueryProvider>
     </NuqsAdapter>
   );

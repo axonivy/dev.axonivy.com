@@ -5,16 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Base, H4, H5 } from "@/components/ui/typography";
+import { H4 } from "@/components/ui/typography";
 import Layout from "@/layouts/main.astro";
-import {
-  IconArrowRight,
-  IconCircleCheck,
-  IconHeadset,
-  IconMail,
-  IconTicket,
-} from "@tabler/icons-astro";
+import { HelpBox } from "@/components/help-box";
+import { IconCircleCheck } from "@tabler/icons-astro";
+import { IconHeadset, IconMail, IconTicket } from "@tabler/icons-react";
 
 const supportInfo = [
   {
@@ -73,73 +68,28 @@ const supportInfo = [
       ))}
     </div>
   </div>
-  <div class="bg-n50 flex flex-col items-stretch gap-4 rounded-md p-4 md:flex-row md:items-center md:justify-between">
-    <div class="flex w-full flex-row items-center gap-4 md:w-auto">
-      <div class="bg-yellow-bg text-yellow shrink-0 rounded-md p-2">
-        <IconHeadset class="size-8" />
-      </div>
-      <div class="flex flex-col">
-        <H4>Need Support?</H4>
-        <Base className="text-n900">To get support please contact us</Base>
-      </div>
-    </div>
-    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
-      <Separator orientation="horizontal" className="md:hidden" />
-      <Separator orientation="vertical" className="hidden md:block" />
-      <div class="flex w-full flex-col md:w-auto">
-        <a
-          href="https://support.axonivy.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex flex-row items-center justify-between gap-3 md:hidden"
-        >
-          <div class="flex flex-col">
-            <div class="flex flex-row items-center gap-1">
-              <IconTicket class="size-5" />
-              <H5>Create ticket</H5>
-            </div>
-            <Base className="text-n900">
-              Create a ticket in our help center
-            </Base>
-          </div>
-          <IconArrowRight class="size-8 shrink-0" />
-        </a>
-
-        <div class="hidden md:flex md:flex-col">
-          <div class="flex flex-row items-center gap-1">
-            <IconTicket class="size-5" />
-            <H5>Create ticket</H5>
-          </div>
-          <Base className="text-n900">Create a ticket in our help center</Base>
-          <a
-            href="https://support.axonivy.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group text-primary"
-          >
-            <span class="flex items-center gap-2">
-              Help center
-              <IconArrowRight class="size-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="flex flex-col gap-4 md:flex-row md:gap-6">
-      <Separator orientation="horizontal" className="md:hidden" />
-      <Separator orientation="vertical" className="hidden md:block" />
-      <div class="flex w-full flex-col md:w-auto">
-        <div class="flex flex-row items-center gap-1">
-          <IconMail class="size-5" />
-          <H5>Send us an email</H5>
-        </div>
-        <Base className="text-n900">
-          Let us know your support issue via email
-        </Base>
-        <a href="mailto:support@axonivy.com" class="group text-primary">
-          support@axonivy.com
-        </a>
-      </div>
-    </div>
-  </div>
+  <HelpBox
+    icon={IconHeadset}
+    tone="yellow"
+    title="Need Support?"
+    text="To get support please contact us"
+    links={[
+      {
+        icon: IconTicket,
+        title: "Create ticket",
+        description: "Create a ticket in our help center",
+        href: "https://support.axonivy.com/",
+        linkLabel: "Help center",
+        external: true,
+      },
+      {
+        icon: IconMail,
+        title: "Send us an email",
+        description: "Let us know your support issue via email",
+        href: "mailto:support@axonivy.com",
+        linkLabel: "support@axonivy.com",
+        arrow: false,
+      },
+    ]}
+  />
 </Layout>

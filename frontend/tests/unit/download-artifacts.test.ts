@@ -6,7 +6,7 @@ import {
   artifactMatchesOperatingSystem,
   engineGuideDocLink,
   type Artifacts,
-} from "@/components/download/download-cards";
+} from "@/components/download/download-artifacts";
 
 vi.mock("detect-browser", () => ({ detect: vi.fn() }));
 
