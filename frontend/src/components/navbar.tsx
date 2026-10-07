@@ -65,7 +65,7 @@ const navItems = [
           {
             label: "Tutorial",
             description: "Learn step by step",
-            href: "https://axonivy.com/tutorial",
+            href: "https://axonivy.com/tutorials",
             external: true,
           },
         ],
