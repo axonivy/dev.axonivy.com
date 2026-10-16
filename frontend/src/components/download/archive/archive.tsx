@@ -1,20 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import { parseAsString, useQueryState } from "nuqs";
-import { useEffect, useMemo, useState } from "react";
-import { IconDownload, IconFileDescription } from "@tabler/icons-react";
+import { ArchiveTable } from "@/components/download/archive/archive-table";
+import { inCategory } from "@/components/download/archive/artifact-meta";
+import { MobileArchiveCards } from "@/components/download/archive/mobile-archive-cards";
+import { Button } from "@/components/ui/button";
 import {
   NativeSelect,
   NativeSelectOptGroup,
   NativeSelectOption,
 } from "@/components/ui/native-select";
-import ArchiveSkeleton from "@/components/skeletons/archive-skeleton";
-import { Base, P } from "@/components/ui/typography";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MobileArchiveCards } from "@/components/download/archive/mobile-archive-cards";
-import { ArchiveTable } from "@/components/download/archive/archive-table";
-import { inCategory } from "@/components/download/archive/artifact-meta";
+import { Base, P } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
+import { IconDownload, IconFileDescription } from "@tabler/icons-react";
+import { parseAsString, useQueryState } from "nuqs";
+import { NuqsAdapter } from "nuqs/adapters/react";
+import { useEffect, useState } from "react";
 
 export type ArchiveProduct = "designer" | "engine";
 
@@ -40,10 +39,16 @@ export type ArchiveRelease = {
 
 export type ArchiveVersionOption = { id: string };
 
-export type ArchiveResponse = {
+export type UiArchiveResponse = {
   releaseInfos: ArchiveRelease[];
   categorizedVersions: Record<string, ArchiveVersionOption[]>;
   currentMajorVersion: string;
+};
+
+export type ArchiveData = {
+  categorizedVersions: Record<string, ArchiveVersionOption[]>;
+  currentMajorVersion: string;
+  releasesByVersion: Record<string, ArchiveRelease[]>;
 };
 
 export type ArchiveView = "downloads" | "sbom";
@@ -58,94 +63,44 @@ function hasSlimEngineArtifact(releases: ArchiveRelease[]) {
   );
 }
 
-async function fetchArchive(version: string) {
-  const endpoint = version
-    ? `/ui/archive/${encodeURIComponent(version)}`
-    : "/ui/archive";
-  const response = await fetch(endpoint);
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  return (await response.json()) as ArchiveResponse;
+export default function Archive({ data }: { data: ArchiveData }) {
+  return (
+    <NuqsAdapter>
+      <ArchiveContent data={data} />
+    </NuqsAdapter>
+  );
 }
 
-export default function Archive() {
+function ArchiveContent({ data }: { data: ArchiveData }) {
   const [selectedVersion, setSelectedVersion] = useQueryState(
     "archive",
     parseAsString.withDefault(""),
   );
-  const defaultArchive = useQuery({
-    queryKey: ["archive", "latest"],
-    placeholderData: (previousData) => previousData,
-    queryFn: () => fetchArchive(""),
-  });
-  const knownArchiveVersions = useMemo(
-    () =>
-      Object.values(defaultArchive.data?.categorizedVersions ?? {})
-        .flat()
-        .map((version) => version.id),
-    [defaultArchive.data?.categorizedVersions],
-  );
-  const shouldFetchSelectedArchive =
-    selectedVersion !== "" &&
-    selectedVersion !== "older" &&
-    knownArchiveVersions.includes(selectedVersion);
-  const selectedArchive = useQuery({
-    queryKey: ["archive", selectedVersion],
-    enabled: shouldFetchSelectedArchive,
-    placeholderData: (previousData) => previousData,
-    queryFn: () => fetchArchive(selectedVersion),
-  });
-  const data = shouldFetchSelectedArchive
-    ? (selectedArchive.data ?? defaultArchive.data)
-    : defaultArchive.data;
-  const isLoading =
-    defaultArchive.isLoading ||
-    (shouldFetchSelectedArchive && selectedArchive.isLoading && !data);
-  const error = defaultArchive.error ?? selectedArchive.error;
   const [view, setView] = useState<ArchiveView>("downloads");
 
   useEffect(() => {
-    if (!defaultArchive.data || !selectedVersion) {
+    if (!selectedVersion) {
       return;
     }
     if (
       selectedVersion !== "older" &&
-      !knownArchiveVersions.includes(selectedVersion)
+      !(selectedVersion in data.releasesByVersion)
     ) {
       setSelectedVersion(null);
     }
-  }, [
-    defaultArchive.data,
-    knownArchiveVersions,
-    selectedVersion,
-    setSelectedVersion,
-  ]);
+  }, [data.releasesByVersion, selectedVersion, setSelectedVersion]);
 
   const changeVersion = (version: string) => {
     history.replaceState(history.state, "", "#archive");
     setSelectedVersion(version);
   };
 
-  if (isLoading) {
-    return <ArchiveSkeleton rows={5} />;
-  }
-
-  if (error) {
-    return (
-      <P className="text-destructive">
-        Failed to load archive data: {error.message}
-      </P>
-    );
-  }
-
   if (!data) {
     return <P className="text-n900">No archive data available.</P>;
   }
 
   const activeVersion = selectedVersion || data.currentMajorVersion;
+  const releases = data.releasesByVersion[activeVersion] ?? [];
   const ltsVersions = data.categorizedVersions["Long Term Support"] ?? [];
   const unstableVersions = data.categorizedVersions.unstable ?? [];
   const selectVersionGroups = Object.entries(data.categorizedVersions).filter(
@@ -255,9 +210,9 @@ export default function Archive() {
         </Base>
       ) : (
         <>
-          <MobileArchiveCards releases={data.releaseInfos} />
-          <ArchiveTable releases={data.releaseInfos} view={view} />
-          {hasSlimEngineArtifact(data.releaseInfos) ? (
+          <MobileArchiveCards releases={releases} />
+          <ArchiveTable releases={releases} view={view} />
+          {hasSlimEngineArtifact(releases) ? (
             <P className="text-n800">
               <sup>1</sup> This version is similar to the 'All' product, but
               without the 'demo-portal'.

@@ -1,47 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { DownloadCards } from "@/components/download/download-cards";
 import type { DownloadRelease } from "@/components/download/download-artifacts";
-import { DownloadSkeleton } from "@/components/skeletons/download-skeleton";
-import { IconArrowRight, IconRefresh } from "@tabler/icons-react";
+import { DownloadCards } from "@/components/download/download-cards";
 import { Base, H2, H4, H5, P } from "@/components/ui/typography";
+import { IconArrowRight, IconRefresh } from "@tabler/icons-react";
 
-type UiDownloadResponse = {
+export type UiDownloadResponse = {
   ltsCurrent: DownloadRelease[];
   ltsMaintenance: DownloadRelease[];
   le: DownloadRelease[];
   dev: DownloadRelease[];
 };
 
-export default function Download() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["download"],
-    queryFn: async () => {
-      const response = await fetch("/ui/download", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = (await response.json()) as UiDownloadResponse;
-      return data;
-    },
-  });
-
-  if (isLoading) {
-    return <DownloadSkeleton />;
-  }
-
-  if (error) {
-    return (
-      <P className="text-destructive">
-        Failed to load download links: {error.message}
-      </P>
-    );
-  }
-
+export default function Download({ data }: { data: UiDownloadResponse }) {
   if (!data) {
     return <P className="text-n900">No download data available.</P>;
   }

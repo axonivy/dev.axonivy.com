@@ -2,9 +2,14 @@ import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Base, Code } from "@/components/ui/typography";
-import { CURRENT_VERSION } from "@/data/global-variables";
 
-export function DockerCommandBlock({ command }: { command: string }) {
+export function DockerCommandBlock({
+  command,
+  currentVersion,
+}: {
+  command: string;
+  currentVersion: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function copyCommand() {
@@ -18,7 +23,7 @@ export function DockerCommandBlock({ command }: { command: string }) {
       <Base>
         <span className="font-semibold">Note:</span> This Docker image version
         defaults to the latest LTS release. To use a different version, replace{" "}
-        <Code>{CURRENT_VERSION}</Code> in the commands above with your desired
+        <Code>{currentVersion}</Code> in the commands above with your desired
         version.
       </Base>
       <div className="bg-n100 text-n900 flex items-start justify-between gap-4 rounded-md p-4">

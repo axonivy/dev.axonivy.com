@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { IconLink } from "@tabler/icons-react";
 import { H1, P } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
+import { IconLink } from "@tabler/icons-react";
+import { useEffect, useRef, useState } from "react";
 
 type LegacyDocLink = { url: string; text: string };
 
 type LegacyDocVersionLinks = { version: string; links: LegacyDocLink[] };
 
-type UiLegacyDocResponse = {
+export type UiLegacyDocResponse = {
   version: string;
   releaseDocuments: LegacyDocVersionLinks;
   externalBooks: LegacyDocVersionLinks;
@@ -16,80 +16,42 @@ type UiLegacyDocResponse = {
   portalLink: string;
 };
 
-export const legacyDocsVersions = [
-  "8.0",
-  "7.4",
-  "7.3",
-  "7.2",
-  "7.1",
-  "7.0",
-] as const;
+export const legacyDocsVersions = ["8.0", "7.0"] as const;
 
 export type LegacyDocsVersion = (typeof legacyDocsVersions)[number];
 
-function apiUrl(version: LegacyDocsVersion, path?: string) {
-  return path
-    ? `/ui/legacy/doc/${version}/${path}`
-    : `/ui/legacy/doc/${version}`;
-}
-
-function pathFromNiceUrl(version: LegacyDocsVersion, url: string) {
-  const prefix = `/doc/${version}/`;
-  return url.startsWith(prefix) ? url.slice(prefix.length) : undefined;
-}
-
-function getInitialPath(version: LegacyDocsVersion) {
-  if (typeof window === "undefined") return undefined;
-  return pathFromNiceUrl(version, window.location.pathname);
-}
-
-type LegacyDocumentationProps = { version: LegacyDocsVersion };
-
 export default function LegacyDocumentation({
-  version,
-}: LegacyDocumentationProps) {
-  const [path, setPath] = useState<string | undefined>(() =>
-    getInitialPath(version),
-  );
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["legacyDocumentation", version, path ?? "default"],
-    queryFn: async () => {
-      const response = await fetch(apiUrl(version, path), {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      return (await response.json()) as UiLegacyDocResponse;
-    },
-  });
-
-  useEffect(() => {
-    function handlePopState() {
-      setPath(pathFromNiceUrl(version, window.location.pathname));
-    }
-
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [version]);
-
-  function navigateTo(link: LegacyDocLink) {
-    window.history.pushState(null, "", link.url);
-    setPath(pathFromNiceUrl(version, link.url));
-  }
+  data,
+  activeUrl,
+}: {
+  data: UiLegacyDocResponse;
+  activeUrl: string | undefined;
+}) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [visible, setVisible] = useState(false);
 
   function resizeIframe(iframe: HTMLIFrameElement) {
     const doc = iframe.contentWindow?.document;
-    if (!doc) return;
+    if (!doc?.body) return;
 
-    iframe.style.height = `${doc.body.scrollHeight}px`;
     removeHeader(doc);
     openLinksInParentTab(doc);
+    iframe.style.height = `${doc.documentElement.scrollHeight}px`;
+    setVisible(true);
+
+    iframe.contentWindow?.addEventListener(
+      "pagehide",
+      () => setVisible(false),
+      { once: true },
+    );
   }
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe?.contentDocument?.readyState === "complete") {
+      resizeIframe(iframe);
+    }
+  }, []);
 
   function removeHeader(doc: Document) {
     const headerDiv = doc.getElementById("headerdiv");
@@ -114,18 +76,6 @@ export default function LegacyDocumentation({
     doc.getElementsByTagName("head")[0]?.appendChild(base);
   }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return (
-      <P className="text-destructive">
-        Failed to load legacy documentation links: {error.message}
-      </P>
-    );
-  }
-
   if (!data) {
     return <P className="text-n900">No legacy documentation data available.</P>;
   }
@@ -136,18 +86,17 @@ export default function LegacyDocumentation({
       <div className="flex flex-col gap-4">
         <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
           {data.releaseDocuments.links.map((link) => (
-            <button
+            <a
               key={link.url}
-              type="button"
-              onClick={() => navigateTo(link)}
+              href={link.url}
               className={
-                link.url === window.location.pathname
+                link.url === activeUrl
                   ? "text-primary font-semibold underline"
                   : "text-primary hover:underline"
               }
             >
               {link.text}
-            </button>
+            </a>
           ))}
         </div>
         <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
@@ -166,11 +115,15 @@ export default function LegacyDocumentation({
         </div>
       </div>
       <iframe
+        ref={iframeRef}
         key={data.documentUrl}
         src={data.documentUrl}
         title={data.version}
         onLoad={(event) => resizeIframe(event.currentTarget)}
-        className="border-n200 w-full rounded-lg border"
+        className={cn(
+          "border-n200 min-h-[60vh] w-full rounded-lg border transition-opacity",
+          visible ? "opacity-100" : "opacity-0",
+        )}
       />
     </div>
   );
