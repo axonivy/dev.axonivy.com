@@ -1,10 +1,6 @@
 ---
-import Layout from "@/layouts/main.astro";
-import { Card, CardContent } from "@/components/ui/card";
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
-import Placeholder from "@/assets/team/avatar-placeholder.svg";
 import PortraitAls from "@/assets/team/als.jpg";
+import Placeholder from "@/assets/team/avatar-placeholder.svg";
 import PortraitBb from "@/assets/team/bb.jpg";
 import PortraitCst from "@/assets/team/cst.jpg";
 import PortraitDar from "@/assets/team/dar.jpg";
@@ -13,7 +9,11 @@ import PortraitLgi from "@/assets/team/lgi.jpg";
 import PortraitLli from "@/assets/team/lli.jpg";
 import PortraitRew from "@/assets/team/rew.jpg";
 import PortraitRwei from "@/assets/team/rwei.jpg";
+import { Card, CardContent } from "@/components/ui/card";
 import { H4, P } from "@/components/ui/typography";
+import Layout from "@/layouts/main.astro";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
 type TeamMember = {
   name: string;
@@ -134,6 +134,7 @@ const team: TeamMember[] = [
 ---
 
 <Layout
+  tabTitle="IvyTeam"
   title="🇨🇭IvyTeam"
   description="IvyTeam is the core development team of the Axon Ivy Platform. The team is highly experienced in agile software development. Since the formation in the year 1993 the team is located in Zug in the heart of Switzerland."
 >

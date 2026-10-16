@@ -1,5 +1,7 @@
 ---
-import { getCollection } from "astro:content";
+import { NewsTimeline } from "@/components/news/timeline";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,19 +9,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
 import Layout from "@/layouts/main.astro";
-import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import {
+  IconArrowRight,
+  IconArrowUpRight,
   IconCalendar,
   IconCircleCheck,
   IconStar,
-  IconArrowRight,
-  IconArrowUpRight,
 } from "@tabler/icons-astro";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { NewsTimeline } from "@/components/news/timeline";
-import { Base, H3, H4, H5, H6 } from "@/components/ui/typography";
+import { getCollection } from "astro:content";
 
 const releases = (await getCollection("news")).sort(
   (left, right) =>
@@ -45,6 +45,7 @@ const formatDate = (date: Date) =>
 ---
 
 <Layout
+  tabTitle="News"
   title="What's new?"
   description={`Explore the latest releases, features and improvements \nof the Axon Ivy platform`}
 >

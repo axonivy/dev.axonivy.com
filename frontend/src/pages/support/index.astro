@@ -1,4 +1,5 @@
 ---
+import { HelpBox } from "@/components/help-box";
 import {
   Card,
   CardDescription,
@@ -7,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import { H4 } from "@/components/ui/typography";
 import Layout from "@/layouts/main.astro";
-import { HelpBox } from "@/components/help-box";
 import { IconCircleCheck } from "@tabler/icons-astro";
 import { IconHeadset, IconMail, IconTicket } from "@tabler/icons-react";
 
@@ -38,6 +38,7 @@ const supportInfo = [
 ---
 
 <Layout
+  tabTitle="Support"
   title="Support"
   description="Axon Ivy Support is commiting to provide high-quality, technical support for quick problem solving, training or consulting. This protects your Axon Ivy investment and lets all participants sleep well."
 >

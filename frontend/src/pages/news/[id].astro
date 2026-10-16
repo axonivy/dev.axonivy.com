@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import NewsScrollSpy from "@/components/news/scrollspy";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Layout from "@/layouts/news.astro";
-import NewsScrollSpy from "@/components/news/scrollspy";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 type NewsEntry = CollectionEntry<"news">;
 
@@ -30,7 +30,7 @@ const formatDate = (date: Date) =>
   }).format(date);
 ---
 
-<Layout>
+<Layout tabTitle="News">
   <div class="flex flex-col">
     <div class="bg-background before:bg-background sticky top-24 z-20 py-2 pb-8 before:absolute before:inset-x-0 before:-top-16 before:h-16 before:content-['']">
       <Breadcrumb className="px-3">
