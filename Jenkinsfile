@@ -49,6 +49,7 @@ pipeline {
           sh "tar -cf ${env.DIST_FILE}\
             --exclude=src/web/releases\
             --exclude=src/web/docs\
+            --exclude=vendor/swagger-api\
             src\
             vendor"
           archiveArtifacts env.DIST_FILE

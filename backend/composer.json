@@ -4,7 +4,8 @@
     "slim/psr7": "*",
     "php-di/php-di": "*",
     "middlewares/trailing-slash": "*",
-    "guzzlehttp/guzzle": "*"
+    "guzzlehttp/guzzle": "*",
+    "swagger-api/swagger-ui": "^5.33"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
@@ -24,5 +25,13 @@
     "allow-plugins": {
       "cyclonedx/cyclonedx-php-composer": true
     }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "php copy-swagger.php"
+    ],
+    "post-update-cmd": [
+      "php copy-swagger.php"
+    ]
   }
 }
