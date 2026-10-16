@@ -22,6 +22,7 @@ type TeamMember = {
   education: string;
   function: string;
   slogan: string;
+  extra?: string;
 };
 
 const team: TeamMember[] = [
@@ -122,6 +123,7 @@ const team: TeamMember[] = [
     education: "EFZ Information Technology",
     function: "Core Developer",
     slogan: "Bringing fresh energy ⚡",
+    extra: "jacek",
   },
   {
     name: "Colin Graf",
@@ -153,10 +155,12 @@ const team: TeamMember[] = [
                 width={115}
                 height={192}
                 class="shrink-0 rounded-md object-cover pt-2"
+                data-extra={member.extra}
               />
             ) : (
               AvatarSvg && (
                 <AvatarSvg
+                  data-extra={member.extra}
                   aria-label={`${member.name} avatar`}
                   class="h-48 w-auto shrink-0 rounded-md"
                 />
@@ -175,3 +179,16 @@ const team: TeamMember[] = [
       })}
   </div>
 </Layout>
+
+<script>
+  // Team extras: set `extra: "<name>"` on your entry and add src/components/team-extras/<name>.ts whose
+  // default export gets your avatar element and can do anything with it. Respect prefers-reduced-motion
+  // and leave the page as you found it.
+  type Extra = { default: (avatar: HTMLElement) => void };
+  const extras = import.meta.glob<Extra>("/src/components/team-extras/*.ts");
+  for (const avatar of document.querySelectorAll<HTMLElement>("[data-extra]")) {
+    extras[`/src/components/team-extras/${avatar.dataset.extra}.ts`]?.().then(
+      (extra) => extra.default(avatar),
+    );
+  }
+</script>
