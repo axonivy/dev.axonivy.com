@@ -87,11 +87,16 @@ function GuideLinkButton({
   );
 }
 
-type InstallationScrollSpyProps = { guideId: string; guide: InstallationGuide };
+type InstallationScrollSpyProps = {
+  guideId: string;
+  guide: InstallationGuide;
+  currentVersion: string;
+};
 
 export default function InstallationScrollSpy({
   guideId,
   guide,
+  currentVersion,
 }: InstallationScrollSpyProps) {
   const [downloadUrl] = useState(() => safeUrl(queryParameter("downloadUrl")));
   const [docLink] = useState(() => safeUrl(queryParameter("docLink")));
@@ -184,6 +189,7 @@ export default function InstallationScrollSpy({
                 {dockerCommand ? (
                   <div className="w-full">
                     <DockerCommandBlock
+                      currentVersion={currentVersion}
                       command={dockerCommand.title
                         .split(/\s*<br\s*\/?>\s*/i)
                         .join("\n")}

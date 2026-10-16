@@ -1,18 +1,20 @@
-import type { ArchiveResponse } from "@/components/download/archive/archive";
+import type { UiArchiveResponse } from "@/components/download/archive/archive";
 import {
   expect,
   test,
   type APIRequestContext,
   type Page,
 } from "@playwright/test";
+import { waitForHydration } from "./hydration";
 
 async function archiveData(request: APIRequestContext, path = "/ui/archive") {
   const response = await request.get(path);
   expect(response.ok()).toBeTruthy();
-  return (await response.json()) as ArchiveResponse;
+  return (await response.json()) as UiArchiveResponse;
 }
 
 async function visibleTables(page: Page) {
+  await waitForHydration(page);
   const tables = page.getByRole("table");
   await expect(tables).toHaveCount(1);
   return tables.first();

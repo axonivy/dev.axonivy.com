@@ -1,4 +1,5 @@
 import { expect, test, type APIRequestContext } from "@playwright/test";
+import { waitForHydration } from "./hydration";
 
 type Artifact = { name: string; url: string; permalink: string };
 type DownloadRelease = {
@@ -31,6 +32,7 @@ test("prioritizes Docker and updates the selected engine artifact", async ({
   expect(selectableArtifact).toBeTruthy();
 
   await page.goto("/download");
+  await waitForHydration(page);
   const engineCard = page
     .getByText(`Axon Ivy Engine ${current.versionShort}`, { exact: true })
     .locator("xpath=ancestor::*[@data-user-os][1]");
@@ -66,6 +68,7 @@ test("shows real permalinks for downloadable engine artifacts", async ({
   expect(artifactsWithPermalinks.length).toBeGreaterThan(0);
 
   await page.goto("/download");
+  await waitForHydration(page);
   const engineCard = page
     .getByText(`Axon Ivy Engine ${current.versionShort}`, { exact: true })
     .locator("xpath=ancestor::*[@data-user-os][1]");
@@ -89,6 +92,7 @@ test("uses the artifact for the VS Code installation flow", async ({
   expect(extension).toBeTruthy();
 
   await page.goto("/download");
+  await waitForHydration(page);
   const designerCard = page
     .getByText(`Axon Ivy Designer ${current.versionShort}`, { exact: true })
     .locator("xpath=ancestor::*[@data-user-os][1]");

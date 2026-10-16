@@ -11,7 +11,7 @@ test("loads real data from the live backend and renders the viewer", async ({
     page.getByRole("heading", { name: `Documentation ${VERSION}` }),
   ).toBeVisible({ timeout: DATA_TIMEOUT });
   await expect(
-    page.getByRole("button", { name: "ReadMe", exact: true }),
+    page.getByRole("link", { name: "ReadMe", exact: true }),
   ).toBeVisible();
 
   const iframe = page.locator(`iframe[title="${VERSION}"]`);
@@ -23,15 +23,12 @@ test("navigates to a document, updates the URL, and the browser back button retu
   page,
 }) => {
   await page.goto(`/doc/${VERSION}`);
-  const readMeButton = page.getByRole("button", {
-    name: "ReadMe",
-    exact: true,
-  });
-  await readMeButton.waitFor({ timeout: DATA_TIMEOUT });
-  await readMeButton.click();
+  const readMeLink = page.getByRole("link", { name: "ReadMe", exact: true });
+  await readMeLink.waitFor({ timeout: DATA_TIMEOUT });
+  await readMeLink.click();
   await expect(page).toHaveURL(`/doc/${VERSION}/en/readme`);
   await expect(
-    page.getByRole("button", { name: "ReadMe", exact: true }),
+    page.getByRole("link", { name: "ReadMe", exact: true }),
   ).toHaveClass(/font-semibold/);
 
   await page.goBack();
