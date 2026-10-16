@@ -1,9 +1,7 @@
 ---
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DeprecationMobileCard from "@/components/deprecation/deprecation-mobile-card.astro";
 import DeprecationStep from "@/components/deprecation/deprecation-step.astro";
-import Layout from "@/layouts/main.astro";
-import deprecated from "@/data/deprecation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -13,6 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { H4, H5 } from "@/components/ui/typography";
+import deprecated from "@/data/deprecation";
+import Layout from "@/layouts/main.astro";
 
 const deprecationSteps = [
   {
@@ -56,6 +56,7 @@ const deprecationSections = [
 ---
 
 <Layout
+  tabTitle="Deprecation & Removal"
   title="Deprecation & Removal"
   description={{
     before:

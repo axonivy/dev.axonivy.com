@@ -1,9 +1,9 @@
 ---
-import Header from "@/components/header.astro";
 import Footer from "@/components/footer.astro";
+import Header from "@/components/header.astro";
+import { Base, H1 } from "@/components/ui/typography";
 import "@/styles/global.css";
 import { Font } from "astro:assets";
-import { Base, H1 } from "@/components/ui/typography";
 
 type LinkedDescription = {
   before: string;
@@ -12,12 +12,13 @@ type LinkedDescription = {
 };
 
 interface Props {
+  tabTitle?: string;
   title?: string;
   description?: string | LinkedDescription;
   left?: boolean;
 }
 
-const { title, description, left } = Astro.props;
+const { tabTitle, title, description, left } = Astro.props;
 const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
 ---
 
@@ -32,7 +33,11 @@ const hasHeroBg = Boolean(title) && Astro.slots.has("hero-background");
     <link rel="manifest" href="/site.webmanifest" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Axon Ivy Developer</title>
+    <meta
+      property="og:title"
+      content={"Axon Ivy Developer" + (tabTitle ? ` - ${tabTitle}` : "")}
+    />
+    <title>Axon Ivy Developer {tabTitle ? `- ${tabTitle}` : ""}</title>
   </head>
   <body>
     <div class="flex min-h-screen flex-col">

@@ -1,9 +1,9 @@
 ---
-import Layout from "@/layouts/main.astro";
+import { HelpBox } from "@/components/help-box";
+import { ArchiveQuery, DownloadQuery } from "@/components/query-components";
 import { H3, H5 } from "@/components/ui/typography";
 import { CURRENT_VERSION } from "@/data/global-variables";
-import { ArchiveQuery, DownloadQuery } from "@/components/query-components";
-import { HelpBox } from "@/components/help-box";
+import Layout from "@/layouts/main.astro";
 import {
   IconFileDescription,
   IconMessageChatbot,
@@ -13,6 +13,7 @@ import {
 ---
 
 <Layout
+  tabTitle="Download"
   title={`Download Long Term Support ${CURRENT_VERSION}`}
   description={
     "Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them."
