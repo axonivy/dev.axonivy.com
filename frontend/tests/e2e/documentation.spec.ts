@@ -40,12 +40,9 @@ test("sorts LTS versions and assigns their lifecycle badges", async ({
   const ltsSection = page
     .getByRole("heading", { name: "LTS - Long Term Support" })
     .locator("xpath=..");
-  await expect(ltsSection.getByRole("heading", { level: 5 })).toHaveCount(
-    expectedVersions.length,
+  await expect(ltsSection.getByRole("heading", { level: 5 })).toHaveText(
+    expectedVersions.map((version) => `Version ${version}`),
   );
-  expect(
-    await ltsSection.getByRole("heading", { level: 5 }).allTextContents(),
-  ).toEqual(expectedVersions.map((version) => `Version ${version}`));
 
   for (const [index, version] of expectedVersions.entries()) {
     const versionHeader = ltsSection

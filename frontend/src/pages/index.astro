@@ -6,10 +6,12 @@ import {
   IconCopy,
   IconInfoCircle,
 } from "@tabler/icons-astro";
-import { CURRENT_VERSION } from "@/data/global-variables";
 import { buttonVariants } from "@/components/ui/button";
+import { getVersions } from "@/lib/backend";
 import { cn } from "@/lib/utils";
 import Processflowbackground from "@/components/processflowbackground.astro";
+
+const { current: currentVersion } = await getVersions();
 ---
 
 <Layout
@@ -59,12 +61,12 @@ import Processflowbackground from "@/components/processflowbackground.astro";
       </a>
       <button
         type="button"
-        data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${CURRENT_VERSION}`}
+        data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${currentVersion}`}
         aria-label="Copy Docker command"
         class="group font-code text-code relative flex max-w-full flex-row items-end justify-center gap-2 hover:cursor-pointer"
       >
         <span class="min-w-0 text-center">
-          ~ docker run -p 8080:8080 axonivy/axonivy-engine:{CURRENT_VERSION}
+          ~ docker run -p 8080:8080 axonivy/axonivy-engine:{currentVersion}
           <IconCheck
             data-check-icon
             aria-hidden="true"

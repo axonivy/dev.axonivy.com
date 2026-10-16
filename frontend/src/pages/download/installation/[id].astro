@@ -8,12 +8,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import guides, { type InstallationGuide } from "@/data/installation-guides";
+import getInstallationGuides, {
+  type InstallationGuide,
+} from "@/data/installation-guides";
 import Layout from "@/layouts/news.astro";
+import { getVersions } from "@/lib/backend";
 
-type GuideId = keyof typeof guides;
+type GuideId = keyof ReturnType<typeof getInstallationGuides>;
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const { current: currentVersion } = await getVersions();
+  const guides = getInstallationGuides(currentVersion);
   const engineGuideIds = [
     "engine-windows",
     "engine-linux",
@@ -22,19 +27,20 @@ export function getStaticPaths() {
 
   const guidePaths = Object.entries(guides).map(([id, guide]) => ({
     params: { id },
-    props: { guideId: id as GuideId, guide },
+    props: { guideId: id as GuideId, guide, currentVersion },
   }));
   const enginePaths = engineGuideIds.map((id) => ({
     params: { id },
-    props: { guideId: id, guide: guides.engine },
+    props: { guideId: id, guide: guides.engine, currentVersion },
   }));
 
   return [...guidePaths, ...enginePaths];
 }
 
-const { guideId, guide } = Astro.props as {
+const { guideId, guide, currentVersion } = Astro.props as {
   guideId: GuideId;
   guide: InstallationGuide;
+  currentVersion: string;
 };
 
 if (!guide) {
@@ -65,6 +71,7 @@ if (!guide) {
     <InstallationScrollSpy
       guideId={guideId}
       guide={guide}
+      currentVersion={currentVersion}
       client:only="react"
     />
   </div>

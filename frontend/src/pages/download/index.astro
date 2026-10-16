@@ -1,26 +1,60 @@
 ---
+import type {
+  ArchiveData,
+  UiArchiveResponse,
+} from "@/components/download/archive/archive";
+import Archive from "@/components/download/archive/archive";
+import type { UiDownloadResponse } from "@/components/download/download";
+import Download from "@/components/download/download";
 import { HelpBox } from "@/components/help-box";
-import { ArchiveQuery, DownloadQuery } from "@/components/query-components";
 import { H3, H5 } from "@/components/ui/typography";
-import { CURRENT_VERSION } from "@/data/global-variables";
 import Layout from "@/layouts/main.astro";
+import { fetchBackend, getVersions } from "@/lib/backend";
 import {
   IconFileDescription,
   IconMessageChatbot,
   IconMessageCircle,
   IconMessageCircleQuestion,
 } from "@tabler/icons-react";
+
+const downloadData = await fetchBackend<UiDownloadResponse>("/ui/download");
+
+function fetchArchive(version?: string) {
+  return fetchBackend<UiArchiveResponse>(
+    version ? `/ui/archive/${encodeURIComponent(version)}` : "/ui/archive",
+  );
+}
+
+const overview = await fetchArchive();
+const versionIds = Object.values(overview.categorizedVersions)
+  .flat()
+  .map((version) => version.id);
+const releasesByVersion = Object.fromEntries(
+  await Promise.all(
+    versionIds.map(
+      async (id) => [id, (await fetchArchive(id)).releaseInfos] as const,
+    ),
+  ),
+);
+
+const archiveData: ArchiveData = {
+  categorizedVersions: overview.categorizedVersions,
+  currentMajorVersion: overview.currentMajorVersion,
+  releasesByVersion,
+};
+
+const { current } = await getVersions();
 ---
 
 <Layout
   tabTitle="Download"
-  title={`Download Long Term Support ${CURRENT_VERSION}`}
+  title={`Download Long Term Support ${current}`}
   description={
     "Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them."
   }
 >
   <div class="flex flex-col gap-24">
-    <DownloadQuery client:load />
+    <Download data={downloadData} client:load />
 
     <div
       id="archive"
@@ -33,7 +67,7 @@ import {
           engine.
         </H5>
       </div>
-      <ArchiveQuery client:load />
+      <Archive data={archiveData} client:load />
     </div>
   </div>
 
