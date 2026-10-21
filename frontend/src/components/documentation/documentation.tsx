@@ -1,18 +1,16 @@
-import { Fragment } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { H4, H5, P } from "@/components/ui/typography";
 import {
   IconArrowRight,
   IconBook2,
+  IconListDetails,
   IconNotes,
   IconRoute,
-  IconListDetails,
 } from "@tabler/icons-react";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Card, CardContent } from "@/components/ui/card";
-import { DocumentationSkeleton } from "@/components/skeletons/documentation-skeleton";
-import { H4, H5, P } from "@/components/ui/typography";
+import { Fragment } from "react";
 
 type DocLink = { url: string; text: string };
 
@@ -65,35 +63,13 @@ const getBadge = (
     : { label: "Maintenance", variant: "green" };
 };
 
-export default function Documentation({ archived }: { archived?: boolean }) {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["documentation"],
-    queryFn: async () => {
-      const response = await fetch("/ui/doc", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      return (await response.json()) as UiDocResponse;
-    },
-  });
-
-  if (isLoading) {
-    return <DocumentationSkeleton />;
-  }
-
-  if (error) {
-    return (
-      <P className="text-destructive">
-        Failed to load documentation links: {error.message}
-      </P>
-    );
-  }
-
+export default function Documentation({
+  data,
+  archived,
+}: {
+  data: UiDocResponse;
+  archived?: boolean;
+}) {
   if (!data) {
     return <P className="text-n900">No documentation data available.</P>;
   }

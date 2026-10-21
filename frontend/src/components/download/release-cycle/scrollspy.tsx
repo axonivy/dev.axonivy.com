@@ -9,9 +9,13 @@ import { IconCircleCheck, IconBulb } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
 import ReleaseCycleIllustration from "@/assets/release-cycle-illustration.svg?react";
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
-import { CURRENT_VERSION, LTS_VERSION } from "@/data/global-variables";
-
-export default function ReleaseCycleScrollspy() {
+export default function ReleaseCycleScrollspy({
+  currentVersion,
+  ltsVersion,
+}: {
+  currentVersion: string;
+  ltsVersion: string;
+}) {
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
@@ -57,7 +61,7 @@ export default function ReleaseCycleScrollspy() {
                   Current Long Term Support versions:
                   <span className="font-normal">
                     {" "}
-                    {LTS_VERSION} / {CURRENT_VERSION}
+                    {ltsVersion} / {currentVersion}
                   </span>
                 </Base>
               </div>

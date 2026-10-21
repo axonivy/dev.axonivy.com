@@ -9,6 +9,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Layout from "@/layouts/news.astro";
+import { getVersions } from "@/lib/backend";
+
+const { current, lts } = await getVersions();
 ---
 
 <Layout tabTitle="Release Cycle">
@@ -31,6 +34,10 @@ import Layout from "@/layouts/news.astro";
       </Breadcrumb>
     </div>
 
-    <ReleaseCycleScrollspy client:load />
+    <ReleaseCycleScrollspy
+      currentVersion={current}
+      ltsVersion={lts}
+      client:load
+    />
   </div>
 </Layout>
