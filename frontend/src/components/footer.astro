@@ -3,22 +3,32 @@ import AxonIvyDevLogo from "@/assets/axonivy-dev-logo.svg";
 import Navbar from "@/components/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { P } from "@/components/ui/typography";
+import { localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
+import { getLanguageUrls } from "@/translation/urls";
 import {
   IconBrandDocker,
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandYoutube,
 } from "@tabler/icons-astro";
-import { P } from "@/components/ui/typography";
+
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
+const languageUrls = getLanguageUrls(Astro.url);
 
 const currentYear = new Date().getFullYear();
+const [beforeLts, ltsText, betweenLinks, leadingEdgeText, afterLeadingEdge] =
+  t("footer.info").split(/<a>|<\/a>/);
 
 const footerContent = {
   copyright: `© ${currentYear} Axon Ivy Inc.`,
-  downloadLink: "/download",
+  downloadLink: localePath(lang, "/download"),
   releaseLinks: {
-    longTermSupport: { label: "Long Term Support", href: "/download" },
-    leadingEdge: { label: "Leading Edge", href: "/download" },
+    longTermSupport: { href: localePath(lang, "/download") },
+    leadingEdge: { href: localePath(lang, "/download") },
   },
   website: { label: "www.axonivy.com", href: "https://www.axonivy.com" },
   legalLinks: [
@@ -53,26 +63,26 @@ const footerContent = {
 <div class="border-n100 w-full border-t">
   <div class="relative mx-auto flex w-full flex-col gap-8 px-4 py-8 md:max-w-6xl">
     <div class="flex flex-col items-center gap-4 md:hidden">
-      <a href="/">
+      <a href={localePath(lang, "/")}>
         <AxonIvyDevLogo width={160} height={40} />
       </a>
       <div class="w-full max-w-md text-center">
         <P className="text-n900">
-          Get the latest stable{" "}
+          {beforeLts}
           <a
             href={footerContent.releaseLinks.longTermSupport.href}
             class="text-primary underline"
           >
-            {footerContent.releaseLinks.longTermSupport.label}
+            {ltsText}
           </a>{" "}
-          version of the Axon Ivy Platform - or download the{" "}
+          {betweenLinks}
           <a
             href={footerContent.releaseLinks.leadingEdge.href}
             class="text-primary underline"
           >
-            {footerContent.releaseLinks.leadingEdge.label}
+            {leadingEdgeText}
           </a>{" "}
-          version.
+          {afterLeadingEdge}
         </P>
       </div>
       <div>
@@ -80,35 +90,35 @@ const footerContent = {
           href={footerContent.downloadLink}
           class={buttonVariants({ variant: "default" })}
         >
-          Download
+          {t("common.download")}
         </a>
       </div>
     </div>
 
     <div class="hidden flex-col gap-4 md:flex">
       <div class="flex items-center justify-between">
-        <a href="/">
+        <a href={localePath(lang, "/")}>
           <AxonIvyDevLogo width={160} height={40} />
         </a>
-        <Navbar client:load />
+        <Navbar lang={lang} urls={languageUrls} client:load />
       </div>
       <div class="w-full max-w-md">
         <P className="text-n900">
-          Get the latest stable{" "}
+          {beforeLts}
           <a
             href={footerContent.releaseLinks.longTermSupport.href}
             class="text-primary underline"
           >
-            {footerContent.releaseLinks.longTermSupport.label}
+            {ltsText}
           </a>{" "}
-          version of the Axon Ivy Platform - or download the{" "}
+          {betweenLinks}
           <a
             href={footerContent.releaseLinks.leadingEdge.href}
             class="text-primary underline"
           >
-            {footerContent.releaseLinks.leadingEdge.label}
+            {leadingEdgeText}
           </a>{" "}
-          version.
+          {afterLeadingEdge}
         </P>
       </div>
       <div class="flex flex-row justify-between">
@@ -116,7 +126,7 @@ const footerContent = {
           href={footerContent.downloadLink}
           class={buttonVariants({ variant: "default" })}
         >
-          Download
+          {t("common.download")}
         </a>
         <a
           href={footerContent.website.href}

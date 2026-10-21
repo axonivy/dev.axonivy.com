@@ -25,6 +25,10 @@ import type {
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
 import { DockerCommandBlock } from "@/components/download/installation/docker-command-block";
 import { HelpBox } from "@/components/help-box";
+import { localePath } from "@/translation/language";
+import "@/translation/ui";
+import type { Lang } from "@/translation/ui";
+import { Trans, useTranslation } from "react-i18next";
 
 const installationImages = import.meta.glob(
   "/src/assets/installation/**/*.{png,jpg,jpeg,webp}",
@@ -91,13 +95,16 @@ type InstallationScrollSpyProps = {
   guideId: string;
   guide: InstallationGuide;
   currentVersion: string;
+  lang: Lang;
 };
 
 export default function InstallationScrollSpy({
   guideId,
   guide,
   currentVersion,
+  lang,
 }: InstallationScrollSpyProps) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const [downloadUrl] = useState(() => safeUrl(queryParameter("downloadUrl")));
   const [docLink] = useState(() => safeUrl(queryParameter("docLink")));
 
@@ -114,25 +121,32 @@ export default function InstallationScrollSpy({
         <ScrollSpyViewport className="p-4">
           <div className="flex flex-col gap-4">
             <H3>{guide.title}</H3>
-            <H6>Step-by-step guide</H6>
+            <H6>{t("installation.stepByStep")}</H6>
             <Base className="text-n900">
-              Follow these steps to download and install Axon Ivy{" "}
-              {guide.product}{" "}
               {guide.type === "Docker" ? (
-                <>
-                  for{" "}
-                  <a
-                    href={downloadUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary underline"
-                  >
-                    Docker
-                  </a>
-                </>
+                <Trans
+                  i18nKey="installation.introDocker"
+                  t={t}
+                  values={{ product: guide.product }}
+                  components={{
+                    docker: (
+                      <a
+                        href={downloadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary underline"
+                      />
+                    ),
+                  }}
+                />
               ) : guide.type !== "Engine" ? (
-                `for ${guide.type}`
-              ) : null}
+                t("installation.introPlatform", {
+                  product: guide.product,
+                  platform: guide.type,
+                })
+              ) : (
+                t("installation.intro", { product: guide.product })
+              )}
             </Base>
             {guide.hint ? (
               <div className="border-info bg-info-bg flex flex-col gap-4 rounded-md border p-4">
@@ -190,6 +204,7 @@ export default function InstallationScrollSpy({
                   <div className="w-full">
                     <DockerCommandBlock
                       currentVersion={currentVersion}
+                      lang={lang}
                       command={dockerCommand.title
                         .split(/\s*<br\s*\/?>\s*/i)
                         .join("\n")}
@@ -205,21 +220,23 @@ export default function InstallationScrollSpy({
                     icon={IconDownload}
                     external={false}
                   >
-                    Download Axon Ivy {guide.product}
+                    {t("installation.actions.download", {
+                      product: guide.product,
+                    })}
                   </GuideLinkButton>
                 ) : null}
                 {(guideId === "docker" || guideId === "designer-vscode") &&
                 step.id === 1 &&
                 step.url ? (
                   <GuideLinkButton href={step.url} icon={IconBook2}>
-                    Official guide
+                    {t("installation.actions.officialGuide")}
                   </GuideLinkButton>
                 ) : null}
                 {guideId === "designer-vscode" &&
                 step.id === 2 &&
                 downloadUrl ? (
                   <GuideLinkButton href={downloadUrl} icon={IconBrandVscode}>
-                    Open VS Code Marketplace
+                    {t("installation.actions.vscodeMarketplace")}
                   </GuideLinkButton>
                 ) : null}
                 {stepIndex < guide.steps.length - 1 ? <Separator /> : null}
@@ -229,28 +246,35 @@ export default function InstallationScrollSpy({
           {guideId.startsWith("designer-") ? (
             <HelpBox
               icon={IconMap2}
+              text={
+                <Trans
+                  i18nKey="common.helpGetStarted"
+                  t={t}
+                  components={{ lineBreak: <br className="hidden md:block" /> }}
+                />
+              }
               links={[
                 {
                   icon: IconMessageChatbot,
-                  title: "Tutorials",
-                  description: "Learn how to use the Designer.",
+                  title: t("installation.help.tutorials.title"),
+                  description: t("installation.help.tutorials.description"),
                   href: "https://www.axonivy.com/tutorials",
-                  linkLabel: "Go to Tutorials",
+                  linkLabel: t("installation.help.tutorials.linkLabel"),
                   external: true,
                 },
                 {
                   icon: IconFileDescription,
-                  title: "Documentation",
-                  description: "Find guides and references.",
-                  href: "/doc",
-                  linkLabel: "Go to Documentation",
+                  title: t("installation.help.documentation.title"),
+                  description: t("installation.help.documentation.description"),
+                  href: localePath(lang, "/doc"),
+                  linkLabel: t("installation.help.documentation.linkLabel"),
                 },
               ]}
             />
           ) : null}
           {guideId === "engine" && docLink ? (
             <GuideLinkButton href={docLink} icon={IconBook2}>
-              Getting Started
+              {t("installation.actions.gettingStarted")}
             </GuideLinkButton>
           ) : null}
           {guideId === "docker" ? (
@@ -258,7 +282,7 @@ export default function InstallationScrollSpy({
               href={guide.steps.at(-1)?.url}
               icon={IconBrandDocker}
             >
-              Getting Started with Docker
+              {t("installation.actions.gettingStartedDocker")}
             </GuideLinkButton>
           ) : null}
         </ScrollSpyViewport>

@@ -1,5 +1,6 @@
 allowBuilds:
   "@scarf/scarf": false
+  "@swc/core": true
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:

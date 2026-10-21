@@ -1,5 +1,8 @@
 ---
 import Layout from "@/layouts/news.astro";
+import { getLanguagePaths } from "@/translation/language";
+
+export const getStaticPaths = getLanguagePaths;
 ---
 
 <Layout>

@@ -16,6 +16,9 @@ import {
   IconMessageCircle,
   IconMessageCircleQuestion,
 } from "@tabler/icons-react";
+import { getLanguagePaths } from "@/translation/language";
+
+export const getStaticPaths = getLanguagePaths;
 
 const downloadData = await fetchBackend<UiDownloadResponse>("/ui/download");
 

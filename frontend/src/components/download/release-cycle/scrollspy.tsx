@@ -9,56 +9,63 @@ import { IconCircleCheck, IconBulb } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
 import ReleaseCycleIllustration from "@/assets/release-cycle-illustration.svg?react";
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
+import "@/translation/ui";
+import type { Lang } from "@/translation/ui";
+import { Trans, useTranslation } from "react-i18next";
+
 export default function ReleaseCycleScrollspy({
   currentVersion,
   ltsVersion,
+  lang,
 }: {
   currentVersion: string;
   ltsVersion: string;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
+
   return (
     <div className="flex flex-col">
       <ScrollSpy offset={200} className="h-auto w-full gap-8">
         <ScrollSpyNav className="bg-background sticky top-40 z-10 hidden shrink-0 self-start pt-2.5 md:flex">
-          <ScrollSpyLink value="LTS">Long Term Support (LTS)</ScrollSpyLink>
-          <ScrollSpyLink value="LE">Leading Edge (LE)</ScrollSpyLink>
-          <ScrollSpyLink value="Milestones">Milestones</ScrollSpyLink>
-          <ScrollSpyLink value="maintenance">Maintenance support</ScrollSpyLink>
+          <ScrollSpyLink value="LTS">
+            {t("releaseCycle.lts.title")}
+          </ScrollSpyLink>
+          <ScrollSpyLink value="LE">{t("releaseCycle.le.title")}</ScrollSpyLink>
+          <ScrollSpyLink value="Milestones">
+            {t("releaseCycle.milestones.title")}
+          </ScrollSpyLink>
+          <ScrollSpyLink value="maintenance">
+            {t("releaseCycle.maintenance.nav")}
+          </ScrollSpyLink>
           <ScrollSpyLink value="illustration">
-            Release cycle illustration
+            {t("releaseCycle.illustration")}
           </ScrollSpyLink>
         </ScrollSpyNav>
         <ScrollSpyViewport className="p-4">
           <ScrollSpySection value="LTS" className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <H3>Release cycle</H3>
-              <H6>How does it work?</H6>
+              <H3>{t("releaseCycle.title")}</H3>
+              <H6>{t("releaseCycle.subtitle")}</H6>
               <Base className="text-n900">
-                The releasing of the Axon Ivy Platform follows a well defined
-                release cycle which clearly differs between{" "}
-                <span className="font-semibold">Long Term Support (LTS)</span>{" "}
-                and <span className="font-semibold">Leading Edge (LE)</span>{" "}
-                versions.
+                <Trans
+                  i18nKey="releaseCycle.intro"
+                  t={t}
+                  components={{ bold: <span className="font-semibold" /> }}
+                />
               </Base>
             </div>
             <Separator />
             <div className="flex flex-col gap-4">
-              <H4>Long Term Support (LTS)</H4>
+              <H4>{t("releaseCycle.lts.title")}</H4>
               <Base className="text-n900">
-                A LTS release is the most stable version. During the maintenance
-                period of an LTS release we provide several update releases
-                which contains mainly bug fixes and tiny improvements.{" "}
+                {t("releaseCycle.lts.description")}
               </Base>
-              <Base className="text-n900">
-                We always support the two latest LTS releases. This protects a
-                running, productive environment - an upgrade to a new update
-                release comes with minimal risk. New LTS releases will always
-                start with an even major version number.
-              </Base>
+              <Base className="text-n900">{t("releaseCycle.lts.support")}</Base>
               <div className="flex flex-row items-center gap-2">
                 <IconCircleCheck className="text-primary size-4" />
                 <Base className="text-n900 font-semibold">
-                  Current Long Term Support versions:
+                  {t("releaseCycle.lts.current")}
                   <span className="font-normal">
                     {" "}
                     {ltsVersion} / {currentVersion}
@@ -70,22 +77,17 @@ export default function ReleaseCycleScrollspy({
           </ScrollSpySection>
           <ScrollSpySection value="LE" className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <H4>Leading Edge (LE)</H4>
+              <H4>{t("releaseCycle.le.title")}</H4>
               <Base className="text-n900">
-                As early adopter you are able to benefit already from the newest
-                features with our Leading Edge release. We can only support the
-                latest Leading Edge release, because of this you need to be
-                ready for frequent migrations!{" "}
+                {t("releaseCycle.le.description")}
               </Base>
               <Base className="text-n900">
-                Taking the leading edge road is suitable if you start new
-                projects. Leading Edge releases will start with an odd version
-                number.
+                {t("releaseCycle.le.newProjects")}
               </Base>
               <div className="flex flex-row items-center gap-2">
                 <IconCircleCheck className="text-primary size-4" />
                 <Base className="text-n900 font-semibold">
-                  Current Leading Edge version:
+                  {t("releaseCycle.le.current")}
                   <span className="font-normal"> 13.2</span>
                 </Base>
               </div>
@@ -94,15 +96,9 @@ export default function ReleaseCycleScrollspy({
                   <IconBulb className="size-8" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <H4>When to upgrade?</H4>
+                  <H4>{t("releaseCycle.upgrade.title")}</H4>
                   <Base className="text-n900">
-                    Consider upgrading to a supported LTS version or the latest
-                    LE version release for ongoing updates and official support.
-                    When a new LTS version is released, the third latest LTS
-                    version will continue to receive support for an additional
-                    3-month grace period until the end of the month, before it
-                    is no longer supported, meaning no more updates or security
-                    patches will be provided.
+                    {t("releaseCycle.upgrade.description")}
                   </Base>
                 </div>
               </div>
@@ -111,34 +107,29 @@ export default function ReleaseCycleScrollspy({
           </ScrollSpySection>
           <ScrollSpySection value="Milestones" className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <H4>Milestones</H4>
+              <H4>{t("releaseCycle.milestones.title")}</H4>
               <Base className="text-n900">
-                If you want to build a new project with the latest Leading Edge
-                features without the instability of nightly releases, a
-                milestone release may be the right choice. Milestone releases
-                are published periodically during development and provide stable
-                snapshots of the Leading Edge codebase at a specific point in
-                time. By staying on the same milestone release, you get a
-                consistent set of features and behavior.
+                {t("releaseCycle.milestones.description")}
               </Base>
             </div>
             <Separator />
           </ScrollSpySection>
           <ScrollSpySection value="maintenance" className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <H4>Extended Maintenance Support</H4>
+              <H4>{t("releaseCycle.maintenance.title")}</H4>
               <Base className="text-n900">
-                For versions that have reached the end of their official support
-                period, we understand that some users may still require
-                assistance for their specific, unsupported version. We offer an
-                Extended Maintenance Support Contract to provide continued
-                support in such cases. To inquire about this contract and
-                receive more information, don't hesitate to contact our support
-                team at{" "}
-                <a className="text-primary" href="mailto:support@axonivy.com">
-                  support@axonivy.com
-                </a>
-                .
+                <Trans
+                  i18nKey="releaseCycle.maintenance.description"
+                  t={t}
+                  components={{
+                    mail: (
+                      <a
+                        className="text-primary"
+                        href="mailto:support@axonivy.com"
+                      />
+                    ),
+                  }}
+                />
               </Base>
             </div>
             <Separator />
@@ -148,7 +139,7 @@ export default function ReleaseCycleScrollspy({
             className="flex flex-col gap-8"
           >
             <div>
-              <H4>Release cycle illustration</H4>
+              <H4>{t("releaseCycle.illustration")}</H4>
               <ReleaseCycleIllustration className="h-auto w-full max-w-svw" />
             </div>
           </ScrollSpySection>

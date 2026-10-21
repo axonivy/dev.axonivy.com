@@ -10,17 +10,18 @@ import { buttonVariants } from "@/components/ui/button";
 import { getVersions } from "@/lib/backend";
 import { cn } from "@/lib/utils";
 import Processflowbackground from "@/components/processflowbackground.astro";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
+import { getLanguagePaths, localePath } from "@/translation/language";
+
+export const getStaticPaths = getLanguagePaths;
 
 const { current: currentVersion } = await getVersions();
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
 ---
 
-<Layout
-  title="Build and automate business processes with Axon Ivy"
-  description={
-    "The open BPM platform to build enterprise-grade applications.\nModel. Automate. Integrate. All in one."
-  }
-  left={true}
->
+<Layout title={t("home.title")} description={t("home.description")} left={true}>
   <Processflowbackground
     slot="hero-background"
     class="absolute inset-0 blur-[1.5px]"
@@ -29,7 +30,7 @@ const { current: currentVersion } = await getVersions();
   <div class="flex flex-col items-center gap-4 leading-loose md:items-start">
     <div class="flex max-w-3xs flex-row justify-center gap-4 md:justify-start">
       <a
-        href="download"
+        href={localePath(lang, "/download")}
         class={cn(
           buttonVariants({
             variant: "default",
@@ -38,23 +39,26 @@ const { current: currentVersion } = await getVersions();
           }),
         )}
       >
-        Get Started
+        {t("home.getStarted")}
         <IconArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
       </a>
       <a
-        href="/news"
+        href={localePath(lang, "/news")}
         class={cn(
           buttonVariants({ variant: "outline", size: "lg", className: "px-6" }),
         )}
       >
-        Latest News
+        {t("home.latestNews")}
       </a>
     </div>
     <div class="flex items-start gap-2 md:items-center">
       <a
-        href="/download/installation/docker?downloadUrl=https%3A%2F%2Fhub.docker.com%2Fr%2Faxonivy%2Faxonivy-engine"
-        aria-label="View Docker installation guide"
-        title="View Docker installation guide"
+        href={localePath(
+          lang,
+          "/download/installation/docker?downloadUrl=https%3A%2F%2Fhub.docker.com%2Fr%2Faxonivy%2Faxonivy-engine",
+        )}
+        aria-label={t("ariaLabels.dockerInstallation")}
+        title={t("ariaLabels.dockerInstallation")}
         class="text-code hover:text-primary mt-1 shrink-0 transition-colors md:mt-0"
       >
         <IconInfoCircle aria-hidden="true" class="size-4" />
@@ -62,7 +66,7 @@ const { current: currentVersion } = await getVersions();
       <button
         type="button"
         data-copy-command={`docker run -p 8080:8080 axonivy/axonivy-engine:${currentVersion}`}
-        aria-label="Copy Docker command"
+        aria-label={t("ariaLabels.dockerCopy")}
         class="group font-code text-code relative flex max-w-full flex-row items-end justify-center gap-2 hover:cursor-pointer"
       >
         <span class="min-w-0 text-center">

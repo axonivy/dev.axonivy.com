@@ -8,57 +8,67 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import getInstallationGuides, {
-  type InstallationGuide,
-} from "@/data/installation-guides";
+import getInstallationGuides from "@/data/installation-guides";
 import Layout from "@/layouts/news.astro";
 import { getVersions } from "@/lib/backend";
+import { localePath, localizePaths } from "@/translation/language";
+import i18next, { type Lang } from "@/translation/ui";
 
-type GuideId = keyof ReturnType<typeof getInstallationGuides>;
+type GuideKey = keyof ReturnType<typeof getInstallationGuides>;
 
 export async function getStaticPaths() {
   const { current: currentVersion } = await getVersions();
-  const guides = getInstallationGuides(currentVersion);
+  const guideKeys = Object.keys(
+    getInstallationGuides(currentVersion, i18next.t),
+  ) as GuideKey[];
   const engineGuideIds = [
     "engine-windows",
     "engine-linux",
     "engine-mac",
   ] as const;
 
-  const guidePaths = Object.entries(guides).map(([id, guide]) => ({
+  const guidePaths = guideKeys.map((id) => ({
     params: { id },
-    props: { guideId: id as GuideId, guide, currentVersion },
+    props: { guideId: id, guideKey: id, currentVersion },
   }));
   const enginePaths = engineGuideIds.map((id) => ({
     params: { id },
-    props: { guideId: id, guide: guides.engine, currentVersion },
+    props: { guideId: id, guideKey: "engine" as GuideKey, currentVersion },
   }));
 
-  return [...guidePaths, ...enginePaths];
+  return localizePaths([...guidePaths, ...enginePaths]);
 }
 
-const { guideId, guide, currentVersion } = Astro.props as {
-  guideId: GuideId;
-  guide: InstallationGuide;
+const { guideId, guideKey, currentVersion } = Astro.props as {
+  guideId: string;
+  guideKey: GuideKey;
   currentVersion: string;
 };
 
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
+const guide = getInstallationGuides(currentVersion, t)[guideKey];
+
 if (!guide) {
-  return Astro.redirect("/download");
+  return Astro.redirect(localePath(lang, "/download"));
 }
 ---
 
-<Layout tabTitle="Installation Guide">
+<Layout tabTitle={t("installation.tabTitle")}>
   <div class="flex flex-col">
     <div class="bg-background before:bg-background sticky top-24 z-20 py-2 pb-8 before:absolute before:inset-x-0 before:-top-16 before:h-16 before:content-['']">
       <Breadcrumb className="px-3">
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink href={localePath(lang, "/")}>
+              {t("nav.home")}
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/download">Download</BreadcrumbLink>
+            <BreadcrumbLink href={localePath(lang, "/download")}>
+              {t("common.download")}
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -72,6 +82,7 @@ if (!guide) {
       guideId={guideId}
       guide={guide}
       currentVersion={currentVersion}
+      lang={lang}
       client:only="react"
     />
   </div>

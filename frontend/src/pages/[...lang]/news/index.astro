@@ -20,6 +20,9 @@ import {
   IconStar,
 } from "@tabler/icons-astro";
 import { getCollection } from "astro:content";
+import { getLanguagePaths } from "@/translation/language";
+
+export const getStaticPaths = getLanguagePaths;
 
 const releases = (await getCollection("news")).sort(
   (left, right) =>

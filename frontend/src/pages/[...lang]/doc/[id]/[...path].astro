@@ -4,6 +4,7 @@ import LegacyDocumentation, {
 } from "@/components/documentation/legacy-documentation";
 import Layout from "@/layouts/news.astro";
 import { fetchLegacyDocData } from "@/lib/backend";
+import { localizePaths } from "@/translation/language";
 
 export async function getStaticPaths() {
   const perVersion = await Promise.all(
@@ -30,7 +31,7 @@ export async function getStaticPaths() {
       ];
     }),
   );
-  return perVersion.flat();
+  return localizePaths(perVersion.flat());
 }
 
 const { legacyDocData, activeUrl } = Astro.props;

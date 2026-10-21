@@ -1,0 +1,108 @@
+---
+import { HelpBox } from "@/components/help-box";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { H4 } from "@/components/ui/typography";
+import Layout from "@/layouts/main.astro";
+import { IconCircleCheck } from "@tabler/icons-astro";
+import { IconHeadset, IconMail, IconTicket } from "@tabler/icons-react";
+import { getLanguagePaths } from "@/translation/language";
+import i18next from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const t = i18next.getFixedT(Astro.currentLocale ?? "en");
+
+const supportInfo = [
+  {
+    title: t("support.information.product.title"),
+    description: t("support.information.product.description"),
+  },
+  {
+    title: t("support.information.version.title"),
+    description: t("support.information.version.description"),
+  },
+  {
+    title: t("support.information.problem.title"),
+    description: t("support.information.problem.description"),
+  },
+  {
+    title: t("support.information.reproduction.title"),
+    description: t("support.information.reproduction.description"),
+  },
+  {
+    title: t("support.information.logs.title"),
+    description: t("support.information.logs.description"),
+  },
+  {
+    title: t("support.information.screenshots.title"),
+    description: t("support.information.screenshots.description"),
+  },
+  {
+    title: t("support.information.configuration.title"),
+    description: t("support.information.configuration.description"),
+  },
+];
+---
+
+<Layout
+  tabTitle={t("support.title")}
+  title={t("support.title")}
+  description={t("support.description")}
+>
+  <div class="flex flex-col gap-4">
+    <H4>
+      {t("support.informationHeading")}{" "}
+      <span class="font-normal">{t("support.optionalNote")}</span>
+    </H4>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {supportInfo.map((info, index) => (
+        <Card
+          className={
+            index === supportInfo.length - 1 && supportInfo.length % 2 !== 0
+              ? "md:col-span-2"
+              : ""
+          }
+        >
+          <CardHeader className="flex flex-row gap-4 w-full">
+            <div class="text-primary mt-1">
+              <IconCircleCheck class="size-4 shrink-0" />
+            </div>
+            <div>
+              <CardTitle>{info.title}</CardTitle>
+              <CardDescription>{info.description}</CardDescription>
+            </div>
+          </CardHeader>
+        </Card>
+      ))}
+    </div>
+  </div>
+  <HelpBox
+    icon={IconHeadset}
+    tone="yellow"
+    title={t("support.contact.title")}
+    text={t("support.contact.text")}
+    links={[
+      {
+        icon: IconTicket,
+        title: t("support.contact.ticket.title"),
+        description: t("support.contact.ticket.description"),
+        href: "https://support.axonivy.com/",
+        linkLabel: t("support.contact.ticket.linkLabel"),
+        external: true,
+      },
+      {
+        icon: IconMail,
+        title: t("support.contact.email.title"),
+        description: t("support.contact.email.description"),
+        href: "mailto:support@axonivy.com",
+        linkLabel: "support@axonivy.com",
+        arrow: false,
+      },
+    ]}
+  />
+</Layout>

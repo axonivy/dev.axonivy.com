@@ -10,15 +10,18 @@ import {
 } from "@/components/ui/breadcrumb";
 import Layout from "@/layouts/news.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { localizePaths } from "@/translation/language";
 
 type NewsEntry = CollectionEntry<"news">;
 
 export async function getStaticPaths() {
   const releases = await getCollection("news");
-  return releases.map((release) => ({
-    params: { id: release.id },
-    props: { release },
-  }));
+  return localizePaths(
+    releases.map((release) => ({
+      params: { id: release.id },
+      props: { release },
+    })),
+  );
 }
 
 const { release } = Astro.props as { release: NewsEntry };

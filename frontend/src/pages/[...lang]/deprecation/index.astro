@@ -11,23 +11,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { H4, H5 } from "@/components/ui/typography";
-import deprecated from "@/data/deprecation";
+import getDeprecations from "@/data/deprecation";
 import Layout from "@/layouts/main.astro";
+import { getLanguagePaths } from "@/translation/language";
+import i18next from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const t = i18next.getFixedT(Astro.currentLocale ?? "en");
+const deprecated = getDeprecations(t);
 
 const deprecationSteps = [
+  { description: t("deprecation.steps.features") },
   {
-    description:
-      "We document features that we will remove in the future on this page.",
-  },
-  {
-    description:
-      "We document Public API that we will remove in future versions in the source code as",
+    description: t("deprecation.steps.api"),
     code: "@Deprecated(forRemoval=true)",
   },
-  {
-    description:
-      "We document features that we will remove on the Designer's UI in the Problem View as Warnings.",
-  },
+  { description: t("deprecation.steps.designer") },
 ];
 
 const currentVersion = 14;
@@ -42,36 +42,34 @@ const recentlyRemoved = deprecated.filter(
 
 const deprecationSections = [
   {
-    title: "Currently deprecated",
-    description:
-      "These features are deprecated and may be removed in future major releases:",
+    title: t("deprecation.sections.deprecated.title"),
+    description: t("deprecation.sections.deprecated.description"),
     items: currentlyDeprecated,
   },
   {
-    title: "Recently removed",
-    description: "These features have been removed in recent major releases:",
+    title: t("deprecation.sections.removed.title"),
+    description: t("deprecation.sections.removed.description"),
     items: recentlyRemoved,
   },
 ];
 ---
 
 <Layout
-  tabTitle="Deprecation & Removal"
-  title="Deprecation & Removal"
+  tabTitle={t("deprecation.title")}
+  title={t("deprecation.title")}
   description={{
-    before:
-      "You should avoid using deprecated Public API and features. When migrating to a new version check for ",
+    before: t("deprecation.introduction.before"),
     link: {
       href: "https://developer.axonivy.com/doc/12.0/en/public-api/deprecated-list.html",
-      label: "deprecated Public API",
+      label: t("deprecation.introduction.link"),
     },
-    after: " and features and replace them with the successor API or feature.",
+    after: t("deprecation.introduction.after"),
   }}
 >
   <div class="flex flex-col gap-12">
     <Card>
       <CardHeader>
-        <CardTitle>We deprecate and remove Features as follows:</CardTitle>
+        <CardTitle>{t("deprecation.processHeading")}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 md:flex-row md:gap-6">
         {deprecationSteps.map((step, index) => (
@@ -88,19 +86,19 @@ const deprecationSections = [
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[30%] whitespace-normal">
-                  Feature
+                  {t("deprecation.columns.feature")}
                 </TableHead>
                 <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
-                  Introduced in
+                  {t("deprecation.columns.introduced")}
                 </TableHead>
                 <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
-                  Deprecated in
+                  {t("deprecation.columns.deprecated")}
                 </TableHead>
                 <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
-                  Removed in
+                  {t("deprecation.columns.removed")}
                 </TableHead>
                 <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border w-[30%] whitespace-normal">
-                  Successor
+                  {t("deprecation.columns.successor")}
                 </TableHead>
               </TableRow>
             </TableHeader>
