@@ -9,22 +9,22 @@ importers:
   .:
     dependencies:
       '@astrojs/check':
-        specifier: ^0.9.10
+        specifier: ^0.9.12
         version: 0.9.12(@emnapi/runtime@1.11.3)(@typescript/typescript6@6.0.2)(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)
       '@astrojs/react':
-        specifier: ^7.0.0
+        specifier: ^7.1.1
         version: 7.1.1(@types/node@26.6.5)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(yaml@2.9.1)
       '@base-ui/react':
-        specifier: ^1.7.0
+        specifier: ^1.9.0
         version: 1.9.0(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@fontsource-variable/inter':
         specifier: ^5.3.0
         version: 5.3.0
       '@tabler/icons-astro':
-        specifier: ^3.46.0
+        specifier: ^3.49.0
         version: 3.49.0(astro@7.4.2(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
       '@tabler/icons-react':
-        specifier: ^3.46.0
+        specifier: ^3.49.0
         version: 3.49.0(react@19.3.1)
       class-variance-authority:
         specifier: ^0.7.1
@@ -36,50 +36,50 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       nuqs:
-        specifier: ^2.10.1
+        specifier: ^2.10.2
         version: 2.10.2(react@19.3.1)
       react:
-        specifier: ^19.2.8
+        specifier: ^19.3.1
         version: 19.3.1
       react-dom:
-        specifier: ^19.2.8
+        specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
       swagger-ui-dist:
-        specifier: ^5.32.14
+        specifier: ^5.34.0
         version: 5.34.0
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.13.0(jiti@2.7.0))
       '@playwright/test':
-        specifier: ^1.63.0
+        specifier: ^1.64.1
         version: 1.64.1
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
       '@types/node':
-        specifier: ^26.4.1
+        specifier: ^26.6.5
         version: 26.6.5
       '@types/react':
-        specifier: ^19.2.18
+        specifier: ^19.3.0
         version: 19.3.0
       '@types/react-dom':
-        specifier: ^19.2.4
+        specifier: ^19.3.0
         version: 19.3.0(@types/react@19.3.0)
       '@typescript/native':
         specifier: npm:typescript@^7.0.2
         version: typescript@7.0.2
       astro:
-        specifier: ^7.2.7
+        specifier: ^7.4.2
         version: 7.4.2(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1)
       eslint:
-        specifier: ^10.8.1
+        specifier: ^10.13.0
         version: 10.13.0(jiti@2.7.0)
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@10.13.0(jiti@2.7.0))
       eslint-plugin-astro:
-        specifier: ^3.1.0
+        specifier: ^3.2.1
         version: 3.2.1(@typescript-eslint/parser@8.72.0(@typescript/typescript6@6.0.2)(eslint@10.13.0(jiti@2.7.0)))(eslint-plugin-jsx-a11y@6.10.2(eslint@10.13.0(jiti@2.7.0)))(eslint@10.13.0(jiti@2.7.0))(typescript-eslint@8.72.0(@typescript/typescript6@6.0.2)(eslint@10.13.0(jiti@2.7.0)))
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
@@ -88,22 +88,22 @@ importers:
         specifier: ^7.1.1
         version: 7.1.1(eslint@10.13.0(jiti@2.7.0))
       globals:
-        specifier: ^17.12.0
+        specifier: ^17.13.0
         version: 17.13.0
       prettier:
-        specifier: ^3.9.6
+        specifier: ^3.9.10
         version: 3.9.10
       prettier-plugin-astro:
-        specifier: ^1.0.0
+        specifier: ^1.1.1
         version: 1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10)
       prettier-plugin-tailwindcss:
         specifier: ^0.8.1
         version: 0.8.1(prettier-plugin-astro@1.1.1(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(prettier@3.9.10))(prettier@3.9.10)
       shadcn:
-        specifier: ^4.17.0
+        specifier: ^4.22.1
         version: 4.22.1
       sharp:
-        specifier: ^0.35.3
+        specifier: ^0.35.5
         version: 0.35.5(@types/node@26.6.5)
       tailwindcss:
         specifier: ^4.3.3
@@ -115,13 +115,13 @@ importers:
         specifier: npm:@typescript/typescript6@^6.0.2
         version: '@typescript/typescript6@6.0.2'
       typescript-eslint:
-        specifier: ^8.67.0
+        specifier: ^8.72.0
         version: 8.72.0(@typescript/typescript6@6.0.2)(eslint@10.13.0(jiti@2.7.0))
       vite-plugin-svgr:
         specifier: ^5.2.0
         version: 5.2.0(@typescript/typescript6@6.0.2)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
       vitest:
-        specifier: ^5.0.0
+        specifier: ^5.0.5
         version: 5.0.5(@types/node@26.6.5)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
 
 packages:
@@ -1704,8 +1704,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  body-parser@2.3.0:
-    resolution: {integrity: sha512-2cGmJupaNgg+QUwVLAucDuWuoMZ6EX9iHDRswZ5lsNYEmwPaRknMPCLZz07yTzVq/83p4o/wzbDZbBrTvGGTIw==}
+  body-parser@2.4.0:
+    resolution: {integrity: sha512-Ifk1KcLrxaGt1occQagQNFNNOqRt1LFuehEnHHzB8Z6cRgIxRU1TBaiIsUiCdA+gy5PL7Y1IX31DNKkRmxtXjQ==}
     engines: {node: '>=18'}
 
   boolbase@1.0.0:
@@ -6009,7 +6009,7 @@ snapshots:
 
   baseline-browser-mapping@2.11.30: {}
 
-  body-parser@2.3.0:
+  body-parser@2.4.0:
     dependencies:
       bytes: 3.1.2
       content-type: 2.1.0
@@ -6642,7 +6642,7 @@ snapshots:
   express@5.3.0:
     dependencies:
       accepts: 2.0.0
-      body-parser: 2.3.0
+      body-parser: 2.4.0
       content-disposition: 2.0.1
       content-type: 2.1.0
       cookie: 0.7.2
