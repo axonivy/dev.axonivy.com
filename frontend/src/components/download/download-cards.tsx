@@ -146,7 +146,7 @@ function DownloadProductCard({
         <CardDescription>
           <H6>{config.mode}</H6>
         </CardDescription>
-        <CardDescription className="text-n800">
+        <CardDescription className="text-n900">
           {config.description}
           {release.docLink && (
             <>

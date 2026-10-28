@@ -128,7 +128,7 @@ function MobileReleaseCard({ release }: { release: ArchiveRelease }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <H4 className="text-n900">{release.version}</H4>
-          <Base className="text-n600 mt-2 flex items-center gap-2">
+          <Base className="text-n900 mt-2 flex items-center gap-2">
             <IconCalendar className="size-4" aria-hidden="true" />
             {release.releaseDate || "-"}
           </Base>

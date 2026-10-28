@@ -213,7 +213,7 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
           <MobileArchiveCards releases={releases} />
           <ArchiveTable releases={releases} view={view} />
           {hasSlimEngineArtifact(releases) ? (
-            <P className="text-n800">
+            <P className="text-n900">
               <sup>1</sup> This version is similar to the 'All' product, but
               without the 'demo-portal'.
             </P>

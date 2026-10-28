@@ -44,7 +44,7 @@ function OsOptionLabel({ label }: { label: string }) {
     <span className="flex items-center gap-1 font-medium">
       <IconBrandUbuntu className="size-6 shrink-0" aria-hidden="true" />
       <span className="hidden sm:inline">Linux</span>
-      <span className="text-n600">/</span>
+      <span className="text-n900">/</span>
       <IconBrandApple className="size-6 shrink-0" aria-hidden="true" />
       <span className="hidden sm:inline">macOS</span>
     </span>
