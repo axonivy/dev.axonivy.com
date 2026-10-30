@@ -188,7 +188,7 @@ html {
   --n600: #a3a3a3;
   --n700: #858585;
   --n800: #a3a3a3;
-  --n900: #a3a3a3;
+  --n900: #d1d1d1;
 
   /* brand primary scale */
   --p50: #272727;
@@ -230,7 +230,7 @@ html {
   --secondary: var(--n75);
   --secondary-foreground: #ffffff;
   --muted: var(--n50);
-  --muted-foreground: var(--n600);
+  --muted-foreground: var(--n900);
   --accent: var(--p50);
   --accent-foreground: var(--p300);
   --destructive: #fd9b9b;
@@ -261,5 +261,10 @@ html {
   }
   html {
     @apply font-sans;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  select:not(:disabled) {
+    cursor: pointer;
   }
 }
