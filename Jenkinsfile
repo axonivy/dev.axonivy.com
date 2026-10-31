@@ -105,7 +105,7 @@ pipeline {
 
         script {
           if (env.BRANCH_NAME == 'master') {
-            sh "docker run -v './':'/sbom' cyclonedx/cyclonedx-cli merge --input-files /sbom/backend/bom.json /sbom/frontend/bom.json --output-file /sbom/full-sbom.json"
+            sh "docker run -v './':'/sbom' cyclonedx/cyclonedx-cli merge --hierarchical --name dev.axonivy.com --version master --input-files /sbom/backend/bom.json /sbom/frontend/bom.json --output-file /sbom/full-sbom.json"
             uploadBOM(projectName: 'dev.axonivy.com', projectVersion: 'master', bomFile: 'full-sbom.json')
           }
         }
