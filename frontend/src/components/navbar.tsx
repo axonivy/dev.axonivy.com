@@ -48,13 +48,13 @@ const navItems = [
         ],
       },
       {
-        label: "External resources",
+        label: "Resources",
         items: [
           {
             label: "Market",
             description: "Explore extensions and connectors",
             href: "https://market.axonivy.com/",
-            external: true,
+            external: false,
           },
           {
             label: "Community",
