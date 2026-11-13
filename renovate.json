@@ -1,15 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>axonivy/renovate-config:npm",
     "local>axonivy/renovate-config:php",
-    "security:minimumReleaseAgeNpm"
+    "security:minimumReleaseAgeNpm",
+    "local>axonivy/renovate-config:npm"
   ],
   "packageRules": [
     {
       "description": "Group non-major frontend dependency updates",
       "matchManagers": ["npm"],
       "matchFileNames": ["frontend/**"],
+      "matchPackageNames": ["!@playwright/test"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "Frontend non-major dependencies",
       "groupSlug": "frontend-non-major"
