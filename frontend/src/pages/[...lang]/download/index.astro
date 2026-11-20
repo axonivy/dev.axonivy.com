@@ -16,10 +16,14 @@ import {
   IconMessageCircle,
   IconMessageCircleQuestion,
 } from "@tabler/icons-react";
-import { getLanguagePaths } from "@/translation/language";
+import { getLanguagePaths, localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
 
 export const getStaticPaths = getLanguagePaths;
 
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
 const downloadData = await fetchBackend<UiDownloadResponse>("/ui/download");
 
 function fetchArchive(version?: string) {
@@ -50,55 +54,52 @@ const { current } = await getVersions();
 ---
 
 <Layout
-  tabTitle="Download"
-  title={`Download Long Term Support ${current}`}
-  description={
-    "Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them."
-  }
+  tabTitle={t("common.download")}
+  title={t("download.pageTitle", { version: current })}
+  description={t("download.description")}
 >
   <div class="flex flex-col gap-24">
-    <Download data={downloadData} client:load />
+    <Download data={downloadData} lang={lang} client:load />
 
     <div
       id="archive"
       class="bg-n50 flex scroll-mt-24 flex-col gap-6 rounded-2xl p-4 md:p-10"
     >
       <div class="flex flex-col gap-4">
-        <H3>Version and Download Options</H3>
+        <H3>{t("download.archiveTitle")}</H3>
         <H5 className="text-n900 font-normal">
-          Explore some older versions and dev releases of the designer and
-          engine.
+          {t("download.archiveDescription")}
         </H5>
       </div>
-      <Archive data={archiveData} client:load />
+      <Archive data={archiveData} lang={lang} client:load />
     </div>
   </div>
 
   <HelpBox
     icon={IconMessageCircleQuestion}
-    title="Need help?"
+    title={t("download.help.title")}
     links={[
       {
         icon: IconFileDescription,
-        title: "Documentation",
-        description: "Find guides and references.",
-        href: "/doc",
-        linkLabel: "Go to Docs",
+        title: t("documentation.title"),
+        description: t("installation.help.documentation.description"),
+        href: localePath(lang, "/doc"),
+        linkLabel: t("installation.help.documentation.linkLabel"),
       },
       {
         icon: IconMessageCircle,
-        title: "Community",
-        description: "Ask questions and get help.",
+        title: t("nav.community"),
+        description: t("download.help.communityDescription"),
         href: "https://community.axonivy.com/",
-        linkLabel: "Go to Community",
+        linkLabel: t("download.help.goToCommunity"),
         external: true,
       },
       {
         icon: IconMessageChatbot,
-        title: "Contact Support",
-        description: "Need additional assistance?",
-        href: "/support",
-        linkLabel: "Contact us",
+        title: t("download.help.contactSupport"),
+        description: t("download.help.contactSupportDescription"),
+        href: localePath(lang, "/support"),
+        linkLabel: t("download.help.contactUs"),
       },
     ]}
   />

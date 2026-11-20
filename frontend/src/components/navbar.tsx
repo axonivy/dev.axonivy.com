@@ -67,7 +67,7 @@ const getNavItems = (t: TFunction, lang: Lang): (NavLink | NavGroup)[] => [
         ],
       },
       {
-        label: t("nav.external"),
+        label: t("nav.resources"),
         items: [
           {
             label: t("nav.market"),

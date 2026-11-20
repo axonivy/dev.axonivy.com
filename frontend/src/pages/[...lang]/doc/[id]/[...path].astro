@@ -5,6 +5,8 @@ import LegacyDocumentation, {
 import Layout from "@/layouts/news.astro";
 import { fetchLegacyDocData } from "@/lib/backend";
 import { localizePaths } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
 
 export async function getStaticPaths() {
   const perVersion = await Promise.all(
@@ -35,8 +37,15 @@ export async function getStaticPaths() {
 }
 
 const { legacyDocData, activeUrl } = Astro.props;
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
 ---
 
-<Layout tabTitle="Documentation">
-  <LegacyDocumentation data={legacyDocData} activeUrl={activeUrl} client:load />
+<Layout tabTitle={t("documentation.title")}>
+  <LegacyDocumentation
+    data={legacyDocData}
+    activeUrl={activeUrl}
+    lang={lang}
+    client:load
+  />
 </Layout>

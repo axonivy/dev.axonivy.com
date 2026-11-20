@@ -94,6 +94,113 @@
     },
     "title": "Deprecation & Removal"
   },
+  "documentation": {
+    "badges": {
+      "archived": "Archived",
+      "inDevelopment": "In development",
+      "latestFeatures": "Latest features",
+      "maintenance": "Maintenance",
+      "stable": "Stable"
+    },
+    "description": "Find all information about the Axon Ivy Platform in our documents",
+    "legacyVersionTitle": "Documentation {{version}}",
+    "link": "Documentation",
+    "noData": "No documentation data available.",
+    "noLegacyData": "No legacy documentation data available.",
+    "promoAction": "View deprecation page",
+    "promoDescription": "Learn more about the features and products that have been deprecated or removed recently.",
+    "promoMobileDescription": "Check the features that have recently been removed.",
+    "promoMobileTitle": "Deprecation page",
+    "promoTitle": "Want to see which features have been removed?",
+    "sections": {
+      "archive": "Archive",
+      "developmentBuild": "Development build",
+      "leadingEdge": "LE - Leading Edge",
+      "lts": "LTS - Long Term Support"
+    },
+    "title": "Documentation",
+    "version": "Version {{version}}"
+  },
+  "download": {
+    "actions": {
+      "download": "Download {{title}} {{version}}",
+      "downloadForBetaPlatform": "Download {{title}} {{version}} for {{platform}} BETA",
+      "downloadForPlatform": "Download {{title}} {{version}} for {{platform}}",
+      "installDocker": "Install {{title}} {{version}} via Docker",
+      "installDockerForPlatform": "Install {{title}} {{version}} via Docker for {{platform}}",
+      "installVsCode": "Install Designer using VS Code Marketplace"
+    },
+    "archive": {
+      "all": "All",
+      "allSlim": "All Slim¹",
+      "archivePage": "archive page",
+      "checksums": "Checksums",
+      "details": "Details",
+      "dev": "Dev",
+      "downloadTab": "Download",
+      "noData": "No archive data available.",
+      "noSbomFiles": "No SBOM files available",
+      "older": "Older",
+      "olderVersionsAfter": ".",
+      "olderVersionsBefore": "Are you searching for even older versions? Have a look at our",
+      "releaseDate": "Release Date",
+      "releaseNotes": "Release notes",
+      "sbomSuffix": " SBOM:",
+      "sbomTab": "SBOM files",
+      "selectLabel": "Archive",
+      "slimExplanation": "This version is similar to the 'All' product, but without the 'demo-portal'.",
+      "tableArtifacts": "Artifacts",
+      "tableVersion": "Version"
+    },
+    "archiveDescription": "Explore some older versions and dev releases of the designer and engine.",
+    "archiveTitle": "Version and Download Options",
+    "card": {
+      "designerDescription": "Model, design and test your business application locally.",
+      "documentation": "documentation",
+      "engineDescription": "Deploy and run your application in a server environment.",
+      "moreInformation": "For more information, see the"
+    },
+    "description": "Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them.",
+    "help": {
+      "communityDescription": "Ask questions and get help.",
+      "contactSupport": "Contact Support",
+      "contactSupportDescription": "Need additional assistance?",
+      "contactUs": "Contact us",
+      "goToCommunity": "Go to Community",
+      "title": "Need help?"
+    },
+    "labels": {
+      "build": "build",
+      "design": "Design",
+      "designer": "Designer",
+      "engine": "Engine",
+      "execute": "Execute",
+      "installationGuide": "Installation Guide",
+      "latestFeatures": "Latest features",
+      "maintenance": "Maintenance",
+      "permalinks": "Permalinks",
+      "released": "Released: {{date}}",
+      "releaseDateNotAvailable": "Release date not available",
+      "releaseNotes": "Release notes",
+      "run": "run",
+      "stable": "Stable"
+    },
+    "leadingEdge": {
+      "descriptionAfter": "Be prepared for frequent migrations.",
+      "descriptionBefore": "Download the Leading Edge version for early access to the newest features!",
+      "title": "Want to check out brand new features?"
+    },
+    "maintenance": {
+      "description": "Download second to last released long term support version.",
+      "title": "Download {{version}}"
+    },
+    "noData": "No download data available.",
+    "pageTitle": "Download Long Term Support {{version}}",
+    "releaseCycle": {
+      "description": "Get familiar with our release cycle before you are going to use the Leading Edge version.",
+      "title": "Learn more about our release cycle"
+    }
+  },
   "footer": {
     "info": "Get the latest stable <a>Long Term Support</a> version of the Axon Ivy Platform - or download the <a>Leading Edge</a> version."
   },
@@ -117,7 +224,7 @@
       "copied": "Copied",
       "copy": "Copy",
       "copyCommand": "Copy command",
-      "note": "<bold>Note:</bold> This Docker image version defaults to the latest LTS release. To use a different version, replace <code>{{version}}</code> in the commands above with your desired version."
+      "note": "<bold>Note:</bold> This Docker image version defaults to the latest LTS release. To use a different version, replace <code>{{version}}</code> in the commands below with your desired version."
     },
     "guides": {
       "common": {
@@ -192,7 +299,6 @@
     "deprecation": "Deprecation",
     "deprecationDescription": "Plan for upcoming changes",
     "doc": "Documentation",
-    "external": "External Resources",
     "home": "Home",
     "market": "Market",
     "marketDescription": "Explore extensions and connectors",
@@ -206,6 +312,35 @@
     "team": "Team",
     "tutorial": "Tutorial",
     "tutorialDescription": "Learn step by step"
+  },
+  "news": {
+    "browseMore": "Browse more news",
+    "demoScreenshots": "Demo screenshots:",
+    "description": "Explore the latest releases, features and improvements of the Axon Ivy platform",
+    "gallery": {
+      "nextImage": "Next image",
+      "openPreview": "Open image preview",
+      "previousImage": "Previous image"
+    },
+    "migrationGuide": "Migration Guide",
+    "pageTitle": "What's new?",
+    "readMore": "Read more",
+    "released": "Released: {{date}}",
+    "releaseNotes": "Release Notes",
+    "tags": {
+      "archived": "Archived",
+      "leadingEdge": "Leading Edge",
+      "longTermSupport": "Long Term Support"
+    },
+    "viewDetails": "View Details",
+    "whatsNew": "What's new in {{version}}"
+  },
+  "notFound": {
+    "description": "Not Found: Our website is taking a break. It seems that we cannot find the page you requested. You would be doing us a great favor by reporting it here:",
+    "linkHome": "Back to homepage",
+    "pageTitle": "404 Error",
+    "subtitle": "Error code: 404",
+    "title": "Oops!"
   },
   "releaseCycle": {
     "illustration": "Release cycle illustration",

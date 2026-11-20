@@ -13,7 +13,9 @@ import { cn } from "@/lib/utils";
 import { IconDownload, IconFileDescription } from "@tabler/icons-react";
 import { parseAsString, useQueryState } from "nuqs";
 import { NuqsAdapter } from "nuqs/adapters/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "@/translation/ui";
 
 export type ArchiveProduct = "designer" | "engine";
 
@@ -63,15 +65,22 @@ function hasSlimEngineArtifact(releases: ArchiveRelease[]) {
   );
 }
 
-export default function Archive({ data }: { data: ArchiveData }) {
+export default function Archive({
+  data,
+  lang,
+}: {
+  data: ArchiveData;
+  lang: Lang;
+}) {
   return (
     <NuqsAdapter>
-      <ArchiveContent data={data} />
+      <ArchiveContent data={data} lang={lang} />
     </NuqsAdapter>
   );
 }
 
-function ArchiveContent({ data }: { data: ArchiveData }) {
+function ArchiveContent({ data, lang }: { data: ArchiveData; lang: Lang }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const [selectedVersion, setSelectedVersion] = useQueryState(
     "archive",
     parseAsString.withDefault(""),
@@ -96,7 +105,7 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
   };
 
   if (!data) {
-    return <P className="text-n900">No archive data available.</P>;
+    return <P className="text-n900">{t("download.archive.noData")}</P>;
   }
 
   const activeVersion = selectedVersion || data.currentMajorVersion;
@@ -114,7 +123,7 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
   );
   const isSelectSelected =
     activeVersion === "older" || selectVersionIds.includes(activeVersion);
-  const selectLabel = "Archive";
+  const selectLabel = t("download.archive.selectLabel");
 
   return (
     <div className="flex flex-col gap-6">
@@ -141,7 +150,7 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
                   variant={activeVersion === version.id ? "default" : "outline"}
                   onClick={() => changeVersion(version.id)}
                 >
-                  Dev
+                  {t("download.archive.dev")}
                 </Button>
               ))}
             </div>
@@ -158,23 +167,26 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
             <NativeSelectOption value="" disabled hidden>
               {selectLabel}
             </NativeSelectOption>
-            {selectVersionGroups.map(([category, versions]) => (
-              <NativeSelectOptGroup
-                key={category}
-                label={category === "UNSUPPORTED" ? selectLabel : category}
-              >
-                {versions.map((version) => (
-                  <NativeSelectOption key={version.id} value={version.id}>
-                    {version.id}
-                  </NativeSelectOption>
-                ))}
-                {category === "UNSUPPORTED" ? (
+            {selectVersionGroups.map(([category, versions]) => {
+              const options = versions.map((version) => (
+                <NativeSelectOption key={version.id} value={version.id}>
+                  {version.id}
+                </NativeSelectOption>
+              ));
+
+              return category === "UNSUPPORTED" ? (
+                <Fragment key={category}>
+                  {options}
                   <NativeSelectOption key="older" value="older">
-                    Older
+                    {t("download.archive.older")}
                   </NativeSelectOption>
-                ) : null}
-              </NativeSelectOptGroup>
-            ))}
+                </Fragment>
+              ) : (
+                <NativeSelectOptGroup key={category} label={category}>
+                  {options}
+                </NativeSelectOptGroup>
+              );
+            })}
           </NativeSelect>
         </div>
         <Tabs
@@ -185,11 +197,11 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
           <TabsList className="bg-n100 gap-2 px-0.75 py-4.5">
             <TabsTrigger value="downloads" className="gap-2 px-3 py-3.5">
               <IconDownload className="size-4" aria-hidden="true" />
-              Download
+              {t("download.archive.downloadTab")}
             </TabsTrigger>
             <TabsTrigger value="sbom" className="gap-2 px-3 py-3.5">
               <IconFileDescription className="size-4" aria-hidden="true" />
-              SBOM files
+              {t("download.archive.sbomTab")}
             </TabsTrigger>
           </TabsList>
         </Tabs>
@@ -197,25 +209,24 @@ function ArchiveContent({ data }: { data: ArchiveData }) {
 
       {selectedVersion === "older" ? (
         <Base className="text-n900">
-          Are you searching for even older versions? Have a look at our{" "}
+          {t("download.archive.olderVersionsBefore")}{" "}
           <a
             href="https://archive.axonivy.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline"
           >
-            archive page
+            {t("download.archive.archivePage")}
           </a>
-          .
+          {t("download.archive.olderVersionsAfter")}
         </Base>
       ) : (
         <>
-          <MobileArchiveCards releases={releases} />
-          <ArchiveTable releases={releases} view={view} />
+          <MobileArchiveCards releases={releases} lang={lang} />
+          <ArchiveTable releases={releases} view={view} lang={lang} />
           {hasSlimEngineArtifact(releases) ? (
             <P className="text-n900">
-              <sup>1</sup> This version is similar to the 'All' product, but
-              without the 'demo-portal'.
+              <sup>1</sup> {t("download.archive.slimExplanation")}
             </P>
           ) : null}
         </>

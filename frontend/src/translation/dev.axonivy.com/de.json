@@ -94,6 +94,113 @@
     },
     "title": "Deprecation & Entfernung"
   },
+  "documentation": {
+    "badges": {
+      "archived": "Archiviert",
+      "inDevelopment": "In Entwicklung",
+      "latestFeatures": "Neueste Funktionen",
+      "maintenance": "Wartung",
+      "stable": "Stabil"
+    },
+    "description": "Finde alle Informationen zur Axon Ivy Platform in unseren Dokumenten.",
+    "legacyVersionTitle": "Dokumentation {{version}}",
+    "link": "Dokumentation",
+    "noData": "Keine Dokumentationsdaten verfügbar.",
+    "noLegacyData": "Keine Daten zur älteren Dokumentation verfügbar.",
+    "promoAction": "Zur Deprecation-Seite",
+    "promoDescription": "Erfahre mehr über Funktionen und Produkte, die abgekündigt oder kürzlich entfernt wurden.",
+    "promoMobileDescription": "Sieh dir an, welche Funktionen kürzlich entfernt wurden.",
+    "promoMobileTitle": "Deprecation-Seite",
+    "promoTitle": "Möchtest du sehen, welche Funktionen entfernt wurden?",
+    "sections": {
+      "archive": "Archiv",
+      "developmentBuild": "Entwicklungs-Build",
+      "leadingEdge": "LE – Leading Edge",
+      "lts": "LTS – Long Term Support"
+    },
+    "title": "Dokumentation",
+    "version": "Version {{version}}"
+  },
+  "download": {
+    "actions": {
+      "download": "{{title}} {{version}} herunterladen",
+      "downloadForBetaPlatform": "{{title}} {{version}} für {{platform}} herunterladen (BETA)",
+      "downloadForPlatform": "{{title}} {{version}} für {{platform}} herunterladen",
+      "installDocker": "{{title}} {{version}} über Docker installieren",
+      "installDockerForPlatform": "{{title}} {{version}} für {{platform}} über Docker installieren",
+      "installVsCode": "Designer über den VS Code Marketplace installieren"
+    },
+    "archive": {
+      "all": "Alle",
+      "allSlim": "Alle Slim¹",
+      "archivePage": "Archivseite",
+      "checksums": "Prüfsummen",
+      "details": "Details",
+      "dev": "Entwicklung",
+      "downloadTab": "Download",
+      "noData": "Keine Archivdaten verfügbar.",
+      "noSbomFiles": "Keine SBOM-Dateien verfügbar",
+      "older": "Ältere",
+      "olderVersionsAfter": ".",
+      "olderVersionsBefore": "Suchst du noch ältere Versionen? Dann wirf einen Blick auf unsere",
+      "releaseDate": "Veröffentlichungsdatum",
+      "releaseNotes": "Versionshinweise",
+      "sbomSuffix": " SBOM:",
+      "sbomTab": "SBOM-Dateien",
+      "selectLabel": "Archiv",
+      "slimExplanation": "Diese Version entspricht dem Produkt „Alle“, jedoch ohne das „demo-portal“.",
+      "tableArtifacts": "Artefakte",
+      "tableVersion": "Version"
+    },
+    "archiveDescription": "Entdecke ältere Versionen und Development-Releases für Designer und Engine.",
+    "archiveTitle": "Versionen und Download-Optionen",
+    "card": {
+      "designerDescription": "Modelliere, entwirf und teste deine Geschäftsanwendung lokal.",
+      "documentation": "Dokumentation",
+      "engineDescription": "Stelle deine Anwendung in einer Serverumgebung bereit und führe sie dort aus.",
+      "moreInformation": "Weitere Informationen findest du in der"
+    },
+    "description": "Axon Ivy besteht aus zwei Komponenten: \nDem Designer zur Entwicklung deiner Anwendungen und der Engine zu deren Ausführung.",
+    "help": {
+      "communityDescription": "Stelle Fragen und erhalte Unterstützung.",
+      "contactSupport": "Support kontaktieren",
+      "contactSupportDescription": "Brauchst du weitere Unterstützung?",
+      "contactUs": "Kontaktiere uns",
+      "goToCommunity": "Zur Community",
+      "title": "Brauchst du Hilfe?"
+    },
+    "labels": {
+      "build": "entwickeln",
+      "design": "Design",
+      "designer": "Designer",
+      "engine": "Engine",
+      "execute": "Ausführen",
+      "installationGuide": "Installationsanleitung",
+      "latestFeatures": "Neueste Funktionen",
+      "maintenance": "Wartung",
+      "permalinks": "Dauerhafte Links",
+      "released": "Veröffentlicht: {{date}}",
+      "releaseDateNotAvailable": "Veröffentlichungsdatum nicht verfügbar",
+      "releaseNotes": "Versionshinweise",
+      "run": "ausführen",
+      "stable": "Stabil"
+    },
+    "leadingEdge": {
+      "descriptionAfter": "Sei auf häufige Migrationen vorbereitet.",
+      "descriptionBefore": "Lade die Leading-Edge-Version herunter, um frühzeitig Zugriff auf die neuesten Funktionen zu erhalten!",
+      "title": "Möchtest du die neuesten Funktionen ausprobieren?"
+    },
+    "maintenance": {
+      "description": "Lade die vorletzte veröffentlichte Long-Term-Support-Version herunter.",
+      "title": "Version {{version}} herunterladen"
+    },
+    "noData": "Keine Download-Daten verfügbar.",
+    "pageTitle": "Long-Term-Support-Version {{version}} herunterladen",
+    "releaseCycle": {
+      "description": "Informiere dich über unseren Release-Zyklus, bevor du die Leading-Edge-Version verwendest.",
+      "title": "Mehr über unseren Release-Zyklus erfahren"
+    }
+  },
   "footer": {
     "info": "Hole Dir die neueste stabile <a>Long Term Support</a>-Version der Axon Ivy Plattform - oder schnapp Dir die brandneue <a>Leading Edge</a>-Version."
   },
@@ -117,7 +224,7 @@
       "copied": "Kopiert",
       "copy": "Kopieren",
       "copyCommand": "Befehl kopieren",
-      "note": "<bold>Hinweis:</bold> Diese Docker-Image-Version verwendet standardmäßig das neueste LTS-Release. Um eine andere Version zu verwenden, ersetze <code>{{version}}</code> in den obigen Befehlen durch die gewünschte Version."
+      "note": "<bold>Hinweis:</bold> Diese Docker-Image-Version verwendet standardmäßig das neueste LTS-Release. Um eine andere Version zu verwenden, ersetze <code>{{version}}</code> in dem folgenden Befehlen durch die gewünschte Version."
     },
     "guides": {
       "common": {
@@ -194,7 +301,6 @@
     "deprecation": "Deprecation",
     "deprecationDescription": "Plan für bevorstehende Änderungen",
     "doc": "Dokumentation",
-    "external": "Externe Ressourcen",
     "home": "Startseite",
     "market": "Marktplatz",
     "marketDescription": "Erkunde Erweiterungen und Konnektoren",
@@ -208,6 +314,35 @@
     "team": "Team",
     "tutorial": "Tutorial",
     "tutorialDescription": "Lerne Schritt für Schritt"
+  },
+  "news": {
+    "browseMore": "Weitere News",
+    "demoScreenshots": "Demo-Screenshots:",
+    "description": "Entdecke die neuesten Releases, Funktionen und Verbesserungen der Axon Ivy Platform",
+    "gallery": {
+      "nextImage": "Nächstes Bild",
+      "openPreview": "Bildvorschau öffnen",
+      "previousImage": "Vorheriges Bild"
+    },
+    "migrationGuide": "Migrationsleitfaden",
+    "pageTitle": "Was gibt es Neues?",
+    "readMore": "Mehr lesen",
+    "released": "Veröffentlicht: {{date}}",
+    "releaseNotes": "Versionshinweise",
+    "tags": {
+      "archived": "Archiviert",
+      "leadingEdge": "Leading Edge",
+      "longTermSupport": "Long Term Support"
+    },
+    "viewDetails": "Details anzeigen",
+    "whatsNew": "Neu in Version {{version}}"
+  },
+  "notFound": {
+    "description": "Nicht gefunden: Unsere Website macht gerade eine Pause. Die angeforderte Seite konnten wir leider nicht finden. Wenn du uns den Fehler meldest, hilfst du uns sehr:",
+    "linkHome": "Zurück zur Startseite",
+    "pageTitle": "Seite nicht gefunden",
+    "subtitle": "Fehlercode: 404",
+    "title": "Hoppla!"
   },
   "releaseCycle": {
     "illustration": "Darstellung des Release-Zyklus",
@@ -301,8 +436,8 @@
       "masterComputerScience": "M.Sc. Informatik"
     },
     "roles": {
-      "coreDeveloper": "Kernentwickler",
-      "productOwnerCoreDeveloper": "Product Owner & Kernentwickler",
+      "coreDeveloper": "Core Developer",
+      "productOwnerCoreDeveloper": "Product Owner & Core Developer",
       "productOwnerTeamLeader": "Product Owner & Teamleiter"
     },
     "slogans": {

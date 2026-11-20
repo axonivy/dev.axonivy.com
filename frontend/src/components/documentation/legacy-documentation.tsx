@@ -2,6 +2,8 @@ import { H1, P } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import { IconLink } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "@/translation/ui";
 
 type LegacyDocLink = { url: string; text: string };
 
@@ -23,10 +25,13 @@ export type LegacyDocsVersion = (typeof legacyDocsVersions)[number];
 export default function LegacyDocumentation({
   data,
   activeUrl,
+  lang,
 }: {
   data: UiLegacyDocResponse;
   activeUrl: string | undefined;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -77,12 +82,14 @@ export default function LegacyDocumentation({
   }
 
   if (!data) {
-    return <P className="text-n900">No legacy documentation data available.</P>;
+    return <P className="text-n900">{t("documentation.noLegacyData")}</P>;
   }
 
   return (
     <div className="flex flex-col gap-6">
-      <H1 className="pt-8">Documentation {data.version}</H1>
+      <H1 className="pt-8">
+        {t("documentation.legacyVersionTitle", { version: data.version })}
+      </H1>
       <div className="flex flex-col gap-4">
         <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
           {data.releaseDocuments.links.map((link) => (

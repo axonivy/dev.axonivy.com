@@ -9,12 +9,16 @@ import {
   isVsCodeExtensionArtifact,
   type Artifacts,
 } from "@/components/download/download-artifacts";
+import { localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import { useTranslation } from "react-i18next";
 
 type DownloadActionProps = {
   title: string;
   version: string;
   artifactLabel: string;
   artifact?: Artifacts;
+  lang: Lang;
 };
 
 export function DownloadAction({
@@ -22,7 +26,10 @@ export function DownloadAction({
   version,
   artifactLabel,
   artifact,
+  lang,
 }: DownloadActionProps) {
+  const { t } = useTranslation(undefined, { lng: lang });
+
   if (!artifact) {
     return null;
   }
@@ -30,13 +37,13 @@ export function DownloadAction({
   if (isVsCodeExtensionArtifact(artifact)) {
     return (
       <a
-        href={`/download/installation/designer-vscode?downloadUrl=${encodeURIComponent(artifact.url)}`}
+        href={`${localePath(lang, "/download/installation/designer-vscode")}?downloadUrl=${encodeURIComponent(artifact.url)}`}
         className={cn(
           buttonVariants({ className: "h-10 w-full justify-start" }),
         )}
       >
         <IconBrandVscode className="size-5 shrink-0" aria-hidden="true" />
-        Install Designer using VS Code Marketplace
+        {t("download.actions.installVsCode")}
       </a>
     );
   }
@@ -44,16 +51,19 @@ export function DownloadAction({
   if (artifact.name === "Docker") {
     return (
       <a
-        href={`/download/installation/docker?downloadUrl=${artifact.url}`}
+        href={`${localePath(lang, "/download/installation/docker")}?downloadUrl=${artifact.url}`}
         className={cn(
           buttonVariants({ className: "h-10 w-full justify-start" }),
         )}
       >
         <IconTerminal className="size-5 shrink-0" aria-hidden="true" />
-        Install {title} {version} via Docker
-        {artifactLabel && (
-          <span className="hidden sm:inline"> for {artifactLabel}</span>
-        )}
+        {artifactLabel
+          ? t("download.actions.installDockerForPlatform", {
+              title,
+              version,
+              platform: artifactLabel,
+            })
+          : t("download.actions.installDocker", { title, version })}
       </a>
     );
   }
@@ -64,13 +74,19 @@ export function DownloadAction({
       className={cn(buttonVariants({ className: "h-10 w-full justify-start" }))}
     >
       <IconDownload className="size-5 shrink-0" aria-hidden="true" />
-      Download {title} {version}
-      {artifactLabel && (
-        <span className="hidden sm:inline">
-          {" "}
-          for {artifactLabel} {artifactLabel === "macOS" && "BETA"}
-        </span>
-      )}
+      {!artifactLabel
+        ? t("download.actions.download", { title, version })
+        : artifactLabel === "macOS"
+          ? t("download.actions.downloadForBetaPlatform", {
+              title,
+              version,
+              platform: artifactLabel,
+            })
+          : t("download.actions.downloadForPlatform", {
+              title,
+              version,
+              platform: artifactLabel,
+            })}
     </a>
   );
 }
