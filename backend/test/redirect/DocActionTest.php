@@ -28,6 +28,11 @@ class DocActionTest extends TestCase
     AppTester::assertThatGet('/doc/7/en')->redirect('/doc/7.5/en');
   }
 
+  public function testRedirectLegacyDocumentationRootToIndex()
+  {
+    AppTester::assertThatGet('/doc/8.0/en')->redirect('/doc/8.0/en/index.html');
+  }
+
   public function testRedirectMajorToLatestMinorWithFiles()
   {
     AppTester::assertThatGet('/doc/8/index.html')->redirect('/doc/8.0/en/index.html');

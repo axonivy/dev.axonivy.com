@@ -77,6 +77,10 @@ class DocAction
       return Redirect::to($response, $docProvider->getLanguageMinorUrl($lang) . $docPath);
     }
 
+    if (empty($docName)) {
+      return Redirect::to($response, $docProvider->getLanguageOverviewUrl($lang) . '/index.html');
+    }
+
     if ($this->documentationBasedOnReadTheDocs($version)) {
       $newDocUrl = $this->resolveNewDocUrl($docProvider->getLanguageOverviewUrl($lang), $docName, new Version($version), $hasLang);
       if (empty($newDocUrl)) {
@@ -154,9 +158,6 @@ class DocAction
 
   private function resolveNewDocUrl($baseUrl, $document, Version $version, bool $hasLang): string
   {
-    if (empty($document)) {
-      return "$baseUrl/index.html";
-    }
     $releaseInfoPath = version_compare($version->getVersionNumber(), 14) >= 0 ? 'technical-info' : 'axonivy';
     if ($document == 'migration-notes') {
       return "$baseUrl/$releaseInfoPath/migration/index.html";
