@@ -10,6 +10,7 @@ use app\redirect\ProductPermalinkAction;
 use app\redirect\MavenPermalinkAction;
 use app\redirect\LinkAction;
 use app\redirect\DocAction;
+use app\redirect\DownloadVersionRedirectAction;
 use app\redirect\RedirectPortalGuide;
 use app\ui\UiDocAction;
 use app\ui\UiDocLegacyAction;
@@ -47,5 +48,6 @@ class RoutingRules
     // tools
     $app->get('/download/maven.html', MavenArchiveAction::class);
     $app->get('/download/robots.txt', DownloadRobotsAction::class);
+    $app->get('/download/{version:(?!release-cycle$|installation$)[^/]+}', DownloadVersionRedirectAction::class);
   }
 }
