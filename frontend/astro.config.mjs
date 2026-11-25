@@ -7,7 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 const backendUrl = process.env.BACKEND_URL ?? "http://localhost:8080";
 // local backend only has empty placeholder docs
-const docsUrl = process.env.DOCS_URL ?? "https://dev.axonivy.com";
+const docsUrl = process.env.DOCS_URL ?? "https://developer.axonivy.com";
 
 export default defineConfig({
   output: "static",

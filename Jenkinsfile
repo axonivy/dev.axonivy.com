@@ -39,7 +39,7 @@ pipeline {
           docker.build('node', '-f build/Dockerfile.node .').inside {
             dir ('frontend') {
               sh 'pnpm install --frozen-lockfile'
-              sh 'BACKEND_URL=https://dev.axonivy.com pnpm build'
+              sh 'BACKEND_URL=https://developer.axonivy.com pnpm build'
             }
           }
         }

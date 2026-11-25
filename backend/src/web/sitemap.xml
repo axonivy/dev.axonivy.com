@@ -1,32 +1,31 @@
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dev.axonivy.com/</loc>
+    <loc>https://developer.axonivy.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://dev.axonivy.com/download</loc>
+    <loc>https://developer.axonivy.com/download</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://dev.axonivy.com/doc</loc>
+    <loc>https://developer.axonivy.com/doc</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://dev.axonivy.com/news</loc>
+    <loc>https://developer.axonivy.com/news</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://dev.axonivy.com/support</loc>
+    <loc>https://developer.axonivy.com/support</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://dev.axonivy.com/team</loc>
+    <loc>https://developer.axonivy.com/team</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
