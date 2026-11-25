@@ -212,7 +212,7 @@ const getInstallationGuides = (currentVersion: string) =>
         {
           id: 3,
           title: "Learn more about Axon Ivy with Docker",
-          url: `https://dev.axonivy.com/doc/${currentVersion}/en/engine-guide/installation/docker/index.html`,
+          url: `https://developer.axonivy.com/doc/${currentVersion}/en/engine-guide/installation/docker/index.html`,
         },
       ],
     },

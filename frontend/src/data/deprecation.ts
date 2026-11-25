@@ -15,10 +15,10 @@ const deprecations: Deprecation[] = [
   {
     name: "Dropin Process Element extension point",
     nameHref:
-      "https://dev.axonivy.com/doc/12.0/en/concepts/3rd-party-integration/process-extensions.html#dropin-elements",
+      "https://developer.axonivy.com/doc/12.0/en/concepts/3rd-party-integration/process-extensions.html#dropin-elements",
     successor: "Program Elements in project",
     successorHref:
-      "https://dev.axonivy.com/doc/14.0/en/getting-productive/connectivity/process-extensions.html#extendible-process-elements",
+      "https://developer.axonivy.com/doc/14.0/en/getting-productive/connectivity/process-extensions.html#extendible-process-elements",
     released: 4,
     deprecated: 12,
     removed: 14,
