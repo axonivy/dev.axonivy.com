@@ -22,6 +22,10 @@ class ApiDocsActionTest extends TestCase
       ->ok()
       ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/en"},{"version":"14.0","url":"\/doc\/14.0\/en"}');
 
+    AppTester::assertThatGet('/api/docs/AxonIvy/10.0/en')
+      ->ok()
+      ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/en"},{"version":"14.0","url":"\/doc\/14.0\/en"},{"version":"10.0","url":"#"}]');
+
     AppTester::assertThatGet('/api/docs/AxonIvy/9.4/ja')
       ->ok()
       ->bodyContains('"versions":[{"version":"12.0","url":"\/doc\/12.0\/ja"},{"version":"14.0","url":"\/doc\/14.0\/ja"}');
