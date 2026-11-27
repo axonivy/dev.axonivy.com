@@ -10,7 +10,7 @@ import {
   IconCalendar,
   IconDownload,
 } from "@tabler/icons-react";
-import type { NewsBlock, NewsLink } from "@/data/news/news";
+import type { NewsSection } from "@/data/news/news";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Fragment } from "react";
@@ -18,14 +18,11 @@ import { Badge } from "@/components/ui/badge";
 import { Base, H3, H4, H6 } from "@/components/ui/typography";
 import { NewsContent } from "@/components/news/news-content";
 import { NewsImageGallery } from "@/components/news/news-image-gallery";
+import { newsTagLabel } from "@/components/news/news-tag-label";
+import type { Lang } from "@/translation/ui";
+import { useTranslation } from "react-i18next";
 
-export type NewsScrollSpySection = {
-  heading: string;
-  anchor: string | null;
-  content: NewsBlock[];
-  links: NewsLink[];
-  images: string[];
-};
+export type NewsScrollSpySection = NewsSection;
 
 type NewsScrollSpyProps = {
   title: string;
@@ -36,6 +33,7 @@ type NewsScrollSpyProps = {
   releaseNotesUrl: string;
   migrationGuideUrl: string;
   sections: NewsScrollSpySection[];
+  lang: Lang;
 };
 
 export function sectionValue(
@@ -61,7 +59,9 @@ export default function NewsScrollSpy({
   releaseNotesUrl,
   sections,
   migrationGuideUrl,
+  lang,
 }: NewsScrollSpyProps) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const defaultSection = sections[0]
     ? sectionValue(sections[0], 0, sections)
     : undefined;
@@ -95,7 +95,7 @@ export default function NewsScrollSpy({
               }
               className="uppercase"
             >
-              {tag}
+              {newsTagLabel(tag, t)}
             </Badge>
             <H3>{title}</H3>
             <H6>{slogan}</H6>
@@ -109,7 +109,7 @@ export default function NewsScrollSpy({
                 className={buttonVariants({ variant: "default", size: "lg" })}
               >
                 <IconDownload className="size-4 shrink-0" />
-                Download
+                {t("common.download")}
               </a>
               <div className="grid grid-cols-2 gap-4">
                 {tag === "Long Term Support" || tag === "Leading Edge" ? (
@@ -125,7 +125,7 @@ export default function NewsScrollSpy({
                       }),
                     )}
                   >
-                    Release Notes
+                    {t("news.releaseNotes")}
                     <IconArrowUpRight className="size-4 shrink-0" />
                   </a>
                 ) : null}
@@ -141,7 +141,7 @@ export default function NewsScrollSpy({
                     }),
                   )}
                 >
-                  Migration Guide
+                  {t("news.migrationGuide")}
                   <IconArrowUpRight className="size-4 shrink-0" />
                 </a>
               </div>
@@ -157,7 +157,7 @@ export default function NewsScrollSpy({
               <NewsContent content={section.content} />
               {section.links ? (
                 <p className="leading-7">
-                  {section.links.map((link, linkIndex) => (
+                  {section.links.map((link, linkIndex, links) => (
                     <Fragment key={link.url}>
                       <a
                         href={link.url}
@@ -168,7 +168,7 @@ export default function NewsScrollSpy({
                         {link.label}
                         <IconArrowUpRight className="ml-1 inline-block size-4 align-middle" />
                       </a>
-                      {linkIndex < section.links.length - 1 ? (
+                      {linkIndex < links.length - 1 ? (
                         <span className="text-p75 mx-3">•</span>
                       ) : null}
                     </Fragment>
@@ -177,11 +177,14 @@ export default function NewsScrollSpy({
               ) : null}
               {section.images ? (
                 <div className="flex flex-col gap-4">
-                  <Base className="font-semibold">Demo screenshots:</Base>
+                  <Base className="font-semibold">
+                    {t("news.demoScreenshots")}
+                  </Base>
                   <div className="flex flex-col gap-4">
                     <NewsImageGallery
                       images={section.images}
                       title={section.heading}
+                      lang={lang}
                     />
                   </div>
                 </div>

@@ -1,0 +1,75 @@
+---
+import type { UiDocResponse } from "@/components/documentation/documentation";
+import Documentation from "@/components/documentation/documentation";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Layout from "@/layouts/main.astro";
+import { fetchBackend } from "@/lib/backend";
+import { IconArrowRight, IconBook2 } from "@tabler/icons-astro";
+import { getLanguagePaths, localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
+const docData = await fetchBackend<UiDocResponse>("/ui/doc");
+---
+
+<Layout
+  tabTitle={t("documentation.title")}
+  title={t("documentation.title")}
+  description={t("documentation.description")}
+>
+  <Documentation data={docData} lang={lang} />
+
+  <Card className="hidden flex-row items-center justify-between gap-4 transition-shadow md:flex">
+    <CardHeader className="flex flex-1 flex-row items-center gap-3">
+      <div class="bg-blue-bg text-blue flex rounded-md p-2.5">
+        <IconBook2 class="h-6 w-6 shrink-0" />
+      </div>
+      <div class="flex flex-col gap-1">
+        <CardTitle>{t("documentation.promoTitle")}</CardTitle>
+        <CardDescription>{t("documentation.promoDescription")}</CardDescription>
+      </div>
+    </CardHeader>
+    <CardContent className="flex flex-row items-center justify-end">
+      <a href={localePath(lang, "/deprecation")} class="group">
+        <span class={buttonVariants({ variant: "outline", size: "lg" })}>
+          {t("documentation.promoAction")}
+          <IconArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+        </span>
+      </a>
+    </CardContent>
+  </Card>
+  <a
+    href={localePath(lang, "/deprecation")}
+    class="group focus-visible:ring-ring/50 block h-full rounded-xl focus-visible:ring-3 focus-visible:outline-1 md:hidden"
+  >
+    <Card className="flex flex-row gap-8 transition-shadow">
+      <CardHeader className="flex w-full flex-row gap-3">
+        <div class="bg-blue-bg text-blue flex rounded-md p-2.5">
+          <IconBook2 class="h-6 w-6 shrink-0" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <CardTitle>{t("documentation.promoMobileTitle")}</CardTitle>
+          <CardDescription>
+            {t("documentation.promoMobileDescription")}
+          </CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-row items-center">
+        <IconArrowRight class="h-6 w-6 transition-transform duration-200 group-hover:translate-x-1" />
+      </CardContent>
+    </Card>
+  </a>
+
+  <Documentation data={docData} archived={true} lang={lang} />
+</Layout>

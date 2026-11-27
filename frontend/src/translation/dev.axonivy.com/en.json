@@ -1,0 +1,461 @@
+{
+  "ariaLabels": {
+    "dockerCopy": "Copy Docker command",
+    "dockerInstallation": "View Docker installation guide",
+    "mobileNavigation": "Mobile Navigation",
+    "toggleTheme": "Toggle theme"
+  },
+  "common": {
+    "download": "Download",
+    "helpGetStarted": "We're here to help <lineBreak/> you get started."
+  },
+  "deprecation": {
+    "columns": {
+      "deprecated": "Deprecated in",
+      "feature": "Feature",
+      "introduced": "Introduced in",
+      "removed": "Removed in",
+      "successor": "Successor"
+    },
+    "features": {
+      "ajp": "Tomcat AJP Protocol",
+      "axis": "WebService Axis 1 & 2",
+      "birt": "Process Documentation (BIRT)",
+      "callAndWait": "Call & Wait element",
+      "classicEditor": "Process Editor: Classic mode",
+      "cmsMetadata": "CMS Meta Data",
+      "cmsPage": "CMS Page",
+      "commonsCollection": "Java Library - Apache Commons Collection 3",
+      "commonsLang": "Java Library - Apache Commons Lang 2",
+      "dialogId": "Dynamic HTML Dialog id",
+      "drlEditor": "Eclipse DRL Editor",
+      "drools": "Rule Engine based on Drools",
+      "dropin": "Dropin Process Element extension point",
+      "eclipseDesigner": "Eclipse-based PRO Designer",
+      "environments": "Environments",
+      "fontAwesome": "Font Awesome Icons",
+      "guava": "Java Library - Guava",
+      "httpClient": "Java Library - Apache HTTP Client",
+      "ntlm": "NTLM Authentication for REST and SOAP WebService Clients",
+      "overriding": "Overriding (Case Scope)",
+      "projectImport": "Import Ivy 3.9 Project",
+      "richDialog": "RIA / Rich Dialog",
+      "rtf": "Macros in RTF documents",
+      "serenity": "HTML Dialog: Primefaces Serenity Theme",
+      "streamline": "Streamline Icons",
+      "webPage": "WebPage element"
+    },
+    "introduction": {
+      "after": " and features and replace them with the successor API or feature.",
+      "before": "You should avoid using deprecated Public API and features. When migrating to a new version check for ",
+      "link": "deprecated Public API"
+    },
+    "mobile": {
+      "deprecated": "Deprecated in:",
+      "introduced": "Introduced in:",
+      "removed": "Removed in:",
+      "successor": "Successor:"
+    },
+    "processHeading": "We deprecate and remove Features as follows:",
+    "sections": {
+      "deprecated": {
+        "description": "These features are deprecated and may be removed in future major releases:",
+        "title": "Currently deprecated"
+      },
+      "removed": {
+        "description": "These features have been removed in recent major releases:",
+        "title": "Recently removed"
+      }
+    },
+    "steps": {
+      "api": "We document Public API that we will remove in future versions in the source code as",
+      "designer": "We document features that we will remove on the Designer's UI in the Problem View as Warnings.",
+      "features": "We document features that we will remove in the future on this page."
+    },
+    "successors": {
+      "authentication": "Microsoft recommends to use more modern and more secure authentication methods",
+      "bpmnEditor": "Process Editor: BPMN mode",
+      "cms": "Modern CMS",
+      "commonsCollection": "Apache Commons Collection 4",
+      "commonsLang": "Apache Commons Lang 3",
+      "configuration": "Containers / Configuration",
+      "cxf": "WebService CXF",
+      "docFactory": "Doc Factory",
+      "drlEditor": "VS Code DRL Editor",
+      "freya": "Primefaces Freya Theme",
+      "htmlDialog": "Html Dialog",
+      "http": "HTTP/S Protocol",
+      "httpClient": "JDK HTTP Client",
+      "jdk": "JDK",
+      "overriding": "Overriding (Strict)",
+      "programElements": "Program Elements in project",
+      "tabler": "Tabler Icons",
+      "vscodeDesigner": "VS Code PRO Designer Extension"
+    },
+    "title": "Deprecation & Removal"
+  },
+  "documentation": {
+    "badges": {
+      "archived": "Archived",
+      "inDevelopment": "In development",
+      "latestFeatures": "Latest features",
+      "maintenance": "Maintenance",
+      "stable": "Stable"
+    },
+    "description": "Find all information about the Axon Ivy Platform in our documents",
+    "legacyVersionTitle": "Documentation {{version}}",
+    "link": "Documentation",
+    "noData": "No documentation data available.",
+    "noLegacyData": "No legacy documentation data available.",
+    "promoAction": "View deprecation page",
+    "promoDescription": "Learn more about the features and products that have been deprecated or removed recently.",
+    "promoMobileDescription": "Check the features that have recently been removed.",
+    "promoMobileTitle": "Deprecation page",
+    "promoTitle": "Want to see which features have been removed?",
+    "sections": {
+      "archive": "Archive",
+      "developmentBuild": "Development build",
+      "leadingEdge": "LE - Leading Edge",
+      "lts": "LTS - Long Term Support"
+    },
+    "title": "Documentation",
+    "version": "Version {{version}}"
+  },
+  "download": {
+    "actions": {
+      "download": "Download {{title}} {{version}}",
+      "downloadForBetaPlatform": "Download {{title}} {{version}} for {{platform}} BETA",
+      "downloadForPlatform": "Download {{title}} {{version}} for {{platform}}",
+      "installDocker": "Install {{title}} {{version}} via Docker",
+      "installDockerForPlatform": "Install {{title}} {{version}} via Docker for {{platform}}",
+      "installVsCode": "Install Designer using VS Code Marketplace"
+    },
+    "archive": {
+      "all": "All",
+      "allSlim": "All Slim¹",
+      "archivePage": "archive page",
+      "checksums": "Checksums",
+      "details": "Details",
+      "dev": "Dev",
+      "downloadTab": "Download",
+      "noData": "No archive data available.",
+      "noSbomFiles": "No SBOM files available",
+      "older": "Older",
+      "olderVersionsAfter": ".",
+      "olderVersionsBefore": "Are you searching for even older versions? Have a look at our",
+      "releaseDate": "Release Date",
+      "releaseNotes": "Release notes",
+      "sbomSuffix": " SBOM:",
+      "sbomTab": "SBOM files",
+      "selectLabel": "Archive",
+      "slimExplanation": "This version is similar to the 'All' product, but without the 'demo-portal'.",
+      "tableArtifacts": "Artifacts",
+      "tableVersion": "Version"
+    },
+    "archiveDescription": "Explore some older versions and dev releases of the designer and engine.",
+    "archiveTitle": "Version and Download Options",
+    "card": {
+      "designerDescription": "Model, design and test your business application locally.",
+      "documentation": "documentation",
+      "engineDescription": "Deploy and run your application in a server environment.",
+      "moreInformation": "For more information, see the"
+    },
+    "description": "Axon Ivy consists of two components: \nThe Designer to build your applications and the Engine to run them.",
+    "help": {
+      "communityDescription": "Ask questions and get help.",
+      "contactSupport": "Contact Support",
+      "contactSupportDescription": "Need additional assistance?",
+      "contactUs": "Contact us",
+      "goToCommunity": "Go to Community",
+      "title": "Need help?"
+    },
+    "labels": {
+      "build": "build",
+      "design": "Design",
+      "designer": "Designer",
+      "engine": "Engine",
+      "execute": "Execute",
+      "installationGuide": "Installation Guide",
+      "latestFeatures": "Latest features",
+      "maintenance": "Maintenance",
+      "permalinks": "Permalinks",
+      "released": "Released: {{date}}",
+      "releaseDateNotAvailable": "Release date not available",
+      "releaseNotes": "Release notes",
+      "run": "run",
+      "stable": "Stable"
+    },
+    "leadingEdge": {
+      "descriptionAfter": "Be prepared for frequent migrations.",
+      "descriptionBefore": "Download the Leading Edge version for early access to the newest features!",
+      "title": "Want to check out brand new features?"
+    },
+    "maintenance": {
+      "description": "Download second to last released long term support version.",
+      "title": "Download {{version}}"
+    },
+    "noData": "No download data available.",
+    "pageTitle": "Download Long Term Support {{version}}",
+    "releaseCycle": {
+      "description": "Get familiar with our release cycle before you are going to use the Leading Edge version.",
+      "title": "Learn more about our release cycle"
+    }
+  },
+  "footer": {
+    "info": "Get the latest stable <a>Long Term Support</a> version of the Axon Ivy Platform - or download the <a>Leading Edge</a> version."
+  },
+  "home": {
+    "description": "The open BPM platform to build enterprise-grade applications. \nModel. Automate. Integrate. All in one.",
+    "getStarted": "Get Started",
+    "latestNews": "Latest News",
+    "title": "Build and automate business processes with Axon Ivy"
+  },
+  "installation": {
+    "actions": {
+      "download": "Download Axon Ivy {{product}}",
+      "gettingStarted": "Getting Started",
+      "gettingStartedDocker": "Getting Started with Docker",
+      "officialGuide": "Official guide",
+      "vscodeMarketplace": "Open VS Code Marketplace"
+    },
+    "docker": {
+      "access": "Now you can access your engine on <localhost>localhost:8080</localhost>.",
+      "commandCopied": "Command copied",
+      "copied": "Copied",
+      "copy": "Copy",
+      "copyCommand": "Copy command",
+      "note": "<bold>Note:</bold> This Docker image version defaults to the latest LTS release. To use a different version, replace <code>{{version}}</code> in the commands below with your desired version."
+    },
+    "guides": {
+      "common": {
+        "downloadDesigner": "Download the Axon Ivy Designer to your desired location",
+        "extractZip": "Extract the downloaded zip file",
+        "nextSteps": "Next steps"
+      },
+      "designerLinux": {
+        "extract": "Extract the downloaded zip file and navigate into the extracted Axon Ivy Designer",
+        "installDependencies": "Install dependencies",
+        "runScript": "Run the install-dependencies.sh script in a terminal, in order to install crucial dependencies.",
+        "sudoPassword": "Supply your sudoer password in order to allow privileged installers to run.",
+        "title": "Install Axon Ivy Designer for Linux",
+        "xorg": "Switch to X.org on Ubuntu 20.04+",
+        "xorgDescription": "If you work on Ubuntu 20.04 or newer, switch to X.org Window system by logging out, clicking on the settings button and choosing Ubuntu on Xorg."
+      },
+      "designerMac": {
+        "confirmOpen": "Give your consent to open the AxonIvyDesigner.app by clicking 'open'",
+        "copyToApplications": "Copy Axon Ivy Designer to the Applications folder",
+        "download": "Download the Axon Ivy Designer",
+        "hintDescription": "This Axon Ivy Designer runs best on Macs with Intel processors (x64 architecture). If you have a newer Mac with Apple Chips/Silicon (ARM architecture) you can run the Designer with the Rosetta 2 software. However, the Designer might not work as well as on the x64 architecture. Please note that this is a beta version, so you may encounter bugs, errors, or other unexpected issues.",
+        "hintTitle": "Mac Designer for Ventura and older",
+        "install": "Install the application",
+        "launch": "Launch Axon Ivy Designer",
+        "open": "Open Axon Ivy Designer",
+        "openDownloads": "Open the Downloads folder in Finder",
+        "title": "Install Axon Ivy Designer for Mac BETA"
+      },
+      "designerVscode": {
+        "clickInstall": "Click on the green 'Install' button",
+        "completeInstall": "In Visual Studio Code, click Install to complete the installation.",
+        "confirmBrowser": "When prompted by your browser, click 'Open Visual Studio Code'",
+        "installExtension": "Install the Axon Ivy Extension",
+        "installVscode": "Install Visual Studio Code following the official guide",
+        "openExtension": "Open the Axon Ivy Extension in the Extensions Marketplace",
+        "title": "Install Axon Ivy VS Code Extension"
+      },
+      "designerWindows": { "title": "Install Axon Ivy Designer for Windows" },
+      "docker": {
+        "installDocker": "Install Docker by following the official guide",
+        "learnMore": "Learn more about Axon Ivy with Docker",
+        "run": "Run Axon Ivy Engine as Docker Image",
+        "title": "Install Axon Ivy Engine for Docker"
+      },
+      "engine": {
+        "download": "Download the Axon Ivy Engine to your desired location",
+        "start": "Start the Axon Ivy Engine",
+        "title": "Install Axon Ivy Engine"
+      }
+    },
+    "help": {
+      "documentation": {
+        "description": "Find guides and references.",
+        "linkLabel": "Go to Documentation",
+        "title": "Documentation"
+      },
+      "tutorials": {
+        "description": "Learn how to use the Designer.",
+        "linkLabel": "Go to Tutorials",
+        "title": "Tutorials"
+      }
+    },
+    "intro": "Follow these steps to download and install Axon Ivy {{product}}",
+    "introDocker": "Follow these steps to download and install Axon Ivy {{product}} for <docker>Docker</docker>",
+    "introPlatform": "Follow these steps to download and install Axon Ivy {{product}} for {{platform}}",
+    "stepByStep": "Step-by-step guide",
+    "tabTitle": "Installation Guide"
+  },
+  "nav": {
+    "community": "Community",
+    "communityDescription": "Ask questions and share ideas",
+    "deprecation": "Deprecation",
+    "deprecationDescription": "Plan for upcoming changes",
+    "doc": "Documentation",
+    "home": "Home",
+    "market": "Market",
+    "marketDescription": "Explore extensions and connectors",
+    "menuClose": "Close navigation menu",
+    "menuOpen": "Open navigation menu",
+    "news": "News",
+    "productInfo": "Product Information",
+    "releaseCycle": "Release Cycle",
+    "releaseCycleDescription": "Understand the release schedule",
+    "resources": "Resources",
+    "team": "Team",
+    "tutorial": "Tutorial",
+    "tutorialDescription": "Learn step by step"
+  },
+  "news": {
+    "browseMore": "Browse more news",
+    "demoScreenshots": "Demo screenshots:",
+    "description": "Explore the latest releases, features and improvements of the Axon Ivy platform",
+    "gallery": {
+      "nextImage": "Next image",
+      "openPreview": "Open image preview",
+      "previousImage": "Previous image"
+    },
+    "migrationGuide": "Migration Guide",
+    "pageTitle": "What's new?",
+    "readMore": "Read more",
+    "released": "Released: {{date}}",
+    "releaseNotes": "Release Notes",
+    "tags": {
+      "archived": "Archived",
+      "leadingEdge": "Leading Edge",
+      "longTermSupport": "Long Term Support"
+    },
+    "viewDetails": "View Details",
+    "whatsNew": "What's new in {{version}}"
+  },
+  "notFound": {
+    "description": "Not Found: Our website is taking a break. It seems that we cannot find the page you requested. You would be doing us a great favor by reporting it here:",
+    "linkHome": "Back to homepage",
+    "pageTitle": "404 Error",
+    "subtitle": "Error code: 404",
+    "title": "Oops!"
+  },
+  "releaseCycle": {
+    "illustration": "Release cycle illustration",
+    "intro": "The releasing of the Axon Ivy Platform follows a well defined release cycle which clearly differs between <bold>Long Term Support (LTS)</bold> and <bold>Leading Edge (LE)</bold> versions.",
+    "le": {
+      "current": "Current Leading Edge version:",
+      "description": "As early adopter you are able to benefit already from the newest features with our Leading Edge release. We can only support the latest Leading Edge release, because of this you need to be ready for frequent migrations!",
+      "newProjects": "Taking the leading edge road is suitable if you start new projects. Leading Edge releases will start with an odd version number.",
+      "title": "Leading Edge (LE)"
+    },
+    "lts": {
+      "current": "Current Long Term Support versions:",
+      "description": "A LTS release is the most stable version. During the maintenance period of an LTS release we provide several update releases which contains mainly bug fixes and tiny improvements.",
+      "support": "We always support the two latest LTS releases. This protects a running, productive environment - an upgrade to a new update release comes with minimal risk. New LTS releases will always start with an even major version number.",
+      "title": "Long Term Support (LTS)"
+    },
+    "maintenance": {
+      "description": "For versions that have reached the end of their official support period, we understand that some users may still require assistance for their specific, unsupported version. We offer an Extended Maintenance Support Contract to provide continued support in such cases. To inquire about this contract and receive more information, don't hesitate to contact our support team at <mail>support@axonivy.com</mail>.",
+      "nav": "Maintenance support",
+      "title": "Extended Maintenance Support"
+    },
+    "milestones": {
+      "description": "If you want to build a new project with the latest Leading Edge features without the instability of nightly releases, a milestone release may be the right choice. Milestone releases are published periodically during development and provide stable snapshots of the Leading Edge codebase at a specific point in time. By staying on the same milestone release, you get a consistent set of features and behavior.",
+      "title": "Milestones"
+    },
+    "subtitle": "How does it work?",
+    "title": "Release cycle",
+    "upgrade": {
+      "description": "Consider upgrading to a supported LTS version or the latest LE version release for ongoing updates and official support. When a new LTS version is released, the third latest LTS version will continue to receive support for an additional 3-month grace period until the end of the month, before it is no longer supported, meaning no more updates or security patches will be provided.",
+      "title": "When to upgrade?"
+    }
+  },
+  "support": {
+    "contact": {
+      "email": {
+        "description": "Let us know your support issue via email",
+        "title": "Send us an email"
+      },
+      "text": "To get support please contact us",
+      "ticket": {
+        "description": "Create a ticket in our help center",
+        "linkLabel": "Help center",
+        "title": "Create ticket"
+      },
+      "title": "Need Support?"
+    },
+    "description": "Axon Ivy Support is commiting to provide high-quality, technical support for quick problem solving, training or consulting. This protects your Axon Ivy investment and lets all participants sleep well.",
+    "information": {
+      "configuration": {
+        "description": "Share your yaml configuration files as text or attachment",
+        "title": "*Configuration"
+      },
+      "logs": {
+        "description": "Share stacktraces as text or log files as attachments",
+        "title": "*Stacktrace / Log"
+      },
+      "problem": {
+        "description": "Detailed description of your problem",
+        "title": "Description"
+      },
+      "product": {
+        "description": "Designer, Engine, REST Service, Web Service or Database",
+        "title": "Product / Service"
+      },
+      "reproduction": {
+        "description": "Detailed way how your bug or problem can be reproduced",
+        "title": "*Way to reproduce"
+      },
+      "screenshots": {
+        "description": "Share screenshots as attachments",
+        "title": "*Screenshots"
+      },
+      "version": {
+        "description": "For example, version: 8.0.20",
+        "title": "Version you're using"
+      }
+    },
+    "informationHeading": "If you open a support ticket, please share the following information:",
+    "optionalNote": "(*if available)",
+    "title": "Support"
+  },
+  "team": {
+    "avatar": "{{name}} avatar",
+    "description": "IvyTeam is the core development team of the Axon Ivy Platform. The team is highly experienced in agile software development. Since the formation in the year 1993 the team is located in Zug in the heart of Switzerland.",
+    "education": {
+      "bachelorComputerScience": "B.Sc. Computer Science",
+      "computerScienceFh": "Inf. Ing. FH",
+      "computerScienceHtl": "Inf. Ing. HTL",
+      "electricalEngineeringHtl": "El. Ing. HTL",
+      "informationTechnologyEfz": "EFZ Information Technology",
+      "masterComputerScience": "M.Sc. Computer Science"
+    },
+    "roles": {
+      "coreDeveloper": "Core Developer",
+      "productOwnerCoreDeveloper": "Product Owner & Core Developer",
+      "productOwnerTeamLeader": "Product Owner & Team Leader"
+    },
+    "slogans": {
+      "als": "Dock worker 👷",
+      "avi": "Starting the journey🛣️",
+      "bb": "Primal rock 🗿",
+      "cgr": "Learning 📚",
+      "cst": "Infrastructure & Architecture 🏗️",
+      "dar": "Taking the first steps 🦿🦵",
+      "edp": "Frontend Flair, Design Spark ✨",
+      "fhe": "Just starting out 🐣",
+      "jla": "Bringing fresh energy ⚡",
+      "lgi": "Living Algorithm 🧮",
+      "lli": "Pixel mover 🌄",
+      "lmu": "Quantum Engineer ⚛️",
+      "rew": "Swiss knife ⌨️",
+      "rwei": "Tracing Guru 📈",
+      "tgr": "Learning Software development 🖥️"
+    },
+    "tabTitle": "IvyTeam",
+    "title": "🇨🇭IvyTeam"
+  }
+}

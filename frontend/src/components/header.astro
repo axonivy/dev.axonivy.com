@@ -2,6 +2,14 @@
 import Navbar from "@/components/navbar";
 import AxonIvyLogo from "@/assets/axonivy-logo-2021-rgb.svg";
 import { ModeToggle } from "./ui/mode-toggle";
+import i18next, { type Lang } from "@/translation/ui";
+import { getLanguageUrls } from "@/translation/urls";
+import { LanguageSwitcher } from "./language-switcher";
+
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const languageUrls = getLanguageUrls(Astro.url);
+const homeUrl = getLanguageUrls(new URL("/", Astro.url))[lang];
+const t = i18next.getFixedT(lang);
 ---
 
 <script is:inline>
@@ -36,12 +44,13 @@ import { ModeToggle } from "./ui/mode-toggle";
 <div class="border-n100 bg-background fixed top-0 z-50 w-full border-b">
   <div class="relative mx-auto w-full px-4 py-4 md:max-w-6xl">
     <div class="flex w-full flex-row items-center justify-between gap-4">
-      <a href="/">
+      <a href={homeUrl} aria-label={t("nav.home")}>
         <AxonIvyLogo width={108} height={16} class="md:h-10 md:w-40" />
       </a>
-      <Navbar client:load />
-      <div class="hidden gap-2 md:flex">
-        <ModeToggle client:load />
+      <Navbar lang={lang} urls={languageUrls} client:load />
+      <div class="hidden gap-2 md:flex items-center">
+        <LanguageSwitcher lang={lang} urls={languageUrls} client:load />
+        <ModeToggle lang={lang} client:load />
       </div>
     </div>
   </div>

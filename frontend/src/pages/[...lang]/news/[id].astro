@@ -1,0 +1,78 @@
+---
+import NewsScrollSpy from "@/components/news/scrollspy";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { getNews, type NewsRelease } from "@/data/news/news";
+import Layout from "@/layouts/news.astro";
+import { getLanguagePaths, localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
+
+export async function getStaticPaths() {
+  return getLanguagePaths().flatMap(({ params }) => {
+    const lang = (params.lang ?? "en") as Lang;
+    return getNews(lang).map((release) => ({
+      params: { ...params, id: release.id },
+      props: { release, lang },
+    }));
+  });
+}
+
+const { release, lang } = Astro.props as { release: NewsRelease; lang: Lang };
+const t = i18next.getFixedT(lang);
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat(lang, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+---
+
+<Layout tabTitle={t("nav.news")}>
+  <div class="flex flex-col">
+    <div class="bg-background before:bg-background sticky top-24 z-20 py-2 pb-8 before:absolute before:inset-x-0 before:-top-16 before:h-16 before:content-['']">
+      <Breadcrumb className="px-3">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href={localePath(lang, "/")}>
+              {t("nav.home")}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={localePath(lang, "/news")}>
+              {t("nav.news")}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{release.version_title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+
+    <NewsScrollSpy
+      title={release.version_title}
+      slogan={release.slogan}
+      tag={release.tag}
+      releaseDate={formatDate(release.release_date)}
+      downloadUrl={
+        release.download_url.startsWith("/")
+          ? localePath(lang, release.download_url)
+          : release.download_url
+      }
+      releaseNotesUrl={release.release_notes_url}
+      migrationGuideUrl={release.migration_guide_url}
+      sections={release.sections}
+      lang={lang}
+      client:load
+    />
+  </div>
+</Layout>

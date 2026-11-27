@@ -11,7 +11,9 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:e2e": "node scripts/test-e2e.mjs",
-    "sbom": "pnpm sbom --sbom-format cyclonedx > bom.json"
+    "sbom": "pnpm sbom --sbom-format cyclonedx > bom.json",
+    "i18n:extract": "i18next-cli extract",
+    "i18n:check": "i18next-cli extract --ci --dry-run"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.12",
@@ -23,12 +25,15 @@
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.0",
     "detect-browser": "^5.3.0",
+    "i18next": "^26.4.5",
     "nuqs": "^2.10.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-i18next": "^17.0.16",
     "swagger-ui-dist": "^5.34.0"
   },
   "devDependencies": {
+    "@astrojs/compiler": "^4.0.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/vite": "^4.3.3",
@@ -43,6 +48,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0",
+    "i18next-cli": "^1.75.3",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",

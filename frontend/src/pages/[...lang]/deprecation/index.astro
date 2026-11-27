@@ -1,0 +1,147 @@
+---
+import DeprecationMobileCard from "@/components/deprecation/deprecation-mobile-card.astro";
+import DeprecationStep from "@/components/deprecation/deprecation-step.astro";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { H4, H5 } from "@/components/ui/typography";
+import getDeprecations from "@/data/deprecation";
+import Layout from "@/layouts/main.astro";
+import { getLanguagePaths } from "@/translation/language";
+import i18next from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const t = i18next.getFixedT(Astro.currentLocale ?? "en");
+const deprecated = getDeprecations(t);
+
+const deprecationSteps = [
+  { description: t("deprecation.steps.features") },
+  {
+    description: t("deprecation.steps.api"),
+    code: "@Deprecated(forRemoval=true)",
+  },
+  { description: t("deprecation.steps.designer") },
+];
+
+const currentVersion = 14;
+
+const currentlyDeprecated = deprecated.filter(
+  (item) => item.removed === undefined || item.removed > currentVersion,
+);
+
+const recentlyRemoved = deprecated.filter(
+  (item) => item.removed !== undefined && item.removed <= currentVersion,
+);
+
+const deprecationSections = [
+  {
+    title: t("deprecation.sections.deprecated.title"),
+    description: t("deprecation.sections.deprecated.description"),
+    items: currentlyDeprecated,
+  },
+  {
+    title: t("deprecation.sections.removed.title"),
+    description: t("deprecation.sections.removed.description"),
+    items: recentlyRemoved,
+  },
+];
+---
+
+<Layout
+  tabTitle={t("deprecation.title")}
+  title={t("deprecation.title")}
+  description={{
+    before: t("deprecation.introduction.before"),
+    link: {
+      href: "https://developer.axonivy.com/doc/12.0/en/public-api/deprecated-list.html",
+      label: t("deprecation.introduction.link"),
+    },
+    after: t("deprecation.introduction.after"),
+  }}
+>
+  <div class="flex flex-col gap-12">
+    <Card>
+      <CardHeader>
+        <CardTitle>{t("deprecation.processHeading")}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4 md:flex-row md:gap-6">
+        {deprecationSteps.map((step, index) => (
+          <DeprecationStep step={step} showSeparator={index > 0} />
+        ))}
+      </CardContent>
+    </Card>
+    {deprecationSections.map((section) => (
+      <div class="flex flex-col gap-2">
+        <H4>{section.title}</H4>
+        <H5 className="font-normal text-n900">{section.description}</H5>
+        <div class="border-border hidden overflow-hidden rounded-lg border md:flex">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[30%] whitespace-normal">
+                  {t("deprecation.columns.feature")}
+                </TableHead>
+                <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                  {t("deprecation.columns.introduced")}
+                </TableHead>
+                <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                  {t("deprecation.columns.deprecated")}
+                </TableHead>
+                <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border">
+                  {t("deprecation.columns.removed")}
+                </TableHead>
+                <TableHead className="relative pr-4 before:absolute before:top-2 before:bottom-2 before:-left-1 before:w-px before:bg-border w-[30%] whitespace-normal">
+                  {t("deprecation.columns.successor")}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {section.items.map((item) => (
+                <TableRow>
+                  <TableCell className="font-medium whitespace-normal">
+                    {item.nameHref ? (
+                      <a href={item.nameHref} class="text-primary underline">
+                        {item.name}
+                      </a>
+                    ) : (
+                      item.name
+                    )}
+                  </TableCell>
+                  <TableCell>{item.released}</TableCell>
+                  <TableCell>{item.deprecated}</TableCell>
+                  <TableCell>{item.removed}</TableCell>
+                  <TableCell className="whitespace-normal">
+                    {item.successorHref ? (
+                      <a
+                        href={item.successorHref}
+                        class="text-primary underline"
+                      >
+                        {item.successor}
+                      </a>
+                    ) : item.successor == null || item.successor === "" ? (
+                      "-"
+                    ) : (
+                      item.successor
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+        <div class="flex flex-col gap-4 md:hidden">
+          {section.items.map((item) => (
+            <DeprecationMobileCard item={item} />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</Layout>

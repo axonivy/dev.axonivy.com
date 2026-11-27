@@ -1,0 +1,183 @@
+---
+import PortraitAls from "@/assets/team/als.jpg";
+import Placeholder from "@/assets/team/avatar-placeholder.svg";
+import PortraitBb from "@/assets/team/bb.jpg";
+import PortraitCst from "@/assets/team/cst.jpg";
+import PortraitDar from "@/assets/team/dar.jpg";
+import PortraitEdp from "@/assets/team/edp.jpg";
+import PortraitLgi from "@/assets/team/lgi.jpg";
+import PortraitLli from "@/assets/team/lli.jpg";
+import PortraitRew from "@/assets/team/rew.jpg";
+import PortraitRwei from "@/assets/team/rwei.jpg";
+import { Card, CardContent } from "@/components/ui/card";
+import { H4, P } from "@/components/ui/typography";
+import Layout from "@/layouts/main.astro";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { getLanguagePaths } from "@/translation/language";
+import i18next from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const t = i18next.getFixedT(Astro.currentLocale ?? "en");
+
+type TeamMember = {
+  name: string;
+  avatarSvg?: typeof Placeholder;
+  avatarImage?: ImageMetadata;
+  education: string;
+  function: string;
+  slogan: string;
+};
+
+const team: TeamMember[] = [
+  {
+    name: "Alexander Suter",
+    avatarImage: PortraitAls,
+    education: t("team.education.bachelorComputerScience"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.als"),
+  },
+  {
+    name: "Bruno Bütler",
+    avatarImage: PortraitBb,
+    education: t("team.education.computerScienceHtl"),
+    function: t("team.roles.productOwnerTeamLeader"),
+    slogan: t("team.slogans.bb"),
+  },
+  {
+    name: "Christian Strebel",
+    avatarImage: PortraitCst,
+    education: t("team.education.computerScienceFh"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.cst"),
+  },
+  {
+    name: "Lukas Lieb",
+    avatarImage: PortraitLli,
+    education: t("team.education.bachelorComputerScience"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.lli"),
+  },
+  {
+    name: "Reguel Wermelinger",
+    avatarImage: PortraitRew,
+    education: t("team.education.bachelorComputerScience"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.rew"),
+  },
+  {
+    name: "Reto Weiss",
+    avatarImage: PortraitRwei,
+    education: t("team.education.electricalEngineeringHtl"),
+    function: t("team.roles.productOwnerCoreDeveloper"),
+    slogan: t("team.slogans.rwei"),
+  },
+  {
+    name: "Louis Müller",
+    avatarSvg: Placeholder,
+    education: t("team.education.masterComputerScience"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.lmu"),
+  },
+  {
+    name: "Tobias Gretler",
+    avatarSvg: Placeholder,
+    education: t("team.education.informationTechnologyEfz"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.tgr"),
+  },
+  {
+    name: "Elio Di Puma",
+    avatarImage: PortraitEdp,
+    education: t("team.education.bachelorComputerScience"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.edp"),
+  },
+  {
+    name: "Dominik Arnold",
+    avatarImage: PortraitDar,
+    education: t("team.education.masterComputerScience"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.dar"),
+  },
+  {
+    name: "Lukas Giger",
+    avatarImage: PortraitLgi,
+    education: t("team.education.informationTechnologyEfz"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.lgi"),
+  },
+  {
+    name: "Fabian Heuberger",
+    avatarSvg: Placeholder,
+    education: t("team.education.informationTechnologyEfz"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.fhe"),
+  },
+  {
+    name: "Alissa Villiger",
+    avatarSvg: Placeholder,
+    education: t("team.education.informationTechnologyEfz"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.avi"),
+  },
+  {
+    name: "Jacek Lajdecki",
+    avatarSvg: Placeholder,
+    education: t("team.education.informationTechnologyEfz"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.jla"),
+  },
+  {
+    name: "Colin Graf",
+    avatarSvg: Placeholder,
+    education: t("team.education.informationTechnologyEfz"),
+    function: t("team.roles.coreDeveloper"),
+    slogan: t("team.slogans.cgr"),
+  },
+];
+---
+
+<Layout
+  tabTitle={t("team.tabTitle")}
+  title={t("team.title")}
+  description={t("team.description")}
+>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+    {team
+      .sort(() => Math.random() - 0.5)
+      .map((member) => {
+        const AvatarSvg = member.avatarSvg;
+
+        return (
+          <Card className="flex flex-row items-center p-2 py-2 gap-2">
+            {member.avatarImage ? (
+              <Image
+                src={member.avatarImage}
+                alt={t("team.avatar", { name: member.name })}
+                width={115}
+                height={192}
+                class="shrink-0 rounded-md object-cover pt-2"
+              />
+            ) : (
+              AvatarSvg && (
+                <AvatarSvg
+                  aria-label={t("team.avatar", { name: member.name })}
+                  class="h-48 w-auto shrink-0 rounded-md"
+                />
+              )
+            )}
+            <CardContent className="flex flex-col gap-2">
+              <H4>{member.name}</H4>
+              <div>
+                <P className="text-n900">{member.function}</P>
+                <P className="text-n900">{member.education}</P>
+              </div>
+              <P className="text-n900">{member.slogan}</P>
+            </CardContent>
+          </Card>
+        );
+      })}
+  </div>
+</Layout>

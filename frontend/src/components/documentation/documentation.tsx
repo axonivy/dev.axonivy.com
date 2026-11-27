@@ -11,6 +11,9 @@ import {
   IconRoute,
 } from "@tabler/icons-react";
 import { Fragment } from "react";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "@/translation/ui";
 
 type DocLink = { url: string; text: string };
 
@@ -22,13 +25,6 @@ export type UiDocResponse = {
   docLinksLE: DocVersionLinks[];
   docLinksDev: DocVersionLinks[];
 };
-
-const sections: Array<{ key: keyof UiDocResponse; title: string }> = [
-  { key: "docLinksLTS", title: "LTS - Long Term Support" },
-  { key: "docLinksArchiveLTS", title: "Archive" },
-  { key: "docLinksLE", title: "LE - Leading Edge" },
-  { key: "docLinksDev", title: "Development build" },
-];
 
 const SecondaryIconForText = ({ text }: { text: string }) => {
   const normalized = text.toLowerCase();
@@ -45,34 +41,52 @@ const getBadge = (
   sectionKey: keyof UiDocResponse,
   group: DocVersionLinks,
   groups: DocVersionLinks[],
+  t: TFunction,
 ): { label: string; variant: "green" | "orange" | "purple" | "gray" } => {
   if (sectionKey === "docLinksLE") {
-    return { label: "Latest features", variant: "orange" };
+    return {
+      label: t("documentation.badges.latestFeatures"),
+      variant: "orange",
+    };
   }
   if (sectionKey === "docLinksDev") {
-    return { label: "In development", variant: "purple" };
+    return {
+      label: t("documentation.badges.inDevelopment"),
+      variant: "purple",
+    };
   }
   if (sectionKey === "docLinksArchiveLTS") {
-    return { label: "Archived", variant: "gray" };
+    return { label: t("documentation.badges.archived"), variant: "gray" };
   }
 
   const newestVersion = Math.max(...groups.map((g) => parseFloat(g.version)));
   const isNewest = parseFloat(group.version) === newestVersion;
   return isNewest
-    ? { label: "Stable", variant: "green" }
-    : { label: "Maintenance", variant: "green" };
+    ? { label: t("documentation.badges.stable"), variant: "green" }
+    : { label: t("documentation.badges.maintenance"), variant: "green" };
 };
 
 export default function Documentation({
   data,
   archived,
+  lang,
 }: {
   data: UiDocResponse;
   archived?: boolean;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
+
   if (!data) {
-    return <P className="text-n900">No documentation data available.</P>;
+    return <P className="text-n900">{t("documentation.noData")}</P>;
   }
+
+  const sections: Array<{ key: keyof UiDocResponse; title: string }> = [
+    { key: "docLinksLTS", title: t("documentation.sections.lts") },
+    { key: "docLinksArchiveLTS", title: t("documentation.sections.archive") },
+    { key: "docLinksLE", title: t("documentation.sections.leadingEdge") },
+    { key: "docLinksDev", title: t("documentation.sections.developmentBuild") },
+  ];
 
   const visibleSections = sections.filter(
     (section) =>
@@ -119,14 +133,16 @@ export default function Documentation({
                   const secondaryLinks = links.filter(
                     (l) => !l.text.toLowerCase().includes("documentation"),
                   );
-                  const badge = getBadge(section.key, group, groups);
+                  const badge = getBadge(section.key, group, groups, t);
 
                   return (
                     <Fragment key={`${section.key}-${group.version}`}>
                       <div className="flex flex-1 flex-col gap-4">
                         <div className="flex items-center justify-between">
                           <H5 className="leading-tight">
-                            Version {group.version}
+                            {t("documentation.version", {
+                              version: group.version,
+                            })}
                           </H5>
                           <Badge variant={badge.variant}>{badge.label}</Badge>
                         </div>
@@ -147,7 +163,7 @@ export default function Documentation({
                                 className="size-4 shrink-0"
                                 aria-hidden="true"
                               />
-                              Documentation
+                              {t("documentation.link")}
                             </span>
                             <IconArrowRight
                               className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"

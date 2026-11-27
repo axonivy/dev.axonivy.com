@@ -1,3 +1,5 @@
+import type { TFunction } from "i18next";
+
 export type InstallationProduct = "Designer" | "Engine";
 
 export type InstallationSubstep = { id: number; title: string; img?: string };
@@ -18,190 +20,170 @@ export type InstallationGuide = {
   steps: InstallationStep[];
 };
 
-const getInstallationGuides = (currentVersion: string) =>
+const getInstallationGuides = (currentVersion: string, t: TFunction) =>
   ({
     "designer-windows": {
-      title: "Install Axon Ivy Designer for Windows",
+      title: t("installation.guides.designerWindows.title"),
       type: "windows",
       product: "Designer",
       steps: [
-        {
-          id: 1,
-          title: "Download the Axon Ivy Designer to your desired location",
-        },
+        { id: 1, title: t("installation.guides.common.downloadDesigner") },
         {
           id: 2,
-          title: "Extract the downloaded zip file",
+          title: t("installation.guides.common.extractZip"),
           img: "designer-windows/extract-axonivy-designer.png",
         },
-        { id: 3, title: "Next steps" },
+        { id: 3, title: t("installation.guides.common.nextSteps") },
       ],
     },
     "designer-linux": {
-      title: "Install Axon Ivy Designer for Linux",
+      title: t("installation.guides.designerLinux.title"),
       type: "Linux",
       product: "Designer",
       steps: [
-        {
-          id: 1,
-          title: "Download the Axon Ivy Designer to your desired location",
-        },
+        { id: 1, title: t("installation.guides.common.downloadDesigner") },
         {
           id: 2,
-          title:
-            "Extract the downloaded zip file and navigate into the extracted Axon Ivy Designer",
+          title: t("installation.guides.designerLinux.extract"),
           img: "designer-linux/ubuntu-extract.png",
         },
         {
           id: 3,
-          title: "Install dependencies",
+          title: t("installation.guides.designerLinux.installDependencies"),
           substeps: [
             {
               id: 3.1,
-              title:
-                "Run the install-dependencies.sh script in a terminal, in order to install crucial dependencies.",
+              title: t("installation.guides.designerLinux.runScript"),
               img: "designer-linux/ubuntu-run-install-deps.png",
             },
             {
               id: 3.2,
-              title:
-                "Supply your sudoer password in order to allow privileged installers to run.",
+              title: t("installation.guides.designerLinux.sudoPassword"),
               img: "designer-linux/ubuntu-install-deps-terminal.png",
             },
           ],
         },
         {
           id: 4,
-          title: "Switch to X.org on Ubuntu 20.04+",
+          title: t("installation.guides.designerLinux.xorg"),
           substeps: [
             {
               id: 4.1,
-              title:
-                "If you work on Ubuntu 20.04 or newer, switch to X.org Window system by logging out, clicking on the settings button and choosing Ubuntu on Xorg.",
+              title: t("installation.guides.designerLinux.xorgDescription"),
               img: "designer-linux/ubuntu-xorg.png",
             },
           ],
         },
-        { id: 5, title: "Next steps" },
+        { id: 5, title: t("installation.guides.common.nextSteps") },
       ],
     },
     "designer-mac": {
-      title: "Install Axon Ivy Designer for Mac BETA",
+      title: t("installation.guides.designerMac.title"),
       type: "macOs",
       product: "Designer",
       hint: {
-        title: "Mac Designer for Ventura and older",
-        description:
-          "This Axon Ivy Designer runs best on Macs with Intel processors (x64 architecture). If you have a newer Mac with Apple Chips/Silicon (ARM architecture) you can run the Designer with the Rosetta 2 software. However, the Designer might not work as well as on the x64 architecture. Please note that this is a beta version, so you may encounter bugs, errors, or other unexpected issues.",
+        title: t("installation.guides.designerMac.hintTitle"),
+        description: t("installation.guides.designerMac.hintDescription"),
       },
       steps: [
-        { id: 1, title: "Download the Axon Ivy Designer" },
+        { id: 1, title: t("installation.guides.designerMac.download") },
         {
           id: 2,
-          title: "Install the application",
+          title: t("installation.guides.designerMac.install"),
           substeps: [
             {
               id: 2.1,
-              title: "Open the Downloads folder in Finder",
+              title: t("installation.guides.designerMac.openDownloads"),
               img: "designer-mac/open-downloads.png",
             },
             {
               id: 2.2,
-              title: "Copy Axon Ivy Designer to the Applications folder",
+              title: t("installation.guides.designerMac.copyToApplications"),
               img: "designer-mac/copy-to-applications.png",
             },
           ],
         },
         {
           id: 3,
-          title: "Launch Axon Ivy Designer",
+          title: t("installation.guides.designerMac.launch"),
           substeps: [
             {
               id: 3.1,
-              title: "Open Axon Ivy Designer",
+              title: t("installation.guides.designerMac.open"),
               img: "designer-mac/open.png",
             },
             {
               id: 3.2,
-              title:
-                "Give your consent to open the AxonIvyDesigner.app by clicking 'open'",
+              title: t("installation.guides.designerMac.confirmOpen"),
               img: "designer-mac/open-confirm.png",
             },
           ],
         },
-        { id: 4, title: "Next steps" },
+        { id: 4, title: t("installation.guides.common.nextSteps") },
       ],
     },
     "designer-vscode": {
-      title: "Install Axon Ivy VS Code Extension",
+      title: t("installation.guides.designerVscode.title"),
       type: "VS Code",
       product: "Designer",
       steps: [
         {
           id: 1,
-          title: "Install Visual Studio Code following the official guide",
+          title: t("installation.guides.designerVscode.installVscode"),
           url: "https://code.visualstudio.com/docs/getstarted/overview",
         },
-        {
-          id: 2,
-          title: "Open the Axon Ivy Extension in the Extensions Marketplace",
-        },
+        { id: 2, title: t("installation.guides.designerVscode.openExtension") },
         {
           id: 3,
-          title: "Install the Axon Ivy Extension",
+          title: t("installation.guides.designerVscode.installExtension"),
           substeps: [
             {
               id: 3.1,
-              title: "Click on the green 'Install' button",
+              title: t("installation.guides.designerVscode.clickInstall"),
               img: "designer-vscode/install-marketplace.png",
             },
             {
               id: 3.2,
-              title:
-                "When prompted by your browser, click 'Open Visual Studio Code'",
+              title: t("installation.guides.designerVscode.confirmBrowser"),
               img: "designer-vscode/confirm-open.png",
             },
             {
               id: 3.3,
-              title:
-                "In Visual Studio Code, click Install to complete the installation.",
+              title: t("installation.guides.designerVscode.completeInstall"),
               img: "designer-vscode/install-vscode.png",
             },
           ],
         },
-        { id: 4, title: "Next steps" },
+        { id: 4, title: t("installation.guides.common.nextSteps") },
       ],
     },
     engine: {
-      title: "Install Axon Ivy Engine",
+      title: t("installation.guides.engine.title"),
       type: "Engine",
       product: "Engine",
       steps: [
-        {
-          id: 1,
-          title: "Download the Axon Ivy Engine to your desired location",
-        },
+        { id: 1, title: t("installation.guides.engine.download") },
         {
           id: 2,
-          title: "Extract the downloaded zip file",
+          title: t("installation.guides.common.extractZip"),
           img: "designer-windows/extract-axonivy-designer.png",
         },
-        { id: 3, title: "Start the Axon Ivy Engine" },
+        { id: 3, title: t("installation.guides.engine.start") },
       ],
     },
     docker: {
-      title: "Install Axon Ivy Engine for Docker",
+      title: t("installation.guides.docker.title"),
       type: "Docker",
       product: "Engine",
       steps: [
         {
           id: 1,
-          title: "Install Docker by following the official guide",
+          title: t("installation.guides.docker.installDocker"),
           url: "https://docs.docker.com/get-started/get-docker/",
         },
         {
           id: 2,
-          title: "Run Axon Ivy Engine as Docker Image",
+          title: t("installation.guides.docker.run"),
           substeps: [
             {
               id: 2.1,

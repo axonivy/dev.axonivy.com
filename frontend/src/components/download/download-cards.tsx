@@ -25,19 +25,25 @@ import {
 } from "@/components/download/download-artifacts";
 import { DownloadAction } from "@/components/download/download-action";
 import { ArtifactPicker } from "@/components/download/artifact-picker";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
+import { localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
 
 type DownloadCardsProps = {
   release: DownloadRelease;
-  releaseLabel: string;
+  isLts: boolean;
   badge: string;
+  lang: Lang;
 };
 
 type DownloadProductCardProps = {
   release: DownloadRelease;
-  releaseLabel: string;
+  isLts: boolean;
   product: Product;
   badge: string;
   userOs: OperatingSystem;
+  lang: Lang;
 };
 
 type ProductConfig = {
@@ -56,18 +62,20 @@ type ProductConfig = {
 function productConfig(
   release: DownloadRelease,
   product: DownloadProductCardProps["product"],
-  releaseLabel: DownloadProductCardProps["releaseLabel"],
+  isLts: DownloadProductCardProps["isLts"],
+  t: TFunction,
 ): ProductConfig {
   const isDesigner = product === "designer";
-  const isLts = releaseLabel === "Long Term Support";
 
   return {
-    title: isDesigner ? "Designer" : "Engine",
-    badge: isDesigner ? "Design" : "Execute",
-    mode: isDesigner ? "build" : "run",
+    title: t(
+      isDesigner ? "download.labels.designer" : "download.labels.engine",
+    ),
+    badge: t(isDesigner ? "download.labels.design" : "download.labels.execute"),
+    mode: t(isDesigner ? "download.labels.build" : "download.labels.run"),
     description: isDesigner
-      ? "Model, design and test your business application locally."
-      : "Deploy and run your application in a server environment.",
+      ? t("download.card.designerDescription")
+      : t("download.card.engineDescription"),
     icon: isDesigner ? (
       <IconTools className="h-8 w-8" />
     ) : (
@@ -83,12 +91,14 @@ function productConfig(
 
 function DownloadProductCard({
   release,
-  releaseLabel,
+  isLts,
   product,
   badge,
   userOs,
+  lang,
 }: DownloadProductCardProps) {
-  const config = productConfig(release, product, releaseLabel);
+  const { t } = useTranslation(undefined, { lng: lang });
+  const config = productConfig(release, product, isLts, t);
   const { artifacts } = config;
   const vsCodeExtensionArtifact = config.isDesigner
     ? artifacts.find(isVsCodeExtensionArtifact)
@@ -151,9 +161,9 @@ function DownloadProductCard({
           {release.docLink && (
             <>
               {" "}
-              For more information, see the{" "}
+              {t("download.card.moreInformation")}{" "}
               <a href={release.docLink} className="text-primary">
-                documentation
+                {t("download.card.documentation")}
               </a>
               .
             </>
@@ -170,31 +180,37 @@ function DownloadProductCard({
             onSelect={setSelectedArtifactPermalink}
           />
         )}
-        <div className={vsCodeExtensionArtifact ? "mt-4 md:mt-15" : "mt-auto"}>
+        <div
+          className={vsCodeExtensionArtifact ? "mt-4 md:mt-14.5" : "mt-auto"}
+        >
           <DownloadAction
             title={config.title}
             version={release.version}
             artifactLabel={artifactLabel}
             artifact={selectedArtifact}
+            lang={lang}
           />
         </div>
         <div className="flex flex-row items-center justify-between gap-4">
           <a
-            href={installationGuideHref(
-              product,
-              userOs,
-              selectedArtifact,
-              product === "engine" ? release.docLink : undefined,
+            href={localePath(
+              lang,
+              installationGuideHref(
+                product,
+                userOs,
+                selectedArtifact,
+                product === "engine" ? release.docLink : undefined,
+              ),
             )}
             className="text-primary text-center"
           >
-            Installation Guide
+            {t("download.labels.installationGuide")}
           </a>
           <Separator orientation="vertical" />
           <P className="text-n900 text-center">
             {release.releaseDate
-              ? `Released: ${release.releaseDate}`
-              : "Release date not available"}
+              ? t("download.labels.released", { date: release.releaseDate })
+              : t("download.labels.releaseDateNotAvailable")}
           </P>
           <Separator orientation="vertical" />
           {vsCodeExtensionArtifact ? (
@@ -202,7 +218,7 @@ function DownloadProductCard({
               href={release.releaseNotesLink}
               className="text-primary text-center"
             >
-              Release notes
+              {t("download.labels.releaseNotes")}
             </a>
           ) : permalinkOptions.length > 0 ? (
             <Button
@@ -214,7 +230,7 @@ function DownloadProductCard({
               onClick={() => setShowPermalinks((current) => !current)}
             >
               <span className="flex w-full items-center gap-2">
-                Permalinks
+                {t("download.labels.permalinks")}
                 <IconArrowRight
                   className={`size-4 shrink-0 transition-transform ${
                     showPermalinks ? "rotate-90" : ""
@@ -254,8 +270,9 @@ function DownloadProductCard({
 
 export function DownloadCards({
   release,
-  releaseLabel,
+  isLts,
   badge,
+  lang,
 }: DownloadCardsProps) {
   const [userOs, setUserOs] = useState<OperatingSystem>("unknown");
 
@@ -275,19 +292,21 @@ export function DownloadCards({
       {showDesignerCard && (
         <DownloadProductCard
           release={release}
-          releaseLabel={releaseLabel}
+          isLts={isLts}
           product="designer"
           badge={badge}
           userOs={userOs}
+          lang={lang}
         />
       )}
       {showEngineCard && (
         <DownloadProductCard
           release={release}
-          releaseLabel={releaseLabel}
+          isLts={isLts}
           product="engine"
           badge={badge}
           userOs={userOs}
+          lang={lang}
         />
       )}
     </>

@@ -1,0 +1,106 @@
+---
+import type {
+  ArchiveData,
+  UiArchiveResponse,
+} from "@/components/download/archive/archive";
+import Archive from "@/components/download/archive/archive";
+import type { UiDownloadResponse } from "@/components/download/download";
+import Download from "@/components/download/download";
+import { HelpBox } from "@/components/help-box";
+import { H3, H5 } from "@/components/ui/typography";
+import Layout from "@/layouts/main.astro";
+import { fetchBackend, getVersions } from "@/lib/backend";
+import {
+  IconFileDescription,
+  IconMessageChatbot,
+  IconMessageCircle,
+  IconMessageCircleQuestion,
+} from "@tabler/icons-react";
+import { getLanguagePaths, localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
+const downloadData = await fetchBackend<UiDownloadResponse>("/ui/download");
+
+function fetchArchive(version?: string) {
+  return fetchBackend<UiArchiveResponse>(
+    version ? `/ui/archive/${encodeURIComponent(version)}` : "/ui/archive",
+  );
+}
+
+const overview = await fetchArchive();
+const versionIds = Object.values(overview.categorizedVersions)
+  .flat()
+  .map((version) => version.id);
+const releasesByVersion = Object.fromEntries(
+  await Promise.all(
+    versionIds.map(
+      async (id) => [id, (await fetchArchive(id)).releaseInfos] as const,
+    ),
+  ),
+);
+
+const archiveData: ArchiveData = {
+  categorizedVersions: overview.categorizedVersions,
+  currentMajorVersion: overview.currentMajorVersion,
+  releasesByVersion,
+};
+
+const { current } = await getVersions();
+---
+
+<Layout
+  tabTitle={t("common.download")}
+  title={t("download.pageTitle", { version: current })}
+  description={t("download.description")}
+>
+  <div class="flex flex-col gap-24">
+    <Download data={downloadData} lang={lang} client:load />
+
+    <div
+      id="archive"
+      class="bg-n50 flex scroll-mt-24 flex-col gap-6 rounded-2xl p-4 md:p-10"
+    >
+      <div class="flex flex-col gap-4">
+        <H3>{t("download.archiveTitle")}</H3>
+        <H5 className="text-n900 font-normal">
+          {t("download.archiveDescription")}
+        </H5>
+      </div>
+      <Archive data={archiveData} lang={lang} client:load />
+    </div>
+  </div>
+
+  <HelpBox
+    icon={IconMessageCircleQuestion}
+    title={t("download.help.title")}
+    links={[
+      {
+        icon: IconFileDescription,
+        title: t("documentation.title"),
+        description: t("installation.help.documentation.description"),
+        href: localePath(lang, "/doc"),
+        linkLabel: t("installation.help.documentation.linkLabel"),
+      },
+      {
+        icon: IconMessageCircle,
+        title: t("nav.community"),
+        description: t("download.help.communityDescription"),
+        href: "https://community.axonivy.com/",
+        linkLabel: t("download.help.goToCommunity"),
+        external: true,
+      },
+      {
+        icon: IconMessageChatbot,
+        title: t("download.help.contactSupport"),
+        description: t("download.help.contactSupportDescription"),
+        href: localePath(lang, "/support"),
+        linkLabel: t("download.help.contactUs"),
+      },
+    ]}
+  />
+</Layout>

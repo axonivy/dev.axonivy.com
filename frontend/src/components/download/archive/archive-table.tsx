@@ -18,6 +18,8 @@ import {
   getArtifactMeta,
   sortArtifacts,
 } from "@/components/download/archive/artifact-meta";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "@/translation/ui";
 
 function linkFor(artifact: ArchiveArtifact, view: ArchiveView) {
   return view === "sbom" ? artifact.bomUrl : artifact.url;
@@ -59,11 +61,14 @@ function ArtifactRow({
   label,
   artifacts,
   view,
+  lang,
 }: {
   label: string;
   artifacts: ArchiveArtifact[];
   view: ArchiveView;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const sortedArtifacts = sortArtifacts(
     artifacts.filter((artifact) => linkFor(artifact, view)),
   );
@@ -82,11 +87,17 @@ function ArtifactRow({
         )}
       >
         {label}
-        {isSbom ? " SBOM:" : ":"}
+        {isSbom ? t("download.archive.sbomSuffix") : ":"}
       </span>
       <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
         {sortedArtifacts.map((artifact) => {
-          const { icon, label } = getArtifactMeta(artifact);
+          const meta = getArtifactMeta(artifact);
+          const label =
+            meta.category === "all"
+              ? t("download.archive.all")
+              : meta.category === "slim"
+                ? t("download.archive.allSlim")
+                : meta.label;
 
           return (
             <li key={artifact.filename} className="flex">
@@ -94,7 +105,7 @@ function ArtifactRow({
                 href={linkFor(artifact, view)}
                 className="text-primary inline-flex items-center gap-1"
               >
-                {icon}
+                {meta.icon}
                 {label}
               </a>
             </li>
@@ -108,31 +119,45 @@ function ArtifactRow({
 function ReleaseArtifacts({
   release,
   view,
+  lang,
 }: {
   release: ArchiveRelease;
   view: ArchiveView;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   if (view === "sbom" && !hasSbom(release)) {
-    return <span className="text-n900">No SBOM files available</span>;
+    return (
+      <span className="text-n900">{t("download.archive.noSbomFiles")}</span>
+    );
   }
 
   return (
     <div className="flex flex-col gap-2">
       <ArtifactRow
-        label="Engine"
+        label={t("download.labels.engine")}
         view={view}
         artifacts={release.engineArtifacts ?? []}
+        lang={lang}
       />
       <ArtifactRow
-        label="Designer"
+        label={t("download.labels.designer")}
         view={view}
         artifacts={release.designerArtifacts ?? []}
+        lang={lang}
       />
     </div>
   );
 }
 
-function ReleaseDetails({ release }: { release: ArchiveRelease }) {
+function ReleaseDetails({
+  release,
+  lang,
+}: {
+  release: ArchiveRelease;
+  lang: Lang;
+}) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const hasDetails =
     release.releaseNotes ||
     release.checksumsUrl ||
@@ -145,10 +170,14 @@ function ReleaseDetails({ release }: { release: ArchiveRelease }) {
   return (
     <div className="flex flex-col gap-2">
       {release.releaseNotes && (
-        <ExternalLink href={release.releaseNotes}>Release notes</ExternalLink>
+        <ExternalLink href={release.releaseNotes}>
+          {t("download.archive.releaseNotes")}
+        </ExternalLink>
       )}
       {release.checksumsUrl && (
-        <ExternalLink href={release.checksumsUrl}>Checksums</ExternalLink>
+        <ExternalLink href={release.checksumsUrl}>
+          {t("download.archive.checksums")}
+        </ExternalLink>
       )}
       {release.unsafeReasons?.map((reason) => (
         <ExternalLink key={reason.url} href={reason.url} className="text-red">
@@ -166,19 +195,30 @@ function ReleaseDetails({ release }: { release: ArchiveRelease }) {
 export function ArchiveTable({
   releases,
   view,
+  lang,
 }: {
   releases: ArchiveRelease[];
   view: ArchiveView;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   return (
     <div className="bg-background hidden rounded-md px-4 py-2 md:block">
       <Table className="w-full">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-1/8">Version</TableHead>
-            <TableHead className="w-1/8">Release Date</TableHead>
-            <TableHead className="w-1/2">Artifacts</TableHead>
-            <TableHead className="w-1/6">Details</TableHead>
+            <TableHead className="w-1/8">
+              {t("download.archive.tableVersion")}
+            </TableHead>
+            <TableHead className="w-1/8">
+              {t("download.archive.releaseDate")}
+            </TableHead>
+            <TableHead className="w-1/2">
+              {t("download.archive.tableArtifacts")}
+            </TableHead>
+            <TableHead className="w-1/6">
+              {t("download.archive.details")}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -189,10 +229,10 @@ export function ArchiveTable({
                 {release.releaseDate || "-"}
               </TableCell>
               <TableCell className="align-top">
-                <ReleaseArtifacts release={release} view={view} />
+                <ReleaseArtifacts release={release} view={view} lang={lang} />
               </TableCell>
               <TableCell className="align-top">
-                <ReleaseDetails release={release} />
+                <ReleaseDetails release={release} lang={lang} />
               </TableCell>
             </TableRow>
           ))}

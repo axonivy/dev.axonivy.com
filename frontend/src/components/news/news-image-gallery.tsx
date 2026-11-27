@@ -5,6 +5,8 @@ import {
   IconZoomIn,
 } from "@tabler/icons-react";
 import { useRef, useState, type KeyboardEvent, type TouchEvent } from "react";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "@/translation/ui";
 
 const newsImages = import.meta.glob(
   "/src/assets/news/**/*.{gif,jpeg,jpg,png,webp,PNG}",
@@ -18,10 +20,13 @@ function imageUrl(image: string) {
 export function NewsImageGallery({
   images,
   title,
+  lang,
 }: {
   images: string[];
   title: string;
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -90,7 +95,7 @@ export function NewsImageGallery({
             />
             <span className="bg-background/90 text-n900 absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
               <IconZoomIn className="size-4" />
-              <span className="sr-only">Open image preview</span>
+              <span className="sr-only">{t("news.gallery.openPreview")}</span>
             </span>
           </button>
         ))}
@@ -118,7 +123,7 @@ export function NewsImageGallery({
                 <button
                   type="button"
                   onClick={showPrev}
-                  aria-label="Previous image"
+                  aria-label={t("news.gallery.previousImage")}
                   className="bg-background/70 text-n900 hover:bg-background focus-visible:outline-primary absolute top-1/2 left-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   <IconChevronLeft className="size-4" />
@@ -126,7 +131,7 @@ export function NewsImageGallery({
                 <button
                   type="button"
                   onClick={showNext}
-                  aria-label="Next image"
+                  aria-label={t("news.gallery.nextImage")}
                   className="bg-background/70 text-n900 hover:bg-background focus-visible:outline-primary absolute top-1/2 right-2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   <IconChevronRight className="size-4" />

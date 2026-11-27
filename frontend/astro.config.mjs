@@ -32,6 +32,12 @@ export default defineConfig({
     plugins: [tailwindcss(), svgr()],
   },
 
+  i18n: {
+    locales: ["en", "de"],
+    defaultLocale: "en",
+    routing: { prefixDefaultLocale: false },
+  },
+
   env: {
     schema: {
       BACKEND_URL: envField.string({

@@ -9,6 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { H4 } from "@/components/ui/typography";
+import { localePath } from "@/translation/language";
+import type { Lang } from "@/translation/ui";
+import { useTranslation } from "react-i18next";
+import { newsTagLabel } from "@/components/news/news-tag-label";
 
 export type NewsTimelineItem = {
   id: string;
@@ -19,14 +23,16 @@ export type NewsTimelineItem = {
   overview: string[];
 };
 
-type NewsTimelineProps = { items: NewsTimelineItem[] };
+type NewsTimelineProps = { items: NewsTimelineItem[]; lang: Lang };
 
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("en", { year: "numeric", month: "short" }).format(
+const formatDate = (date: Date, lang: Lang) =>
+  new Intl.DateTimeFormat(lang, { year: "numeric", month: "short" }).format(
     date,
   );
 
-export function NewsTimeline({ items }: NewsTimelineProps) {
+export function NewsTimeline({ items, lang }: NewsTimelineProps) {
+  const { t } = useTranslation(undefined, { lng: lang });
+
   return (
     <ol className="grid grid-cols-1 gap-4 md:grid-cols-[auto_1.5rem_minmax(0,1fr)]">
       {items.map((item, index) => (
@@ -35,7 +41,7 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
             dateTime={item.releaseDate.toISOString()}
             className="text-n700 hidden pt-0.5 text-sm font-medium md:block"
           >
-            {formatDate(item.releaseDate)}
+            {formatDate(item.releaseDate, lang)}
           </time>
 
           <div className="relative hidden justify-center md:flex">
@@ -59,7 +65,7 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
                   }
                   className="uppercase"
                 >
-                  {item.tag}
+                  {newsTagLabel(item.tag, t)}
                 </Badge>
               </span>
               <CardDescription className="text-n900">
@@ -76,12 +82,12 @@ export function NewsTimeline({ items }: NewsTimelineProps) {
             </CardContent>
             <div className="flex w-full shrink-0 items-end justify-end px-4 pt-6 md:w-auto md:px-0 md:pt-0 md:pr-4">
               <a
-                href={`/news/${item.id}`}
+                href={localePath(lang, `/news/${item.id}`)}
                 className={cn(
                   buttonVariants({ variant: "link", className: "group" }),
                 )}
               >
-                View Details
+                {t("news.viewDetails")}
                 <IconArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>

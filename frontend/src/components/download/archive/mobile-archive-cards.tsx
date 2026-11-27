@@ -23,6 +23,8 @@ import {
   isVscodeArtifact,
   sortArtifacts,
 } from "@/components/download/archive/artifact-meta";
+import { useTranslation } from "react-i18next";
+import type { Lang } from "@/translation/ui";
 
 type ArtifactFilter = (artifact: ArchiveArtifact) => boolean;
 
@@ -62,10 +64,13 @@ function artifactLinkLabel(artifact: ArchiveArtifact) {
 function MobileArtifactRow({
   row,
   artifacts,
+  lang,
 }: {
   row: MobileRow;
   artifacts: ArchiveArtifact[];
+  lang: Lang;
 }) {
+  const { t } = useTranslation(undefined, { lng: lang });
   const sortedArtifacts = sortArtifacts(artifacts.filter(row.filter));
   if (sortedArtifacts.length === 0) {
     return null;
@@ -77,7 +82,13 @@ function MobileArtifactRow({
     <div className="border-n200 flex justify-between gap-3 border-b py-2 last:border-b-0">
       <div className="text-n900 flex w-1/2 shrink-0 items-center gap-3">
         <RowIcon className="size-4" aria-hidden="true" />
-        <span>{row.label}</span>
+        <span>
+          {row.label === "All"
+            ? t("download.archive.all")
+            : row.label === "All Slim"
+              ? t("download.archive.allSlim")
+              : row.label}
+        </span>
       </div>
       <div className="min-w-0 flex-1 text-right">
         {sortedArtifacts.map((artifact) => {
@@ -105,24 +116,38 @@ function MobileArtifactSection({
   title,
   rows,
   artifacts,
+  lang,
 }: {
   title: string;
   rows: MobileRow[];
   artifacts: ArchiveArtifact[];
+  lang: Lang;
 }) {
   return (
     <section className="mt-4 first:mt-0">
       <Base className="text-n900 font-semibold">{title}</Base>
       <div className="mt-2">
         {rows.map((row) => (
-          <MobileArtifactRow key={row.label} row={row} artifacts={artifacts} />
+          <MobileArtifactRow
+            key={row.label}
+            row={row}
+            artifacts={artifacts}
+            lang={lang}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-function MobileReleaseCard({ release }: { release: ArchiveRelease }) {
+function MobileReleaseCard({
+  release,
+  lang,
+}: {
+  release: ArchiveRelease;
+  lang: Lang;
+}) {
+  const { t } = useTranslation(undefined, { lng: lang });
   return (
     <article className="bg-background rounded-3xl px-6 py-5 shadow-sm">
       <div className="flex items-start justify-between gap-4">
@@ -138,21 +163,23 @@ function MobileReleaseCard({ release }: { release: ArchiveRelease }) {
             href={release.releaseNotes}
             className="text-primary inline-flex shrink-0 items-center gap-1"
           >
-            Release notes
+            {t("download.archive.releaseNotes")}
             <IconArrowRight className="size-4" aria-hidden="true" />
           </a>
         )}
       </div>
       <div className="mt-4">
         <MobileArtifactSection
-          title="Designer"
+          title={t("download.labels.designer")}
           rows={designerRows}
           artifacts={release.designerArtifacts ?? []}
+          lang={lang}
         />
         <MobileArtifactSection
-          title="Engine"
+          title={t("download.labels.engine")}
           rows={engineRows}
           artifacts={release.engineArtifacts ?? []}
+          lang={lang}
         />
       </div>
     </article>
@@ -161,13 +188,19 @@ function MobileReleaseCard({ release }: { release: ArchiveRelease }) {
 
 export function MobileArchiveCards({
   releases,
+  lang,
 }: {
   releases: ArchiveRelease[];
+  lang: Lang;
 }) {
   return (
     <div className="flex flex-col gap-6 md:hidden">
       {releases.map((release) => (
-        <MobileReleaseCard key={release.version} release={release} />
+        <MobileReleaseCard
+          key={release.version}
+          release={release}
+          lang={lang}
+        />
       ))}
     </div>
   );

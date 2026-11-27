@@ -1,0 +1,13 @@
+---
+import NotFound from "@/components/not-found.astro";
+import Layout from "@/layouts/news.astro";
+import type { Lang } from "@/translation/ui";
+import i18next from "@/translation/ui";
+
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
+---
+
+<Layout tabTitle={t("notFound.pageTitle")}>
+  <NotFound />
+</Layout>

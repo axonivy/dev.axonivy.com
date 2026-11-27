@@ -1,0 +1,54 @@
+---
+import ReleaseCycleScrollspy from "@/components/download/release-cycle/scrollspy";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Layout from "@/layouts/news.astro";
+import { getVersions } from "@/lib/backend";
+import { getLanguagePaths, localePath } from "@/translation/language";
+import i18next, { type Lang } from "@/translation/ui";
+
+export const getStaticPaths = getLanguagePaths;
+
+const { current, lts } = await getVersions();
+const lang = (Astro.currentLocale ?? "en") as Lang;
+const t = i18next.getFixedT(lang);
+---
+
+<Layout tabTitle={t("nav.releaseCycle")}>
+  <div class="flex flex-col">
+    <div class="bg-background before:bg-background sticky top-24 z-20 py-2 pb-8 before:absolute before:inset-x-0 before:-top-16 before:h-16 before:content-['']">
+      <Breadcrumb className="px-3">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href={localePath(lang, "/")}>
+              {t("nav.home")}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={localePath(lang, "/download")}>
+              {t("common.download")}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{t("nav.releaseCycle")}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+
+    <ReleaseCycleScrollspy
+      currentVersion={current}
+      ltsVersion={lts}
+      lang={lang}
+      client:load
+    />
+  </div>
+</Layout>

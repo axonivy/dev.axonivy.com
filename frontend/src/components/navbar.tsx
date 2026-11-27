@@ -1,96 +1,122 @@
-import { useState } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Drawer, DrawerContent, DrawerFooter } from "@/components/ui/drawer";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { Separator } from "@/components/ui/separator";
+import { Base, H6 } from "@/components/ui/typography";
+import { localePath } from "@/translation/language";
+import "@/translation/ui";
+import type { Lang } from "@/translation/ui";
 import {
   IconArrowUpRight,
   IconChevronDown,
   IconMenu2,
   IconX,
 } from "@tabler/icons-react";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { Drawer, DrawerContent, DrawerFooter } from "@/components/ui/drawer";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { Base, H6 } from "@/components/ui/typography";
-import { Separator } from "@/components/ui/separator";
+import type { TFunction } from "i18next";
+import { Fragment, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./language-switcher";
 
-const navItems = [
-  { label: "Download", href: "/download", external: false },
-  { label: "Documentation", href: "/doc", external: false },
+type NavLink = {
+  label: string;
+  description?: string;
+  href: string;
+  external: boolean;
+};
+
+type NavGroup = { label: string; items: { label: string; items: NavLink[] }[] };
+
+const getNavItems = (t: TFunction, lang: Lang): (NavLink | NavGroup)[] => [
   {
-    label: "Resources",
+    label: t("common.download"),
+    href: localePath(lang, "/download"),
+    external: false,
+  },
+  { label: t("nav.doc"), href: localePath(lang, "/doc"), external: false },
+  {
+    label: t("nav.resources"),
     items: [
       {
-        label: "Product information",
+        label: t("nav.productInfo"),
         items: [
           {
-            label: "Release cycle",
-            description: "Understand the release schedule",
-            href: "/download/release-cycle",
+            label: t("nav.releaseCycle"),
+            description: t("nav.releaseCycleDescription"),
+            href: localePath(lang, "/download/release-cycle"),
             external: false,
           },
           {
-            label: "Deprecation",
-            description: "Plan for upcoming changes",
-            href: "/deprecation",
+            label: t("nav.deprecation"),
+            description: t("nav.deprecationDescription"),
+            href: localePath(lang, "/deprecation"),
             external: false,
           },
         ],
       },
       {
-        label: "Resources",
+        label: t("nav.resources"),
         items: [
           {
-            label: "Market",
-            description: "Explore extensions and connectors",
+            label: t("nav.market"),
+            description: t("nav.marketDescription"),
             href: "https://market.axonivy.com/",
             external: false,
           },
           {
-            label: "Community",
-            description: "Ask questions and share ideas",
+            label: t("nav.community"),
+            description: t("nav.communityDescription"),
             href: "https://community.axonivy.com/",
             external: true,
           },
           {
-            label: "Tutorial",
-            description: "Learn step by step",
-            href: "https://www.axonivy.com/tutorials",
+            label: t("nav.tutorial"),
+            description: t("nav.tutorialDescription"),
+            href: "https://axonivy.com/tutorial",
             external: true,
           },
         ],
       },
     ],
   },
-  { label: "News", href: "/news", external: false },
-  { label: "Team", href: "/team", external: false },
+  { label: t("nav.news"), href: localePath(lang, "/news"), external: false },
+  { label: t("nav.team"), href: localePath(lang, "/team"), external: false },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  lang,
+  urls,
+}: {
+  lang: Lang;
+  urls: Record<Lang, string>;
+}) {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation(undefined, { lng: lang });
 
   return (
     <div className="relative">
       <NavigationMenu align="center" className="hidden md:flex">
         <NavigationMenuList>
-          {navItems.map((item) => {
-            return item.items ? (
+          {getNavItems(t, lang).map((item) => {
+            return "items" in item ? (
               <NavigationMenuItem key={item.label}>
                 <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <div className="flex w-fit gap-4 p-2">
                     {item.items.map((subItem, index) => (
-                      <>
+                      <Fragment key={subItem.label}>
                         {index > 0 && <Separator orientation="vertical" />}
                         <ul className="flex flex-1 flex-col">
                           <H6 className="dark:text-n700 p-2">
@@ -125,7 +151,8 @@ export default function Navbar() {
                                         )}
                                       </span>
                                       <span className="text-muted-foreground dark:text-n700 text-sm whitespace-nowrap">
-                                        {subSubItem.description}
+                                        {subSubItem.description &&
+                                          subSubItem.description}
                                       </span>
                                     </span>
                                   </a>
@@ -134,7 +161,7 @@ export default function Navbar() {
                             </li>
                           ))}
                         </ul>
-                      </>
+                      </Fragment>
                     ))}
                   </div>
                 </NavigationMenuContent>
@@ -172,7 +199,7 @@ export default function Navbar() {
         <button
           type="button"
           className="text-foreground focus-visible:ring-ring/50 relative z-50 inline-flex size-9 items-center justify-center rounded-lg focus-visible:ring-3 focus-visible:outline-1"
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={isOpen ? t("nav.menuClose") : t("nav.menuOpen")}
           aria-expanded={isOpen}
           onClick={() => setIsOpen((open) => !open)}
         >
@@ -191,10 +218,13 @@ export default function Navbar() {
               borderRadius: 0,
             }}
           >
-            <nav aria-label="Mobile navigation" className="px-4 pt-4">
+            <nav
+              aria-label={t("ariaLabels.mobileNavigation")}
+              className="px-4 pt-4"
+            >
               <ul className="flex flex-col gap-1">
-                {navItems.map((item) =>
-                  item.items ? (
+                {getNavItems(t, lang).map((item) =>
+                  "items" in item ? (
                     <li key={item.label}>
                       <Collapsible className="flex w-full flex-col gap-2">
                         <CollapsibleTrigger
@@ -208,7 +238,7 @@ export default function Navbar() {
                         <CollapsibleContent className="flex flex-col items-start gap-2 p-2.5 pt-0 text-sm">
                           {item.items.map((subItem) => {
                             return (
-                              <>
+                              <Fragment key={subItem.label}>
                                 <H6 className="py-2 pl-3 text-xs">
                                   {subItem.label}
                                 </H6>
@@ -236,7 +266,7 @@ export default function Navbar() {
                                     )}
                                   </a>
                                 ))}
-                              </>
+                              </Fragment>
                             );
                           })}
                         </CollapsibleContent>
@@ -265,7 +295,8 @@ export default function Navbar() {
               </ul>
             </nav>
             <DrawerFooter className="flex flex-row justify-start">
-              <ModeToggle />
+              <LanguageSwitcher lang={lang} urls={urls} />
+              <ModeToggle lang={lang} />
             </DrawerFooter>
           </DrawerContent>
         </Drawer>

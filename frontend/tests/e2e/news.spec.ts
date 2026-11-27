@@ -37,6 +37,24 @@ test("renders a semantic timeline and opens release details", async ({
   ).toHaveAttribute("href", /.+/);
 });
 
+test("renders German news and keeps the locale in release routes", async ({
+  page,
+}) => {
+  await page.goto("/de/news");
+  await expect(
+    page.getByRole("heading", { name: "Was gibt es Neues?" }),
+  ).toBeVisible();
+
+  const detailLink = page
+    .getByRole("link", { name: "Details anzeigen" })
+    .first();
+  const href = await detailLink.getAttribute("href");
+  expect(href).toMatch(/^\/de\/news\//);
+
+  await detailLink.click();
+  await expect(page).toHaveURL(href!);
+});
+
 test("navigates release sections with the scroll spy", async ({ page }) => {
   await page.goto("/news");
   const detailHref = await page
